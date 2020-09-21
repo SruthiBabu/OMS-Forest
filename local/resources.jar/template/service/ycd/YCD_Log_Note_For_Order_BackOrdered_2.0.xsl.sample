@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+
+<xsl:output method="xml" indent="yes"/>
+<xsl:template match="Order">
+<Order>
+   <xsl:copy-of select="@OrderHeaderKey"/>
+   <Notes>
+     <xsl:apply-templates select="OrderLines"/>
+   </Notes>
+</Order>
+</xsl:template>
+
+<xsl:template match="OrderLines">
+<Note>
+    <xsl:variable name="itemWithQuantity">
+        <xsl:for-each select="OrderLine">
+	   <xsl:value-of select="concat(./Item/@ItemID,'(',./StatusBreakupForBackOrderedQty/BackOrderedFrom/@BackOrderedQuantity,'), ')"/>
+        </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="itemWithQuantity2"><xsl:value-of select="substring($itemWithQuantity,1,string-length($itemWithQuantity)-2)"/></xsl:variable>
+
+    <xsl:attribute name="ReasonCode">
+	<xsl:text>YCD_BACKORDER_INFO</xsl:text>
+    </xsl:attribute>   
+    <xsl:attribute name="ContactUser">
+	<xsl:text>SYSTEM</xsl:text>
+    </xsl:attribute>   
+    <xsl:variable name="noteText">
+	<xsl:value-of select="concat('Items ',$itemWithQuantity2,' were backordered')"/>
+    </xsl:variable>
+    <xsl:attribute name="NoteText">
+    	<xsl:value-of select="substring($noteText,1,2000)"/>
+    </xsl:attribute>
+    <xsl:attribute name="Priority">
+	<xsl:text>1</xsl:text>
+    </xsl:attribute>
+</Note>
+</xsl:template>
+
+</xsl:stylesheet>

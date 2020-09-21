@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite
+(C) Copyright IBM Corp. 2001, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DelimitedSenderSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedsender.xsd'>
+    <ParserDefaults  DefaultRecordDelimiter="Newline" DefaultFieldDelimiter=" " 
+        DefaultEscapeCharacter="\" DefaultPadCharacter="#" RecordIdStartPosition="1" 
+        SkipCarriageReturn="true">
+   </ParserDefaults>
+
+   <ElementMapList>
+       <ElementMap ElementName="CouponCode" RecordId="CODE">
+           <AttributeMap AttributeName="CouponCode" FieldName="CODE" />
+       </ElementMap>
+   </ElementMapList>
+
+   <RecordDefinitions>
+       <Record RecordId="CODE" Name="Code" WriteRecordId="false">
+           <Field Name="CODE" FieldPosition="2" />
+       </Record>
+   </RecordDefinitions>
+
+</DelimitedSenderSchema>

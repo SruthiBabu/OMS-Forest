@@ -1,0 +1,93 @@
+<html>
+    <body>
+        <form name="frmCountCompletion" target="/console/rfuserdrivencnt.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblTitle"
+                                    type="text" validate="false" value="Count_Confirmation"/>
+									<input col="21"
+                                    inputbinding="xml:/CountTask/@TaskId"
+                                    mandatory="false"
+                                    outputbinding="xml:/CountTask/@TaskId"
+                                    size="0" subtype="Hidden"
+                                    tag="binding=xml:/CountTask/@TaskId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblPalletCount"
+                                    size="16" subtype="Label"
+                                    tag="binding=lblPalletCount"
+                                    type="text" validate="false" value="Pallets_#"/>
+                                    <input col="17" name="txtPalletCount"
+                                    size="4" subtype="ProtectedText" inputbinding="xml:/CountRecordSummary/@NumberOfPallets"
+                                    tag="binding=xml:/CountRecordSummary/@NumberOfPallets"
+                                    type="text" validate="false" mandatory="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblCaseCount"
+                                    size="16" subtype="Label"
+                                    tag="binding=lblCaseCount"
+                                    type="text" validate="false" value="Cases_#"/>
+                                    <input col="17" name="txtCaseCount"
+                                    size="4" subtype="ProtectedText" inputbinding="xml:/CountRecordSummary/@NumberOfCases"
+                                    tag="binding=xml:/CountRecordSummary/@NumberOfCases"
+                                    type="text" validate="false" mandatory="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblDistinctItemsCount"
+                                    size="16" subtype="Label"
+                                    tag="binding=lblDistinctItemsCount"
+                                    type="text" validate="false" value="Distinct_Items_#"/>
+                                    <input col="17" name="txtDistinctItemsCount"
+                                    size="4" subtype="ProtectedText" inputbinding="xml:/CountRecordSummary/@NumberOfDifferentItems"
+                                    tag="binding=xml:/CountRecordSummary/@NumberOfDifferentItems"
+                                    type="text" validate="false" mandatory="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblItemsCount"
+                                    size="16" subtype="Label"
+                                    tag="binding=lblItemsCount"
+                                    type="text" validate="false" value="Total_Item_Count"/>
+                                    <input col="17" name="txtItemsCount"
+                                    size="4" subtype="ProtectedText" inputbinding="xml:/CountRecordSummary/@NumberOfUnits"
+                                    tag="binding=xml:/CountRecordSummary/@NumberOfUnits"
+                                    type="text" validate="false" mandatory="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="2" hotkey="F3"
+                                    mandatory="false" size="13"
+                                    subtype="Command" tag=" "
+                                    type="button" name="AcceptButton"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmCompleteTask"
+                                    validate="false" value="Mobile_Accept_Count"/>
+                                    <input col="16" hotkey="F6"
+                                    mandatory="false" size="7"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmRescanTask"
+                                    validate="false" value="Mobile_Rescan"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

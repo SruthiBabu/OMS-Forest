@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite - Foundation
+(C) Copyright IBM Corp 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+-->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores All the Available Label Formats."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="LabelFormats" Module="ysc" Name="Label_Format"
+            Prefix="YFS_" TableName="YFS_LABEL_FORMAT"
+            TableType="CONFIGURATION" XMLName="LabelFormat">
+            <Attributes>
+                <Attribute ColumnName="LABEL_FORMAT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_LABEL_FORMAT table."
+                    Name="Label_Format_Key" Nullable="false"/>
+                <Attribute ColumnName="LABEL_FORMAT_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Label Format Identifier."
+                    Name="Label_Format_Id" Nullable="false"/>
+                <Attribute ColumnName="LABEL_FORMAT_FILE"
+                    DataType="LongFileName" DefaultValue="' '"
+                    Description="Name of the label format file."
+                    Name="Label_Format_File" Nullable="false"/>
+                <Attribute ColumnName="MAPPING_XML"
+                    DataType="LongFileName" DefaultValue="' '"
+                    Description="File Name of the mapping XML for this Label."
+                    Name="Mapping_XML" Nullable="false" XMLName="MappingXML"/>
+                <Attribute ColumnName="SYSTEM_DEFINED" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if the label format is system defined."
+                    Name="System_Defined" Nullable="false" XMLName="SystemDefined"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+				<Attribute ColumnName="PRINT_ADAPTER"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Suggest for which adapter this label is configured."
+                    Name="Print_Adapter" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="LABEL_FORMAT_PK">
+                <Attribute ColumnName="LABEL_FORMAT_KEY" Name="Label_Format_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LABEL_FORMAT_I1"
+                    Name="YFS_LABEL_FORMAT_I1" Unique="true">
+                    <Column Name="LABEL_FORMAT_ID"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity contains the definition of all the documents that will be printed using the print-infrastructure along with their descriptions and the default label format to be used for the document."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="PrintDocuments" Module="ysc"
+            Name="Print_Document" Prefix="YFS_"
+            TableName="YFS_PRINT_DOCUMENT" TableType="CONFIGURATION" XMLName="PrintDocument">
+            <Attributes>
+                <Attribute ColumnName="PRINT_DOCUMENT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_PRINT_DOCUMENT table."
+                    Name="Print_Document_Key" Nullable="false"/>
+                <Attribute ColumnName="PRINT_DOCUMENT_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Document identifier, Values like BOL, Shipping Label, Pick List, Pack List etc."
+                    Name="Print_Document_Id" Nullable="false"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="PRINT_DOCUMENT_DESCRIPTION"
+                    DataType="FreeText-200" DefaultValue="' '"
+                    Description="Description of the Print Document."
+                    Name="Print_Document_Description" Nullable="false"/>
+                <Attribute ColumnName="DEFAULT_LABEL_FORMAT_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Default Label format for this document across all organizations."
+                    Name="Default_Label_Format_Id" Nullable="false" XMLName="DefaultLabelFormatId"/>
+                <Attribute ColumnName="SYSTEM_DEFINED" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if the print document is system defined."
+                    Name="System_Defined" Nullable="false" XMLName="SystemDefined"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="PRINT_DOCUMENT_PK">
+                <Attribute ColumnName="PRINT_DOCUMENT_KEY" Name="Print_Document_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PRINT_DOCUMENT_I1"
+                    Name="YFS_PRINT_DOCUMENT_I1" Unique="true">
+                    <Column Name="PRINT_DOCUMENT_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="PrintDocuments"
+                    ChildName="Print_Document"
+                    ChildXMLName="PrintDocument"
+                    ForeignEntity="Label_Format"
+                    Name="Default_Label_Format" Type="Bidirectional" XMLName="DefaultLabelFormat">
+                    <Attribute Name="Default_Label_Format_Id" ParentName="Label_Format_Id"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity contains the definition of the transactional attribute of the print document."
+            EntityType="CONFIGURATION" Extensible="Y"
+            ListXMLName="PrintDocumentTranAttributes" Module="ysc"
+            Name="Print_Document_Tran_Attr" Prefix="YFS_"
+            TableName="YFS_PRINT_DOCUMENT_TRAN_ATTR"
+            TableType="CONFIGURATION" XMLName="PrintDocumentTranAttribute"
+            LockingEntity="Print_Document">
+            <Attributes>
+                <Attribute ColumnName="PRINT_DOCUMENT_TRAN_ATTR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_PRINT_DOCUMENT_TRAN_ATTR table."
+                    Name="Print_Document_Tran_Attr_Key" Nullable="false"/>
+                <Attribute ColumnName="PRINT_DOCUMENT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_PRINT_DOCUMENT table."
+                    Name="Print_Document_Key" Nullable="false"/>
+                <Attribute ColumnName="SAVE_DIRECTORY"
+                    DataType="LongFileName" DefaultValue="' '"
+                    Description="The Directory in which the print file for this document will be saved, if not being sent to Printer."
+                    Name="Save_Directory" Nullable="false" XMLName="SaveDirectory"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="PRT_DOCTRANATR_PK" Name="YFS_PRINT_DOC_TRAN_ATTR_PK">
+                <Attribute ColumnName="PRINT_DOCUMENT_TRAN_ATTR_KEY" Name="Print_Document_Tran_Attr_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PRT_DOCTRANATR_I1"
+                    Name="YFS_PRINT_DOC_TRAN_ATTR_I1" Unique="true">
+                    <Column Name="PRINT_DOCUMENT_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="PrintDocumentTranAttributes"
+                    ChildName="Print_Document_Tran_Attr"
+                    ChildXMLName="PrintDocumentTranAttribute"
+                    DeleteCascade="true" ForeignEntity="Print_Document"
+                    Name="Print_Document" Type="Bidirectional" XMLName="PrintDocument">
+                    <Attribute Name="Print_Document_Key" ParentName="Print_Document_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity represents the documents that can be printed by the printer type."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="PrinterTypePrintDocuments" Module="ysc"
+            Name="Printer_Type_Prnt_Docs" Prefix="YFS_"
+            TableName="YFS_PRINTER_TYPE_PRNT_DOCS"
+            TableType="CONFIGURATION" XMLName="PrinterTypePrintDocument">
+            <Attributes>
+                <Attribute ColumnName="PRINTER_TYPE_PRNT_DOCS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_PRINTER_TYPE_PRNT_DOCS table."
+                    Name="Printer_Type_Prnt_Docs_Key" Nullable="false" XMLName="PrinterTypePrintDocumentKey"/>
+                <Attribute ColumnName="PRINTER_TYPE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_DEVICE_SUB_TYPE table."
+                    Name="Printer_Type_Key" Nullable="false"/>
+                <Attribute ColumnName="PRINT_DOCUMENT_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Unique key of YFS_PRINT_DOCUMENT."
+                    Name="Print_Document_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="PRNTRTPPRNTDOC_PK">
+                <Attribute ColumnName="PRINTER_TYPE_PRNT_DOCS_KEY" Name="Printer_Type_Prnt_Docs_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PRNTRTPPRNTDOC_I1"
+                    Name="YFS_PRINTER_TYPE_PRNT_DOCS_I1" Unique="true">
+                    <Column Name="PRINTER_TYPE_KEY"/>
+                    <Column Name="PRINT_DOCUMENT_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PrinterTypePrintDocuments"
+                    ChildName="PrinterTypePrintDocument"
+                    ChildXMLName="PrinterTypePrintDocument"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Device_Sub_Type" IsParent="true"
+                    Name="DeviceSubType" Type="Bidirectional"
+                    XMLName="DeviceSubType">
+                    <Attribute Name="Printer_Type_Key" ParentName="Device_Sub_Type_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PrinterTypePrintDocuments"
+                    ChildName="PrinterTypePrintDocument"
+                    ChildXMLName="PrinterTypePrintDocument"
+                    ForeignEntity="Print_Document" Name="PrintDocument"
+                    Type="Bidirectional" XMLName="PrintDocument">
+                    <Attribute Name="Print_Document_Id" ParentName="Print_Document_Id"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity defines the printers to be used for different documents based on attributes such as User, UserGroup etc."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="UserPrinterPreferences" Module="ysc"
+            Name="User_Printer_Preference" Prefix="YFS_"
+            TableName="YFS_USER_PRINTER_PREFERENCE" TableType="MASTER" XMLName="UserPrinterPreference">
+            <Attributes>
+                <Attribute ColumnName="USER_PRINTER_PREFERENCE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_USER_PRINTER_PREFERENCE table."
+                    Name="User_Printer_Preference_Key" Nullable="false"/>
+                <Attribute ColumnName="PRINTER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_DEVICE table."
+                    Name="Printer_Key" Nullable="false"/>
+                <Attribute ColumnName="USERGROUP_ID"
+                    DataType="UserGroup" DefaultValue="' '"
+                    Description="Unique key of YFS_USER_GROUP."
+                    Name="Usergroup_Id" Nullable="false" XMLName="UsergroupId"/>
+                <Attribute ColumnName="USER_ID" DataType="LoginId"
+                    DefaultValue="' '"
+                    Description="Unique key of YFS_USER." Name="User_Id"
+                    Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="USR_PRINT_PREF_PK">
+                <Attribute ColumnName="USER_PRINTER_PREFERENCE_KEY" Name="User_Printer_Preference_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="USR_PRINT_PREF_I1"
+                    Name="YFS_USER_PRINTER_PREFERENCE_I1" Unique="true">
+                    <Column Name="PRINTER_KEY"/>
+                    <Column Name="USERGROUP_ID"/>
+                    <Column Name="USER_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserPrinterPreferences"
+                    ChildName="User_Printer_Preference"
+                    ChildXMLName="UserPrinterPreference"
+                    ForeignEntity="Device" Name="Device"
+                    Type="Unidirectional" XMLName="Device">
+                    <Attribute Name="Printer_Key" ParentName="Device_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserPrinterPreferences"
+                    ChildName="User_Printer_Preference"
+                    ChildXMLName="UserPrinterPreference"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="User_Group" Name="User_Group"
+                    Type="Bidirectional" XMLName="UserGroup">
+                    <Attribute Name="Usergroup_Id" ParentName="Usergroup_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserPrinterPreferences"
+                    ChildName="User_Printer_Preference"
+                    ChildXMLName="UserPrinterPreference"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="User" Name="User"
+                    Type="Bidirectional" XMLName="User">
+                    <Attribute Name="User_Id" ParentName="Loginid"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity defines the label format to be used for different documents for different criteria."
+            EntityType="CONFIGURATION" Extensible="Y"
+            ListXMLName="LabelPreferences" Module="ysc"
+            Name="Label_Preference" Prefix="YFS_"
+            TableName="YFS_LABEL_PREFERENCE" TableType="CONFIGURATION" XMLName="LabelPreference">
+            <Attributes>
+                <Attribute ColumnName="LABEL_PREFERENCE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_LABEL_PREFERENCE table."
+                    Name="Label_Preference_Key" Nullable="false"/>
+                <Attribute ColumnName="LABEL_FORMAT_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_LABEL_FORMAT table."
+                    Name="Label_Format_Id" Nullable="false"/>
+                <Attribute ColumnName="PRINT_DOCUMENT_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Unique Key attribute of YFS_PRINT_DOCUMENT."
+                    Name="Print_Document_Id" Nullable="false" XMLName="PrintDocumentId"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_SHIP_NODE table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="SELLER_ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="Organization code of seller."
+                    Name="Seller_Organization_Code" Nullable="false" XMLName="SellerOrganizationCode"/>
+                <Attribute ColumnName="BUYER_ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="Organization code of buyer."
+                    Name="Buyer_Organization_Code" Nullable="false" XMLName="BuyerOrganizationCode"/>
+                <Attribute ColumnName="SCAC" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Carrier by which this shipment will be transported."
+                    Name="Scac" Nullable="false" XMLName="SCAC"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode" IsOrgColumn="Y" 
+                    DefaultValue="' '" Description="Enterprise Code."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' '"
+                    Description="Equipment type name."
+                    Name="Equipment_Type" Nullable="false"/>
+                <Attribute ColumnName="DEFAULT_NO_OF_COPIES"
+                    DataType="Integer" DefaultValue="1"
+                    Description="Default Number Of Copies for this Label."
+                    Name="Default_No_Of_Copies" Nullable="false" XMLName="NoOfCopies"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="LABEL_PREF_PK">
+                <Attribute ColumnName="LABEL_PREFERENCE_KEY" Name="Label_Preference_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LABEL_PREF_I1"
+                    Name="YFS_LABEL_PREFERENCE_I1" Unique="true">					
+					<Column Name="LABEL_FORMAT_ID"/>
+                    <Column Name="PRINT_DOCUMENT_ID"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="SELLER_ORGANIZATION_CODE"/>
+                    <Column Name="BUYER_ORGANIZATION_CODE"/>
+                    <Column Name="SCAC"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="EQUIPMENT_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LabelPreferences"
+                    ChildName="Label_Preference"
+                    ChildXMLName="LabelPreference"
+                    ForeignEntity="Label_Format" Name="Label_Format"
+                    Type="Bidirectional" XMLName="LabelFormat">
+                    <Attribute Name="Label_Format_Id" ParentName="Label_Format_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LabelPreferences"
+                    ChildName="Label_Preference"
+                    ChildXMLName="LabelPreference"
+                    ForeignEntity="Print_Document" Name="Print_Document"
+                    Type="Bidirectional" XMLName="PrintDocument">
+                    <Attribute Name="Print_Document_Id" ParentName="Print_Document_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="Organization_Rel_Node" Type="Unidirectional" XMLName="OrganizationRelNode">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="Organization_Rel_Seller" Type="Unidirectional" XMLName="OrganizationRelSeller">
+                    <Attribute Name="Seller_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="Organization_Rel_Buyer" Type="Unidirectional" XMLName="OrganizationRelBuyer">
+                    <Attribute Name="Buyer_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="Organization_Rel_Scac" Type="Unidirectional" XMLName="OrganizationRelScac">
+                    <Attribute Name="Scac" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="Organization_Rel_Enterprise"
+                    Type="Bidirectional" XMLName="OrganizationRelEnterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+		<!--Avishek 6/25/2013/-->
+		<Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores all the adapter supported by SMCFS. Along with the adapter information it will have information about the class implementing the PrintAdapter, PrintAdapterUtil interfaces, and default set of properties for the adapter."
+            EntityType="CONFIGURATION" Extensible="Y"
+            ListXMLName="PrintAdapters" Module="ysc" Name="Print_Adapter"
+            Prefix="YFS_" TableName="YFS_PRINT_ADAPTER"
+            TableType="CONFIGURATION" XMLName="PrintAdapter">
+            <Attributes>
+                <Attribute ColumnName="PRINT_ADAPTER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_PRINT_ADAPTER table."
+                    Name="Print_Adapter_Key" Nullable="false"/>
+                <Attribute ColumnName="PRINT_ADAPTER_NAME"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The name of the print adapter, for example Loftware, Cyberra."
+                    Name="Print_Adapter_Name" Nullable="false"/>
+                <Attribute ColumnName="IMPL_CLASS_NAME"
+                    DataType="LongFileName" DefaultValue="' '"
+                    Description="The class that will implement the PrintAdapter interface to integrate between Sterling and the print adapters."
+                    Name="Impl_Class_Name" Nullable="false"/>
+                <Attribute ColumnName="ADAPTER_PROPERTY_XML" DataType="CLOB" DefaultValue="' '" Description="This column will have information about the property supported by the specific adapter and their default values, whose subset will be configurable at organization level."
+                    Name="Adapter_Property_XML" Nullable="false" XMLName="AdapterPropertyXML"/>
+				<Attribute ColumnName="SYSTEM_DEFINED" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="Indicates if the print adapter is system defined."
+                    Name="System_Defined" Nullable="false" XMLName="SystemDefined"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="PRNT_ADAPTER_PK">
+                <Attribute ColumnName="PRINT_ADAPTER_KEY" Name="Print_Adapter_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PRNT_ADAPTER_I1"
+                    Name="YFS_PRINT_ADAPTER_I1" Unique="true" Version="9.3.0">
+                    <Column Name="PRINT_ADAPTER_NAME"/>
+                </Index>
+            </Indices>
+        </Entity>
+    </Entities>
+</DBSchema>

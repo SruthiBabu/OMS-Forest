@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2020 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<UIApplication Id="INV" Description="INV UI Application" ModuleCode="inv">   	
+	<!-- 
+		Api templates are defined in template\resource\uiapitemplate directory of every module.
+		Any number of templates can be defined for an API depending on the usage but the 
+		TemplateId has to be unique across modules so that it can be retrieved uniquely.
+
+		All the Api Templates given in a XML are defined under a ModuleCode (set at the top node).
+		Besides this api templates can be grouped under a View identified by a ViewId. 
+		In order to make TemplateId unique, every TemplateId given below is prefixed with 
+		<ModuleCode>_<ViewId> and inserted into PLT_API_TEMPLATE.Template_Id. 	
+		
+		eg: For TemplateId="getInventoryItemList_1" in the sample given below the PLT_API_TEMPLATE.Template_Id 
+		will be populated as inv_buc_invitemgetInventoryItemList_1 where inv is the ModuleCode and buc_invitem is the ViewId.
+
+		IMPORTANT:	The maximum length allowed for TemplateId (including it's prefix) is 40.
+		IMPORTANT:	The columns in 'OrganizationCode' and 'TemplateType' in PLT_API_TEMPLATE 
+					are inserted as 'DEFAULT' and '00' respectively.
+	-->
+	<!-- 
+		<View ViewId="buc_invitem" Description="inventory item">
+			<APIList>
+				<API ApiName="getInventoryItemList">
+					<TemplateList>
+						<Template TemplateKey="inv_ui_api_template_01" TemplateId="getInventoryItemList_1" 
+						Description="To publish Inventory Item info">
+							<InventoryList TotalNumberOfRecords="" >
+								<InventoryItem InventoryOrganizationCode="" ItemID="" ProductClass="" UnitOfMeasure=""/>
+							</InventoryList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	-->
+	<Views>
+		<View ViewId="buc_dg" Description="Business User Controls Distribution Rule List">
+			<APIList>
+				<API ApiName="getDistributionRuleList">
+					<TemplateList>
+						<Template TemplateKey="inv_ui_api_buc_tpl_10" TemplateId="getDistrRuleLst_2001" 
+						Description="API template for BUC fulfillment Distribution groups">
+							<DistributionRuleList TotalNumberOfRecords="">
+								<DistributionRule DefaultFlag="" Description="" DistributionRuleId="" DistributionRuleKey="" ItemGroupCode="" OwnerKey="" Purpose="">
+									<ItemShipNodes>
+										<ItemShipNode ActiveFlag="" EffectiveEndDate="" EffectiveStartDate="" ExternalInvOrg="" ItemId="" ItemType="" ItemshipnodeKey="" Priority="" ShipNodeItem="" ShipnodeKey="" SourceFromOrganization=""/>
+									</ItemShipNodes>
+								</DistributionRule>
+							</DistributionRuleList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_inv" Description="Business User Controls Inventory Item List">
+			<APIList>
+				<API ApiName="getInventoryItemList">
+					<TemplateList>
+						<Template TemplateKey="inv_ui_api_buc_tpl_15" TemplateId="getInventoryItemList_2001" 
+						Description="API template for BUC inv pages">
+							<InventoryList LastInventoryItemKey="" LastRecordSet="" TotalInventoryItemList="">
+								<InventoryItem InventoryItemKey="" InventoryOrganizationCode="" ItemID="" ProductClass="" UnitOfMeasure="">
+									<Item ItemID="" ItemKey="" OrganizationCode="" UnitOfMeasure=""> 
+										<InventoryParameters OnhandSafetyFactorQuantity="" OnhandSafetyFactorPercentage="" LeadTime="" ProcessingTime=""/>
+										<ItemAttributeGroupTypeList> 
+											<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsForMaintenance="" IsForSelling="" IsSingleGroup="" IsValidForCategory="" IsValidForClassification="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey=""> 
+												<ItemAttributeGroupList> 
+													<ItemAttributeGroup ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" ItemAttributeGroupPath="" ParentItemAttributeGroupKey="" SequenceNo="">
+														<ItemAttributeList> 
+															<ItemAttribute AttributeDomainID="" AttributeGroupID="" CategoryKey="" IsInherited="" IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeGroupType="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value=""> 
+																<AssignedValueList> 
+																	<AssignedValue DoubleValue="" IntegerValue="" IsInherited="" LongDescription="" SequenceNo="" ShortDescription="" Value=""/> 
+																</AssignedValueList> 
+															</ItemAttribute> 
+														</ItemAttributeList> 
+													</ItemAttributeGroup> 
+												</ItemAttributeGroupList> 
+											</ItemAttributeGroupType> 
+										</ItemAttributeGroupTypeList> 
+										<PrimaryInformation Description="" ImageID="" ImageLocation="" IsModelItem="" ManufacturerItem="" ManufacturerItemDesc="" ManufacturerName="" ShortDescription="" DefaultProductClass="" KitCode="" IsPickupAllowed="" IsShippingAllowed="" IsDeliveryAllowed=""/>
+									</Item>
+								</InventoryItem>
+							</InventoryList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	</Views>
+</UIApplication>

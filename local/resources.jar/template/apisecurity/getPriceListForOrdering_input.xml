@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- getPriceListForOrdering Input XML -->
+<GetPriceListForOrdering>
+    <Items>
+        <Item>
+            <!--There may be different price list depending on region. ShiptoAddress is to identify the region' -->
+            <ShipToAddress/>
+            <TranQuantity/>
+            <PriceInfo/>
+            <Charges>
+                <Charge/>
+            </Charges>
+            <Taxes>
+                <Tax/>
+            </Taxes>
+            <Awards>
+                <Award/>
+            </Awards>
+        </Item>
+        <!-- If you have fixed charges that apply to entire order no matter how many items in the order then pass those charges as HeaderCharges' -->
+        <HeaderCharges>
+            <HeaderCharge/>
+        </HeaderCharges>
+        <!-- Taxes for the HeaderCharges'-->
+        <HeaderTaxes>
+            <HeaderTax/>
+        </HeaderTaxes>
+        <Promotions>
+            <Promotion/>
+        </Promotions>
+        <Awards>
+            <Award/>
+        </Awards>
+    </Items>
+</GetPriceListForOrdering>

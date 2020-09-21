@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Zones >
+    <Zone AttemptSKUConsolidation=" " BuildingNumber=" " Description=" "
+        IsActiveZone=" " LocationsPerItem=" " MixCountryOfOrigin=" "
+        MixEnterprise=" " MixFifo=" " MixInventoryStatus=" "
+        MixInventoryTag=" " MixProductClass=" "
+		MixReceiptNo=" " MixSKU=" " MixSegment=" "
+        MixShipByDate=" " Node=" " PrimaryBulkZoneId=" " TrackCaseLPN=" "
+        TrackInventory=" " TrackPalletLPN=" " ZoneId=" " ZoneKey=" " PutOnVarianceHold=" " SplitUom=" " ForceLocnScanOnVisit=" " ConfirmLocnEmptyAfterPick=" " CheckDigit="">
+        <ZoneEnterprises >
+            <ZoneEnterprise EnterpriseCode=" " ZoneEnterpriseKey=" "
+                ZoneKey=" ">
+                <StorageConstraints >
+                    <StorageConstraint ItemClassification1=" "
+                        ItemClassification2=" " ItemClassification3=" "
+                        StorageConstraintKey=" "  ZoneEnterpriseKey=" "/>
+                </StorageConstraints>
+            </ZoneEnterprise>
+        </ZoneEnterprises>
+        <InventoryStatusTransitions >
+            <InventoryStatusTransition InventoryStatus=" "
+                InventoryStatusTransitionKey=" "
+                NewInventoryStatus=" " Node=" " ZoneId=" "/>
+        </InventoryStatusTransitions>
+        <ZoneLocations >
+            <ZoneLocation AisleNumber=" " BayNumber=" " FreezeMoveIn=" " 
+				FreezeMoveOut=" " InStagingLocationId=" " LevelNumber=" " 
+				LocationBarCode=" " LocationId=" " LocationKey=" " 
+				LocationSizeCode=" " LocationType=" " MoveInSeqNo=" " 
+				MoveOutSeqNo=" " Node=" " OutStagingLocationId=" " 
+				StorageCode=" " VelocityCode=" "  ZoneId=" ">
+                <LocationSize Description=" " DimensionUom=" " Height=" "
+                    IsInfiniteCapacity=" " Length=" " LocationSizeCode=" "
+                    LocationSizeKey=" " MaxWeight=" " Node=" " Volume=" "
+                    VolumeUom=" " WeightUom=" " Width=" ">
+                    <LocationCapacities >
+                        <LocationCapacity EnterpriseCode=" "
+                            ItemClassificationCode=" " LocationCapacityKey=" "
+                            LocationSizeCode=" " NoOfPackages=" " Node=" "
+                            PackagingType=" "/>
+                    </LocationCapacities>
+                </LocationSize>
+                <SKUDedications >
+                    <SKUDedication EnterpriseCode=" " 
+                        ItemId=" " LocationId=" " MaxQuantity=" "
+                        MinQuantity=" " Node=" " ProductClass=" "
+                        SKUDedicationKey=" " Segment=" " SegmentType=" "
+                        UnitOfMeasure=" "/>
+                </SKUDedications>
+            </ZoneLocation>
+        </ZoneLocations>
+    </Zone>
+</Zones>

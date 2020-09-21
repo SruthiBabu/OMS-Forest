@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<TableGroup GroupName="Approval">
+    <Entity EntityName="Order_Approval_Rule" Table="YFS_ORDER_APPROVAL_RULE" Key="ORDER_APPROVAL_RULE_KEY" XMLName="OrderApprovalRule">
+    	<ChildEntity EntityName="Approval_Rule_Assoc" Table="YFS_APPROVAL_RULE_ASSOC" Key="APPROVAL_RULE_ASSOC_KEY" XMLName="ApprovalRuleAssoc">
+    		<QueryAttr ChildColumn="ORDER_APPROVAL_RULE_KEY" ParentAttrXML="OrderApprovalRuleKey"/>
+    	</ChildEntity>
+    </Entity>
+</TableGroup>

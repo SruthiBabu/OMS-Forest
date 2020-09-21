@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FlatfileSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='flatfileschema.xsd'>
+   <ParserDefaults  DefaultEscapeCharacter="\" DefaultPadCharacter="#" RecordIdStartPosition="1" RecordIdEndPosition="10">
+   </ParserDefaults>
+
+   <Root Name="HAZMATDATALIST">
+        <Header Name="HAZMATDATA" RecordName="HAZMATDATA" MinOccurence="1" MaxOccurence="1"/>
+   </Root>
+
+   <RecordDefinitions>
+      <Record RecordId="HAZMATDATA" Name="HAZMATDATA" XMLName="HAZMATDATA">
+		 <Field Name="Action" StartPosition="11" EndPosition="13" XMLName="Action"/>
+		 <Field Name="Symbols" StartPosition="14" EndPosition="21" XMLName="Symbols"/>
+		 <Field Name="ProperShippingName" StartPosition="22" EndPosition="471" XMLName="ProperShippingName"/>
+         <Field Name="HazardClass" StartPosition="472" EndPosition="486" XMLName="HazardClass"/>
+         <Field Name="UNNumber" StartPosition="487" EndPosition="496" XMLName="UNNumber"/>
+         <Field Name="PackingGroup" StartPosition="497" EndPosition="501" XMLName="PackingGroup"/>
+         <Field Name="Label" StartPosition="502" EndPosition="531" XMLName="Label"/>
+		 <Field Name="SpecialProvisions" StartPosition="532" EndPosition="621" XMLName="SpecialProvisions"/>
+         <Field Name="Exception" StartPosition="622" EndPosition="636" XMLName="Exception"/>
+         <Field Name="QtyNonBulk" StartPosition="637" EndPosition="651" XMLName="QtyNonBulk"/>
+         <Field Name="QtyBulk" StartPosition="652" EndPosition="666" XMLName="QtyBulk"/>
+         <Field Name="PassengerAir" StartPosition="667" EndPosition="681" XMLName="PassengerAir"/>
+         <Field Name="CargoAir" StartPosition="682" EndPosition="696" XMLName="CargoAir"/>
+		 <Field Name="Vessel" StartPosition="697" EndPosition="701" XMLName="Vessel"/>
+         <Field Name="VesselSP" StartPosition="702" EndPosition="736" XMLName="VesselSP"/>
+         <Field Name="SortOrder" StartPosition="737" EndPosition="742" XMLName="SortOrder"/>
+		 
+      </Record>
+   </RecordDefinitions>
+</FlatfileSchema>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LabelFieldMap>
+    <LabelField Binding="/Batch/@BatchNo" LabelFieldName="BatchNo" RepeatingElement=""/>
+    <LabelField Binding="/Batch/Tasks/Task/@SourceLocationId" LabelFieldName="CountLocation" RepeatingElement=""/>
+    <LabelField Binding="/Batch/Tasks/Task/Inventory/Item/PrimaryInformation/@Description" LabelFieldName="ItemDesc" RepeatingElement="Task"/>
+	<LabelField Binding="/Batch/Tasks/Task/Inventory/@ItemId" LabelFieldName="ItemId" RepeatingElement="Task"/>
+	 <LabelField Binding="/Batch/Tasks/Task/Inventory/@ProductClass" LabelFieldName="ProductClass" RepeatingElement="Task"/>
+	<LabelField Binding="/Batch/@OrganizationCode" LabelFieldName="Node" RepeatingElement=""/>
+    <LabelField Binding="/Batch/@BatchNo" LabelFieldName="BatchBarCode" RepeatingElement=""/>
+    <RepeatingFields>
+        <RepeatingField LabelFieldName="CountLocation" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="ItemDesc" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+		<RepeatingField LabelFieldName="ItemId" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+		<RepeatingField LabelFieldName="ProductClass" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+    </RepeatingFields>
+</LabelFieldMap>

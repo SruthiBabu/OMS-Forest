@@ -1,0 +1,1781 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityFactLookup>
+    <User_Zone OrganizationCode="@Node" PrimaryKey="@UserZoneKey" TableType="'MASTER'"/>
+    <Server TableType="'CONFIGURATION'"/>
+    <Pipeline_Definition TableType="'CONFIGURATION'"/>
+    <Coupon_Code PrimaryKey="@CouponCodeKey" TableType="'MASTER'"/>
+    <Entity_Custom_Attribute OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Device_Type_Template TableType="'CONFIGURATION'"/>
+    <Phy_Cnt_Plan_Act PrimaryKey="@PCPlanActGroupKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@PhysicalCountPlanKey"/>
+    </Phy_Cnt_Plan_Act>
+    <Item_Service_Skill OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ItemServiceSkillKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_Service_Skill>
+    <Business_Document TableType="'CONFIGURATION'"/>
+    <Entity_Change OrganizationCode="@OrganizationCode"
+        PrimaryKey="@EntityChangeKey" TableName="'YFS_ENTITY_CHANGE'"/>
+    <LPN_Location OrganizationCode="@Node" PrimaryKey="@LPNLocationKey" TableType="'TRANSACTION'"/>
+    <Org_Exception_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Monitor_Alert PrimaryKey="@MonitorAlertKey" TableType="'TRANSACTION'"/>
+    <Carrier_Service OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Status OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Activity_Config_Metadata TableType="'CONFIGURATION'"/>
+    <Answer_Master PrimaryKey="@AnswerMasterKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@AnswerSetMasterKey"/>
+    </Answer_Master>
+    <Count_Tag PrimaryKey="@CountTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@CountKey"/>
+    </Count_Tag>
+    <Item_Attr PrimaryKey="@ItemAttributeKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CategoryKey"/>
+    </Item_Attr>
+    <Transaction_Approval_Status PrimaryKey="@ApprovalStatusKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TransactionViolationKey"/>
+        <Fact Name="PrimaryKey" Path="@TransactionApproverKey"/>
+    </Transaction_Approval_Status>
+    <Customer_Assignment Loginid="@UserId"
+        OrganizationCode="@OrganizationCode"
+        PrimaryKey="@CustomerAssignmentKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+    </Customer_Assignment>
+    <Retrieval_Pla_Item_Condition TableType="'CONFIGURATION'"/>
+    <User_Group_List PrimaryKey="@UserGroupListKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@UserKey"/>
+    </User_Group_List>
+    <Work_Order_Status_Audit PrimaryKey="@WorkOrderStatusAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Status_Audit>
+    <Service_Slot_Group OrganizationCode="@OrganizationKey"
+        PrimaryKey="@ServiceSlotGroupKey" TableType="'MASTER'"/>
+    <Inbox_References PrimaryKey="@InboxReferenceKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InboxKey"/>
+    </Inbox_References>
+    <Migration_Progress TableType="'STATISTICS'"/>
+    <Order_Tag_Mod_Type TableType="'CONFIGURATION'"/>
+    <Pla_Item_Pick_Staging_Zone TableType="'CONFIGURATION'"/>
+    <Phy_Cnt_Cat_Act_Grp TableType="'CONFIGURATION'"/>
+    <Inventory_Shipment PrimaryKey="@InventoryShipmentKey" TableType="'TRANSACTION'"/>
+    <Pick_List OrganizationCode="@ShipNode" PrimaryKey="@PickListKey" TableType="'TRANSACTION'"/>
+    <CallOut_Class_Loader TableType="'CONFIGURATION'"/>
+    <Hold_Type_Mod_Type TableType="'CONFIGURATION'"/>
+    <Inventory_Status OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Base_Event TableType="'CONFIGURATION'"/>
+    <Load_Hold_Type PrimaryKey="@LoadHoldTypeKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+    </Load_Hold_Type>
+    <InboxNotes PrimaryKey="@InboxNotesKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InboxKey"/>
+    </InboxNotes>
+    <Pipeline_Condition OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Shipping_Preference OrganizationCode="@EnterpriseOrgCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@BuyerOrganizationCode"/>
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+    </Shipping_Preference>
+    <Work_Order_Notes PrimaryKey="@WorkOrderNotesKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Notes>
+    <Count_Program_Condition_State
+        PrimaryKey="@CountProgramConditionStateKey" TableType="'TRANSACTION'"/>
+    <Device_Sub_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Audit PrimaryKey="@AuditKey" TableName="'YFS_AUDIT'"/>
+    <Commodity_Record PrimaryKey="@CommodityRecordKey" TableType="'TRANSACTION'"/>
+    <Esp_Terms OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Base_Transaction TableType="'CONFIGURATION'"/>
+    <Order_Transaction_Info PrimaryKey="@TransactionInfoKey" TableType="'TRANSACTION'"/>
+    <Receipt_Header OrganizationCode="@ReceivingNode"
+        PrimaryKey="@ReceiptHeaderKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+    </Receipt_Header>
+    <IBA_Trigger OrganizationCode="@OrganizationCode"
+        PrimaryKey="@IBATriggerKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@Node"/>
+    </IBA_Trigger>
+    <Cntr_Ret_Track PrimaryKey="@ContainerReturnTrackingKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentContainerKey"/>
+    </Cntr_Ret_Track>
+    <Status_Inventory_Types TableType="'CONFIGURATION'"/>
+    <Work_Order_Alloc_Cons TableType="'CONFIGURATION'"/>
+    <Res_Pool_Region PrimaryKey="@ResPoolRegionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Res_Pool_Region>
+    <Buyer_Instruction OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Qualified_Tag_Version_Compatibility TableType="'CONFIGURATION'"/>
+    <Validation OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Coupon_Code_Batch PrimaryKey="@CouponCodeBatchKey" TableType="'MASTER'"/>
+    <Additional_Attribute PrimaryKey="@AdditionalAttributeKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ParentKey"/>
+    </Additional_Attribute>
+    <Transformation_Header TableType="'CONFIGURATION'"/>
+    <Entitle_Rule_Assignment OrganizationCode="@OrganizationCode"
+        PrimaryKey="@EntitlementRuleAssignmentKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@EntitlementRuleKey"/>
+        <Fact Name="OrganizationCode" Path="@AssignedToOrganizationCode"/>
+    </Entitle_Rule_Assignment>
+    <Shipment OrganizationCode="@ShipNode" PrimaryKey="@ShipmentKey"
+        Store="@SellerOrganizationCode" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@FromAddressKey"/>
+        <Fact Name="PrimaryKey" Path="@ToAddressKey"/>
+        <Fact Name="PrimaryKey" Path="@BillToAddressKey"/>
+        <Fact Name="PrimaryKey" Path="@DeliveryPlanKey"/>
+        <Fact Name="OrganizationCode" Path="@BuyerOrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@ManifestKey"/>
+        <Fact Name="PrimaryKey" Path="@MarkForKey"/>
+    </Shipment>
+    <Data_Security_Doc_Type TableType="'CONFIGURATION'"/>
+    <Region_Level TableType="'CONFIGURATION'"/>
+    <Activity_Config TableType="'CONFIGURATION'"/>
+    <Wo_Service_Supervisor_Detmn OrganizationCode="@NodeKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+    </Wo_Service_Supervisor_Detmn>
+    <SubFlow TableType="'CONFIGURATION'"/>
+    <Order_Release_Status PrimaryKey="@OrderReleaseStatusKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderReleaseKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineScheduleKey"/>
+        <Fact Name="PrimaryKey" Path="@ChainedToOrderLineKey"/>
+    </Order_Release_Status>
+    <Approval_Group OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Adjustment_Reason OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Org_Service OrganizationCode="@OrganizationKey" TableType="'CONFIGURATION'"/>
+    <Tran_Flow TableType="'CONFIGURATION'"/>
+    <Module_Document_Type TableType="'CONFIGURATION'"/>
+    <Item_Locale PrimaryKey="@ItemLocaleKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_Locale>
+    <SKU_Dedication OrganizationCode="@Node"
+        PrimaryKey="@SKUDedicationKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </SKU_Dedication>
+    <Currency_Conversion TableType="'CONFIGURATION'"/>
+    <Role_Document TableType="'CONFIGURATION'"/>
+    <Document_Format TableType="'CONFIGURATION'"/>
+    <Delivery_Plan OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@DeliveryPlanKey" TableType="'TRANSACTION'"/>
+    <Opportunity Loginid="@OwnerUserID"
+        OrganizationCode="@EnterpriseCode" PrimaryKey="@OpportunityKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@BuyerOrganizationCode"/>
+        <Fact Name="Loginid" Path="@CoOwnerUserID"/>
+        <Fact Name="PrimaryKey" Path="@BuyerContactAddressKey"/>
+        <Fact Name="PrimaryKey" Path="@PrimaryQuoteKey"/>
+    </Opportunity>
+    <Customer_Grade OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <User_Tran_Constraints Loginid="@AssignedToUserId"
+        OrganizationCode="@OrganizationCode"
+        PrimaryKey="@UserTranConstraintsKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseKey"/>
+    </User_Tran_Constraints>
+    <Pricing_Rule_Price_Type_Trigger
+        PrimaryKey="@PricingRulePriceTypeTriggerKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Price_Type_Trigger>
+    <DbVerify_Script TableType="'STATISTICS'"/>
+    <IBA_Resv_Demand_Vw PrimaryKey="@IBAResvDemandVwKey" TableType="'TRANSACTION'"/>
+    <Condition OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Exception_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Node_Tran_Attr PrimaryKey="@NodeTranAttrKey" TableType="'TRANSACTION'"/>
+    <Outbound_Constraints OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Planned_Task_Cond_Rslt TableType="'CONFIGURATION'"/>
+    <DOCUMENT_RESTORE PrimaryKey="@DocId" TableType="'TRANSACTION'"/>
+    <IBA_Sequence_Header OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Planned_Task_Cond TableType="'CONFIGURATION'"/>
+    <Order_Line_Price_Match PrimaryKey="@OrderLinePriceMatchKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@PriceMatchKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Order_Line_Price_Match>
+    <Price_Set OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Label_Preference OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+        <Fact Name="OrganizationCode" Path="@BuyerOrganizationCode"/>
+        <Fact Name="OrganizationCode" Path="@SCAC"/>
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Label_Preference>
+    <Transaction_Dependency TableType="'CONFIGURATION'"/>
+    <Negotiable_Hdr_Attr TableType="'CONFIGURATION'"/>
+    <Node_Can_Ship_To_NT OrganizationCode="@ShipnodeKey" TableType="'CONFIGURATION'"/>
+    <Shipment_Hold_Type PrimaryKey="@ShipmentHoldTypeKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+    </Shipment_Hold_Type>
+    <Global_Serial_Num OrganizationCode="@ShipNode"
+        PrimaryKey="@GlobalSerialKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+        <Fact Name="PrimaryKey" Path="@ReceiptHeaderKey"/>
+    </Global_Serial_Num>
+    <Node_Receiving_Preference OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Node_Receiving_Preference>
+    <Print_Document TableType="'CONFIGURATION'"/>
+    <Order_Hold_Type PrimaryKey="@OrderHoldTypeKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Hold_Type>
+    <Special_Services TableType="'CONFIGURATION'"/>
+    <Container_Details PrimaryKey="@ContainerDetailsKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderReleaseKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentContainerKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrigOrderLineScheduleKey"/>
+    </Container_Details>
+    <Transformation_Config OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Asset PrimaryKey="@AssetKey" TableName="'YFS_ASSET'">
+        <Fact Name="PrimaryKey" Path="@ParentKey"/>
+    </Asset>
+    <Object_Lock TableType="'STATISTICS'"/>
+    <Promotion_Usage PrimaryKey="@PromotionUsageKey"
+        Store="@SellerOrganizationCode" TableType="'TRANSACTION'"/>
+    <Status_Milestone OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Res_Pool_Capcty_Override PrimaryKey="@ResPoolCapctyOverrideKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Res_Pool_Capcty_Override>
+    <Load OrganizationCode="@EnterpriseCode" PrimaryKey="@LoadKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@DeliveryPlanKey"/>
+        <Fact Name="PrimaryKey" Path="@OriginAddressKey"/>
+        <Fact Name="PrimaryKey" Path="@DestinationAddressKey"/>
+        <Fact Name="PrimaryKey" Path="@ManifestKey"/>
+    </Load>
+    <Surcharge_Applicable TableType="'CONFIGURATION'"/>
+    <Execution_Exception OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Work_Order_Service_Line PrimaryKey="@WorkOrderServiceLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Work_Order_Service_Line>
+    <Item_Price_Set_Dtl TableType="'CONFIGURATION'"/>
+    <Productivity_Reference OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Queue_Subscription PrimaryKey="@QueueSubscriptionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@UserKey"/>
+    </Queue_Subscription>
+    <Instruction_Detail PrimaryKey="@InstructionDetailKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReferenceKey"/>
+    </Instruction_Detail>
+    <Pla_Zone_Set OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Condition_Variables TableType="'CONFIGURATION'"/>
+    <Order_Approval_Detail PrimaryKey="@OrderApprovalDetailKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderApprovalKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Approval_Detail>
+    <Classification_Consumption_Pattern_Header
+        OrganizationCode="@InventoryOrganization" TableType="'CONFIGURATION'"/>
+    <Order_Header_Extension PrimaryKey="@OrderHeaderExtensionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Order_Header_Extension>
+    <GDPR_Restriction PrimaryKey="@GDPRRestrictionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TableKey"/>
+    </GDPR_Restriction>
+    <Organization OrganizationCode="@OrganizationKey"
+        PrimaryKey="@CorporateAddressKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@OrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@ContactAddressKey"/>
+        <Fact Name="PrimaryKey" Path="@BillingAddressKey"/>
+        <Fact Name="OrganizationCode" Path="@PrimaryEnterpriseKey"/>
+        <Fact Name="OrganizationCode" Path="@InheritConfigFromEnterprise"/>
+        <Fact Name="OrganizationCode" Path="@CapacityOrganizationCode"/>
+    </Organization>
+    <Data_Security_Nodes OrganizationCode="@ShipnodeKey" TableType="'CONFIGURATION'"/>
+    <Cntr_Capacity_Defn PrimaryKey="@CntrCapacityDefnKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Cntr_Capacity_Defn>
+    <Distribution_Rule OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Inventory_Supply OrganizationCode="@ShipNode"
+        PrimaryKey="@InventorySupplyKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+    </Inventory_Supply>
+    <Ent_Node_Type OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'"/>
+    <Charge_Transaction_Request_Map
+        PrimaryKey="@ChargeTransactionRequestMappingKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ChargeTransactionKey"/>
+        <Fact Name="PrimaryKey" Path="@ChargeTransactionRequestKey"/>
+    </Charge_Transaction_Request_Map>
+    <Customer_Currency PrimaryKey="@CustomerCurrencyKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+    </Customer_Currency>
+    <Order_Line OrganizationCode="@ShipNode" PrimaryKey="@OrderLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@CurrentWorkOrderKey"/>
+        <Fact Name="PrimaryKey" Path="@ChainedFromOrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@DerivedFromOrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipToKey"/>
+        <Fact Name="PrimaryKey" Path="@MarkForKey"/>
+        <Fact Name="OrganizationCode" Path="@ReceivingNode"/>
+        <Fact Name="PrimaryKey" Path="@BundleParentOrderLineKey"/>
+    </Order_Line>
+    <General_Codes TableType="'CONFIGURATION'"/>
+    <Wave_Size_Constraint OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+        <Fact Name="OrganizationCode" Path="HeaderAttributes/@SCAC"/>
+    </Wave_Size_Constraint>
+    <Menu OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Property TableType="'CONFIGURATION'"/>
+    <Class_Item_Attr PrimaryKey="@ClassificationItemAttributeKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CategoryKey"/>
+    </Class_Item_Attr>
+    <Equipment_Device PrimaryKey="@EquipmentDeviceKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@EquipmentKey"/>
+    </Equipment_Device>
+    <Pricelist_Order_Attr PrimaryKey="@PricelistOrderAttributeKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricelistHeaderKey"/>
+    </Pricelist_Order_Attr>
+    <Aisle_User_Constraint OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Status_Condition OrganizationCode="@EnterpriseKey" TableType="'CONFIGURATION'"/>
+    <Sync_DB_Import OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Attribute_Reference TableType="'CONFIGURATION'"/>
+    <Inventory_Item_Node_Cost OrganizationCode="@ShipnodeKey"
+        PrimaryKey="@InventoryItemNodeCostKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+    </Inventory_Item_Node_Cost>
+    <Participant_Note PrimaryKey="@ParticipantNoteKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@TableKey"/>
+    </Participant_Note>
+    <ImportView PrimaryKey="@ImportKey" TableType="'TRANSACTION'"/>
+    <Order_Header OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@OrderHeaderKey" Store="@SellerOrganizationCode" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@BuyerOrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@BillToKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipToKey"/>
+        <Fact Name="PrimaryKey" Path="@MarkForKey"/>
+        <Fact Name="PrimaryKey" Path="@ContactKey"/>
+        <Fact Name="PrimaryKey" Path="@SoldToKey"/>
+        <Fact Name="PrimaryKey" Path="@OpportunityKey"/>
+    </Order_Header>
+    <Enterprise OrganizationCode="@EnterpriseKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@Enterprisecode"/>
+    </Enterprise>
+    <DOCUMENT_LIFESPAN PrimaryKey="@DocId" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkflowId"/>
+        <Fact Name="PrimaryKey" Path="@UserKey"/>
+    </DOCUMENT_LIFESPAN>
+    <Inventory_Reservation OrganizationCode="@ShipNode"
+        PrimaryKey="@InventoryReservationKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@OrganizationCode"/>
+    </Inventory_Reservation>
+    <Change_Request TableType="'CONFIGURATION'"/>
+    <Routing_Guide OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ContactKey" TableType="'CONFIGURATION'"/>
+    <Pla_Activity_Deter OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@Node"/>
+    </Pla_Activity_Deter>
+    <Org_Group_Override OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Order_Line_Relationship PrimaryKey="@OrderLineRelationshipKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ParentOrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@ChildOrderLineKey"/>
+    </Order_Line_Relationship>
+    <Task OrganizationCode="@OrganizationCode" PrimaryKey="@TaskKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="TaskReferences/@ShipmentLineKey"/>
+        <Fact Name="PrimaryKey" Path="TaskReferences/@ShipmentContainerKey"/>
+        <Fact Name="PrimaryKey" Path="TaskReferences/@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@BatchKey"/>
+        <Fact Name="PrimaryKey" Path="TaskReferences/@MoveRequestKey"/>
+        <Fact Name="PrimaryKey" Path="TaskReferences/@MoveRequestLineKey"/>
+        <Fact Name="PrimaryKey" Path="TaskReferences/@CountRequestKey"/>
+    </Task>
+    <Item_Alias PrimaryKey="@ItemAliasKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_Alias>
+    <Order_Kit_Line_Schedule PrimaryKey="@OrderKitLineScheduleKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineScheduleKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Kit_Line_Schedule>
+    <Ownership_Transfer_Summary
+        PrimaryKey="@OwnershipTransferSummaryKey" TableType="'TRANSACTION'"/>
+    <Task_Status_Audit PrimaryKey="@TaskStatusAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TaskKey"/>
+    </Task_Status_Audit>
+    <Sort_Strategy OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Inventory_Supply_Temp PrimaryKey="@InventorySupplyTempKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+    </Inventory_Supply_Temp>
+    <Date_Type OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Change_Project_Approver TableType="'CONFIGURATION'"/>
+    <Transaction_Info PrimaryKey="@TransactionInfoKey" TableType="'TRANSACTION'"/>
+    <Move_Request OrganizationCode="@Node" PrimaryKey="@MoveRequestKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@WaveKey"/>
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Move_Request>
+    <Receipt_Status_Audit PrimaryKey="@ReceiptStatusAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReceiptHeaderKey"/>
+    </Receipt_Status_Audit>
+    <Order_Pick_Pla_Item_Condition TableType="'CONFIGURATION'"/>
+    <Mass_Audit PrimaryKey="@MassAuditKey" TableType="'TRANSACTION'"/>
+    <Hold_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Additional_Date PrimaryKey="@AdditionalDateKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReferenceKey"/>
+    </Additional_Date>
+    <Transaction OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Pla_Zone_Attr OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Price_Type_Locale TableType="'CONFIGURATION'"/>
+    <Planned_Task OrganizationCode="@Node" PrimaryKey="@PlannedTaskKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@EntityKey"/>
+    </Planned_Task>
+    <Modification_Attribute TableType="'CONFIGURATION'"/>
+    <Condition_Props TableType="'CONFIGURATION'"/>
+    <User_Task_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <PMNT_Trans_Error PrimaryKey="@PMNTTransErrorKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ChargeTransactionKey"/>
+    </PMNT_Trans_Error>
+    <Transaction_Approver PrimaryKey="@TransactionApproverKey" TableType="'TRANSACTION'"/>
+    <Order_Pick_Pla_Zone_Set TableType="'CONFIGURATION'"/>
+    <Org_Enterprise OrganizationCode="@OrganizationKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseOrganizationKey"/>
+    </Org_Enterprise>
+    <Cost_Factor_Group OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'"/>
+    <Shipping_Charge_Policy OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <User_Aisle PrimaryKey="@UserAisleKey" TableType="'TRANSACTION'"/>
+    <Transformation_Header_Locale TableType="'CONFIGURATION'"/>
+    <Order_Kit_Line PrimaryKey="@OrderKitLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Kit_Line>
+    <Price_Program OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Printer_Type_Prnt_Docs TableType="'CONFIGURATION'"/>
+    <Agent_Criteria TableType="'CONFIGURATION'"/>
+    <Allocation_Rule OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <ErrorDispatch PrimaryKey="@ErrorTxnId" TableType="'TRANSACTION'"/>
+    <Vendor OrganizationCode="@OrganizationCode" PrimaryKey="@VendorKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+    </Vendor>
+    <Manifest OrganizationCode="@ShipNode" PrimaryKey="@ManifestKey" TableType="'TRANSACTION'"/>
+    <Order_Date PrimaryKey="@OrderDateKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderReleaseKey"/>
+    </Order_Date>
+    <Region_Addnl_Capacity OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Pricing_Rule_Category PrimaryKey="@PricingRuleCategoryKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Category>
+    <Item_Ship_Node OrganizationCode="@ShipnodeKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@OwnerKey"/>
+    </Item_Ship_Node>
+    <LPN_Pend_Move OrganizationCode="@Node" PrimaryKey="@LPNPendMoveKey" TableType="'TRANSACTION'"/>
+    <Inventory_Ownership_Transfer_Record
+        OrganizationCode="@FromOrganizationCode"
+        PrimaryKey="@InventoryOwnerTransferRecordKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@ToOrganizationCode"/>
+    </Inventory_Ownership_Transfer_Record>
+    <Order_Line_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Item_Instruction PrimaryKey="@ItemInstructionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_Instruction>
+    <Inventory_Org_Relationship
+        OrganizationCode="@ConsumableInventoryOrg" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@InventoryOrganization"/>
+    </Inventory_Org_Relationship>
+    <Res_Pool OrganizationCode="@Node" PrimaryKey="@ResourcePoolKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@CapacityOrganizationCode"/>
+        <Fact Name="OrganizationCode" Path="@ProviderOrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@ProviderContactAddressKey"/>
+    </Res_Pool>
+    <Cntr_Category_Assoc PrimaryKey="@CntrCategoryAssocKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Cntr_Category_Assoc>
+    <Category_Item PrimaryKey="@CategoryItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CategoryKey"/>
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Category_Item>
+    <Pwd_Rule_Defn OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Transaction_Dependency_Grp OrganizationCode="@EnterpriseKey" TableType="'CONFIGURATION'"/>
+    <Xref_Config_Hdr TableType="'CONFIGURATION'"/>
+    <Config_Regression_Test PrimaryKey="@TestKey" TableType="'TRANSACTION'"/>
+    <Consumer PrimaryKey="@ConsumerKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+        <Fact Name="PrimaryKey" Path="@BillingAddressKey"/>
+    </Consumer>
+    <Special_Service_Ref PrimaryKey="@SpecialServiceRefKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReferenceKey"/>
+    </Special_Service_Ref>
+    <Currency TableType="'CONFIGURATION'"/>
+    <Shipping_Charge_Item PrimaryKey="@ShippingChargeItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ShippingChargeRuleKey"/>
+    </Shipping_Charge_Item>
+    <Data_Security_Enterprise OrganizationCode="@EnterpriseOrgCode" TableType="'CONFIGURATION'"/>
+    <Base_Config_Tables TableType="'CONFIGURATION'"/>
+    <Customer_Account_Balance PrimaryKey="@CustomerAccountBalanceKey" TableType="'TRANSACTION'"/>
+    <Res_Pool_Capacity_Lock PrimaryKey="@ResPoolCapacityLockKey" TableType="'TRANSACTION'"/>
+    <Order_Line_Option_Extension PrimaryKey="@OrderLineOptionExtnKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineOptionKey"/>
+    </Order_Line_Option_Extension>
+    <Productivity OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ProductivityKey" TableType="'TRANSACTION'"/>
+    <Charge_Tran_Dist PrimaryKey="@ChargeTranDistKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@DistributedFromChargeTranKey"/>
+        <Fact Name="PrimaryKey" Path="@DistributedToChargeTranKey"/>
+    </Charge_Tran_Dist>
+    <Transaction_Lock OrganizationCode="@Node"
+        PrimaryKey="@TransactionLockKey" TableType="'TRANSACTION'"/>
+    <Store_Batch_Location PrimaryKey="@StoreBatchLocationKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@StoreBatchKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+    </Store_Batch_Location>
+    <Location_Size OrganizationCode="@Node"
+        PrimaryKey="@LocationSizeKey" TableType="'MASTER'"/>
+    <Answer_Capacity_Impact OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Item_Count_State PrimaryKey="@ItemCountStateKey" TableType="'TRANSACTION'"/>
+    <Distinct_Order_Line_Vw PrimaryKey="@DistinctOrderLineVwKey" TableType="'TRANSACTION'"/>
+    <Pricelist_Line_Attr PrimaryKey="@PricelistLineAttrKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricelistLineKey"/>
+    </Pricelist_Line_Attr>
+    <Error_Code TableType="'CONFIGURATION'"/>
+    <Attribute OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Pricing_Rule_Attribute_Value
+        PrimaryKey="@PricingRuleAttributeValueKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Attribute_Value>
+    <Response_Line PrimaryKey="@ResponseLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResponseKey"/>
+        <Fact Name="PrimaryKey" Path="@NegotiationLineKey"/>
+    </Response_Line>
+    <Calendar_Excp_Shift TableType="'CONFIGURATION'"/>
+    <Purge_Criteria OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Classification_Consumption_Pattern_Detail TableType="'CONFIGURATION'"/>
+    <Category_Domain OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Association PrimaryKey="@AssociationKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ParentKey"/>
+        <Fact Name="PrimaryKey" Path="@AssociatedKey"/>
+    </Association>
+    <Order_Approval PrimaryKey="@OrderApprovalKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Order_Approval>
+    <Pla_Condition_Attr OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Base_Pickup_Drop_Sts TableType="'CONFIGURATION'"/>
+    <Print_Document_Tran_Attr TableType="'CONFIGURATION'"/>
+    <Protocol TableType="'CONFIGURATION'"/>
+    <Process_Task_Type TableType="'CONFIGURATION'"/>
+    <Equip_Type_Task_Type TableType="'CONFIGURATION'"/>
+    <Stop_Del_Req_Hdr PrimaryKey="@StopDeliveryRequestHeaderKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Stop_Del_Req_Hdr>
+    <Async_Request_Error PrimaryKey="@AsyncRequestErrorKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@AsyncronousRequestKey"/>
+    </Async_Request_Error>
+    <Attr_Allowed_Value TableType="'CONFIGURATION'"/>
+    <Search_Index_Process PrimaryKey="@SearchIndexProcessKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@SearchIndexTriggerKey"/>
+    </Search_Index_Process>
+    <Load_Shipment PrimaryKey="@LoadShipmentKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@PickupStopKey"/>
+        <Fact Name="PrimaryKey" Path="@DropoffStopKey"/>
+    </Load_Shipment>
+    <Equipment_Type OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Move_Request_Line PrimaryKey="@MoveRequestLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@MoveRequestKey"/>
+        <Fact Name="PrimaryKey" Path="@ReceiptHeaderKey"/>
+    </Move_Request_Line>
+    <Inventory_Monitor_Rules OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Inventory_Node_Control OrganizationCode="@OrganizationCode"
+        PrimaryKey="@InventoryNodeControlKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@Node"/>
+    </Inventory_Node_Control>
+    <Shipment_Container PrimaryKey="@ShipmentContainerKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+        <Fact Name="PrimaryKey" Path="@ParentContainerKey"/>
+        <Fact Name="PrimaryKey" Path="@WaveKey"/>
+    </Shipment_Container>
+    <Price_Type_Association PrimaryKey="@PriceTypeAssnKey" TableType="'MASTER'"/>
+    <Customer_Subscription_Price
+        PrimaryKey="@CustomerSubscriptionPriceKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerSubscriptionKey"/>
+    </Customer_Subscription_Price>
+    <Auth_Answer PrimaryKey="@AuthAnswerKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@UserKey"/>
+    </Auth_Answer>
+    <Item_Attr_Group TableType="'CONFIGURATION'"/>
+    <User_Exit TableType="'CONFIGURATION'"/>
+    <Region_Match_Pref TableType="'CONFIGURATION'"/>
+    <Item_Attr_Group_Locale TableType="'CONFIGURATION'"/>
+    <Sync_Subscription OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Activity_Demand PrimaryKey="@ActivityDemandKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@ForShipmentLineKey"/>
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Activity_Demand>
+    <Status_Modification OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Xref_Code TableType="'CONFIGURATION'"/>
+    <Carrier TableType="'CONFIGURATION'"/>
+    <Open_Container OrganizationCode="@Node"
+        PrimaryKey="@OpenContainerKey" TableType="'TRANSACTION'"/>
+    <Person_Info PrimaryKey="@PersonInfoKey" TableName="'YFS_PERSON_INFO'"/>
+    <Hold_Type_Tran TableType="'CONFIGURATION'"/>
+    <Price_Match PrimaryKey="@PriceMatchKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@CompetitorKey"/>
+    </Price_Match>
+    <Location_Preference PrimaryKey="@LocationKey" TableType="'CONFIGURATION'">
+        <Fact Name="PrimaryKey" Path="@ZoneKey"/>
+    </Location_Preference>
+    <Shipping_Charge_Del_Method PrimaryKey="@ShippingChargeDelMethodKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ShippingChargeRuleKey"/>
+    </Shipping_Charge_Del_Method>
+    <Negotiation_Rule TableType="'CONFIGURATION'"/>
+    <Charge_Category OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Ship_Node OrganizationCode="@ShipnodeKey"
+        PrimaryKey="@ShipNodeAddressKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@ShipNode"/>
+        <Fact Name="OrganizationCode" Path="@OwnerKey"/>
+        <Fact Name="PrimaryKey" Path="@ContactAddressKey"/>
+        <Fact Name="OrganizationCode" Path="@NodeOrgCode"/>
+        <Fact Name="OrganizationCode" Path="@ReceivingNode"/>
+    </Ship_Node>
+    <Shipment_Line PrimaryKey="@ShipmentLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@ParentShipmentLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderReleaseKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@MarkForKey"/>
+        <Fact Name="PrimaryKey" Path="@StoreBatchKey"/>
+    </Shipment_Line>
+    <Res_Pool_Std_Capacity_Period
+        PrimaryKey="@ResPoolStdCapacityPeriodKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Res_Pool_Std_Capacity_Period>
+    <Item_Instruction_Code OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ItemInstructionCodeKey" TableType="'MASTER'"/>
+    <Node_Notification_Dow TableType="'CONFIGURATION'"/>
+    <Container_Inner_Pack PrimaryKey="@ContainerInnerPackKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentContainerKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+    </Container_Inner_Pack>
+    <Region TableType="'CONFIGURATION'"/>
+    <Service_Slot PrimaryKey="@ServiceSlotKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ParentSlotKey"/>
+        <Fact Name="PrimaryKey" Path="@ServiceSlotGroupKey"/>
+    </Service_Slot>
+    <User_Group OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Location_Capacity OrganizationCode="@Node"
+        PrimaryKey="@LocationCapacityKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Location_Capacity>
+    <Order_Line_Req_Tag PrimaryKey="@OrderLineReqTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Line_Req_Tag>
+    <Shipping_Charge_Service PrimaryKey="@ShippingChargeServiceKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ShippingChargeRuleKey"/>
+    </Shipping_Charge_Service>
+    <User_Activity Loginid="@UserId" PrimaryKey="@UserActivityKey" TableType="'TRANSACTION'"/>
+    <Pwd_Rule_Cfg TableType="'CONFIGURATION'"/>
+    <Invoked_Flows TableType="'CONFIGURATION'"/>
+    <DATA_TABLE TableType="'CONFIGURATION'"/>
+    <PLD_User_Defaults TableType="'CONFIGURATION'"/>
+    <Receiving_Discrepancy_Dtl PrimaryKey="@ReceivingDiscrepancyDtlKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReceivingDiscrepancyKey"/>
+    </Receiving_Discrepancy_Dtl>
+    <Retrieval_Strategy OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Res_Pool_Item PrimaryKey="@ResPoolItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Res_Pool_Item>
+    <Charge_Transaction PrimaryKey="@ChargeTransactionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@PaymentKey"/>
+    </Charge_Transaction>
+    <Inbound_Compliance OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Notes PrimaryKey="@NotesKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TableKey"/>
+    </Notes>
+    <SDFFileStatus TableType="'STATISTICS'"/>
+    <Index_Status TableType="'STATISTICS'"/>
+    <Equipment OrganizationCode="@Node" PrimaryKey="@EquipmentKey" TableType="'MASTER'"/>
+    <Item_Service_Assoc_Skill OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ItemServiceAssocSkillKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemServiceAssocKey"/>
+    </Item_Service_Assoc_Skill>
+    <Order_Ser_Prod_Item PrimaryKey="@OrderSerProdItemKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Ser_Prod_Item>
+    <Awaiting_Index PrimaryKey="@AwaitingIndexKey" TableType="'TRANSACTION'"/>
+    <BOM_Header PrimaryKey="@BOMHeaderKey" TableName="'YIC_BOM_HEADER'"/>
+    <Node_Disposition OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Node_Disposition>
+    <Shipment_Line_Req_Tag PrimaryKey="@ShipmentLineReqTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentLineKey"/>
+    </Shipment_Line_Req_Tag>
+    <Inv_Avail_Safety_Factor OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <User_Act_Audit PrimaryKey="@UserActAuditKey" TableType="'TRANSACTION'"/>
+    <Data_Extract_Column TableType="'CONFIGURATION'"/>
+    <Application_Version TableType="'CONFIGURATION'"/>
+    <Count PrimaryKey="@CountKey" TableType="'TRANSACTION'"/>
+    <Cntr_Buyer_Assoc PrimaryKey="@CntrBuyerAssocKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Cntr_Buyer_Assoc>
+    <Locn_Monitor_Alert PrimaryKey="@LocnMonitorAlertKey" TableType="'TRANSACTION'"/>
+    <Unique_Id TableType="'METADATA'"/>
+    <Load_Shipment_Charge PrimaryKey="@LoadShipmentChargeKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+    </Load_Shipment_Charge>
+    <DOCUMENT PrimaryKey="@DocId" TableType="'TRANSACTION'"/>
+    <Xref_Value TableType="'CONFIGURATION'"/>
+    <Cost_Factor_Group_Dtl TableType="'CONFIGURATION'"/>
+    <Locn_Monitor_Rule OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Node_Notification_Period OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Pricelist_Seller_Assignment OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@PricelistSellerAssignmentKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@PricelistHeaderKey"/>
+    </Pricelist_Seller_Assignment>
+    <Inbound_Vas_Compliance OrganizationCode="@BuyerOrganizationCode" TableType="'CONFIGURATION'"/>
+    <Status_Modification_Type TableType="'CONFIGURATION'"/>
+    <Order_Line_Schedule PrimaryKey="@OrderLineScheduleKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Order_Line_Schedule>
+    <BOM_Property PrimaryKey="@BOMPropertyKey" TableName="'YIC_BOM_PROP'">
+        <Fact Name="PrimaryKey" Path="@BOMHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@BOMLineKey"/>
+    </BOM_Property>
+    <Cpn_Code_Exp_Audit PrimaryKey="@CpnCodeExpAuditKey" TableType="'MASTER'"/>
+    <Order_Line_Option PrimaryKey="@OrderLineOptionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Line_Option>
+    <Work_Order_Activity PrimaryKey="@WorkOrderActivityKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Activity>
+    <Data_Extract_Config TableType="'CONFIGURATION'"/>
+    <Opportunity_Extension PrimaryKey="@OpportunityExtensionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OpportunityKey"/>
+    </Opportunity_Extension>
+    <Org_Protocol_Reference TableType="'CONFIGURATION'"/>
+    <Price_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <WMS_Item_Attributes PrimaryKey="@ItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@WMSItemAttrKey"/>
+    </WMS_Item_Attributes>
+    <Pricing_Rule_Price_Type_Target
+        PrimaryKey="@PricingRulePriceTypeTargetKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Price_Type_Target>
+    <Disposition_Transition TableType="'CONFIGURATION'"/>
+    <Dock_Appointment OrganizationCode="@OrganizationCode"
+        PrimaryKey="@DockAppointmentKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResPoolConsmptnDtlsKey"/>
+        <Fact Name="OrganizationCode" Path="@Node"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+    </Dock_Appointment>
+    <Carrier_Service_Override TableType="'CONFIGURATION'"/>
+    <Promotion PrimaryKey="@PromotionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@AdditionalLinePriceKey"/>
+    </Promotion>
+    <Pricing_Rule_Target_Attribute_Value
+        PrimaryKey="@PricingRuleTargetAttributeValueKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Target_Attribute_Value>
+    <Category_Item_Vw PrimaryKey="@CategoryItemVwKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemVwKey"/>
+    </Category_Item_Vw>
+    <Label_Format TableType="'CONFIGURATION'"/>
+    <Common_Code OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Export PrimaryKey="@ExportKey" TableType="'TRANSACTION'"/>
+    <Promotion_Reference PrimaryKey="@PromotionReferenceKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@PromotionKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Promotion_Reference>
+    <Base_Ship_Constraints TableType="'CONFIGURATION'"/>
+    <Coupon_Char_Set TableType="'CONFIGURATION'"/>
+    <Pipeline OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Sku_Safety_Factor_Defn PrimaryKey="@SafetyFactorDefnKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ParentKey"/>
+    </Sku_Safety_Factor_Defn>
+    <Base_Config_Task TableType="'CONFIGURATION'"/>
+    <Node_Transfer_Schedule OrganizationCode="@ToNode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@FromNode"/>
+    </Node_Transfer_Schedule>
+    <Line_Relationship_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <DbColonyPool TableType="'METADATA'"/>
+    <Auto_User_Constraints Loginid="@AssignedToUserId"
+        PrimaryKey="@AutoUserConstraintsKey" TableType="'TRANSACTION'"/>
+    <Scac_Adapter_Support TableType="'CONFIGURATION'"/>
+    <Classification_Purpose OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Node_Transfer_Schedule_Override OrganizationCode="@FromNode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@ToNode"/>
+    </Node_Transfer_Schedule_Override>
+    <Header_Charges PrimaryKey="@HeaderChargesKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@HeaderKey"/>
+    </Header_Charges>
+    <Hold_Type_User_Group TableType="'CONFIGURATION'"/>
+    <Tran_User_Exit TableType="'CONFIGURATION'"/>
+    <Manifest_Ups_Dtl PrimaryKey="@ManifestUpsDtlKey" TableType="'TRANSACTION'"/>
+    <Task_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@Node"/>
+    </Task_Type>
+    <Assc_Relationship OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'"/>
+    <Carrier_Special_Service TableType="'CONFIGURATION'"/>
+    <Negotiation_Line PrimaryKey="@NegotiationLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@NegotiationHeaderKey"/>
+    </Negotiation_Line>
+    <Pricelist_Assignment OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@PricelistAssignmentKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricelistHeaderKey"/>
+    </Pricelist_Assignment>
+    <Category_Locale PrimaryKey="@CategoryLocaleKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CategoryKey"/>
+    </Category_Locale>
+    <Customer_Subscription OrganizationCode="@OrganizationCode"
+        PrimaryKey="@CustomerSubscriptionKey"
+        Store="@SellerOrganizationCode" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@BundleParentSubscriptionKey"/>
+    </Customer_Subscription>
+    <Device OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Base_Document_Template TableType="'CONFIGURATION'"/>
+    <DbColony TableType="'METADATA'"/>
+    <Item_Consumption_Pattern_Detail TableType="'CONFIGURATION'"/>
+    <Heartbeat TableType="'STATISTICS'"/>
+    <Monitor_Rule_Delivery_Method TableType="'CONFIGURATION'"/>
+    <Base_Config_Task_Status OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Order_Hold_Type_Log PrimaryKey="@OrderHoldTypeLogKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHoldTypeKey"/>
+    </Order_Hold_Type_Log>
+    <Entity_Lock PrimaryKey="@EntityLockKey" TableName="'YFS_ENTITY_LOCK'"/>
+    <Productivity_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Customer_Additional_Address
+        PrimaryKey="@CustomerAdditionalAddressKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+        <Fact Name="PrimaryKey" Path="@PersonInfoKey"/>
+        <Fact Name="PrimaryKey" Path="@CustomerContactKey"/>
+    </Customer_Additional_Address>
+    <Service_Resource_Efficiency
+        PrimaryKey="@ServiceResourceEfficiencyKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ServiceResourceKey"/>
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Service_Resource_Efficiency>
+    <Monitor_Type TableType="'CONFIGURATION'"/>
+    <Data_Extract_Job PrimaryKey="@DataExtractJobKey" TableType="'TRANSACTION'"/>
+    <Entity_Address PrimaryKey="@EntityAddressKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@EntityKey"/>
+        <Fact Name="PrimaryKey" Path="@EntityParentKey"/>
+        <Fact Name="PrimaryKey" Path="@PersonInfoKey"/>
+    </Entity_Address>
+    <Pricing_Rule_Locale PrimaryKey="@PricingRuleLocaleKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Locale>
+    <Item_Node_Velocity_Dump PrimaryKey="@ItemNodeVelocityDumpKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+    </Item_Node_Velocity_Dump>
+    <Entitlement_Rule_Hdr OrganizationCode="@OrganizationCode"
+        PrimaryKey="@EntitlementRuleKey" TableType="'MASTER'"/>
+    <Shipping_Charge_Attr_Value PrimaryKey="@ShippingChargeAttrValueKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ShippingChargeRuleKey"/>
+    </Shipping_Charge_Attr_Value>
+    <Res_Pool_Dow_Capcty PrimaryKey="@ResPoolDowCapctyKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResPoolStdCapacityPeriodKey"/>
+    </Res_Pool_Dow_Capcty>
+    <Component_Status TableType="'CONFIGURATION'"/>
+    <Exception_Type_Role OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Planned_Task_Cond_Set OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Pla_Uom_Condition OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Inventory_Alerts PrimaryKey="@InventoryAlertKey" TableType="'TRANSACTION'"/>
+    <Batch_Rule OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Capacity_Uom_Type TableType="'CONFIGURATION'"/>
+    <Pricelist_Line PrimaryKey="@PricelistLineKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricelistHeaderKey"/>
+    </Pricelist_Line>
+    <Promotion_Award_Reference_Mapping
+        PrimaryKey="@PromotionAwardReferenceMapKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@PromotionReferenceKey"/>
+        <Fact Name="PrimaryKey" Path="@PromotionAwardKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Promotion_Award_Reference_Mapping>
+    <Sub_Cat_Org_Assign OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@SubCatalogOrganizationCode"/>
+    </Sub_Cat_Org_Assign>
+    <Pla_Activity_Task_Type OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Resource_Permission PrimaryKey="@UserKey" TableType="'CONFIGURATION'"/>
+    <EOFStatus TableType="'STATISTICS'"/>
+    <Item_Node_Velocity PrimaryKey="@ItemNodeVelocityKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+    </Item_Node_Velocity>
+    <Monitor_Rule OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Work_Order_Service_Tool PrimaryKey="@WorkOrderServiceToolKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Service_Tool>
+    <Store_Batch_Config PrimaryKey="@StoreBatchConfigKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@StoreBatchKey"/>
+    </Store_Batch_Config>
+    <Zip_Code_Location TableType="'CONFIGURATION'"/>
+    <Query OrganizationCode="@OrganizationCode" PrimaryKey="@QueryKey" TableName="'YFS_QUERY'"/>
+    <Calendar_Day_Excp TableType="'CONFIGURATION'"/>
+    <Customer OrganizationCode="@OrganizationCode"
+        PrimaryKey="@CustomerKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@BuyerOrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@ParentCustomerKey"/>
+    </Customer>
+    <Order_Validation OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Item_Pick_Pla_Zone_Set TableType="'CONFIGURATION'"/>
+    <Res_Pool_Consmptn_Dtls PrimaryKey="@ResPoolConsmptnDtlsKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResPoolCapctyConsmptnKey"/>
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+        <Fact Name="PrimaryKey" Path="@WorkOrderApptKey"/>
+    </Res_Pool_Consmptn_Dtls>
+    <Shipment_Tag_Serial PrimaryKey="@ShipmentTagSerialKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentLineKey"/>
+        <Fact Name="PrimaryKey" Path="@ContainerDetailKey"/>
+        <Fact Name="PrimaryKey" Path="@ContainerInnerPackKey"/>
+    </Shipment_Tag_Serial>
+    <Node_Notification TableType="'CONFIGURATION'"/>
+    <Attribute_Locale TableType="'CONFIGURATION'"/>
+    <Tran_Rollback_Status TableType="'CONFIGURATION'"/>
+    <Inventory_Receipt OrganizationCode="@ShipnodeKey"
+        PrimaryKey="@InventoryReceiptKey" TableType="'TRANSACTION'"/>
+    <Pricelist_VW PrimaryKey="@PricelistVwKey" TableType="'MASTER'"/>
+    <CallOut TableType="'CONFIGURATION'"/>
+    <Upload_Job_Record PrimaryKey="@JobRecordKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@JobKey"/>
+    </Upload_Job_Record>
+    <Tax_Breakup PrimaryKey="@TaxBreakupKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@HeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@LineKey"/>
+    </Tax_Breakup>
+    <Upload_Job PrimaryKey="@JobKey" TableType="'TRANSACTION'"/>
+    <Node_Service_Pickup_Override OrganizationCode="@ShipnodeKey" TableType="'CONFIGURATION'"/>
+    <CallOut_Impl TableType="'CONFIGURATION'"/>
+    <User_Delegate Loginid="@UserID" PrimaryKey="@UserDelegateKey" TableType="'MASTER'"/>
+    <Shipment_Statistics PrimaryKey="@ShipmentStatisticsKey" TableType="'TRANSACTION'"/>
+    <Auth_Question OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Item_Price_Set TableType="'CONFIGURATION'"/>
+    <Tran_Locn_Attrs OrganizationCode="@Node"
+        PrimaryKey="@TransactionalLocationAttributesKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@LocationKey"/>
+    </Tran_Locn_Attrs>
+    <Item_UOM_Master OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Shipment_Group OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Item_Attr_Group_Type TableType="'CONFIGURATION'"/>
+    <Service_Resource_User Loginid="@UserId"
+        PrimaryKey="@ServiceResourceUserKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ServiceResourceKey"/>
+    </Service_Resource_User>
+    <Event_Auditor OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Dispatch TableType="'METADATA'"/>
+    <Customer_Slot_Preference PrimaryKey="@CustomerSlotPreferenceKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+    </Customer_Slot_Preference>
+    <User_Printer_Preference Loginid="@UserId"
+        PrimaryKey="@UserPrinterPreferenceKey" TableType="'MASTER'"/>
+    <Receiving_Discr_Reason OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Work_Order_Prod_Del PrimaryKey="@WorkOrderProdDeliveryKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Work_Order_Prod_Del>
+    <DbPool TableType="'METADATA'"/>
+    <BarCode_Translation OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <TRANS_DATA PrimaryKey="@DataId" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@PageIndex"/>
+    </TRANS_DATA>
+    <Org_Protocol OrganizationCode="@OrganizationKey" TableType="'CONFIGURATION'"/>
+    <Deprecated TableType="'CONFIGURATION'"/>
+    <Invtdmddtl_Vw PrimaryKey="@InvtdmddtlVwKey" TableType="'TRANSACTION'"/>
+    <Entity_Attribute_Domain OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Queue OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Doc_Type_Deter TableType="'CONFIGURATION'"/>
+    <Config_Task_Knwge TableType="'CONFIGURATION'"/>
+    <Item_Attr_Grp_Type_Locale TableType="'CONFIGURATION'"/>
+    <Special_Service_Group TableType="'CONFIGURATION'"/>
+    <UPS_Routing_Code TableType="'CONFIGURATION'"/>
+    <Order_Invoice_Detail PrimaryKey="@OrderInvoiceDetailKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderInvoiceKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@AdditionalLinePriceKey"/>
+    </Order_Invoice_Detail>
+    <Return_Disposition OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <SCAC_And_Service OrganizationCode="@ScacKey" TableType="'CONFIGURATION'"/>
+    <File_Data PrimaryKey="@FileDataKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@FileAttachmentKey"/>
+    </File_Data>
+    <Search_Index OrganizationCode="@OrganizationCode"
+        PrimaryKey="@SearchIndexKey" TableType="'MASTER'"/>
+    <SI_VERSION TableType="'CONFIGURATION'"/>
+    <Rules OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Node_Type TableType="'CONFIGURATION'"/>
+    <Transaction_Violation PrimaryKey="@TransactionViolationKey" TableType="'TRANSACTION'"/>
+    <Localized_Strings TableType="'CONFIGURATION'"/>
+    <Language_Description PrimaryKey="@LanguageDescriptionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@TableKey"/>
+    </Language_Description>
+    <DOCUMENT_CLONE PrimaryKey="@DocId" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkflowId"/>
+    </DOCUMENT_CLONE>
+    <Saved_Search Loginid="@Loginid" PrimaryKey="@SavedSearchKey" TableType="'MASTER'"/>
+    <Asset_Locale PrimaryKey="@AssetLocaleKey" TableName="'YFS_ASSET_LOCALE'">
+        <Fact Name="PrimaryKey" Path="@AssetKey"/>
+    </Asset_Locale>
+    <Retrieval_Attr OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Inventory_Status_Tran OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Voice_Work_Flow TableType="'CONFIGURATION'"/>
+    <Org_Relationship_Type TableType="'CONFIGURATION'"/>
+    <BOM_Line PrimaryKey="@BOMLineKey" TableName="'YIC_BOM_LINE'">
+        <Fact Name="PrimaryKey" Path="@BOMHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ParentLineKey"/>
+    </BOM_Line>
+    <Data_Access_Policy_Rules OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Base_Process_Type TableType="'CONFIGURATION'"/>
+    <PLD_Detail TableType="'CONFIGURATION'"/>
+    <Container_Status_Audit PrimaryKey="@ContainerStatusAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ContainerKey"/>
+    </Container_Status_Audit>
+    <Region_Best_Match TableType="'CONFIGURATION'"/>
+    <Base_Purge_Criteria TableType="'CONFIGURATION'"/>
+    <Inventory_Demand_Addnl PrimaryKey="@InventoryDemandAddnlKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+    </Inventory_Demand_Addnl>
+    <Invoice_Collection PrimaryKey="@InvoiceCollectionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderInvoiceKey"/>
+        <Fact Name="PrimaryKey" Path="@ChargeTransactionKey"/>
+    </Invoice_Collection>
+    <Res_Pool_Secondary_Uom PrimaryKey="@ResPoolSecondaryUomKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Res_Pool_Secondary_Uom>
+    <Shipment_Hold_Type_Log PrimaryKey="@ShipmentHoldTypeLogKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentHoldTypeKey"/>
+    </Shipment_Hold_Type_Log>
+    <Role TableType="'CONFIGURATION'"/>
+    <Qualified_Tag TableType="'CONFIGURATION'"/>
+    <Index_Config TableType="'CONFIGURATION'"/>
+    <Order_Approval_Rule OrganizationCode="@OrganizationCode"
+        PrimaryKey="@OrderApprovalRuleKey" TableType="'MASTER'"/>
+    <Tran_Hold_Process_Type TableType="'CONFIGURATION'"/>
+    <Negotiation_Hdr OrganizationCode="@EnterpriseKey"
+        PrimaryKey="@NegotiationHeaderKey" TableType="'TRANSACTION'"/>
+    <Work_Order_Activity_Dtl PrimaryKey="@WorkOrderActivityDtlKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Activity_Dtl>
+    <Pricing_Rule_Pricelist_Exclusion
+        PrimaryKey="@PricingRulePricelistExclusionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+        <Fact Name="PrimaryKey" Path="@PricelistHeaderKey"/>
+    </Pricing_Rule_Pricelist_Exclusion>
+    <Property_MetaData TableType="'CONFIGURATION'"/>
+    <Coupon_Policy TableType="'CONFIGURATION'"/>
+    <Batch_Pick_Pla_Item_Condition TableType="'CONFIGURATION'"/>
+    <Pricelist_Header OrganizationCode="@SellerOrganizationCode"
+        PrimaryKey="@PricelistHeaderKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@OrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@InheritFromPricelistHeaderKey"/>
+    </Pricelist_Header>
+    <Internal_Order_Data PrimaryKey="@InternalOrderDataKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Internal_Order_Data>
+    <Batch OrganizationCode="@OrganizationCode" PrimaryKey="@BatchKey" TableType="'TRANSACTION'"/>
+    <Order_Line_Src_Cntrl PrimaryKey="@OrderLineSourcingCntrlKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Line_Src_Cntrl>
+    <Inventory_Pending_Adj OrganizationCode="@ShipnodeKey"
+        PrimaryKey="@InventoryPendingAdjKey" TableType="'TRANSACTION'"/>
+    <International_Record PrimaryKey="@InternationalRecordKey" TableType="'TRANSACTION'"/>
+    <Wo_Hold_Type PrimaryKey="@WorkOrderHoldTypeKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Wo_Hold_Type>
+    <Coupon PrimaryKey="@CouponKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Coupon>
+    <Pack_Strategy_Attr TableType="'CONFIGURATION'"/>
+    <Base_Common_Code TableType="'CONFIGURATION'"/>
+    <Pro_No_Data OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Transaction_Pickup_Status TableType="'CONFIGURATION'"/>
+    <Device_Type TableType="'CONFIGURATION'"/>
+    <Pwd_Req PrimaryKey="@PwdReqKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@UserKey"/>
+    </Pwd_Req>
+    <Pack_Strategy OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Pack_Strategy>
+    <Uom OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Node_Cost TableType="'CONFIGURATION'"/>
+    <Order_Line_Tran_Comp PrimaryKey="@OrderLineTranCompKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Line_Tran_Comp>
+    <Hazmat_Compliance TableType="'CONFIGURATION'"/>
+    <Putaway_Strategy OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Putaway_Strategy>
+    <Inventory_Alert_Detail PrimaryKey="@InventoryAlertDetailKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryAlertKey"/>
+    </Inventory_Alert_Detail>
+    <Entitlement_Rule_Dtl PrimaryKey="@EntitlementRuleDetailKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@EntitlementRuleKey"/>
+        <Fact Name="PrimaryKey" Path="@CategoryKey"/>
+    </Entitlement_Rule_Dtl>
+    <Server_Activity_Config TableType="'CONFIGURATION'"/>
+    <Status_Audit PrimaryKey="@StatusAuditKey" TableType="'TRANSACTION'"/>
+    <TRANS_DATA_RESTORE PrimaryKey="@DataId" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@PageIndex"/>
+    </TRANS_DATA_RESTORE>
+    <Import PrimaryKey="@ImportKey" TableType="'TRANSACTION'"/>
+    <Item_Consumption_Pattern_Header
+        OrganizationCode="@InventoryOrganization" TableType="'CONFIGURATION'"/>
+    <Storage_Constraint PrimaryKey="@StorageConstraintKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ZoneEnterpriseKey"/>
+    </Storage_Constraint>
+    <Charge_Name OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Customer_Analytics OrganizationCode="@OrganizationCode"
+        PrimaryKey="@CustomerAnalyticsKey" TableType="'MASTER'"/>
+    <Sync_Profile_Subscription TableType="'CONFIGURATION'"/>
+    <Statistics_Detail TableType="'STATISTICS'"/>
+    <ErrorDispatchView PrimaryKey="@ErrorTxnId" TableType="'TRANSACTION'"/>
+    <Pricing_Rule_Assignment OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@PricingRuleAssignmentKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Assignment>
+    <Order_Audit PrimaryKey="@OrderAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderReleaseKey"/>
+    </Order_Audit>
+    <Order_Audit_Level PrimaryKey="@OrderAuditLevelKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderAuditKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderReleaseKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Audit_Level>
+    <Work_Order_Component PrimaryKey="@WorkOrderComponentKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Component>
+    <Snapshot TableType="'STATISTICS'"/>
+    <Change_Project OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <LPN_Hdr PrimaryKey="@LPNHdrKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReceiptHeaderKey"/>
+    </LPN_Hdr>
+    <Charge_Transaction_Request
+        PrimaryKey="@ChargeTransactionRequestKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Charge_Transaction_Request>
+    <Inventory_Supply_Type TableType="'CONFIGURATION'"/>
+    <Inventory_Demand_Dtls PrimaryKey="@InventoryDemandDtlsKey" TableType="'TRANSACTION'"/>
+    <Receiving_Preference OrganizationCode="@EnterpriseOrgCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@BuyerOrganizationCode"/>
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+    </Receiving_Preference>
+    <Inventory_Tag PrimaryKey="@InventoryTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+    </Inventory_Tag>
+    <Promotion_Award PrimaryKey="@AwardKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@PromotionKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@AdditionalLinePriceKey"/>
+    </Promotion_Award>
+    <NodeInventoryDtl_Vw PrimaryKey="@NodeInventoryDtlKey" TableType="'TRANSACTION'"/>
+    <Pricing_Rule OrganizationCode="@OrganizationCode"
+        PrimaryKey="@PricingRuleKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+    </Pricing_Rule>
+    <Task_Reference TableType="'CONFIGURATION'"/>
+    <Activity_Constraint OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Activity_Constraint>
+    <Stop_Del_Req_Dtl PrimaryKey="@StopDeliveryRequestDetailKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@StopDeliveryRequestHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Stop_Del_Req_Dtl>
+    <Base_Document_Params TableType="'CONFIGURATION'"/>
+    <Tran_Zone_Attrs PrimaryKey="@TransactionalZoneAttributesKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ZoneKey"/>
+    </Tran_Zone_Attrs>
+    <Validation_Reference TableType="'CONFIGURATION'"/>
+    <Count_Request OrganizationCode="@Node"
+        PrimaryKey="@CountRequestKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReceiptHeaderKey"/>
+    </Count_Request>
+    <Index_Sync TableType="'STATISTICS'"/>
+    <Inventory_Monitor_Rule_Fulfillment_Type TableType="'CONFIGURATION'"/>
+    <Document_Template TableType="'CONFIGURATION'"/>
+    <Surcharges TableType="'CONFIGURATION'"/>
+    <Transaction_Violation_Reference
+        PrimaryKey="@TransactionViolationReferenceKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TransactionViolationKey"/>
+    </Transaction_Violation_Reference>
+    <SCAC_Ex OrganizationCode="@RecordKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@ScacKey"/>
+        <Fact Name="OrganizationCode" Path="@EnterpriseKey"/>
+        <Fact Name="OrganizationCode" Path="@ThirdPartyOrganizationKey"/>
+    </SCAC_Ex>
+    <Flow OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Xref_Mapping TableType="'CONFIGURATION'"/>
+    <Order_Prod_Ser_Assoc PrimaryKey="@OrderProdSerAssocKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ProductLineKey"/>
+        <Fact Name="PrimaryKey" Path="@ServiceLineKey"/>
+    </Order_Prod_Ser_Assoc>
+    <Routing_Guide_Attr OrganizationCode="@Value" TableType="'CONFIGURATION'"/>
+    <Status_Mod_Group OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Paged_Data PrimaryKey="@PagedDataKey" TableType="'TRANSACTION'"/>
+    <Task_Type_Res_Pool PrimaryKey="@TaskTypeResourcePoolKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Task_Type_Res_Pool>
+    <Locale TableType="'CONFIGURATION'"/>
+    <Reference_Table PrimaryKey="@ReferenceKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TableKey"/>
+    </Reference_Table>
+    <Base_Config_Grp_Defn TableType="'CONFIGURATION'"/>
+    <Adapter TableType="'CONFIGURATION'"/>
+    <Load_Stop PrimaryKey="@LoadStopKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+        <Fact Name="PrimaryKey" Path="@StopAddressKey"/>
+    </Load_Stop>
+    <Uom_Conversion OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Routing_Guide_Detail_Carrier PrimaryKey="@ContactKey" TableType="'CONFIGURATION'"/>
+    <Load_Hold_Type_Log PrimaryKey="@LoadHoldTypeLogKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@LoadHoldTypeKey"/>
+    </Load_Hold_Type_Log>
+    <Move_Request_Status_Audit PrimaryKey="@MoveRequestStatusAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@MoveRequestKey"/>
+    </Move_Request_Status_Audit>
+    <Calendar_Shift TableType="'CONFIGURATION'"/>
+    <HMThresholds TableType="'CONFIGURATION'"/>
+    <Item_Pick_Pla_Item_Condition TableType="'CONFIGURATION'"/>
+    <Process_Status TableType="'STATISTICS'"/>
+    <Order_Audit_Detail PrimaryKey="@OrderAuditDetailKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderAuditLevelKey"/>
+    </Order_Audit_Detail>
+    <Response_Line_Dtl PrimaryKey="@ResponseLineDtlKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResponseLineKey"/>
+    </Response_Line_Dtl>
+    <Count_Program OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+        <Fact Name="OrganizationCode" Path="@OwnerKey"/>
+    </Count_Program>
+    <Capacity_Availability PrimaryKey="@CapacityAvailabilityKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Capacity_Availability>
+    <Tran_Complete_Status TableType="'CONFIGURATION'"/>
+    <Payment PrimaryKey="@PaymentKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@BillToKey"/>
+    </Payment>
+    <Chute_Dedication OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Order_Tag_Detmn TableType="'CONFIGURATION'"/>
+    <Load_Status_Audit PrimaryKey="@LoadStatusAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+    </Load_Status_Audit>
+    <Order_Line_Reservation PrimaryKey="@OrderLineReservationKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Line_Reservation>
+    <Approval_Plan OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Res_Pool_Attr PrimaryKey="@ResourcePoolAttributeKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Res_Pool_Attr>
+    <Payment_Rule OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Container_Activity PrimaryKey="@ContainerActivityKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentContainerKey"/>
+    </Container_Activity>
+    <Carr_Service TableType="'CONFIGURATION'"/>
+    <Credit_Card_Transaction PrimaryKey="@CreditCardTransactionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ChargeTransactionKey"/>
+    </Credit_Card_Transaction>
+    <Count_Result_Tag PrimaryKey="@CountResultTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@CountResultKey"/>
+    </Count_Result_Tag>
+    <Work_Order_Appt PrimaryKey="@WorkOrderApptKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Appt>
+    <Inventory_Match PrimaryKey="@InventoryMatchKey" TableType="'TRANSACTION'"/>
+    <Trace_Component TableType="'STATISTICS'"/>
+    <Approval_Rule_Assoc PrimaryKey="@ApprovalRuleAssocKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@OrderApprovalRuleKey"/>
+    </Approval_Rule_Assoc>
+    <Item_Option OrganizationCode="@OptionOrganizationCode"
+        PrimaryKey="@ItemOptionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_Option>
+    <DATA_TABLE_RESTORE TableType="'CONFIGURATION'"/>
+    <Error PrimaryKey="@ErrorTxnId" TableType="'TRANSACTION'"/>
+    <Shipment_Selector OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="HeaderAttributes/@EnterpriseCode"/>
+    </Shipment_Selector>
+    <Res_Pool_Capcty_Consmptn PrimaryKey="@ResPoolCapctyConsmptnKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+        <Fact Name="PrimaryKey" Path="@ServiceResourceKey"/>
+    </Res_Pool_Capcty_Consmptn>
+    <Status_Inv_Selection TableType="'CONFIGURATION'"/>
+    <Inv_Node_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Agent_Criteria_Template TableType="'CONFIGURATION'"/>
+    <User_Login_Fail PrimaryKey="@UserLoginFailKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@UserKey"/>
+    </User_Login_Fail>
+    <BLOB_TRACK PrimaryKey="@ObjId" TableType="'TRANSACTION'"/>
+    <Shipping_Charge_Destination
+        PrimaryKey="@ShippingChargeDestinationKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ShippingChargeRuleKey"/>
+    </Shipping_Charge_Destination>
+    <Service_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Api_Template OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Competitor OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@CompetitorKey" TableType="'TRANSACTION'"/>
+    <Customer_Payment_Method PrimaryKey="@CustomerPaymentMethodKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+        <Fact Name="PrimaryKey" Path="@CustomerContactKey"/>
+        <Fact Name="PrimaryKey" Path="@PersonInfoKey"/>
+    </Customer_Payment_Method>
+    <Sync_Profile OrganizationCode="@OrganizationCode"
+        PrimaryKey="@SyncQueryKey" TableType="'CONFIGURATION'"/>
+    <Activity TableType="'CONFIGURATION'"/>
+    <Pwd_History TableType="'CONFIGURATION'"/>
+    <Payment_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Order_Invoice OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@OrderInvoiceKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+    </Order_Invoice>
+    <Node_Service_Pickup_Dow OrganizationCode="@ShipnodeKey" TableType="'CONFIGURATION'"/>
+    <Count_Program_Condition_Attr TableType="'CONFIGURATION'"/>
+    <Pick_Strategy OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Carrier_Adapter_Impl TableType="'CONFIGURATION'"/>
+    <Locn_Monitor_Filter TableType="'CONFIGURATION'"/>
+    <Department OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Inventory_Demand_Type TableType="'CONFIGURATION'"/>
+    <Shipping_Charge_Action PrimaryKey="@ShippingChargeActionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ShippingChargeRuleKey"/>
+    </Shipping_Charge_Action>
+    <LPN_Dtl PrimaryKey="@LPNDtlKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+    </LPN_Dtl>
+    <Event_Condition OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'"/>
+    <Service_Activity_Instruction
+        PrimaryKey="@ServiceActivityInstructionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ServiceActivityKey"/>
+    </Service_Activity_Instruction>
+    <Validation_Domain OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'"/>
+    <Work_Order_Tag PrimaryKey="@WorkOrderTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Work_Order_Tag>
+    <Line_Charges PrimaryKey="@LineChargesKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@HeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@LineKey"/>
+    </Line_Charges>
+    <Wo_Hold_Type_Log PrimaryKey="@WorkOrderHoldTypeLogKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderHoldTypeKey"/>
+    </Wo_Hold_Type_Log>
+    <Location_Inventory OrganizationCode="@Node"
+        PrimaryKey="@LocationInventoryKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+    </Location_Inventory>
+    <Equipment_Type_Detail OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Count_Program_Condition TableType="'CONFIGURATION'"/>
+    <User_Exit_Impl OrganizationCode="@OrgKey" TableType="'CONFIGURATION'"/>
+    <Wo_Appt_User PrimaryKey="@WoApptUserKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderApptKey"/>
+    </Wo_Appt_User>
+    <Receipt_Line OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@ReceiptLineKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReceiptHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderReleaseKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Receipt_Line>
+    <Item_Vw PrimaryKey="@ItemVwKey" TableType="'MASTER'"/>
+    <Activity_Grp_Res_Ref TableType="'CONFIGURATION'"/>
+    <Sourcing_Rule_Header OrganizationCode="@SellerOrganizationCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@OrganizationCode"/>
+        <Fact Name="OrganizationCode" Path="@ToNodeKey"/>
+    </Sourcing_Rule_Header>
+    <Store_Batch PrimaryKey="@StoreBatchKey" TableType="'TRANSACTION'"/>
+    <Order_Search_Condition PrimaryKey="@OrderSearchConditionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Order_Search_Condition>
+    <Voice_Application TableType="'CONFIGURATION'"/>
+    <Pwd_Hist PrimaryKey="@PasswordHistoryKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@UserKey"/>
+    </Pwd_Hist>
+    <Answer_Option OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Pwd_Policy TableType="'CONFIGURATION'"/>
+    <Change_Project_Locale TableType="'CONFIGURATION'"/>
+    <SCAC PrimaryKey="@ContactAddressKey" TableType="'CONFIGURATION'">
+        <Fact Name="PrimaryKey" Path="@BillingAddressKey"/>
+    </SCAC>
+    <Location_Storage_Code OrganizationCode="@Node"
+        PrimaryKey="@LocationStorageKey" TableType="'MASTER'"/>
+    <Question OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Qualified_Tag_Type TableType="'CONFIGURATION'"/>
+    <Zone_Enterprise OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@ZoneEnterpriseKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ZoneKey"/>
+        <Fact Name="OrganizationCode" Path="@Node"/>
+    </Zone_Enterprise>
+    <Inbox OrganizationCode="@EnterpriseKey" PrimaryKey="@InboxKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@ShipnodeKey"/>
+        <Fact Name="PrimaryKey" Path="@AssignedToUserKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Inbox>
+    <Response_Hdr PrimaryKey="@ResponseHdrKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ResponseKey"/>
+        <Fact Name="PrimaryKey" Path="@NegotiationHeaderKey"/>
+    </Response_Hdr>
+    <Item_Tag PrimaryKey="@ItemTagKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_Tag>
+    <Charge_Breakup PrimaryKey="@ChargeBreakupKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@HeaderChargeKey"/>
+        <Fact Name="PrimaryKey" Path="@LineChargeKey"/>
+    </Charge_Breakup>
+    <Calendar OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Inventory_Audit OrganizationCode="@InventoryOrganizationCode"
+        PrimaryKey="@InventoryAuditKey" TableType="'TRANSACTION'"/>
+    <Exception_Routing_Rule OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Tote OrganizationCode="@Node" PrimaryKey="@ToteKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ReferenceKey"/>
+    </Tote>
+    <Atp_Rules OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Order_Line_Extension PrimaryKey="@OrderLineExtensionKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Line_Extension>
+    <Inventory_Item OrganizationCode="@InventoryOrganizationCode"
+        PrimaryKey="@InventoryItemKey" TableType="'TRANSACTION'"/>
+    <Shipping_Charge_Rule PrimaryKey="@ShippingChargeRuleKey" TableType="'MASTER'"/>
+    <Change_Request_User PrimaryKey="@ChangeRequestUserKey" TableType="'TRANSACTION'"/>
+    <Event OrganizationCode="@EnterpriseKey" TableType="'CONFIGURATION'"/>
+    <Config_Version_Label TableType="'CONFIGURATION'"/>
+    <Answer_Set_Master PrimaryKey="@AnswerSetMasterKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PrimaryTableRefKey"/>
+    </Answer_Set_Master>
+    <IBA_Ord_Demand_Vw PrimaryKey="@IBAOrdDemandVwKey" TableType="'TRANSACTION'"/>
+    <Wave_Audit PrimaryKey="@WaveAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WaveKey"/>
+    </Wave_Audit>
+    <Cost_Factor_Purpose OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@SupplierOrganizationCode"/>
+    </Cost_Factor_Purpose>
+    <Pla_Upgrade_Uom OrganizationCode="@Node" TableType="'CONFIGURATION'"/>
+    <Base_Config_Task_Dep TableType="'CONFIGURATION'"/>
+    <Loaded_Container PrimaryKey="@LoadedContainerKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@LoadKey"/>
+        <Fact Name="PrimaryKey" Path="@ContainerKey"/>
+    </Loaded_Container>
+    <Manifest_Ups_Hdr PrimaryKey="@ManifestUpsHdrKey" TableType="'TRANSACTION'"/>
+    <Application_Menu TableType="'CONFIGURATION'"/>
+    <Item_Status_Rules OrganizationCode="@ShipnodeKey" TableType="'CONFIGURATION'"/>
+    <Batch_Pick_Pla_Zone_Set TableType="'CONFIGURATION'"/>
+    <Monitor_Consolidation OrganizationCode="@InventoryOrganizationCode" TableType="'CONFIGURATION'"/>
+    <Inventory_Considerations TableType="'CONFIGURATION'"/>
+    <Voice_Application_Instance TableType="'CONFIGURATION'"/>
+    <Answer_Set_Tran PrimaryKey="@AnswerSetTranKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@PrimaryTableRefKey"/>
+    </Answer_Set_Tran>
+    <Org_Theme OrganizationCode="@OrganizationKey" TableType="'CONFIGURATION'"/>
+    <Graph_UI OrganizationCode="@OwnerKey" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@GraphRefKey"/>
+    </Graph_UI>
+    <BOM_Message PrimaryKey="@BOMMessageKey" TableName="'YIC_BOM_MESSAGE'">
+        <Fact Name="PrimaryKey" Path="@BOMHeaderKey"/>
+    </BOM_Message>
+    <Pack_Do_Not_Mix TableType="'CONFIGURATION'"/>
+    <Base_Pack_Do_Not_Mix TableType="'CONFIGURATION'"/>
+    <Document_Params TableType="'CONFIGURATION'"/>
+    <Pipeline_Pickup_Tran TableType="'CONFIGURATION'"/>
+    <Region_Level_Assoc TableType="'CONFIGURATION'"/>
+    <Sourcing_Config OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Base_Rules TableType="'CONFIGURATION'"/>
+    <Freight_Terms OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'"/>
+    <Action OrganizationCode="@OwnerKey" PrimaryKey="@InboxUserKey" TableType="'CONFIGURATION'"/>
+    <Audit_Header PrimaryKey="@AuditHeaderKey" TableName="'YFS_AUDIT_HEADER'"/>
+    <Order_Release OrganizationCode="@MergeNode"
+        PrimaryKey="@OrderReleaseKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+        <Fact Name="PrimaryKey" Path="@WorkOrderApptKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipToKey"/>
+        <Fact Name="OrganizationCode" Path="@ShipNode"/>
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+        <Fact Name="PrimaryKey" Path="@MarkForKey"/>
+    </Order_Release>
+    <Change_Request_Assignment TableType="'CONFIGURATION'"/>
+    <Pricing_Rule_Item PrimaryKey="@PricingRuleItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Item>
+    <Colony_Map TableType="'METADATA'"/>
+    <Cat_Domain_Locale TableType="'CONFIGURATION'"/>
+    <Component_Endpoint TableType="'CONFIGURATION'"/>
+    <Pipeline_Drop_Status_Condition TableType="'CONFIGURATION'"/>
+    <Print_Adapter TableType="'CONFIGURATION'"/>
+    <Payment_Card_Type OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Calendar_Shift_Eff_Perd TableType="'CONFIGURATION'"/>
+    <Task_Queue PrimaryKey="@TaskQKey" TableType="'TRANSACTION'"/>
+    <Item_Exclusion PrimaryKey="@ItemExclusionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_Exclusion>
+    <Res_Pool_Service_Skill OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ResPoolServiceSkillKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+    </Res_Pool_Service_Skill>
+    <Order_Tag PrimaryKey="@OrderTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Order_Tag>
+    <Process_Tran_Hold_Level TableType="'CONFIGURATION'"/>
+    <Pricing_Rule_Order_Attr PrimaryKey="@PricingRuleOrderAttributeKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Order_Attr>
+    <Base_Tran_Hold_Pro_Type TableType="'CONFIGURATION'"/>
+    <Install_Defaults TableType="'CONFIGURATION'"/>
+    <Location OrganizationCode="@Node" PrimaryKey="@LocationKey" TableType="'MASTER'"/>
+    <Process_Control TableType="'CONFIGURATION'"/>
+    <Pricing_Rule_Target_Category
+        PrimaryKey="@PricingRuleTargetCategoryKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Target_Category>
+    <Pricing_Rule_Action PrimaryKey="@PricingRuleActionKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Action>
+    <Data_Security_Group OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Phy_Cnt_Category TableType="'CONFIGURATION'"/>
+    <Shipment_Select_Attr OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@Value"/>
+    </Shipment_Select_Attr>
+    <Xref_Config_Dtl TableType="'CONFIGURATION'"/>
+    <HMGroups TableType="'CONFIGURATION'"/>
+    <Item OrganizationCode="@OrganizationCode" PrimaryKey="@ItemKey" TableType="'MASTER'"/>
+    <Data_Access_Policy_Override TableType="'CONFIGURATION'"/>
+    <Inventory_Alert_Detail_Relationship
+        PrimaryKey="@InvAlertDtlRelationshipKey" TableType="'TRANSACTION'"/>
+    <Master_Catalog OrganizationCode="@OrganizationCode"
+        PrimaryKey="@MasterCatalogKey" TableType="'MASTER'"/>
+    <Service_Skill OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ServiceSkillKey" TableType="'MASTER'"/>
+    <Region_Schema OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Sync_Target OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Region_Detail TableType="'CONFIGURATION'"/>
+    <Carrier_Service_Dow TableType="'CONFIGURATION'"/>
+    <Routing_Guide_Detail OrganizationCode="ShipFrom/@ShipFromNode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="ShipTo/@ShipToConsolNode"/>
+        <Fact Name="OrganizationCode" Path="ShipTo/@ShipToNode"/>
+        <Fact Name="OrganizationCode" Path="ShipTo/@ShipToStore"/>
+        <Fact Name="OrganizationCode" Path="@RevisedShipToConsolNode"/>
+        <Fact Name="OrganizationCode" Path="@RevisedShipToNode"/>
+        <Fact Name="OrganizationCode" Path="@RevisedShipToStore"/>
+    </Routing_Guide_Detail>
+    <Attribute_Group OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Execution_Exception_Audit PrimaryKey="@ExecutionExceptionAuditKey" TableType="'TRANSACTION'"/>
+    <Receiving_Discrepancy PrimaryKey="@ReceivingDiscrepancyKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Receiving_Discrepancy>
+    <Sync_DB_Export OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Access_Token TableType="'STATISTICS'"/>
+    <Order_Override PrimaryKey="@OrderOverrideKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+    </Order_Override>
+    <Catalog_Mass_Audit PrimaryKey="@CatalogMassAuditKey" TableType="'TRANSACTION'"/>
+    <Phy_Cnt_Plan OrganizationCode="@Node"
+        PrimaryKey="@PhysicalCountPlanKey" TableType="'TRANSACTION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Phy_Cnt_Plan>
+    <Shipment_Status_Audit PrimaryKey="@ShipmentStatusAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+    </Shipment_Status_Audit>
+    <Wave OrganizationCode="@Node" PrimaryKey="@WaveKey" TableType="'TRANSACTION'"/>
+    <Org_Relationship OrganizationCode="@FromOrgCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@ToOrgCode"/>
+    </Org_Relationship>
+    <File_Attachment PrimaryKey="@FileAttachmentKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TableKey"/>
+    </File_Attachment>
+    <Voice_Work_Flow_Activity_Association TableType="'CONFIGURATION'"/>
+    <Item_Service_Assoc OrganizationCode="@ServiceOrganizationCode"
+        PrimaryKey="@ItemServiceAssocKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+        <Fact Name="PrimaryKey" Path="@CategoryKey"/>
+    </Item_Service_Assoc>
+    <Location_Inventory_Audit PrimaryKey="@LocnInventoryAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+        <Fact Name="PrimaryKey" Path="@ReceiptHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@CountRequestKey"/>
+        <Fact Name="PrimaryKey" Path="@WorkOrderKey"/>
+    </Location_Inventory_Audit>
+    <Count_Result PrimaryKey="@CountResultKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@CountRequestKey"/>
+    </Count_Result>
+    <Password_Policy OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Search_Index_Facet PrimaryKey="@SearchIndexFacetKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@SearchIndexTriggerKey"/>
+    </Search_Index_Facet>
+    <Service_Activity PrimaryKey="@ServiceActivityKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Service_Activity>
+    <Transactional_Relationship PrimaryKey="@RelationshipKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@TableKey"/>
+        <Fact Name="PrimaryKey" Path="@RelatedTableKey"/>
+    </Transactional_Relationship>
+    <Validation_Rule OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ValidationRuleKey" TableType="'MASTER'"/>
+    <Cart PrimaryKey="@CartKey" TableType="'TRANSACTION'"/>
+    <Order_Pending_Change PrimaryKey="@OrderPendingChangeKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Order_Pending_Change>
+    <Additional_Line_Price PrimaryKey="@AdditionalLinePriceKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+    </Additional_Line_Price>
+    <Equipment_Detail OrganizationCode="@Node"
+        PrimaryKey="@EquipmentDetailKey" TableType="'MASTER'"/>
+    <Work_Order OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@WorkOrderKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@OrderHeaderKey"/>
+        <Fact Name="PrimaryKey" Path="@OrderLineKey"/>
+        <Fact Name="PrimaryKey" Path="@ServiceLocationAddressKey"/>
+    </Work_Order>
+    <Attr_Allow_Val_Locale TableType="'CONFIGURATION'"/>
+    <Item_Node_Defn OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ItemNodeDefnKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@Node"/>
+    </Item_Node_Defn>
+    <Inventory_Supply_Addnl PrimaryKey="@InventorySupplyAddnlKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+    </Inventory_Supply_Addnl>
+    <Customer_Contact Loginid="@UserID" PrimaryKey="@CustomerContactKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+    </Customer_Contact>
+    <Batch_Location PrimaryKey="@BatchLocationKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@BatchKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentKey"/>
+        <Fact Name="PrimaryKey" Path="@ShipmentContainerKey"/>
+    </Batch_Location>
+    <Inventory_Demand PrimaryKey="@InventoryDemandKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+        <Fact Name="PrimaryKey" Path="@InventoryTagKey"/>
+    </Inventory_Demand>
+    <Entitle_Rule_Dtl_Item PrimaryKey="@EntitlementRuleDetailItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@EntitlementRuleDetailKey"/>
+    </Entitle_Rule_Dtl_Item>
+    <Shipping_Charge_Category PrimaryKey="@ShippingChargeCategoryKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ShippingChargeRuleKey"/>
+    </Shipping_Charge_Category>
+    <Attr_Grp_Locale TableType="'CONFIGURATION'"/>
+    <Asyncronous_Request PrimaryKey="@AsyncronousRequestKey" TableType="'TRANSACTION'"/>
+    <Inventory_Item_Lock PrimaryKey="@InventoryItemLockKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InventoryItemKey"/>
+    </Inventory_Item_Lock>
+    <Adjustment_Location_Sequence PrimaryKey="@ZoneKey" TableType="'CONFIGURATION'">
+        <Fact Name="PrimaryKey" Path="@LocationKey"/>
+    </Adjustment_Location_Sequence>
+    <Current_Pro_No_Detail PrimaryKey="@CurrentProNoDetailKey" TableType="'TRANSACTION'"/>
+    <Org_Document OrganizationCode="@OrganizationKey" TableType="'CONFIGURATION'"/>
+    <Count_Strategy OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseKey"/>
+    </Count_Strategy>
+    <Nonlocalized_Strings TableType="'CONFIGURATION'"/>
+    <Negotiable_Line_Attr TableType="'CONFIGURATION'"/>
+    <Base_Activity_Group TableType="'CONFIGURATION'"/>
+    <Freight_Charge TableType="'CONFIGURATION'"/>
+    <Retrieval_Pla_Zone_Set TableType="'CONFIGURATION'"/>
+    <Work_Order_Audit_Detail PrimaryKey="@WorkOrderAuditDetailKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderStatusAuditKey"/>
+    </Work_Order_Audit_Detail>
+    <Carrier_Zone TableType="'CONFIGURATION'"/>
+    <Sourcing_Rule_Detail TableType="'CONFIGURATION'"/>
+    <Adjustment_Reason_Detail OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Adjustment_Reason_Detail>
+    <Resource TableType="'CONFIGURATION'"/>
+    <Enterprise_Colony_Map OrganizationCode="@EnterpriseCode" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@ShardedOrganizationCode"/>
+    </Enterprise_Colony_Map>
+    <Kit_Item PrimaryKey="@KitItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+        <Fact Name="PrimaryKey" Path="@ComponentItemKey"/>
+    </Kit_Item>
+    <Service_Resource OrganizationCode="@Node"
+        PrimaryKey="@ServiceResourceKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ResourcePoolKey"/>
+        <Fact Name="PrimaryKey" Path="@ServiceResourceContactAddressKey"/>
+    </Service_Resource>
+    <Change_Request_Locale TableType="'CONFIGURATION'"/>
+    <Pricing_Rule_Seller_Assignment OrganizationCode="@EnterpriseCode"
+        PrimaryKey="@PricingRuleSellerAssignmentKey" TableType="'MASTER'">
+        <Fact Name="OrganizationCode" Path="@SellerOrganizationCode"/>
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Seller_Assignment>
+    <ErrorView PrimaryKey="@ErrorTxnId" TableType="'TRANSACTION'"/>
+    <Move_Request_Line_Tag PrimaryKey="@MoveRequestLineTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@MoveRequestLineKey"/>
+    </Move_Request_Line_Tag>
+    <Customer_Assignment_Lookup Loginid="@UserId"
+        OrganizationCode="@OrganizationCode"
+        PrimaryKey="@CustomerAssignmentLookupKey" TableType="'TRANSACTION'"/>
+    <Error_Cause_Action TableType="'CONFIGURATION'"/>
+    <Plt_User_Ui_State Loginid="@Loginid"
+        PrimaryKey="@PltUserUiStateKey" TableType="'MASTER'"/>
+    <User Loginid="@Loginid" OrganizationCode="@OrganizationKey"
+        PrimaryKey="@UserKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ContactaddressKey"/>
+        <Fact Name="PrimaryKey" Path="@BillingaddressKey"/>
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </User>
+    <Category OrganizationCode="@OrganizationCode"
+        PrimaryKey="@CategoryKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ParentCategoryKey"/>
+    </Category>
+    <Answer_Tran PrimaryKey="@AnswerTranKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@AnswerSetTranKey"/>
+    </Answer_Tran>
+    <Process_Type TableType="'CONFIGURATION'"/>
+    <Pack_Stgy_Ship_Mode TableType="'CONFIGURATION'"/>
+    <Pla_Item_Condition OrganizationCode="@Node" TableType="'CONFIGURATION'">
+        <Fact Name="OrganizationCode" Path="@EnterpriseCode"/>
+    </Pla_Item_Condition>
+    <Inbox_Audit PrimaryKey="@InboxAuditKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@InboxKey"/>
+    </Inbox_Audit>
+    <ExportView PrimaryKey="@ExportKey" TableType="'TRANSACTION'"/>
+    <Transaction_Drop_Status TableType="'CONFIGURATION'"/>
+    <Price_Program_Defn TableType="'CONFIGURATION'"/>
+    <Region_Usage OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Work_Order_Component_Tag PrimaryKey="@WorkOrderComponentTagKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@WorkOrderComponentKey"/>
+    </Work_Order_Component_Tag>
+    <Attr_Domain_Locale TableType="'CONFIGURATION'"/>
+    <Zone OrganizationCode="@Node" PrimaryKey="@ZoneKey" TableType="'MASTER'"/>
+    <Service TableType="'CONFIGURATION'"/>
+    <Item_UOM PrimaryKey="@ItemUOMKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ItemKey"/>
+    </Item_UOM>
+    <Common_Code_Attribute TableType="'CONFIGURATION'"/>
+    <IBA_Sequence_Detail TableType="'CONFIGURATION'"/>
+    <Attribute_Domain OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Response OrganizationCode="@OrganizationCode"
+        PrimaryKey="@ResponseKey" TableType="'TRANSACTION'">
+        <Fact Name="PrimaryKey" Path="@NegotiationHeaderKey"/>
+    </Response>
+    <Confirm_Demand_Plan PrimaryKey="@ConfirmDemandPlanKey" TableType="'TRANSACTION'"/>
+    <Search_Index_Trigger OrganizationCode="@OrganizationCode"
+        PrimaryKey="@SearchIndexTriggerKey" TableType="'MASTER'"/>
+    <Special_Service TableType="'CONFIGURATION'"/>
+    <Purge_Criteria_Addnl TableType="'CONFIGURATION'"/>
+    <Pipeline_Listener TableType="'CONFIGURATION'"/>
+    <Customer_Sch_Preference PrimaryKey="@CustomerSchPreferenceKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@CustomerKey"/>
+    </Customer_Sch_Preference>
+    <Ship_Constraints OrganizationCode="@OrganizationCode" TableType="'CONFIGURATION'"/>
+    <Service_Resource_Assignment
+        PrimaryKey="@ServiceResourceAssignmentKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@ServiceResourceKey"/>
+        <Fact Name="PrimaryKey" Path="@AssignedToResourcePoolKey"/>
+    </Service_Resource_Assignment>
+    <Putaway_Strategy_Detail TableType="'CONFIGURATION'"/>
+    <Pricing_Rule_Target_Item PrimaryKey="@PricingRuleTargetItemKey" TableType="'MASTER'">
+        <Fact Name="PrimaryKey" Path="@PricingRuleKey"/>
+    </Pricing_Rule_Target_Item>
+    <Inventory_Activity OrganizationCode="@Node"
+        PrimaryKey="@InventoryActivityKey" TableType="'TRANSACTION'"/>
+</EntityFactLookup>

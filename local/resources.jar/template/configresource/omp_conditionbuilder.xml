@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<WorkflowConditionBuilderInput>
+   <ORDER_FULFILLMENT AllowDuplicateAttributes="Y" ShowNotButtons="N" >
+	<ItemAttributes DisplayName="Item_Attributes">
+      <ItemID Type="Leaf" Id="ItemID" DisplayName="ItemID" DataType="ItemID" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ItemID" IsReqd="" OverRidingClass=""/>
+      </ItemID>
+	  <ItemGroupCode Type="Leaf" Id="ItemGroupCode" DisplayName="ItemGroupCode" DataType="Text-20" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ItemGroupCode" IsReqd="" IsStatic="true" OverRidingClass="">
+            <ItemGroupCode Code="PROD" Desc="Product"/>
+            <ItemGroupCode Code="PS" Desc="Provided Services"/>
+            <ItemGroupCode Code="DS" Desc="Delivery Services"/>
+         </MasterData>
+      </ItemGroupCode>
+      <ProductLine Type="Leaf" Id="ProductLine" DisplayName="ProductLine" DataType="Text-100" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ProductLine" IsReqd="" OverRidingClass=""/>
+      </ProductLine>
+	 <IsBundleParent Type="Leaf" Id="IsBundleParent" DisplayName="IsBundleParent" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+         <MasterData MasterDataId="IsBundleParent" IsReqd="" IsStatic="true" OverRidingClass="">
+            <IsBundleParent Code="Y" Desc="Yes"/>
+            <IsBundleParent Code="N" Desc="No"/>
+         </MasterData>
+      </IsBundleParent>
+	</ItemAttributes>
+	<OrderAttributes DisplayName="Order_Attributes">
+      <ConditionVariable1 Type="Leaf" Id="ConditionVariable1" DisplayName="ConditionVariable1" DataType="ConditionVariable1" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ConditionVariable1" IsReqd="" OverRidingClass=""/>
+      </ConditionVariable1>
+      <ConditionVariable2 Type="Leaf" Id="ConditionVariable2" DisplayName="ConditionVariable2" DataType="ConditionVariable2" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ConditionVariable2" IsReqd="" OverRidingClass=""/>
+      </ConditionVariable2>
+	  <DeliveryMethod Type="Leaf" Id="DeliveryMethod" DisplayName="DeliveryMethod" DataType="Text-40" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="DeliveryMethod" IsReqd="" IsStatic="true" OverRidingClass="">
+            <DeliveryMethod Code="SHP" Desc="Shipping"/>
+            <DeliveryMethod Code="DEL" Desc="Delivery"/>
+			<DeliveryMethod Code="PICK" Desc="Pickup"/>
+			<DeliveryMethod Code="CARRY" Desc="CashAndCarry"/>
+         </MasterData>
+      </DeliveryMethod>
+      <DispositionCode Type="Leaf" Id="DispositionCode" DisplayName="DispositionCode" DataType="DispositionCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="DispositionCode" IsReqd="" OverRidingClass=""/>
+      </DispositionCode>
+      <LineType Type="Leaf" Id="LineType" DisplayName="LineType" DataType="LineType" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="LineType" IsReqd="" OverRidingClass=""/>
+      </LineType>
+      <OrderType Type="Leaf" Id="OrderType" DisplayName="OrderType" DataType="Text-20" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="OrderType" IsReqd="" OverRidingClass=""/>
+      </OrderType>
+      <VersionTag Type="Leaf" Id="VersionTag" DisplayName="VersionTag" DataType="Text-50" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="VersionTag" IsReqd="" OverRidingClass=""/>
+      </VersionTag>
+      <PaymentStatus Type="Leaf" Id="PaymentStatus" DisplayName="PaymentStatus" DataType="Status" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="PaymentStatus" IsReqd="" IsStatic="true" OverRidingClass="">
+            <PaymentStatus Code="AWAIT_PAY_INFO" Desc="AWAIT_PAY_INFO"/>
+            <PaymentStatus Code="AWAIT_AUTH" Desc="AWAIT_AUTH"/>
+            <PaymentStatus Code="REQUESTED_AUTH" Desc="REQUESTED_AUTH"/>
+            <PaymentStatus Code="REQUEST_CHARGE" Desc="REQUEST_CHARGE"/>
+            <PaymentStatus Code="AUTHORIZED" Desc="AUTHORIZED"/>
+            <PaymentStatus Code="INVOICED" Desc="INVOICED"/>
+            <PaymentStatus Code="PAID" Desc="PAID"/>
+            <PaymentStatus Code="FAILED_AUTH" Desc="FAILED_AUTH"/>
+            <PaymentStatus Code="FAILED_CHARGE" Desc="FAILED_CHARGE"/>
+            <PaymentStatus Code="HOLD" Desc="HOLD"/>
+            <PaymentStatus Code="RELEASE_HOLD" Desc="RELEASE_HOLD"/>
+            <PaymentStatus Code="NOT_APPLICABLE" Desc="NOT_APPLICABLE"/>
+         </MasterData>
+      </PaymentStatus>
+      <SaleVoided Type="Leaf" Id="SaleVoided" DisplayName="SaleVoided" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+       <MasterData MasterDataId="SaleVoided" IsReqd="" IsStatic="true" OverRidingClass="">
+               <SaleVoided Code="Y" Desc="Yes"/>
+               <SaleVoided Code="N" Desc="No"/>
+         </MasterData>        
+      </SaleVoided>
+      <TransactionId Type="Leaf" Id="TransactionId" DisplayName="TransactionId" DataType="TransactionID" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="TransactionId" IsReqd="" OverRidingClass=""/>
+      </TransactionId>
+	</OrderAttributes>
+	<ParticipantAttributes DisplayName="Participant_Attributes">
+      <BillToID Type="Leaf" Id="BillToID" DisplayName="BillToID" DataType="ID-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="BillToID" IsReqd="" OverRidingClass=""/>
+      </BillToID>
+      <BuyerOrganizationCode Type="Leaf" Id="BuyerOrganizationCode" DisplayName="BuyerOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="BuyerOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </BuyerOrganizationCode>
+      <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>
+      <ReceivingNode Type="Leaf" Id="ReceivingNode" DisplayName="ReceivingNode" DataType="ShipNode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ReceivingNode" IsReqd="" OverRidingClass=""/>
+      </ReceivingNode>
+      <SellerOrganizationCode Type="Leaf" Id="SellerOrganizationCode" DisplayName="SellerOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="SellerOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </SellerOrganizationCode>
+      <ShipNode Type="Leaf" Id="ShipNode" DisplayName="ShipNode" DataType="ShipNode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ShipNode" IsReqd="" OverRidingClass=""/>
+      </ShipNode>
+      <ShipNodeInterfaceType Type="Leaf" Id="ShipNodeInterfaceType" DisplayName="ShipNodeInterfaceType" DataType="Text-20" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ShipNodeInterfaceType" IsReqd="" IsStatic="true" OverRidingClass="">
+            <ShipNodeInterfaceType Code="INTEGRATED_WMS" Desc="Integrated WMS Interface"/>
+            <ShipNodeInterfaceType Code="WMS_YANTRA" Desc="WMS 6.2 Interface"/>
+            <ShipNodeInterfaceType Code="YFX" Desc="Application Consoles"/>
+            <ShipNodeInterfaceType Code="EVENTS" Desc="Events"/>
+         </MasterData>
+      </ShipNodeInterfaceType>
+      <NodeType Type="Leaf" Id="NodeType" DisplayName="NodeType" DataType="ID-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NodeType" IsReqd="" OverRidingClass=""/>
+      </NodeType>
+      <ShipToID Type="Leaf" Id="ShipToID" DisplayName="ShipToID" DataType="ID-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ShipToID" IsReqd="" OverRidingClass=""/>
+      </ShipToID>
+      <SupplierCode Type="Leaf" Id="SupplierCode" DisplayName="SupplierCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="SupplierCode" IsReqd="" OverRidingClass=""/>
+      </SupplierCode>
+	</ParticipantAttributes>
+	<RelatedOrderAttributes DisplayName="Related_Order_Attributes">
+	  <ChainType Type="Leaf" Id="ChainType" DisplayName="ChainType" DataType="Text-40" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ChainType" IsReqd="" IsStatic="true" OverRidingClass="">
+            <ChainType Code="DROP_SHIP" Desc="Drop Ship"/>
+            <ChainType Code="PROCURE_TO_SHIP" Desc="Procure To Ship"/>
+         </MasterData>
+      </ChainType>
+      <IsChainedLine Type="Leaf" Id="IsChainedLine" DisplayName="IsChainedLine" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+	   <MasterData MasterDataId="IsChainedLine" IsReqd="" IsStatic="true" OverRidingClass="">
+               <IsChainedLine Code="Y" Desc="Yes"/>
+               <IsChainedLine Code="N" Desc="No"/>
+         </MasterData>        
+      </IsChainedLine>
+      <IsDerivedLine Type="Leaf" Id="IsDerivedLine" DisplayName="IsDerivedLine" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+	   <MasterData MasterDataId="IsDerivedLine" IsReqd="" IsStatic="true" OverRidingClass="">
+               <IsDerivedLine Code="Y" Desc="Yes"/>
+               <IsDerivedLine Code="N" Desc="No"/>
+         </MasterData>        
+      </IsDerivedLine>
+      <OrderPurpose Type="Leaf" Id="OrderPurpose" DisplayName="OrderPurpose" DataType="Text-20" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="OrderPurpose" IsReqd="" IsStatic="true" OverRidingClass="">
+            <OrderPurpose Code="EXCHANGE" Desc="Exchange"/>
+            <OrderPurpose Code="REFUND" Desc="Refund"/>
+         </MasterData>
+      </OrderPurpose>
+	</RelatedOrderAttributes>
+	<SourcingAttributes DisplayName="Sourcing_Attributes">
+      <FulfillmentType Type="Leaf" Id="FulfillmentType" DisplayName="FulfillmentType" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="FulfillmentType" IsReqd="" OverRidingClass=""/>
+      </FulfillmentType>
+	 <IntentionalBackorder Type="Leaf" Id="IntentionalBackorder" DisplayName="IntentionalBackorder" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+         <MasterData MasterDataId="IntentionalBackorder" IsReqd="" IsStatic="true" OverRidingClass="">
+            <IntentionalBackorder Code="Y" Desc="Yes"/>
+            <IntentionalBackorder Code="N" Desc="No"/>
+         </MasterData>
+      </IntentionalBackorder>
+      <IsFirmPredefinedNode Type="Leaf" Id="IsFirmPredefinedNode" DisplayName="IsFirmPredefinedNode" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+         <MasterData MasterDataId="IsFirmPredefinedNode" IsReqd="" IsStatic="true" OverRidingClass="">
+            <IsFirmPredefinedNode Code="Y" Desc="Yes"/>
+            <IsFirmPredefinedNode Code="N" Desc="No"/>
+         </MasterData>
+      </IsFirmPredefinedNode>
+	   <Order_Sourcing_Classification Type="Leaf" Id="Order_Sourcing_Classification" DisplayName="Order_Sourcing_Classification" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="Order_Sourcing_Classification" IsReqd="" OverRidingClass="">
+         </MasterData>
+      </Order_Sourcing_Classification>
+      <ReservationMandatory Type="Leaf" Id="ReservationMandatory" DisplayName="ReservationMandatory" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+         <MasterData MasterDataId="ReservationMandatory" IsReqd="" IsStatic="true" OverRidingClass="">
+            <ReservationMandatory Code="Y" Desc="Yes"/>
+            <ReservationMandatory Code="N" Desc="No"/>
+         </MasterData>
+      </ReservationMandatory>
+	</SourcingAttributes>
+	</ORDER_FULFILLMENT>
+   <!-- Condition variables for OPPORTUNITY_FULFILLMENT process type -->
+   <OPPORTUNITY_FULFILLMENT AllowDuplicateAttributes="Y" ShowNotButtons="N" >
+	<OpportunityAttributes DisplayName="Opportunity_Attributes">
+	  <OpportunityID Type="Leaf" Id="OpportunityID" DisplayName="OpportunityID" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="OpportunityID" IsReqd="" OverRidingClass=""/>
+      </OpportunityID>
+	  <OpportunityName Type="Leaf" Id="OpportunityName" DisplayName="OpportunityName" DataType="Text-100" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="OpportunityName" IsReqd="" OverRidingClass=""/>
+      </OpportunityName>
+      <Status Type="Leaf" Id="Status" DisplayName="Status" DataType="Status" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="Status" IsReqd="" OverRidingClass=""/>
+      </Status>
+      <CurrencyValue Type="Leaf" Id="CurrencyValue" DisplayName="CurrencyValue" DataType="Amount" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="CurrencyValue" IsReqd="" OverRidingClass=""/>
+      </CurrencyValue>
+      <ProbableSuccessRate Type="Leaf" Id="ProbableSuccessRate" DisplayName="ProbableSuccessRate" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ProbableSuccessRate" IsReqd="" OverRidingClass=""/>
+      </ProbableSuccessRate>
+	</OpportunityAttributes>
+	<ParticipantAttributes DisplayName="Participant_Attributes">
+      <CustomerContactID Type="Leaf" Id="CustomerContactID" DisplayName="CustomerContactID" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="CustomerContactID" IsReqd="" OverRidingClass=""/>
+      </CustomerContactID>
+      <OwnerUserID Type="Leaf" Id="OwnerUserID" DisplayName="OwnerUserID" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="OwnerUserID" IsReqd="" OverRidingClass=""/>
+      </OwnerUserID>
+      <CoOwnerUserID Type="Leaf" Id="CoOwnerUserID" DisplayName="CoOwnerUserID" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="CoOwnerUserID" IsReqd="" OverRidingClass=""/>
+      </CoOwnerUserID>
+      <TeamCode Type="Leaf" Id="TeamCode" DisplayName="TeamCode" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="TeamCode" IsReqd="" OverRidingClass=""/>
+      </TeamCode>
+      <BillToID Type="Leaf" Id="BillToID" DisplayName="BillToID" DataType="ID-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="BillToID" IsReqd="" OverRidingClass=""/>
+      </BillToID>
+      <BuyerOrganizationCode Type="Leaf" Id="BuyerOrganizationCode" DisplayName="BuyerOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="BuyerOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </BuyerOrganizationCode>
+      <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>
+	</ParticipantAttributes>
+	</OPPORTUNITY_FULFILLMENT>
+   <!-- Condition variables for ORDER_NEGOTIATION process types -->
+   <ORDER_NEGOTIATION AllowDuplicateAttributes="Y" ShowNotButtons="N" >
+      <DocumentType Type="Leaf" Id="DocumentType" DisplayName="DocumentType" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="DocumentType" IsReqd="" OverRidingClass=""/>
+      </DocumentType>
+      <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>
+	  <FreightTerms Type="Leaf" Id="FreightTerms" DisplayName="FreightTerms" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="FreightTerms" IsReqd="" OverRidingClass=""/>
+      </FreightTerms>
+      <HeaderEntity Type="Leaf" Id="HeaderEntity" DisplayName="HeaderEntity" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="HeaderEntity" IsReqd="" OverRidingClass=""/>
+      </HeaderEntity>
+      <InitiatorOrganizationCode Type="Leaf" Id="InitiatorOrganizationCode" DisplayName="InitiatorOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="InitiatorOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </InitiatorOrganizationCode>
+      <NegotiatorOrganizationCode Type="Leaf" Id="NegotiatorOrganizationCode" DisplayName="NegotiatorOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NegotiatorOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </NegotiatorOrganizationCode>
+      <NegotiationPipelineKey Type="Leaf" Id="NegotiationPipelineKey" DisplayName="NegotiationPipelineKey" DataType="Key" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NegotiationPipelineKey" IsReqd="" OverRidingClass=""/>
+      </NegotiationPipelineKey>
+      <NegotiationNo Type="Leaf" Id="NegotiationNo" DisplayName="NegotiationNo" DataType="DocumentNo" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NegotiationNo" IsReqd="" OverRidingClass=""/>
+      </NegotiationNo>
+      <NegotiationRuleKey Type="Leaf" Id="NegotiationRuleKey" DisplayName="NegotiationRuleKey" DataType="Key" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NegotiationRuleKey" IsReqd="" OverRidingClass=""/>
+      </NegotiationRuleKey>
+      <NegotiationStatus Type="Leaf" Id="NegotiationStatus" DisplayName="NegotiationStatus" DataType="Status" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NegotiationStatus" IsReqd="" OverRidingClass=""/>
+      </NegotiationStatus>
+      <PaymentTerms Type="Leaf" Id="PaymentTerms" DisplayName="PaymentTerms" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="PaymentTerms" IsReqd="" OverRidingClass=""/>
+      </PaymentTerms>
+   </ORDER_NEGOTIATION>
+   <!-- Condition variables for RECEIPT process types -->
+   <RECEIPT>
+      <BuyerOrganizationCode Type="Leaf" Id="BuyerOrganizationCode" DisplayName="BuyerOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="BuyerOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </BuyerOrganizationCode>
+      <CarrierType Type="Leaf" Id="CarrierType" DisplayName="CarrierType" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="CarrierType" IsReqd="" OverRidingClass=""/>
+      </CarrierType>
+      <DocumentType Type="Leaf" Id="DocumentType" DisplayName="DocumentType" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="DocumentType" IsReqd="" OverRidingClass=""/>
+      </DocumentType>
+	  <DiscrepancyExists Type="Leaf" Id="DiscrepancyExists" DisplayName="IsDiscrepancyExists" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+	   <MasterData MasterDataId="DiscrepancyExists" IsReqd="" IsStatic="true" OverRidingClass="">
+               <DiscrepancyExists Code="Y" Desc="Yes"/>
+               <DiscrepancyExists Code="N" Desc="No"/>
+         </MasterData>
+      </DiscrepancyExists>
+	  <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>
+	  <FreightTerms Type="Leaf" Id="FreightTerms" DisplayName="FreightTerms" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="FreightTerms" IsReqd="" OverRidingClass=""/>
+      </FreightTerms>
+      <HazardousMaterialFlag Type="Leaf" Id="HazardousMaterialFlag" DisplayName="IsHazardousMaterial" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+         <MasterData MasterDataId="HazardousMaterialFlag" IsReqd="" IsStatic="true" OverRidingClass="">
+               <HazardousMaterialFlag Code="Y" Desc="Yes"/>
+               <HazardousMaterialFlag Code="N" Desc="No"/>
+         </MasterData>
+      </HazardousMaterialFlag>
+	  <InspectionPendingFlag Type="Leaf" Id="InspectionPendingFlag" DisplayName="IsInspectionPending" DataType="Flag" ControlType="Combo">
+		 <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+	   <MasterData MasterDataId="InspectionPendingFlag" IsReqd="" IsStatic="true" OverRidingClass="">
+               <InspectionPendingFlag Code="Y" Desc="Yes"/>
+               <InspectionPendingFlag Code="N" Desc="No"/>
+         </MasterData>
+      </InspectionPendingFlag>
+      <ReceivingNode Type="Leaf" Id="ReceivingNode" DisplayName="ReceivingNode" DataType="ShipNode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ReceivingNode" IsReqd="" OverRidingClass=""/>
+      </ReceivingNode>
+      <ReceivingNodeDcmIntegrationRealTime Type="Leaf" Id="ReceivingNodeDcmIntegrationRealTime" DisplayName="IsReceivingNodeIntegratedRealTime" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+	   <MasterData MasterDataId="ReceivingNodeDcmIntegrationRealTime" IsStatic="true" IsReqd="" OverRidingClass="">
+               <ReceivingNodeDcmIntegrationRealTime Code="Y" Desc="Yes"/>
+               <ReceivingNodeDcmIntegrationRealTime Code="N" Desc="No"/>
+         </MasterData>
+      </ReceivingNodeDcmIntegrationRealTime>
+	  <ReceivingNodeInterfaceType Type="Leaf" Id="ReceivingNodeInterfaceType" DisplayName="ReceivingNodeInterfaceType" DataType="Text-20" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ReceivingNodeInterfaceType" IsReqd="" IsStatic="true" OverRidingClass="">
+            <ReceivingNodeInterfaceType Code="INTEGRATED_WMS" Desc="Integrated WMS Interface"/>
+            <ReceivingNodeInterfaceType Code="WMS_YANTRA" Desc="WMS 6.2 Interface"/>
+            <ReceivingNodeInterfaceType Code="YFX" Desc="Application Consoles"/>
+            <ReceivingNodeInterfaceType Code="EVENTS" Desc="Events"/>
+         </MasterData>
+      </ReceivingNodeInterfaceType>
+	  <ShipMode Type="Leaf" Id="ShipMode" DisplayName="ShipMode" DataType="ShipMode" ControlType="Text">
+      <SellerOrganizationCode Type="Leaf" Id="SellerOrganizationCode" DisplayName="SellerOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="SellerOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </SellerOrganizationCode>
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ShipMode" IsReqd="" OverRidingClass=""/>
+      </ShipMode>
+      <ShipNode Type="Leaf" Id="ShipNode" DisplayName="ShipNode" DataType="ShipNode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ShipNode" IsReqd="" OverRidingClass=""/>
+      </ShipNode>
+	  <UnderReceiptExists  Type="Leaf" Id="UnderReceiptExists" DisplayName="IsUnderReceiptExists " DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+	   <MasterData MasterDataId="UnderReceiptExists " IsReqd="" IsStatic="true" OverRidingClass="">
+               <UnderReceiptExists  Code="Y" Desc="Yes"/>
+               <UnderReceiptExists  Code="N" Desc="No"/>
+         </MasterData>
+      </UnderReceiptExists>
+   </RECEIPT>
+</WorkflowConditionBuilderInput>

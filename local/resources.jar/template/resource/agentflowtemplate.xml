@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Flow FlowName="" FlowGroupName="DefaultAgentGroup" GraphUIKey="AgentGraphUI" FlowType="01" IsRealTime="Y" IsOutGoing="Y" SystemDefined="" >
+	<FlowComponents>
+		<Node NodeType="Start" NodeGroup="Start" NodeId="0"/>
+		<Link Type="Simple" FromNode="0" ToNode="1"/>
+		<Node NodeGroup="Transport" NodeType="LOCAL" NodeId="1" />							
+		<Link Type="Async" IsReceiver="N" TransportType="JMS" FromNode="1" ToNode="2">
+			<Properties QName="" TimeToLive="" DeliveryMode=""
+				ProviderURL="" InitialContextFactory="" QCFLookup="">
+			</Properties>
+		</Link>						
+		<Node NodeGroup="Transport" NodeType="JMS" NodeId="2" />							
+		<Link Type="Async" IsReceiver="Y" TransportType="JMS" FromNode="2" ToNode="3">
+			<Properties RunTimeId="" QName="" Threads="" ReceivingMode="" 
+				MessageSelector="" ProviderURL="" InitialContextFactory="" QCFLookup=""/>
+			<Server ServerName="" ServerType="01" ServerKey="" RunTimeId=""/>
+			<ExceptionHandling Reprocess="" ExceptionType="" ExceptionQName=""
+				Restartable="" RestartWaitTime="" IsSequenceable="" 
+				ErrorSequenceUE=""/>		
+		</Link>										
+		<Node NodeGroup="Flow" NodeType="API" NodeId="3" >
+			<Properties ClassName="" MethodName="run" APIName="run"/>
+		</Node>
+	</FlowComponents>
+</Flow>
+	

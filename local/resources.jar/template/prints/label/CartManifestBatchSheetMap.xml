@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LabelFieldMap>
+    <LabelField Binding="/Batch/@BatchNo" LabelFieldName="BatchBarCode" RepeatingElement=""/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/@SourceLocationId" LabelFieldName="FromLocation" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/Inventory/@ItemId" LabelFieldName="ItemId" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/@TotalQty" LabelFieldName="Quantity" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[1]/@CartQuantity" LabelFieldName="CartLocation1" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[2]/@CartQuantity" LabelFieldName="CartLocation2" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[3]/@CartQuantity" LabelFieldName="CartLocation3" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[4]/@CartQuantity" LabelFieldName="CartLocation4" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[5]/@CartQuantity" LabelFieldName="CartLocation5" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[6]/@CartQuantity" LabelFieldName="CartLocation6" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[7]/@CartQuantity" LabelFieldName="CartLocation7" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[8]/@CartQuantity" LabelFieldName="CartLocation8" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/@BatchNo" LabelFieldName="BatchNo" RepeatingElement=""/>
+    <LabelField Binding="/Batch/Tasks/Task/TaskReferences/@WaveNo" LabelFieldName="WaveNo" RepeatingElement=""/>
+    <LabelField Binding="/Batch/@OrganizationCode" LabelFieldName="Node" RepeatingElement=""/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[9]/@CartQuantity" LabelFieldName="CartLocation9" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[10]/@CartQuantity" LabelFieldName="CartLocation10" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/CartLocations/CartLocation/@CartonSize" LabelFieldName="CartonSize" RepeatingElement="BatchLocation"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[11]/@CartQuantity" LabelFieldName="CartLocation11" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[12]/@CartQuantity" LabelFieldName="CartLocation12" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[13]/@CartQuantity" LabelFieldName="CartLocation13" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[14]/@CartQuantity" LabelFieldName="CartLocation14" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[15]/@CartQuantity" LabelFieldName="CartLocation15" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/CartLocations/CartLocation[16]/@CartQuantity" LabelFieldName="CartLocation16" RepeatingElement="BatchTask"/>
+	 <LabelField Binding="/Batch/CartLocations/CartLocation/@CartLocationId" LabelFieldName="CartLocationId" RepeatingElement="CartLocation"/> 
+
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/Inventory/Item/PrimaryInformation/@Description" LabelFieldName="ItemDesc" RepeatingElement="BatchTask"/>
+    <LabelField Binding="/Batch/BatchTasks/BatchTask/Inventory/@UnitOfMeasure" LabelFieldName="UOM" RepeatingElement="BatchTask"/>
+  <LabelField Binding="/Batch/CartLocations/CartLocation/@CartLocationId" LabelFieldName="CartLocation" RepeatingElement="CartLocation"/> 
+    <LabelField Binding="/Batch/References/Reference/@ReferenceName" LabelFieldName="Reference" RepeatingElement="Reference"/>
+    <LabelField Binding="/Batch/References/Reference/@ReferenceNo" LabelFieldName="ReferenceNo" RepeatingElement="Reference"/>
+    <RepeatingFields>
+        <RepeatingField LabelFieldName="FromLocation" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="ItemId" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="Quantity" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation1" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation2" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation3" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation4" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation5" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation6" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation7" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation8" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation9" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation10"
+            MaxFirstPage="10" MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartonSize" MaxFirstPage="16"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="CartLocation11"
+            MaxFirstPage="10" MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation12"
+            MaxFirstPage="10" MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation13"
+            MaxFirstPage="10" MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation14"
+            MaxFirstPage="10" MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation15"
+            MaxFirstPage="10" MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation16"
+            MaxFirstPage="10" MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocationId"
+            MaxFirstPage="16" MaxLastPage="16" MaxMidPage="16" RepeatValuesOnEachPage="Y"/>
+        <RepeatingField LabelFieldName="ItemDesc" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="UOM" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="CartLocation" MaxFirstPage="16"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="Reference" MaxFirstPage="3"
+            MaxLastPage="3" MaxMidPage="3" RepeatValuesOnEachPage="Y"/>
+        <RepeatingField LabelFieldName="ReferenceNo" MaxFirstPage="3"
+            MaxLastPage="3" MaxMidPage="3" RepeatValuesOnEachPage="Y"/>
+    </RepeatingFields>
+</LabelFieldMap>

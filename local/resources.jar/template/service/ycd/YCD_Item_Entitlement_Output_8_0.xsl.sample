@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="no"/>
+
+	<xsl:template match="/">
+		<ItemList AppendItemDetails="Y">
+			<xsl:choose>
+				<xsl:when test="Comergent/ProductSearchResults/ProductList/Product">
+					<xsl:attribute name="AppendItemDetails">Y</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="AppendItemDetails">N</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:apply-templates select="Comergent/ProductSearchResults/ProductList/Product"/>
+
+			<xsl:apply-templates select="Comergent/ProductSearchResults"/>
+		</ItemList>
+	</xsl:template>
+
+	<xsl:template match="Product">
+		<Item>
+			<xsl:attribute name="ItemID">
+				<xsl:value-of select="ProductID"/>
+			</xsl:attribute>
+			<xsl:attribute name="UnitOfMeasure">
+				<xsl:choose>
+					<xsl:when test="UnitOfMeasure = 'EA'">EACH</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="UnitOfMeasure"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<xsl:attribute name="OrganizationCode">
+				<xsl:value-of select="/Comergent/ProductSearchResults/CatalogOrganizationCode" />
+			</xsl:attribute>
+		</Item>
+	</xsl:template>
+
+	<xsl:template match="ProductSearchResults">
+		<xsl:if test="/Comergent/Item/Paginate/@PageSize">
+			<xsl:variable name="PageSize">
+				<xsl:value-of select="/Comergent/Item/Paginate/@PageSize"/>
+			</xsl:variable>
+
+			<PageData>
+				<xsl:attribute name="PageNumber">
+					<xsl:value-of select="PageNum"/>
+				</xsl:attribute>
+				<xsl:choose>
+					<xsl:when test="PageNum = '1'">
+						<xsl:attribute name="IsFirstPage">Y</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="IsFirstPage">N</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:choose>
+					<xsl:when test="PageNum * $PageSize &gt;= RecordCount">
+						<xsl:attribute name="IsLastPage">Y</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="IsLastPage">N</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:choose>
+					<xsl:when test="PageNum * $PageSize &lt;= RecordCount">
+						<xsl:attribute name="IsValidPage">Y</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="IsValidPage">N</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:variable name="TotalPages">
+					<xsl:value-of select="floor(RecordCount div $PageSize)"/>
+				</xsl:variable>
+				<xsl:choose>
+					<xsl:when test="RecordCount mod $PageSize &gt; 0">
+						<xsl:attribute name="TotalNumberOfPages">
+							<xsl:value-of select="$TotalPages + 1"/>
+						</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="TotalNumberOfPages">
+							<xsl:value-of select="$TotalPages"/>
+						</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+			</PageData>
+		</xsl:if>
+	</xsl:template>
+</xsl:stylesheet>

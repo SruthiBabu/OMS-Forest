@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Receipt>
+    <ParentLPN/>
+    <Shipment/>
+    <Instructions>
+        <Instruction/>
+    </Instructions>
+    <ReceiptLines>
+        <ReceiptLine>
+            <SerialRangeList>
+                <SerialRange/>
+            </SerialRangeList>
+            <ReceiptLineTranQuantity/>
+            <SerialDetail/>
+            <OrderLine>
+                <Item>
+                    <LanguageDescriptionList>
+                        <LanguageDescription/>
+                    </LanguageDescriptionList>
+                </Item>
+                <WorkOrders>
+                    <WorkOrder/>
+                </WorkOrders>
+                <OrderLineTranQuantity/>
+                <OrderLineOptions>
+                    <OrderLineOption/>
+                </OrderLineOptions>
+                <OrderLineSourcingControls>
+                    <OrderLineSourcingCntrl/>
+                </OrderLineSourcingControls>
+                <DerivedFromOrder/>
+                <PersonInfoShipTo/>
+                <!--Optional-->
+                <PersonInfoMarkFor/>
+                <!--Optional-->
+                <LinePriceInfo/>
+                <Instructions>
+                    <!-- NumberOfInstructions is not a template driven attribute. -->
+                    <Instruction/>
+                </Instructions>
+                <References>
+                    <Reference/>
+                </References>
+                <!--Optional-->
+                <KitLines>
+                    <!-- NumberOfKitLines is not a template driven attribute. -->
+                    <KitLine>
+                        <KitLineTranQuantity/>
+                    </KitLine>
+                </KitLines>
+                <Schedules>
+                    <Schedule>
+                        <ScheduleTranQuantity/>
+                    </Schedule>
+                </Schedules>
+                <AdditionalAddresses>
+                    <!-- NumberOfAdditionalAddresses is not a template driven attribute. -->
+                    <AdditionalAddress>
+                        <PersonInfo/>
+                    </AdditionalAddress>
+                </AdditionalAddresses>
+                <LineOverallTotals/>
+                <!-- LineOverallTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+                <LineInvoicedTotals/>
+                <!-- LineInvoicedTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+                <LineRemainingTotals/>
+                <!-- LineRemainingTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+                <LineOverallTotalsInEnterpriseCurrency/>
+                <!-- LineOverallTotalsInEnterpriseCurrency is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if only the attributes are removed from the template, they will still be present in the output xml. -->
+                <LineRemainingTotalsInEnterpriseCurrency/>
+                <!-- LineRemainingTotalsInEnterpriseCurrency is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if only the attributes are removed from the template, they will still be present in the output xml. -->
+                <LineCharges>
+                    <LineCharge/>
+                </LineCharges>
+                <!-- LineCharge is not a template driven element. If the template contains either of LineCharge or LineTax elements, both will appear in the output, alongwith all their attributes. -->
+                <LineTaxes>
+                    <LineTax/>
+                    <TaxSummary>
+                        <TaxSummaryDetail/>
+                    </TaxSummary>
+                </LineTaxes>
+                <!-- LineTax is not a template driven element. If the template contains either of LineCharge or LineTax elements, both will appear in the output, alongwith all their attributes. -->
+                <!--Optional-->
+                <OrderStatuses>
+                    <OrderStatus>
+                        <OrderStatusTranQuantity/>
+                        <Details>
+                            <KitDetails>
+                                <KitDetail>
+                                    <KitDetailTranQuantity/>
+                                </KitDetail>
+                            </KitDetails>
+                        </Details>
+                    </OrderStatus>
+                </OrderStatuses>
+                <OrderDates>
+                    <OrderDate/>
+                </OrderDates>
+                <OrderLineInvAttRequest/>
+                <ProductAssociations>
+                    <ProductAssociation>
+                        <ProductLine/>
+                        <ServiceLine/>
+                    </ProductAssociation>
+                </ProductAssociations>
+                <ServiceAssociations>
+                    <ServiceAssociation>
+                        <ProductLine/>
+                        <ServiceLine/>
+                    </ServiceAssociation>
+                </ServiceAssociations>
+                <DeliveryAssociations>
+                    <DeliveryAssociation>
+                        <ProductLine/>
+                        <ServiceLine/>
+                    </DeliveryAssociation>
+                </DeliveryAssociations>
+                <ChildOrderLineRelationships>
+                    <OrderLineRelationship>
+                        <ParentLine/>
+                        <ChildLine/>
+                    </OrderLineRelationship>
+                </ChildOrderLineRelationships>
+                <ParentOrderLineRelationships>
+                    <OrderLineRelationship>
+                        <ParentLine/>
+                        <ChildLine/>
+                    </OrderLineRelationship>
+                </ParentOrderLineRelationships>
+                <DerivedFromOrderLine>
+                    <Item/>
+                </DerivedFromOrderLine>
+                <Notes>
+                    <Note/>
+                </Notes>
+                <BundleParentLine/>
+                <CustomAttributes/>
+            </OrderLine>
+        </ReceiptLine>
+    </ReceiptLines>
+</Receipt>

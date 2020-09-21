@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2008, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<Order AuditTransactionId="" EnterpriseCode="" OrderHeaderKey="" DocumentType="" OrderNo="" BillToID="" BuyerOrganizationCode="" BuyerUserId="" DraftOrderFlag="" PricingClassificationCode="" IsNewOrder="" OptimizationType="" OrderComplete="" OrderDate="" SellerOrganizationCode="" CarrierServiceCode="" MinOrderStatus="" ShipNode="" CustCarrierAccountNo="">
+        <PriceInfo Currency="" />
+        <OrderLines>
+                <OrderLine PrimeLineNo="" OrderedQty="" CarrierServiceCode="" OrderLineKey="" DeliveryMethod="" ItemGroupCode="" ReshipParentLineKey="" >
+                        <Item ItemID="" UnitOfMeasure="" />
+                        <LinePriceInfo IsLinePriceForInformationOnly="" IsPriceLocked="" ListPrice="" UnitPrice="" TaxableFlag="" RepricingQty="" />
+                        <LineCharges>
+                                <LineCharge ChargeCategory="" ChargeName="" ChargePerLine="" ChargePerUnit="" ChargeAmount="" />
+                        </LineCharges>
+			<LineTaxes>
+				<LineTax ChargeCategory="" ChargeName="" TaxName="" Tax=""/>
+			</LineTaxes>
+			<Awards>
+				<Award AwardId="" AwardType="" Action=""/>
+			</Awards>
+			<PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3="" City="" State="" Country="" ZipCode="" />
+                </OrderLine>
+        </OrderLines>
+	<HeaderTaxes>
+		<HeaderTax ChargeCategory="" ChargeName="" InvoicedTax="" Tax="" TaxName="" RemainingTax="" TaxableFlag="" TaxPercentage="" />
+	</HeaderTaxes>
+        <HeaderCharges>
+                <HeaderCharge ChargeCategory="" ChargeName="" ChargeAmount="" />
+        </HeaderCharges>
+	<PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3="" City="" State="" Country="" ZipCode="" />
+        <Promotions>
+                <Promotion PromotionId="" PromotionType="" Action="">
+			<Awards>
+				<Award AwardId="" PromotionId="" Action="" />
+			</Awards>
+		</Promotion>
+        </Promotions>
+	<Awards>
+		<Award AwardId="" AwardType="" Action=""/>
+	</Awards>
+</Order>
+

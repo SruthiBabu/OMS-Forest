@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2005, 2020  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+    <Entities>
+		<Entity TableName="YFS_TRANSACTION">
+			 <Attributes>
+			   <Attribute ColumnName="OPERATION_LEVEL" Name="Operation_Level" 
+                    Description=" This is a common code and application defined. This column indicates the level at which the transaction operates. In specific applications, the operation level can be assigned at either the header or at line level of the transaction. When the header level operation is used, all lines associated to the header will be also be changed. On the other hand, if the operation is defined at the line level, only the specified line will be changed and its associated header will not be affected."/>
+			 </Attributes>
+			<RelationShips>
+	            <RelationShip Cardinality="OneToMany"
+	                ChildListXMLName="TransactionList"
+	                ChildName="Transaction" ChildXMLName="Transaction"
+	                ForeignEntity="Activity" Name="Activity"
+	                Type="Bidirectional" XMLName="Activity">
+	                <Attribute Name="Activity_Code" ParentName="Activity_Code"/>
+	            </RelationShip>
+	        </RelationShips>
+		</Entity>
+		<Entity TableName="YFS_ENTITY_ADDRESS" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+            <Indices>
+                <Index DB2Name="ENTITY_ADDRESS_I2" Name="YFS_ENTITY_ADDRESS_I2">
+                    <Column Name="PERSON_INFO_KEY"/>
+                </Index>
+                <Index DB2Name="ENTITY_ADDRESS_I3" Name="YFS_ENTITY_ADDRESS_I3">
+                    <Column Name="ENTITY_TYPE"/>
+                    <Column Name="ENTITY_PARENT_KEY"/>
+				</Index>
+			</Indices>
+			<CustomInterface Name="YSCEntityAddressCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCEntityAddressCustomDBUtilImpl" ModuleCode="ysc">
+				<Method Name="getAuditXML" Return="void">
+					<Arg Name="ctx" Class="YFSContext" />
+					<Arg Name="retVal" Class="YFCElement" />
+					<Arg Name="c" Class="String" />
+				</Method>
+				<Import Class="com.yantra.yfc.dom.YFCElement" />
+				<Import Class="com.yantra.shared.ycp.YFSContext" />
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_NOTES" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+            <Attributes>
+				<Attribute Name="Visible_To_All" ColumnName="VISIBLE_TO_ALL" DataType="Flag" XMLName="VisibleToAll"
+					Description="This flag determines whether the note applied should be visible to all users. This field is used for filtering. No logic is currently applied to it."
+					Nullable="true" />
+            </Attributes>            
+			<CustomInterface Name="YSCNotesCustomDBUtil"
+				Impl="com.yantra.ysc.customutil.YSCNotesCustomDBUtilImpl" IsSingleton="false" ModuleCode="ysc">
+				<Method Name="getAuditXML" Return="void">
+					<Arg Name="retVal" Class="YFCElement" />
+					<Arg Name="sAuditType" Class="String" />
+				</Method>
+				<Method Name="getAuditXML" Return="void">
+					<Arg Name="retVal" Class="YFCElement" />
+					<Arg Name="sAuditType" Class="String" />
+					<Arg Name="bAuditAll" Class="boolean" />
+				</Method>
+				<Import Class="com.yantra.yfc.dom.YFCElement" />
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_INSTRUCTION_DETAIL" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+			<CustomInterface Name="YSCInstructionDetailCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCInstructionDetailCustomDBUtilImpl" ModuleCode="ysc">
+				<Method Name="getAuditXML" Return="void">
+					<Arg Name="retVal" Class="YFCElement" />
+					<Arg Name="c" Class="String" />
+				</Method>
+				<Import Class="com.yantra.yfc.dom.YFCElement" />
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_ORGANIZATION">
+            <Attributes>
+				<Attribute ColumnName="ORGANIZATION_KEY" FactName="OrganizationCode"/>
+                <Attribute ColumnName="PAYMENT_PROCESSING_REQD"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether this organization requires payment processing."
+                    Name="Payment_Processing_Reqd" Nullable="false" XMLName="PaymentProcessingReqd"/>
+                <Attribute ColumnName="REQUIRES_CHAINED_ORDER"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether this organization requires chained order."
+                    Name="Requires_Chained_Order" Nullable="false" XMLName="RequiresChainedOrder"/>
+                <Attribute ColumnName="REQUIRES_CHANGE_REQUEST"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This field is not currently used."
+                    Name="Requires_Change_Request" Nullable="false" XMLName="RequiresChangeRequest"/>
+                <Attribute ColumnName="DEFAULT_DISTRIBUTION_RULE_ID"
+                    DataType="Text-40" DefaultValue="' '  "
+                    Description="The default distribution rule that is associated with this organization."
+                    Name="Default_Distribution_Rule_Id" Nullable="false" XMLName="DefaultDistributionRuleId"/>
+                <Attribute ColumnName="INVENTORY_KEPT_EXTERNALLY"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether inventory in an organization is maintained within or outside the system."
+                    Name="Inventory_Kept_Externally" Nullable="false" XMLName="InventoryKeptExternally"/>
+                <Attribute ColumnName="INVENTORY_PUBLISHED"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether inventory is published by the organization."
+                    Name="Inventory_Published" Nullable="false" XMLName="InventoryPublished"/>
+                <Attribute ColumnName="CATALOG_ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="The organization that owns the catalog of this organization."
+                    Name="Catalog_Organization_Code" Nullable="false" XMLName="CatalogOrganizationCode"/>
+                <Attribute ColumnName="INVENTORY_ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="The organization that owns the inventory of this organization."
+                    Name="Inventory_Organization_Code" Nullable="false" XMLName="InventoryOrganizationCode"/>
+                <Attribute ColumnName="PRICING_ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization that owns the pricing configuration for this organization."
+                    Name="Pricing_Organization_Code"  Nullable="true" XMLName="PricingOrganizationCode"/>
+				<Attribute ColumnName="STORE_CONFIG_ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization that owns the store configuration for this organization."
+                    Name="Store_Config_Organization_Code"  Nullable="true" XMLName="StoreConfigOrganizationCode"/>
+                <Attribute ColumnName="IS_BUYER" DataType="Flag"
+                    DefaultValue="' '  "
+                    Description="This flag indicates whether this organization is a buyer."
+                    Name="Is_Buyer" Nullable="false" XMLName="IsBuyer"/>
+                <Attribute ColumnName="IS_SELLER" DataType="Flag"
+                    DefaultValue="' '  "
+                    Description="This flag indicates whether this organization is a seller."
+                    Name="Is_Seller" Nullable="false" XMLName="IsSeller"/>
+                <Attribute ColumnName="IS_CARRIER" DataType="Flag"
+                    DefaultValue="' '  "
+                    Description="This flag indicates whether this organization is a carrier."
+                    Name="Is_Carrier" Nullable="false" XMLName="IsCarrier"/>
+				<Attribute ColumnName="IS_TEMPLATE" DataType="Flag"
+                    Description="This flag indicates whether this organization is a template."
+                    Name="Is_Template" Nullable="true" XMLName="IsTemplate"/>
+                <Attribute ColumnName="ITEM_XREF_RULE"
+                    DataType="Text-40" DefaultValue="' '  "
+                    Description="The rule used for cross referencing items."
+                    Name="Item_Xref_Rule" Nullable="false" XMLName="ItemXrefRule"/>
+                <Attribute ColumnName="XREF_ALIAS_TYPE"
+                    DataType="Text-40" DefaultValue="' '  "
+                    Description="The cross reference alias type."
+                    Name="Xref_Alias_Type" Nullable="false" XMLName="XrefAliasType"/>
+                <Attribute ColumnName="TAXPAYER_ID" DataType="ID-40"
+                    DefaultValue="' '  "
+                    Description="The tax payer identifier for the organization."
+                    Name="Taxpayer_Id" Nullable="false" XMLName="TaxpayerId"/>
+                <Attribute ColumnName="TAX_JURISDICTION"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The tax jurisdiction to which the organization belongs."
+                    Name="Tax_Jurisdiction" Nullable="false" XMLName="TaxJurisdiction"/>
+                <Attribute ColumnName="TAX_EXEMPT_FLAG" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This indicates whether the organization is exempt from taxes."
+                    Name="Tax_Exempt_Flag" Nullable="false" XMLName="TaxExemptFlag"/>
+                <Attribute ColumnName="TAX_EXEMPTION_CERTIFICATE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The certificate of tax exemption."
+                    Name="Tax_Exemption_Certificate" Nullable="false" XMLName="TaxExemptionCertificate"/>
+                <Attribute ColumnName="ISSUING_AUTHORITY"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The authority that issued tax exemption certificate."
+                    Name="Issuing_Authority" Nullable="false" XMLName="IssuingAuthority"/>
+                <Attribute ColumnName="AUTHORITY_TYPE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The nature of the authority that issued the tax exemption to the organization."
+                    Name="Authority_Type" Nullable="false" XMLName="AuthorityType"/>
+                <Attribute ColumnName="IS_SOURCING_KEPT" DataType="Flag"
+                    DefaultValue="' '  "
+                    Description="This flag indicates whether sourcing is maintained for the organization."
+                    Name="Is_Sourcing_Kept" Nullable="false" XMLName="IsSourcingKept"/>
+                <Attribute ColumnName="ACCOUNT_WITH_HUB"
+                    DataType="ID-40" DefaultValue="' '  "
+                    Description="The account with the hub."
+                    Name="Account_With_Hub" Nullable="false" XMLName="AccountWithHub"/>
+                <Attribute ColumnName="PRIMARY_SIC_CODE"
+                    DataType="Text-10" DefaultValue="' '  "
+                    Description="The primary SIC code of the organization."
+                    Name="Primary_Sic_Code" Nullable="false" XMLName="PrimarySicCode"/>
+                <Attribute ColumnName="DEFAULT_PAYMENT_RULE_ID"
+                    DataType="Text-20" DefaultValue="' ' "
+                    Description="The default payment rule the organization adopts."
+                    Name="Default_Payment_Rule_Id" Nullable="false" XMLName="DefaultPaymentRuleId"/>
+                <Attribute ColumnName="DEFAULT_PRICE_PROGRAM_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The default price program that is associated with this organization."
+                    Name="Default_Price_Program_Key" Nullable="false" XMLName="DefaultPriceProgramKey"/>
+                <Attribute ColumnName="CAPACITY_ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="The capacity organization for this organization."
+                    Name="Capacity_Organization_Code" Nullable="false" XMLName="CapacityOrganizationCode"/>
+                <Attribute ColumnName="IS_LEGAL_ENTITY" DataType="Flag"
+                    DefaultValue="' '  "
+                    Description="This flag indicates whether this organization is a legal entity."
+                    Name="Is_Legal_Entity" Nullable="false" XMLName="IsLegalEntity"/>
+                <Attribute ColumnName="IS_SRVC_SOURCING_KEPT"
+                    DataType="Flag" DefaultValue="' '  "
+                    Description="This flag indicates whether sourcing is maintained for service items."
+                    Name="Is_Srvc_Sourcing_Kept" Nullable="false" XMLName="IsServiceSourcingKept"/>
+                <Attribute ColumnName="IS_DEL_SOURCING_KEPT"
+                    DataType="Flag" DefaultValue="' '  "
+                    Description="This flag indicates whether sourcing is maintained for delivery  items."
+                    Name="Is_Del_Sourcing_Kept" Nullable="false" XMLName="IsDeliverySourcingKept"/>
+                <Attribute ColumnName="CAPACITY_KEPT_EXTERNALLY"
+                    DataType="Flag" DefaultValue="' '  "
+                    Description="This flag indicates whether the capacity for the organization is kept externally."
+                    Name="Capacity_Kept_Externally" Nullable="false" XMLName="CapacityKeptExternally"/>
+                <Attribute ColumnName="CUSTOMER_MAINTAINED_EXTERNALLY"
+                    DataType="Flag" 
+                    Description="This flag indicates whether the customers of the organization are maintained externally."
+                    Name="Customer_Maintained_Externally" Nullable="true" XMLName="CustomerMaintainedExternally"/>
+                <Attribute ColumnName="DEFAULT_FULFILLMENT_TYPE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The default fulfillment type to be used for the organization."
+                    Name="Default_Fulfillment_Type" Nullable="false" XMLName="DefaultFulfillmentType"/>
+                <Attribute ColumnName="UCC_PREFIX"
+                    DataType="CompanyUCCPrefix" DefaultValue="0000000"
+                    Description="The UCC prefix for the Organization."
+                    Name="UCC_Prefix" Nullable="false" XMLName="UCCPrefix"/>
+                <Attribute ColumnName="REQUIRES_VAS_COMPLIANCE"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the buyer organization requires value added services to be peformed on the item. If set to Y, the organization can specify a Service Item to be performed on the item."
+                    Name="Requires_Vas_Compliance" Nullable="false" XMLName="RequiresVasCompliance"/>
+                <Attribute ColumnName="SUPPLY_KEPT_EXTERNALLY"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the organization tracks supply externally. If set to 'Y', the system gets the supply picture from an external system and computes the availability based on the external supplies, and the demands kept within the system. Default value is 'N'."
+                    Name="Supply_Kept_Externally" Nullable="false" XMLName="SupplyKeptExternally"/>
+                 <Attribute ColumnName="INVORG_SUPPLY_DEMAND_EXTERNAL"
+                    DataType="Flag" 
+                    Description="This flag indicates whether inventory organization keeps supply and demand externally. If set to 'Y', the system publishes supply and demand to external system through events and there is no inventory updates in the system. Valid values are 'Y' or 'N'.
+                    When no value is set, supply and demand is kept internally."                    
+                    Name="Is_Supply_Demand_Kept_Externally" Nullable="true" XMLName="SupplyDemandKeptExternally"/>
+                <Attribute ColumnName="ORG_SUFFIX"
+                    DataType="OrgSuffix" DefaultValue="' '"
+                    Description="The suffix to apply to the organization code that is generated automatically when creating a customer. If this field is blank, organization code generation will not be performed."
+                    Name="Org_Suffix" Nullable="false" XMLName="OrganizationSuffix"/>
+                <Attribute ColumnName="CUSTOMER_MASTER_ORG_CODE"
+                    DataType="OrgCode" DefaultValue="' '"
+                    Description="Determines which organization maintains this organization's customers. If organization is an enterprise, it will default to itself. Otherwise, it will default to its primary enterprise's CustomerMasterOrganizationCode."
+                    Name="Customer_Master_Org_Code" Nullable="false" XMLName="CustomerMasterOrganizationCode"/>
+  				<Attribute ColumnName="COLONY_ID" 
+					DataType="ColonyId" DefaultValue="'DEFAULT'" 
+					Description="Colony this Organization belongs to."	
+					Name="Assigned_Colony_Id" Nullable="false" XMLName="AssignedColonyId"/>
+				<Attribute ColumnName="SYNC_TARGET_ID"
+                	DataType="SyncTableID-40" Description="The SyncTarget that this Organization is assigned."
+                    Name="Sync_Target_ID" Nullable="true" XMLName="SyncTargetID"/>
+            </Attributes>
+		    <Indices>
+		        <Index Name="ORGANIZATION_I5">
+		            <Column Name="PARENT_ORGANIZATION_CODE"/>
+		        </Index>
+		        <Index Name="ORGANIZATION_I6">
+		            <Column Name="IS_ENTERPRISE" Unique="false"/>
+		        </Index>
+			</Indices>
+			<CustomInterface Name="YSCOrganizationCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCOrganizationCustomDBUtilImpl" ModuleCode="ysc">
+				<Method Name="isSeller" Return="boolean" />
+				<Method Name="isBuyer" Return="boolean" />
+				<Method Name="isCarrier" Return="boolean" />
+				<Method Name="isTemplate" Return="boolean" />
+				<Method Name="isRoutingGuideMaintained" Return="boolean">
+					<Arg Name="sRole" Class="String" />
+				</Method>
+				<Method Name="isRoutingDynamic" Return="boolean">
+					<Arg Name="sRole" Class="String" />
+				</Method>
+				<Method Name="isTagCaptureRequiredAtShipping" Return="boolean" />
+				<Method Name="isSerialCaptureRequiredAtShipping" Return="boolean" />
+				<Method Name="isCustomerMaintainedExternally" Return="boolean" />
+			</CustomInterface>
+			<ColonyMap MapType="OrganizationCode" ColonyReference="Assigned_Colony_Id">
+                <Attribute Name="Organization_Code" />
+			</ColonyMap>
+		</Entity>
+		<Entity TableName="YFS_ENTERPRISE">
+            <Attributes>
+				<Attribute ColumnName="ENTERPRISE_KEY" FactName="OrganizationCode"/>
+				<Attribute ColumnName="ENTERPRISECODE" FactName="OrganizationCode"/>
+				<Attribute ColumnName="USE_DEFAULT_DISTRIBUTION"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the default distribution needs to be used."
+                    Name="Use_Default_Distribution" Nullable="false" XMLName="UseDefaultDistribution"/>
+                <Attribute ColumnName="USE_DEFAULT_ORDER_STATUS_RULES"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the default order status rules needs to be used."
+                    Name="Use_Default_Order_Status_Rules"
+                    Nullable="false" XMLName="UseDefaultOrderStatusRules"/>
+                <Attribute ColumnName="TAXPAYER_ID" DataType="ID-40"
+                    DefaultValue="' ' "
+                    Description="The tax payer identifier of the enterprise."
+                    Name="Taxpayer_Id" Nullable="false" XMLName="TaxpayerId"/>
+                <Attribute ColumnName="IS_SOURCING_KEPT" DataType="Flag"
+                    DefaultValue="' '  "
+                    Description="This flag indicates whether sourcing is maintained for the enterprise."
+                    Name="Is_Sourcing_Kept" Nullable="false" XMLName="IsSourcingKept"/>
+                <Attribute ColumnName="IS_SRVC_SOURCING_KEPT"
+                    DataType="Flag" DefaultValue="' '  "
+                    Description="This flag indicates whether sourcing is maintained for service items."
+                    Name="Is_Srvc_Sourcing_Kept" Nullable="false" XMLName="IsServiceSourcingKept"/>
+                <Attribute ColumnName="IS_DEL_SOURCING_KEPT"
+                    DataType="Flag" DefaultValue="' '  "
+                    Description="This flag indicates whether sourcing is maintained for delivery  items."
+                    Name="Is_Del_Sourcing_Kept" Nullable="false" XMLName="IsDeliverySourcingKept"/>
+                <Attribute ColumnName="DEFAULT_DISTRIBUTION_RULE_ID"
+                    DataType="Text-40" DefaultValue="' '  "
+                    Description="The default distribution rule for the enterprise."
+                    Name="Default_Distribution_Rule_Id" Nullable="false" XMLName="DefaultDistributionRuleId"/>
+            </Attributes>
+			<CustomInterface Name="YSCEnterpriseCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCEnterpriseCustomDBUtilImpl" IsSingleton="false" ModuleCode="ysc">
+				<Method Name="getEnterpriseItemWeightUom" Return="String" />
+				<Method Name="getEnterpriseItemVolumeUom" Return="String" />
+				<Method Name="readYFCLocale" Return="void">
+					<Arg Name="a" Class="boolean" />
+				</Method>
+				<Method Name="getYFCLocale" Return="YFCLocale">
+					<Arg Name="a" Class="boolean" />
+				</Method>
+				<Method Name="getParticipatingNodes" Return="List" />
+				<Import Class="java.util.List" />
+				<Import Class="com.yantra.yfc.util.YFCLocale" />
+			</CustomInterface>
+			<RelationShips>
+				 <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Distribution_Rule"
+                    Name="Distribution_Rule" Type="Bidirectional"
+                    Virtual="true" XMLName="DistributionRule">
+                    <Attribute Name="Enterprise_Key" ParentName="Owner_Key"/>
+                    <Attribute Name="Default_Distribution_Rule_Id" ParentName="Distribution_Rule_Id"/>
+                </RelationShip>
+			</RelationShips>
+		</Entity>
+		<Entity TableName="YFS_SHIP_NODE">
+            <Attributes>
+				<Attribute ColumnName="SHIPNODE_KEY" FactName="OrganizationCode"/>
+                <Attribute ColumnName="SHIP_NODE" DataSecurityUsageType="NODE" FactName="OrganizationCode"/> 
+                <Attribute ColumnName="DCM_INTEGRATION_REAL_TIME"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether a ship node has WMS7.0+ installed."
+                    Name="Dcm_Integration_Real_Time" Nullable="false" XMLName="DcmIntegrationRealTime"/>
+                <Attribute ColumnName="SERIAL_TRACKING" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the node requires serial tracking in inventory. Supported values are Y and N. This attribute comes into play only when the catalog signifies that the serial number requires tracking in inventory. However, a node has a choice to override the inventory tracking preference to indicate that it is not needed."
+                    Name="Serial_Tracking" Nullable="false" XMLName="SerialTracking"/>
+				<Attribute ColumnName="SERIAL_TRCKD_ON_TRANSFER" DataType="Flag"
+                    DefaultValue="'Y' " Description="This flag indicates whether to track Serial information on Transfer. Valid values are Y and N."
+					Name="Serial_Tracked_On_Transfer" Nullable="false"
+					XMLName="SerialTrackedOnTransfer"/>
+				<Attribute ColumnName="SERIAL_TRCKD_IN_SHIPPING" DataType="Flag"
+					Description="This flag indicates whether to track Serial information during shipping. Valid values are Y and N." Name="Serial_Tracked_In_Shipping" Nullable="true" XMLName="SerialTrackedInShipping"/>
+				<Attribute ColumnName="SERIAL_TRCKD_RECEIVING" DataType="ProgramID"
+					Description="This flag indicates whether to track Serial information during receiving.This receiveing includes return receiving. Valid values are REC(for receiving) and RET(for only returns)."  Name="Serial_Tracked_Receiving" Nullable="true" XMLName="SerialTrackedReceiving"/>
+				<Attribute ColumnName="TAG_TRACKED_IN_INVENTORY" DataType="Flag"
+                    DefaultValue="'Y' "
+                    Description="This flag indicates whether to track tag information in inventory. Valid values are Y and N."
+                    Name="Tag_Tracked_In_Inventory" Nullable="false" XMLName="TagTrackedInInventory"/>
+				<Attribute ColumnName="TAG_TRACKED_AT_RECEIPT" DataType="Flag"
+                    DefaultValue="'Y' " Description="This flag indicates whether to track tag information during receiving. Valid values are Y and N." Name="Tag_Tracked_At_Receipt" Nullable="false" XMLName="TagTrackedAtReceipt"/>
+                <Attribute ColumnName="INTERFACE_TYPE"
+                    DataType="Text-20" DefaultValue="' ' "
+                    Description="This field indicates the manner in which orders are passed to a ship node for servicing ( &quot;WMS_YANTRA&quot;,&quot;YFX&quot;,&quot;EVENTS&quot; )."
+                    Name="Interface_Type" Nullable="false" XMLName="InterfaceType"/>
+                <Attribute ColumnName="INTERFACE_SUB_TYPE"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="A sub-classification of the interface type."
+                    Name="Interface_Sub_Type" Nullable="false" XMLName="InterfaceSubType"/>
+                <Attribute ColumnName="REQUIRES_CHANGE_REQUEST"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the ship node requires change requests to manage order modifications after it is released to the node."
+                    Name="Requires_Change_Reqeust" Nullable="false" XMLName="RequiresChangeRequest"/>
+                <Attribute ColumnName="SUPPLIER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The supplier who owns the ship node."
+                    Name="Supplier_Key" Nullable="false" XMLName="SupplierKey"/>
+                <Attribute ColumnName="PICKLIST_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The type of pick-list that this ship node requires for picking."
+                    Name="Picklist_Type" Nullable="false" XMLName="PicklistType"/>
+                <Attribute ColumnName="RETURN_CENTER_FLAG"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the ship node is a return center."
+                    Name="Return_Center_Flag" Nullable="false" XMLName="ReturnCenterFlag"/>
+                <Attribute ColumnName="ACCEPTANCE_REQUIRED"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether acceptance is required by the ship node before processing orders for shipping."
+                    Name="Acceptance_Required" Nullable="false" XMLName="AcceptanceRequired"/>
+                <Attribute ColumnName="GENERATE_BOL_NUMBER"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the BOL number needs to be generated for this ship node."
+                    Name="Generate_Bol_Number" Nullable="false" XMLName="GenerateBolNumber"/>
+                <Attribute ColumnName="CURRENT_BOL_NUMBER"
+                    DataType="Counter" DefaultValue="' ' "
+                    Description="The last generated BOL number."
+                    Name="Current_Bol_Number" Nullable="false" XMLName="CurrentBolNumber"/>
+                <Attribute ColumnName="RECEIVING_CALENDAR_KEY"
+                    DataType="Text-24" DefaultValue="' ' "
+                    Description="The receiving calendar that is associated with this ship node."
+                    Name="Receiving_Calendar_Key" Nullable="false" XMLName="ReceivingCalendarKey"/>
+                <Attribute ColumnName="SHIPPING_CALENDAR_KEY"
+                    DataType="Text-24" DefaultValue="' ' "
+                    Description="The shipping calendar that is associated with this ship node."
+                    Name="Shipping_Calendar_Key" Nullable="false" XMLName="ShippingCalendarKey"/>
+                <Attribute ColumnName="EXPORT_TAXPAYER_ID"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The identifier of the tax payer for the ship node."
+                    Name="Export_Taxpayer_Id" Nullable="false" XMLName="ExportTaxpayerId"/>
+                <Attribute ColumnName="EXPORT_LICENSE_NO"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The export license number given to the ship node."
+                    Name="Export_License_No" Nullable="false" XMLName="ExportLicenseNo"/>
+                <Attribute ColumnName="EXPORT_LICENSE_EXP_DATE"
+                    DataType="Date" DefaultValue="sysdate "
+                    Description="The date by which an export license given to a ship node expires."
+                    Name="Export_License_Exp_Date" Nullable="false" XMLName="ExportLicenseExpDate"/>
+                <Attribute ColumnName="INVENTORYTYPE"
+                    DataType="EnumInventoryType" DefaultValue="' '"
+                    Description="This field indicates whether the ship node tracks inventory. The value is defaulted to 'TRACK' if the flag InventoryTracked is set to 'Y' and it is defaulted to 'INFINITE' if flag InventoryTracked is set to 'N'."
+                    Name="Inventorytype" XMLName="Inventorytype"/>
+                <Attribute ColumnName="DEFAULT_DECLARED_VALUE"
+                    DataType="Money" DefaultValue="0 "
+                    Description="The default value the ship node may declare for its shipments."
+                    Name="Default_Declared_Value" Nullable="false" XMLName="DefaultDeclaredValue"/>
+                <Attribute ColumnName="MAINTAIN_INVENTORY_COST"
+                    DataType="Flag" DefaultValue="' '     "
+                    Description="This flag indicates whether the ship node maintains inventory cost."
+                    Name="Maintain_Inventory_Cost" Nullable="false" XMLName="MaintainInventoryCost"/>
+                <Attribute ColumnName="INVENTORY_TRACKED"
+                    DataType="Flag" DefaultValue="' '     "
+                    Description="This flag indicates whether the ship node tracks inventory. Valid values are 'Y' or 'N'. Default Value is 'Y'."
+                    Name="Inventory_Tracked" Nullable="false" XMLName="InventoryTracked"/>
+                <Attribute ColumnName="SHIPPING_NODE" DataType="Flag"
+                    DefaultValue="' '     "
+                    Description="This flag indicates whether the ship node can perform shipping operations. This flag does not have any functionality. Reserved for future use."
+                    Name="Shipping_Node" Nullable="false" XMLName="ShippingNode"/>
+                <Attribute ColumnName="RECEIVING_NODE" DataType="Flag"
+                    DefaultValue="' '     "
+                    Description="This flag indicates whether the ship node can perform receiving operations. This flag does not have any functionality. Reserved for future use."
+                    Name="Receiving_Node" Nullable="false" XMLName="ReceivingNode"/>
+                <Attribute ColumnName="RETURNS_NODE" DataType="Flag"
+                    DefaultValue="' '     "
+                    Description="This flag indicates whether the ship node can perform reverse logistic operations. This flag does not have any functionality. Reserved for future use."
+                    Name="Returns_Node" Nullable="false" XMLName="ReturnsNode"/>
+                <Attribute ColumnName="THREE_PL_NODE"  DataType="Flag"
+                    DefaultValue="' '     "
+                    Description="This flag indicates whether the ship node is a 3PL node."
+                    Name="Three_Pl_Node" Nullable="false" XMLName="ThreePlNode"/>
+                <Attribute ColumnName="ADVANCE_NOTIFICATION_TIME" Virtual="true"
+                    DataType="NumberOfDaysWithDecimal" DefaultValue="0"
+                    Description="The number of days before which the ship node needs notification of an impending receipt or shipment."
+                    Name="Advance_Notification_Time" Nullable="false" XMLName="AdvanceNotificationTime">
+			        <CustomOverride Name="YSCShipNodeCustomDBUtil" Type="get"/>
+			        <CustomOverride Name="YSCShipNodeCustomDBUtil" Type="set"/>
+				</Attribute>
+                <Attribute ColumnName="RECEIPT_PROCESSING_TIME"
+                    DataType="NumberOfHours" DefaultValue="0"
+                    Description="The time in hours required to process an incoming procurement (purchase or transfer) order after receiving it."
+                    Name="Receipt_Processing_Time" Nullable="false" XMLName="ReceiptProcessingTime"/>
+                <Attribute ColumnName="RCPT_PRCSSNG_TIME_FOR_FRWRDNG"
+                    DataType="NumberOfHours" DefaultValue="0"
+                    Description="The time in hours required to process an incoming shipment that is being forwarded to this node."
+                    Name="Receipt_Processing_Time_For_Forwarding" Nullable="false" XMLName="ReceiptProcessingTimeForForwarding"/>
+                <Attribute ColumnName="RCPT_PRCSSNG_TIME_FOR_FUTURE"
+                    DataType="NumberOfDays" DefaultValue="0"
+                    Description="The time in days required to process incoming future supply before being available for orders. Default: 0."
+                    Name="Receipt_Processing_Time_For_Future_Inventory" Nullable="false" XMLName="ReceiptProcessingTimeForFutureInventory"/>
+                <Attribute ColumnName="MAX_DAYS_TO_SCH_BEFORE"
+                    DataType="NumberOfDays" DefaultValue="0"
+                    Description="The number of days before which an order line cannot be scheduled at the node."
+                    Nullable="false" XMLName="MaxDaysToScheduleBefore"/>
+                <Attribute ColumnName="MIN_NOTIFICATION_TIME"
+                    DataType="NumberOfDays" DefaultValue="0" Virtual="true"
+                    Description="The number of days before which the communication to ship the order to the shipping node or supplier should be made. This field is used to determine the earliest ship date on the line."
+                    Name="Min_Notification_Time" Nullable="false" XMLName="MinNotificationTime">
+			        <CustomOverride Name="YSCShipNodeCustomDBUtil" Type="get"/>
+			        <CustomOverride Name="YSCShipNodeCustomDBUtil" Type="set"/>
+				</Attribute>
+				<Attribute ColumnName="PROCURE_TO_SHIP_ALLOWED"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether this node can be setup for procuring inventory from other nodes for shipment."
+                    Name="Procure_To_Ship_Allowed" Nullable="false" XMLName="ProcureToShipAllowed"/>
+                <Attribute ColumnName="SUBSTITUTION_ALLOWED"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This field determines whether a node is allowed to use substitute items."
+                    Name="Substitution_Allowed" Nullable="false" XMLName="SubstitutionAllowed"/>
+                <Attribute ColumnName="WORK_ORDER_CREATION_ALLOWED"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This field determines whether a node is allowed to create work orders."
+                    Name="Work_Order_Creation_Allowed" Nullable="false" XMLName="WorkOrderCreationAllowed"/>
+				<Attribute ColumnName="DELAYED_INV_ALLOC_SUPPORT"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether delayed inventory allocation is supported or not."
+                    Name="Delayed_Inventory_Allocation_Support" Nullable="false" XMLName="DelayedInventoryAllocationSupport"/>
+				<Attribute ColumnName="IGNORE_PENDING_ALLOCATION"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether Pending inventory to be considered for allocation."
+                    Name="Ignore_Pending_Allocation" Nullable="false" XMLName="IgnorePendingAllocation"/>
+                <Attribute ColumnName="X_DOC_NODE" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether this node is only used a cross-doc node."
+                    Name="X_Doc_Node" Nullable="false" XMLName="XDocNode"/>
+                <Attribute ColumnName="USE_END_OF_SHIFT_TIME"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="Thie flag indicates whether the node will use the end of shift time."
+                    Name="Use_End_Of_Shift_Time" Nullable="false" XMLName="UseEndOfShiftTime"/>
+                <Attribute ColumnName="CAN_SHIP_TO_OTHER_ADDRESSES"
+                    DataType="Flag" DefaultValue="'Y' "
+                    Description="This flag indicates whether the node can ship to other addresses."
+                    Name="Can_Ship_To_Other_Addresses" Nullable="false" XMLName="CanShipToOtherAddresses"/>
+                <Attribute ColumnName="CAN_SHIP_TO_ALL_NODES" DataType="Flag"
+                    DefaultValue="'Y' "
+                    Description="This flag indicates whether the node can ship to all node/node types.  Entries in YFS_NODE_CAN_SHIP_TO_NT table will be ignored if flag is Y."
+                    Name="Can_Ship_To_All_Nodes" Nullable="false" XMLName="CanShipToAllNodes"/>
+                <Attribute ColumnName="BOL_PREFIX" DataType="BolPrefix"
+                    DefaultValue="00"
+                    Description="The one up sequence number for tracking paper trail."
+                    Name="Bol_Prefix" Nullable="false" XMLName="BolPrefix"/>
+                <Attribute ColumnName="REQUIRE_TRANSFER_ACCEPTANCE"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the order line will need to wait for acceptance, if this node is used as procure from node on the line."
+                    Name="Require_Transfer_Acceptance" Nullable="false" XMLName="RequireTransferAcceptance"/>
+                <Attribute ColumnName="IS_IBA_ALLOWED" DataType="Flag"
+                    DefaultValue="'Y' "
+                    Description="This flag indicates whether the node is allowed for Item-Based Allocation process.  Valid values: Y/N.  Default value: Y."
+                    Name="Is_IBA_Allowed" Nullable="false" XMLName="IsItemBasedAllocationAllowed"/>
+                <Attribute ColumnName="RESOURCE_PLANNING_ENABLED" DataType="Flag"
+                    Description="This flag indicates whether resource planning is enabled for this node."
+                    Name="Resource_Planning_Enabled" Nullable="true" XMLName="ResourcePlanningEnabled"/>
+                <Attribute ColumnName="RESOURCE_PLANNING_UOM" DataType="Text-40"
+                    Description="Indicates the time UOM in which resources are planned in a node. Valid values are WorkDay and Hours."
+                    Name="Resource_Planning_UOM" Nullable="true" XMLName="ResourcePlanningUOM"/>
+                <Attribute ColumnName="PLANNING_CALENDAR_KEY" DataType="Text-24"
+                    Description="The planning calendar that is associated with this ship node."
+                    Name="Planning_Calendar_Key" Nullable="true" XMLName="PlanningCalendarKey"/>
+                <Attribute ColumnName="SUPPLY_DEMAND_DIFF_THRESHOLD" DataType="Percentage"
+                    Description="Difference percent to be considered to resolve mismatch between supply and demand during resource planning."
+                    Name="Supply_Demand_Diff_Threshold" Nullable="true" XMLName="SupplyDemandDifferenceThreshold"/>
+                <Attribute ColumnName="DEFAULT_PERSON_DAY_HOURS"
+                    DataType="NumberOfDaysForCapacity" Description="Number of person hours that make a person day." Name="Default_Person_Day_Hours" Nullable="true" XMLName="DefaultPersonDayHours"/>
+				<Attribute ColumnName="IS_FULFILLMENT_NODE" DataType="Flag"
+                    Description="This flag indicates whether the node is a fulfillment node."
+                    Name="Is_Fulfillment_Node" Nullable="true" XMLName="IsFulfillmentNode"/>
+				<Attribute ColumnName="IS_YARD" DataType="Flag"
+                    Description="This flag indicates whether this node is a Yard."
+                    Name="Is_Yard" Nullable="true" XMLName="IsYard"/>
+				<Attribute ColumnName="DOCK_SCHEDULING"
+                    DataType="Text-20"
+                    Description="The field indicates whether the dock sheduling is done by Warehouse Management System or Sterling TMS. Blank value is treated as Warehouse Management System."
+                    Name="Dock_Scheduling" Nullable="true" XMLName="DockScheduling">
+					<CustomOverride Name="YSCShipNodeCustomDBUtil" Type="get"/>
+				</Attribute>
+				<Attribute ColumnName="ALLOW_GIFT_WRAP" DataType="Flag" Description="This flag indicates that the node allows gift wrapping."
+					Name="Allow_Gift_Wrap" Nullable="true" XMLName="AllowGiftWrap"	/>
+				<Attribute ColumnName="STORE_INV_CONFIG" Name="Store_Inv_Config" XMLName="StoreInvConfig"
+                    DataType="Text-2" Nullable="true"
+                    Description="The type of the Store Inventory Config. Null or '00' means not SIM Enabled Store. '01' means SIM-enabled Store and Inventory IS Store managed. '02' means SIM-enabled Store but Inventory IS NOT Store managed. "/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="YDB100101"
+                    ForeignEntity="Calendar" Name="ReceivingCalendar"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="ReceivingCalendar">
+                    <Attribute Name="Receiving_Calendar_Key" ParentName="Calendar_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="YDB100102"
+                    ForeignEntity="Calendar" Name="ShippingCalendar"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="ShippingCalendar">
+                    <Attribute Name="Shipping_Calendar_Key" ParentName="Calendar_Key"/>
+			        <CustomOverride Name="YSCShipNodeCustomDBUtil" Type="get"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="YDB100174"
+                    ForeignEntity="Action" Name="Action"
+                    Type="Unidirectional" ValidateDelete="true" Virtual="true">
+                    <Attribute Name="Owner_Key" ParentName="Owner_Key"/>
+                    <Attribute Name="Interface_Sub_Type" ParentName="ActionCode"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Calendar" Name="PlanningCalendar"
+                    Type="Unidirectional" XMLName="PlanningCalendar">
+                    <Attribute Name="Planning_Calendar_Key" ParentName="Calendar_Key"/>
+                </RelationShip>
+            </RelationShips>
+			<CustomInterface Name="YSCShipNodeCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCShipNodeCustomDBUtilImpl" ModuleCode="ysc">
+				<Import Class="java.util.Map" />
+		        <Import Class="com.yantra.yfc.date.YDate" />
+
+				<Method Name="isTagCaptureRequired" Return="boolean">
+					<Arg Name="operation" Class="int" />
+				</Method>
+				<Method Name="getMinNotificationTime" Return="long">
+					<Arg Name="oEnv" Class="YFSContext" />
+					<Arg Name="organizationName" Class="String" />
+					<Arg Name="orderReference" Class="String" />
+					<Arg Name="sRushCode" Class="String" />
+				</Method>
+				<Method Name="getMinNotificationTime" Return="long">
+					<Arg Name="oEnv" Class="YFSContext" />
+					<Arg Name="organizationName" Class="String" />
+					<Arg Name="orderReference" Class="String" />
+					<Arg Name="sRushCode" Class="String" />
+					<Arg Name="date" Class="YDate" />
+				</Method>
+
+				<Method Name="getMinNotificationTimeMap" Return="Map">
+					<Arg Name="oEnv" Class="YFSContext" />
+					<Arg Name="sOrganizationName" Class="String" />
+					<Arg Name="sOrderReference" Class="String" />
+					<Arg Name="date" Class="YDate" />
+				</Method>
+				<Method Name="isDraftStatusSupported" Return="boolean" />
+				<Method Name="isPendInIgnoredForAllocation" Return="boolean" />
+				<Method Name="getSlotGroupId" Return="String" />
+		        <Import Class="com.yantra.shared.ycp.YFSContext" />
+				<Method Name="isSerialTrackingEnabledNode" Return="boolean" />
+				<Method Name="isSerialCaptureRequired" Return="boolean" >
+					<Arg Name="operation" Class="String" />
+				</Method>
+		        <Import Class="com.yantra.shared.dbi.YFS_Node_Notification_Period" />
+				<Method Name="getNodeNotificationPeriod" Return="YFS_Node_Notification_Period" >
+					<Arg Name="oEnv" Class="YFSContext" />
+					<Arg Name="oDate" Class="YDate" />
+				</Method>
+		        <Import Class="com.yantra.shared.dbi.YFS_Node_Service_Pickup_Dow" />
+				<Method Name="getPickupScheduleForCarrierService" Return="YFS_Node_Service_Pickup_Dow" >
+					<Arg Name="sCarrierServiceCode" Class="String" />
+					<Arg Name="oDate" Class="YDate" />
+				</Method>
+		        <Import Class="com.yantra.yfc.date.YTimestamp" />
+				<Method Name="getAdvancedNotificationDate" Return="YTimestamp" >
+					<Arg Name="oEnv" Class="YFSContext" />
+					<Arg Name="ts" Class="YTimestamp" />
+					<Arg Name="sRushCode" Class="String" />
+					<Arg Name="dCalcAdv" Class="double" />
+					<Arg Name="dCalcMax" Class="double" />
+				</Method>
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_ENT_NODE_TYPE">
+            <Attributes>
+                <Attribute ColumnName="PROC_HANDLING_CST_PER_SHP"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an incoming procurement order at the receving node that has specified node type.  Indicates cost per shipment."
+                    Name="Proc_Handling_Cst_Per_Shp" Nullable="false" XMLName="ProcurementHandlingCostPerShipment"/>
+                <Attribute ColumnName="OUT_HANDLING_CST_PER_SHP"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an outbound shipment at the shipping node that has specified node type.  Indicates cost per shipment."
+                    Name="Out_Handling_Cst_Per_Shp" Nullable="false" XMLName="OutboundHandlingCostPerShipment"/>
+                <Attribute ColumnName="PROC_HANDLING_CST_PER_SHP_LN"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an incoming procurement order at the receving node that has specified node type.  Indicates cost per line."
+                    Name="Proc_Handling_Cst_Per_Shp_Ln" Nullable="false" XMLName="ProcurementHandlingCostPerShipmentLine"/>
+                <Attribute ColumnName="OUT_HANDLING_CST_PER_SHP_LN"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an outbound shipment at the shipping node that has specified node type.  Indicates cost per line."
+                    Name="Out_Handling_Cst_Per_Shp_Ln" Nullable="false" XMLName="OutboundHandlingCostPerShipmentLine"/>
+                <Attribute ColumnName="PROC_HANDLING_CST_PER_UNIT"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an incoming procurement order at the receving node that has specified node type.  Indicates cost per item unit."
+                    Name="Proc_Handling_Cst_Per_Unit" Nullable="false" XMLName="ProcurementHandlingCostPerUnit"/>
+                <Attribute ColumnName="OUT_HANDLING_CST_PER_UNIT"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an outbound shipment at the shipping node that has specified node type.  Indicates cost per item unit."
+                    Name="Out_Handling_Cst_Per_Unit" Nullable="false" XMLName="OutboundHandlingCostPerUnit"/>
+               <Attribute ColumnName="PROC_HNDL_CST_PER_UNIT_WEIGHT"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an incoming procurement order at the receving node that has specified node type.  Indicates cost per item unit weight."
+                    Name="Proc_Hndl_Cst_Per_Unit_Weight" Nullable="false" XMLName="ProcurementHandlingCostPerUnitWeight"/>
+               <Attribute ColumnName="OUT_HNDL_CST_PER_UNIT_WEIGHT"
+                    DataType="Money" DefaultValue="0"
+                    Description="The cost of handling an outbound shipment at the receving node that has specified node type.  Indicates cost per item unit weight."
+                    Name="Out_Hndl_Cst_Per_Unit_Weight" Nullable="false" XMLName="OutboundHandlingCostPerUnitWeight"/>
+                <Attribute ColumnName="PROC_WEIGHT_UOM"
+                    DataType="UOM" DefaultValue="' '"
+                    Description="Weight Unit Of Measure for Procurements."
+                    Name="Proc_Weight_UOM" Nullable="false" XMLName="ProcurementWeightUOM"/>
+               <Attribute ColumnName="OUT_WEIGHT_UOM"
+                    DataType="UOM" DefaultValue="' '"
+                    Description="Weight Unit Of Measure for Outbound Shipments."
+                    Name="Out_Weight_UOM" Nullable="false" XMLName="OutboundWeightUOM"/>
+                <Attribute ColumnName="CURRENCY"
+                    DataType="Currency" DefaultValue="' '"
+                    Description="Indicates currency which handling costs are specified in."
+                    Name="Currency" Nullable="false" XMLName="Currency"/>
+            </Attributes>
+		</Entity>
+		<Entity TableName="YFS_COMMON_CODE">
+            <Attributes>
+                <Attribute ColumnName="MEANT_FOR_SUPPLIER"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the code is maintained by suppliers."
+                    Name="Meant_For_Supplier" Nullable="false" XMLName="MeantForSupplier"/>
+            </Attributes>
+		</Entity>
+		<Entity TableName="YFS_RULES">
+            <Attributes>
+                <Attribute ColumnName="MEANT_FOR_SUPPLIER"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="Indicates if a rule is meant to be used by a supplier."
+                    Name="Meant_For_Supplier" Nullable="false" XMLName="MeantForSupplier"/>
+            </Attributes>
+		</Entity>
+		<Entity TableName="YFS_EVENT">
+            <Attributes>
+                <Attribute ColumnName="EXTEND_SUPPLIER_FLAG"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This field is currently not supported."
+                    Name="Extend_Supplier_Flag" Nullable="false" XMLName="ExtendSupplierFlag"/>
+            </Attributes>
+		</Entity>
+		<Entity TableName="YFS_STATUS_MODIFICATION_TYPE">
+            <Attributes>
+                <Attribute ColumnName="PROPAGATE_TO_CHAINED_ORDER"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="Indicates if a modification needs to be propogated to a chained order."
+                    Name="Propagate_To_Chained_Order" Nullable="false" XMLName="PropagateToChainedOrder"/>
+                <Attribute ColumnName="REPRICE_ORDER" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if a modification requires recomputation of prices."
+                    Name="Reprice_Order" Nullable="false" XMLName="RepriceOrder"/>
+            </Attributes>
+		</Entity>
+		<Entity TableName="YFS_INBOX">
+            <Attributes>
+                <Attribute ColumnName="SUPPLIER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The supplier code associated with the exception."
+                    Name="Supplier_Key" Nullable="false" XMLName="SupplierKey"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="The order associated with the exception."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="ORDER_NO" DataType="VarcharDocumentNo"
+                    Description="The order number associated with the exception."
+                    Name="Order_No" Nullable="true" XMLName="OrderNo"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The shipment associated with this exception."
+                    HasSkewedData="true" Name="Shipment_Key"
+                    Nullable="false" XMLName="ShipmentKey"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' ' "
+                    Description="The shipment number."
+                    Name="Shipment_No" Nullable="false" XMLName="ShipmentNo"/>
+                <Attribute ColumnName="LOAD_NO" DataType="DocumentNo"
+                    DefaultValue="' ' " Description="The load number."
+                    Name="Load_No" Nullable="false" XMLName="LoadNo"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' ' "
+                    Description="The identifier for the item associated with the exception."
+                    Name="Item_Id" Nullable="false" XMLName="ItemId"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order line associated with the exception."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    Description="The work order associated with the exception."
+                    Name="Work_Order_Key" Nullable="true"/>
+                <Attribute ColumnName="WORK_ORDER_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The work order number within the context of a node and enterprise."
+                    Name="Work_Order_No" Nullable="false"/>
+                <Attribute ColumnName="MOVE_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The move request associated with this exception."
+                    Name="Move_Request_Key" Nullable="false" XMLName="MoveRequestKey"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The location identifier. Identifies the location for which exception is raised."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="BILL_TO_ID"
+                    DataType="ID-40" Description="Indicates a customer associated with the exception."
+                    Name="Bill_To_Id" Nullable="true" XMLName="BillToID" DataSecurityUsageType="CUSTOMER"/>        
+                <Attribute ColumnName="TEAM_CODE"
+                    DataType="Text-40" Description="Indicates a team associated with the exception."
+                    Name="Team_Code" Nullable="true" XMLName="TeamCode" DataSecurityUsageType="TEAM"/>    
+   				<Attribute ColumnName="ENTERPRISE_KEY" DataSecurityUsageType="ORG"/>
+				<Attribute ColumnName="SHIPNODE_KEY" DataSecurityUsageType="NODE"/>
+            </Attributes>
+            <Indices>
+                <Index Name="YFS_INBOX_I1">
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="EXCEPTION_TYPE"/>
+                </Index>
+                <Index Name="YFS_INBOX_I4">
+                    <Column Name="ORDER_LINE_KEY"/>
+                    <Column Name="EXCEPTION_TYPE"/>
+                </Index>
+                <Index Name="YFS_INBOX_I5">
+                    <Column Name="SHIPMENT_NO"/>
+                </Index>
+                <Index Name="YFS_INBOX_I7">
+                    <Column Name="LOAD_NO"/>
+                </Index>
+                <Index Name="YFS_INBOX_I8">
+                    <Column Name="MOVE_REQUEST_KEY"/>
+                </Index>
+            </Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany" Virtual="true"
+						ForeignEntity="Enterprise" Name="Enterprise"
+						Type="Unidirectional" XMLName="Enterprise">
+						<Attribute Name="Enterprise_Key" ParentName="Enterprise_Key"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany" Virtual="true"                    
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Unidirectional" XMLName="ShipNode" >
+                    <Attribute Name="Shipnode_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+			</RelationShips>
+			<CustomInterface Name="YSCInboxCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCInboxCustomDBUtilImpl" ModuleCode="ysc">
+				<Import Class="com.yantra.shared.ycp.YFSContext" />
+				<Import Class="com.yantra.shared.dbi.YFS_Customer" />
+				<Import Class="com.yantra.yfc.dom.YFCDocument" />
+				<Import Class="com.yantra.yfc.dom.YFCElement" />
+				<Method Name="getCustomerMasterOrganizationCode" Return="String" >
+					<Arg Name="ctx" Class="YFSContext" />
+				</Method>
+				<Method Name="getBillToCustomer" Return="YFS_Customer">
+					<Arg Name="ctx" Class="YFSContext" />
+				</Method>
+				<Method Name="getBillToCustomerXML" Return="YFCElement">
+					<Arg Name="ctx" Class="YFSContext" />
+					<Arg Name="doc" Class="YFCDocument" />
+					<Arg Name="template" Class="YFCElement" />
+				</Method>
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_DOCUMENT_PARAMS">
+			<Attributes>
+                <Attribute ColumnName="DOCUMENT_PARAMS_KEY" FactName="false"/>
+                 <Attribute ColumnName="DESCRIPTION"  Localized="true"/>
+			</Attributes>
+			<CustomInterface Name="YSCDocumentParamsCustomDBUtil"
+				Impl="com.yantra.ysc.customutil.YSCDocumentParamsCustomDBUtilImpl"
+				IsSingleton="false" ModuleCode="ysc">
+				<Method Name="getYSCImpl"
+					Return="YSCDocumentParamsCustomDBUtil" />
+				<Method Name="readDocument" Return="void" />
+				<Method Name="getTemplateOrderDocumentType" Return="String" />
+				<Method Name="getOrderReleaseModifyTransactionId"
+					Return="String" />
+				<Method Name="consolidateToRelease" Return="boolean" />
+				<Method Name="sendMessageToDerivedParent" Return="boolean" />
+				<Method Name="createChainedOrder" Return="boolean" />
+				<Method Name="invoiceCreationRequired" Return="boolean" />
+				<Method Name="invoiceCreationForProFormaRequired"
+					Return="boolean" />
+				<Method Name="itemValidationRequired" Return="boolean" />
+				<Method Name="itemValidationRequiredForVas" Return="boolean" />
+				<Method Name="draftOrderPricingRequired" Return="boolean" />
+				<Method Name="createReleaseForProductsBeingDelivered"
+					Return="boolean" />
+				<Method Name="actualOrderPricingRequired" Return="boolean" />
+				<Method Name="sellerInventoryUpdateRequried" Return="boolean" />
+				<Method Name="buyerInventoryUpdateRequried" Return="boolean" />
+				<Method Name="paymentUpdateRequried" Return="boolean" />
+				<Method Name="getDemandTypeForSchedule" Return="String" />
+				<Method Name="getDemandTypeForRelease" Return="String" />
+				<Method Name="getDemandTypeForOrderReservations"
+					Return="String" />
+				<Method Name="inventoryReadRequired" Return="boolean" />
+				<Method Name="isReturnDocument" Return="boolean" />
+				<Method Name="getDocumentClassification" Return="String" />
+				<Method Name="reservationRequried" Return="boolean" />
+				<Method Name="POCreateRequried" Return="boolean" />
+				<Method Name="getOrderNegotiationRule" Return="String" />
+				<Method Name="getReleaseNegotiationRule" Return="String" />
+				<Method Name="getFulfillmentProcess" Return="String" />
+				<Method Name="getCompletedTransactionId" Return="String" />
+				<Method Name="getNegotiationTranId" Return="String">
+					<Arg Name="sEntityType" Class="String" />
+					<Arg Name="sBaseTranId" Class="String" />
+				</Method>
+				<Method Name="getNegotiationProcessType" Return="String">
+					<Arg Name="sEntityType" Class="String" />
+				</Method>
+				<Method Name="getEntityAttribute" Return="String">
+					<Arg Name="sEntityType" Class="String" />
+					<Arg Name="sWhichTran" Class="String" />
+				</Method>
+				<Method Name="getDriverDate" Return="String" />
+				<Method Name="getDefaultDeliveryMethod" Return="boolean" />
+				<Method Name="getChainedDropShipOrderDocType" Return="String" />
+				<Method Name="getChainedProcurementPurchaseOrderDocType"
+					Return="String" />
+				<Method Name="getRefundFulfillmentDocType" Return="String" />
+				<Method Name="getChainedProcurementTransferOrderDocType"
+					Return="String" />
+				<Method Name="getProcurementPlacedSupplyType" Return="String" />
+				<Method Name="getCreateChainedOrdersImmediately"
+					Return="boolean" />
+				<Method Name="getTransactionForProcessType" Return="String">
+					<Arg Name="oEnv" Class="YFSContext" />
+					<Arg Name="sBaseProcessType" Class="String" />
+					<Arg Name="sBaseTransactionId" Class="String" />
+				</Method>
+				<Method Name="getTemplate" Return="YFCDocument">
+					<Arg Name="sTemplateType" Class="String" />
+				</Method>
+				<Method Name="getFulfillmentTransactionId" Return="String">
+					<Arg Name="sBaseTransactionId" Class="String" />
+				</Method>
+				<Method Name="receiveMessageFromDerivedChild" Return="boolean" />
+				<Method Name="LogAuditForDraftOrderRequired" Return="boolean" />
+				<Import Class="com.yantra.yfc.dom.YFCDocument" />
+				<Import Class="com.yantra.shared.ycp.YFSContext" />
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_HOLD_TYPE">
+			<CustomInterface Name="YSCHoldTypeCustomDBUtil"
+				Impl="com.yantra.ysc.customutil.YSCHoldTypeCustomDBUtilImpl" IsSingleton="false" ModuleCode="ysc">
+				<Method Name="getHoldTypePreventedTransactionList"	Return="List" />
+				<Import Class="java.util.List" />
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_PERSON_INFO" TableType="TRANSACTION">
+			<CustomInterface Name="YSCPersonInfoCustomDBUtil"
+			Impl="com.yantra.ysc.customutil.YSCPersonInfoCustomDBUtilImpl" IsSingleton="false" ModuleCode="ysc">
+				<Method Name="getAuditXML" Return="YFCElement">
+				<Arg Name="auditDoc" Class="YFCDocument" />
+				<Arg Name="sAuditType" Class="String" />
+				</Method>
+				<Import Class="com.yantra.yfc.dom.YFCElement" />
+				<Import Class="com.yantra.yfc.dom.YFCDocument" />
+			</CustomInterface>
+			<Attributes>
+				<Attribute ColumnName="ADDRESS_ID"
+				DataType="Text-256" Description="A user specified label for an address."
+				Name="Address_Id" Nullable="true" XMLName="AddressID"/>    
+				<Attribute ColumnName="SHORT_ZIP_CODE" DataType="ZipCode"
+                Description="The truncated zip code used to match the region."
+                Name="Short_Zip_Code" Nullable="true" XMLName="ShortZipCode" FactName="false"/>
+				<Attribute ColumnName="FIRST_NAME">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+						<Entity EntityName="Shipment"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="LAST_NAME">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+						<Entity EntityName="Shipment"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="ADDRESS_LINE1">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="ZIP_CODE">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+						<Entity EntityName="Shipment"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="CITY">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="STATE">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="DAY_FAX_NO">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="DAY_PHONE">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+						<Entity EntityName="Shipment"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="MOBILE_PHONE">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+						<Entity EntityName="Shipment"/>
+					</UsedForIndexing>
+				</Attribute>
+				<Attribute ColumnName="EMAILID">
+					<UsedForIndexing>
+						<Entity EntityName="Order"/>
+					</UsedForIndexing>
+				</Attribute>
+			</Attributes>
+			<TableTypeList>
+				<TableType Name="MASTER"/>
+				<TableType Name="CONFIGURATION"/>
+			</TableTypeList>
+			<QueryGroups>
+				<QueryGroup Name="RegionMatchGrp">
+					<Column Name="ADDRESS_LINE6"/>
+					<Column Name="CITY"/>
+					<Column Name="STATE"/>
+					<Column Name="COUNTRY"/>
+					<Column Name="SHORT_ZIP_CODE"/>
+				</QueryGroup>
+			</QueryGroups>
+		</Entity>
+		<Entity TableName="YFS_USER" TableType="MASTER">
+            <Attributes>
+				<Attribute ColumnName="LOGINID" FactName="Loginid"/>
+                <Attribute ColumnName="MAX_CUST_ASSIGN" DataType="NumberOfAssignment" DefaultValue="0"
+                    Description="Indicates maximum number of customers that can be assigned to this user."
+                    Name="Max_Cust_Assign" Nullable="false" XMLName="MaxCustomerAssignments"/>
+                <Attribute ColumnName="IS_SUPERVISOR" DataType="Flag" DefaultValue="'N'"
+                    Description="Indicates if the user is a supervisor. Default is N."
+                    Name="Is_Supervisor" Nullable="true" XMLName="IsSupervisor"/>
+                <Attribute ColumnName="DISPLAY_USER_ID" DataType="Text-150" DefaultValue=""
+                    Description="Indicates Display User's ID which is used for login in to the system."
+                    Name="Display_User_ID" Nullable="true" XMLName="DisplayUserID"/>
+                <Attribute ColumnName="ENTERPRISE_CODE" DataType="Text-24" DefaultValue=""
+                    Description="The Customer Master Organization Code of the User's Organization."
+                    Name="Enterprise_Code" Nullable="true" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="IS_CUSTOMER" DataType="Flag" DefaultValue=""
+                    Description="Flag to indicate if the user is a valid customer."
+                    Name="Is_Customer" Nullable="true" XMLName="IsCustomer"/>
+			</Attributes>
+		    <Indices>
+		        <Index Name="YFS_USER_I10" Unique="true">
+		            <Column Name="DISPLAY_USER_ID"/>
+		            <Column Name="ENTERPRISE_CODE"/>
+		        </Index>
+		    </Indices>
+			<ColonyMap MapType="Loginid">
+                <Attribute Name="Loginid" />
+			</ColonyMap>
+			<CustomInterface Name="YSCUserCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCUserCustomDBUtilImpl" ModuleCode="ysc">
+				<Method Name="isSupervisor" Return="boolean"/>
+				<Method Name="isBuyerUser" Return="boolean"/>
+				<Method Name="isSellerUser" Return="boolean"/>
+				<Method Name="getSubUserList" Return="List"/>
+				<Method Name="isConsumer" Return="boolean">
+					<Arg Name="ctx" Class="YFSContext" />
+				</Method>
+				<Method Name="isAnonymousUser" Return="boolean">
+					<Arg Name="ctx" Class="YFSContext" />
+				</Method>
+				<Method Name="hasOverridePermissions" Return="boolean">
+					<Arg Name="ctx" Class="YFSContext" />
+				</Method>
+				<Import Class="java.util.List" />
+				<Import Class="com.yantra.shared.ycp.YFSContext" />
+			</CustomInterface>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ForeignEntity="Enterprise" Name="Enterprise"
+					Type="Unidirectional" XMLName="Enterprise">
+					<Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+				</RelationShip>
+			</RelationShips>
+		</Entity>
+		<Entity TableName="YFS_AUDIT" TableType="CONFIGURATION">
+			<TableTypeList>
+				<TableType Name="TRANSACTION"/>
+				<TableType Name="MASTER"/>
+				<TableType Name="STATISTICS"/>
+			</TableTypeList>
+		</Entity>
+		<Entity TableName="YFS_AUDIT_HEADER" TableType="CONFIGURATION">
+			<TableTypeList>
+				<TableType Name="TRANSACTION"/>
+				<TableType Name="MASTER"/>
+			</TableTypeList>
+		</Entity>
+		<Entity TableName="YFS_USER_ACTIVITY" TableType="TRANSACTION"/>
+		<Entity TableName="YFS_USER_ACT_AUDIT" TableType="TRANSACTION"/>
+		<Entity TableName="YFS_USER_GROUP_LIST" TableType="MASTER"/>
+		<Entity TableName="YFS_SAVED_SEARCH" TableType="MASTER"/>
+		<Entity TableName="YFS_QUEUE_SUBSCRIPTION" TableType="MASTER"/>
+		<Entity TableName="PLT_USER_LOGIN_FAIL" TableType="MASTER"/>
+		<Entity TableName="PLT_USER_UI_STATE" TableType="MASTER"/> <!-- Setting back to MASTER against defect 584527 -->
+		<Entity TableName="PLT_PWD_HIST" TableType="MASTER"/>
+		<Entity TableName="PLT_PWD_REQ" TableType="MASTER"/>
+		<Entity TableName="PLT_AUTH_ANSWER" TableType="MASTER"/>
+		<Entity TableName="YFS_DATA_SECURITY_GROUP">
+            <Attributes>
+				<Attribute ColumnName="CUSTOMER_ACCESS_MODE"
+                    DataType="CustomerAccessMode" DefaultValue="'01'"
+                    Description="Access mode for Customer. Indicates if the team can access all customer data (01), only specified customers (02) assigned to the team, or only specified customers assigned directly to the user, regardless of the Enterprise's manual assignment rule (03). Default Value is 01." Name="Customer_Access_Mode" Nullable="false" XMLName="CustomerAccessMode"/>
+            </Attributes>
+			<CustomInterface Name="YSCTeamCustomDBUtil" Impl="com.yantra.ysc.customutil.YSCTeamCustomDBUtilImpl" ModuleCode="ysc">
+				<Method Name="getParentTeamList" Return="List" >
+				</Method>
+				<Method Name="getChildTeamList" Return="List" >
+				</Method>
+				<Method Name="isCustomerAccessRestricted" Return="boolean" />
+				<Method Name="isCustomerAccessNormal" Return="boolean" />
+				<Method Name="isLeaf" Return="boolean" />
+				<Method Name="isRoot" Return="boolean" />
+				<Import Class="java.util.List" />
+				<Import Class="com.yantra.yfc.util.YFCLocale" />
+				<Import Class="org.w3c.dom.Document" />
+				<Import Class="com.yantra.yfc.dom.YFCElement" />
+				<Import Class="com.yantra.shared.ycp.YFSContext" />
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_QUEUE">
+            <Attributes>
+				<Attribute ColumnName="QUEUE_KEY" FactName="false"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_RESOURCE">
+			<Attributes>
+                <Attribute ColumnName="RESOURCE_KEY" FactName="false"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_CALENDAR">
+			<Attributes>
+                <Attribute ColumnName="CALENDAR_KEY" FactName="false"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_REGION_SCHEMA">
+			<Attributes>
+                <Attribute ColumnName="REGION_SCHEMA_KEY" FactName="false"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="PLT_AUTH_QUESTION">
+			<Attributes>
+                <Attribute ColumnName="AUTH_QUESTION_KEY" FactName="false"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_PIPELINE">
+			<Attributes>
+                <Attribute ColumnName="PIPELINE_KEY" FactName="false"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_USER_GROUP">
+			<Attributes>
+                <Attribute ColumnName="USERGROUP_KEY" FactName="false"/>
+                <Attribute ColumnName="PURPOSE" Description="Defines what purpose the user group is for." DataType="Text-40" Name="Purpose" Nullable="true" XMLName="Purpose"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_QUERY"  EntityType="CONFIGURATION/CATALOG_MASTER" ConfigurableByOrgOrNode="Y">
+			<TableTypeList>
+				<TableType Name="MASTER"/>
+				<TableType Name="CONFIGURATION"/>
+			</TableTypeList>
+            <Attributes>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="'DEFAULT'" IsOrgColumn="Y" 
+                    Description="The organization that owns the catalog of this organization." Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+			</Attributes>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                    DeleteCascade="false" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>               
+ 			</RelationShips>
+		</Entity>		
+	<Entity Module="ycp" Name="File_Attachment" Prefix="PLT_" TableName="PLT_FILE_ATTACHMENT" XMLName="FileAttachment">
+		<RelationShips>
+		   <RelationShip Cardinality="OneToOne" DeleteCascade="true"
+				ChildListXMLName="FileAttachments"
+				ChildName="FileAttachment"
+				ForeignEntity="Upload_Job" Name="Upload_Job"
+				Type="Bidirectional" XMLName="UploadJob">
+				<Attribute Name="Table_Key" ParentName="Job_Key"/>
+				<Attribute Name="Table_Name" ParentName="YFS_UPLOAD_JOB"/>
+		</RelationShip>
+	  </RelationShips>
+	</Entity>
+	</Entities>
+</DBSchema>

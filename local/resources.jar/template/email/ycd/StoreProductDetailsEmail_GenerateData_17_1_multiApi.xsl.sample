@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM IBM Sterling Selling and Fulfillment 
+	Suite - Foundation, IBM Order Management (5737-D18) (C) Copyright IBM Corp. 2007, 2017 All Rights Reserved. 
+	US Government Users Restricted Rights - Use, duplication or disclosure restricted 
+	by GSA ADP Schedule Contract with IBM Corp. -->
+	
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2005/xpath-functions"
+	xmlns:java="http://xml.apache.org/xslt/java" xmlns:fopUtil="com.yantra.pca.ycd.fop.YCDFOPUtils" exclude-result-prefixes="java">
+	
+	<xsl:import href="/template/prints/ycd/xsl/CommonTemplates_HTML.xsl" />
+	<xsl:output method="html" encoding="UTF-8" indent="yes" />
+	<xsl:variable name="ireport.scriptlethandling" select="2" />
+	<xsl:variable name="ireport.encoding" select="UTF-8" />
+	
+<!-- getCompleteItemList -->
+	<xsl:variable name="productDescription">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteItemList']/Output/ItemList/Item/PrimaryInformation/@ShortDescription" />
+	</xsl:variable>
+	
+	<xsl:variable name="imageLabel">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteItemList']/Output/ItemList/Item/PrimaryInformation/@ImageLabel" />
+	</xsl:variable>
+	
+	<xsl:variable name="imageLocation">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteItemList']/Output/ItemList/Item/PrimaryInformation/@ImageLocation" />
+	</xsl:variable>
+	
+	<xsl:variable name="imageID">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteItemList']/Output/ItemList/Item/PrimaryInformation/@ImageID" />
+	</xsl:variable>
+	
+	<xsl:variable name="imgSrc">
+		<xsl:choose>
+			<xsl:when test="((normalize-space($imageLocation) != '') and (normalize-space($imageID) != ''))">
+				<xsl:value-of select="concat($imageLocation, '/', $imageID)" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="' '" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	
+	
+<!-- getCompleteCustomerDetails -->
+	<xsl:variable name="title">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteCustomerDetails']/Output/Customer/CustomerContactList/CustomerContact/@Title" />
+	</xsl:variable>
+
+	<xsl:variable name="firstName">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteCustomerDetails']/Output/Customer/CustomerContactList/CustomerContact/@FirstName" />
+	</xsl:variable>
+
+	<xsl:variable name="lastName">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteCustomerDetails']/Output/Customer/CustomerContactList/CustomerContact/@LastName" />
+	</xsl:variable>
+	
+	<xsl:variable name="salutationAndName">
+		<xsl:choose>
+			<xsl:when test="(($title != '' or $title != null) and ($firstName != '' or $firstName != null) and ($lastName != '' or $lastName != null))">
+				<xsl:value-of select="concat($title, ' ', $firstName, ' ', $lastName)" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="'Sir/Madam'" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	
+	<xsl:variable name="customerEmail">
+		<xsl:value-of select="/MultiApi/API[@Name='getCompleteCustomerDetails']/Output/Customer/CustomerContactList/CustomerContact/@EmailID" />
+	</xsl:variable>
+
+
+<!-- getShipNodeList -->
+	<xsl:variable name="companyName">
+		<xsl:value-of select="/MultiApi/API[@Name='getShipNodeList']/Output/ShipNodeList/ShipNode/ShipNodePersonInfo/@Company" />
+	</xsl:variable>
+	
+	<xsl:variable name="storeEmail">
+		<xsl:value-of select="/MultiApi/API[@Name='getShipNodeList']/Output/ShipNodeList/ShipNode/ShipNodePersonInfo/@EMailID" />
+	</xsl:variable>
+	
+	<xsl:variable name="storeDayPhone">
+		<xsl:value-of select="/MultiApi/API[@Name='getShipNodeList']/Output/ShipNodeList/ShipNode/ShipNodePersonInfo/@DayPhone" />
+	</xsl:variable>
+	
+	<xsl:variable name="storeName">
+		<xsl:value-of select="/MultiApi/API[@Name='getShipNodeList']/Output/ShipNodeList/ShipNode/@Description" />
+	</xsl:variable>
+	
+	<xsl:variable name="localeCode">
+		<xsl:value-of select="/MultiApi/API[@Name='getShipNodeList']/Output/ShipNodeList/ShipNode/@LocaleCode" />
+	</xsl:variable>
+	
+	
+	<xsl:template match="MultiApi">
+		<html>
+			<xsl:comment>CONTENT_TYPE=text/html; charset=UTF-8</xsl:comment> 
+			<xsl:attribute name="lang">
+				<xsl:value-of select="$localeCode" />
+			</xsl:attribute>
+			<body>
+				<style>
+					<xsl:text disable-output-escaping="yes">
+
+						body {
+							font-family: "HelvNeueRomanforIBM", Helvetica, Arial, Tahoma, Verdana, sans-serif;
+							font-size: 12px;
+							padding: 10px 0px;
+							border: 1px solid #C7C7CC;
+						}
+				
+					</xsl:text>
+				</style>
+				<div>
+					<p>
+						Dear <span> <xsl:value-of select="concat($salutationAndName, ',')" /> </span>
+ 					</p>
+ 					<p>
+						Thank you for visiting
+						<span> <xsl:value-of select="concat(' ', $companyName, '. ')" /> </span>
+						Below is some additional information about the product that you viewed. If you have any questions please feel free to call our store at
+						<span> <xsl:value-of select="concat(' ', $storeDayPhone, ' ')" /> </span>
+						or visit our store again and we would be happy to help. You can also reach us by emailing
+						<span> <xsl:value-of select="concat(' ', $storeEmail, '.')" /> </span>
+					</p>
+					<p>
+						<img src="{$imgSrc}" alt="{$imageLabel}"></img>
+						<div> <xsl:value-of select="$productDescription" /> </div>
+					</p>
+					<p>
+						Thank you for being our valued customer, and we hope to see you again soon.
+					</p>
+					<p>
+						Warm Regards,
+					</p>
+					<p>
+						<xsl:value-of select="$storeName" />
+					</p>
+				</div>
+			</body>
+		</html>
+	</xsl:template>
+
+</xsl:stylesheet>

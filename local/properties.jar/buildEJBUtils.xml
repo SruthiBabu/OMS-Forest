@@ -1,0 +1,335 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+     (C) Copyright IBM Corp. 2001, 2019 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+ <project basedir=".." name="ejb.utils" default="">
+
+	<property name="compiler" value="modern"/>
+	<condition property="noejb2" value="true">
+		<equals arg1="${noejb}" arg2="true" casesensitive="false" trim="true"/>
+	</condition>
+
+ 	<condition property="async.ejb.enabled" value="true">
+ 		<equals arg1="${asyncejb}" arg2="true" casesensitive="false" trim="true" />
+ 	</condition>
+	
+ 	<condition property="async.ejb.descriptor.for.weblogic.enabled" value="true">
+ 		<and>
+ 			<isset property="async.ejb.enabled" />
+ 			<equals arg1="${appserver}" arg2="weblogic" casesensitive="false" trim="true" />
+ 		</and>
+ 	</condition>
+ 	
+	<condition property="ejbmetainf.exists">
+		<available file="${installdir}/extensions/weblogic-ejb-jar.xml"/>
+	</condition>
+
+	<condition property="copyejbjar" value="true">
+		<not>
+			<equals arg1="${appserver}" arg2="websphere" />
+		</not>
+	</condition>
+
+	<target name="create-ejb" unless="noejb2" depends="set-ejb-ui-classpth">
+		
+		<property name="ejb.descriptor.dir" location="${installdir}/repository/eardata/platform/descriptors/${appserver}"/>
+		<property name="ejbtmp" location="${tmpdir}/ejb"/>
+		<property name="ejbjar" location="${eartmp}/${ear.basename}ejb.jar"/>
+		
+		<property file="${installdir}/bin/build.properties"/>
+		<condition property="ejbversion" value="3">
+			<and>
+				<or>
+					<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true"/>
+					<!-- No WebLogic support until version 10 -->
+					<!-- No WebSphere support in 6.1 -->
+				</or>
+				<istrue value="${ejb3.enabled}" />
+			</and>
+		</condition>
+		<property name="ejbversion" value="2" />
+		
+		<mkdir dir="${ejbtmp}/jar/META-INF" />
+
+		<antcall target="-create-ejb${ejbversion}">
+		</antcall>
+		
+		<!-- disincluding ejb-jar.xml for jboss ejb3 -->		
+		<condition property="skip.munje.ejb" >
+			<equals arg1="${ejbversion}" arg2="3" trim="true" casesensitive="false" />
+		</condition>
+		<antcall target="-munje-ejb-descriptor" />
+
+		<condition property="ejb.ui.classpath" else=" ">
+			<isset property="ejb.ui.classpath"/>
+		</condition>
+
+		<condition property="package-ejb-jar-target" value="package-ejb-jar-target-jboss" else="package-ejb-jar-target">
+				<equals arg1="${appserver}" arg2="jboss" />
+		</condition>
+		<antcall target="${package-ejb-jar-target}"/>
+
+		<antcall target="copy-ejb-jar"/>
+	</target>
+
+	<target name="package-ejb-jar-target-jboss">
+		<jar jarfile="${ejbjar}" basedir="${ejbtmp}/jar" />
+	</target>
+
+	<target name="package-ejb-jar-target">
+		<jar jarfile="${ejbjar}" basedir="${ejbtmp}/jar" >
+			<manifest>
+				<attribute name="Class-Path" value="${deployment.manifest.classpath} ${ear.basename}wsbe.jar ${ejb.ui.classpath}" />
+			</manifest>
+		</jar>
+	</target>
+ 	
+ 	<target name="create-async-ejb" if="async.ejb.enabled">
+		<property name="ejbtmp" location="${tmpdir}/${asyncejb.jar.basename}"/>
+
+		<mkdir dir="${ejbtmp}/jar/META-INF" />
+
+		<antcall target="-build-async-ejb-classes" />
+ 		<antcall target="-munje-async-ejb-descriptor-for-weblogic" />
+ 		
+ 		<condition property="ejb.ui.classpath" else=" ">
+			<isset property="ejb.ui.classpath"/>
+		</condition>
+
+		<jar jarfile="${eartmp}/${asyncejb.jarname}" basedir="${ejbtmp}/jar">
+			<manifest>
+				<attribute name="Class-Path" value="${deployment.manifest.classpath} ${ear.basename}wsbe.jar ${ejb.ui.classpath}" />
+			</manifest>
+		</jar>
+ 	</target> 	
+ 	<target name="-build-async-ejb-classes">
+ 		<!--
+ 		Important note:
+ 			The below class is looked up through reflection. Further, 
+ 			absence of this class is a VALID use-case. So do NOT 
+ 			rename or change the package unless you fix the place 
+ 			which references it (AsyncEJBExecutorService) and test 
+ 			this change THOROUGHLY
+ 		--> 		
+ 		<echo file="${ejbtmp}/src/com/ibm/sterling/afc/ejb/concurrent/impl/AsyncProviderBean.java">
+ 			<![CDATA[
+ 			package com.ibm.sterling.afc.ejb.concurrent.impl;
+
+ 			import javax.ejb.Asynchronous;
+ 			import javax.ejb.Local;
+ 			import javax.ejb.Stateless;
+ 			
+ 			import javax.ejb.TransactionManagement;
+ 			import javax.ejb.TransactionManagementType;
+
+ 			import com.ibm.sterling.afc.concurrent.impl.ejb.AsyncProvider;
+
+ 			@Stateless
+ 			@Local(AsyncProvider.class)
+ 			@TransactionManagement(value=TransactionManagementType.BEAN)
+ 			public class AsyncProviderBean {
+ 				public static final String containerJarName = 
+ 					"]]>${asyncejb.jar.basename}<![CDATA["; // jar-name set during ear build
+ 			
+ 				@Asynchronous
+ 				public void execute(Runnable r) {
+ 					r.run();
+ 				}
+ 			}
+ 			]]>
+ 		</echo>
+ 		
+ 		<javac debug="${debug}" failonerror="true" srcdir="${ejbtmp}/src" destdir="${ejbtmp}/jar">
+			<classpath>
+				<path refid="project.classpath" />
+			</classpath>
+			<include name="**/*.java"/>
+		</javac>
+ 	</target>
+ 	<target name="-munje-async-ejb-descriptor-for-weblogic" if="async.ejb.descriptor.for.weblogic.enabled">
+ 		<echo file="${ejbtmp}/jar/META-INF/weblogic-ejb-jar.xml">
+ 			<![CDATA[
+ 			<?xml version="1.0" encoding="UTF-8"?>
+ 			<weblogic-ejb-jar>
+ 				<weblogic-enterprise-bean>
+ 					<ejb-name>AsyncProviderBean</ejb-name>
+ 					<dispatch-policy>asyncejbwm</dispatch-policy>
+ 			        <jndi-name>java:app/${asyncejb.jar.basename}/AsyncProviderBean</jndi-name>
+ 				</weblogic-enterprise-bean>
+ 			</weblogic-ejb-jar>
+ 			]]>
+ 		</echo>
+	</target>
+ 	
+	<!-- ================================= 
+	     target: move-ui-libs
+	     ================================= -->
+	<target name="set-ejb-ui-classpth" unless="require.struts.workaround">
+		<listFiles prop="ejbuicp" isWar="false" isEar = "false"/>
+		<property name="ejb.ui.classpath" value="${ejbuicp}" />
+	</target>
+	
+	<target name="copy-ejb-jar" unless="copyejbjar">
+			<copy file="${ejbjar}" todir="${dir.external}" overwrite="true" />
+	</target>
+
+	<target name="-create-ejb3" >		
+		<mkdir dir="${ejbtmp}/src/com/yantra/interop/services/ejb/string3" />
+
+		<property name="xsldir" location="${installdir}/repository/xapi/xsl" />
+
+		<java fork="true" classname="com.yantra.interop.tools.InteropBuildHelper" classpathref="project.classpath">
+			<arg value="-dxml" />
+			<arg value="${ejbtmp}/api.xml" />
+			<arg value="-filter" />
+			<arg value="${installdir}/repository/eardata/${package}/ejb/exposedapis.xml" />
+			<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+		</java>
+
+		<xslt in="${ejbtmp}/api.xml" style="${xsldir}/ejb3-string-adapter.xsl"
+	          out="${ejbtmp}/src/com/yantra/interop/services/ejb/string3/SCApiAdapter.java"/>
+		<xslt in="${ejbtmp}/api.xml" style="${xsldir}/ejb3-string-api.xsl"
+	          out="${ejbtmp}/src/com/yantra/interop/services/ejb/string3/SCStringApi.java"/>
+
+		<echo file="${ejbtmp}/src/com/yantra/interop/services/ejb/string3/SCApiBean.java">
+			<![CDATA[
+			package com.yantra.interop.services.ejb.string3;
+			
+			import java.security.Principal;
+
+			import javax.annotation.Resource;			
+			import javax.ejb.Remote;
+			import javax.ejb.SessionContext;
+			import javax.ejb.Stateless;
+			
+			@Stateless			
+			@Remote ({SCStringApi.class})
+			public class SCApiBean extends SCApiAdapter implements SCStringApi{
+
+			    @Resource SessionContext _sessionContext;
+
+			    protected String getContainerUserId() {
+					try {
+				        if( _sessionContext != null ) {
+				            Principal principal = _sessionContext.getCallerPrincipal();
+				            if( principal != null ) {
+				                return principal.getName();
+				            }
+				        }
+					} catch(Exception e) {
+						// Doesnt matter, use a null user id.
+					}
+			        return null;
+			    }
+			}
+		]]>
+		</echo>
+
+		<antcall target="-create-ejb3-compile-${appserver}" />		
+	</target>
+
+	<target name="-create-ejb3-compile-jboss">
+		<property file="${installdir}/bin/build.properties"/>
+		<condition property="jboss.dir" value="${env.JBOSS_HOME}">
+			<isset property="env.JBOSS_HOME" />
+		</condition>
+		<checkproperty property="jboss.dir" />
+		<AFCecho message="JBoss libraries will be picked up from {1}/client">
+			<arg value="${jboss.dir}"/>
+		</AFCecho>
+
+		<javac debug="${debug}" failonerror="true" fork="yes" srcdir="${ejbtmp}/src" destdir="${ejbtmp}/jar">
+			<classpath>
+				<fileset dir="${jboss.dir}">
+					<include name="client/*.jar"/>
+				</fileset>
+				<path refid="project.classpath" />
+			</classpath>
+			<include name="**/*.java"/>
+		</javac>		
+	</target>
+
+	<target name="-check-ejb-versions">
+		<condition property="skip-ejb2">
+			<istrue value="${ejb3.enabled}" />
+		</condition>
+	</target>
+
+	<target name="-copy-extn-ejb-descriptors" if="ejbmetainf.exists">
+		<copy file="${installdir}/extensions/weblogic-ejb-jar.xml" tofile="${ejbtmp}/jar/META-INF/weblogic-ejb-jar.xml" overwrite="true"/>
+	</target>
+
+	<target name="-create-ejb2" depends="-check-ejb-versions" unless="skip-ejb2">
+
+		<antcall target="-copy-extn-ejb-descriptors"/>
+
+		<unzip src="${installdir}/jar/platform/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/xapi.jar" dest="${ejbtmp}/jar">
+			<patternset>
+				<include name="com/yantra/interop/services/ejb/*.class"/>
+				<include name="com/yantra/interop/services/ejb/string/*.class"/>
+				<include name="com/yantra/interop/services/webservices/rpc/ejb/*.class"/>
+			</patternset>
+		</unzip>
+		<condition property="ejb2.target" value="${appserver}">
+			<equals arg1="${appserver}" arg2="jboss" />
+		</condition>
+		<property name="ejb2.target" value="standard" />
+		<antcall target="-create-ejb2-${ejb2.target}">
+		</antcall>
+	</target>
+
+	<target name="-create-ejb2-jboss">
+		<mkdir dir="${ejbtmp}/src/com/yantra/interop/services/webservices/rpc/ejb" />
+
+		<unzip src="${installdir}/jar/platform_afc/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar" dest="${ejbtmp}/src">
+			<patternset>
+				<include name="com/yantra/interop/tools/xsl/*.xsl" />
+			</patternset>
+		</unzip>
+
+		<xslt style="${ejbtmp}/src/com/yantra/interop/tools/xsl/web-serviceforjboss.xsl" in="${ejbtmp}/src/com/yantra/interop/tools/xsl/web-serviceforjboss.xsl"
+			  out="${ejbtmp}/src/com/yantra/interop/services/webservices/rpc/ejb/YIFWebService.java" classpathref="project.classpath"/>
+		<javac debug="on" srcdir="${ejbtmp}/src" destdir="${ejbtmp}/jar" classpathref="project.classpath" includes="com/yantra/interop/services/webservices/rpc/ejb/**"/>
+	</target>
+
+	<target name="-create-ejb2-standard">
+		<!-- Nothing special needed for weblogic / websphere-->
+	</target>
+
+	<target name="-munje-ejb-descriptor" unless="skip.munje.ejb" >
+
+		<taskdef name="EJBDescripterGenerator" classname="com.yantra.tools.ant.taskdefs.EJBDescriptorGenerator" />
+
+		<property file="${installdir}/bin/build.properties"/>
+		<condition property="deploy.yifwebservice.ejb" value="true" else="false" >
+			<and>
+				<or>
+					<contains string="${webservices}" substring="YIFWebService"/>
+					<not>
+						<contains string="${webservices}" substring="SIXBeanXapiJaxWS"/>
+					</not>	
+				</or>
+				<not>
+					<and>
+						<isset property="nowebservice"/>
+						<istrue value="${nowebservice}"/>
+					</and>
+				</not>	
+			</and>
+		</condition>
+
+		<EJBDescripterGenerator
+			appserver="${appserver}"
+			outputdir="${ejbtmp}/jar/META-INF/"
+			namespace="${yfs.context.namespace}"
+			deployInteropEJBApi="${deploy.interop.ejb}" 
+			deployYIFWebServiceApiEJB="${deploy.yifwebservice.ejb}"
+			deployYantraStringApiEJB="${deploy.yantrastringapi.ejb}" />
+
+	</target>
+
+</project>
+
+
+

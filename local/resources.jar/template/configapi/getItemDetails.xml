@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- getItemDetails Output XML -->
+<Item ItemID="" InheritAttributesFromClassification="" ItemKey="" OrganizationCode="" UnitOfMeasure="" IsShippingCntr="" GlobalItemID="" ItemGroupCode="" CanUseAsServiceTool="" UPCCompanyPrefixLength="" >
+    <PrimaryInformation IsConfigurable="" AssumeInfiniteInventory="" CapacityUOM="" CapacityVolume="" CapacityVolumeUOM="" CostCurrency="" CountryOfOrigin="" 
+        DefaultProductClass="" Description="" ExtendedDescription=""
+        ItemType="" KitCode="" ManufacturerItem="" ManufacturerItemDesc=""
+        ManufacturerName="" MasterCatalogID="" MaxOrderQuantity=""
+        MinOrderQuantity="" ProductLine="" 
+        ShortDescription="" Status="" TaxableFlag="" UnitCost=""
+        UnitHeight="" UnitHeightUOM="" UnitLength="" UnitLengthUOM="" 
+		IsReturnable="" IsStandaloneService="" InvolvesSegmentChange="" CreditWOReceipt="" ReturnWindow="" IsHazmat=""
+        UnitWeight="" UnitWeightUOM="" UnitWidth="" UnitWidthUOM=""
+		PricingUOMStrategy="" AppointmentType="" 
+		RequiresProdAssociation=""  MultipleProdLineAllowed="" IsSubOnOrderAllowed="" NumSecondarySerials="" IsReturnService="" 
+		PricingUOM="" PricingQuantityStrategy="" FixedPricingQtyPerLine="" PricingQuantityConvFactor="" IsShippingAllowed="" IsDeliveryAllowed="" IsForwardingAllowed="" IsProcurementAllowed="" IsParcelShippingAllowed="" IsPickupAllowed="" FixedCapacityQtyPerLine="" CapacityQuantityStrategy="" MinimumCapacityQuantity="" SerializedFlag="" InvoiceBasedOnActuals="" RunQuantity="" UnitVolume="" UnitVolumeUOM="" OrderingQuantityStrategy=""  CapacityPerOrderedQty="" PrimarySupplier="" ComputedUnitCost="" ServiceTypeID="" IsFreezerRequired="" IsAirShippingAllowed="" ReturnShippingLabelLevel="" SizeCode="" ColorCode="" BundleFulfillmentMode="" ShipmentConsolidationWindow="" IsModelItem="" ModelItemUnitOfMeasure=""/>
+    <InventoryParameters ATPRule="" DefaultExpirationDays="" OnhandSafetyFactorPercentage="" FutureSafetyFactorPercentage="" OnhandSafetyFactorQuantity="" 
+        InventoryMonitorRule="" IsFifoTracked="" IsSerialTracked="" LeadTime="" TagControlFlag=""
+        ProcessingTime="" RequiresDGOverride="" TimeSensitive="" AdvanceNotificationTime="" MaxDaysToScheduleBefore="" MinNotificationTime="" NodeLevelInventoryMonitorRule=""  IsItemBasedAllocationAllowed="" UseUnplannedInventory="" MaximumNotificationTime=""/>
+    <ClassificationCodes CommodityCode="" ECCNNo="" HarmonizedCode=""
+        HazmatClass="" Model="" NAICSCode="" NMFCClass="" NMFCCode=""
+        Schedule_B_Code="" TaxProductCode="" UNSPSC="" StorageType="" PickingType="" OperationalConfigurationComplete="" VelocityCode="" PostingClassification=""/>
+	<HazmatInformation HazmatComplianceKey=" " Symbols=" " ProperShippingName=" "
+    HazardClass=" " UNNumber=" " PackingGroup=" " Label=" " SpecialProvisions=" " Exception=" "
+    QtyNonBulk=" " QtyBulk=" " PassengerAir=" " CargoAir=" " Vessel=" " VesselSP=" " SortOrder=" " />
+    <WIPCostFactorPurpose CostFactorGroupName="" CostFactorGroupKey="" />
+    <ItemAliasList>
+        <ItemAlias AliasName="" AliasValue=""/>
+    </ItemAliasList>
+    <ItemExclusionList>
+        <ItemExclusion ExclusionCode=""/>
+    </ItemExclusionList>
+    <AdditionalAttributeList>
+        <AdditionalAttribute Name="" Value=""/>
+    </AdditionalAttributeList>
+    <CategoryList>
+        <Category CategoryID="" CategoryKey="" CategoryPath="" OrganizationCode=""/>
+    </CategoryList>
+    <LanguageDescriptionList>
+        <LanguageDescription LocaleCode="" ShortDescription="" ExtendedDescription="" Description="" />
+    </LanguageDescriptionList>
+    <Components> 
+        <Component ItemKey="" ComponentItemKey="" ComponentItemID="" ComponentUnitOfMeasure="" ComponentOrganizationCode="" KitQuantity=""/>
+    </Components>
+	<InventoryTagAttributes ItemTagKey="" ItemKey="" LotNumber="" RevisionNo="" BatchNo="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotExpirationDate="" LotKeyReference="" ManufacturingDate="">
+		<Extn/>
+	</InventoryTagAttributes>
+	<AlternateUOMList>
+		<AlternateUOM  ItemKey="" ItemUOMKey="" UnitOfMeasure="" Quantity="" Length="" LengthUOM="" Width="" WidthUOM=""  Height="" HeightUOM="" Weight="" WeightUOM="" IsOrderingUOM="" IsOperationalUOM="" /> 
+	</AlternateUOMList>
+	<ItemInstructionList>
+		<ItemInstruction ItemInstructionKey="" ItemKey="" InstructionType="" SeqNo="" InstructionCode="" InstructionText="" /> 
+	</ItemInstructionList>
+	<ItemOptionList>
+		<ItemOption ItemOptionKey="" ItemKey="" OptionItemId="" OptionUOM="" />
+	</ItemOptionList>
+	<ItemServiceAssocList>
+		<ItemServiceAssoc ItemServiceAssocKey="" ItemKey="" CategoryKey="" ServiceItemId="" ServiceUOM="" ServiceQuantity="" ProductQuantity="" PricingServiceQuantity="" PricingProductQuantity="" HoldSchedTillCompletion="" ServiceItemGroupCode="">
+            <ItemServiceAssocSkillList>
+                <ItemServiceAssocSkill ServiceSkillId="" Description=""/>
+            </ItemServiceAssocSkillList>
+        </ItemServiceAssoc>
+	</ItemServiceAssocList>
+    <ItemServiceSkillList>
+        <ItemServiceSkill ServiceSkillId=""  Description=""/>
+    </ItemServiceSkillList>
+	<ContainerBuyerAssociationList>
+	    <ContainerBuyerAssocation CntrBuyerAssocKey="" ItemKey="" BuyerOrganizationCode="" Include="" />
+	</ContainerBuyerAssociationList>
+	<ContainerItemAssociationList>
+	    <ContainerItemAssociation CntrCategoryAssocKey="" ContainerCategory=""/>
+	</ContainerItemAssociationList>
+	<ContainerInformation MaxCntrWeight="" MaxCntrWeightUom="" VolumeAllowance="" CapacityVolume="" CapacityVolumeUom="" ContainerType="" />
+	<InheritedAttributes>
+		<InheritedAttribute  Name="" Value="" InheritedFrom="" ClassificationPurpose="" />
+	</InheritedAttributes>
+	<SafetyFactorDefinitions>
+		<SafetyFactorDefinition   DeliveryMethod="" FutureSafetyFactorPercentage="" OnhandSafetyFactorPercentage="" OnhandSafetyFactorQuantity=""/>
+	</SafetyFactorDefinitions>
+    <Extn/>
+	<WMSItemAttributes Deformable="" PackedHeight="" PackedLength="" PackedVolume="" PackedWidth="" StackHeightIncrease="" Stackable="" ConstrainedByHeight="" PackByVolume=""/>
+
+</Item>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- Either ShipmentKey or ShipmentNo is required -->
+<!-- OverrideModificationRules is used to override the statuses of shipment that can be considered for pack. This is determined using the modification_type SHIPMENT_PACK -->
+<Shipment>
+    <Containers>
+        <!-- Only one Container will be processed in one call to this API. All other Container nodes will be ignored. Read Javadocs for additional details. -->
+        <Container>
+            <ContainerDetails>
+                <!--One amongst ShipmentLineKey OR ShipmentLine child element must be passed-->
+                <ContainerDetail>
+                    <ShipmentLine/>
+                    <ShipmentTagSerials>
+                        <ShipmentTagSerial>
+                            <SerialRange/>
+                        </ShipmentTagSerial>
+                    </ShipmentTagSerials>
+                </ContainerDetail>
+            </ContainerDetails>
+            <Instructions>
+                <Instruction/>
+            </Instructions>
+            <AdditionalAttributes>
+                <AdditionalAttribute/>
+            </AdditionalAttributes>
+            <SpecialServices>
+                <SpecialService/>
+            </SpecialServices>
+        </Container>
+    </Containers>
+</Shipment>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema Name="sequences">
+    <Entities>
+        <Sequence Name="SEQ_YFS_TABLE_KEY" 
+                Increment="1" Startwith="1" 
+                Maxvalue="9999999999" Minvalue="1" Cachesize="500" Order="false" TableType="METADATA">
+                <TableTypeList>
+					<TableType Name="CONFIGURATION"/>
+					<TableType Name="STATISTICS"/>
+					<TableType Name="TRANSACTION"/>	
+				</TableTypeList>
+		</Sequence>
+        <Sequence Name="SEQ_AUDIT_TXN_ID" TableType="METADATA"
+                Increment="1" Startwith="1" 
+                Maxvalue="9999999 " Minvalue="1" Cachesize="10" />
+	<Sequence Name="SEQ_YFS_LOCALIZED_STRINGS_KEY" TableType="METADATA"
+                Increment="1" Startwith="100000000" 
+                Maxvalue="999999999" Minvalue="1" Cachesize="10" />
+	<Sequence Name="SEQ_PLT_DISPATCH" TableType="METADATA" ImplementedAsTable="Y"
+                Increment="1" Startwith="1" 
+                Maxvalue="999999999" Minvalue="1" Cachesize="10" />
+    </Entities>
+</DBSchema>

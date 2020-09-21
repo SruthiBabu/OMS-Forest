@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2019, 2020 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<UIApplication Id="YCM" Description="YCM UI Application" ModuleCode="ycm">   	
+	<!-- 
+		Api templates are defined in template\resource\uiapitemplate directory of every module.
+		Any number of templates can be defined for an API depending on the usage but the 
+		TemplateId has to be unique across modules so that it can be retrieved uniquely.
+
+		All the Api Templates given in a XML are defined under a ModuleCode (set at the top node).
+		Besides this api templates can be grouped under a View identified by a ViewId. 
+		In order to make TemplateId unique, every TemplateId given below is prefixed with 
+		<ModuleCode>_<ViewId> and inserted into PLT_API_TEMPLATE.Template_Id. 	
+		
+		eg: For TemplateId="getItemList_1" in the sample given below the PLT_API_TEMPLATE.Template_Id 
+		will be populated as ycm_itemgetItemList_1 where ycm is the ModuleCode and item is the ViewId.
+
+		IMPORTANT:	The maximum length allowed for TemplateId (including it's prefix) is 40.
+		IMPORTANT:	The columns in 'OrganizationCode' and 'TemplateType' in PLT_API_TEMPLATE 
+					are inserted as 'DEFAULT' and '00' respectively.
+	-->
+	<!-- 
+		<View ViewId="item" Description="Item">
+			<APIList>
+				<API ApiName="getItemList">
+					<TemplateList>
+						<Template TemplateKey="ycm_ui_api_template_01" TemplateId="getItemList_1" 
+						Description="To publish Item info">
+							<ItemList TotalNumberOfRecords="" >
+								<Item ItemID="" ItemKey="" OrganizationCode="" UnitOfMeasure=""/> 
+							</ItemList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	-->
+	<Views>
+		<View ViewId="buc_inventory" Description="Business User Controls Inventory">
+			<APIList>
+				<API ApiName="getItemList">
+					<TemplateList>
+						<Template TemplateKey="ycm_ui_api_buc_tpl_06" TemplateId="getItemList_1903" 
+						Description="API template for BUC inventory pages">
+							<ItemList TotalItemList="" TotalNumberOfRecords="">
+								<Item ItemID="" ItemKey="" OrganizationCode="" UnitOfMeasure="">
+									<InventoryParameters OnhandSafetyFactorQuantity="" OnhandSafetyFactorPercentage="" LeadTime="" ProcessingTime=""/>
+									<ItemAttributeGroupTypeList>
+										<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsForMaintenance="" IsForSelling="" IsSingleGroup="" IsValidForCategory="" IsValidForClassification="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey="">
+											<ItemAttributeGroupList>
+												<ItemAttributeGroup ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" ItemAttributeGroupPath="" ParentItemAttributeGroupKey="" SequenceNo="">
+													<ItemAttributeList>
+														<ItemAttribute AttributeDomainID="" AttributeGroupID="" CategoryKey="" IsInherited="" IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeGroupType="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value="">
+															<AssignedValueList>
+																<AssignedValue DoubleValue="" IntegerValue="" IsInherited="" LongDescription="" SequenceNo="" ShortDescription="" Value=""/>
+															</AssignedValueList>
+														</ItemAttribute>
+													</ItemAttributeList>
+												</ItemAttributeGroup>
+											</ItemAttributeGroupList>
+										</ItemAttributeGroupType>
+									</ItemAttributeGroupTypeList>
+									<CategoryList>
+										<Category CategoryID="" CategoryKey="" CategoryPath="" OrganizationCode=""/>
+									</CategoryList>
+									<PrimaryInformation Description="" ImageID="" ImageLocation="" IsModelItem="" ManufacturerItem="" ManufacturerItemDesc="" ManufacturerName="" ShortDescription="" DefaultProductClass="" KitCode="" IsPickupAllowed="" IsShippingAllowed="" IsDeliveryAllowed=""/> <ClassificationCodes CommodityCode="" ECCNNo="" HarmonizedCode="" HazmatClass="" Model="" NAICSCode="" NMFCClass="" NMFCCode="" OperationalConfigurationComplete="" PickingType="" PostingClassification="" Schedule_B_Code="" StorageType="" TaxProductCode="" UNSPSC="" VelocityCode=""/>
+									<ChildItemList>
+										<ChildItem ItemGroupCode="" ItemID="" ItemKey="" OrganizationCode="" UnitOfMeasure="">
+											<PrimaryInformation Description="" ImageID="" ImageLocation="" ManufacturerItem="" ManufacturerItemDesc="" ManufacturerName="" ShortDescription="" DefaultProductClass="" KitCode=""/>
+										</ChildItem>
+									</ChildItemList>
+								</Item>
+							</ItemList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_inv" Description="Business User Controls Item Node Defn Details">
+			<APIList>
+				<API ApiName="getItemNodeDefnDetails">
+					<TemplateList>
+						<Template TemplateKey="ycm_ui_api_buc_tpl_07" TemplateId="getItemNodeDefnDetails_1904" 
+						Description="API template for BUC inv pages with GIV">
+							<ItemNodeDefn FutureSafetyFactorPercentage="" ItemID="" ItemNodeDefnKey="" Node="" OnhandSafetyFactorPercentage="" OnhandSafetyFactorQuantity="" OperationalConfigurationComplete="" OrganizationCode="" PickingType="" StorageType="" UnitOfMeasure="" VelocityCode="">
+							<SafetyFactorDefinitions>
+								<SafetyFactorDefinition DeliveryMethod="" OnhandSafetyFactorQuantity="" OnhandSafetyFactorPercentage=""/>
+							</SafetyFactorDefinitions>
+							</ItemNodeDefn>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_inv" Description="Business User Controls Item Details">
+			<APIList>
+				<API ApiName="getItemDetails">
+					<TemplateList>
+						<Template TemplateKey="ycm_ui_api_buc_tpl_08" TemplateId="getItemDetails_1904" 
+						Description="API template for BUC GIV inv pages">
+							<Item>
+								<InventoryParameters OnhandSafetyFactorQuantity="" OnhandSafetyFactorPercentage="" LeadTime="" ProcessingTime=""/>
+								<SafetyFactorDefinitions>
+									<SafetyFactorDefinition DeliveryMethod="" OnhandSafetyFactorQuantity="" OnhandSafetyFactorPercentage=""/>
+								</SafetyFactorDefinitions>
+							</Item>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_inv" Description="Business User Controls Item Node Defn List">
+			<APIList>
+				<API ApiName="getItemNodeDefnList">
+					<TemplateList>
+						<Template TemplateKey="ycm_ui_api_buc_tpl_09" TemplateId="getItemNodeDefnList_1904" 
+						Description="API template for BUC inv pages with GIV">
+							<ItemNodeDefnList>
+								<ItemNodeDefn FutureSafetyFactorPercentage="" ItemID=" " ItemNodeDefnKey=" " Node=" " OnhandSafetyFactorPercentage="" OnhandSafetyFactorQuantity="" OperationalConfigurationComplete=" " OrganizationCode=" " PickingType=" " StorageType=" " UnitOfMeasure=" " VelocityCode=" ">
+								<SafetyFactorDefinitions>
+									<SafetyFactorDefinition DeliveryMethod="" OnhandSafetyFactorQuantity="" OnhandSafetyFactorPercentage=""/>
+								</SafetyFactorDefinitions>
+								</ItemNodeDefn>
+							</ItemNodeDefnList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_srcrule" Description="Business User Controls Category Domain List">
+			<APIList>
+				<API ApiName="getCategoryDomainList">
+					<TemplateList>
+						<Template TemplateKey="ycm_ui_api_buc_tpl_12" TemplateId="getCatDomainLst_2001" 
+						Description="API template for BUC fulfillment Sourcing Rules - CategoryList">
+							<CategoryDomainList TotalCategoryDomainList="">
+								<CategoryDomain AttributeName="" CategoryDomainKey="" OrganizationCode="" ShortDescription=""/>
+							</CategoryDomainList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_srcrule" Description="Business User Controls Classification Purpose List">
+			<APIList>
+				<API ApiName="getClassificationPurposeList ">
+					<TemplateList>
+						<Template TemplateKey="ycm_ui_api_buc_tpl_13" TemplateId="getClsPurpsLst_2001" 
+						Description="API template for BUC fulfillment Sourcing Rules - ClassificationPurposeList">
+							<ClassificationPurposeList TotalNumberOfRecords="">
+								<ClassificationPurpose AttributeName="" CategoryDomainKey="" ClassificationPurposeCode="" ClassificationPurposeDesc="" ClassificationPurposeKey="" OrganizationCode=""/>
+							</ClassificationPurposeList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	</Views>
+</UIApplication>

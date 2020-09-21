@@ -1,0 +1,63 @@
+<html>
+    <body>
+        <form name="frmSpecificTaskTypes" target="/console/rfspecifictask.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+							<tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label" name="lblTitle"
+                                    tag="binding=lblTaskTypeList"
+                                    type="text" validate="false" value="Task_Types"/>
+				                </td>
+							</tr>
+                            <tr>
+                                <td>
+									<table 
+									binding="/User/UserTaskTypeList/@UserTaskType"
+                                    col="1" gridcols="20"
+                                    gridrows="6" id="UserTaskType"
+                                    mandatory="false"
+                                    name="grdUser"
+                                    namespace="User" size="20"
+                                    tag="binding=grdUser" validate="false">
+									<tr>
+									<td>
+                                    <input colno="0" colName=" "
+                                    size="0" type="hidden" value="/console/rfspecifictask.ppc?action=frmgetNextTask"/>
+                                    <input colno="1" colName="1" inputbinding="xml:/UserTaskType/TaskType/@TaskType"
+                                    outputbinding="xml:/Task/@TaskType" size="0" type="hidden"/>
+                                    <input colno="2" colName="2" inputbinding="xml:/UserTaskType/TaskType/@ActivityGroupId"
+                                    outputbinding="xml:/Task/@ActivityGroupId" size="0" type="hidden"/>
+									<input colno="3" colName="3" inputbinding="xml:/UserTaskType/TaskType/@ResourceIdOverride" 
+									outputbinding="xml:/Task/TaskType/@ResourceIdOverride" size="0" type="hidden"/>
+									<input colno="4" size="20" colName="TaskType"
+									type="text" inputbinding="xml:/UserTaskType/TaskType/@TaskTypeName"/>
+									</td>
+									</tr>
+                                    </table>
+                                </td>
+                            </tr>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+                             <tr>
+                                <td>
+ 									<input col="1" hotkey="F4" mandatory="false"
+                                    name="action1" size="6"
+                                    subtype="CommandBack"
+                                    type="button" validate="false" value="Back"/>                         
+								</td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<ApproverResponse ApproverUserID="" OrganizationCode="">
+	<ValidationList TotalNumberOfRecords="">
+		<Validation ValidationKey="" ValidationID="" Domain=""
+			ErrorCode="" CanApprovalBePostponed="" ViolationEntity=""
+			OrganizationCode="">
+			<TransactionViolationList
+				TotalNumberOfRecords="">
+				<TransactionViolation TransactionViolationKey=""
+					TransactionInfoID="" SequenceNumber="" ApprovalRuleID=""
+					OrganizationCode="" Status="" DocumentType="">
+					<TransactionApproverList
+						TotalNumberOfRecords="">
+						<TransactionApprover TransactionApproverKey=""
+							ApproverUserGroupID="" ApproverUserTeam="" ApproverGroupKey="" />
+					</TransactionApproverList>
+					<TransactionApprovalStatusList
+						TotalNumberOfRecords="">
+						<TransactionApprovalStatus
+							TransactionApprovalStatusKey="" TransactionApproverKey=""
+							IsMandatory="" Status="" ApproverUserID="" ApproverComments=""
+							ApproverSequence="" PreviousApproverSequence="" />
+					</TransactionApprovalStatusList>
+					<TransactionViolationReferenceList
+						TotalNumberOfRecords="">
+						<TransactionViolationReference
+							TransactionViolationReferenceKey="" ReferenceName=""
+							ReferenceValue="" />
+					</TransactionViolationReferenceList>
+					<TransactionInfo OrderHeaderKey="" />
+				</TransactionViolation>
+			</TransactionViolationList>
+		</Validation>
+	</ValidationList>
+</ApproverResponse>

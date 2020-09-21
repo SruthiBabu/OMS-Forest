@@ -1,0 +1,228 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="JavaDocGen" basedir=".." default="generate" >
+
+	<property name="install.dir" value="${basedir}"/>
+	<property name="tmp.dir" value="${install.dir}/tmp" />
+	<property name="dest.dir" value="${tmp.dir}/javadoc" />
+
+	<property file="${install.dir}/properties/sandbox.cfg" prefix="sandbox"/>
+
+	<condition property="javadoc.header" value="${sandbox.JAVADOC_PRODUCT_LABEL}">
+		<isset property="sandbox.JAVADOC_PRODUCT_LABEL" />
+	</condition>
+	<condition property="javadoc.header" value=" ">
+		<not>
+			<isset property="sandbox.JAVADOC_PRODUCT_LABEL" />
+		</not>
+	</condition>
+
+	<condition property="javadoc.copyright.info" value="${sandbox.JAVADOC_COPYRIGHT_INFO_LABEL}">
+		<isset property="sandbox.JAVADOC_COPYRIGHT_INFO_LABEL" />
+	</condition>
+	<condition property="javadoc.copyright.info" value=" ">
+ 		<not>
+			<isset property="sandbox.JAVADOC_COPYRIGHT_INFO_LABEL" />
+		</not>
+	</condition>
+
+
+	<path id="runtime.classpath">
+		<fileset dir="${install.dir}/jar">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<condition property="generate.bundle" value="true" else="false" >
+		<and>
+			<isset property="GENERATE_BUNDLE"/>
+			<istrue value="${GENERATE_BUNDLE}"/>
+		</and>
+	</condition>
+
+	<condition property="post.process.bundle">
+		<istrue value="${generate.bundle}"/>
+	</condition>
+
+	<condition property="javadoc.locale" value="${LOCALE}" >
+			<isset property="LOCALE"/>
+	</condition>
+	<condition property="javadoc.locale" value="${sandbox.LOCALE}" else="en" >
+			<isset property="sandbox.INSTALL_LOCALE"/>
+	</condition>
+
+	<target name="generate">
+		<delete dir="${dest.dir}" failonerror="false"/>
+		<mkdir dir="${dest.dir}"/>
+		<mkdir dir="${dest.dir}/core_javadocs_src"/>
+		<mkdir dir="${dest.dir}/core_javadocs"/>
+		<mkdir dir="${dest.dir}/api_javadocs_src"/>
+		<mkdir dir="${dest.dir}/api_javadocs"/>
+
+		<antcall target="generateLinkedHTML"/>
+
+		<!-- ================================================================= -->
+		<!-- Use JavadocGen doclet to generate interface code for core_javadocs -->
+		<javadoc 
+			locale="${javadoc.locale}"
+			docletpathref="runtime.classpath" 
+			classpathref="runtime.classpath" 
+			author="false" 
+           	maxmemory="128m" 
+			packagenames="com.yantra.*,com.sterlingcommerce.security.dv.*, com.sterlingcommerce.activity.*,com.sterlingcommerce.woodstock.callout.*" >
+                <doclet name="com.yantra.tools.devtools.javadoc.JavadocGen" path="${clump.root.dir}/build/product/classes" >
+                    <param name="-copyright" value="(C) Copyright IBM Corp. 2001, 2013 All Rights Reserved." />
+                    <param name="-outdir" value="${dest.dir}/core_javadocs_src" />
+					<param name="-generatebundle" value="${generate.bundle}"/>
+					<param name="-bundleid" value="core"/>
+					<param name="-doclocale" value="${javadoc.locale}"/>
+                </doclet>
+                <sourcepath>
+                        <pathelement path="${install.dir}/repository/xapi/documentation/source/foundation/core_javadocs_src" />
+                </sourcepath>
+        </javadoc>
+
+		<!-- ================================================================= -->
+		<!-- Use JavadocGen doclet to generate interface code for api_javadocs -->
+		<javadoc 
+			locale="${javadoc.locale}"
+			docletpathref="runtime.classpath" 
+			classpathref="runtime.classpath" 
+			author="false" 
+           	maxmemory="128m" 
+			packagenames="com.yantra.*,com.sterlingcommerce.security.dv.*, com.sterlingcommerce.activity.*,com.sterlingcommerce.woodstock.callout.*" >
+                <doclet name="com.yantra.tools.devtools.javadoc.JavadocGen" path="${clump.root.dir}/build/product/classes" >
+                    <param name="-copyright" value="(C) Copyright IBM Corp. 2001, 2013 All Rights Reserved." />
+                    <param name="-outdir" value="${dest.dir}/api_javadocs_src" />
+					<param name="-generatebundle" value="${generate.bundle}"/>
+					<param name="-bundleid" value="api"/>
+					<param name="-doclocale" value="${javadoc.locale}"/>
+                </doclet>
+                <sourcepath>
+                        <pathelement path="${install.dir}/repository/xapi/documentation/source/foundation/api_javadocs" />
+                </sourcepath>
+        </javadoc>
+
+		<!-- ================================================================= -->
+		<!-- Use Standard doclet to generate interface code for core_javadocs -->
+		<copy todir="${dest.dir}/core_javadocs_src">
+			<fileset dir="repository/xapi/documentation/source/foundation/core_javadocs_src">
+				<include name="com/yantra/interop/japi/package.html"/>
+			</fileset>
+		</copy>
+		<javadoc  
+			locale="${javadoc.locale}"
+			bottom="&lt;font face=&apos;Verdana&apos; size=&apos;1&apos;&gt;&amp;#169; ${javadoc.copyright.info} &lt;/font&gt;" 
+           	author="false"
+			classpathref="runtime.classpath" 
+			destdir="${dest.dir}/core_javadocs" 
+			footer="&lt;b&gt;IBM Corp. Confidential&lt;/b&gt;" 
+			maxmemory="512m" 
+			packagenames="*"
+			useexternalfile="yes"
+			windowtitle="IBM Sterling Dev java docs">
+			<header>&lt;b&gt;<![CDATA[${javadoc.header}]]>&lt;/b&gt;</header>
+			<sourcefiles>
+				<fileset dir="${dest.dir}/core_javadocs_src/" > 
+					<include name="**/*.java"/>
+					<exclude name="**/YFSAuth*"/>
+				</fileset>
+			</sourcefiles>
+		</javadoc>
+
+		<!-- ================================================================= -->
+		<!-- Use Standard doclet to generate interface code for api_javadocs -->
+		<copy todir="${dest.dir}/api_javadocs_src">
+			<fileset dir="repository/xapi/documentation/source/foundation/api_javadocs">
+				<include name="com/yantra/interop/japi/package.html"/>
+			</fileset>
+		</copy>
+		<javadoc  
+			locale="${javadoc.locale}"
+			bottom="&lt;font face=&apos;Verdana&apos; size=&apos;1&apos;&gt;&amp;#169; ${javadoc.copyright.info} &lt;/font&gt;" 
+           	author="false"
+			classpathref="runtime.classpath" 
+			destdir="${dest.dir}/api_javadocs" 
+			footer="&lt;b&gt;IBM Corp. Confidential&lt;/b&gt;" 
+			maxmemory="512m" 
+			packagenames="*"
+			useexternalfile="yes"
+			windowtitle="IBM Sterling Dev java docs">
+			<header>&lt;b&gt;<![CDATA[${javadoc.header}]]>&lt;/b&gt;</header>
+			<sourcefiles>
+				<fileset dir="${dest.dir}/api_javadocs_src/" > 
+					<include name="**/*.java"/>
+					<exclude name="**/YFSAuth*"/>
+				</fileset>
+			</sourcefiles>
+		</javadoc>
+	
+		<antcall target="handle-bundles" />
+
+		<!-- now copy in the xmls and stuff that are presented as links ... 
+		<copy todir="${dest.dir}/api_javadocs" >
+			<fileset dir="xapidocs/api_javadocs/">
+				<include name="XML/**"/>
+				<include name="XSD/**"/>
+			</fileset>
+		</copy>
+		-->
+		<!-- antcall target="generateLinkedHTML"/ -->
+	</target>
+
+	<target name="handle-bundles" if="post.process.bundle">
+		<concat destfile="${dest.dir}/afc_javadoc.properties">
+			<fileset dir="${dest.dir}/resources" includes="*.properties"/>
+		</concat>
+		<delete>
+			<fileset dir="${dest.dir}/resources" includes="*.properties" />
+		</delete>
+		<move file="${dest.dir}/afc_javadoc.properties" tofile="${dest.dir}/resources/afc_javadoc.properties"/>
+	</target>
+
+	<target name="generateLinkedHTML">
+
+		<mkdir dir="${dest.dir}/xmlstruct"/>
+		<java fork="true" failonerror="true" 
+			classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" 
+			classpath="${install.dir}/jar/bootstrapper.jar" >
+			<arg value="-f" />
+			<arg value="${install.dir}/properties/dynamicclasspath.cfg" />
+			<arg value="-class" />
+			<arg value="com.yantra.tools.xsdgen.XSDGenerator" />
+			<arg value="-invokeargs" />
+
+			<arg value="-EN"/>
+			<arg value="${install.dir}/repository/entity"/>
+			<arg value="-DT"/>
+			<arg value="${install.dir}/repository/datatypes/datatypes.xml"/>
+			<arg value="-IN"/>
+			<arg value="${install.dir}/xapidocs/xmlstruct"/>
+			<arg value="-OU"/>
+			<arg value="${dest.dir}/api_javadocs/dtd"/>
+			<arg value="-EX"/>
+			<arg value="_dtd.txt"/>
+			<arg value="-SA"/>
+			<arg value="${dest.dir}/api_javadocs/XML"/>
+			<arg value="-SE"/>
+			<arg value="${install.dir}/repository/xapi/template/merged/apisecurity"/>
+			<arg value="-FACTOUT"/>
+			<arg value="${install.dir}/repository/xapi/template/merged/resource" />
+			<arg value="-TP"/>
+			<arg value="${dest.dir}/templateXML"/>
+			<arg value="-XSD"/>
+			<arg value="${dest.dir}/api_javadocs/XSD"/>
+			<arg value="-HTMLOUTPUTDIR"/>
+			<arg value="${dest.dir}/api_javadocs/XSD/HTML"/>
+			<arg value="-USETARGETNS" />
+			<arg value="${USETARGETNS}" />
+            <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+			<sysproperty key="GENERATE_BUNDLE" value="${generate.bundle}"/>
+			<sysproperty key="LOCALE" value="${javadoc.locale}"/>
+		</java>
+	</target>
+
+</project>

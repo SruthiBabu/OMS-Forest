@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!-- Note: basedir not set because of errors deploying from different locations. -->
+<project default="installInfo" name="STERLING Install Information">
+	<!-- NOTE : If an application intends to extends install_info, they must need to define the following targets: -->
+	<!-- 1. validate(if some validation stuff that needs to be done before printing info, e.g. license etc.) 
+		 2. info (information that needs to be dumped )-->
+
+	<import file="AFCTasks.xml"/>
+	<property file="${INSTALL_DIR}/properties/sandbox.cfg" />
+	<property name="ant.file" value="${INSTALL_DIR}/properties/install_info.xml" />
+	
+	<path id="foreach_classpath">
+		<fileset dir="${INSTALL_DIR}/jar">
+			<include name="platform_afc/**/platform_afc.jar"/>
+			<include name="install_foundation.jar"/>
+		</fileset>
+	</path>
+
+	<target name="init" depends="init.foreach">
+		<AFCecho message="All information will be logged in {1}">
+			<arg value="${LOG_DIR}/install_info.log"/>
+		</AFCecho>
+		<taskdef name="antcallback" classname="com.yantra.tools.ant.AntCallback">
+			<classpath refid="foreach_classpath"/>
+		</taskdef>
+	</target>
+
+	<target name="init.foreach" >
+      <taskdef name="foreach" classname="com.yantra.tools.ant.ForEach">
+        <classpath refid="foreach_classpath"/>
+      </taskdef>
+    </target>
+		
+	<target name="callExtension-validate">
+		<AFCecho message="Calling install info extension: {1} for target validate">
+			<arg value="${installInfoExtFile}"/>
+		</AFCecho>	
+		<ant antfile="${INSTALL_DIR}/properties/${installInfoExtFile}" target="validate" inheritRefs="true"/>
+	</target>
+
+
+	<target name="callExtension-info">
+		<AFCecho message="Calling install info extension: {1} for target info">
+			<arg value="${installInfoExtFile}"/>
+		</AFCecho>
+		<ant antfile="${INSTALL_DIR}/properties/${installInfoExtFile}" target="info" inheritRefs="true"/>
+	</target>
+	
+	<target name="callExtension-preinfo">
+		<AFCecho message="Calling install info extension: {1} for target preinfo">
+			<arg value="${installInfoExtFile}"/>
+		</AFCecho>
+		<antcallback antfile="${INSTALL_DIR}/properties/${installInfoExtFile}" target="preinfo" returnProperty="INFO_TYPES" inheritRefs="true"/>
+	</target>
+
+	<macrodef name="handleExtensions">
+		<attribute name="extension-task-name" />
+		<sequential>
+			<foreach propertyname="installInfoExtFile" targetname="callExtension-@{extension-task-name}" returnProperty="INFO_TYPES" >
+				<fileset dir="${INSTALL_DIR}/properties">
+					<include name="install_info_*_ext"/>
+				</fileset>
+			</foreach>
+		</sequential>
+	</macrodef>
+	
+	<target name="validatetasks" depends="validateDbConnection" >
+		<handleExtensions extension-task-name="validate"/>
+	</target>
+
+	<target name="validateDbConnection" >
+		<java fork="true" failonerror="true"
+			classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+			classpath="${JAR_DIR}/bootstrapper.jar" >
+			<arg value="-f" />
+			<arg value="${PROP_DIR}/dynamicclasspath.cfg" />
+			<arg value="-class" />
+			<arg value="com.sterlingcommerce.woodstock.install.info.DbConnectionValidator" />
+			<sysproperty key="vendor" value="shell" />
+			<sysproperty key="vendorFile" value="/servers.properties" />
+            <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		</java>
+	</target>
+
+	<target name="infotasks" depends="preinfo">		
+		<java fork="true" failonerror="true"
+			classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+			classpath="${JAR_DIR}/bootstrapper.jar" >
+			<arg value="-f" />
+			<arg value="${PROP_DIR}/dynamicclasspath.cfg" />
+			<arg value="-class" />
+			<arg value="com.sterlingcommerce.woodstock.install.info.InfoUtil" />            
+			<arg value="-invokeargs" />
+			<arg value="-infoFilePath" />
+			<arg value="${LOG_DIR}/install_info.log" />
+			<arg value="-infoTypes" />
+			<arg value="${INFO_TYPES}" />
+			<sysproperty key="vendor" value="shell" />
+			<sysproperty key="vendorFile" value="/servers.properties" />
+            <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		</java>
+		<handleExtensions extension-task-name="info"/>
+	</target>
+
+	<target name="preinfo">
+		<handleExtensions extension-task-name="preinfo"/>
+		<AFCecho message="INFO_TYPES after calling extension is {1}">
+			<arg value="${INFO_TYPES}"/>
+		</AFCecho>
+		<condition property="INFO_TYPES" value="system,siversion,javasecurity,db,jvm,classpath">
+			<not>
+				<isset property="INFO_TYPES"/>
+			</not>
+		</condition>
+		<AFCecho message="INFO_TYPES after condition is {1}">
+			<arg value="${INFO_TYPES}"/>
+		</AFCecho>
+	</target>
+	
+	<target name="installInfo" depends="init,validatetasks,infotasks" description="Default target for this project"/>
+</project>

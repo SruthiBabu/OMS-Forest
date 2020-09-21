@@ -1,0 +1,2222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y"
+            Description="This table stores the information about the work orders to be done at a node on an inventory item or a license plate."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            ListXMLName="WorkOrders" Module="vas" Name="Work_Order"
+            Prefix="YFS_" SupportHangOffEntity="Y"
+            TableName="YFS_WORK_ORDER" TableType="TRANSACTION" XMLName="WorkOrder">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key of the YFS_WORK_ORDER table."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="PIPELINE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The pipeline associated with this work order. This is determined by the document type and several other key attributes of the work order."
+                    Name="Pipeline_Key" Nullable="false" XMLName="PipeLineKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node associated with this work order, where work orders would be executed."
+                    Name="Node_Key" Nullable="false" XMLName="NodeKey"/>
+                <Attribute ColumnName="WORK_ORDER_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The work order number. Identifies a work order within the context of a node and enterprise."
+                    Name="Work_Order_No" Nullable="false" XMLName="WorkOrderNo"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The document type for this work order."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="SERVICE_ITEM_GROUP_CODE"
+                    DataType="EnumServiceItemGroupCode"
+                    DefaultValue="' '"
+                    Description="This field indicates the service item group on this work order."
+                    Name="Service_Item_Group_Code" XMLName="ServiceItemGroupCode"/>
+                <Attribute ColumnName="PURPOSE" DataType="EnumPurpose2"
+                    DefaultValue="' '"
+                    Description="This field indicates the purpose for the work order."
+                    Name="Purpose" XMLName="Purpose"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="ID-24"
+                    DefaultValue="' '"
+                    Description="The code of the enterprise to which the item or license plate belongs."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="SERVICE_ITEM_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The identifier for the service item on this work order."
+                    Name="Service_Item_ID" Nullable="false" XMLName="ServiceItemID"/>
+                <Attribute ColumnName="SERVICE_UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unit of measure for the service item."
+                    Name="Service_Uom" Nullable="false" XMLName="ServiceUom"/>
+                <Attribute ColumnName="PRIORITY" DataType="Integer"
+                    DefaultValue="0"
+                    Description="An integer priority. Requests will be processed in the order of this priority."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute ColumnName="START_NO_EARLIER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The date a task should not start earlier than. Pass through fields to be stamped on each task."
+                    Name="Start_No_Earlier_Than" Nullable="false" XMLName="StartNoEarlierThan"/>
+                <Attribute ColumnName="FINISH_NO_LATER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The date a task should not finish later than. Pass through fields to be stamped on each task."
+                    Name="Finish_No_Later_Than" Nullable="false" XMLName="FinishNoLaterThan"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the LPN type for the work order. Valid values are:"
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="LPN_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The number identifier for the case or pallet."
+                    Name="LPN_No" Nullable="false" XMLName="LPNNo"/>
+                <Attribute ColumnName="ITEM_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The item identifier for this work order."
+                    Name="Item_ID" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unit of measure for the item."
+                    Name="Uom" Nullable="false" XMLName="Uom"/>
+                <Attribute ColumnName="PRODUCT_CLASS" DataType="Text-10"
+                    DefaultValue="' '"
+                    Description="The product class of an item."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="SEGMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the segment type. Valid values are: - MTO : Made To Order - MTC : Made To Customer."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory involved in the work order belongs."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date before which a time-sensitive inventory must be shipped out."
+                    Name="Ship_By_Date" Nullable="false" XMLName="ShipByDate"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' '"
+                    Description="This field identifies the tag attributes of the item involved in the work order."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field identifies a serial number for the serialized item involved in the work order."
+                    Name="Serial_No" Nullable="false" XMLName="SerialNo"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The order that is associated with this work order."
+                    Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The order line associated with this work order."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The shipment associated with this work order."
+                    Name="Shipment_Key" Nullable="false" XMLName="ShipmentKey"/>
+                <Attribute ColumnName="STATUS" DataType="Status"
+                    DefaultValue="' '"
+                    Description="The status of the work order."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="STATUS_DATE" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The date and time when the last status change took place."
+                    Name="Status_Date" Nullable="false"/>
+                <Attribute ColumnName="ORIGINAL_QUANTITY_REQUESTED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="The original quantity requested."
+                    Name="Original_Quantity_Requested" Nullable="false" XMLName="OriginalQuantityRequested"/>
+                <Attribute ColumnName="QUANTITY_REQUESTED"
+                    DataType="Capacity" DefaultValue="0 "
+                    Description="The quantity for which the work order is created."
+                    Name="Quantity_Requested" Nullable="false" XMLName="QuantityRequested"/>
+                <Attribute ColumnName="COMPUTED_REQUESTED_QUANTITY"
+                    DataType="Capacity" DefaultValue="0 "
+                    Description="The quantity for which the work order is created based on service lines."
+                    Name="Computed_Requested_Quantity" Nullable="false" XMLName="ComputedRequestedQuantity"/>
+                <Attribute ColumnName="ADDITIONAL_REQUESTED_QUANTITY"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="The quantity for which the work order is created."
+                    Name="Additional_Requested_Quantity"
+                    Nullable="false" XMLName="AdditionalRequestedQuantity"/>
+                <Attribute ColumnName="QUANTITY_RELEASED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="The quantity released."
+                    Name="Quantity_Released" Nullable="false" XMLName="QuantityReleased"/>
+                <Attribute ColumnName="QUANTITY_REMOVED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="The quantity removed due to exceptions."
+                    Name="Quantity_Removed" Nullable="false" XMLName="QuantityRemoved"/>
+                <Attribute ColumnName="QUANTITY_ALLOCATED"
+                    DataType="Capacity" DefaultValue="0 "
+                    Description="The quantity that was allocated."
+                    Name="Quantity_Allocated" Nullable="false" XMLName="QuantityAllocated"/>
+                <Attribute ColumnName="QUANTITY_COMPLETED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="The quantity for which work order is completely confirmed."
+                    Name="Quantity_Completed" Nullable="false" XMLName="QuantityCompleted"/>
+                <Attribute ColumnName="ALLOCATED_WEIGHT"
+                    DataType="Dimension"
+                    Description="Total weight allocated by appointments."
+                    Name="Allocated_Weight" Nullable="true" XMLName="AllocatedWeight"/>
+                <Attribute ColumnName="ALLOCATED_VOLUME"
+                    DataType="Dimension"
+                    Description="Total volume allocated by appointments."
+                    Name="Allocated_Volume" Nullable="true" XMLName="AllocatedVolume"/>
+                <Attribute ColumnName="VOLUME_UOM" DataType="Text-40"
+                    Description="Volume Unit of Measure."
+                    Name="Volume_Uom" Nullable="true" XMLName="VolumeUOM"/>
+                <Attribute ColumnName="WEIGHT_UOM" DataType="Text-40"
+                    Description="Weight Unit of Measure."
+                    Name="Weight_Uom" Nullable="true" XMLName="WeightUOM"/>
+                <Attribute ColumnName="TOTAL_VOLUME"
+                    DataType="Dimension"
+                    Description="Total volume of products being delivered."
+                    Name="Total_Volume" Nullable="true" XMLName="TotalVolume"/>
+                <Attribute ColumnName="TOTAL_WEIGHT"
+                    DataType="Dimension"
+                    Description="Total weight of products being delivered."
+                    Name="Total_Weight" Nullable="true" XMLName="TotalWeight"/>
+                <Attribute ColumnName="INV_UPD_ACTIVITY_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The activity code against which inventory needs to be updated."
+                    Name="Inv_Upd_Activity_Code" Nullable="false" XMLName="InvUpdateActivityCode"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The reason code indicating the reason for the work order to get cancelled."
+                    Name="Reason_Code" Nullable="false" XMLName="ReasonCode"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' '"
+                    Description="The reason text indicating the reason entered by user while cancelling the work order."
+                    Name="Reason_Text" Nullable="false" XMLName="ReasonText"/>
+                <Attribute ColumnName="BUYER_ORGANIZATION_CODE"
+                    DataSecurityUsageType="BUYER" DataType="ID-24"
+                    Description="The buyer organization for which the work order is placed."
+                    Name="Buyer_Organization_Code" Nullable="true" XMLName="BuyerOrganizationCode"/>
+                <Attribute ColumnName="SELLER_ORGANIZATION_CODE"
+                    DataSecurityUsageType="SELLER" DataType="ID-24"
+                    DefaultValue="' '"
+                    Description="The seller organization for which the work order is placed."
+                    Name="Seller_Organization_Code" Nullable="false" XMLName="SellerOrganizationCode"/>
+                <Attribute ColumnName="PROVIDER_ORGANIZATION_CODE"
+                    DataSecurityUsageType="ORG" DataType="ID-24"
+                    DefaultValue="' '"
+                    Description="The organization which provides services on the work order.  For PS work orders, this will be node's owner."
+                    Name="Provider_Organization_Code" Nullable="false" XMLName="ProviderOrganizationCode"/>
+                <Attribute ColumnName="SERVICE_LOCATION_ADDRESS_KEY"
+                    DataType="ID-24" DefaultValue="' '"
+                    Description="The customer's location key where a service will be performed when the ServiceItemGroupCode is PS."
+                    Name="Service_Location_Address_Key" Nullable="false" XMLName="ServiceLocationAddressKey"/>
+                <Attribute ColumnName="KIT_CODE" DataType="ID-24"
+                    DefaultValue="' '"
+                    Description="This field indicates the kit code for this work order. Valid values are: - PK : Physical Kit - DPK : Dynamic Physical Kit."
+                    Name="Kit_Code" Nullable="false" XMLName="KitCode"/>
+                <Attribute ColumnName="ORDER_NO" DataType="VarcharDocumentNo"
+                    Description="The order number of the order with which the work order is associated."
+                    Name="Order_No" Nullable="true" XMLName="OrderNo"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The shipment number of the shipment with which the work order is associated."
+                    Name="Shipment_No" Nullable="false" XMLName="ShipmentNo"/>
+                <Attribute ColumnName="PROMISED_APPT_START_DATE"
+                    DataType="TimeStamp"
+                    Description="The promised start date of the appointment. Used in case of provided service work order."
+                    Name="Promised_Appt_Start_Date" Nullable="true" XMLName="PromisedApptStartDate"/>
+                <Attribute ColumnName="PROMISED_APPT_END_DATE"
+                    DataType="TimeStamp"
+                    Description="The promised end date of the appointment. Used in case of provided service work order."
+                    Name="Promised_Appt_End_Date" Nullable="true" XMLName="PromisedApptEndDate"/>
+                <Attribute ColumnName="NEXT_ALERT_TS"
+                    DataType="TimeStamp"
+                    Description="This field indicates the next time the work order would be considered for monitoring."
+                    Name="Next_Alert_Ts" Nullable="true"/>
+                <Attribute ColumnName="IS_QTY_REQUESTED_OVERRIDDEN"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the requested quantity is overridden."
+                    Name="Is_Quantity_Requested_Overridden"
+                    Nullable="false" XMLName="IsQuantityRequestedOverridden"/>
+                <Attribute ColumnName=" " DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether all products that are associated to the DS line will be included in the work order."
+                    Name="OverrideProductsToBeDelivered"
+                    Nullable="false" Virtual="true" XMLName="OverrideProductsToBeDelivered"/>
+                <Attribute ColumnName="IS_MULTI_APPT_REQUIRED"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the work order can have multiple appointments."
+                    Name="Is_Multi_Appt_Required" Nullable="false" XMLName="IsMultiApptRequired"/>
+                <Attribute ColumnName="IS_PLANNING_COMPLETE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether work order planning has been completed."
+                    Name="Is_Planning_Complete" Nullable="false" XMLName="IsPlanningComplete"/>
+                <Attribute ColumnName="PRE_CALL_STATUS"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This field indicates the status of the pre-call process."
+                    Name="Pre_Call_Status" Nullable="false" XMLName="PreCallStatus"/>
+                <Attribute ColumnName="OPEN_WORK_ORDER_FLAG"
+                    DataType="Flag" DefaultValue="'Y'"
+                    Description="This flag indicates whether the execution of the work order has ended."
+                    Name="Open_Work_Order_Flag" Nullable="false" XMLName="OpenWorkOrderFlag"/>
+                <Attribute ColumnName="PREFERRED_RESOURCE_POOL_ID"
+                    DataType="ID-24" DefaultValue="' ' "
+                    Description="The preferred resource pool."
+                    Name="Preferred_Resource_Pool_Id" Nullable="false" XMLName="PreferredResourcePoolId"/>
+                <Attribute ColumnName="PREFERRED_SERVICE_RESOURCE_ID"
+                    DataType="ID-24" DefaultValue="' ' "
+                    Description="The preferred service resource."
+                    Name="Preferred_Service_Resource_Id"
+                    Nullable="false" XMLName="PreferredServiceResourceId"/>
+                <Attribute ColumnName="TIMEZONE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The time zone in which the work order will be executed."
+                    Name="Timezone" Nullable="false" XMLName="Timezone">
+                    <DBType Name="DERBY" ColumnName="TIMEZONE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="SERVICE_COMPLEXITY_LEVEL"
+                    DataType="Count" DefaultValue="0 "
+                    Description="The service complexity level which indicates complexity of the work order, and is computed based on all service lines in the work order."
+                    Name="Service_Complexity_Level" Nullable="false" XMLName="ServiceComplexityLevel"/>
+                <Attribute ColumnName="SERVICE_SUPERVISOR_ID"
+                    DataType="UserId" DefaultValue="' '"
+                    Description="This field represents the supervisor responsible for this work order.This will be a valid user ID in the system. This user will belong to the node performing the work order."
+                    Name="Service_Supervisor_Id" Nullable="false"/>
+                <Attribute ColumnName="HOLD_FLAG" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the work order has any non-resolved hold type."
+                    Name="Hold_Flag" Nullable="false" XMLName="HoldFlag"/>
+                <Attribute ColumnName="SERVICE_AMOUNT" DataType="Money"
+                    DefaultValue="0 "
+                    Description="The total value of the service items on the work order."
+                    Name="Service_Amount" Nullable="false" XMLName="ServiceAmount"/>
+                <Attribute ColumnName="PRODUCT_AMOUNT" DataType="Money"
+                    DefaultValue="0 "
+                    Description="The total value of the product items on the work order."
+                    Name="Product_Amount" Nullable="false" XMLName="ProductAmount"/>
+                <Attribute ColumnName="LEVEL_OF_SERVICE"
+                    DataType="LevelOfService"
+                    Description="Indicates the level of service required for this work order.  Default from corresponding order lines."
+                    Name="Level_Of_Service" Nullable="true" XMLName="LevelOfService"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creationg of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification or this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The use who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            <Attribute ColumnName="DELAY_APPOINTMENT_TAKING" DataType="Flag" Description="This flag indicates whether the taking of appointment can be delayed or not." Name="Delay_Appointment_Taking" Nullable="true" XMLName="DelayAppointmentTaking" />
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="NODE_KEY"/>
+                <Reference ColumnName="WORK_ORDER_NO"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WORK_ORDER_PK">
+                <Attribute ColumnName="WORK_ORDER_KEY" Name="Work_Order_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrders" ChildName="WorkOrder"
+                    ForeignEntity="Order_Line" Name="OrderLine"
+                    ReadOnly="true" Type="Bidirectional" XMLName="OrderLine">
+                    <Attribute Name="Order_Line_Key" ParentName="Order_Line_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Order_Header" Name="OrderHeader"
+                    ReadOnly="true" Type="Unidirectional" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Person_Info" Name="PersonInfo"
+                    Type="Unidirectional" XMLName="PersonInfo">
+                    <Attribute Name="Service_Location_Address_Key" ParentName="Person_Info_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+					ForeignEntity="Enterprise" Name="Enterprise"
+					Type="Unidirectional" XMLName="Enterprise">
+					<Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+				</RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="WORK_ORDER_I1" Name="YFS_WORK_ORDER_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="WORK_ORDER_NO"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                </Index>
+                <Index DB2Name="WORK_ORDER_I2" Name="YFS_WORK_ORDER_I2" Unique="false">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LPN_NO"/>
+                </Index>
+                <Index DB2Name="WORK_ORDER_I3" Name="YFS_WORK_ORDER_I3" Unique="false">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="SERIAL_NO"/>
+                </Index>
+                <Index DB2Name="WORK_ORDER_I4" Name="YFS_WORK_ORDER_I4" Unique="false">
+                    <Column Name="ORDER_LINE_KEY"/>
+                </Index>
+                <Index DB2Name="WORK_ORDER_I5" Name="YFS_WORK_ORDER_I5" Unique="false">
+                    <Column Name="ORDER_HEADER_KEY"/>
+                </Index>
+                <Index DB2Name="WORK_ORDER_I6" Name="YFS_WORK_ORDER_I6" Unique="false">
+                    <Column Name="SERVICE_LOCATION_ADDRESS_KEY"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores information about all the components required by the work order."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            ListXMLName="WorkOrderComponents" Module="vas"
+            Name="Work_Order_Component" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_COMPONENT" TableType="TRANSACTION" XMLName="WorkOrderComponent">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_COMPONENT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_WORK_ORDER_COMPONENT table."
+                    Name="Work_Order_Component_Key" Nullable="false" XMLName="WorkOrderComponentKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The work order associated with this work order component."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="ITEM_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unique identifier for the item associated with this work order component."
+                    Name="Item_ID" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unit of measure for the item."
+                    Name="Uom" Nullable="false" XMLName="Uom"/>
+                <Attribute ColumnName="PRODUCT_CLASS" DataType="Text-10"
+                    DefaultValue="' '"
+                    Description="The product class of an item."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="SEGMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the segment type. Valid values are: - MTO : Made To Order - MTC : Made To Customer."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory involved in the work order belongs."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date before which any time-sensitive inventory must be shipped out."
+                    Name="Ship_By_Date" Nullable="false" XMLName="ShipByDate"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' '"
+                    Description="This field identifies the tag attributes of the item involved in the work order."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field identifies a serial number for the serialized item involved in the work order."
+                    Name="Serial_No" Nullable="false" XMLName="SerialNo"/>
+                <Attribute ColumnName="COMPONENT_QUANTITY"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="The component quantity per work order item quantity."
+                    Name="Component_Quantity" Nullable="false" XMLName="ComponentQuantity"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="ITEM_ID"/>
+                <Reference ColumnName="PRODUCT_CLASS"/>
+                <Reference ColumnName="SEGMENT_TYPE"/>
+                <Reference ColumnName="SEGMENT"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WRK_ORD_COMP_PK">
+                <Attribute ColumnName="WORK_ORDER_COMPONENT_KEY" Name="Work_Order_Component_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderComponents"
+                    ChildName="WorkOrderComponent"
+                    ChildXMLName="WorkOrderComponent"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="WRK_ORD_COMP_I1"
+                    Name="YFS_WORK_ORDER_COMPONENT_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="ITEM_ID"/>
+                    <Column Name="UOM"/>
+                    <Column Name="PRODUCT_CLASS"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores details of the inventory tag attributes for work order components that are tag tracked."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            ListXMLName="WorkOrderComponentTags" Module="vas"
+            Name="Work_Order_Component_Tag" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_COMP_TAG" TableType="TRANSACTION" XMLName="WorkOrderComponentTag">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_COMP_TAG_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER_COMP_TAG."
+                    Name="Work_Order_Component_Tag_Key" Nullable="false" XMLName="WorkOrderComponentTagKey"/>
+                <Attribute ColumnName="WORK_ORDER_COMPONENT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER_COMPONENT."
+                    Name="Work_Order_Component_Key" Nullable="false" XMLName="WorkOrderComponentKey"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' " Description="Unique identifier."
+                    Name="Tag_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_NUMBER" DataType="Text-40"
+                    DefaultValue="' ' " Description="Lot Number."
+                    Name="Lot_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_KEY_REFERENCE"
+                    DataType="Text-4000" DefaultValue="' ' "
+                    Description="Stores reference information for the lot number."
+                    Name="Lot_Key_Reference" Nullable="false"/>
+                <Attribute ColumnName="LOT_MANUFACTURE_DATE"
+                    DataType="Date" Description="Lot Manufacturing Date."
+                    Name="Lot_Manufacture_Date" Nullable="true" XMLName="ManufacturingDate"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE1"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Any other lot attribute."
+                    Name="Lot_Attribute1" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE2"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Any other lot attribute."
+                    Name="Lot_Attribute2" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE3"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Any other lot attribute."
+                    Name="Lot_Attribute3" Nullable="false"/>
+                <Attribute ColumnName="REVISION_NO" DataType="Text-40"
+                    DefaultValue="' ' " Description="Revision Number."
+                    Name="Revision_No" Nullable="false"/>
+                <Attribute ColumnName="BATCH_NO" DataType="Text-40"
+                    DefaultValue="' ' " Description="Batch Number."
+                    Name="Batch_No" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_COMPONENT_KEY"/>
+                <Reference ColumnName="TAG_NUMBER"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WRKORDCOMP_AG_PK">
+                <Attribute ColumnName="WORK_ORDER_COMPONENT_TAG_KEY" Name="Work_Order_Component_Tag_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="WorkOrderComponentTags"
+                    ChildName="WorkOrderComponentTag"
+                    ChildXMLName="WorkOrderComponentTag"
+                    DeleteCascade="true"
+                    ForeignEntity="Work_Order_Component"
+                    Name="Work_Order_Component" Type="Bidirectional" XMLName="WorkOrderComponent">
+                    <Attribute Name="Work_Order_Component_Key" ParentName="Work_Order_Component_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores details of the inventory tag attributes of the work order item that is tag tracked."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            ListXMLName="WorkOrderTags" Module="vas"
+            Name="Work_Order_Tag" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_TAG" TableType="TRANSACTION" XMLName="WorkOrderTag">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_TAG_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER_TAG."
+                    Name="Work_Order_Tag_Key" Nullable="false" XMLName="WorkOrderTagKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' " Description="Unique identifier."
+                    Name="Tag_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_NUMBER" DataType="Text-40"
+                    DefaultValue="' ' " Description="Lot Number."
+                    Name="Lot_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_KEY_REFERENCE"
+                    DataType="Text-4000" DefaultValue="' ' "
+                    Description="Stores reference information for the lot number."
+                    Name="Lot_Key_Reference" Nullable="false"/>
+                <Attribute ColumnName="LOT_MANUFACTURE_DATE"
+                    DataType="Date" Description="Lot Manufacturing Date."
+                    Name="Lot_Manufacture_Date" Nullable="true" XMLName="ManufacturingDate"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE1"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Any other lot attribute."
+                    Name="Lot_Attribute1" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE2"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Any other lot attribute."
+                    Name="Lot_Attribute2" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE3"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Any other lot attribute."
+                    Name="Lot_Attribute3" Nullable="false"/>
+                <Attribute ColumnName="REVISION_NO" DataType="Text-40"
+                    DefaultValue="' ' " Description="Revision Number."
+                    Name="Revision_No" Nullable="false"/>
+                <Attribute ColumnName="BATCH_NO" DataType="Text-40"
+                    DefaultValue="' ' " Description="Batch Number."
+                    Name="Batch_No" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="TAG_NUMBER"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WRK_ORD_TAG_PK">
+                <Attribute ColumnName="WORK_ORDER_TAG_KEY" Name="Work_Order_Tag_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="WorkOrderTags"
+                    ChildName="WorkOrderTag" ChildXMLName="WorkOrderTag"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="WRK_ORD_TAG_I1"
+                    Name="YFS_WORK_ORDER_TAG_I1" Unique="false">
+                    <Column Name="WORK_ORDER_KEY"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores the list of activities to be performed to complete the work order."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            ListXMLName="WorkOrderActivities" Module="vas"
+            Name="Work_Order_Activity" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_ACTIVITY" TableType="TRANSACTION" XMLName="WorkOrderActivity">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_ACTIVITY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER_ACTIVITY."
+                    Name="Work_Order_Activity_Key" Nullable="false" XMLName="WorkOrderActivityKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="ACTIVITY_CODE" DataType="Text-40"
+                    DefaultValue="' '" Description="Activity Code."
+                    Name="Activity_Code" Nullable="false" XMLName="ActivityCode"/>
+                <Attribute ColumnName="ACTIVITY_SEQ_NO" DataType="Count"
+                    DefaultValue="0"
+                    Description="Identifies the sequence in which this activity needs to be performed."
+                    Name="Activity_Seq_No" Nullable="false" XMLName="ActivitySeqNo"/>
+                <Attribute ColumnName="IS_COMPLETE" DataType="Flag"
+                    DefaultValue="'Y'"
+                    Description="Indicates if the entire activity is complete for the work order."
+                    Name="Is_Complete" Nullable="false" XMLName="IsComplete"/>
+                <Attribute ColumnName="QUANTITY_COMPLETE"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Quantity completed on confirmation of this activity."
+                    Name="Quantity_Complete" Nullable="false" XMLName="QuantityComplete"/>
+                <Attribute ColumnName=" " DataType="Action"
+                    DefaultValue="' '" Name="Action" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="ACTIVITY_CODE"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WRK_ORD_ACTY_PK">
+                <Attribute ColumnName="WORK_ORDER_ACTIVITY_KEY" Name="Work_Order_Activity_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderActivities"
+                    ChildName="WorkOrderActivity"
+                    ChildXMLName="WorkOrderActivity"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional"
+                    UsedForDataSecurity="true" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="WRKORDACTYDTL_I2"
+                    Name="YFS_WORK_ORDER_ACTIVITY_I2" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="ACTIVITY_CODE"/>
+                </Index>
+            </Indices>
+            <OrderBy Value="WORK_ORDER_KEY, ACTIVITY_SEQ_NO, ACTIVITY_CODE, IS_COMPLETE, QUANTITY_COMPLETE"/>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores details on where and to what extent an activity is confirmed."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            ListXMLName="WorkOrderActivityDtls" Module="vas"
+            Name="Work_Order_Activity_Dtl" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_ACTY_DTL" TableType="TRANSACTION" XMLName="WorkOrderActivityDtl">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_ACTY_DTL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER_ACTY_DTL."
+                    Name="Work_Order_Activity_Dtl_Key" Nullable="false" XMLName="WorkOrderActivityDtlKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="ACTIVITY_CODE" DataType="Text-40"
+                    DefaultValue="' '" Description="Activity Code."
+                    Name="Activity_Code" Nullable="false" XMLName="ActivityCode"/>
+                <Attribute ColumnName="ACTIVITY_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The unique identifier for an Activity Location."
+                    Name="Activity_Location_Id" Nullable="false" XMLName="ActivityLocationId"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="Text-40"
+                    DefaultValue="' '" Description="Case / Pallet."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="LPN_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="Case Id or Pallet Id being built recorded as part of confirmation."
+                    Name="LPN_No" Nullable="false" XMLName="LPNNo"/>
+                <Attribute ColumnName="QUANTITY_REQUESTED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="Quantity Requested."
+                    Name="Quantity_Requested" Nullable="false" XMLName="QuantityRequested"/>
+                <Attribute ColumnName="QUANTITY_COMPLETED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="Quantity for which Activity is completely confirmed."
+                    Name="Quantity_Completed" Nullable="false" XMLName="QuantityCompleted"/>
+                <Attribute ColumnName="QUANTITY_RELEASED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="Quantity for which the Activity detail is released."
+                    Name="Quantity_Released" Nullable="false" XMLName="QuantityReleased"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="A Serial number of the parent item."
+                    Name="Serial_No" Nullable="false" XMLName="SerialNo"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName=" " DataType="Action"
+                    DefaultValue="' '" Name="Action" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="ACTIVITY_CODE"/>
+                <Reference ColumnName="ACTIVITY_LOCATION_ID"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WRKORDACTYDTL_PK">
+                <Attribute ColumnName="WORK_ORDER_ACTY_DTL_KEY" Name="Work_Order_Activity_Dtl_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderActivityDtls"
+                    ChildName="Work_Order_Activity_Dtl"
+                    ChildXMLName="WorkOrderActivityDtl"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderActivityDtls"
+                    ChildName="Work_Order_Activity_Dtl"
+                    ChildXMLName="WorkOrderActivityDtl"
+                    DeleteCascade="true"
+                    ForeignEntity="Work_Order_Activity"
+                    Name="Work_Order_Activity" Type="Bidirectional" XMLName="WorkOrderActivity">
+                    <Attribute Name="Activity_Code" ParentName="Activity_Code"/>
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="WRKORDACTYDTL_I1"
+                    Name="YFS_WORK_ORDER_ACTY_DTL_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="ACTIVITY_CODE"/>
+                    <Column Name="ACTIVITY_LOCATION_ID"/>
+                    <Column Name="LPN_TYPE"/>
+                    <Column Name="SERIAL_NO"/>
+                    <Column Name="LPN_NO"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the demand and the supply types for the work order."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="WorkOrderAllocConsList" Module="vas"
+            Name="Work_Order_Alloc_Cons" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_ALLOC_CONS"
+            TableType="CONFIGURATION" XMLName="WorkOrderAllocCons">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_ALLOC_CONS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER_ALLOC_CONS."
+                    Name="Work_Order_Alloc_Cons_Key" Nullable="false" XMLName="WorkOrderAllocConsKey"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="Document Type for which the consideration is configured."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="SERVICE_ITEM_GROUP_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The Service Group to which the consideration belongs."
+                    Name="Service_Item_Group_Code" Nullable="false" XMLName="ServiceItemGroupCode"/>
+                <Attribute ColumnName="DEMAND_TYPE_FOR_CONSUMED"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Type of demand, which needs to be associated with consumed components while work order creation."
+                    Name="Demand_Type_For_Consumed" Nullable="false" XMLName="DemandTypeForConsumed"/>
+                <Attribute ColumnName="SUPPLY_TYPE_FOR_CREATED"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Type of supply, which needs to be updated for the created item while work order creation."
+                    Name="Supply_Type_For_Created" Nullable="false" XMLName="SupplyTypeForCreated"/>
+                <Attribute ColumnName="ALLCN_DEMAND_TYPE_FOR_CONSUMED"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Type of demand, which needs to be associated with consumed components while work order allocation."
+                    Name="Allocation_Demand_Type_For_Consumed"
+                    Nullable="false" XMLName="AllocationDemandTypeForConsumed"/>
+                <Attribute ColumnName="ALLCN_SUPPLY_TYPE_FOR_CREATED"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Type of supply which needs to be updated for the created item while work order allocation."
+                    Name="Allocation_Supply_Type_For_Created"
+                    Nullable="false" XMLName="AllocationSupplyTypeForCreated"/>
+                <Attribute ColumnName="ACTUAL_SUPPLY_TYPE_CONSUMED"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Type of supply actually associated with consumed components after confirmation."
+                    Name="Actual_Supply_For_Consumed" Nullable="false" XMLName="ActualSupplyTypeConsumed"/>
+                <Attribute ColumnName="ACTUAL_SUPPLY_TYPE_CREATED"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Type of supply actually associated with the created item after confirmation."
+                    Name="Actual_Supply_Type_Created" Nullable="false" XMLName="ActualSupplyTypeCreated"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="WRK_ORDALLCON_PK">
+                <Attribute ColumnName="WORK_ORDER_ALLOC_CONS_KEY" Name="Work_Order_Alloc_Cons_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="WRK_ORDALLCON_I1"
+                    Name="YFS_WORK_ORDER_ALLOC_CONS_I1" Unique="true">
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="SERVICE_ITEM_GROUP_CODE"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity
+            Description="This table stores work order status change audit. whenever the work order status changes because of a business process, an audit is posted along with the status, timestamp, reason code and text, user ID and program ID. All transactions in the work order pipeline in fact will have entries in this table upon completion of a transaction."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="vas" Name="Work_Order_Status_Audit" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_STS_AUDIT" TableType="TRANSACTION" XMLName="WorkOrderStatusAudit">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_STS_AUDIT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key."
+                    Name="Work_Order_Status_Audit_Key" Nullable="false"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key of YFS_WORK_ORDER."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="OLD_STATUS"
+                    DataType="ShortStatus" DefaultValue="' ' "
+                    Description="Status of the work order before the status change."
+                    Name="Old_Status" Nullable="false"/>
+                <Attribute ColumnName="NEW_STATUS"
+                    DataType="ShortStatus" DefaultValue="' ' "
+                    Description="Status of the work order after the status change."
+                    Name="New_Status" Nullable="false"/>
+                <Attribute ColumnName="OLD_STATUS_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="Status date as recorded on the work order at the previous status change."
+                    Name="Old_Status_Date" Nullable="false"/>
+                <Attribute ColumnName="NEW_STATUS_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="Status date recorded on the work order at the most recent status change."
+                    Name="New_Status_Date" Nullable="false"/>
+                <Attribute ColumnName="TRANSACTION_ID"
+                    DataType="TransactionID" DefaultValue="' ' "
+                    Description="The unique identifier of a transaction that was executed on the work order."
+                    Name="Transaction_Id" Nullable="false" XMLGroup="" XMLName="TransactionId"/>
+                <Attribute ColumnName="AUDIT_USER_ID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="The unique identifier of a user who performed the transaction."
+                    Name="Audit_User_Id" Nullable="false" XMLGroup="" XMLName="AuditUserId"/>
+                <Attribute ColumnName="AUDIT_TRANSACTION_ID"
+                    DataType="TransactionID" DefaultValue="' ' "
+                    Description="The unique identifier of an external Transaction reference."
+                    Name="Audit_Transaction_Id" Nullable="false"
+                    XMLGroup="" XMLName="AuditTransactionId"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' ' "
+                    Description="Reason code indicating the reason for the status change."
+                    Name="Reason_Code" Nullable="false"/>
+                <Attribute ColumnName="COMMENTS" DataType="Text-1500"
+                    DefaultValue="' '"
+                    Description="Free form comments that may be recorded during the execution of the transaction."
+                    Name="Comments" Nullable="false" XMLName="Comments"/>
+                <Attribute ColumnName="AUDIT_TRAN_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Unique key of the transaction.  A transaction may have multiple api's." Nullable="false"/>
+                <Attribute ColumnName="AUDIT_CONTEXT_ID"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="The unique identifier for the context in which a audit record is created." Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="WRK_ORDSTS_AUD_PK">
+                <Attribute ColumnName="WORK_ORDER_STS_AUDIT_KEY" Name="Work_Order_Status_Audit_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderStatusAudits"
+                    ChildName="WorkOrderStatusAudit"
+                    ChildXMLName="WorkOrderStatusAudit"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional"
+                    UsedForDataSecurity="true" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="WORK_ORDER_STS_AUDIT_KEY, CREATETS"/>
+            <Indices>
+                <Index DB2Name="WRK_ORDSTS_AUD_I1"
+                    Name="YFS_WORK_ORDER_STS_AUDIT_I1" Unique="false">
+                    <Column Name="WORK_ORDER_KEY"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores Information on Buyer compliance to be done for an Item."
+            EntityType="CONFIGURATION" Extensible="Y" HasHistory="N"
+            Module="vas" Name="Inbound_Vas_Compliance" Prefix="YFS_"
+            TableName="YFS_INBOUND_VAS_COMPLIANCE"
+            TableType="CONFIGURATION" XMLName="InboundVasCompliance">
+            <Attributes>
+                <Attribute ColumnName="INBOUND_VAS_COMPLIANCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_INBOUND_VAS_COMPLIANCE table."
+                    Name="Inbound_Vas_Compliance_Key" Nullable="false" XMLName="InboundVasComplianceKey"/>
+                <Attribute ColumnName="BUYER_ORGANIZATION_CODE"
+                    DataType="ID-24"
+                    DefaultValue="' '"
+                    Description="Buyer organization code for which the work order is placed."
+                    Name="Buyer_Organization_Code" Nullable="false" XMLName="BuyerOrganizationCode"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="ID-24"
+                    DefaultValue="' '"
+                    Description="Enterprise code to which the item or license plate belongs."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Item Classification for which Buyer Compliance is setup."
+                    Name="Item_Classification" Nullable="false" XMLName="ItemClassification"/>
+                <Attribute ColumnName="SERVICE_ITEM_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The unique identifier for the Service Item that needs to be performed on the item to make it compliant with Buyer's requirements."
+                    Name="Service_Item_ID" Nullable="false" XMLName="ServiceItemID"/>
+                <Attribute ColumnName="SERVICE_UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="Unit of measure for the service item."
+                    Name="Service_Uom" Nullable="false" XMLName="ServiceUom"/>
+                <Attribute ColumnName="RUN_QUANTITY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="Indicates the multiple of quantity in which a work order gets created."
+                    Name="Run_Quantity" Nullable="false" XMLName="RunQuantity"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="INBND_VAS_COMP_PK">
+                <Attribute ColumnName="INBOUND_VAS_COMPLIANCE_KEY" Name="Inbound_Vas_Compliance_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="INBND_VAS_COMP_I1"
+                    Name="YFS_INBOUND_VAS_COMPLIANCE_I1" Unique="true">
+                    <Column Name="ITEM_CLASSIFICATION"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="BUYER_ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BuyerComplianceList"
+                    ChildName="BuyerCompliance"
+                    ChildXMLName="BuyerCompliance" DeleteCascade="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Buyer_Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores work order attributes which were modified while excuting a transaction on the work order."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            ListXMLName="WorkOrderAuditDetailList" Module="vas"
+            Name="Work_Order_Audit_Detail" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_AUDT_DTL" TableType="TRANSACTION" XMLName="WorkOrderAuditDetail">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_AUDT_DTL_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key."
+                    Name="Work_Order_Audit_Detail_Key" Nullable="false"/>
+                <Attribute ColumnName="WORK_ORDER_STS_AUDIT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Foreign Key to YFS_WORK_ORDER_STS_AUDIT."
+                    Name="Work_Order_Status_Audit_Key" Nullable="false"/>
+                <Attribute ColumnName="ATTRIBUTE_NAME"
+                    DataType="AttributeName" DefaultValue="' '"
+                    Description="The name of the attribute that was changed on the work order other than the status of the work order."
+                    Name="Attribute_Name" Nullable="false"/>
+                <Attribute ColumnName="OLD_VALUE" DataType="Text-1500"
+                    DefaultValue="' '"
+                    Description="Value of the attribute before the modification."
+                    Name="Old_Value" Nullable="false"/>
+                <Attribute ColumnName="NEW_VALUE" DataType="Text-1500"
+                    DefaultValue="' '"
+                    Description="Value of the attribute after the modification."
+                    Name="New_Value" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+			<Indices>
+                <Index DB2Name="WO_AUDT_DTL_I1"
+                    Name="YFS_WORK_ORDER_AUDT_DTL_I1">
+                    <Column Name="WORK_ORDER_STS_AUDIT_KEY"/>
+                </Index>
+            </Indices>
+            <PrimaryKey DB2Name="WRK_ORDAUD_DTL_PK">
+                <Attribute ColumnName="WORK_ORDER_AUDT_DTL_KEY" Name="Work_Order_Audit_Detail_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderAuditDetailList"
+                    ChildName="WorkOrderAuditDetail"
+                    ChildXMLName="WorkOrderAuditDetail"
+                    DeleteCascade="true"
+                    ForeignEntity="Work_Order_Status_Audit"
+                    Name="Work_Order_Status_Audit" Type="Bidirectional" XMLName="WorkOrderStatusAudit">
+                    <Attribute Name="Work_Order_Status_Audit_Key" ParentName="Work_Order_Status_Audit_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores information about service lines included in the work order. Used only for PS/DS work orders."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            ListXMLName="WorkOrderProdDeliveries" Module="vas"
+            Name="Work_Order_Prod_Del" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_PROD_DEL" TableType="TRANSACTION" XMLName="WorkOrderProdDelivery">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_PROD_DEL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_WORK_ORDER_PROD_DEL table."
+                    Name="Work_Order_Prod_Del_Key" Nullable="false" XMLName="WorkOrderProdDeliveryKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The work order associated with this work order product delivery."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="LINE_NO" DataType="LineNo"
+                    DefaultValue="0"
+                    Description="The product delivery sequence number."
+                    Name="Line_No" Nullable="false" XMLName="LineNo"/>
+                <Attribute ColumnName="ITEM_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The product item identifier."
+                    Name="Item_ID" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unit of measure for the product item."
+                    Name="Uom" Nullable="false" XMLName="Uom"/>
+                <Attribute ColumnName="PRODUCT_CLASS" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The product class for the product item."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The order line associated with this work order product delivery."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="QUANTITY_REQUIRED"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The product quantity to be delivered."
+                    Name="Quantity_Required" Nullable="false" XMLName="QuantityRequired"/>
+                <Attribute ColumnName="QUANTITY_DELIVERED"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The product quantity that was actually delivered."
+                    Name="Quantity_Delivered" Nullable="false" XMLName="QuantityDelivered"/>
+                <Attribute ColumnName="CAUSE_APPT_CHANGE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="Indicates that the addition or modification to this line requires the current work order appointment to be changed. If the flag is maintained internally, it will be set to Y when a new work order is created, this line is added to a work order without appointments, or an appointment is no longer available due to addition of this line."
+                    Name="Cause_Appt_Change" Nullable="false" XMLName="CauseAppointmentChange"/>
+                <Attribute ColumnName=" " DataType="Action"
+                    DefaultValue="' '" Name="Action" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="The order header associated with this work order product delivery."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="LINE_NO"/>
+                <Reference ColumnName="ORDER_LINE_KEY"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WORK_O_PR_DEL_PK">
+                <Attribute ColumnName="WORK_ORDER_PROD_DEL_KEY" Name="Work_Order_Prod_Del_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderProdDeliveries"
+                    ChildName="WorkOrderProdDel"
+                    ChildXMLName="WorkOrderProdDelivery"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="WorkOrderProdDeliveries"
+                    ChildName="WorkOrderProdDelivery"
+                    ForeignEntity="Order_Line" Name="OrderLine"
+                    ReadOnly="true" Type="Bidirectional" XMLName="OrderLine">
+                    <Attribute Name="Order_Line_Key" ParentName="Order_Line_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index Name="WORK_O_PR_DEL_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="LINE_NO"/>
+                </Index>
+                <Index Name="WORK_O_PR_DEL_I2" Unique="false">
+                    <Column Name="ORDER_LINE_KEY"/>
+                    <Column Name="WORK_ORDER_KEY"/>
+                </Index>
+				<Index Name="WORK_O_PR_DEL_I3" Unique="false">
+                        <Column Name="ORDER_HEADER_KEY"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores information about appointments taken on the work order. Used only for PS/DS work orders."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            ListXMLName="WorkOrderAppointments" Module="vas"
+            Name="Work_Order_Appt" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_APPT" TableType="TRANSACTION" XMLName="WorkOrderAppointment">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_APPT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_WORK_ORDER_APPT table."
+                    Name="Work_Order_Appt_Key" Nullable="false" XMLName="WorkOrderApptKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The work order associated with this work order appointment."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="APPT_SEQ" DataType="LineNo"
+                    DefaultValue="0"
+                    Description="This number denotes the position in the sequence when the current appointment would be executed."
+                    Name="Appt_Seq" Nullable="false" XMLName="ApptSeq"/>
+                <Attribute ColumnName="EXECUTION_START_TIME"
+                    DataType="TimeStamp"
+                    Description="The last date when the execution of the service was attempted. This can correspond to either a successful or failed attempt."
+                    Name="Execution_Start_Time" Nullable="true" XMLName="ExecutionStartTime"/>
+                <Attribute ColumnName="EXECUTION_END_TIME"
+                    DataType="TimeStamp"
+                    Description="The last date when the execution of the service was attempted. This can correspond to either a successful or failed attempt."
+                    Name="Execution_End_Time" Nullable="true" XMLName="ExecutionEndTime"/>
+                <Attribute ColumnName="EXECUTION_BY" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The technician executing the work order."
+                    Name="Execution_By" Nullable="false" XMLName="ExecutionBy"/>
+                <Attribute ColumnName="EXECUTION_DURATION"
+                    DataType="NumberOfHours" DefaultValue="0"
+                    Description="The amount of time took to perform the service."
+                    Name="Execution_Duration" Nullable="false" XMLName="ExecutionDuration"/>
+                <Attribute ColumnName="PROMISED_APPT_START_DATE"
+                    DataType="TimeStamp"
+                    Description="The promised start date of the appointment. Used in case of provided service or delivery service work order."
+                    Name="Promised_Appt_Start_Date" Nullable="true" XMLName="PromisedApptStartDate"/>
+                <Attribute ColumnName="PROMISED_APPT_END_DATE"
+                    DataType="TimeStamp"
+                    Description="The promised end date of the appointment. Used in case of provided service or delivery service work order."
+                    Name="Promised_Appt_End_Date" Nullable="true" XMLName="PromisedApptEndDate"/>
+                <Attribute ColumnName="APPT_STATUS" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The appointment status. Will be in synch with the service order line. Used in case of provided service work order."
+                    Name="Appt_Status" Nullable="false" XMLName="ApptStatus"/>
+                <Attribute ColumnName="RESOURCE_POOL_ID"
+                    DataType="ID-24" DefaultValue="' ' "
+                    Description="The identifier for the resource pool associated with this work order appointment."
+                    Name="Resource_Pool_Id" Nullable="false" XMLName="ResourcePoolId"/>
+                <Attribute ColumnName="SERVICE_RESOURCE_ID"
+                    DataType="ID-24" DefaultValue="' ' "
+                    Description="The identifier for the service resource associated with this work order appointment."
+                    Name="Service_Resource_Id" Nullable="false" XMLName="ServiceResourceId"/>
+                <Attribute ColumnName="IS_SLOT_BASED" DataType="Flag"
+                    DefaultValue="'Y'"
+                    Description="This flag indicates whether the appointment taken is against a resource pool slot."
+                    Name="Is_Slot_Based" Nullable="false" XMLName="IsSlotBased"/>
+                <Attribute ColumnName="ALLOCATED_QUANTITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="The capacity allocated for the service or delivery line."
+                    Name="Allocated_Quantity" Nullable="false" XMLName="AllocatedQuantity"/>
+                <Attribute ColumnName="REQUESTED_QUANTITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="The requested capacity for the service or delivery line."
+                    Name="Requested_Quantity" Nullable="false" XMLName="RequestedQuantity"/>
+                <Attribute ColumnName="FAILURE_REASON_CODE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The failure reason code."
+                    Name="Failure_Reason_Code" Nullable="false"
+                    XMLGroup="" XMLName="FailureReasonCode"/>
+                <Attribute ColumnName="EXECUTION_COMMENTS"
+                    DataType="Text-1500" DefaultValue="' '"
+                    Description="The execution comments."
+                    Name="ExecutionComments" Nullable="false" XMLName="ExecutionComments"/>
+                <Attribute ColumnName=" " DataType="Action"
+                    DefaultValue="' '" Name="Action" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName=" " DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates that the appointment is overridden.  If passed as Y, available capacity will not be checked when blocking the appointment."
+                    Name="IsAppointmentOverridden" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName=" " DataType="Flag"
+                    DefaultValue="' '" Name="IgnoreMinNotificationTime"
+                    Nullable="false" Virtual="true"/>
+                <Attribute ColumnName=" " DataType="Flag"
+                    DefaultValue="false"
+                    Description="This flag indicates whether the slot under which the current timestamp falls can be considered."
+                    Name="ConsiderCurrentSlot" Nullable="true" Virtual="true"/>
+                <Attribute ColumnName="IS_FIRM_PREDEF_RES_POOL"
+                    DataType="Flag" DefaultValue="'Y'"
+                    Description="This flag indicates whether the resource pool on the appointment is firm.  If it is, then system will not consider any other resource pool.  Whenever Resource Pool is passed in the input xml, this flag will be set to Y."
+                    Name="Is_Firm_Predef_Res_Pool" Nullable="false" XMLName="IsFirmPredefinedResourcePool"/>
+                <Attribute ColumnName="IS_FIRM_PREDEF_SRV_RES"
+                    DataType="Flag" DefaultValue="'Y'"
+                    Description="This flag indicates whether the service resource on the appointment is firm.  If it is, then system will not consider any other service resource. Whenever Service Resource is passed in the input xml, this flag will be set to Y."
+                    Name="Is_Firm_Predef_Srv_Res" Nullable="false" XMLName="IsFirmPredefinedServiceResource"/>
+                <!--route planning -->
+                <Attribute ColumnName="EXPECTED_APPT_START_DATE"
+                    DataType="TimeStamp"
+                    Description="The expected start date of the appointment.Populated during route planning of provided service work order."
+                    Name="Expected_Appt_Start_Date" Nullable="true" XMLName="ExpectedApptStartDate"/>
+                <Attribute ColumnName="EXPECTED_APPT_END_DATE"
+                    DataType="TimeStamp"
+                    Description="The expected end date of the appointment. Populated during route planning of provided service work order."
+                    Name="Expected_Appt_End_Date" Nullable="true" XMLName="ExpectedApptEndDate"/>
+                <Attribute ColumnName="STOP_NUMBER" DataType="Count"
+                    DefaultValue="0"
+                    Description="The stop number assigned during route planning, indicating the order in which this appointemnt will be attempted during the route execution."
+                    Name="Stop_Number" Nullable="false" XMLName="StopNumber"/>
+                <Attribute ColumnName="IS_ROUTE_PLANNING_COMPLETE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the route planning has been completed and expected appointments dates and stop number were populated."
+                    Name="Is_Route_Planning_Complete" Nullable="false" XMLName="IsRoutePlanningComplete"/>
+                <!--end route planning -->
+                <!-- report completion -->
+                <Attribute ColumnName="ITEMS_NOT_USED"
+                    DataType="Text-200" DefaultValue="' ' "
+                    Description="This field indicates items that were returned back and were not used."
+                    Name="Items_Not_Used" Nullable="false" XMLGroup="" XMLName="ItemsNotUsed"/>
+                <Attribute ColumnName="ADDITIONAL_EQUIPMENT_USED"
+                    DataType="Text-200" DefaultValue="' ' "
+                    Description="This field indicates items that were used, which were not originally requested."
+                    Name="Additional_Equipment_Used" Nullable="false"
+                    XMLGroup="" XMLName="AdditionalEquipmentUsed"/>
+                <Attribute ColumnName="NON_INV_ITEMS_RETURNED"
+                    DataType="Text-200" DefaultValue="' ' "
+                    Description="This field indicates special tools that were used and then returned."
+                    Name="Non_Inv_Items_Returned" Nullable="false"
+                    XMLGroup="" XMLName="NonInventoryItemsReturned"/>
+                <Attribute ColumnName="ALERT_SCHEDULER"
+                    DataType="Text-200" DefaultValue="' ' "
+                    Description="This field indicates that the scheduler has to be notified and entered information is send to the scheduler."
+                    Name="Alert_Scheduler" Nullable="false" XMLGroup="" XMLName="AlertScheduler"/>
+                <Attribute ColumnName="ALERT_SALES" DataType="Text-200"
+                    DefaultValue="' ' "
+                    Description="This field indicates that the sales person has to be notified and entered information is send to the sales person."
+                    Name="Alert_Sales" Nullable="false" XMLGroup="" XMLName="AlertSales"/>
+                <Attribute ColumnName="ATTENTION_REQUIRED"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates that some problems exist with work order and it has to be looked at."
+                    Name="Attention_Required" Nullable="false" XMLName="AttentionRequired"/>
+                <Attribute ColumnName="VEHICLE_NUMBER"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates vehicle number that was used for job completion."
+                    Name="Vehicle_Number" Nullable="false" XMLGroup="" XMLName="VehicleNumber"/>
+                <Attribute ColumnName="VEHICLE_ODOMETER_READING"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This field indicates odometer reading at the time of appointment completion."
+                    Name="Vehicle_Odometer_Reading" Nullable="false"
+                    XMLGroup="" XMLName="VehicleOdometerReading"/>
+                <Attribute ColumnName="VEHICLE_SERVICE_REQUEST"
+                    DataType="Text-200" DefaultValue="' ' "
+                    Description="This field indicates what were the problems with the vehicle that required service."
+                    Name="Vehicle_Service_Request" Nullable="false"
+                    XMLGroup="" XMLName="VehicleServiceRequest"/>
+                <!-- end report completion -->
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="APPT_SEQ"/>
+                <Reference ColumnName="APPT_STATUS"/>
+                <Reference ColumnName="RESOURCE_POOL_ID"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WO_APPT_PK">
+                <Attribute ColumnName="WORK_ORDER_APPT_KEY" Name="Work_Order_Appt_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderAppointments"
+                    ChildName="WorkOrderAppointment"
+                    ChildXMLName="WorkOrderAppointment"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional"
+                    UsedForDataSecurity="true" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index Name="WORK_O_APPT_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="APPT_SEQ"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores information about service lines included in the work order. Used only for PS/DS work orders."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            ListXMLName="WorkOrderServiceLines" Module="vas"
+            Name="Work_Order_Service_Line" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_SERVICE_LINE"
+            TableType="TRANSACTION" XMLName="WorkOrderServiceLine">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_SERVICE_LINE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_WORK_ORDER_SERVICE_LINE table."
+                    Name="Work_Order_Service_Line_Key" Nullable="false" XMLName="WorkOrderServiceLineKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The work order associated with this work order service line."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="LINE_NO" DataType="LineNo"
+                    DefaultValue="0"
+                    Description="The service line sequence number. Part of unique key."
+                    Name="Line_No" Nullable="false" XMLName="LineNo"/>
+                <Attribute ColumnName="ITEM_GROUP_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This field indicates the item group code. Valid values are: - PS : Provided Service - DS : Delivery Service."
+                    Name="Item_Group_Code" Nullable="false" XMLName="ItemGroupCode"/>
+                <Attribute ColumnName="ITEM_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The identifier of the service item."
+                    Name="Item_ID" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unit of measure for the service item."
+                    Name="Uom" Nullable="false" XMLName="Uom"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The order line associated with this work order service line."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="QUANTITY_REQUIRED"
+                    DataType="Capacity" DefaultValue="0 "
+                    Description="The required capacity of the associated service line."
+                    Name="Quantity_Required" Nullable="false" XMLName="QuantityRequired"/>
+                <Attribute ColumnName="IS_COMPLETE" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether the service line is complete."
+                    Name="Is_Complete" Nullable="false" XMLName="IsComplete"/>
+                <Attribute ColumnName="CAUSE_APPT_CHANGE"
+                    DataType="Flag"
+                    Description="Indicates that the addition or modification to this line requires the current work order appointment to be changed. If the flag is maintained internally, it will be set to Y when a new work order is created, this line is added to a work order without appointments, or an appointment is no longer available due to addition of this line."
+                    Name="Cause_Appt_Change" Nullable="true" XMLName="CauseAppointmentChange"/>
+                <Attribute ColumnName=" " DataType="Action"
+                    DefaultValue="' '" Name="Action" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="The order header associated with this work order service line."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="LINE_NO"/>
+                <Reference ColumnName="ORDER_LINE_KEY"/>
+                <Reference ColumnName="ITEM_GROUP_CODE"/>
+            </AuditReferences>
+            <PrimaryKey Name="WRK_OR_S_LN_PK">
+                <Attribute ColumnName="WORK_ORDER_SERVICE_LINE_KEY" Name="Work_Order_Service_Line_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderServiceLines"
+                    ChildName="WorkOrderServiceLine"
+                    ChildXMLName="WorkOrderServiceLine"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="WorkOrderServiceLines"
+                    ChildName="WorkOrderServiceLine"
+                    ForeignEntity="Order_Line" Name="OrderLine"
+                    ReadOnly="true" Type="Bidirectional" XMLName="OrderLine">
+                    <Attribute Name="Order_Line_Key" ParentName="Order_Line_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index Name="WRK_O_SRV_LN_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="LINE_NO"/>
+                </Index>
+                <Index Name="WRK_O_SRV_LN_I2" Unique="false">
+                    <Column Name="ORDER_LINE_KEY"/>
+                    <Column Name="WORK_ORDER_KEY"/>
+                </Index>
+                <Index Name="WRK_O_SRV_LN_I3" Unique="false">
+                    <Column Name="ORDER_HEADER_KEY"/>
+                </Index>
+            </Indices>
+            <OrderBy Value="WORK_ORDER_SERVICE_LINE_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="false"
+            Description="This table stores information about service tools included in the work order."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            ListXMLName="WorkOrderServiceTools" Module="vas"
+            Name="Work_Order_Service_Tool" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_SERVICE_TOOLS"
+            TableType="TRANSACTION" XMLName="WorkOrderServiceTool">
+            <Attributes>
+                <Attribute ColumnName="WO_SRVC_TOOL_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER_SERVICE_TOOLS."
+                    Name="Work_Order_Service_Tool_Key" Nullable="false" XMLName="WorkOrderServiceToolKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key of YFS_WORK_ORDER."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="ITEM_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unique identifier for a Service Tool Item."
+                    Name="Item_ID" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="Unit of measure for the service tool item."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="QUANTITY_REQUIRED"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="Required quantity of the associated service tool item."
+                    Name="Quantity_Required" Nullable="false" XMLName="QuantityRequired"/>
+                <Attribute ColumnName="COMMENTS" DataType="Text-1500"
+                    DefaultValue="' '"
+                    Description="Free form comments that may be recorded during the association of Service Item."
+                    Name="Comments" Nullable="false" XMLName="Comments"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="ITEM_ID"/>
+                <Reference ColumnName="UOM"/>
+            </AuditReferences>
+            <PrimaryKey Name="WO_SRVC_TOOL_PK">
+                <Attribute ColumnName="WO_SRVC_TOOL_KEY" Name="Work_Order_Service_Tool_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderServiceTools"
+                    ChildName="WorkOrderServiceTool"
+                    ChildXMLName="WorkOrderServiceTool"
+                    DeleteCascade="true" ForeignEntity="Work_Order"
+                    Name="Work_Order" Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="WO_SRVC_TOOL_I1"
+                    Name="YFS_WO_SRVC_TOOL_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="ITEM_ID"/>
+                    <Column Name="UOM"/>
+                </Index>
+            </Indices>
+            <OrderBy Value="WO_SRVC_TOOL_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the service supervisor for the combination of node and seller org."
+            EntityType="CONFIGURATION" Extensible="N" HasHistory="N"
+            ListXMLName="WoServiceSupervisorDetmnList" Module="vas"
+            Name="Wo_Service_Supervisor_Detmn" Prefix="YFS_"
+            TableName="YFS_WO_SS_DETMN" TableType="CONFIGURATION" XMLName="WoServiceSupervisorDetmn">
+            <Attributes>
+                <Attribute ColumnName="WO_SS_DETMN_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key of YFS_WO_SS_DETMN."
+                    Name="Wo_Service_Supervisor_Detmn_Key"
+                    Nullable="false" XMLName="WoServiceSupervisorDetmnKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key of YFS_SHIP_NODE."
+                    Name="Node_Key" Nullable="false" XMLName="NodeKey"/>
+                <Attribute ColumnName="SELLER_ORGANIZATION_CODE"
+                    DataType="ID-24" DefaultValue="' '"
+                    Description="This can be any Seller Organization in the system. This may or may not be a node. However, in a retail environment, this is expected to be a node which is the store where the sale is being made."
+                    Name="Seller_Organization_Code" Nullable="false" XMLName="SellerOrganizationCode"/>
+                <Attribute ColumnName="SERVICE_SUPERVISOR_ID"
+                    DataType="UserId" DefaultValue="' '"
+                    Description="The unique identifer that represents the supervisor responsible for the work orders originating from the seller represented by SELLER_ORGANIZATION_CODE and executed by the node represented by NODE_KEY. This will be a valid user id in the system. This user will belong to the node represented by NODE_KEY."
+                    Name="Service_Supervisor_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey Name="WO_SS_DETMN_PK">
+                <Attribute ColumnName="WO_SS_DETMN_KEY" Name="Wo_Service_Supervisor_Detmn_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true"
+                    DeleteValidationError="YDB10091"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    DeleteValidationError="YDB10093"
+                    ForeignEntity="Organization"
+                    Name="Seller_Organization_Code"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="SellerOrganizationCode">
+                    <Attribute Name="Seller_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="YFS_WO_SS_DETMN_I1"
+                    Name="YFS_WO_SS_DETMN_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="SELLER_ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores all the hold types defined for a work order."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="vas" Name="Wo_Hold_Type" Prefix="YFS_"
+            TableName="YFS_WO_HOLD_TYPE" TableType="TRANSACTION" XMLName="WorkOrderHoldType">
+            <Attributes>
+                <Attribute ColumnName="WO_HOLD_TYPE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key for YFS_WO_HOLD_TYPE table."
+                    Name="Wo_Hold_Type_Key" Nullable="false" XMLName="WorkOrderHoldTypeKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key of the YFS_WORK_ORDER table."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="HOLD_TYPE" DataType="CodeType"
+                    DefaultValue="' ' " Description="Hold type."
+                    Name="Hold_Type" Nullable="false"/>
+                <Attribute ColumnName="LAST_HOLD_TYPE_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="Timestamp when this hold type was added to the order."
+                    Name="Last_Hold_Type_Date" Nullable="false"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' ' "
+                    Description="The reason text indicating the reason entered by user while putting hold on the work order."
+                    Name="Reason_Text" Nullable="false"/>
+                <Attribute ColumnName="TRANSACTION_ID"
+                    DataType="TransactionID" DefaultValue="' '  "
+                    Description="Transaction which changed the hold type status."
+                    Name="Transaction_Id" Nullable="false"/>
+                <Attribute ColumnName="WORK_ORDER_STS_AUDIT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key."
+                    Name="Work_Order_Status_Audit_Key" Nullable="false"/>
+                <Attribute ColumnName="STATUS" DataType="ShortStatus"
+                    DefaultValue="' ' "
+                    Description="Status of the work order hold type."
+                    Name="Status" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="HOLD_TYPE"/>
+                <Reference ColumnName="STATUS"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WO_HOLD_TYPE_PK">
+                <Attribute ColumnName="WO_HOLD_TYPE_KEY" Name="Wo_Hold_Type_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderHoldTypes"
+                    ChildName="WorkOrderHoldType"
+                    ForeignEntity="Work_Order" Name="WorkOrder"
+                    Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="WO_HOLD_TYPE_I1"
+                    Name="YFS_WO_HOLD_TYPE_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="HOLD_TYPE"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity
+            Description="This table stores the log notes when status of a hold type changes."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            Module="vas" Name="Wo_Hold_Type_Log" Prefix="YFS_"
+            TableName="YFS_WO_HOLD_TYPE_LOG" TableType="TRANSACTION" XMLName="WorkOrderHoldTypeLog">
+            <Attributes>
+                <Attribute ColumnName="WO_HOLD_TYPE_LOG_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for YFS_WO_HOLD_TYPE_LOG table."
+                    Name="Wo_Hold_Type_Log_Key" Nullable="false" XMLName="WorkOrderHoldTypeLogKey"/>
+                <Attribute ColumnName="WO_HOLD_TYPE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key for YFS_Wo_HOLD_TYPE table."
+                    Name="Wo_Hold_Type_Key" Nullable="false" XMLName="WorkOrderHoldTypeKey"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' ' "
+                    Description="The reason text indicating the reason entered by user while putting hold on the work order."
+                    Name="Reason_Text" Nullable="false"/>
+                <Attribute ColumnName="TRANSACTION_ID"
+                    DataType="TransactionID" DefaultValue="' '  "
+                    Description="The unique idetifier for a transaction which changes the hold type status."
+                    Name="Transaction_Id" Nullable="false"/>
+                <Attribute ColumnName="USER_ID" DataType="Modifyuserid"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="User_Id" Nullable="false"/>
+                <Attribute ColumnName="STATUS" DataType="ShortStatus"
+                    DefaultValue="' ' "
+                    Description="Status of the work order hold type."
+                    Name="Status" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="WO_HT_LOG_PK">
+                <Attribute ColumnName="WO_HOLD_TYPE_LOG_KEY" Name="Wo_Hold_Type_Log_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderHoldTypeLogs"
+                    ChildName="WorkOrderHoldTypeLog"
+                    ForeignEntity="Wo_Hold_Type" Name="WorkOrdeHoldType"
+                    Type="Bidirectional" XMLName="WorkOrderHoldType">
+                    <Attribute Name="Wo_Hold_Type_Key" ParentName="Wo_Hold_Type_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores the Notes/customer contact information for work order."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="vas" Name="Work_Order_Notes" Prefix="YFS_"
+            TableName="YFS_WORK_ORDER_NOTES" TableType="TRANSACTION">
+            <Attributes>
+                <Attribute ColumnName="WORK_ORDER_NOTES_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for YFS_WORK_ORDER_NOTES table."
+                    Name="Work_Order_Notes_Key" Nullable="false"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Represents the work order this notes/customer contact information corresponds to."
+                    Name="Work_Order_Key" Nullable="false"/>
+                <Attribute ColumnName="SEQUENCE_NO" DataType="Count"
+                    DefaultValue="0"
+                    Description="Sequence Number for the record."
+                    Name="Sequence_No" Nullable="false"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' '  "
+                    Description="The reason for which the notes are logged. Like &quot;CustomerContact&quot; etc. The values will be selected from common code of code type &quot;NOTES_REASON&quot;."
+                    Name="Reason_Code" Nullable="false"/>
+                <Attribute ColumnName="NOTE_TEXT" DataType="NoteText"
+                    DefaultValue="' ' " Description="The actual notes."
+                    Name="Note_Text" Nullable="false"/>
+                <Attribute ColumnName="CONTACT_TYPE"
+                    DataType="CommonCode" DefaultValue="' ' "
+                    Description="The contact type like Phone call, email etc. The values will be selected from common code of code type &quot;CONTACT_TYPE&quot;."
+                    Name="Contact_Type" Nullable="false"/>
+                <Attribute ColumnName="CONTACT_REFERENCE"
+                    DataType="Text-150" DefaultValue="' ' "
+                    Description="If the notes were entered because of customer contact by phone, the phone no can be stored in this column. If the contact is by email, emailed can be stored here."
+                    Name="Contact_Reference" Nullable="false"/>
+                <Attribute ColumnName="CONTACT_TIME"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The time at which the customer contact occurred."
+                    Name="Contact_Time" Nullable="false"/>
+                <Attribute ColumnName="CONTACT_USER" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="The user who made the contact. The default value will the logged in user."
+                    Name="Contact_User" Nullable="false"/>
+                <Attribute ColumnName=" " DataType="Action"
+                    DefaultValue="' '" Name="Action" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName="VISIBLE_TO_ALL" DataType="Flag"
+                    Description="This flag determines whether the note applied should be visible to all users. This field is used for filtering. No logic is currently applied to it."
+                    Name="Visible_To_All" Nullable="true" XMLName="VisibleToAll"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="WO_NOTES_PK">
+                <Attribute ColumnName="WORK_ORDER_NOTES_KEY" Name="Work_Order_Notes_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderNotesList"
+                    ChildName="WorkOrderNotes"
+                    ChildXMLName="WorkOrderNotes" DeleteCascade="true"
+                    ForeignEntity="Work_Order" Name="Work_Order"
+                    Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="YFS_WO_NOTES_I1" Name="YFS_WO_NOTES_I1" Unique="true">
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="SEQUENCE_NO"/>
+                </Index>
+            </Indices>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_KEY"/>
+                <Reference ColumnName="SEQUENCE_NO"/>
+            </AuditReferences>
+        </Entity>
+        <Entity AuditRequired="Y"
+            Description="This table stores the list of users who worked/assigned for an appointment in the work order."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="vas" Name="Wo_Appt_User" Prefix="YFS_"
+            TableName="YFS_WO_APPT_USER" TableType="TRANSACTION" XMLName="WorkOrderAppointmentUser">
+            <Attributes>
+                <Attribute ColumnName="WO_APPT_USER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key of the YFS_WO_APPT_USER table."
+                    Name="Wo_Appt_User_Key" Nullable="false" XMLName="WoApptUserKey"/>
+                <Attribute ColumnName="WORK_ORDER_APPT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Key pointing to the appointment in the work order."
+                    Name="Work_Order_Appt_Key" Nullable="false" XMLName="WorkOrderApptKey"/>
+                <Attribute ColumnName="USER_ID" DataType="ID-24"
+                    DefaultValue="' ' "
+                    Description="The unique identifier of the user who is working on this appointment."
+                    Name="User_ID" Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="OVERRIDDEN_FLAG" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="By default, the users configured in the resource user table will be copied in to this table if the appointment is serviced by the resource. If any other  user served this appointment then the overridden flag will be &quot;Y&quot;."
+                    Name="Overridden_Flag" Nullable="false" XMLName="OverriddenFlag"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences>
+                <Reference ColumnName="WORK_ORDER_APPT_KEY"/>
+                <Reference ColumnName="USER_ID"/>
+            </AuditReferences>
+            <PrimaryKey DB2Name="WO_APPT_USER_PK">
+                <Attribute ColumnName="WO_APPT_USER_KEY" Name="Wo_Appt_User_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderAppointmentUsers"
+                    ChildName="WorkOrderAppointmentUser"
+                    ChildXMLName="WorkOrderAppointmentUser"
+                    DeleteCascade="true" ForeignEntity="Work_Order_Appt"
+                    Name="Work_Order_Appt" Type="Bidirectional" XMLName="WorkOrderAppointment">
+                    <Attribute Name="Work_Order_Appt_Key" ParentName="Work_Order_Appt_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index Name="WO_APPT_USER_I1" Unique="true">
+                    <Column Name="WORK_ORDER_APPT_KEY"/>
+                    <Column Name="USER_ID"/>
+                </Index>
+            </Indices>
+        </Entity>
+    </Entities>
+</DBSchema>

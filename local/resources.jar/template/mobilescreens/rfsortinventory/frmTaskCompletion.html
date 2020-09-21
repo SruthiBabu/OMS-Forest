@@ -1,0 +1,118 @@
+<html>
+    <body>
+        <form name="frmTaskCompletion" target="/console/rfsortinventory.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+						    <tr>
+                                <td>
+                                    <input col="2" size="17"
+                                    subtype="Label"
+                                    tag="binding=lblScanContainer"
+                                    type="text" validate="false" value="Mobile_Scan_Container"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtTarZone" 
+									inputbinding="xml:/Task/@TargetZoneId"
+									ouputbinding="xml:/Task/@TargetZoneId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@TargetZoneId"
+                                    type="text"/>
+                                </td>
+                            </tr>		
+							<tr>
+                                <td>
+                                    <input col="1" 
+                                    name="txtItem" 
+									inputbinding="xml:/Task/@ItemId"
+                                    outputbinding="xml:/Task/@Item"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@Item"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+												
+							<tr>
+                                <td>
+                                    <input col="1" 
+                                    name="txtItemDesc" 
+									inputbinding="xml:/Task/@ItemDesc"
+									outputbinding="xml:/Task/@ItemDesc"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@Item"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtpQuantity"
+									inputbinding="xml:/Task/@pQty"
+									outputbinding="xml:/Task/@pQty"
+                                    size="10" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@pQuantity"
+                                    type="text" />
+									<input col="11" size="9"
+									name="txtUom"
+									inputbinding="xml:/Task/@Uom"
+									outputbinding="xml:/Task/@Uom"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@Uom"
+                                    type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtpLPN"
+									inputbinding="xml:/Container/@pLPNNo"
+									outputbinding="xml:/Container/@pLPNNo"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Container/@pLPN"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtLPN" 
+									inputbinding="xml:/Container1/@LPN"
+                                    outputbinding="xml:/Container/@LPN"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Container/@LPN"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtpSortLocation"
+									inputbinding="xml:/Container/@pLocationId"
+                                    outputbinding="xml:/Container/@pSortLocation"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Container/@pSortLocation"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtSortLocation" 
+									inputbinding="xml:/Container1/@LocationId"
+                                    outputbinding="xml:/Container/@SortLocation"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Container/@SortLocation"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

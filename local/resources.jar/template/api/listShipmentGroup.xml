@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.  
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<ShipmentGroupList>
+    <ShipmentGroup AcceptWave="" CalendarKey="" Description="" 
+		EffectiveDateFrom="" EffectiveDateTo=""  MinNoOfShipments="" 
+		MinVolume="" MaxWavesToProcess="" ToWaveStatus="" NoOfConcurrentWaves="" Node="" PickStrategyKey=""
+        PipelineKey="" Priority="" SeqNo="" ShipmentGroupId="" 
+		ShipmentGroupKey="" SortStrategyKey="">
+        <Calendar CalendarDescription="" CalendarId="" CalendarKey=""
+			MeantForInternal="" MonthFilter="" OrganizationCode="" 
+			YearFilter="">
+            <CalendarDayExceptions>
+                <CalendarDayException Action="" CalendarDayExceptionKey=""
+                    CalendarKey="" Date="" ExceptionType="">
+                    <ExceptionShifts>
+                        <ExceptionShift Action="" CalendarDayExceptionKey="" 
+                            ExceptionShiftKey="" ShiftKey=""/>
+                    </ExceptionShifts>
+                </CalendarDayException>
+            </CalendarDayExceptions>
+            <EffectivePeriods>
+                <EffectivePeriod Action="" CalendarKey="" EffectiveFromDate=""
+					EffectiveToDate="" ShiftEffectivePeriodKey="">
+                    <Shifts>
+                        <Shift Action="" FridayValid="" MondayValid=""
+                            SaturdayValid="" ShiftEffectivePeriodKey=""
+                            ShiftEndTime="" ShiftKey="" ShiftName=""
+                            ShiftStartTime="" ShiftType="" SundayValid="" 
+							ThursdayValid="" TuesdayValid="" ValidForDay="" WednesdayValid="">
+                            <ExceptionShifts/>
+                        </Shift>
+                    </Shifts>
+                </EffectivePeriod>
+            </EffectivePeriods>
+        </Calendar>
+        <ShipmentSelectorList>
+            <ShipmentSelector Description="" Node="" ShipmentGroupKey="" 
+				ShipmentSelectorKey="">
+                <HeaderAttributes DeliveryMethod="" DocumentType="" 
+					EnterpriseCode="" OrderType="" PackAndHold="" 
+					PriorityCode="" SCAC="" ShipMode="" ShipToCountry=""/>
+                <ShipmentValueAttributes Currency="" ShipmentValue=""/>
+                <ZipCodeAttributes FromZip="" ToZip="" ZipCodeLength=""/>
+                <SpecialProcessingAttributes ShipmentWithVAS="" SingleLineShipment=""/>
+                <DelinquentShipmentAttributes DelCancelDateDelqShipment=""
+                    DelCancelDatePastDue="" ShipDatePastDue=""/>
+                <ShipmentDateAttributes DelCancelDateRiskShipment="" ShipDateWithin=""/>
+                <LineAttributes ItemClassification1="" ItemClassification2="" 
+					ItemClassification3=""/>
+                <ShipmentSelectAttrList>
+                    <ShipmentSelectAttr AttrName="" Node="" ShipmentSelectAttrKey=""
+                        ShipmentSelectorKey="" Value=""/>
+                </ShipmentSelectAttrList>
+            </ShipmentSelector>
+        </ShipmentSelectorList>
+        <ShipmentGroupSizeConstraintList>
+            <WaveSizeConstraint Description="" EnterpriseCode="" 
+				MaxNoOfCases="" MaxNoOfLoads="" MaxNoOfShipments="" 
+				MaxNoOfSkus="" MaxVolume="" Node="" ShipmentGroupKey="" 
+				WaveSizeConstraintKey="">
+                <HeaderAttributes CarrierServiceCode="" SCAC="" ShipMode=""/>
+                <SpecialProcessingAttributes MultiCaseShipment="" MultiLineShipment=""/>
+                <LineAttributes ItemClassification1="" ItemClassification2="" 
+					ItemClassification3=""/>
+            </WaveSizeConstraint>
+        </ShipmentGroupSizeConstraintList>
+        <WaveList/>
+    </ShipmentGroup>
+</ShipmentGroupList>

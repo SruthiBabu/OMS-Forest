@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<MonitorTypeList>
+    <MonitorType MonitorType="MNRBD" RuleDesc="Milestone_has_not_reached_before_a_date" 
+    Template="If_arg0_has_not_reached_arg1_arg2_arg7_before_arg3_raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_has_not_reached_arg1_arg2_arg7_before_arg3_raise_arg4">
+<!-- eHtmlTemplate="
+&lt;html&gt;
+&lt;body&gt;
+    &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
+        &lt;tr&gt;
+            &lt;td colspan=&quot;2&quot;&gt;IF {0}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td width=&quot;20px&quot;&gt;&lt;/td&gt;
+            &lt;td colspan=&quot;2&quot;&gt; has not reached &lt;a href=http://MilestoneTypeToMonitor&gt;{1}&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td width=&quot;20px&quot;&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;a href=http://Age&gt;{2}&lt;/a&gt; &lt;a href=http://AgeType&gt;{7}&lt;/a&gt; before &lt;a href=http://ComparisonDateType&gt;{3}&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan=&quot;2&quot;&gt;THEN&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td width=&quot;20px&quot;&gt;&lt;/td&gt;
+            &lt;td&gt;raise &lt;a href=http://MonitorConsolidationKey&gt;{4}&lt;/a&gt;.&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    ">
+ -->
+		<RuleParam Name="BusDoc" DefaultValue="Document"  />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType"/>
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="MNRWD" RuleDesc="Milestone_has_not_reached_after_a_date" 
+    Template="If_arg0_has_not_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4"
+	LocalizeHtmlTemplate="HTML_If_arg0_has_not_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4">
+        <RuleParam Name="BusDoc" DefaultValue="Document"  />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType"/>
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="MNRWM" RuleDesc="Milestone_has_not_reached_after_another_Milestone" 
+    Template="If_arg0_has_not_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_has_not_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document"  />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonMilestoneType" DefaultValue="Choose_a_milestone" Link="http://ComparisonMilestoneType"/>
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="MRBD" RuleDesc="Milestone_has_reached_before_a_date" 
+    Template="If_arg0_has_reached_arg1_arg2_arg7_before_arg3_raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_has_reached_arg1_arg2_arg7_before_arg3_raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document"  />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType"/>
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="MRWD" RuleDesc="Milestone_has_reached_after_a_date" 
+    Template="If_arg0_has_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_has_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document"  />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType"/>
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="MRWM" RuleDesc="Milestone_has_reached_after_another_Milestone" 
+    Template="If_arg0_has_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_has_reached_arg1_within_arg2_arg7_of_arg3_raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document"  />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonMilestoneType" DefaultValue="Choose_a_milestone" Link="http://ComparisonMilestoneType"/>
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="HBS" RuleDesc="Has_been_in_a_status" 
+    Template="If_arg0_has_been_in_arg1_for_arg2_arg6_raise_arg3" 
+	LocalizeHtmlTemplate="HTML_If_arg0_has_been_in_arg1_for_arg2_arg6_raise_arg3" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="StatusToMonitor" DefaultValue="Choose_a_status" Link="http://StatusToMonitor"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="BD" RuleDesc="Before_a_date" 
+    Template="For_arg0_arg2_arg6_before_arg3_raise_arg1" 
+	LocalizeHtmlTemplate="HTML_For_arg0_arg2_arg6_before_arg3_raise_arg1" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="DateTypeToMonitor" DefaultValue="Choose_a_date_type" Link="http://DateTypeToMonitor" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="AD" RuleDesc="After_a_date" 
+    Template="For_arg0_arg2_arg6_after_arg3_,raise_arg1" 
+	LocalizeHtmlTemplate="HTML_For_arg0_arg2_arg6_after_arg3_,raise_arg1" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="DateTypeToMonitor" DefaultValue="Choose_a_date_type" Link="http://DateTypeToMonitor" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="AM" RuleDesc="After_a_Milestone" 
+    Template="For_arg0_arg2_arg6_after_arg3_,raise_arg1" 
+	LocalizeHtmlTemplate="HTML_For_arg0_arg2_arg6_after_arg3_,raise_arg1" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="DBD" RuleDesc="Date_before_another_date" 
+    Template="If_arg0_is_more_than_arg2_arg7_before_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_is_more_than_arg2_arg7_before_arg3_,raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" DefaultValue="Choose_a_date_type" Link="http://DateTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="DAD" RuleDesc="Date_after_another_date" 
+    Template="If_arg0_is_more_than_arg2_arg7_after_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_is_more_than_arg2_arg7_after_arg3_,raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" DefaultValue="Choose_a_date_type" Link="http://DateTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    
+	<MonitorType MonitorType="DWD" RuleDesc="Date_within_a_specified_time_after_another_date" 
+    Template="If_arg1_is_within_arg2_arg7_of_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg1_is_within_arg2_arg7_of_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" DefaultValue="Choose_a_date_type" Link="http://DateTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+
+	<MonitorType MonitorType="DNWD" RuleDesc="Date_not_within_a_specified_time_after_another_date" 
+    Template="If_arg1_is_not_within_arg2_arg7_of_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg1_is_not_within_arg2_arg7_of_arg3_,raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" DefaultValue="Choose_a_date_type" Link="http://DateTypeToMonitor" />
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+
+    </MonitorType>
+	
+	<MonitorType MonitorType="CMNRBD" RuleDesc="Conditionally_Milestone_has_not_reached_before_a_date" 
+	Template="If_arg0_meets_condition_arg7_and_has_not_reached_arg1_arg2_arg8_before_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg7_and_has_not_reached_arg1_arg2_arg8_before_arg3_,raise_arg4" 	>
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" DefaultValue="Choose_a_condition" Link="http://ConditionKey"/>
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="CMNRWD" RuleDesc="Conditionally_Milestone_has_not_reached_after_a_date" 
+    Template="If_arg1_meets_condition_arg7_and_has_not_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg1_meets_condition_arg7_and_has_not_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" Link="http://MilestoneTypeToMonitor"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="ComparisonDateType" DefaultValue="Choose_a_date_type" Link="http://ComparisonDateType" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" DefaultValue="Choose_a_condition" Link="http://ConditionKey"/>
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="CMNRWM" RuleDesc="Conditionally_Milestone_has_not_reached_after_another_Milestone" 
+    Template="If_arg1_meets_condition_arg7_and_has_not_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg1_meets_condition_arg7_and_has_not_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MilestoneTypeToMonitor" Link="http://MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonMilestoneType" Link="http://ComparisonMilestoneType" DefaultValue="Choose_a_milestone" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CMRBD" RuleDesc="Conditionally_Milestone_has_reached_before_a_date" 
+    Template="If_arg0_meets_condition_arg7_and_has_reached_arg1_arg2_arg8_before_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg7_and_has_reached_arg1_arg2_arg8_before_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MilestoneTypeToMonitor" Link="http://MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonDateType" Link="http://ComparisonDateType" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CMRWD" RuleDesc="Conditionally_Milestone_has_reached_after_a_date" 
+    Template="If_arg0_meets_condition_arg7_and_has_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg7_and_has_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MilestoneTypeToMonitor" Link="http://MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonDateType" Link="http://ComparisonDateType" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CMRWM" RuleDesc="Conditionally_Milestone_has_reached_after_another_Milestone" 
+    Template="If_arg0_meets_condition_arg7_and_has_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg7_and_has_reached_arg1_within_arg2_arg8_of_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MilestoneTypeToMonitor" Link="http://MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonMilestoneType" Link="http://ComparisonMilestoneType" DefaultValue="Choose_a_milestone" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CHBS" RuleDesc="Conditionally_has_been_in_a_status" 
+    Template="If_arg0_meets_condition_arg6_and_has_been_in_arg1_for_arg2_arg7_,raise_arg3" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg6_and_has_been_in_arg1_for_arg2_arg7_,raise_arg3" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="StatusToMonitor" DefaultValue="Choose_a_status" Link="http://StatusToMonitor"/>
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CBD" RuleDesc="Conditionally_before_a_date" 
+    Template="If_arg0_meets_condition_arg4_,raise_arg1_arg2_arg7_before_arg3" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg4_,raise_arg1_arg2_arg7_before_arg3" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CAD" RuleDesc="Conditionally_after_a_date" 
+    Template="If_arg0_meets_condition_arg4_,raise_arg1_arg2_arg7_after_arg3" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg4_,raise_arg1_arg2_arg7_after_arg3" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CAM" RuleDesc="Conditionally_after_a_Milestone" 
+    Template="If_arg0_meets_condition_arg4_,raise_arg1_arg2_arg7_after_arg3" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg4_,raise_arg1_arg2_arg7_after_arg3" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="MilestoneTypeToMonitor" Link="http://MilestoneTypeToMonitor" DefaultValue="Choose_a_milestone" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+
+    <MonitorType MonitorType="CDBD" RuleDesc="Conditionally_date_before_another_date" 
+    Template="If_arg0_meets_condition_arg7_and_if_arg1_is_arg2_arg8_before_arg3_raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg7_and_if_arg1_is_arg2_arg8_before_arg3_raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonDateType" Link="http://ComparisonDateType" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CDAD" RuleDesc="Conditionally_date_after_another_date" 
+    Template="If_arg0_meets_condition_arg7_and_if_arg1_is_more_than_arg2_arg8_after_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg7_and_if_arg1_is_more_than_arg2_arg8_after_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonDateType" Link="http://ComparisonDateType" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="CDWD" RuleDesc="Conditionally_date_within_a_specified_time_after_another_date" 
+    Template="If_arg0_meets_condition_arg7_and_if_arg1_is_within_arg2_arg8_after_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg7_and_if_arg1_is_within_arg2_arg8_after_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonDateType" Link="http://ComparisonDateType" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+
+    <MonitorType MonitorType="CDNWD" RuleDesc="Conditionally_date_not_within_a_specified_time_after_another_date" 
+    Template="If_arg0_meets_condition_arg0_and_if_arg1_is_not_within_arg2_arg8_after_arg3_,raise_arg4" 
+	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg0_and_if_arg1_is_not_within_arg2_arg8_after_arg3_,raise_arg4" >
+        <RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="Age" Link="http://Age" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ComparisonDateType" Link="http://ComparisonDateType" DefaultValue="Choose_a_date_type" />
+        <RuleParam Name="MonitorConsolidationKey" Link="http://MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" />
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="AgeType" Link="http://AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" />
+    </MonitorType>
+    <MonitorType MonitorType="HBHT" RuleDesc="Has_been_in_Hold_Type" 
+    Template="If_arg0_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_raise_arg4" 	LocalizeHtmlTemplate="HTML_If_arg0_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="HoldTypeKey" DefaultValue="Choose_a_Hold_Type" Link="http://HoldTypeKey"/>
+        <RuleParam Name="HoldTypeStatus" DefaultValue="Choose_a_Hold_Type_Status" Link="http://HoldTypeStatus"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+    </MonitorType>
+    <MonitorType MonitorType="CHBHT" RuleDesc="Conditionally_has_been_in_Hold_Type"    Template="If_arg0_meets_condition_arg8_and_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_raise_arg4" 	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg8_and_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="HoldTypeKey" DefaultValue="Choose_a_Hold_Type" Link="http://HoldTypeKey"/>
+        <RuleParam Name="HoldTypeStatus" DefaultValue="Choose_a_Hold_Type_Status" Link="http://HoldTypeStatus"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+    </MonitorType>
+    <MonitorType MonitorType="HBHTBD" RuleDesc="Has_been_in_Hold_Type_before_a_date" 
+    Template="If_arg0_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_before_arg8_raise_arg4" 	LocalizeHtmlTemplate="HTML_If_arg0_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_before_arg8_raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="HoldTypeKey" DefaultValue="Choose_a_Hold_Type" Link="http://HoldTypeKey"/>
+        <RuleParam Name="HoldTypeStatus" DefaultValue="Choose_a_Hold_Type_Status" Link="http://HoldTypeStatus"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+    </MonitorType>
+    <MonitorType MonitorType="CHBHTBD" RuleDesc="Conditionally_has_been_in_Hold_Type_before_a_date"    Template="If_arg0_meets_condition_arg8_and_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_before_arg9_raise_arg4" 	LocalizeHtmlTemplate="HTML_If_arg0_meets_condition_arg8_and_has_been_in_hold_type_arg1_with_hold_type_status_arg2_for_arg3_arg7_before_arg9_raise_arg4" >
+		<RuleParam Name="BusDoc" DefaultValue="Document" />
+        <RuleParam Name="HoldTypeKey" DefaultValue="Choose_a_Hold_Type" Link="http://HoldTypeKey"/>
+        <RuleParam Name="HoldTypeStatus" DefaultValue="Choose_a_Hold_Type_Status" Link="http://HoldTypeStatus"/>
+        <RuleParam Name="Age" DefaultValue="24" DefaultValid="Y" Link="http://Age" />
+        <RuleParam Name="MonitorConsolidationKey" DefaultValue="Choose_a_monitor_event" Link="http://MonitorConsolidationKey"/>
+        <RuleParam Name="RealertRequired" DefaultValue="N" DefaultValid="Y" />
+        <RuleParam Name="RealertInterval" DefaultValue="24" DefaultValid="Y" />
+        <RuleParam Name="AgeType" DefaultValue="Choose_a_calendar" DefaultValid="N" Link="http://AgeType" />
+        <RuleParam Name="ConditionKey" Link="http://ConditionKey" DefaultValue="Choose_a_condition" />
+        <RuleParam Name="DateTypeToMonitor" Link="http://DateTypeToMonitor" DefaultValue="Choose_a_date_type" />
+    </MonitorType>
+</MonitorTypeList>

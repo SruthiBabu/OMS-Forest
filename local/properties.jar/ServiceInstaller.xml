@@ -1,0 +1,390 @@
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2001, 2018  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="ServiceInstaller" default="all" basedir="..">
+
+	<import file="AFCTasks.xml"/>
+
+	<property file="${dir.install}/properties/serviceinstaller.properties" prefix="serviceinstall"/>
+	<property file="${dir.install}/properties/sandbox.cfg" prefix="sandbox" />
+
+	<condition property="usage.flag" value="-usage" else="" >
+		<or>
+			<istrue value="${USAGE}"/>
+			<istrue value="${serviceinstall.usage}"/>
+		</or>
+	</condition>
+	<condition property="tests.flag" value="-tests" else="" >
+		<or>
+			<istrue value="${TESTS}"/>
+			<istrue value="${serviceinstall.tests}"/>
+		</or>
+	</condition>
+	<condition property="compwarn.flag" value="-compwarn" else="" >
+		<or>
+			<istrue value="${COMPWARN}"/>
+			<istrue value="${serviceinstall.compwarn}"/>
+		</or>
+	</condition>
+	<condition property="force.flag" value="-force" else="" >
+		<or>
+			<istrue value="${FORCE}"/>
+			<istrue value="${serviceinstall.force}"/>
+		</or>
+	</condition>
+	<condition property="nodeploy.flag" value="-nodeploy" else="" >
+		<or>
+			<istrue value="${NODEPLOY}"/>
+			<istrue value="${serviceinstall.nodeploy}"/>
+		</or>
+	</condition>
+	<condition property="nochecksum.flag" value="-nochecksum" else="" >
+		<or>
+			<istrue value="${NOCHECKSUM}"/>
+			<istrue value="${serviceinstall.nochecksum}"/>
+		</or>
+	</condition>
+	<condition property="skipxapi.flag" value="-skipXAPI" else="" >
+		<or>
+			<istrue value="${SKIPXAPI}"/>
+			<istrue value="${serviceinstall.skipxapi}"/>
+		</or>
+	</condition>
+	<condition property="skipjavadocs.flag" value="-skipJavadocs" else="" >
+		<or>
+			<istrue value="${SKIPJAVADOCS}"/>
+			<istrue value="${serviceinstall.skipjavadocs}"/>
+		</or>
+	</condition>
+	<condition property="skipfactorysetup.flag" value="-skipFactorySetup" else="" >
+		<or>
+			<istrue value="${SKIPFACTORYSETUP}"/>
+			<istrue value="${serviceinstall.skipfactorysetup}"/>
+		</or>
+	</condition>
+	<condition property="silent.flags" value="-silent ${SILENT_FILE}" else="" >
+			<and>
+				<isset property="SILENT_FILE"/>
+				<isset property="SILENT_OPTION"/>
+				<istrue value="${SILENT_OPTION}"/>
+			</and>
+	</condition>
+	<condition property="matrix.flags" value="-matrix ${MATRIX_FILE}" else="" >
+		<and>
+			<isset property="MATRIX_FILE"/>
+			<isset property="MATRIX_OPTION"/>
+			<istrue value="${MATRIX_OPTION}"/>
+		</and>
+	</condition>
+
+	<AFCfail message="The script requires at least one argument to indicate the path to the Service Install package.">
+		<condition>
+			<equals arg1="${package.path}" arg2="UNSET" />
+		</condition>
+	</AFCfail>
+
+	<condition property="real.package.path" value="${package.path}">
+		<resourceexists>
+			<file file="${package.path}"/>
+		</resourceexists>
+	</condition>
+
+	<condition property="real.package.path" value="${user.dir}/${package.path}" >
+		<resourceexists>
+			<file file="${user.dir}/${package.path}"/>
+		</resourceexists>
+	</condition>
+
+	<AFCfail message="The package path given cannot be resolved to a valid file!  Neither {1} nor {2} is a valid path." >
+		<arg value="${package.path}"/>
+		<arg value="${user.dir}/${package.path}"/>
+		<condition>
+			<not>
+				<isset property="real.package.path"/>
+			</not>
+		</condition>
+	</AFCfail>
+
+	<condition property="platform_suffix" value="cmd" else="sh" >
+		<os family="windows"/>
+	</condition>
+
+	<target name="all" >
+		<antcall target="preinstall-service-validator"/>
+		<antcall target="patch-pre-install"/>
+		<antcall target="setup-files"/>
+		<antcall target="os-platformize"/>
+		<antcall target="service-preinstall"/>
+		<antcall target="fp-pre-install"/>
+		<antcall target="setup-files"/>
+		<!-- Intentionally not converting ${BIN_DIR}/updateJavaSecurity.sh 
+			 since afc_security clump is not relevant to foundation.
+		-->
+		<antcall target="generic-updater"/>
+		<antcall target="service-install-bootstrapper"/>
+		<antcall target="delete-vendor-jars"/>
+		<ant antfile="${dir.install}/properties/deployer.xml" target="deployall"/>
+	</target>
+
+	<target name="setup-files" >
+		<copy file="${dir.install}/bin/java_wrapper.${platform_suffix}.in" tofile="${dir.install}/bin/java_wrapper.temp.${platform_suffix}.in"/>
+		<path id="munge.path" >
+			<fileset dir="${dir.install}">
+							<include name="**/*.in"/>
+							<exclude name="installed_data/**"/>
+							<exclude name="database/**"/>
+							<exclude name="dbjar/**"/>
+							<exclude name="extensions/**"/>
+							<exclude name="external_deployments/**"/>
+							<exclude name="xapidocs/**"/>
+							<exclude name="tmp/**"/>
+							<exclude name="idx/**"/>
+							<exclude name="middleware/**"/>
+							<exclude name="jdk/**"/>
+							<exclude name="lib/**"/>
+							<exclude name="packages/**"/>	
+							<exclude name="lib/**"/>
+							<exclude name="logs/**"/>
+						</fileset>
+		</path>
+		<pathconvert property="munge.path.converted" pathsep="${line.separator}">
+			<path refid="munge.path"/>
+		</pathconvert>
+
+		<echo file="${dir.install}/bin/inppbatch" message="${munge.path.converted}"/>
+		<replaceregexp file="${dir.install}/bin/inppbatch" match="(.*).in"  replace="\1.in \1" byline="true"/>
+
+		<java classname="driver.inpp" dir="${dir.install}/bin" fork="true" >
+			<classpath>
+				<pathelement location="${dir.install}/jar/install_foundation.jar"/>
+				<pathelement location="${dir.install}/jar/platform_baseutils.jar"/>
+				<pathelement location="${dir.install}/jar/icu4j/${sandbox.ICU4J_VERSION}/icu4j-${sandbox.ICU4J_VERSION}.jar"/>
+			</classpath>
+			<arg line="exclude=java_wrapper.${platform_suffix}.in"/>
+			<arg line="file=${dir.install}/bin/inppconfig"/>
+			<arg line="backup_path=${dir.install}"/>
+			<arg line="backup_dirs=bin,properties"/>
+		</java>
+		<move file="${dir.install}/bin/java_wrapper.temp.${platform_suffix}.in" tofile="${dir.install}/bin/java_wrapper.${platform_suffix}.in" />
+		<!-- TODO:  should we delete the inppbatch file (necessary?)-->
+	</target>
+
+	<target name="preinstall-service-validator" >
+		<java classname="com.sterlingcommerce.woodstock.install.validate.SCPreInstallServiceValidator" failonerror="true" >
+			<permissions>
+  				<grant class="java.security.AllPermission"/>
+			</permissions>
+			<arg line="-jar ${real.package.path}"/>
+			<arg line="-install ${dir.install}"/>
+			<arg line="${usage.flag}"/>
+			<arg line="${compwarn.flag}"/>
+			<arg line="${silent.flags}"/>
+			<arg line="${matrix.flags}"/>
+		</java>
+
+		<!--
+			${JAVA_HOME}/bin/java -cp ${JAR_DIR}/install_foundation.jar:${DB_DRIVERS} 
+			com.sterlingcommerce.woodstock.install.validate.SCPreInstallServiceValidator 
+			-jar "${PACKAGE}" 
+			-install "${INSTALL_DIR}" 
+			${COMPWARN}
+		-->
+	</target>
+
+	<target name="patch-pre-install">
+		<java classname="com.sterlingcommerce.woodstock.install.module_loader.PatchPreInstall" fork="true" failonerror="true" >
+			<classpath>
+				<pathelement location="${dir.install}/jar/serviceinstallbootstrapper.jar"/>
+				<pathelement location="${dir.install}/jar/icu4j/${sandbox.ICU4J_VERSION}/icu4j-${sandbox.ICU4J_VERSION}.jar"/>
+			</classpath>
+			<arg line="-f ${real.package.path}"/>
+			<arg line="-c ${dir.install}/properties/sandbox.cfg"/>
+		</java>
+		<!--
+			${JAVA_HOME}/bin/java -cp ${JAR_DIR}/serviceinstallbootstrapper.jar 
+			com.sterlingcommerce.woodstock.install.module_loader.PatchPreInstall 
+			-f ${PACKAGE} 
+			-c ${PROP_DIR}/sandbox.cfg
+		-->
+	</target>
+		
+	<target name="fp-pre-install">
+		<condition property="FPPreInstallAntPresent" value="true">
+            <available file="${dir.install}/properties/FPPreInstall.xml"/>
+        </condition>
+		<antcall target="-fp-pre-install" >
+		    <param name="FPPreInstallFile" value="${dir.install}/properties/FPPreInstall.xml" />
+		</antcall>
+	</target>
+	
+	<target name="-fp-pre-install" if="FPPreInstallAntPresent">
+		<ant antfile="${FPPreInstallFile}" target="smcfs-fp-pre-install"/>
+	</target>
+
+	<target name="os-platformize">
+		<condition property="platform_invalid_suffix" value="sh" else="cmd" >
+			<os family="windows"/>
+		</condition>
+		<chmod perm="a+x" >
+			<fileset dir="${dir.install}">
+				<include name="**/*.${platform_suffix}"/>
+				<exclude name="database/**"/>
+				<exclude name="dbjar/**"/>
+				<exclude name="extensions/**"/>
+				<exclude name="external_deployments/**"/>
+				<exclude name="xapidocs/**"/>
+				<exclude name="tmp/**"/>
+				<exclude name="idx/**"/>
+				<exclude name="middleware/**"/>
+				<exclude name="jdk/**"/>
+				<exclude name="lib/**"/>
+				<exclude name="packages/**"/>	
+				<exclude name="lib/**"/>
+				<exclude name="logs/**"/>
+				<!-- TODO:  They were chmod +x-ing the sh.in files in the old script - was this purposeful? -->
+			</fileset>
+		</chmod>
+		<!-- Devtoolkit Window's support-->
+		<!-- <delete>
+			<fileset dir="${dir.install}">
+				<include name="**/*.${platform_invalid_suffix}"/>
+				<include name="**/*.${platform_invalid_suffix}.in"/>
+				<exclude name="database/**"/>
+				<exclude name="dbjar/**"/>
+				<exclude name="extensions/**"/>
+				<exclude name="external_deployments/**"/>
+				<exclude name="xapidocs/**"/>
+				<exclude name="tmp/**"/>
+				<exclude name="idx/**"/>
+				<exclude name="middleware/**"/>
+				<exclude name="jdk/**"/>
+				<exclude name="lib/**"/>
+				<exclude name="packages/**"/>	
+				<exclude name="lib/**"/>
+				<exclude name="logs/**"/>
+			</fileset>
+		</delete>-->
+	</target>
+
+	<target name="service-preinstall">
+		<java classname="com.sterlingcommerce.woodstock.install.module_loader.ClassLoader"  fork="true"  failonerror="true" >
+			<!--
+			<permissions>
+				<grant class="java.lang.RuntimePermission" name="exitVM.*" />
+			</permissions>
+			-->
+			<classpath>
+				<pathelement location="${dir.install}/jar/serviceinstallbootstrapper.jar"/>
+				<pathelement location="${dir.install}/jar/install_foundation.jar"/>
+				<pathelement location="${dir.install}/jar/icu4j/${sandbox.ICU4J_VERSION}/icu4j-${sandbox.ICU4J_VERSION}.jar"/>
+			</classpath>
+			<arg line="-f ${real.package.path}"/>
+			<arg line="-c ${dir.install}/properties/sandbox.cfg"/>
+			<arg line="-a ${dir.install}/properties/apservsetup"/>
+			<arg line="-v ${dir.install}/properties/ports"/>
+			<arg line="${tests.flag}"/>
+			<arg line="${force.flag}"/>
+			<arg line="${silent.flags}"/>
+			<sysproperty key="cpFile" value="${dir.install}/properties/dynamicclasspath.cfg"/>
+			<sysproperty key="vendor" value="shell"/>
+			<sysproperty key="vendorFile" value="${dir.install}/properties/servers.properties"/>
+			<sysproperty key="loadClass" value="com.sterlingcommerce.woodstock.install.module_loader.ServicePreInstall"/>
+		</java>
+		<!-- ${JAVA_HOME}/bin/java 
+			-cp ${JAR_DIR}/serviceinstallbootstrapper.jar:${JAR_DIR}/install_foundation.jar:${DB_DRIVERS} 
+			-DcpFile=$cpFile -Dvendor=shell -DvendorFile=${PROP_DIR}/servers.properties 
+			-DloadClass=com.sterlingcommerce.woodstock.install.module_loader.ServicePreInstall 
+			com.sterlingcommerce.woodstock.install.module_loader.ClassLoader 
+			-f ${PACKAGE} 
+			-c ${PROP_DIR}/sandbox.cfg 
+			-a /home/dgoldgar/litterbox/INDUS/install_db2/properties/apservsetup 
+			-v /home/dgoldgar/litterbox/INDUS/install_db2/properties/ports 
+			${TESTS} 
+			${FORCE} 
+			-silent ${SILENT_FILE}
+			-->
+	</target>
+	<target name="generic-updater">
+		<java  classname="com.sterlingcommerce.woodstock.install.module_loader.GenericUpdater"   failonerror="true" >
+			<classpath>
+				<pathelement location="${dir.install}/jar/icu4j/${sandbox.ICU4J_VERSION}/icu4j-${sandbox.ICU4J_VERSION}.jar"/>
+				<pathelement location="${dir.install}/jar/serviceinstallbootstrapper.jar"/>
+				<pathelement location="${dir.install}/jar/icu4j/${sandbox.ICU4J_VERSION}/icu4j-${sandbox.ICU4J_VERSION}.jar"/>
+				<pathelement location="${dir.install}/jar/install_foundation.jar"/>
+			</classpath>
+			<arg line="-f ${real.package.path}"/>
+			<arg line="-c ${dir.install}/properties/sandbox.cfg"/>
+		</java>
+		<!--
+		/home/dgoldgar/litterbox/INDUS/install_db2/jdk/bin/java 
+			-cp ${JAR_DIR}/serviceinstallbootstrapper.jar:${JAR_DIR}/install_foundation.jar:${DB_DRIVERS} 
+		    com.sterlingcommerce.woodstock.install.module_loader.GenericUpdater 
+			-f ${PACKAGE} 
+			-c ${PROP_DIR}/sandbox.cfg
+		-->
+	</target>
+
+	<target name="service-install-bootstrapper">
+
+			<java classname="com.sterlingcommerce.woodstock.install.module_loader.ServiceInstallBootstrapper" fork="true"  failonerror="true" >
+				<classpath>
+					<pathelement location="${dir.install}/jar/icu4j/${sandbox.ICU4J_VERSION}/icu4j-${sandbox.ICU4J_VERSION}.jar"/>
+					<pathelement location="${dir.install}/jar/serviceinstallbootstrapper.jar"/>
+					<pathelement location="${dir.install}/jar/platform_baseutils.jar"/>
+				</classpath>
+				<sysproperty key="cpFile" value="${dir.install}/properties/dynamicclasspath.cfg"/>
+				<sysproperty key="vendor" value="shell"/>
+				<sysproperty key="vendorFile" value="${dir.install}/properties/servers.properties"/>
+				<arg line="-c ${dir.install}/properties/sandbox.cfg"/>
+				<arg line="-a ${dir.install}/properties/apservsetup"/>
+				<arg line="-v ${dir.install}/properties/ports"/>
+				<arg line="-b ${real.package.path}"/>
+				<arg line="-backupfiles"/>
+				<arg line="${tests.flag}"/>
+				<arg line="${force.flag}"/>
+				<arg line="${nochecksum.flag}"/>
+				<arg line="${skipxapi.flag}"/>
+				<arg line="${skipjavadocs.flag}"/>
+				<arg line="${skipfactorysetup.flag}"/>
+			</java>
+				<!--
+				${INSTALL_JAVA} -DcpFile=$cpFile 
+					-Dvendor=shell 
+					-DvendorFile=/home/dgoldgar/litterbox/INDUS/install_db2/properties/servers.properties 
+					-jar /home/dgoldgar/litterbox/INDUS/install_db2/jar/serviceinstallbootstrapper.jar 
+				-c /home/dgoldgar/litterbox/INDUS/install_db2/properties/sandbox.cfg 
+				-a /home/dgoldgar/litterbox/INDUS/install_db2/properties/apservsetup 
+				-v /home/dgoldgar/litterbox/INDUS/install_db2/properties/ports 
+				-b ${PACKAGE} 
+				${TESTS} 
+				${FORCE} 
+				${NOCHECKSUM} 
+				${SILENT} 
+				${SILENT_FILE}  does not appear to be supported by the java program...
+				-backupfiles 
+				$COMARGS 
+				${NOPREREQUISITECHECKFAILURE}  
+				${SKIPXAPI} 
+				${SKIPJAVADOCS} 
+				${SKIPFACTORYSETUP}
+			-->
+	</target>
+
+	<target name="delete-vendor-jars">
+		<property name="master.list" value="${dir.install}/jar/jarstodelete.txt"/>
+		<java classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"  failonerror="true" >
+			<sysproperty key="vendor" value="shell"/>
+			<sysproperty key="vendorFile" value="${dir.install}/properties/servers.properties"/>
+			<classpath>
+				<pathelement location="${dir.install}/jar/bootstrapper.jar"/>
+			</classpath>
+			<arg line="-f ${dir.install}/properties/dynamicclasspath.cfg"/>
+			<arg line ="-class com.ibm.sterling.programs.DeleteVendorJars"/>
+			<arg line="-invokeargs -JARS_TO_DELETE ${master.list}"/>
+		</java>
+	</target>
+
+</project>

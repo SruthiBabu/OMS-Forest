@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBscheme>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains information questions for question types defined by an organization."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Question" Prefix="YFS_" TableName="YFS_QUESTION"
+            TableType="CONFIGURATION" XMLName="Question">
+            <Attributes>
+                <Attribute ColumnName="QUESTION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key of question."
+                    Name="Question_Key" Nullable="false" XMLName="QuestionKey"/>
+                <Attribute ColumnName="QUESTION_ID" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="Identifier for the question."
+                    Name="Question_ID" Nullable="false" XMLName="QuestionID"/>
+                <Attribute ColumnName="QUESTION_TYPE" DataType="Text-20"
+                    DefaultValue="' ' " Description="The question type."
+                    Name="Question_Type" Nullable="false" XMLName="QuestionType"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The organization that defined the question."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute CanTranslate="Y" ColumnName="QUESTION_TEXT"
+                    DataType="Text-200" DefaultValue="' ' "
+                    Description="The text to display when posing the question."
+                    Name="Question_Text" Nullable="false" XMLName="QuestionText"/>
+                <Attribute ColumnName="SEQUENCE_NO"
+                    DataType="ShorterNumber" DefaultValue="0"
+                    Description="Specifies for the question hierarchy level of this question, what sequence to display this question in."
+                    Name="Sequence_No" Nullable="false" XMLName="SequenceNo"/>
+                <Attribute ColumnName="IS_GROUP" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="Indicates if the question is a grouping for a set of questions."
+                    Name="Is_Group" Nullable="false" XMLName="IsGroup"/>
+                <Attribute ColumnName="DATA_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="Indicates what type of data type is expected for the answer.  Valid values are BOOLEAN, DECIMAL, INTEGER, TEXT."
+                    Name="Data_Type" Nullable="false" XMLName="DataType"/>
+                <Attribute ColumnName="DISPLAY_CONTROL_TYPE"
+                    DataType="Text-20" DefaultValue="' ' "
+                    Description="Indicates what type of display control to show for the user interface when supplying an answer.  Valid values are CHECK_BOX, DROPDOWN, RADIO_BUTTON, TEXT_BOX, TEXT_FIELD."
+                    Name="Display_Control_Type" Nullable="false"/>
+                <Attribute ColumnName="PARENT_QUESTION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Question Key of the question group to which this question belongs."
+                    Name="Parent_Question_Key" Nullable="false" XMLName="ParentQuestionKey"/>
+                <Attribute ColumnName="PARENT_ANSWER_OPTION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Answer Option Key of the answer option that is required to be selected in order to ask this question."
+                    Name="Parent_Answer_Option_Key" Nullable="false" XMLName="ParentAnswerOptionKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0    "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="QUESTION_PK">
+                <Attribute ColumnName="QUESTION_KEY" Name="Question_Key" XMLName="QuestionKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="QUESTION_I1" Name="YFS_QUESTION_I1" Unique="true">
+                    <Column Name="QUESTION_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="QUESTION_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="QuestionList"
+                    ChildName="SubQuestion" ChildXMLName="Question"
+                    DeleteCascade="true" ForeignEntity="Question"
+                    Name="QuestionGroup" Type="Bidirectional" XMLName="Question">
+                    <Attribute Name="Parent_Question_Key" ParentName="Question_Key"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Question_Type" ParentName="Question_Type"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="QuestionList"
+                    ChildName="FollowupQuestion" ChildXMLName="Question"
+                    DeleteCascade="true" ForeignEntity="Answer_Option"
+                    Name="ParentAnswerOption" Type="Bidirectional" XMLName="ParentAnswerOption">
+                    <Attribute Name="Parent_Answer_Option_Key" ParentName="Answer_Option_Key"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Question_Type" ParentName="Question_Type"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains information on valid answer options for questions."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Answer_Option" Prefix="YFS_"
+            TableName="YFS_ANSWER_OPTION" TableType="CONFIGURATION" XMLName="AnswerOption"
+            LockingEntity="Question">
+            <Attributes>
+                <Attribute ColumnName="ANSWER_OPTION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key of answer option."
+                    Name="Answer_Option_Key" Nullable="false" XMLName="AnswerOptionKey"/>
+                <Attribute ColumnName="ANSWER_OPTION_VALUE"
+                    DataType="Text-20" DefaultValue="' ' "
+                    Description="A predefined value allowed for a question."
+                    Name="Answer_Option_Value" Nullable="false" XMLName="AnswerOptionValue"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' '  "
+                    Description="A description." Name="Description"
+                    Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="QUESTION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The question for which this answer option was defined."
+                    Name="Question_Key" Nullable="false" XMLName="QuestionKey"/>
+                <Attribute ColumnName="QUESTION_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The question type that this answer option is relevant for."
+                    Name="Question_Type" Nullable="false" XMLName="QuestionType"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The organization that defined this answer option."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SEQUENCE_NO"
+                    DataType="ShorterNumber" DefaultValue="0"
+                    Description="Specifies for the question what sequence the answer is shown in."
+                    Name="Sequence_No" Nullable="false" XMLName="SequenceNo"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0    "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ANSWER_OPTION_PK">
+                <Attribute ColumnName="ANSWER_OPTION_KEY"
+                    Name="Answer_Option_Key" XMLName="AnswerOptionKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ANSWER_OPTION_I1"
+                    Name="YFS_ANSWER_OPTION_I1" Unique="true">
+                    <Column Name="QUESTION_KEY"/>
+                    <Column Name="ANSWER_OPTION_VALUE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AnswerOptionList"
+                    ChildName="AnswerOption" DeleteCascade="true"
+                    ForeignEntity="Question" Name="Question"
+                    Type="Bidirectional" XMLName="Question">
+                    <Attribute Name="Question_Key" ParentName="Question_Key"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Question_Type" ParentName="Question_Type"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains information on capacity impact based on answers."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Answer_Capacity_Impact" Prefix="YFS_"
+            TableName="YFS_ANSWER_CAPACITY_IMPACT"
+            TableType="CONFIGURATION" XMLName="AnswerCapacityImpact"
+            LockingEntity="Answer_Option">
+            <Attributes>
+                <Attribute ColumnName="ANSWER_CAPACITY_IMPACT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key of answer capacity impact."
+                    Name="Answer_Capacity_Impact_Key" Nullable="false" XMLName="AnswerCapacityImpactKey"/>
+                <Attribute ColumnName="ANSWER_OPTION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The answer option that causes this capacity impact."
+                    Name="Answer_Option_Key" Nullable="false" XMLName="AnswerOptionKey"/>
+                <Attribute ColumnName="QUESTION_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The question type that this answer capacity impact is relevant for."
+                    Name="Question_Type" Nullable="false" XMLName="QuestionType"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The organization that defined this answer capacity impact."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SERVICE_TYPE_ID"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="The unique identifier for service type that belongs to a catalog organization."
+                    Name="Service_Type_Id" Nullable="false" XMLName="ServiceTypeID"/>
+                <Attribute ColumnName="CAPACITY_IMPACT_FIXED"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The fixed amount by which the capacity will be affected when the answer option of this record is selected."
+                    Name="Capacity_Impact_Fixed" Nullable="false" XMLName="CapacityImpactFixed"/>
+                <Attribute ColumnName="CAPACITY_IMPACT_FACTOR"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The factor which will multiplied against an answer to calculate the capacity impact when the answer option of this record is selected."
+                    Name="Capacity_Impact_Factor" Nullable="false" XMLName="CapacityImpactFactor"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0    "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ANSWER_CAP_IMP_PK">
+                <Attribute ColumnName="ANSWER_CAPACITY_IMPACT_KEY"
+                    Name="Answer_Capacity_Impact_Key" XMLName="AnswerCapacityImpactKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ANSWER_CAP_IMP_I1"
+                    Name="YFS_ANSWER_CAPACITY_IMPACT_I1" Unique="true">
+                    <Column Name="ANSWER_OPTION_KEY"/>
+                    <Column Name="SERVICE_TYPE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AnswerCapacityImpactList"
+                    ChildName="AnswerCapacityImpact"
+                    DeleteCascade="true" ForeignEntity="Answer_Option"
+                    Name="AnswerOption" Type="Bidirectional" XMLName="AnswerOption">
+                    <Attribute Name="Answer_Option_Key" ParentName="Answer_Option_Key"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Question_Type" ParentName="Question_Type"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="false"
+            Description="Stores the relationship between a set of answers and the entities which provided these answers."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            Module="ysc" Name="Answer_Set_Tran" Prefix="YFS_"
+            TableName="YFS_ANSWER_SET_TRAN" TableType="TRANSACTION" XMLName="AnswerSet">
+            <Attributes>
+                <Attribute ColumnName="ANSWER_SET_TRAN_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key of answer set tran."
+                    Name="Answer_Set_Tran_Key" Nullable="false" XMLName="AnswerSetTranKey"/>
+                <Attribute ColumnName="QUESTION_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The question type that this answer set is for."
+                    Name="Question_Type" Nullable="false" XMLName="QuestionType"/>
+                <Attribute ColumnName="PRIMARY_TABLE_NAME"
+                    DataType="TableName" DefaultValue="' ' "
+                    Description="The name of the table which stores the record of the primary owner of this answer set."
+                    Name="Primary_Table_Name" Nullable="false" XMLName="PrimaryTableName"/>
+                <Attribute ColumnName="PRIMARY_TABLE_REF_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The key for the primary owner of this answer set."
+                    Name="Primary_Table_Ref_Key" Nullable="false" XMLName="PrimaryTableRefKey"/>
+                <Attribute ColumnName="SECONDARY_TABLE_NAME"
+                    DataType="TableName" DefaultValue="' ' "
+                    Description="The name of the table which stores the record for the secondary owner of this answer set."
+                    Name="Secondary_Table_Name" Nullable="false" XMLName="SecondaryTableName"/>
+                <Attribute ColumnName="SECONDARY_TABLE_REF_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The key for the secondary owner of this answer set."
+                    Name="Secondary_Table_Ref_Key" Nullable="false" XMLName="SecondaryTableRefKey"/>
+                <Attribute ColumnName="ACTION" DataType="Action"
+                    DefaultValue="' ' " Description="" Name="Action"
+                    Nullable="false" Virtual="true" XMLName="Action">
+                    <DBType Name="DERBY" ColumnName="ACTION_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0    "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ANSWER_SET_TRAN_PK">
+                <Attribute ColumnName="ANSWER_SET_TRAN_KEY"
+                    Name="Answer_Set_Tran_Key" XMLName="AnswerSetTranKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ANSWER_SET_TRAN_I1"
+                    Name="YFS_ANSWER_SET_TRAN_I1" Unique="true">
+                    <Column Name="QUESTION_TYPE"/>
+                    <Column Name="PRIMARY_TABLE_NAME"/>
+                    <Column Name="PRIMARY_TABLE_REF_KEY"/>
+                    <Column Name="SECONDARY_TABLE_NAME"/>
+                    <Column Name="SECONDARY_TABLE_REF_KEY"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity Cacheable="false"
+            Description="Stores each answer for an answer set."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            Module="ysc" Name="Answer_Tran" Prefix="YFS_"
+            TableName="YFS_ANSWER_TRAN" TableType="TRANSACTION" XMLName="Answer">
+            <Attributes>
+                <Attribute ColumnName="ANSWER_TRAN_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key of answer tran."
+                    Name="Answer_Tran_Key" Nullable="false" XMLName="AnswerTranKey"/>
+                <Attribute ColumnName="ANSWER_SET_TRAN_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The answer set for this answer."
+                    Name="Answer_Set_Tran_Key" Nullable="false" XMLName="AnswerSetTranKey"/>
+                <Attribute ColumnName="QUESTION_ID" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="Identifier for the question that this answer is for."
+                    Name="Question_ID" Nullable="false" XMLName="QuestionID"/>
+                <Attribute ColumnName="ANSWER_VALUE"
+                    DataType="Text-1000" DefaultValue="' ' "
+                    Description="The answer for the question."
+                    Name="Answer_Value" Nullable="false" XMLName="AnswerValue"/>
+                <Attribute ColumnName="ACTION" DataType="Action"
+                    DefaultValue="' ' " Description="" Name="Action"
+                    Nullable="false" Virtual="true" XMLName="Action">
+                    <DBType Name="DERBY" ColumnName="ACTION_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0    "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ANSWER_TRAN_PK">
+                <Attribute ColumnName="ANSWER_TRAN_KEY"
+                    Name="Answer_Tran_Key" XMLName="AnswerTranKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ANSWER_TRAN_I1"
+                    Name="YFS_ANSWER_TRAN_I1" Unique="true">
+                    <Column Name="ANSWER_SET_TRAN_KEY"/>
+                    <Column Name="QUESTION_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Answers" ChildName="Answer"
+                    DeleteCascade="true" ForeignEntity="Answer_Set_Tran"
+                    Name="AnswerSet" Type="Bidirectional" XMLName="AnswerSet">
+                    <Attribute Name="Answer_Set_Tran_Key" ParentName="Answer_Set_Tran_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores the relationship between a set of answers and the entities which provided these answers."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Answer_Set_Master" Prefix="YFS_"
+            TableName="YFS_ANSWER_SET_MASTER" TableType="MASTER" XMLName="AnswerSet"
+            LockingEntity="Customer">
+            <Attributes>
+                <Attribute ColumnName="ANSWER_SET_MASTER_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key of answer set master."
+                    Name="Answer_Set_Master_Key" Nullable="false" XMLName="AnswerSetMasterKey"/>
+                <Attribute ColumnName="QUESTION_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The question type that this answer set is for."
+                    Name="Question_Type" Nullable="false" XMLName="QuestionType"/>
+                <Attribute ColumnName="PRIMARY_TABLE_NAME"
+                    DataType="TableName" DefaultValue="' ' "
+                    Description="The name of the table which stores the record of the primary owner of this answer set."
+                    Name="Primary_Table_Name" Nullable="false" XMLName="PrimaryTableName"/>
+                <Attribute ColumnName="PRIMARY_TABLE_REF_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The key for the primary owner of this answer set."
+                    Name="Primary_Table_Ref_Key" Nullable="false" XMLName="PrimaryTableRefKey"/>
+                <Attribute ColumnName="SECONDARY_TABLE_NAME"
+                    DataType="TableName" DefaultValue="' ' "
+                    Description="The name of the table which stores the record for the secondary owner of this answer set."
+                    Name="Secondary_Table_Name" Nullable="false" XMLName="SecondaryTableName"/>
+                <Attribute ColumnName="SECONDARY_TABLE_REF_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The key for the secondary owner of this answer set."
+                    Name="Secondary_Table_Ref_Key" Nullable="false" XMLName="SecondaryTableRefKey"/>
+                <Attribute ColumnName="ACTION" DataType="Action"
+                    DefaultValue="' ' " Description="" Name="Action"
+                    Nullable="false" Virtual="true" XMLName="Action">
+                    <DBType Name="DERBY" ColumnName="ACTION_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0    "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ANSWER_SET_MAS_PK">
+                <Attribute ColumnName="ANSWER_SET_MASTER_KEY"
+                    Name="Answer_Set_Master_Key" XMLName="AnswerSetMasterKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ANSWER_SET_MAS_I1"
+                    Name="YFS_ANSWER_SET_MASTER_I1" Unique="true">
+                    <Column Name="QUESTION_TYPE"/>
+                    <Column Name="PRIMARY_TABLE_NAME"/>
+                    <Column Name="PRIMARY_TABLE_REF_KEY"/>
+                    <Column Name="SECONDARY_TABLE_NAME"/>
+                    <Column Name="SECONDARY_TABLE_REF_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AnswerSets" ChildName="AnswerSet"
+                    ChildXMLName="AnswerSet" DeleteCascade="true"
+                    ForeignEntity="Customer" Name="Customer"
+                    Type="Bidirectional" XMLName="Customer">
+                    <Attribute Name="Primary_Table_Ref_Key" ParentName="Customer_Key"/>
+                    <Attribute Name="Primary_Table_Name" ParentName="YFS_CUSTOMER"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores the relationship between a set of answers and the entities which provided these answers."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Answer_Master" Prefix="YFS_"
+            TableName="YFS_ANSWER_MASTER" TableType="MASTER" XMLName="Answer"
+            LockingEntity="Answer_Set_Master">
+            <Attributes>
+                <Attribute ColumnName="ANSWER_MASTER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key of answer master."
+                    Name="Answer_Master_Key" Nullable="false" XMLName="AnswerMasterKey"/>
+                <Attribute ColumnName="ANSWER_SET_MASTER_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The answer set for this answer."
+                    Name="Answer_Set_Master_Key" Nullable="false" XMLName="AnswerSetMasterKey"/>
+                <Attribute ColumnName="QUESTION_ID" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="Identifier for the question that this answer is for."
+                    Name="Question_ID" Nullable="false" XMLName="QuestionID"/>
+                <Attribute ColumnName="ANSWER_VALUE"
+                    DataType="Text-1000" DefaultValue="' ' "
+                    Description="The answer for the question."
+                    Name="Answer_Value" Nullable="false" XMLName="AnswerValue"/>
+                <Attribute ColumnName="ACTION" DataType="Action"
+                    DefaultValue="' ' " Description="" Name="Action"
+                    Nullable="false" Virtual="true" XMLName="Action">
+                    <DBType Name="DERBY" ColumnName="ACTION_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0    "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ANSWER_MASTER_PK">
+                <Attribute ColumnName="ANSWER_MASTER_KEY"
+                    Name="Answer_Master_Key" XMLName="AnswerMasterKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ANSWER_MASTER_I1"
+                    Name="YFS_ANSWER_MASTER_I1" Unique="true">
+                    <Column Name="ANSWER_SET_MASTER_KEY"/>
+                    <Column Name="QUESTION_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Answers" ChildName="Answer"
+                    DeleteCascade="true"
+                    ForeignEntity="Answer_Set_Master" Name="AnswerSet"
+                    Type="Bidirectional" XMLName="AnswerSet">
+                    <Attribute Name="Answer_Set_Master_Key" ParentName="Answer_Set_Master_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBscheme>

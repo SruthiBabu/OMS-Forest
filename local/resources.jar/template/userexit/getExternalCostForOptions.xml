@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2010, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Promise>
+<PromiseLines>
+<PromiseLine CarrierServiceCode="" DeliveryMethod="" DistributionRuleId="" FillQuantity="" FulfillmentType=""  ItemID="" LineId="" ProductClass="" ReceivingNode="" RequiredQty="" SCAC="" ScacAndServiceKey="" ShipNode="" UnitOfMeasure=""> 
+<PossibleAssignments>
+     <Assignment AssignmentKey=""  CapacityUtilization="" CarrierServiceCode=""  DeliveryDate="" Distance="" ProcuredQty=""  ProductAvailDate="" Quantity="" SCAC="" ShipDate="" ShipNode="">
+		<PossibleCarriers>
+			<Carrier CarrierServiceCode="" ExpectedShipmentDate="" ExpectedDeliveryDate=""/>
+		</PossibleCarriers>
+         <Costs Currency=""  ItemInventoryCostPerUnit=""   NodePriorityCostPerUnit=""
+             NodeShippingCapacityCostPerUnit="" OutboundShipmentHandlingCostPerUnit=""/>
+         <SubstituteItems>
+             <SubstituteItem      AssignmentKey=""  CapacityUtilization="" ItemID=""  ProcuredQty="" ProductClass=""  Quantity=""    ShipDate="" UOM=" ">
+                 <Costs Currency=""    ItemInventoryCostPerUnit="" />                     
+                 <Procurements>
+                     <Procurement   AssignmentKey=""  CapacityUtilization=""  ProcureFromNode=" "   Quantity="" ShipDate="">
+                        <Costs Currency=""   ItemInventoryCostPerUnit=""  NodePriorityCostPerUnit=""                     NodeShippingCapacityCostPerUnit="" OutboundShipmentHandlingCostPerUnit=""/>
+                     </Procurement>
+                 </Procurements>
+            </SubstituteItem>
+         </SubstituteItems>
+         <Procurements>
+            <Procurement   AssignmentKey=""  CapacityUtilization="" ProcureFromNode=" "   Quantity="" ShipDate="">
+		    <Costs Currency=""   ItemInventoryCostPerUnit=""   NodePriorityCostPerUnit="" NodeShippingCapacityCostPerUnit="" OutboundShipmentHandlingCostPerUnit=""/>
+            </Procurement>
+         </Procurements>   
+		</Assignment>
+	</PossibleAssignments>
+	</PromiseLine>
+	</PromiseLines>
+	</Promise>

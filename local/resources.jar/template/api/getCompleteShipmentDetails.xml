@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2008, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Order DisplayStatusDescription="" LastOrderLineKey="" LastRecordSet=""
+    TotalLineList="" TotalNumberOfRecords="" EnterpriseCode="">
+    <OrderHoldTypes>
+        <OrderHoldType HoldType="" ReasonText="" Status="" StatusDescription="">
+        </OrderHoldType>
+    </OrderHoldTypes>
+    <OrderLines>
+        <OrderLine CarrierServiceCode="" DeliveryMethod=""
+            DisplayStatusDescription="" ItemGroupCode=""
+            OrderHeaderKey="" OrderLineKey="" OrderedQty=""
+            PromisedApptEndDate="" PromisedApptStartDate=""
+            ReceivingNode="" ReshipParentLineKey="" ReshippedQty=""
+            SCAC="" ScacAndService="" ScacAndServiceKey="" ShipNode=""
+            Status="" Timezone="" GiftFlag="">
+			<ItemTrackingLevels>
+				<ItemTrackingLevel TrackingLevel="" TrackingLevelDesc=""/>
+			</ItemTrackingLevels>
+			<OrderLineTranQuantity OrderedQty="" TransactionalUOM="" />
+			<Item CostCurrency="" ItemDesc="" ItemID="" ItemShortDesc=""/>
+			<ItemDetails ItemID="">
+				<PrimaryInformation DefaultProductClass=""
+				Description=""
+				ExtendedDescription="" ShortDescription=""/> 
+					<ItemAttributeGroupTypeList>
+						<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsAdditionalAttributeAllowed="" IsSingleGroup="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey="">
+						<ItemAttributeGroupList>
+							<ItemAttributeGroup CategoryKey="" IsInherited="" ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" SequenceNo="">
+							<ItemAttributeList>
+								<ItemAttribute IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value=""/> 
+							</ItemAttributeList>
+							</ItemAttributeGroup>
+						</ItemAttributeGroupList>
+					</ItemAttributeGroupType>
+				</ItemAttributeGroupTypeList>
+			</ItemDetails>
+            <LinePriceInfo UnitPrice=""/>
+            <WorkOrders>
+                <WorkOrder IsMultiApptRequired="" ReasonCode=""
+                    ReasonText="" Status="" StatusDescription="" WorkOrderKey="">
+              		<WorkOrderServiceLines>
+						<WorkOrderServiceLine CauseAppointmentChange="" CompletedByApptSeq="" IsComplete="" ItemDescription="" ItemGroupCode="" ItemID="" ItemShortDescription="" LineNo="" QuantityRequired="" Uom="" WorkOrderServiceLineKey="">
+							<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo="" ItemGroupCode="">
+                                <LinePriceInfo UnitPrice=""/>
+								<Order DocumentType="" EnterpriseCode="" OrderHeaderKey="" OrderNo="" > 	
+								<PriceInfo Currency=""/>
+								 </Order>
+							</OrderLine>
+						</WorkOrderServiceLine>
+					</WorkOrderServiceLines>                    
+                    <WorkOrderProdDeliveries>
+                        <WorkOrderProdDelivery ItemDescription="" Uom=""
+                            ItemID="" ItemShortDescription="" LineNo=""
+                            ProductClass="" QuantityDelivered=""
+                            QuantityRequired="" WorkOrderProdDeliveryKey="">
+                            <OrderLine OrderLineKey="">
+                                <LinePriceInfo UnitPrice=""/>
+                                <Order OrderHeaderKey="">
+                                    <PriceInfo Currency=""/>
+                                </Order>
+                            </OrderLine>
+                        </WorkOrderProdDelivery>
+                    </WorkOrderProdDeliveries>
+                    <WorkOrderAppointments>
+                        <WorkOrderAppointment ApptSeq="" ApptStatus=""
+                            ExecutionComments="" ExecutionEndTime=""
+                            ExecutionStartTime="" FailureReasonCode=""
+                            PromisedApptEndDate=""
+                            PromisedApptStartDate="" WorkOrderApptKey=""/>
+                    </WorkOrderAppointments>
+                </WorkOrder>
+            </WorkOrders>
+            <KitLines/>
+            <OrderStatuses>
+                <OrderStatus OrderHeaderKey="" OrderLineKey=""
+                    OrderLineScheduleKey="" OrderReleaseKey=""
+                    ShipNode="" Status="" StatusDate=""
+                    StatusDescription="" StatusQty="" TotalQuantity="" ItemTrackingLevel="" ExpectedQtyOnDeliveryDate="">
+                    <Details ExpectedDeliveryDate="" ExpectedShipmentDate=""/>
+                </OrderStatus>
+            </OrderStatuses>
+			<PromiseLine RequiredQty="" OrderLineKey="" UnitOfMeasure="" ProductClass="" ItemID="">
+				<Assignments>
+					<Assignment AvailableFromUnplannedInventory="" ProductAvailDate="" Quantity="" ReservedQty=""  ShipNode="" ShipDate="">
+						<Procurements>
+							<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate=""/>
+						</Procurements>
+					</Assignment>
+				</Assignments>
+            </PromiseLine>
+			<OrderDates>
+				<OrderDate ActualDate="" DateTypeId="" ExpectedDate="" OrderHeaderKey="" 
+				OrderLineKey="" OrderReleaseKey="" RequestedDate=""/>
+			</OrderDates>
+
+            <ReturnOrderLines>
+                <OrderLine OrderHeaderKey="" OrderLineKey=""/>
+            </ReturnOrderLines>
+            <Containers>
+				<Container ContainerGroup="" ContainerNo="" OrderNo="" SCAC=""
+				ShipmentContainerKey="" ShipmentKey="" TrackingNo="" isHistory="">
+					<ContainerDetails>
+						<ContainerDetail ContainerDetailsKey="" ItemID=""
+							OrderHeaderKey="" OrderNo="" ProductClass=""
+							Quantity="" ShipmentContainerKey="" ShipmentKey=""
+							ShipmentLineKey="" UnitOfMeasure="" isHistory="">
+							<ShipmentLine ItemDesc="" ItemID="" ItemShortDesc=""
+								OrderHeaderKey="" OrderReleaseKey="" ShipmentLineKey=""/>
+							<OrderLine OrderLineKey="">
+								<Item ItemID="" ItemShortDesc=""/>
+								<ItemDetails ItemID="">
+									<PrimaryInformation DefaultProductClass=""
+									Description=""
+									ExtendedDescription="" ShortDescription=""/> 
+										<ItemAttributeGroupTypeList>
+											<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsAdditionalAttributeAllowed="" IsSingleGroup="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey="">
+											<ItemAttributeGroupList>
+												<ItemAttributeGroup CategoryKey="" IsInherited="" ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" SequenceNo="">
+												<ItemAttributeList>
+													<ItemAttribute IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value=""/> 
+												</ItemAttributeList>
+												</ItemAttributeGroup>
+											</ItemAttributeGroupList>
+										</ItemAttributeGroupType>
+									</ItemAttributeGroupTypeList>
+								</ItemDetails>
+								<LinePriceInfo UnitPrice=""/>
+							</OrderLine>
+						</ContainerDetail>
+					</ContainerDetails>
+					<Shipment ActualDeliveryDate="" ActualShipmentDate="" 
+						CarrierAccountNo="" CarrierServiceCode="" CarrierType=""
+						Currency="" DeliveryMethod="" EnterpriseCode=""
+						ExpectedDeliveryDate="" ExpectedShipmentDate=""
+						NumOfCartons="" OrderHeaderKey="" OrderNo=""
+						RequestedShipmentDate="" SCAC="" ScacAndService=""
+						ScacAndServiceKey="" ShipNode="" ShipmentKey="" ToAddressKey=""			
+						ShipmentNo="" Status="" RequestedDeliveryDate="" />
+				</Container>
+            </Containers>
+            <ShipmentLines>
+				<ShipmentLine ActualQuantity="" DocumentType="" UnitOfMeasure=""
+                    ItemDesc="" ItemID="" KitCode="" OrderHeaderKey=""
+                    OrderLineKey="" OrderNo="" OrderReleaseKey=" "
+                    Quantity="" ReceivedQuantity="" ShipmentLineKey=""
+                    ShipmentLineNo="" ShipmentSubLineNo="" isHistory="" ShipmentKey="">
+                    <OrderLine OrderLineKey="">
+                        <Item ItemID="" ItemShortDesc="" UnitOfMeasure=""/>
+                        <LinePriceInfo UnitPrice=""/>
+						<ItemDetails ItemID="">
+							<PrimaryInformation DefaultProductClass=""
+							Description=""
+							ExtendedDescription="" ShortDescription=""/> 
+								<ItemAttributeGroupTypeList>
+									<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsAdditionalAttributeAllowed="" IsSingleGroup="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey="">
+									<ItemAttributeGroupList>
+										<ItemAttributeGroup CategoryKey="" IsInherited="" ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" SequenceNo="">
+										<ItemAttributeList>
+											<ItemAttribute IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value=""/> 
+										</ItemAttributeList>
+										</ItemAttributeGroup>
+									</ItemAttributeGroupList>
+								</ItemAttributeGroupType>
+							</ItemAttributeGroupTypeList>
+						</ItemDetails>
+                    </OrderLine>
+					 <Shipment ActualDeliveryDate="" ActualShipmentDate="" 
+						CarrierAccountNo="" CarrierServiceCode="" CarrierType=""
+						Currency="" DeliveryMethod="" EnterpriseCode=""
+						ExpectedDeliveryDate="" ExpectedShipmentDate=""
+						NumOfCartons="" OrderHeaderKey="" OrderNo=""
+						RequestedShipmentDate="" SCAC="" ScacAndService=""
+						ScacAndServiceKey="" ShipNode="" ShipmentKey="" ToAddressKey=""			
+						ShipmentNo="" Status="" RequestedDeliveryDate=""/>
+                </ShipmentLine>
+            </ShipmentLines>
+       		<PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" IsCommercialAddress="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" State="" Suffix="" TaxGeoCode="" Title="" ZipCode="" />
+			<PersonInfoMarkFor  DayPhone="" FirstName="" LastName="" />
+			<Shipnode ShipNode="" Description="">
+				<ShipNodePersonInfo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" ErrorTxt="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" IsCommercialAddress="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" PreferredShipAddress="" State="" Suffix="" TaxGeoCode="" Title="" UseCount="" VerificationStatus="" ZipCode="" />
+			</Shipnode>
+			<Order OrderHeaderKey="">
+				<PriceInfo Currency=""/>
+				<PersonInfoShipTo/>
+			</Order>
+			<ParentOrderLineRelationships>
+				<OrderLineRelationship RelationshipType="" OrderLineRelationshipKey="" ParentOrderLineKey="">
+					<ParentLine OrderLineKey=""/>
+				</OrderLineRelationship>
+			</ParentOrderLineRelationships>
+			<OrderLineInvAttRequest>
+				<Extn/>
+			</OrderLineInvAttRequest>
+			<OrderHoldTypes>
+				<OrderHoldType ReasonText="" Status="">
+				</OrderHoldType>
+			</OrderHoldTypes>
+		</OrderLine>
+    </OrderLines>
+    <PersonInfoShipTo/>
+    <PersonInfoBillTo/>
+    <PriceInfo/>
+    <Shipments>
+        <Shipment ActualDeliveryDate="" ActualShipmentDate="" 
+            CarrierAccountNo="" CarrierServiceCode="" CarrierType=""
+            Currency="" DeliveryMethod="" EnterpriseCode=""
+            ExpectedDeliveryDate="" ExpectedShipmentDate=""
+            NumOfCartons="" OrderHeaderKey="" OrderNo=""
+            RequestedShipmentDate="" SCAC="" ScacAndService=""
+            ScacAndServiceKey="" ShipNode="" ShipmentKey="" ToAddressKey=""			
+            ShipmentNo="" Status="" RequestedDeliveryDate="">
+			<ShipmentLines>
+                <ShipmentLine ActualQuantity="" DocumentType="" UnitOfMeasure="" ProductClass=""
+                    ItemDesc="" ItemID="" KitCode="" OrderHeaderKey=""
+                    OrderLineKey="" OrderNo="" OrderReleaseKey=" "
+                    Quantity="" ReceivedQuantity="" ShipmentLineKey=""
+                    ShipmentLineNo="" ShipmentSubLineNo="" isHistory="">
+                    <OrderLine OrderLineKey="">
+                        <Item ItemID="" ItemShortDesc="" UnitOfMeasure=""/>
+						<ItemDetails ItemID="">
+							<PrimaryInformation DefaultProductClass=""
+							Description=""
+							ExtendedDescription="" ShortDescription=""/> 
+								<ItemAttributeGroupTypeList>
+									<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsAdditionalAttributeAllowed="" IsSingleGroup="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey="">
+									<ItemAttributeGroupList>
+										<ItemAttributeGroup CategoryKey="" IsInherited="" ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" SequenceNo="">
+										<ItemAttributeList>
+											<ItemAttribute IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value=""/> 
+										</ItemAttributeList>
+										</ItemAttributeGroup>
+									</ItemAttributeGroupList>
+								</ItemAttributeGroupType>
+							</ItemAttributeGroupTypeList>
+						</ItemDetails>
+                        <LinePriceInfo UnitPrice=""/>
+                    </OrderLine>
+                </ShipmentLine>
+            </ShipmentLines>
+        </Shipment>
+    </Shipments>
+    <Containers>
+        <Container ContainerGroup="" ContainerNo="" OrderNo="" SCAC=""
+            ShipmentContainerKey="" ShipmentKey="" TrackingNo="" isHistory="">
+            <ContainerDetails>
+                <ContainerDetail ContainerDetailsKey="" ItemID=""
+                    OrderHeaderKey="" OrderNo="" ProductClass=""
+                    Quantity="" ShipmentContainerKey="" ShipmentKey=""
+                    ShipmentLineKey="" UnitOfMeasure="" isHistory="">
+                    <ShipmentLine ItemDesc="" ItemID="" ItemShortDesc=""
+                        OrderHeaderKey="" OrderReleaseKey="" ShipmentLineKey=""/>
+                    <OrderLine OrderLineKey="">
+                        <Item ItemID="" ItemShortDesc=""/>
+						<ItemDetails ItemID="">
+							<PrimaryInformation DefaultProductClass=""
+							Description=""
+							ExtendedDescription="" ShortDescription=""/> 
+								<ItemAttributeGroupTypeList>
+									<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsAdditionalAttributeAllowed="" IsSingleGroup="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey="">
+									<ItemAttributeGroupList>
+										<ItemAttributeGroup CategoryKey="" IsInherited="" ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" SequenceNo="">
+										<ItemAttributeList>
+											<ItemAttribute IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value=""/> 
+										</ItemAttributeList>
+										</ItemAttributeGroup>
+									</ItemAttributeGroupList>
+								</ItemAttributeGroupType>
+							</ItemAttributeGroupTypeList>
+						</ItemDetails>
+                        <LinePriceInfo UnitPrice=""/>
+                    </OrderLine>
+                </ContainerDetail>
+            </ContainerDetails>
+        </Container>
+    </Containers>
+</Order>

@@ -1,0 +1,324 @@
+<html>
+    <body>
+        <form name="frmReceiveIntoLocation" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ShipmentKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/ReceiptList/Receipt/@ReceiptHeaderKey"
+                                    mandatory="false"
+                                    name="ReceiptHeaderKey"
+                                    outputbinding="xml:/Receipt/@ReceiptHeaderKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceiptHeaderKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Receipt/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@EnterpriseCode"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Receipt/@OrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@OrganizationCode"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@DoNotVerifyPalletContent"
+                                    mandatory="false"
+                                    name="DoNotVerifyPalletContent"
+                                    outputbinding="xml:/Receipt/Shipment/@DoNotVerifyPalletContent"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@DoNotVerifyPalletContent"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@DoNotVerifyCaseContent"
+                                    mandatory="false"
+                                    name="DoNotVerifyCaseContent"
+                                    outputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@BolNo"
+                                    mandatory="false"
+                                    name="txtBolNo"
+                                    outputbinding="xml:/Receipt/Shipment/@BolNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@BolNo"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@OrderNo"
+                                    mandatory="false" name="txtOrderNo"
+                                    outputbinding="xml:/Receipt/Shipment/@OrderNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@OrderNo"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ShipmentNo"
+                                    mandatory="false" name="txtHiddenShipmentNo"
+                                    outputbinding="xml:/Shipment/@ShipmentNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@ShipmentNo"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@SellerOrganizationCode"
+                                    mandatory="false" name="txtHiddenVendor"
+                                    outputbinding="xml:/Shipment/@SellerOrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@SellerOrganizationCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@SCAC"
+                                    mandatory="false" name="txtSCAC"
+                                    outputbinding="xml:/Shipment/@SCAC"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@SCAC"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@EnterpriseCode"
+                                    mandatory="false" name="txtHiddenEnterprise"
+                                    outputbinding="xml:/Shipment/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20" subtype="Hidden"
+                                    tag="binding=lblEquipment" name="lblEquipment"
+                                    type="hidden" validate="false" value="Mobile_Equipment_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="txtEquipmentId"
+                                    inputbinding="xml:/ReceiptPutaway/@EquipmentId"
+									mandatory="true"
+                                    outputbinding="xml:/ReceiptPutaway/@EquipmentId"
+                                    size="20" subtype="Hidden" 
+                                    tag="binding=xml:/ReceiptPutaway/@EquipmentId"
+                                    type="hidden" validate="always"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation" name="lblLocation"
+                                    type="text" validate="false" value="Mobile_Location"/>									
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@LocationId"
+                                    mandatory="false"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Receipt/@LocationId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Receipt/@LocationId"
+                                    type="text" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/ReceiptList/Receipt/@ReceivingDock"
+                                    mandatory="false"
+                                    name="txtRdock"
+                                    outputbinding="xml:/Receipt/@ReceivingDock"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceivingDock"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblPalletId"
+                                    type="text" validate="false" value="Mobile_Pallet_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Receipt1/@PalletId"
+                                    mandatory="false"
+                                    name="txtPalletId"
+                                    outputbinding="xml:/Receipt/@PalletId"
+                                    size="15" subtype="Text"
+                                    tag="binding=xml:/Receipt/@PalletId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmReceivePalletUpdate"
+                                    validate="false" value="Mobile_Go"/>
+                                    <input col="5" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="5"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Info"/>
+                                    <input col="12" hotkey="F8"
+                                    mandatory="false" name="Done"
+                                    size="5" subtype="Command"
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmReceiptDocumentType"
+                                    validate="false" value="Mobile_Done"/>
+                                </td>
+                            </tr>
+							<tr>
+								<td>
+									<input col="1" hotkey="F11"
+                                    mandatory="false" name="VerifyReceipt"
+                                    size="14" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfreceive.ppc?action=frmVerifyReceipt"
+                                    validate="false" value="Mobile_Verify_Receipt"/>
+                                    <input col="15" hotkey="F12"
+                                    name="startPutaway"
+                                    size="7" subtype="Hidden"
+                                    tag=" " type="hidden"
+                                    url="/console/rfreceive.ppc?action=frmPrepareForDeposit"
+                                    validate="false" value="Mobile_Putaway"/>
+                                </td>  
+                             </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblShipmentNo"
+                                    type="text" validate="false" value="Mobile_Shipment_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ShipmentNo"
+                                    mandatory="false"
+                                    name="txtShipmentNo"
+                                    outputbinding="xml:/Receipt/Shipment/@ShipmentNo"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Receipt/Shipment/@ShipmentNo"
+                                    type="text" validate="false" value=" "/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblVendor"
+                                    type="text" validate="false" value="Mobile_Seller"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@SellerOrganizationCode"
+                                    mandatory="false"
+                                    name="txtVendor"
+                                    outputbinding="xml:/Receipt/Shipment/@SellerOrganizationCode"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Receipt/Shipment/@SellerOrganizationCode"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblSCAC"
+                                    type="text" validate="false" value="Mobile_SCAC"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@SCAC"
+                                    mandatory="false" name="txtSCAC"
+                                    outputbinding="xml:/Receipt/Shipment/@SCAC"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Receipt/Shipment/@SCAC"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblEnterprise"
+                                    type="text" validate="false" value="Mobile_Enterprise"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@EnterpriseCode"
+                                    mandatory="false"
+                                    name="txtEnterprise"
+                                    outputbinding="xml:/Receipt/Shipment/@EnterpriseCode"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Receipt/Shipment/@EnterpriseCode"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Prev_View"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

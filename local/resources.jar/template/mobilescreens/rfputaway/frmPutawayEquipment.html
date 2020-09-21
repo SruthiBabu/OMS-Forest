@@ -1,0 +1,108 @@
+<html>
+    <body>
+        <form name="frmPutawayEquipment" target="/console/rfputaway.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblPutaway"
+                                    type="text" validate="false" value="Mobile_Criteria"/>
+                                    <input col="1"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false" value="PUTAWAY"/>
+                                    <input col="2"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="hidden" validate="false" value=""/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" size="12"
+                                    subtype="Label"
+                                    tag="binding=lblEquipment"
+                                    type="text" validate="false" value="Mobile_Equipment_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" name="lblTaskList"
+                                    size="20" subtype="Label"
+                                    type="text" validate="false" value="Task_List_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@TaskListId"
+                                    name="txtTaskListId"
+                                    outputbinding="xml:/Task/@TaskListId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@TaskListId"
+                                    type="text" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@ShipmentNo"
+                                    name="txtShipmentNo"
+                                    outputbinding="xml:/Task/TaskReferences/@ShipmentNo"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskReferences/@ShipmentNo"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="15"
+                                    subtype="Label"
+                                    tag="binding=lbllocation"
+                                    type="text" validate="false" value="Mobile_Start_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfputaway.ppc?action=frmPutawayCriteriaUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

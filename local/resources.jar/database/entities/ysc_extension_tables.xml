@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+	<Entity Cacheable="true" AuditRequired="Y"
+			ConfigurableByOrgOrNode="Y"
+			Description="This table stores the Attribute domain used by an entity TableName and DocumentType."
+			EntityType="CONFIGURATION" Module="ysc"
+			Name="Entity_Attribute_Domain" Prefix="YFS_"
+			TableName="YFS_ENTITY_ATTRIBUTE_DOMAIN" TableType="CONFIGURATION" XMLName="EntityAttributeDomain"
+			LockingEntity="Attribute_Domain">
+			<Attributes>
+				<Attribute ColumnName="ENTITY_ATTRIBUTE_DOMAIN_KEY"
+					DataType="Key" DefaultValue="' '"
+					Description="The primary key of the YFS_ENTITY_ATTRIBUTE_DOMAIN table."
+					Name="Entity_Attribute_Domain_Key" Nullable="false" XMLName="EntityAttributeDomainKey"/>
+				<Attribute ColumnName="ORGANIZATION_CODE"
+					DataType="OrgCode" Description="The organization that maintains the YFS_ATTRIBUTE_DOMAIN record given in ATTRIBUTE_DOMAIN_ID column."
+					IsOrgColumn="Y" Name="Organization_Code" DataSecurityUsageType="ORG"
+					Nullable="true" XMLName="OrganizationCode"/>
+				<Attribute ColumnName="ATTRIBUTE_DOMAIN_ID"
+					DataType="GroupName"
+					Description="The primary identifier of the record in YFS_ATTRIBUTE_DOMAIN table."
+					Name="Attribute_Domain_ID" Nullable="true" XMLName="AttributeDomainID"/>
+				<Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+					Description="The DocumentType with which the AttributeDomain defined in column ATTRIBUTE_DOMAIN_ID must be associated."
+					Name="Document_Type" Nullable="true" XMLName="DocumentType"/>
+				<Attribute ColumnName="TABLE_NAME" DataType="Text-40"
+					Description="The TableName with which the AttributeDomain defined in column ATTRIBUTE_DOMAIN_ID must be associated. The allowed values are YFS_ORDER_HEADER, YFS_ORDER_LINE AND YFS_OPPORTUNITY"
+					Name="Table_Name" Nullable="true" XMLName="TableName"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+					DefaultValue="sysdate"
+					Description="The timestamp for the creation of this record."
+					Name="Createts" Nullable="false" XMLName="Createts"/>
+				<Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+					DefaultValue="sysdate "
+					Description="The timestamp for the last modification of this record."
+					Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+				<Attribute ColumnName="CREATEUSERID"
+					DataType="Createuserid"
+					Description="The user who created this record."
+					Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+				<Attribute ColumnName="MODIFYUSERID"
+					DataType="Modifyuserid"
+					Description="The user who last modified this record."
+					Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+				<Attribute ColumnName="CREATEPROGID"
+					DataType="ProgramID" 
+					Description="The program that created this record."
+					Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+				<Attribute ColumnName="MODIFYPROGID"
+					DataType="ProgramID" 
+					Description="The program that modified this record."
+					Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+					DefaultValue="0"
+					Description="An integer used to track and prevent concurrent modifications."
+					Name="Lockid" Nullable="false" XMLName="Lockid"/>
+		</Attributes>
+		<Indices>
+				<Index DB2Name="ENT_ATTR_DOMAIN_I1"
+					Name="YFS_ENTITY_ATTRIBUTE_DOMAIN_I1" Unique="true">
+					<Column Name="ORGANIZATION_CODE"/>
+					<Column Name="DOCUMENT_TYPE"/>
+					<Column Name="TABLE_NAME"/>
+				</Index>
+		</Indices>
+		<PrimaryKey DB2Name="ENT_ATT_DOM_KEY_PK" Name="YFS_ENTITY_ATTRIBUTE_DOMAIN_PK">
+			<Attribute ColumnName="ENTITY_ATTRIBUTE_DOMAIN_KEY"/>
+		</PrimaryKey>
+		<RelationShips>
+			<RelationShip Cardinality="OneToMany" DeleteValidationError="YDB100310"
+			ValidateDelete="true"
+					ForeignEntity="Attribute_Domain" Name="Attribute_Domain"
+					Type="Bidirectional" XMLName="AttributeDomain">
+				<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+				<Attribute Name="Attribute_Domain_ID" ParentName="Attribute_Domain_ID"/>
+			</RelationShip>
+			<RelationShip Cardinality="OneToMany" ChildName="Entity_Attribute_Domain" ChildXMLName="EntityAttributeDomain"
+				DeleteCascade="true" ForeignEntity="Organization" Name="Organization" Type="Bidirectional" XMLName="Organization">
+				<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+			</RelationShip>
+		</RelationShips>
+	</Entity>
+	<Entity Description="This table stores the extended attributes to be used by an Entity." EntityType="CONFIGURATION" Extensible="N" HasHistory="N" AuditRequired="Y" Cacheable="true" ConfigurableByOrgOrNode="Y" Module="ysc" Name="Entity_Custom_Attribute" Prefix="YFS_" TableName="YFS_ENTITY_CUSTOM_ATTRIBUTE" TableType="CONFIGURATION" XMLName="EntityCustomAttribute">
+		<Attributes>
+			<Attribute ColumnName="ENTITY_CUSTOM_ATTRIBUTE_KEY" DataType="Key" DefaultValue="' ' " Description="The primary key for the YFS_ENTITY_CUSTOM_ATTRIBUTE table."
+			Name="Entity_Custom_Attribute_Key" Nullable="false" />
+			<Attribute ColumnName="ENTITY_ATTRIBUTE_DOMAIN_KEY"                  DataType="Key" DefaultValue="' ' " Description="The primary key for the YFS_ENTITY_ATTRIBUTE_DOMAIN table."	Name="Entity_Attribute_Domain_Key" Nullable="false" />
+			<Attribute ColumnName="ORGANIZATION_CODE" DataType="OrgCode" DataSecurityUsageType="CATALOG,ORG" DefaultValue="' ' " Description="The organization that maintains the attribute." IsOrgColumn="Y" Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+			<Attribute ColumnName="ATTRIBUTE_DOMAIN_ID"	DataType="GroupName" DefaultValue="' ' " Description="The unique identifier of the attribute domain." Name="Attribute_Domain_ID" Nullable="false" />
+			<Attribute ColumnName="ATTRIBUTE_GROUP_ID" DataType="GroupName" DefaultValue="' ' " Description="The unique identifier of the attribute group."	Name="Attribute_Group_ID" Nullable="false" />
+			<Attribute ColumnName="ATTRIBUTE_ID" DataType="Text-40"                   DefaultValue="' ' " Description="The unique identifier of the attribute. This attribute will be used as an extended column for the TableName/DocumentType defined in the corresponding  YFS_ENTITY_ATTRIBUTE_DOMAIN table."
+			Name="Attribute_ID" Nullable="false"/>
+			<Attribute ColumnName="COLUMN_NAME" DataType="Text-40"                   DefaultValue="' ' " Description="This points to the Column in the hang-off of the corresponding Entity for storing the extended attribute defined in ATTRIBUTE_ID field." Name="Column_Name" Nullable="false"/>
+			<Attribute ColumnName="STATUS" DataType="AttributeStatus"                   DefaultValue="' ' " Description="This represents the Status of the extended attribute." Name="Status" Nullable="false"/>
+			<Attribute ColumnName="SEARCHABLE" DataType="Flag" DefaultValue="'N'"      Description="This flag indicates whether the extended attribute is an indexed column in the hang-off.  Default value: &quot;N&quot;." Name="Searchable" Nullable="false"/>
+			<Attribute ColumnName="CREATETS" DataType="TimeStamp"				DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+			<Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false" />
+			<Attribute ColumnName="CREATEUSERID" DataType="Createuserid" DefaultValue="' ' " Description="User who created the record." Name="Createuserid" Nullable="false" />
+			<Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid" DefaultValue="' ' " Description="User who modified the record." Name="Modifyuserid" Nullable="false" />
+			<Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' ' " Description="Program that created the record."	Name="Createprogid" Nullable="false" />
+			<Attribute ColumnName="MODIFYPROGID"  DataType="ProgramID" DefaultValue="' ' " Description="Program that modified the record."	Name="Modifyprogid" Nullable="false" />
+			<Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0 "		Description="An integer used to track and prevent concurrent modifications."	Name="Lockid" Nullable="false" />
+		</Attributes>
+		<AuditReferences />
+		<PrimaryKey DB2Name="ENT_ATTR_PK" Name="ENTITY_CUSTOM_ATTRIBUTE_PK">
+			<Attribute ColumnName="ENTITY_CUSTOM_ATTRIBUTE_KEY" Name="Entity_Custom_Attribute_Key"/>
+		</PrimaryKey>
+		<Indices>
+			<Index DB2Name="ENT_ATTR_I1"
+				Name="ENT_ATTR_I1" Unique="true">
+				<Column Name="ENTITY_ATTRIBUTE_DOMAIN_KEY" />
+				<Column Name="ATTRIBUTE_DOMAIN_ID" />
+				<Column Name="ATTRIBUTE_GROUP_ID" />
+				<Column Name="ATTRIBUTE_ID" />
+				<Column Name="STATUS" />
+				<Column Name="COLUMN_NAME" />
+			</Index>
+		</Indices>
+		<RelationShips>
+			<RelationShip Cardinality="OneToMany"
+				DeleteValidationError="YDB100300"
+				ForeignEntity="Attribute" Name="Attribute"
+				Type="Unidirectional" ValidateDelete="true" >
+				<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+				<Attribute Name="Attribute_ID" ParentName="Attribute_ID"/>
+				<Attribute Name="Attribute_Group_ID" ParentName="Attribute_Group_ID"/>
+				<Attribute Name="Attribute_Domain_ID" ParentName="Attribute_Domain_ID"/>
+			</RelationShip>
+			<RelationShip Cardinality="OneToMany"
+				DeleteCascade="true" ForeignEntity="Entity_Attribute_Domain"
+				Name="Entity_Attribute_Domain" Type="Bidirectional" >
+				<Attribute Name="Entity_Attribute_Domain_Key" ParentName="Entity_Attribute_Domain_Key"/>
+			</RelationShip>
+		</RelationShips>
+	</Entity>
+</Entities>
+</DBSchema>

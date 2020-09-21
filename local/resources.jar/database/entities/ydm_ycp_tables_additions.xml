@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity TableName="YFS_INSTRUCTION_DETAIL" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+			<RelationShips>
+               <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="LoadInstruction" ForeignEntity="Load"
+                    Name="Load" Type="Bidirectional" XMLName="Load">
+                    <Attribute Name="Reference_Key" ParentName="Load_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_LOAD"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="ShipmentInstruction"
+                    ForeignEntity="Shipment" Name="Shipment"
+                    Type="Bidirectional" XMLName="Shipment">
+                    <Attribute Name="Reference_Key" ParentName="Shipment_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_SHIPMENT"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="ContainerInstruction"
+                    ForeignEntity="Shipment_Container"
+                    Name="ShipmentContainer" Type="Bidirectional" XMLName="ShipmentContainer">
+                    <Attribute Name="Reference_Key" ParentName="Shipment_Container_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_SHIPMENT_CONTAINER"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="ShipmentLineInstruction"
+                    ForeignEntity="Shipment_Line"
+                    Name="ShipmentLine" Type="Bidirectional" XMLName="ShipmentLine">
+                    <Attribute Name="Reference_Key" ParentName="Shipment_Line_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_SHIPMENT_LINE"/>
+                </RelationShip>
+			</RelationShips>			
+		</Entity>
+		<Entity TableName="YFS_NOTES" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+           <RelationShips>    
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Notes" ChildName="Note"
+                    ChildXMLName="Note"
+                    ForeignEntity="Shipment_Container"
+                    Name="ShipmentContainer" Type="Bidirectional" XMLName="ShipmentContainer">
+                    <Attribute Name="Table_Key" ParentName="Shipment_Container_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_SHIPMENT_CONTAINER"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Notes"
+                    ChildName="Note" ChildXMLName="Note"
+                    ForeignEntity="Shipment" Name="Shipment"
+                    Type="Bidirectional" XMLName="Shipment">
+                    <Attribute Name="Table_Key" ParentName="Shipment_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_SHIPMENT"/>
+                </RelationShip> 
+            </RelationShips>			
+		</Entity>
+	</Entities>
+</DBSchema>

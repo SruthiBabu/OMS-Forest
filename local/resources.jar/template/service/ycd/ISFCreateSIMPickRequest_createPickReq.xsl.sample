@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+
+    <xsl:output indent="yes"/>
+
+    
+    <xsl:template match="Shipment">
+      <pickRequest>
+			<xsl:attribute name="storeId">
+					<xsl:value-of select="@ShipNode"/>
+			</xsl:attribute>
+			<xsl:attribute name="orderNo">
+					<xsl:value-of select="@DisplayOrderNo"/>
+			</xsl:attribute>
+			<xsl:attribute name="shipmentNo">
+					<xsl:value-of select="@ShipmentNo"/>
+			</xsl:attribute>
+			<xsl:attribute name="assignedToUserId">
+					<xsl:value-of select="@AssignedToUserId"/>
+			</xsl:attribute>
+			<xsl:if test="@DocumentType='0006'">
+				<xsl:attribute name="purpose">
+					<xsl:text>TRANSFER</xsl:text>
+				 </xsl:attribute>
+			</xsl:if>
+			<xsl:choose>
+				<xsl:when test="@DeliveryMethod='PICK'">
+					<xsl:attribute name="deliveryMethod">
+					<xsl:text>PICK</xsl:text>
+				 </xsl:attribute>
+				</xsl:when>
+				<xsl:when test="@DeliveryMethod='SHP'">
+					<xsl:attribute name="deliveryMethod">
+					<xsl:text>SHIP</xsl:text>
+				 </xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="deliveryMethod">
+					<xsl:text>CARRY</xsl:text>
+				 </xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<references>
+				<xsl:attribute name="shipmentKey">
+					<xsl:value-of select="@ShipmentKey"/>
+			</xsl:attribute>
+			</references>	
+			<xsl:for-each select="ShipmentLines/ShipmentLine">
+					<requestedProducts>
+						<xsl:attribute name="productId">
+								<xsl:value-of select="@ItemID"/>
+						</xsl:attribute>
+						<xsl:attribute name="requestedQuantity">
+								<xsl:value-of select="@Quantity"/>
+						</xsl:attribute>
+						<xsl:attribute name="unitOfMeasure">
+								<xsl:value-of select="@UnitOfMeasure"/>
+						</xsl:attribute>
+						<xsl:attribute name="requestProductReferenceId">
+								<xsl:value-of select="@ShipmentLineKey"/>
+						</xsl:attribute>
+						<xsl:attribute name="segment">
+								<xsl:value-of select="@Segment"/>
+						</xsl:attribute>
+						<xsl:attribute name="segmentType">
+								<xsl:value-of select="@SegmentType"/>
+						</xsl:attribute>						
+						<xsl:attribute name="productClass">
+								<xsl:value-of select="@ProductClass"/>
+						</xsl:attribute>
+						<xsl:attribute name="batchNo">
+								<xsl:value-of select="ShipmentLineInvAttRequest/@BatchNo"/>
+						</xsl:attribute>
+						<xsl:attribute name="lotNo">
+								<xsl:value-of select="ShipmentLineInvAttRequest/@LotNo"/>
+						</xsl:attribute>
+						<xsl:attribute name="manufacturedDate">
+								<xsl:value-of select="ShipmentLineInvAttRequest/@ManufacturingDate"/>
+						</xsl:attribute>
+					</requestedProducts>
+			</xsl:for-each>			
+       </pickRequest>
+    </xsl:template>
+
+</xsl:stylesheet>

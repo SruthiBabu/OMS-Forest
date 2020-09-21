@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" indent="yes"/>
+	
+	<xsl:variable name="MAX_X">
+		<xsl:for-each select="//RowList/Row/Data[@Sequence='3']">	
+		  <xsl:sort select="@Value" order="descending" data-type="number" />	     
+		  <xsl:if test="position()=1"><xsl:value-of select="./@Value"/></xsl:if>
+		</xsl:for-each>
+	 </xsl:variable>
+
+	 <xsl:variable name="MAX_Z">
+		<xsl:for-each select="//RowList/Row/Data[@Sequence='5']">	
+		  <xsl:sort select="@Value" order="descending" data-type="number" />	     
+		  <xsl:if test="position()=1"><xsl:value-of select="./@Value"/></xsl:if>
+		</xsl:for-each>
+	 </xsl:variable>
+
+	 <xsl:variable name="MIN_Z">
+		<xsl:for-each select="//RowList/Row/Data[@Sequence='5']">	
+		  <xsl:sort select="@Value" order="ascending" data-type="number" />	     
+		  <xsl:if test="position()=1"><xsl:value-of select="./@Value"/></xsl:if>
+		</xsl:for-each>
+	 </xsl:variable>
+
+	<xsl:variable name="numdigits">
+		<xsl:value-of select="string-length(ceiling($MAX_X))"/>
+	</xsl:variable>
+	
+	<xsl:variable name="nmultipleof10">
+		<xsl:call-template name="power">
+			<xsl:with-param name="num" select="10"/>
+			<xsl:with-param name="toraise" select="$numdigits - 1"/>
+		</xsl:call-template>
+	</xsl:variable>
+
+	<xsl:variable name="divider">
+		<xsl:choose>
+			<xsl:when test="(floor($MAX_X div $nmultipleof10)) = 1">
+				<xsl:call-template name="power">
+					<xsl:with-param name="num" select="10"/>
+					<xsl:with-param name="toraise" select="$numdigits - 2"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="power">
+					<xsl:with-param name="num" select="10"/>
+					<xsl:with-param name="toraise" select="$numdigits - 1"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>	
+	</xsl:variable>
+
+	<xsl:variable name="normalizex">
+		<xsl:value-of select="floor(($MAX_X div $divider) + 1) * $divider"/>
+	</xsl:variable>
+
+	<xsl:template name="power">
+		<xsl:param name="num"/>
+		<xsl:param name="toraise"/>
+		<xsl:choose>
+			<xsl:when test="$toraise = 1">
+				<xsl:value-of select="$num"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:choose>
+					<xsl:when test="$toraise = 0">
+						<xsl:value-of select="1"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="power">
+							<xsl:with-param name="num" select="$num * 10"/>
+							<xsl:with-param name="toraise" select="$toraise - 1"/>
+						</xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="CognosData">
+		<chart numDivLines="1" palette="3" showPlotBorder="0" showToolTip="1" showValues="1" 
+		chartRightMargin="60" chartTopMargin="30" is3D="1" xAxisName="SAALifeTimeRevenue" 
+		yAxisName="SAALastYearRevenue" zAxisName="SAAAverageOrderValue">
+		
+			<categories>
+				<category showVerticalLine="1" x="0.5">
+					<xsl:attribute name="label">
+						<xsl:value-of select="$normalizex div 2"/>
+					</xsl:attribute>
+				</category>
+				<category showVerticalLine="1" x="1">
+					<xsl:attribute name="label">
+						<xsl:value-of select="$normalizex"/>
+					</xsl:attribute>
+				</category>
+			    </categories>
+
+			
+			<dataSet showValues="0">
+				<set name="" toolText="" x="0" y="0" z="0"/>
+			</dataSet>
+			<dataSet showValues="0">
+				<set name="" toolText="" x="0.95" y="0" z="0"/>
+			</dataSet>
+
+			<xsl:apply-templates select="RowList/Row">
+			</xsl:apply-templates>
+		</chart>
+	</xsl:template>
+
+	<xsl:template match="Row">
+		<dataSet includeInLegend="1">
+			<xsl:choose>
+				<xsl:when test="Data[@Sequence = '1']/@Value = 'Average'">
+					<xsl:attribute name="color">
+						<xsl:value-of select="'ABABAB'"/>
+					</xsl:attribute>
+				</xsl:when>
+			</xsl:choose>
+
+			<xsl:choose>
+				<xsl:when test="($MIN_Z div $MAX_Z) &lt; 0.1">
+					<xsl:attribute name="showValues">
+						<xsl:value-of select="1"/>
+					</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="showValues">
+						<xsl:value-of select="0"/>
+					</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			
+			<xsl:attribute name="seriesName">
+				<xsl:value-of select="Data[@Sequence = '2']/@Value"/>
+			</xsl:attribute>
+			<set xAxisName="SAALifeTimeRevenue" 
+		yAxisName="SAALastYearRevenue" zAxisName="SAAAverageOrderValue" bubbleName="SAACustomer">
+				<xsl:attribute name="name">
+					<xsl:value-of select="Data[@Sequence = '2']/@Value"/>
+				</xsl:attribute>
+				<xsl:attribute name="unnormalizedx">
+					<xsl:value-of select="Data[@Sequence = '3']/@Value"/>
+				</xsl:attribute>
+				<xsl:attribute name="x">
+					<xsl:value-of select="Data[@Sequence = '3']/@Value div $normalizex"/>
+				</xsl:attribute>
+				<xsl:attribute name="y">
+					<xsl:value-of select="Data[@Sequence = '4']/@Value"/>
+				</xsl:attribute>
+				<xsl:attribute name="z">
+					<xsl:value-of select="Data[@Sequence = '5']/@Value"/>
+				</xsl:attribute>
+			</set>
+		</dataSet>
+	</xsl:template>
+</xsl:stylesheet>

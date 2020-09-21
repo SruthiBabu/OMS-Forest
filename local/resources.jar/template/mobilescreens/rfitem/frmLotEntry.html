@@ -1,0 +1,73 @@
+<html>
+    <body>
+        <form name="frmLotEntry" target="/console/rfitem.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+		                            <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemID"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemID"
+                                    outputbinding="xml:/Item/@ItemID"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Item/@ItemID"
+                                    type="text" validate="false"/>
+   									<input col="1"
+                                    inputbinding="xml:/Item/@LocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Item/@LocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Item/@LocationId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblTagNumber" size="20"
+                                    subtype="Hidden"
+                                    tag="binding=lblTagNumber"
+                                    type="hidden" validate="false" value=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    mandatory="false"
+                                    name="txtTagNumber"
+                                    outputbinding="" size="20"
+                                    subtype="Hidden" tag=""
+                                    type="hidden" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rfitem.ppc?action=frmLotEntryValtxtTagNumber"
+                                    validate="false" value="Mobile_Go"/>
+                                 </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

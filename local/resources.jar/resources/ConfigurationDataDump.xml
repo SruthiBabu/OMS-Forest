@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Settings>
+    <RecordingAllowed>
+        <TableType Name="CONFIGURATION"/>
+        <TableType Name="MASTER"/>
+    </RecordingAllowed>
+	    <RecordingPrevented ApiNameRegex="(^get.*List$)?(^login$)?(^registerLogin$)?(^registerLogout$)?(^invalidateAccessToken$)?(^getMenuHierarchyForUser$)?(^getUserHierarchy$)?(^getResourcesForUser$)?(^getModificationTypeAttributes$)?(^getShipmentListForOrder$)?(^getItemListForOrdering$)?">
+	        <Api Name="" />
+	        <Table Name="" />
+	    </RecordingPrevented>
+	    <ListRecording>
+	        <RestrictedRecording Limit="5">
+	            <TableType Name="MASTER"/>
+	            <TableType Name="TRANSACTION"/>
+	            <Table Name="YFS_ORGANIZATION"/>
+	            <Table Name="YFS_SHIP_NODE"/>
+	        </RestrictedRecording>
+	        <PreventedRecording>
+	            <Table Name="YFS_USER_EXIT"/>
+	            <Table Name="YFS_USER"/>
+	            <Table Name="YFS_USER_GROUP_LIST"/>
+	            <Table Name="YFS_BASE_CONFIG_TABLES"/>
+	            <Table Name="YFS_BASE_CONFIG_GRP_DEFN"/>
+	            <Table Name="YFS_BASE_RULES"/>
+	        </PreventedRecording>
+	    </ListRecording>
+	</Settings>

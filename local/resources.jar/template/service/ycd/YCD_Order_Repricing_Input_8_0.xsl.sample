@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+
+	<xsl:template match="/Order">
+		<Comergent>
+			<MessageHeader>
+				<MessageType>PricingCartServiceRequest</MessageType> 
+				<MessageVersion>4.0</MessageVersion>
+				<StoreFrontTransient><xsl:value-of select="@EnterpriseCode"/></StoreFrontTransient>
+			</MessageHeader>
+			<RemoteUser>
+				<UserLogin/>
+ 				<UserAuthenticator />
+			</RemoteUser>
+			<PricingCartServiceRequest type="BusinessObject">
+				<xsl:choose>
+					<xsl:when test="contains(@OrderDate, 'T')">
+						<Date><xsl:value-of select="concat(substring-before(@OrderDate,'T'),' ',substring-before(substring-after(@OrderDate, 'T'),'-'))"/></Date>
+					</xsl:when>
+					<xsl:otherwise>
+						<Date><xsl:value-of select="@OrderDate"/></Date>
+					</xsl:otherwise>
+				</xsl:choose>
+				<CustomerTypeCode><xsl:value-of select="@PricingClassificationCode" /></CustomerTypeCode>
+				<Currency><xsl:value-of select="PriceInfo/@Currency" /></Currency>
+				<BuyerUser><xsl:value-of select="@BuyerUserId" /></BuyerUser>
+				<BuyerOrgCode><xsl:value-of select="@BuyerOrganizationCode"/></BuyerOrgCode>
+				<RunRulesFlag>true</RunRulesFlag>
+				<PricingCartItemList>
+					<xsl:apply-templates select="/Order/OrderLines/OrderLine[@ItemGroupCode='PROD']" />
+				</PricingCartItemList>
+				<PricingCouponList>
+					<xsl:apply-templates select="/Order/Promotions/Promotion" />
+				</PricingCouponList>
+				<xsl:if test="@ApplyShippingAmount='Y'">
+					<ShippingInfo>
+						<ExternalShippingCharge><xsl:value-of select="@TotalShippingCharge"/></ExternalShippingCharge>
+						<ShipCompleteStatus>
+							<xsl:if test="@OptimizationType = '03'">Y</xsl:if>
+							<xsl:if test="@OptimizationType != '03'">N</xsl:if>
+						</ShipCompleteStatus>
+						<ShippingMethod><xsl:value-of select="@UniqueCarrierServiceCode"/></ShippingMethod>
+					</ShippingInfo>
+				</xsl:if>
+			</PricingCartServiceRequest>
+		</Comergent>
+	</xsl:template>
+
+	<xsl:template match="/Order/OrderLines/OrderLine">
+		<xsl:if test="not(LinePriceInfo/@IsLinePriceForInformationOnly) or (LinePriceInfo/@IsLinePriceForInformationOnly and LinePriceInfo/@IsLinePriceForInformationOnly='N')">
+			<xsl:if test="@OrderedQty &gt; 0">
+				<xsl:if test="not(@ReshipParentLineKey)">
+					<PricingCartItem>
+						<SKU><xsl:value-of select="Item/@ItemID" /></SKU>
+						<ExternalRefID><xsl:value-of select="@OrderLineKey" /></ExternalRefID>
+						<Quantity><xsl:value-of select="round(@OrderedQty)"/></Quantity>
+						<xsl:choose>
+							<xsl:when test="LinePriceInfo/@IsPriceLocked='Y'">
+								<FreezeFlag>true</FreezeFlag>
+							</xsl:when>
+							<xsl:otherwise>
+								<FreezeFlag>false</FreezeFlag>
+							</xsl:otherwise>
+						</xsl:choose>
+						<UnitPrice><xsl:value-of select="LinePriceInfo/@UnitPrice"/></UnitPrice>
+						<EligibleForShippingDiscounts>true</EligibleForShippingDiscounts>
+						<xsl:choose>
+							<xsl:when test="@DeliveryMethod='SHP'">
+								<WillBeShipped>true</WillBeShipped>
+							</xsl:when>
+							<xsl:otherwise>
+								<WillBeShipped>false</WillBeShipped>
+							</xsl:otherwise>
+						</xsl:choose>
+					</PricingCartItem>
+				</xsl:if>
+			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="/Order/Promotions/Promotion">
+		<xsl:if test="@Action!='REMOVE'">
+			<xsl:if test="not(@PromotionType) or @PromotionType='' or @PromotionType='COUPON'">
+				<PricingCoupon>
+					<CouponID><xsl:value-of select="@PromotionId"/></CouponID>
+				</PricingCoupon>
+			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+				
+</xsl:stylesheet>

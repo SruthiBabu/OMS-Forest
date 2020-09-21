@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery QueryType="Catalog">
+   <Item DisplayName="Item" TableName="YFS_ITEM" IconFile="item.gif" ShowNotButtons="Y">
+      <PrimaryInfo DisplayName="Primary_Info">
+		  <ItemGroupCode Type="Leaf" Id="ItemGroupCode" DisplayName="ItemGroupCode" DataType="Text-20" ControlType="Combo" ColumnName="ITEM_GROUP_CODE">
+			 <QryTypes DefaultQryTypeId="EQ">
+				<QryType QryTypeName="Is" QryTypeId="EQ"/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="NEQ"/>
+			 </QryTypes>
+			 <MasterData MasterDataId="ItemGroupCode" IsReqd="" OverRidingClass="" IsStatic="true">
+				<ItemGroupCode Code="PROD" Desc="Product"/>
+				<ItemGroupCode Code="PS" Desc="Provided_Services"/>
+				<ItemGroupCode Code="DS" Desc="Delivery_Services"/>
+			 </MasterData>
+		  </ItemGroupCode>
+		  <EffectiveEndDate Type="Leaf" Id="EffectiveEndDate" DisplayName="EffectiveEndDate" DataType="Date" ControlType="Text" ColumnName="EFFECTIVE_END_DATE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+			  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+			</QryTypes>
+			<MasterData MasterDataId="EffectiveEndDate" IsReqd="" OverRidingClass=""/>
+		  </EffectiveEndDate>
+		  <EffectiveStartDate Type="Leaf" Id="EffectiveStartDate" DisplayName="EffectiveStartDate" DataType="Date" ControlType="Text" ColumnName="EFFECTIVE_START_DATE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+			  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+			</QryTypes>
+			<MasterData MasterDataId="EffectiveStartDate" IsReqd="" OverRidingClass=""/>
+		  </EffectiveStartDate>
+     </PrimaryInfo>
+      <MorePrimaryInfo DisplayName="More_Primary_Info">
+		  <IsConfigurable Type="Leaf" Id="IsConfigurable" DisplayName="IsConfigurable" DataType="Flag" ControlType="Combo" ColumnName="IS_CONFIGURABLE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsConfigurable" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsConfigurable Code="Y" Desc="Yes"/>
+			  <IsConfigurable Code="N" Desc="No"/>
+			</MasterData>
+		  </IsConfigurable>
+		  <IsDeliveryAllowed Type="Leaf" Id="IsDeliveryAllowed" DisplayName="IsDeliveryAllowed" DataType="Flag" ControlType="Combo" ColumnName="IS_DELIVERY_ALLOWED">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsDeliveryAllowed" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsDeliveryAllowed Code="Y" Desc="Yes"/>
+			  <IsDeliveryAllowed Code="N" Desc="No"/>
+			</MasterData>
+		  </IsDeliveryAllowed>
+		  <IsForwardingAllowed Type="Leaf" Id="IsForwardingAllowed" DisplayName="IsForwardingAllowed" DataType="Flag" ControlType="Combo" ColumnName="IS_FORWARDING_ALLOWED">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsForwardingAllowed" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsForwardingAllowed Code="Y" Desc="Yes"/>
+			  <IsForwardingAllowed Code="N" Desc="No"/>
+			</MasterData>
+		  </IsForwardingAllowed>
+		  <IsHazmat Type="Leaf" Id="IsHazmat" DisplayName="IsHazmat" DataType="Flag" ControlType="Combo" ColumnName="IS_HAZMAT">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsHazmat" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsHazmat Code="Y" Desc="Yes"/>
+			  <IsHazmat Code="N" Desc="No"/>
+			</MasterData>
+		  </IsHazmat>
+		  <IsModelItem Type="Leaf" Id="IsModelItem" DisplayName="IsModelItem" DataType="Flag" ControlType="Combo" ColumnName="IS_MODEL_ITEM">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsModelItem" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsModelItem Code="Y" Desc="Yes"/>
+			  <IsModelItem Code="N" Desc="No"/>
+			</MasterData>
+		  </IsModelItem>
+		  <IsPickupAllowed Type="Leaf" Id="IsPickupAllowed" DisplayName="IsPickupAllowed" DataType="Flag" ControlType="Combo" ColumnName="IS_PICKUP_ALLOWED">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsPickupAllowed" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsPickupAllowed Code="Y" Desc="Yes"/>
+			  <IsPickupAllowed Code="N" Desc="No"/>
+			</MasterData>
+		  </IsPickupAllowed>
+		  <IsPreConfigured Type="Leaf" Id="IsPreConfigured" DisplayName="IsPreConfigured" DataType="Flag" ControlType="Combo" ColumnName="IS_PRE_CONFIGURED">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsPreConfigured" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsPreConfigured Code="Y" Desc="Yes"/>
+			  <IsPreConfigured Code="N" Desc="No"/>
+			</MasterData>
+		  </IsPreConfigured>
+		  <IsProcurementAllowed Type="Leaf" Id="IsProcurementAllowed" DisplayName="IsProcurementAllowed" DataType="Flag" ControlType="Combo" ColumnName="IS_PROCUREMENT_ALLOWED">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsProcurementAllowed" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsProcurementAllowed Code="Y" Desc="Yes"/>
+			  <IsProcurementAllowed Code="N" Desc="No"/>
+			</MasterData>
+		  </IsProcurementAllowed>
+		  <IsReturnable Type="Leaf" Id="IsReturnable" DisplayName="IsReturnable" DataType="Flag" ControlType="Combo" ColumnName="IS_RETURNABLE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsReturnable" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsReturnable Code="Y" Desc="Yes"/>
+			  <IsReturnable Code="N" Desc="No"/>
+			</MasterData>
+		  </IsReturnable>
+		  <IsReturnService Type="Leaf" Id="IsReturnService" DisplayName="IsReturnService" DataType="Flag" ControlType="Combo" ColumnName="IS_RETURN_SERVICE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsReturnService" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsReturnService Code="Y" Desc="Yes"/>
+			  <IsReturnService Code="N" Desc="No"/>
+			</MasterData>
+		  </IsReturnService>
+		  <IsShippingAllowed Type="Leaf" Id="IsShippingAllowed" DisplayName="IsShippingAllowed" DataType="Flag" ControlType="Combo" ColumnName="IS_SHIPPING_ALLOWED">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsShippingAllowed" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsShippingAllowed Code="Y" Desc="Yes"/>
+			  <IsShippingAllowed Code="N" Desc="No"/>
+			</MasterData>
+		  </IsShippingAllowed>
+		  <IsSoldSeparately Type="Leaf" Id="IsSoldSeparately" DisplayName="IsSoldSeparately" DataType="Flag" ControlType="Combo" ColumnName="IS_SOLD_SEPARATELY">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsSoldSeparately" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsSoldSeparately Code="Y" Desc="Yes"/>
+			  <IsSoldSeparately Code="N" Desc="No"/>
+			</MasterData>
+		  </IsSoldSeparately>
+		  <IsStandaloneService Type="Leaf" Id="IsStandaloneService" DisplayName="IsStandaloneService" DataType="Flag" ControlType="Combo" ColumnName="IS_STANDALONE_SERVICE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			</QryTypes>
+			<MasterData MasterDataId="IsStandaloneService" IsReqd="" OverRidingClass="" IsStatic="true">
+			  <IsStandaloneService Code="Y" Desc="Yes"/>
+			  <IsStandaloneService Code="N" Desc="No"/>
+			</MasterData>
+		  </IsStandaloneService>
+      </MorePrimaryInfo>
+      <ClassificationCodes DisplayName="Classification_Codes">
+		  <PickingType Type="Leaf" Id="PickingType" DisplayName="PickingType" DataType="Text-40" ControlType="Text" ColumnName="PICKING_TYPE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+			  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+			  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+			</QryTypes>
+			<MasterData MasterDataId="PickingType" IsReqd="" OverRidingClass=""/>
+		  </PickingType>
+		  <PostingClassification Type="Leaf" Id="PostingClassification" DisplayName="PostingClassification" DataType="Text-40" ControlType="Text" ColumnName="POSTING_CLASSIFICATION">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+			  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+			  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+			</QryTypes>
+			<MasterData MasterDataId="PostingClassification" IsReqd="" OverRidingClass=""/>
+		  </PostingClassification>
+		  <VelocityCode Type="Leaf" Id="VelocityCode" DisplayName="VelocityCode" DataType="Text-40" ControlType="Text" ColumnName="VELOCITY_CODE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+			  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+			  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+			</QryTypes>
+			<MasterData MasterDataId="VelocityCode" IsReqd="" OverRidingClass=""/>
+		  </VelocityCode>
+		  <SizeCode Type="Leaf" Id="SizeCode" DisplayName="SizeCode" DataType="Text-40" ControlType="Text" ColumnName="SIZE_CODE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+			  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+			  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+			</QryTypes>
+			<MasterData MasterDataId="SizeCode" IsReqd="" OverRidingClass=""/>
+		  </SizeCode>
+		  <StorageType Type="Leaf" Id="StorageType" DisplayName="StorageType" DataType="Text-40" ControlType="Text" ColumnName="STORAGE_TYPE">
+			<QryTypes DefaultQryTypeId="EQ">
+			  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+			  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+			  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+			  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+			</QryTypes>
+			<MasterData MasterDataId="StorageType" IsReqd="" OverRidingClass=""/>
+		  </StorageType>
+	  </ClassificationCodes>
+   </Item>
+</AdvancedQuery>

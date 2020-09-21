@@ -1,0 +1,142 @@
+<html>
+    <body>
+        <form name="frmSingleItemContainerDtl" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Inventory_Container"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/@LPN"
+                                    name="txtContainerNo" outputbinding="xml:/InventoryContainerDtl/@LPN"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/@LPN"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/@LocationId"
+                                    name="txtLocation" outputbinding="xml:/InventoryContainerDtl/@LocationId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/@LocationId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblItemid"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblItemid" value="Mobile_Item_ID"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/ContainerDtl/@ItemID"
+                                    name="txtItemId" outputbinding="xml:/InventoryContainerDtl/ContainerDtl/@ItemID"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/ContainerDtl/@ItemID"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/ContainerDtl/@ItemShortDescription"
+                                    name="txtItemDesc" outputbinding="xml:/InventoryContainerDtl/ContainerDtl/@ItemShortDescription"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/ContainerDtl/@ItemShortDescription"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblQuantity"
+                                    size="4" subtype="Label"
+                                    tag="binding=lblQty" value="Mobile_Short_Quantity"
+                                    type="text" validate="false"/>
+                                    <input col="6" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/ContainerDtl/@Quantity"
+                                    name="txtQuantity" outputbinding="xml:/InventoryContainerDtl/ContainerDtl/@Quantity"
+                                    size="7" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/ContainerDtl/@Quantity"
+                                    type="text" validate="false"/>
+                                    <input col="14" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/ContainerDtl/@UnitOfMeasure"
+                                    name="txtUOM" outputbinding="xml:/InventoryContainerDtl/ContainerDtl/@UnitOfMeasure"
+                                    size="7" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/ContainerDtl/@UnitOfMeasure"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblProductClass"
+                                    size="3" subtype="Label"
+                                    tag="binding=lblProductClass" value="Mobile_Short_Product_Class"
+                                    type="text" validate="false"/>
+                                    <input col="5" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/ContainerDtl/@ProductClass"
+                                    name="txtProductClass" outputbinding="xml:/InventoryContainerDtl/ContainerDtl/@ProductClass"
+                                    size="5" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/ContainerDtl/@ProductClass"
+                                    type="text" validate="false"/>
+                                    <input col="11"
+                                    name="lblInventoryStatus"
+                                    size="4" subtype="Label"
+                                    tag="binding=lblInventoryStatus" value="Mobile_Short_Inventory_Sts"
+                                    type="text" validate="false"/>
+                                    <input col="15" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/ContainerDtl/@InventoryStatus"
+                                    name="txtInventoryStatus" outputbinding="xml:/InventoryContainerDtl/ContainerDtl/@InventoryStatus"
+                                    size="6" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/ContainerDtl/@InventoryStatus"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblPendOutQty"
+                                    size="13" subtype="Label"
+                                    tag="binding=lblPendOutQty" value="Mobile_Pend_Out_Quantity"
+                                    type="text" validate="false"/>
+                                    <input col="15" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/ContainerDtl/@PendOutQty"
+                                    name="txtPendOutQty" outputbinding="xml:/InventoryContainerDtl/ContainerDtl/@PendOutQty"
+                                    size="6" subtype="ProtectedText"
+                                    tag="xml:/InventoryContainerDtl/ContainerDtl/@PendOutQty"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+                                    subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+                          </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<CassandraSchema>
+    <MappedEntities>
+        <!-- Each of the tables defined in Cassandra must have a corresponding 
+            entity in the RDBMS entity framework Each of the attribute of these tables 
+            must have a corresponding attribute defined in the entity xml as well -->
+        <MappedEntity EntityName="Inventory_Node_Control" TableName="INV_INVENTORY_NODE_CONTROL">
+            <MappedAttributes>
+                <MappedAttribute Name="Node_Key" ColumnName="node"/>
+                <MappedAttribute Name="Node_Control_Type" ColumnName="node_ctrl_type"/>
+                <MappedAttribute Name="Organization_Code" ColumnName="org_code"/>
+                <MappedAttribute Name="Item_Id" ColumnName="item_id"/>
+                <MappedAttribute Name="Uom" ColumnName="uom"/>
+                <MappedAttribute Name="Product_Class" ColumnName="pc"/>
+                <MappedAttribute Name="Inv_Picture_Incorrect_Till_Date" ColumnName="inv_incorrect_date"/>
+                <MappedAttribute Name="Start_Date" ColumnName="start_date"/>
+                <MappedAttribute Name="Inventory_Node_Control_Key" ColumnName="node_ctrl_key"/>
+            </MappedAttributes>
+            <PartitionKey>
+                <Attribute Name="Item_Id" />
+                <Attribute Name="Uom" />
+                <Attribute Name="Product_Class" />
+                <Attribute Name="Organization_Code" />
+                <Attribute Name="Node_Control_Type" />
+            </PartitionKey>
+            <ClusteringColumns>
+                <Attribute Name="Node_Key" />
+            </ClusteringColumns>
+        </MappedEntity>
+        <MappedEntity EntityName="Item_Node_Velocity" TableName="INV_ITEM_NODE_VELOCITY">
+            <MappedAttributes>
+                <MappedAttribute Name="Item_Node_Velocity_Key" ColumnName="vel_key"/>
+                <MappedAttribute Name="Inventory_Item_Key" ColumnName="item_key"/>
+                <MappedAttribute Name="Item_Id" ColumnName="item_id"/>                
+                <MappedAttribute Name="Uom" ColumnName="uom"/>
+                <MappedAttribute Name="Product_Class" ColumnName="pc"/>
+                <MappedAttribute Name="Organization_Code" ColumnName="org_code"/>
+                <MappedAttribute Name="Ship_Node" ColumnName="node"/>
+                <MappedAttribute Name="Velocity_Date" ColumnName="vel_dt"/>
+                <MappedAttribute Name="Quantity_In_Min_Window" ColumnName="minwin_qty"/>
+                <MappedAttribute Name="Quantity_In_Max_Window" ColumnName="maxwin_qty"/>
+            </MappedAttributes>
+            <PartitionKey>
+                <Attribute Name="Item_Id" />
+                <Attribute Name="Uom" />
+                <Attribute Name="Product_Class" />
+                <Attribute Name="Organization_Code" />
+                <Attribute Name="Ship_Node" />
+            </PartitionKey>
+            <ClusteringColumns>
+                <Attribute Name="Velocity_Date" />
+            </ClusteringColumns>
+        </MappedEntity>
+        <MappedEntity EntityName="Capacity_Availability" TableName="INV_CAPACITY_AVAILABILITY">
+            <MappedAttributes>
+                <MappedAttribute Name="Capacity_Availability_Key" ColumnName="cap_key"/>
+                <MappedAttribute Name="Node_Key" ColumnName="node"/>
+                <MappedAttribute Name="Capacity_Organization_Code" ColumnName="org_code"/>
+                <MappedAttribute Name="Resource_Pool_Id" ColumnName="res_pool"/>
+                <MappedAttribute Name="Available_Date" ColumnName="avl_date"/>
+                <MappedAttribute Name="Capacity_Uom" ColumnName="cap_uom"/>
+                <MappedAttribute Name="Item_Group_Code" ColumnName="itemgc"/>
+                <MappedAttribute Name="Purpose" ColumnName="purpose"/>
+                <MappedAttribute Name="Delivery_Method" ColumnName="del_mthd"/>
+                <MappedAttribute Name="Start_Time" ColumnName="st_time"/>
+                <MappedAttribute Name="End_Time" ColumnName="end_time"/>
+                <MappedAttribute Name="Total_Standard_Capacity" ColumnName="tot_std_cap"/>
+                <MappedAttribute Name="Total_Supplement_Capacity" ColumnName="tot_sup_cap"/>
+                <MappedAttribute Name="Available_Capacity" ColumnName="avl_cap"/>
+                <MappedAttribute Name="Additional_Standard_Capacity1" ColumnName="addnl_std_cap1"/>
+                <MappedAttribute Name="Additional_Standard_Capacity2" ColumnName="addnl_std_cap2"/>
+                <MappedAttribute Name="Additional_Supplement_Capacity1" ColumnName="addnl_sup_cap1"/>
+                <MappedAttribute Name="Additional_Supplement_Capacity2" ColumnName="addnl_sup_cap2"/>
+            </MappedAttributes>
+            <PartitionKey>
+                <Attribute Name="Node_Key" />
+                <Attribute Name="Capacity_Organization_Code" />
+            </PartitionKey>
+            <ClusteringColumns>
+                <Attribute Name="Resource_Pool_Id" />
+                <Attribute Name="Available_Date" />
+            </ClusteringColumns>
+        </MappedEntity>
+        <MappedEntity EntityName="Inventory_Supply" TableName="INV_INVENTORY_PARTITION">
+            <MappedAttributes>
+                <MappedAttribute Name="Inventory_Supply_Key" ColumnName="partition_key"/>
+                <MappedAttribute Name="Inventory_Item_Key" ColumnName="item_key"/>
+                <MappedAttribute Name="Item_Id" ColumnName="item_id"/>
+                <MappedAttribute Name="Uom" ColumnName="uom"/>
+                <MappedAttribute Name="Product_Class" ColumnName="pc"/>
+                <MappedAttribute Name="Organization_Code" ColumnName="org_code"/>
+                <MappedAttribute Name="Shipnode_Key" ColumnName="node"/>
+                <MappedAttribute Name="Supply_Type" ColumnName="type"/>
+                <MappedAttribute Name="Segment" ColumnName="segment"/>
+                <MappedAttribute Name="Segment_Type" ColumnName="segment_type"/>
+                <MappedAttribute Name="Eta" ColumnName="start_date"/>
+                <MappedAttribute Name="Ship_By_Date" ColumnName="end_date"/>
+                <MappedAttribute Name="Owner_Key" ColumnName="owner"/>
+                <MappedAttribute Name="Tag_Number" ColumnName="tag_identifier"/>
+                <MappedAttribute Name="Supply_Line_Reference" ColumnName="inv_line_ref"/>
+                <MappedAttribute Name="Supply_Reference" ColumnName="inv_ref"/>
+            </MappedAttributes>
+            <PartitionKey>
+                <Attribute Name="Item_Id" />
+                <Attribute Name="Uom" />
+                <Attribute Name="Product_Class" />
+                <Attribute Name="Organization_Code" />
+            </PartitionKey>
+            <ClusteringColumns>
+                <Attribute Name="Supply_Type" />
+                <Attribute Name="Segment" />
+                <Attribute Name="Segment_Type" />
+                <Attribute Name="Eta" />
+                <Attribute Name="Ship_By_Date" />
+                <Attribute Name="Shipnode_Key" />
+                <Attribute Name="Owner_Key" />
+                <Attribute Name="Tag_Number" />
+                <Attribute Name="Supply_Line_Reference" />
+                <Attribute Name="Supply_Reference" />
+                <Attribute Name="Inventory_Supply_Key" />
+                <Attribute Name="Inventory_Item_Key" />        
+            </ClusteringColumns>
+        </MappedEntity>
+    </MappedEntities>
+</CassandraSchema>
+

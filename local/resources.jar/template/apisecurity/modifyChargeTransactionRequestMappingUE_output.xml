@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- ctr element shown only once with blindAmt, ctrkey due to issue.. to fix. -->
+<Mapping>
+    <InvoiceList>
+        <OrderInvoice>
+            <ChargeTransactionRequest/>
+            <ChargeTransactionList>
+                <ChargeTransaction/>
+            </ChargeTransactionList>
+        </OrderInvoice>
+    </InvoiceList>
+    <NegativeInvoiceList>
+        <OrderInvoice>
+            <ChargeTransactionList>
+                <ChargeTransaction/>
+            </ChargeTransactionList>
+        </OrderInvoice>
+    </NegativeInvoiceList>
+    <PresettledAmount>
+        <ChargeTransactionList>
+            <ChargeTransaction/>
+        </ChargeTransactionList>
+        <ChargeTransactionRequestList>
+            <ChargeTransactionRequest/>
+        </ChargeTransactionRequestList>
+    </PresettledAmount>
+    <ChargeTransactionRequestList>
+        <ChargeTransactionRequest>
+            <ChargeTransactionList>
+                <ChargeTransaction/>
+            </ChargeTransactionList>
+        </ChargeTransactionRequest>
+    </ChargeTransactionRequestList>
+    <OrderRemainder>
+        <ChargeTransactionList>
+            <ChargeTransaction/>
+        </ChargeTransactionList>
+    </OrderRemainder>
+</Mapping>

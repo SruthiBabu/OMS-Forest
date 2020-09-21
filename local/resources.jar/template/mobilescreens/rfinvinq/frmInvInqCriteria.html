@@ -1,0 +1,77 @@
+<html>
+    <body>
+        <form name="frmInvInqCriteria" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Inventory_Inquiry"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+							</tr>
+							<tr>
+                                <td>
+                                    <input col="1" name="lblInvInqCriteria_1"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblInvInqCriteria_1"
+                                    type="text" validate="false" value="Mobile_Location_ID_Serial_No"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" name="lblInvInqCriteria_2"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblInvInqCriteria_2"
+                                    type="text" validate="false" value="Mobile_Case_ID_Pallet_ID"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" name="lblInvInqCriteria_3"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblInvInqCriteria_3"
+                                    type="text" validate="false" value="Mobile_Item_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:CurrentUser:/User/@Node"
+                                    name="txtNode"
+                                    outputbinding="xml:CurrentUser:/User/@Node"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:CurrentUser:/User/@Node"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InvInqCriteria/@BarCodeData"
+                                    name="txtBarCode" outputbinding="xml:/InvInqCriteria/@BarCodeData"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/InvInqCriteria/@BarCodeData"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+							</tr>					
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfinvinq.ppc?action=frmInvInqCriteriaValtxtBarCode"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                          </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

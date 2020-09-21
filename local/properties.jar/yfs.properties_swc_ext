@@ -1,0 +1,418 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management  (5725-D10), IBM Order Management (5737-D18)
+# IBM Sterling Configure Price Quote (5725-D11)
+# (C) Copyright IBM Corp. 2007, 2017 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_swc_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_swc_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## This file contains the yfs properties to configure the behavior of
+## Sterling OMS and Websphere Commerce integration services in the product.
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.providerurl
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## These properties are used by Sterling Commerce - Websphere Commerce Integration Services provided OOB.
+scwc.sdf.integration.providerurl=corbaloc::<host>:<bootstrap port>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.export.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.export.qcf=<QueueConnectionFactory Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.import.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.import.qcf=<QueueConnectionFactory Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.import.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.import.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.createorderonsuccess.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.createorderonsuccess.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.sendinventorychanges.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.sendinventorychanges.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.changeorderonsuccess.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.changeorderonsuccess.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.changeorderoncancel.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.changeorderoncancel.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.integration.apis.confirmdraftorderonsuccess.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.integration.apis.confirmdraftorderonsuccess.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.sendinventorychanges.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Following Properties are related to Web Sphere Commerce WebServices which will be invoked by integration services
+scwc.sdf.sendinventorychanges.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/inventory/services/InventoryServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.sendorderchanges.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.sendorderchanges.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/order/services/OrderServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.getOrderPrice.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.getOrderPrice.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/order/services/OrderServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.getItemPrice.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.getItemPrice.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/price/services/PriceServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.validateCoupon.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.validateCoupon.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/promotion/services/PromotionServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.getPricingRuleDetails.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.getPricingRuleDetails.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/promotion/services/PromotionServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.getOrder.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.getOrder.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/order/services/OrderServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.processOrder.service.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.processOrder.service.url=http://WC_HOSTNAME:8007/webapp/wcs/component/order/services/OrderServices
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.wc.user
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.wc.user=wcsadmin
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.wc.password
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.sdf.wc.password=wcs1admin
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.action.properties.file
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by SCWCSoapServlet to identify service to be called in Sterling Commerce.
+scwc.action.properties.file=/action.properties
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.value.mapping.file
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by SDF to map Sterling Commerce attribute values to Websphere Commerce or vice versa
+scwc.value.mapping.file=/ValueMaps.xml
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.server.connection.timeout
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by SCWCSoapUtils, Specify the time in millseconds.
+scwc.server.connection.timeout=10000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.server.read.timeout
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by SCWCSoapUtils, Specify the time in millseconds.
+scwc.server.read.timeout=15000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.sdf.csv.dir
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by SCWCCsvUtils,  Specify the directory where the InventoryAvailability.csv file needs to be created
+scwc.sdf.csv.dir=<csv directory>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.soapservlet.authstyle
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Set this property to change the authentication process for SCWCSoapServlet.
+## Valid values:
+## STANDARD : Pass _loginid and _tokenid (same idea as InteropHttpServlet's user token)
+## BASIC : Send user and password information encoded using the base64 algorithm in the Authorization header in the request.
+## This will attempt to login to the system using the user credentials passed in the request.
+## Any other value will cause the SCWCSoapServlet to rely on the container to provide the user principal.   
+scwc.soapservlet.authstyle=
+## PROPERTY_END

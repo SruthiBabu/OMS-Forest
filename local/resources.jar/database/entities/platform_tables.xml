@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema Name="platform_tables">
+    <Entities>
+        <Entity Cacheable="true" Description="The table stores the product version details."
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="SI_VERSION" Prefix="SCI_"
+            TableName="SI_VERSION" TableType="CONFIGURATION" XMLName="SI_VERSION">
+            <Attributes>
+                <Attribute ColumnName="PRODUCT_LABEL" 
+                	Description="Label of the Product." 
+					DataType="ProductLabel" Name="Product_Label" 
+					DefaultValue="' '"
+					Nullable="false" XMLName="ProductLabel"/>
+                <Attribute ColumnName="BUILD_NUMBER"
+                	Description="Number of the build." 
+                    DataType="BuildNumber" Name="Build_Number"
+					DefaultValue="' '"
+                    Nullable="false" XMLName="BuildNumber"/>
+                <Attribute ColumnName="LIC_PROD_VER"
+                	Description="License product version." 
+                    DataType="VersionLicense" Name="Lic_Prod_Ver"
+					DefaultValue="' '"
+                    Nullable="false" XMLName="LicProdVer"/>
+                <Attribute ColumnName="SI_INSTALL_DATE"
+                	Description="Date of installation." 
+                    DataType="TimeStamp" Name="Si_Install_Date"
+					DefaultValue="sysdate"
+                    Nullable="false" XMLName="SiInstallDate"/>
+                <Attribute ColumnName="SI_COMMENTS" 
+                	Description="Comments about the version." 
+			     	DataType="VersionComments" Name="Si_Comments" 
+					Nullable="true" XMLName="SiComments"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_64">
+                <Attribute ColumnName="PRODUCT_LABEL" Name="Product_Label"/>
+            </PrimaryKey>
+            <Indices/>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true" Description="The Document represents incoming data (e.g.,HTML or XML document) to the Workflow system. Conceptually, it is the handle of the persisted document in permanent storage (i.e., the database), and provides the primary access to the document's data. \n             Note: Once a Document object has been persisted, it is viewed as Read Only. Changes to a persisted Document object will result in creation of a new document and will get persisted with a distinct document Id."        
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="DOCUMENT" Prefix="SCI_"
+            TableName="DOCUMENT" TableType="TRANSACTION" XMLName="DOCUMENT">
+            <Attributes>
+                <Attribute ColumnName="DOC_ID" DataType="DocumentId-Informix"
+                    Description="Document ID - GUID used to identify this Document instance"
+                    Name="Doc_Id" Nullable="false" XMLName="DocId"/>
+                <Attribute ColumnName="SUBJECT" DataType="Subject"
+                    Description="Free text subject field"
+                    Name="Subject" Nullable="true" XMLName="Subject"/>
+                <Attribute ColumnName="CONTENT_TYPE" DataType="ContentType"
+                    Description="Free text content-type field"
+                    Name="Content_Type" Nullable="true" XMLName="ContentType"/>
+                <Attribute ColumnName="CONTENT_SUBTYPE"
+                    Description="Free text content-subtype field"
+                    DataType="ContentSubType" Name="Content_Subtype"
+                    Nullable="true" XMLName="ContentSubtype"/>
+                <Attribute ColumnName="CREATE_TIME" DataType="Date"
+                    Description="Time this document was created"
+                    Name="Create_Time" Nullable="false" XMLName="CreateTime"/>
+                <Attribute ColumnName="PREV_DOC_ID" DataType="DocumentId-255"
+                    Description="Reference to the DOCUMENT_ID of the Document instance this instance was created from"
+                    Name="Prev_Doc_Id" Nullable="true" XMLName="PrevDocId"/>
+                <Attribute ColumnName="BODY_NAME" DataType="BodyName"
+                    Description="Free text name field"
+                    Name="Body_Name" Nullable="true" XMLName="BodyName"/>
+                <Attribute ColumnName="BODY" DataType="DocumentBody"
+                    Description="Pointer to payload data for this instance.  Will reference a set of rowas in the DATA_TABLE which could be either direct payload data or header information (in the form of a hashtable) for file system storage."                
+                    Name="Body" Nullable="true" XMLName="Body"/>
+                <Attribute ColumnName="CHAR_ENCODING"
+                    Description="Free text character-encoding field"
+                    DataType="CharacterEncoding" Name="Char_Encoding"
+                    Nullable="true" XMLName="CharEncoding"/>
+                <Attribute ColumnName="DOC_NAME" DataType="DocumentName-Informix"
+                    Description="Free text name field"
+                    Name="Doc_Name" Nullable="true" XMLName="DocName"/>
+                <Attribute ColumnName="WORKFLOW_ID" DataType="WF_ID"
+                    Description="Reference to the WORKFLOW_ID that owns this instance.  The lifecycle of this instance is controlled by the setting for the referenced WORKFLOW_ID"
+                    Name="Workflow_Id" Nullable="false" XMLName="WorkflowId"/>
+                <Attribute ColumnName="PURGE_AFTER" DataType="Date"
+                    Description="No longer used"
+                    Name="Purge_After" Nullable="true" XMLName="PurgeAfter"/>
+                <Attribute ColumnName="ARCHIVE_FLAG" DataType="ArchiveFlag"
+                    Description="No longer used"
+                    DefaultValue="-1" Name="Archive_Flag"
+                    Nullable="true" XMLName="ArchiveFlag"/>
+                <Attribute ColumnName="ARCHIVE_DATE" DataType="Date"
+                    Description="No longer used"
+                    Name="Archive_Date" Nullable="true" XMLName="ArchiveDate"/>
+                <Attribute ColumnName="DOCUMENT_SIZE" DataType="SCI_LONG"
+                    Description="No longer used"
+                    Name="Document_Size" Nullable="false" XMLName="DocumentSize"
+                                        DefaultValue="-1"/>
+                <Attribute ColumnName="STORAGE_TYPE" DataType="StorageType"
+                    Description="Flag indicating where the payload data is stored"
+                    Name="Storage_Type" Nullable="false" XMLName="StorageType"
+                                        DefaultValue="0"/>
+                <Attribute ColumnName="ENC_ALG" DataType="EncryptionAlgorithm"
+                    Description="Algorithm used to encrypt payload data"
+                    Name="Enc_Alg" Nullable="true" XMLName="EncAlg"/>
+                <Attribute ColumnName="ENC_IV" DataType="InitializationVector"
+                    Description="Initialization Vector (IV) used to encrypt payload data"
+                    Name="Enc_Iv" Nullable="true" XMLName="EncIv"/>
+                <Attribute ColumnName="ENC_KEY" DataType="EncryptionKey"
+                    Description="Reference to encryption key used to encrypt payload data"
+                    Name="Enc_Key" Nullable="true" XMLName="EncKey"/>
+                <Attribute ColumnName="MODIFYTS" DataType="Date"
+                    Description="Last modify time"
+                    Name="Create_Time" Nullable="true" XMLName="CreateTime"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_25">
+                <Attribute ColumnName="DOC_ID" Name="Doc_Id"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="SCI_DOC_WRK_IDX" Unique="false">
+                    <Column Name="WORKFLOW_ID"/>
+                </Index>
+                <Index Name="SCI_IDX_185" Unique="false">
+                    <Column Name="BODY"/>
+                    <Column Name="DOC_ID"/>
+                </Index>
+                <Index Name="SCI_IDX_51" Unique="false">
+                    <Column Name="WORKFLOW_ID"/>
+                    <Column Name="BODY"/>
+                    <Column Name="DOC_ID"/>
+                </Index>
+                <Index Name="SCI_IDX_66" Unique="false">
+                    <Column Name="DOC_NAME"/>
+                </Index>
+            </Indices>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true"
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="DOCUMENT_RESTORE" Prefix="SCI_"
+            Description="This is a copy of DOCUMENT table.  It is used by the Restore service to recall archived data."
+            TableName="DOCUMENT_RESTORE" TableType="TRANSACTION" XMLName="DOCUMENT_RESTORE">
+            <Attributes>
+                <Attribute ColumnName="DOC_ID" DataType="DocumentId-Informix"
+					Description="Document ID - GUID used to identify this Document instance"
+                    Name="Doc_Id" Nullable="false" XMLName="DocId"/>
+                <Attribute ColumnName="SUBJECT" DataType="Subject"
+					Description="Free text subject field"
+                    Name="Subject" Nullable="true" XMLName="Subject"/>
+                <Attribute ColumnName="CONTENT_TYPE" DataType="ContentType"
+					Description="Free text content-type field"
+                    Name="Content_Type" Nullable="true" XMLName="ContentType"/>
+                <Attribute ColumnName="CONTENT_SUBTYPE"
+					Description="Free text content-subtype field"
+                    DataType="ContentSubType" Name="Content_Subtype"
+                    Nullable="true" XMLName="ContentSubtype"/>
+                <Attribute ColumnName="CREATE_TIME" DataType="Date"
+                    Description="Time this document was created"
+                    Name="Create_Time" Nullable="false" XMLName="CreateTime"/>
+                <Attribute ColumnName="PREV_DOC_ID" DataType="DocumentId-Informix"
+					Description="Reference to the DOCUMENT_ID of the Document instance this instance was created from"
+                    Name="Prev_Doc_Id" Nullable="true" XMLName="PrevDocId"/>
+                <Attribute ColumnName="BODY_NAME" DataType="DocumentBodyName"
+					Description="Free text name field"
+                    Name="Body_Name" Nullable="true" XMLName="BodyName"/>
+                <Attribute ColumnName="BODY" DataType="DocumentBody"
+					Description="Pointer to payload data for this instance.  Will reference a set of rowas in the DATA_TABLE which could be either direct payload data or header information (in the form of a hashtable) for file system storage." 
+                    Name="Body" Nullable="true" XMLName="Body"/>
+                <Attribute ColumnName="CHAR_ENCODING"
+					Description="Free text character-encoding field"
+                    DataType="CharacterEncoding" Name="Char_Encoding"
+                    Nullable="true" XMLName="CharEncoding"/>
+                <Attribute ColumnName="DOC_NAME" DataType="DocumentName-255"
+					Description="Free text name field"
+                    Name="Doc_Name" Nullable="true" XMLName="DocName"/>
+                <Attribute ColumnName="WORKFLOW_ID" DataType="WF_ID"
+                    Description="Reference to the WORKFLOW_ID that owns this instance."
+                    Name="Workflow_Id" Nullable="false" XMLName="WorkflowId"/>
+                <Attribute ColumnName="PURGE_AFTER" DataType="Date"
+					Description="No longer used"
+                    Name="Purge_After" Nullable="true" XMLName="PurgeAfter"/>
+                <Attribute ColumnName="ARCHIVE_FLAG" DataType="ArchiveFlag"
+					Description="No longer used"
+                    Name="Archive_Flag" Nullable="true" XMLName="ArchiveFlag"/>
+                <Attribute ColumnName="ARCHIVE_DATE" DataType="Date"
+					Description="No longer used"
+                    Name="Archive_Date" Nullable="true" XMLName="ArchiveDate"/>
+                <Attribute ColumnName="DOCUMENT_SIZE" DataType="SCI_LONG"
+					Description="No longer used"
+                    Name="Document_Size" Nullable="false" XMLName="DocumentSize"
+                                        DefaultValue="-1"/>
+                <Attribute ColumnName="STORAGE_TYPE" DataType="StorageType"
+					Description="Flag indicating where the payload data is stored"
+                    Name="Storage_Type" Nullable="false" XMLName="StorageType"
+                                        DefaultValue="0"/>
+                <Attribute ColumnName="ENC_ALG" DataType="EncryptionAlgorithm-Informix"
+					Description="Algorithm used to encrypt payload data"
+                    Name="Enc_Alg" Nullable="true" XMLName="EncAlg"/>
+                <Attribute ColumnName="ENC_IV" DataType="InitializationVector-Informix"
+					Description="Initialization Vector (IV) used to encrypt payload data"
+                    Name="Enc_Iv" Nullable="true" XMLName="EncIv"/>
+                <Attribute ColumnName="ENC_KEY" DataType="EncryptionKey-Informix"
+					Description="Reference to encryption key used to encrypt payload data"
+                    Name="Enc_Key" Nullable="true" XMLName="EncKey"/>
+                <Attribute ColumnName="MODIFYTS" DataType="Date"
+					Description="Last modify time"
+                    Name="Create_Time" Nullable="true" XMLName="CreateTime"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_100">
+                <Attribute ColumnName="DOC_ID" Name="Doc_Id"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="SCI_IDX_31" Unique="false">
+                    <Column Name="BODY"/>
+                </Index>
+            </Indices>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true" Description="This table keeps track of references to the same original document.   This is useful when purging.  The reason it is useful is that for documents on the file system we create new Document and Data_Table entries but we still point to the same actual file on disk.  Therefore we need to make sure this file is not removed until all references to it and all clones from it are ready for purge or have already been purged."
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="DOCUMENT_CLONE" Prefix="SCI_"
+            TableName="DOCUMENT_CLONE" TableType="TRANSACTION" XMLName="DOCUMENT_CLONE">
+            <Attributes>
+                <Attribute ColumnName="ORIG_DOC_ID" DataType="DocumentId-Informix"
+					Description="Document ID - used to identify the Original Document instance"
+                    Name="Orig_Doc_Id" Nullable="false" XMLName="OrigDocId"/>
+                <Attribute ColumnName="DOC_ID" DataType="DocumentId-Informix"
+					Description="Document ID - GUID used to identify this Document instance"
+                    Name="Doc_Id" Nullable="false" XMLName="DocId"/>
+                <Attribute ColumnName="WORKFLOW_ID" DataType="WF_ID"
+                    Description="Reference to the WORKFLOW_ID that owns this instance.  The lifecycle of this instance is controlled by the setting for the referenced WORKFLOW_ID"
+                    Name="Workflow_Id" Nullable="false" XMLName="WorkflowId"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_215">
+                <Attribute ColumnName="DOC_ID" Name="Doc_Id"/>
+                <Attribute ColumnName="WORKFLOW_ID" Name="Workflow_Id"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="SCI_IDX_179" Unique="false">
+                    <Column Name="ORIG_DOC_ID"/>
+                    <Column Name="WORKFLOW_ID"/>
+                </Index>
+                <Index Name="SCI_IDX_180" Unique="false">
+                    <Column Name="DOC_ID"/>
+                    <Column Name="ORIG_DOC_ID"/>
+                </Index>
+                <Index Name="SCI_IDX_181" Unique="false">
+                    <Column Name="WORKFLOW_ID"/>
+                    <Column Name="ORIG_DOC_ID"/>
+                </Index>
+            </Indices>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true" Description="This table contains additional lifespan information for a given document.  This is commonly used in subsystems like mailbox.  Mailbox uses this to add long lifespans to documents until they are used in BPs.  This is done so that they are not identified as unassociated orphans that need to be cleaned up by AssociateBPsToDoc."
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="DOCUMENT_LIFESPAN" Prefix="SCI_"
+            TableName="DOCUMENT_LIFESPAN" TableType="TRANSACTION" XMLName="DOCUMENT_LIFESPAN">
+            <Attributes>
+                <Attribute ColumnName="DOC_ID" DataType="DocumentId-Informix"
+					Description="Document ID - used to identify this Document instance"
+                    Name="Doc_Id" Nullable="false" XMLName="DocId"/>
+                <Attribute ColumnName="WORKFLOW_ID" DataType="WF_ID"
+                    Description="Reference to the WORKFLOW_ID that owns this instance.  The lifecycle of this instance is controlled by the setting for the referenced WORKFLOW_ID"
+                    Name="Workflow_Id" Nullable="false" XMLName="WorkflowId"/>
+                <Attribute ColumnName="USER_KEY" DataType="UserKey-Informix"
+                    Description="The User who owns this document"
+                    Name="User_Key" Nullable="false" XMLName="UserKey"/>
+                <Attribute ColumnName="LIFE_SPAN" DataType="SCI_LONG"
+                    Description="The life span of this document"
+                    Name="Life_Span" Nullable="false" XMLName="LifeSpan"/>
+                <Attribute ColumnName="ARCHIVE_FLAG" DataType="ArchiveFlag"
+					Description="No longer used"
+                    DefaultValue="-1" Name="Archive_Flag"
+                    Nullable="true" XMLName="ArchiveFlag"/>
+                <Attribute ColumnName="ARCHIVE_DATE" DataType="Date"
+					Description="No longer used"
+                    Name="Archive_Date" Nullable="true" XMLName="ArchiveDate"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_152">
+                <Attribute ColumnName="DOC_ID" Name="Doc_Id"/>
+                <Attribute ColumnName="WORKFLOW_ID" Name="Workflow_Id"/>
+                <Attribute ColumnName="USER_KEY" Name="User_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="SCI_IDX_106" Unique="false">
+                    <Column Name="WORKFLOW_ID"/>
+                    <Column Name="LIFE_SPAN"/>
+                </Index>
+                <Index Name="SCI_IDX_107" Unique="false">
+                    <Column Name="DOC_ID"/>
+                    <Column Name="USER_KEY"/>
+                </Index>
+            </Indices>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true" Description="This table stores data object as blob."
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="DATA_TABLE" Prefix="SCI_"
+            TableName="DATA_TABLE" TableType="CONFIGURATION" XMLName="DATA_TABLE">
+            <Attributes>
+                <Attribute ColumnName="DATA_ID" DataType="DataId"
+					Description="This identifier for the data."
+                    Name="Data_Id" Nullable="false" XMLName="DataId"/>
+                <Attribute ColumnName="DATA_OBJECT"
+					Description="The BLOB containing the data."
+                    DataType="DATA_OBJECT-4000" Name="Data_Object"
+                    Nullable="false" XMLName="DataObject"/>
+                <Attribute ColumnName="PAGE_INDEX" DataType="PageIndex"
+                    Description="The index of the page."
+                    Name="Page_Index" Nullable="false" XMLName="PageIndex"/>
+                <Attribute ColumnName="DATA_TYPE" DataType="StoredDataType"
+					Description="The type of the data being stored."
+                    Name="Data_Type" Nullable="false" XMLName="DataType"/>
+                <Attribute ColumnName="ARCHIVE_FLAG" DataType="ArchiveFlag"
+					Description="No longer used"
+                    DefaultValue="-1" Name="Archive_Flag"
+                    Nullable="true" XMLName="ArchiveFlag"/>
+                <Attribute ColumnName="ARCHIVE_DATE" DataType="Date"
+					Description="No longer used"
+                    Name="Archive_Date" Nullable="true" XMLName="ArchiveDate"/>
+                <Attribute ColumnName="WF_ID" DataType="WF_ID"
+                    Description="Reference to the WORKFLOW_ID that owns this instance."
+                    Name="Wf_Id" Nullable="true" XMLName="WfId"/>
+                <Attribute ColumnName="REFERENCE_TABLE" DataType="ReferenceTable"
+					Description="The Table being referenced."
+                    Name="Reference_table" Nullable="true" XMLName="ReferenceId"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_14">
+                <Attribute ColumnName="DATA_ID" Name="Data_Id"/>
+                <Attribute ColumnName="PAGE_INDEX" Name="Page_Index"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="SCI_IDX_56" Unique="false">
+                    <Column Name="WF_ID"/>
+                </Index>
+            </Indices>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true" Description="This table stores transaction data object as blob."
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="TRANS_DATA" Prefix="SCI_"
+            TableName="TRANS_DATA" TableType="TRANSACTION" XMLName="TRANS_DATA">
+            <Attributes>
+                <Attribute ColumnName="DATA_ID" DataType="DataId"
+					Description="This identifier for the transaction data."
+                    Name="Data_Id" Nullable="false" XMLName="DataId"/>
+                <Attribute ColumnName="DATA_OBJECT"
+					Description="The BLOB containing the data."
+                    DataType="DATA_OBJECT-4000" Name="Data_Object"
+                    Nullable="false" XMLName="DataObject"/>
+                <Attribute ColumnName="PAGE_INDEX" DataType="PageIndex"
+                    Description="The index of the page."
+                    Name="Page_Index" Nullable="false" XMLName="PageIndex"/>
+                <Attribute ColumnName="DATA_TYPE" DataType="StoredDataType"
+					Description="The type of the data being stored."
+                    Name="Data_Type" Nullable="false" XMLName="DataType"/>
+                <Attribute ColumnName="WF_ID" DataType="WF_ID"
+                    Description="Reference to the WORKFLOW_ID that owns this instance."
+                    Name="Wf_Id" Nullable="true" XMLName="WfId"/>
+                <Attribute ColumnName="REFERENCE_TABLE" DataType="ReferenceTable"
+					Description="The Table being referenced."
+                    Name="Reference_table" Nullable="true" XMLName="ReferenceId"/>
+				<Attribute ColumnName="CUM_SIZE" DataType="SCI_LONG"
+					Description="This size represents cummulatative size of a document stored in different TRANS_DATA column."
+                    Name="Cum_Size" Nullable="true" XMLName="CumSize" />
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_14_2">
+                <Attribute ColumnName="DATA_ID" Name="Data_Id"/>
+                <Attribute ColumnName="PAGE_INDEX" Name="Page_Index"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="SCI_IDX_56_2" Unique="false">
+                    <Column Name="WF_ID"/>
+                </Index>
+            </Indices>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true" Description="This table stores data object archive as blob."
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="DATA_TABLE_RESTORE" Prefix="SCI_"
+            TableName="DATA_TABLE_RESTORE" TableType="CONFIGURATION" XMLName="DATA_TABLE_RESTORE">
+            <Attributes>
+                <Attribute ColumnName="DATA_ID" DataType="DataId"
+					Description="This identifier for the data."
+                    Name="Data_Id" Nullable="false" XMLName="DataId"/>
+                <Attribute ColumnName="DATA_OBJECT"
+					Description="The BLOB containing the data."
+                    DataType="DATA_OBJECT-4000" Name="Data_Object"
+                    Nullable="false" XMLName="DataObject"/>
+                <Attribute ColumnName="PAGE_INDEX" DataType="PageIndex"
+                    Description="The index of the page."
+                    Name="Page_Index" Nullable="false" XMLName="PageIndex"/>
+                <Attribute ColumnName="DATA_TYPE" DataType="StoredDataType"
+					Description="The type of the data being stored."
+                    Name="Data_Type" Nullable="false" XMLName="DataType"/>
+                <Attribute ColumnName="ARCHIVE_FLAG" DataType="ArchiveFlag"
+					Description="No longer used"
+                    Name="Archive_Flag" Nullable="true" XMLName="ArchiveFlag"/>
+                <Attribute ColumnName="ARCHIVE_DATE" DataType="Date"
+					Description="No longer used"
+                    Name="Archive_Date" Nullable="true" XMLName="ArchiveDate"/>
+                <Attribute ColumnName="WF_ID" DataType="WF_ID"
+                    Description="Reference to the WORKFLOW_ID that owns this instance."
+                    Name="Wf_Id" Nullable="true" XMLName="WfId"/>
+                <Attribute ColumnName="REFERENCE_TABLE" DataType="ReferenceTable"
+					Description="The Table being referenced."
+                    Name="Reference_table" Nullable="true" XMLName="ReferenceId"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_99">
+                <Attribute ColumnName="DATA_ID" Name="Data_Id"/>
+                <Attribute ColumnName="PAGE_INDEX" Name="Page_Index"/>
+            </PrimaryKey>
+            <Indices/>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true" Description="This table stores transaction data object archive as blob."
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="TRANS_DATA_RESTORE" Prefix="SCI_"
+            TableName="TRANS_DATA_RESTORE" TableType="TRANSACTION" XMLName="TRANS_DATA_RESTORE">
+            <Attributes>
+                <Attribute ColumnName="DATA_ID" DataType="DataId"
+					Description="This identifier for the transaction data."
+                    Name="Data_Id" Nullable="false" XMLName="DataId"/>
+                <Attribute ColumnName="DATA_OBJECT"
+					Description="The BLOB containing the data."
+                    DataType="DATA_OBJECT-4000" Name="Data_Object"
+                    Nullable="false" XMLName="DataObject"/>
+                <Attribute ColumnName="PAGE_INDEX" DataType="PageIndex"
+                    Description="The index of the page."
+                    Name="Page_Index" Nullable="false" XMLName="PageIndex"/>
+                <Attribute ColumnName="DATA_TYPE" DataType="StoredDataType"
+					Description="The type of the data being stored."
+                    Name="Data_Type" Nullable="false" XMLName="DataType"/>
+                <Attribute ColumnName="WF_ID" DataType="WF_ID"
+                    Description="The WORKFLOW_ID that owns this instance."
+                    Name="Wf_Id" Nullable="true" XMLName="WfId"/>
+                <Attribute ColumnName="REFERENCE_TABLE" DataType="ReferenceTable"
+					Description="The Table being referenced."
+                    Name="Reference_table" Nullable="true" XMLName="ReferenceId"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_99_2">
+                <Attribute ColumnName="DATA_ID" Name="Data_Id"/>
+                <Attribute ColumnName="PAGE_INDEX" Name="Page_Index"/>
+            </PrimaryKey>
+            <Indices/>
+            <TSIndices/>
+        </Entity>
+  <Entity Cacheable="true" 
+            EntityType="CONFIGURATION" GenerateDBClass="Y"
+            Module="ycp" Name="Pwd_Policy" Prefix="SCI_"
+            Description="The password policy table contain attributes about the policy.  Users can be assigned a password policy that will control when their password needs to be changed, and the required characteristics of the new policy."        
+            TableName="PWD_POLICY" TableType="CONFIGURATION" XMLName="PwdPolicy">
+            <Attributes>
+                <Attribute ColumnName="POLICY_ID" DataType="PasswordPolicyId-Informix"
+					Description="The Id of the Password Policy a user has been assigned to. The primary key of PWD_POLICY table " 
+                    Name="Policy_Id" Nullable="false" XMLName="PolicyId"/>
+                <Attribute ColumnName="POLICY_NAME" DataType="PasswordPolicyName"
+					Description="The Name of the Password Policy." 
+                    Name="Policy_Name" Nullable="false" XMLName="PolicyName"/>
+                <Attribute ColumnName="NUM_DAYS_VALID" DataType="NumValidDays"
+	            Description="The number of days the Password Policy is valid." 
+                    Name="Num_Days_Valid" Nullable="false" XMLName="NumDaysValid"/>
+                <Attribute ColumnName="MIN_LENGTH" DataType="MinPasswordLength"
+                    Description="The minimum length of the Password." 
+                    Name="Min_Length" Nullable="false" XMLName="MinLength"/>
+                <Attribute ColumnName="MAX_LENTGH" DataType="MaxPasswordLength"
+                    Description="The maximum length of the Password." 
+                    Name="Max_Lentgh" Nullable="false" XMLName="MaxLength"/>
+                <Attribute ColumnName="NUM_HIST_ENTRIES"
+		    Description="The number of previous password entires to be maintained in the history." 
+                    DataType="NumPasswordEntries" Name="Num_Hist_Entries"
+                    Nullable="false" XMLName="NumHistEntries"/>
+                <Attribute ColumnName="SPECIAL_CHARS_REQ"
+                    Description="Whether password will have special characters." 
+                    DataType="SpecialCharRequired" Name="Special_Chars_Req"
+                    Nullable="false" XMLName="SpecialCharsReq"/>
+                <Attribute ColumnName="FIRST_ATTEMPT" DataType="FirstAttempt"
+	            Description="Whether this is the user's first attempt." 
+                    Name="First_Attempt" Nullable="false" XMLName="FirstAttempt"/>
+                <Attribute ColumnName="STATUS" DataType="PolicyStatus"
+                    Description="Indicates the status of policy."
+                    Name="Status" Nullable="true" XMLName="Status"/>
+               <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_166">
+                <Attribute ColumnName="POLICY_ID" Name="Policy_Id"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="SCI_AK_20" Unique="true">
+                    <Column Name="POLICY_NAME"/>
+                </Index>
+            </Indices>
+            <TSIndices/>
+        </Entity>
+        <Entity Cacheable="true"
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="ycp" Name="Pwd_History" Prefix="SCI_"
+            Description="A record is entered here when a password is changed."
+            TableName="PWD_HISTORY" TableType="CONFIGURATION" XMLName="PwdHistory">
+            <Attributes>
+                <Attribute ColumnName="USER_ID" DataType="UserId-50"
+                    Description="The User changing the password."
+                    Name="User_Id" Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="OLD_PASSWORD" DataType="Password"
+                    Description="The old password of the user"
+                    Name="Old_Password" Nullable="false" XMLName="OldPassword"/>
+                <Attribute ColumnName="PWD_MOD_DATE" DataType="Date"
+                    Description="The date the password is modified."
+                    Name="Pwd_Mod_Date" Nullable="false" XMLName="PwdModDate"/>
+                <Attribute ColumnName="OLD_SALT" DataType="PasswordSalt"
+                    Description="Random characters used for password encryption."
+                    Name="Old_Salt" Nullable="true" XMLName="OldSalt"/>
+            </Attributes>
+            <PrimaryKey Name="SCI_PK_167">
+                <Attribute ColumnName="USER_ID" Name="User_Id"/>
+                <Attribute ColumnName="OLD_PASSWORD" Name="Old_Password"/>
+            </PrimaryKey>
+            <Indices/>
+            <TSIndices/>
+        </Entity>
+		<Entity Cacheable="true"
+            EntityType="TRANSACTION" GenerateDBClass="N"
+            Module="platform" Name="BLOB_TRACK" Prefix="SCI_"
+            Description="A record is entered here, when first time the Document is gettting saved in TRANS_DATA"
+            TableName="BLOB_TRACK" TableType="TRANSACTION" XMLName="BLOB_TRACK">
+            <Attributes>
+                <Attribute ColumnName="OBJ_ID" DataType="NText-255-Informix-100"
+				Description="This is a identifier for the transaction data."
+                    Name="Obj_Id" Nullable="false" XMLName="ObjId"/>
+                <Attribute ColumnName="CURR_DATE" DataType="TimeStamp"
+				Description="Current date on which document was saved"
+                    Name="Curr_Date" Nullable="false" XMLName="CurrDate"/>
+            </Attributes>
+            <PrimaryKey Name="PLT_BLOB_TRACK_PK">
+                <Attribute ColumnName="OBJ_ID" Name="Obj_Id"/>
+            </PrimaryKey>
+            <Indices/>
+            <TSIndices/>
+        </Entity>
+    </Entities>
+</DBSchema>

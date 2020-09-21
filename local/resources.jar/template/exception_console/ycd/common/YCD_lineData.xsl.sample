@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:lxslt="http://xml.apache.org/xslt"
+		xmlns:emailformatters="com.yantra.pca.email.formatters"
+		xmlns:java="java"
+		exclude-result-prefixes="java emailformatters"
+                version="1.0">
+
+<xsl:template name="lineDataHeader">
+	<xsl:param name="QuantityDescription">Open Quantity</xsl:param>
+	<xsl:param name="ShipDateDescription">Expected Ship Date</xsl:param>
+	<xsl:param name="ShowShipDate">Y</xsl:param>
+		<tr>
+			<td class="tablecolumnheader">Line No</td>
+			<td class="tablecolumnheader">Item Description</td>
+			<td class="tablecolumnheader"><xsl:value-of select="$QuantityDescription" /></td>
+			<xsl:if test="$ShowShipDate='Y'">
+				<td class="tablecolumnheader"><xsl:value-of select="$ShipDateDescription" /></td>
+			</xsl:if>
+		</tr>
+</xsl:template>
+
+<xsl:template name="lineDataFooter">
+</xsl:template>
+
+<xsl:template name="lineData">
+	<xsl:param name="lineLevelLinkPrefix" />
+	<xsl:param name="LineKey" />
+	<xsl:param name="LineNo" />
+	<xsl:param name="ItemDesc" />
+	<xsl:param name="Quantity">0</xsl:param>
+	<xsl:param name="ShipDate" />
+	<xsl:param name="ShowShipDate">Y</xsl:param>
+
+	<tr>
+		<td class="tablecolumn">
+			<xsl:call-template name="makeLineLink">
+				<xsl:with-param name="Prefix" select="$lineLevelLinkPrefix" />
+				<xsl:with-param name="Key" select="$LineKey" />
+				<xsl:with-param name="Text" select="$LineNo" />
+			</xsl:call-template>
+		</td>
+		<td class="tablecolumn"><xsl:value-of select="$ItemDesc" /></td>
+		<td class="tablecolumn"><xsl:value-of select="$Quantity" /></td>
+		<xsl:if test="$ShowShipDate='Y'">
+			<td class="tablecolumn">
+				<xsl:value-of select="emailformatters:TextEmailFormat.formatDate($ShipDate, 'MMM dd, yyyy')"/>
+			</td>
+		</xsl:if>
+	</tr>
+</xsl:template>
+
+</xsl:stylesheet>

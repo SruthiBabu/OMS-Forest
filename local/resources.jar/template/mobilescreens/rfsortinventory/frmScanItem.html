@@ -1,0 +1,77 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<html>
+    <body>
+        <form name="frmScanItem" target="/console/rfsortinventory.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                             <tr>
+                                <td>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblScanItem"
+                                    type="text" validate="false" value="Mobile_Scan_Item"/>
+                                </td>
+                            </tr>
+							<tr/>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblPrevScan"
+                                    type="text" validate="false" value="Mobile_Previous_Scan"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtPrevScan"
+									inputbinding="xml:/Item/@PrevScan"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Item/@PrevScan"
+                                    type="text" />
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItem"
+                                    type="text" validate="false" value="Mobile_Item_ID_/_Serial"/>
+								 </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="txtItem" defaultoutput="false"
+									inputbinding="xml:/Item/@ItemId"
+                                    outputbinding="xml:/Item/@Item"
+                                    size="20" subtype="Text" 
+                                    tag="binding=xml:/Item/@Item"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" hotkey="F4" name="CancelTasks"
+                                    size="15" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfsortinventory.ppc?action=frmCancelTasks"
+                                    validate="false" value="Mobile_Cancel_Tasks"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

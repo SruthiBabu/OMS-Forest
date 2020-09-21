@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+    <LabelField Binding="/Manifest/@ManifestNo" LabelFieldName="ManifestNo" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/@ManifestDate" LabelFieldName="ManifestDate" RepeatingElement="" DataType="Date"/>
+	<LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@AddressLine1" LabelFieldName="ShippingAddress1" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@AddressLine2" LabelFieldName="ShippingAddress2" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@AddressLine3" LabelFieldName="ShippingAddress3" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@City" LabelFieldName="ShippingCity" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@State" LabelFieldName="ShippingState" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@ZipCode" LabelFieldName="ShippingZipCode" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@Country" LabelFieldName="ShippingCountry" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/Carrier/@ScacDesc" LabelFieldName="CarrierName" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/@TrailerNo" LabelFieldName="TrailerNo" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/Loads/@TotalWeight" LabelFieldName="TotalWeight" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/Loads/@TotalWeightUOM" LabelFieldName="WeightUOM" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/Loads/@TotalNumberOfCases" LabelFieldName="TotalNoOfCartons" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/Loads/@TotalNumberOfPallets" LabelFieldName="TotalNoOfPallets" RepeatingElement=""/>
+
+	<LabelField Binding="/Manifest/Loads/Load/@BolNo" LabelFieldName="BolNo" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/@ProNo" LabelFieldName="ProNo" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@Company" LabelFieldName="CustomerName" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@AddressLine1" LabelFieldName="AddressLine1" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@AddressLine2" LabelFieldName="AddressLine2" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@AddressLine3" LabelFieldName="AddressLine3" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@City" LabelFieldName="City" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@State" LabelFieldName="State" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@ZipCode" LabelFieldName="ZipCode" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/DestinationAddress/@Country" LabelFieldName="Country" RepeatingElement="Load"/>
+    <LabelField Binding="/Manifest/Loads/Load/@TotalWeight" LabelFieldName="Weight" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/@TotalWeightUOM" LabelFieldName="UOM" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/@NumberOfCases" LabelFieldName="NoOfCartons" RepeatingElement="Load"/>
+	<LabelField Binding="/Manifest/Loads/Load/@NumberOfPallets" LabelFieldName="NoOfPallets" RepeatingElement="Load"/>
+
+	<RepeatingFields>
+        <RepeatingField LabelFieldName="BolNo" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ProNo" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="CustomerName" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="AddressLine1" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="AddressLine2" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="AddressLine3" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="City" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="State" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ZipCode" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="Country" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="Weight" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="UOM" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="NoOfCartons" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="NoOfPallets" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="TotalWeight" MaxFirstPage="0"
+            MaxLastPage="1" MaxMidPage="0"/>
+		<RepeatingField LabelFieldName="TotalNoOfCartons" MaxFirstPage="0"
+            MaxLastPage="1" MaxMidPage="0"/>
+		<RepeatingField LabelFieldName="TotalNoOfPallets" MaxFirstPage="0"
+            MaxLastPage="1" MaxMidPage="0"/>
+    </RepeatingFields>
+</LabelFieldMap>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite
+(C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<ScreenModifications>
+   <YCM00022>
+      <ListInfo>
+         <Absolute>
+            <List AttributeName="/PrimaryInformation@MasterCatalogID" ColumnTitle="Master_Catalog" DataType="CatalogId"/>
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+            <List AttributeName="/PrimaryInformation@DefaultProductClass" ColumnTitle="Product_Class" DataType="ProductClass"/>
+         </Absolute>
+         <Add>
+            <List AttributeName="/PrimaryInformation@Status" ColumnTitle="Status" DataType="Status"/>
+         </Add>
+         <Remove>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+         </Remove>
+      </ListInfo>
+   </YCM00022>
+</ScreenModifications>

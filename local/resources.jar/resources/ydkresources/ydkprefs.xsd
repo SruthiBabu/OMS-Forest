@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:yfc="http://www.yantra.com/documentation" xmlns:yfctype="http://www.yantra.com/documentation/types">
+    <xsd:annotation  >
+        <xsd:appinfo source="structure">
+            <preferences>
+                <configsynch>
+                    <Settings hasAttributes="Y">
+                        <AuditDeployment hasAttributes="Y"/>
+                    </Settings>
+                    <SourceDatabases>
+                        <Database hasAttributes="Y"/>
+                    </SourceDatabases>
+                    <TargetDatabases>
+                        <Database hasAttributes="Y"/>
+                    </TargetDatabases>
+                    <SourceTargetPrefs>
+                        <SourceTargetPrefs>
+                            <SourceTargetPair hasAttributes="Y">
+                                <Transformations>
+                                    <Table hasAttributes="Y">
+                                    <Column hasAttributes="Y">
+                                    <Transform hasAttributes="Y"/>
+                                    </Column>
+                                    </Table>
+                                </Transformations>
+                                <Ignore>
+                                    <Table hasAttributes="Y"/>
+                                </Ignore>
+                                <AppendOnly>
+                                    <Table hasAttributes="Y"/>
+                                </AppendOnly>
+                            </SourceTargetPair>
+                        </SourceTargetPrefs>
+                    </SourceTargetPrefs>
+                </configsynch>
+	  </preferences>
+        </xsd:appinfo>
+    </xsd:annotation>
+    
+    <xsd:element name="preferences">
+	    <xsd:complexType>
+	        <xsd:all>
+	            <xsd:element maxOccurs="1" minOccurs="0" ref="configsynch"/>
+	            <!-- The following elements are no longer used, and provided here for backward compatibility. -->
+	            <xsd:element maxOccurs="1" minOccurs="0" name="common" type="deprecatedElementType" />
+	            <xsd:element maxOccurs="1" minOccurs="0" name="portlet" type="deprecatedElementType" />
+			</xsd:all>
+	    </xsd:complexType>
+	</xsd:element>
+    <xsd:element name="configsynch">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="Settings"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="SourceDatabases"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="TargetDatabases"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="SourceTargetPrefs">
+                    <xsd:complexType>
+                        <xsd:all>
+                            <xsd:element maxOccurs="1" minOccurs="0" name="SourceTargetPrefs">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                    <xsd:element maxOccurs="unbounded"
+                                    minOccurs="0" ref="SourceTargetPair"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:all>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:all>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Settings">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="AuditDeployment"/>
+            </xsd:all>
+            <xsd:attribute name="CustomEntityClass" type="xsd:string" use="optional"/>
+            <xsd:attribute name="MaxChangesToDisplay" type="xsd:string" use="optional"/>
+            <xsd:attribute name="ReportsDir" type="xsd:string" use="optional"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AuditDeployment">
+        <xsd:complexType>
+            <xsd:attribute name="ValidateLockid" type="xsd:string" use="optional"/>
+            <xsd:attribute name="ValidateOldValues" type="xsd:string" use="optional"/>
+            <xsd:attribute name="ValidateRecordExistsBeforeDelete"
+                type="xsd:string" use="optional"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SourceDatabases">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" name="Database">
+                    <xsd:complexType>
+                        <xsd:attribute name="Name" type="xsd:string" use="required"/>
+                        <xsd:attribute name="className"
+                            type="xsd:string" use="required"/>
+                        <xsd:attribute name="dbType" type="xsd:string" use="required"/>
+                        <xsd:attribute name="folder" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="jdbcURL" type="xsd:string" use="required"/>
+                        <xsd:attribute name="schema" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="user" type="xsd:string" use="required"/>
+                        <xsd:attribute name="password" type="xsd:string" use="optional"/>
+                        <!-- Not used -->
+                        <xsd:attribute name="httpurl" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="httpuser" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="httppassword" type="xsd:string" use="optional"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="TargetDatabases">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" name="Database">
+                    <xsd:complexType>
+                        <xsd:attribute name="Name" type="xsd:string" use="required"/>
+                        <xsd:attribute name="className"
+                            type="xsd:string" use="required"/>
+                        <xsd:attribute name="dbType" type="xsd:string" use="required"/>
+                        <xsd:attribute name="folder" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="httpurl" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="httpuser" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="httppassword" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="jdbcURL" type="xsd:string" use="required"/>
+                        <xsd:attribute name="schema" type="xsd:string" use="optional"/>
+                        <xsd:attribute name="user" type="xsd:string" use="required"/>
+                        <xsd:attribute name="password" type="xsd:string" use="optional"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SourceTargetPair">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="Transformations"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="Ignore"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="AppendOnly"/>
+            </xsd:all>
+            <xsd:attribute name="SourceDatabase" type="xsd:string" use="optional"/>
+            <xsd:attribute name="TargetDatabase" type="xsd:string" use="optional"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Transformations">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" name="Table">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="Column"/>
+                        </xsd:sequence>
+                        <xsd:attribute name="Name" type="xsd:string" use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Column">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="Transform"/>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Transform">
+        <xsd:complexType>
+            <xsd:attribute name="Match" type="xsd:string" use="optional"/>
+            <xsd:attribute name="Replace" type="xsd:string" use="optional"/>
+            <xsd:attribute name="XPath" type="xsd:string" use="optional"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Ignore">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" name="Table">
+                    <xsd:complexType>
+                        <xsd:attribute name="Name" type="xsd:string" use="optional"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AppendOnly">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" name="Table">
+                    <xsd:complexType>
+                        <xsd:attribute name="Name" type="xsd:string" use="optional"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+   
+    <xsd:complexType name="deprecatedElementType">
+    	<xsd:sequence>
+        	<xsd:any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+        </xsd:sequence>
+        <xsd:anyAttribute processContents="lax"/>
+    </xsd:complexType>
+    
+</xsd:schema>

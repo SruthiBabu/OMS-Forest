@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema Name="ycp_views">
+    <Entities>
+            <Entity Module="ycp" Description="This is a view over the YFS_REPROCESS_ERROR table, refer to descriptions of YFS_REPROCESS_TABLE entity for attribute descriptions." EntityType="VIEW" Name="ErrorView" Prefix="Reprocess" TableName="YFS_REPROCESS_ERROR_VW" TableType="TRANSACTION" View="true" XMLName="IntegrationError">
+            <Attributes>
+                    <Attribute ColumnName="ERRORTXNID" DataType="TransactionID" Description="Primary Key of the Error Reprocess table." Name="ErrorTxnId" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="SYSTEMNAME" DataType="SystemName" Description="This field is deprecated" Name="SystemName" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="APINAME" DataType="ApiName-40" Description="This field is deprecated" Name="ApiName" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="SUB_FLOW_NAME" DataType="SubFlowName" Description="The sub service or Runtime Id associated with this error." Name="SubFlowName" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="FLOW_NAME" DataType="FlowName" Description="The Service associated with this error" Name="FlowName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="ERROR_REFERENCE" DataType="ErrorReference" Description="An Error Reference" Name="ErrorReference" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="EXCEPTION_GROUP_NAME" DataType="GroupName-40" Description="Exception Group Name" DefaultValue="' ' " Name="ExceptionGroupName" Nullable="false"/>
+                <Attribute ColumnName="EXCEPTIONID" DataType="Identifier" Description="Exception Id" Name="ExceptionId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="EXCEPTIONGROUPID" DataType="ExceptionGroupId" DefaultValue="' ' " Description="Exception Group Id" Name="ExceptionGroupId" Nullable="false"/>
+                <Attribute ColumnName="QUEUEID" DataType="Identifier" Description="Queue Id" Name="QueueId" Nullable="false" XMLName="QueueKey" DefaultValue="' '"/>
+                <Attribute ColumnName="STOREFRONT" DataType="StoreFront" DefaultValue="" Description="Store Front" Name="Storefront" Nullable="false"/>
+                <Attribute ColumnName="TXNNAME" DataType="TransactionName-40" DefaultValue="" Description="Transaction Name" Name="TransactionName" Nullable="false"/>
+                <Attribute ColumnName="ERRORSTRING" DataType="ErrorString-100" DefaultValue="" Description="Error String" Name="ErrorString" Nullable="false"/>
+                <Attribute ColumnName="STATE" DataType="State" DefaultValue="INITIAL" Description="State" Name="State" Nullable="false"/>
+                <Attribute ColumnName="ERRORCODE" DataType="ErrorCode-15" DefaultValue="" Description="Error Code" Name="ErrorCode" Nullable="false"/>
+                <Attribute ColumnName="UNIQUEKEY" DataType="Key" DefaultValue="" Description="Key " Name="UniqueKey" Nullable="false"/>
+                <Attribute ColumnName="PARENTTXNID" DataType="TransactionID" Description="Parent Transaction Id" Name="ParentTxnId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="ERRORMESSAGE" DataType="ErrorMessage-100" DefaultValue="" Description="Error Message" Name="ErrorMessage" Nullable="false"/>
+                <Attribute ColumnName="DESTINATIONCODE" DataType="DestinationCode" DefaultValue="" Description="Destination Code" Name="DestinationCode" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="CreateUserId" DefaultValue="" Description="User who created the record." Name="CreateUserId" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="ModifyUserId" DefaultValue="" Description="User who modified the record." Name="ModifyUserId" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="" Description="Program that created the record." Name="CreateProgId" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="" Description="Program that modified the record." Name="ModifyProgId" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0" Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute Name="ErrorTxnId"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity Module="ycp" EntityType="VIEW" Description="A View over the INTEROP_ERROR_DISPATCH table, Refer to INTEROP_ERROR_DISPATCH entity for attribute descriptions." Name="ErrorDispatchView" Prefix="Interop" TableName="INTEROP_ERROR_DISPATCH_VW" TableType="TRANSACTION" View="true">
+            <Attributes>
+                <Attribute ColumnName="ERRORTXNID" DataType="TransactionID" Description="Error Tran Id" Name="ErrorTxnId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="PARENTTXNID" DataType="TransactionID" Description="Parent Tran id" Name="ParentTxnId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="SYSTEMNAME" DataType="SystemName" Description="System Name" Name="SystemName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="APINAME" DataType="ApiName-40" Description="Api Name" Name="ApiName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="SUB_FLOW_NAME" DataType="SubFlowName" Description="Sub Service or Runtime ID" Name="SubFlowName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="FLOW_NAME" DataType="FlowName" Description="Service Name" Name="FlowName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="EXCEPTION_GROUP_NAME" DataType="GroupName-40" Description="Exception Group Name" DefaultValue="' ' " Name="ExceptionGroupName" Nullable="false"/>
+                <Attribute ColumnName="EXCEPTIONID" DataType="ExceptionId" Description="Exception Id" Name="ExceptionId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="EXCEPTIONGROUPID" DataType="ExceptionGroupId" Description="Exception Group Id" DefaultValue="' '" Name="ExceptionGroupId" Nullable="false"/>
+                <Attribute ColumnName="QUEUEID" DataType="Identifier" Description="Queue Id" Name="QueueId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="STOREFRONT" DataType="StoreFront" DefaultValue="" Description="Store Front" Name="Storefront" Nullable="false"/>
+                <Attribute ColumnName="TXNNAME" DataType="TransactionName-40" DefaultValue="" Description="Transaction Name" Name="TransactionName" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="CreateUserId" DefaultValue="" Description="User who created the record." Name="CreateUserId" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="ModifyUserId" DefaultValue="" Description="User who modified the record." Name="ModifyUserId" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="" Description="Program that created the record." Name="CreateProgId" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="" Description="Program that modified the record." Name="ModifyProgId" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0" Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute Name="ErrorTxnId"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity Module="ycp" EntityType="VIEW" Description="A View over the YFS_EXPORT table, refer to YFS_Export Entity for attribute descriptions." Name="ExportView" Prefix="YFS" TableName="YFS_EXPORT_VW" TableType="TRANSACTION" View="true">
+            <Attributes>
+                    <Attribute ColumnName="EXPORT_KEY" DataType="Key" Description="Key" Name="ExportKey" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="SYSTEM_NAME" DataType="SystemName" Description="System Name" Name="SystemName" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="API_NAME" DataType="ApiName-40" Description="API Name" Name="ApiName" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="SUB_FLOW_NAME" DataType="SubFlowName" Description="Sub Service or Runtime ID" Name="SubFlowName" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="FLOW_NAME" DataType="FlowName" Description="Service Name" Name="FlowName" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="USER_REFERENCE" DataType="UserReference" Description="User Reference" Name="UserReference" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="STATUS" DataType="ShortStatus" Description="Status " Name="Status" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="REPLY_TO_ID" DataType="Key" Description="Reply to ID" Name="ReplyToID" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="FROM_ORG_CODE" DataType="OrgCode" Description="From Organization Code" Name="FromOrgCode" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="TO_ORG_CODE" DataType="OrgCode" Description="To Organization Code" Name="ToOrgCode" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="ENTERPRISE_KEY" DataType="Key" Description="Enterprise Key" Name="EnterpriseKey" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="SHIP_NODE" DataType="ShipNode" Description="Ship Node" Name="ShipNode" Nullable="false" DefaultValue="' '"/>
+                    <Attribute ColumnName="PRIORITY" DataType="PriorityWithDecimal" Description="Priority" Name="Priority" Nullable="false" DefaultValue="0"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="CreateUserId"  Description="User who created the record." Name="CreateUserId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="ModifyUserId"  Description="User who modified the record." Name="ModifyUserId" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="" Description="Program that created the record." Name="CreateProgId" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="" Description="Program that modified the record." Name="ModifyProgId" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count" DefaultValue="0" Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute Name="ExportKey"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity Module="ycp" EntityType="VIEW" Description="A View over the YFS_IMPORT Table, refer to YFS_Import entity for attribute descriptions." Name="ImportView" Prefix="YFS" TableName="YFS_IMPORT_VW" TableType="TRANSACTION" View="true">
+            <Attributes>
+                <Attribute ColumnName="IMPORT_KEY" DataType="Key" Description="Key" Name="ImportKey" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="SYSTEM_NAME" DataType="SystemName" Description="System Name" Name="SystemName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="API_NAME" DataType="ApiName-40" Description="Api Name" Name="ApiName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="SUB_FLOW_NAME" DataType="SubFlowName-40" Description="Sub Service or Runtime ID" Name="SubFlowName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="FLOW_NAME" DataType="FlowName-40" Description="Service Name" Name="FlowName" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="USER_REFERENCE" DataType="UserReference" Description="User Reference for the record" Name="UserReference" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="STATUS" DataType="ShortStatus" Description="Status" Name="Status" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="REPLY_TO_ID" DataType="Key" Description="Reply to ID" Name="ReplyToID" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="FROM_ORG_CODE" DataType="OrgCode" Description="From Organization Code" Name="FromOrgCode" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="TO_ORG_CODE" DataType="OrgCode" Description="To Organization Code" Name="ToOrgCode" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="SHIP_NODE" DataType="ShipNode" Description="Ship Node" Name="ShipNode" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="ENTERPRISE_KEY" DataType="Key" Description="Enterprise Key" Name="EnterpriseKey" Nullable="false" DefaultValue="' '"/>
+                <Attribute ColumnName="PRIORITY" DataType="PriorityWithDecimal" Description="Priority" Name="Priority" Nullable="false" DefaultValue="0"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="CreateUserId" DefaultValue="" Description="User who created the record." Name="CreateUserId" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="ModifyUserId" DefaultValue="" Description="User who modified the record." Name="ModifyUserId" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="" Description="Program that created the record." Name="CreateProgId" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="" Description="Program that modified the record." Name="ModifyProgId" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count" DefaultValue="0" Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute Name="ImportKey"/>
+            </PrimaryKey>
+        </Entity>
+	</Entities>
+</DBSchema>

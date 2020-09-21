@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2017 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<UIApplication Id="SMA" Description="SMA UI Application" ModuleCode="sma">   	
+	<!-- 
+		The attributes 'OrganizationCode' and 'TemplateType' are set to 'DEFAULT' and '00' respectively.
+
+		Api templates can also be defined from similar XML(s) in the same module or from another modules.
+		Any number of templates can be defined for an API depending on the usage but the TemplateId has 
+		to be distinct so that it persists in the database separately and can be retrieved uniquely.
+
+		All the Api Templates given in a XML are defined under a ModuleCode (set at the top node).
+		Besides this api templates can be grouped under a View identified by a ViewId. In order to make
+		TemplateId unique, every TemplateId given below is prefixed with <ModuleCode><ViewId>_. 
+		
+		eg: For TemplateId="getOrderList_1" given below the PLT_API_TEMPLATE.Template_Id will be 
+		populated as svcstrmgmt_getOrderList_1 where svc is the ModuleCode and strmgmt is the ViewId.
+
+		The maximum length allowed for TemplateId (including it's prefix) is 40.
+		Some sample templates are given below.
+	-->
+	<!-- <APIList>
+		<API ApiName="">
+			<TemplateList>
+				<Template TemplateId="" Description=""/>
+			</TemplateList>
+		</API>
+	</APIList> -->
+	<Views>
+		<View ViewId="dashboardhome" Description="Agent Dashboard">
+			<APIList>
+				<API ApiName="getServerList">
+					<TemplateList>
+						<Template TemplateKey="sma_ui_api_template_01" TemplateId="getServerList_1" 
+						Description="To list Servers with Id, Status, Start time and Trace info">
+							<Servers>
+								<Server Type="" Status="" Name="" Id="" SubType="" StartTime="" 
+								MaxTraceLevel="" MaxElapsedTraceEnabledTimeInMins=""/>
+							</Servers>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="serverdetails" Description="Agent and Integration Server Details">
+			<APIList>
+				<API ApiName="getServerDetails">
+					<TemplateList>
+						<Template TemplateKey="sma_ui_api_template_02" TemplateId="getServerDetails_1" 
+						Description="To get details of Agent and Integration Servers">
+							<Server Id="" Name="" Status="" Type="" SubType="" StartTime="" 
+							MaxTraceLevel="" MaxElapsedTraceEnabledTimeInMins="">
+								<Service Name="" NoOfThreads="" Status="">
+									<TransportProperties TransportType="" QName="" InitialContextFactory="" 
+									ProviderURL="" QCFLookup="" MessageSelector=""/>
+									<ScheduleInfo ScheduleTrigger="" ScheduleTriggerTimeInterval="" 
+									NextScheduleTriggerTime="" AdvancedSchedulingEnabled="" 
+									AdvancedSchedulingCronExpr=""/>
+									<TraceInfo TraceLevel="" ElapsedTraceEnabledTimeInMins=""/>
+									<RunInfo PendingJobs=""/>
+									<AgentCriteriaInfo AgentCriteriaXML=""/>
+									<ExceptionHandling ExceptionType="" ExceptionQName="" 
+									Reprocess="" RestartWaitTime="" Restartable=""/>
+								</Service>
+							</Server>
+						</Template>
+						<!--Template to just get the pending jobs count-->
+						<Template TemplateKey="sma_ui_api_template_04" TemplateId="getServerDetails_2" 
+						Description="To get details of Agent and Integration Servers">
+							<Server Id="" Name="" Status="" Type="" SubType="" StartTime="" >
+								<Service Name="" NoOfThreads="" Status="">									
+									<RunInfo PendingJobs=""/>									
+								</Service>
+							</Server>
+						</Template>
+						<!--Template to get all details except pending jobs count-->
+						<Template TemplateKey="sma_ui_api_template_05" TemplateId="getServerDetails_3" 
+						Description="To get details of Agent and Integration Servers">
+							<Server Id="" Name="" Status="" Type="" SubType="" StartTime="" 
+							MaxTraceLevel="" MaxElapsedTraceEnabledTimeInMins="">
+								<Service Name="" NoOfThreads="" Status="">
+									<TransportProperties TransportType="" QName="" InitialContextFactory="" 
+									ProviderURL="" QCFLookup="" MessageSelector=""/>
+									<ScheduleInfo ScheduleTrigger="" ScheduleTriggerTimeInterval="" 
+									NextScheduleTriggerTime="" AdvancedSchedulingEnabled="" 
+									AdvancedSchedulingCronExpr=""/>
+									<TraceInfo TraceLevel="" ElapsedTraceEnabledTimeInMins=""/>
+									<AgentCriteriaInfo AgentCriteriaXML=""/>
+									<ExceptionHandling ExceptionType="" ExceptionQName="" 
+									Reprocess="" RestartWaitTime="" Restartable=""/>
+								</Service>
+							</Server>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="tracedcomponents" Description="Traced Components">
+			<APIList>
+				<API ApiName="getTraceList">
+					<TemplateList>
+						<Template TemplateKey="sma_ui_api_template_03" TemplateId="getTraceList_1" 
+						Description="To list Traced components">
+							<Traces>
+								<Trace Type="" ServerName="" ServerId="" Name="" Level=""/>
+							</Traces>						
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	</Views>
+</UIApplication>

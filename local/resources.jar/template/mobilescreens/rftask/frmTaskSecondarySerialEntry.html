@@ -1,0 +1,174 @@
+<html>
+    <body>
+        <form name="frmTaskSecondarySerialEntry" target="/console/rftask.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@TaskKey"
+                                    name="txtTaskKey"
+                                    outputbinding="xml:/Task/@TaskKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EnterpriseKey"
+                                    name="txtEnterprise"
+                                    outputbinding="xml:/Task/@EnterpriseKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EnterpriseKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    name="numSecSerials"
+                                    outputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" name="lblPick" size="7" subtype="Label" value="Mobile_Pick-"
+                                    type="text" validate="false"/>
+                                    <input col="8"
+                                    inputbinding="xml:/Task/@TaskType"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="12" subtype="Label"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="text" validate="false"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemID"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+								    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Item/@DisplayItemId"
+                                    mandatory="false"
+                                    name="txtDisplayItemId" 
+									outputbinding="xml:/Item/@DisplayItemId"
+                                    size="20"
+                                    subtype="ProtectedText"
+									tag="binding=xml:/Item/@DisplayItemId"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemID"
+                                    outputbinding="xml:/Task/Inventory/@ItemId"
+                                    size="20"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Task/Inventory/@ItemId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Task/Inventory/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/Inventory/@UnitOfMeasure"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerialsCaptured"
+                                    name="numSecSerialsCaptured"
+                                    outputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerialsCaptured"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Item/PrimaryInformation/@NumSecondarySerialsCaptured"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtDisplayLocationId"
+                                    outputbinding="xml:/Task/@DisplaySourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@DisplaySourceLocationId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSerialNo" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblSerialNo"
+                                    type="text" validate="false" value="Mobile_Serial_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@SerialNo"
+                                    mandatory="false"
+                                    name="txtSerialNo"
+                                    outputbinding="xml:/TaskList/Task/Inventory/@SerialNo"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/TaskList/Task/Inventory/@SerialNo"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSecSerialNo" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblSecSerialNo"
+                                    type="text" validate="false" value="Mobile_Secondary_Serial_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/TaskList1/Task/Inventory/@SecondarySerial"
+                                    mandatory="false"
+                                    name="txtSecSerialNo"
+                                    outputbinding="xml:/TaskList/Task/Inventory/@SecondarySerial"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/TaskList/Task/Inventory/@SecondarySerial"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rftask.ppc?action=frmTaskSecondarySerialEntryValtxtSecSerialNo"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

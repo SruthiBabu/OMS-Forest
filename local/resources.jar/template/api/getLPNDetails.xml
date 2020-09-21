@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetLPNDetails Node="" EnterpriseCode="" InventoryOrganizationCode="">
+<LPN  PalletId="" CaseId="" CaseQuantity="" Length="" OrganizationCode=""
+	Width="" Height="" Weight="" DimensionUOM="" ReceiptHeaderKey="" Segment="" SegmentType="" WeightUOM="">
+	<Receipt ReceiptNo=""/>
+	<ParentLPN  CaseId="" PalletId="" />
+	<OuterMostLPN  CaseId="" PalletId="" />
+	<LPNLocation  Node="" LocationId="" ZoneId=""/>
+	<Allocations > 
+		<Allocation  AllocType="" TargetLocationId="" />
+	</Allocations>
+	<ItemInventoryDetailList>
+		<ItemInventoryDetail   CaseId="" 
+		PalletId=""  InventoryStatus="" Segment="" 
+		SegmentType="" ShipByDate="" FifoNo="" CountryOfOrigin=""  
+		Quantity="" PendOutQty="">
+			<Receipt ReceiptNo=""/>
+			<InventoryItem  ItemID="" ProductClass="" OrganizationCode="" UnitOfMeasure="">
+				<Item ItemID="" ItemKey=""  UnitOfMeasure="">
+					<PrimaryInformation Description="" ShortDescription="" />
+				    </Item>
+			</InventoryItem>
+			<TagDetail BatchNo="" LotNumber="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotExpirationDate="" ManufacturingDate="" RevisionNo="" TagNumber= " "/>
+			<SerialList>
+				<SerialDetail SerialNo="" SecondarySerial1="" SecondarySerial2="" SecondarySerial3=""/>
+			</SerialList>
+		</ItemInventoryDetail>
+	</ItemInventoryDetailList>
+	<ChildLPNs>
+		<ChildLPN  PalletId="" CaseId="" CaseQuantity="" Length="" OrganizationCode=""
+			Width="" Height="" DimensionUOM="" ReceiptHeaderKey="" Segment="" SegmentType="" Weight="" WeightUOM="">
+			<Receipt ReceiptNo=""/>
+		</ChildLPN>
+	</ChildLPNs>
+</LPN>
+</GetLPNDetails>

@@ -1,0 +1,78 @@
+<html>
+    <body>
+        <form name="frmNoLPNLocation" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Containers"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input colno="1"
+                                    inputbinding="xml:CurrentUser:/User/@Node"
+                                    outputbinding="xml:CurrentUser:/User/@Node"
+                                    size="0" subtype="Hidden"
+                                    tag="binding=xml:CurrentUser:/User/@Node"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    name="lblLocation"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation" value="Mobile_Location"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/LocationLPNList/@LocationId"
+                                    name="txtLocation" outputbinding="xml:/LocationLPNList/@LocationId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/LocationLPNList/@LocationId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblNoInvMessage1"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblNoInvMessage1" value="Mobile_Containers_do_not_exist_Location_1"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblNoInvMessage2"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblNoInvMessage2" value="Mobile_Containers_do_not_exist_Location_2"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+                                    subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

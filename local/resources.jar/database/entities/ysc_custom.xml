@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Tables>
+    <Table Name="YFSAPP_ORD_CONSOLE_PENDING_VW">
+        <Method Name="OrderHeaderKey" OrderBy=" ORDER BY  ITEM_ID " Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ALLOCATION_RULE">
+        <Method Name="RuleID" OrderBy="" Type="select">
+            <Param ColumnName="ALLOCATION_RULE_ID"
+                Name="anAllocationRuleID" Type=""/>
+            <WhereClause> WHERE (ALLOCATION_RULE_ID = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_CARRIER_SERVICE">
+        <Method Name="ServiceCode" OrderBy="" Type="select">
+            <Param ColumnName="CARRIER_SERVICE_CODE"
+                Name="aCarrierServiceCode" Type=""/>
+            <WhereClause> WHERE (CARRIER_SERVICE_CODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_CARRIER">
+        <Method Name="CarrierCode" OrderBy="" Type="select">
+            <Param ColumnName="CARRIERCODE" Name="aCarrierCode" Type=""/>
+            <WhereClause> WHERE (CARRIERCODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_CHARGE_TRANSACTION">
+        <Method Name="OrderHdrKeyAndChrgType" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="CHARGE_TYPE" Name="aChargeType" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_HEADER_KEY = {0} ) AND (CHARGE_TYPE = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_CONTAINER_DETAILS">
+        <Method Name="ShipmentContainerKeyAndOrderLineKey" OrderBy="" Type="list">
+            <Param ColumnName="SHIPMENT_CONTAINER_KEY"
+                Name="aShipmentCOntainerKey" Type=""/>
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <WhereClause> WHERE  ( (SHIPMENT_CONTAINER_KEY = {0} ) AND (ORDER_LINE_KEY = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="OrderHeaderKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_DOCUMENT">
+        <Method Name="TypeStatusShpndKeyAndRefKey" OrderBy="" Type="select">
+            <Param ColumnName="DOCUMENT_TYPE" Name="aDocumentType" Type=""/>
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <Param ColumnName="SHIPNODE_KEY" Name="aShipNodeKey" Type=""/>
+            <Param ColumnName="REFERENCE_KEY" Name="aReferenceKey" Type=""/>
+            <WhereClause> WHERE  ( (DOCUMENT_TYPE = {0} ) AND  ( (STATUS= {1} ) AND  ( (SHIPNODE_KEY = {2} ) AND (REFERENCE_KEY= {3} ) )  )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ENTERPRISE_SUPPLIER_REF">
+        <Method Name="EnterpriseKeyAndShipnodeAlias" OrderBy="" Type="list">
+            <Param ColumnName="ENTERPRISE_KEY" Name="anEnterpriseKey" Type=""/>
+            <Param ColumnName="SHIPNODE_ALIAS" Name="aShipNodeAlias" Type=""/>
+            <WhereClause> WHERE  ( (ENTERPRISE_KEY = {0} ) AND(SHIPNODE_ALIAS = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_EXP_INTERFACE_DATA">
+        <Method Name="DataIdOrderBySeqNo" OrderBy=" ORDER BY  SEQ_NO " Type="list">
+            <Param ColumnName="DATA_ID" Name="aData_Id" Type=""/>
+            <WhereClause> WHERE  ( (DATA_ID = {0} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_EXP_INTERFACE_SYSTEM">
+        <Method Name="DataIDSystemID" OrderBy="" Type="select">
+            <Param ColumnName="DATA_ID" Name="aData_Id" Type=""/>
+            <Param ColumnName="EXPORT_SYSTEM_ID" Name="anExportSystemId" Type=""/>
+            <WhereClause> WHERE  ( (DATA_ID = {0} ) AND (EXPORT_SYSTEM_ID = {1} ) ) </WhereClause>
+        </Method>
+        <Method
+            Name="DataIdAndExportStatusAndExportSystemIdAndShipNodeAndTranId"
+            OrderBy=" ORDER BY  DATA_ID " Type="select">
+            <Param ColumnName="DATA_ID" Name="aDataID" Type=""/>
+            <Param ColumnName="EXPORT_STATUS" Name="anExportStatus" Type=""/>
+            <Param ColumnName="EXPORT_SYSTEM_ID" Name="anExpSysId" Type=""/>
+            <Param ColumnName="SHIP_NODE" Name="aShipNode" Type=""/>
+            <Param ColumnName="TRANID" Name="aTranID" Type=""/>
+            <WhereClause> WHERE  ( (DATA_ID &gt; {0} ) AND  ( (EXPORT_STATUS = {1} ) AND  ( (EXPORT_SYSTEM_ID = {2} ) AND  ( (SHIP_NODE = {3} ) AND (TRANID = {4} ) )  )  )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_GLOBAL_INVENTORY">
+        <Method Name="ItemIDProductClassAndUOM" OrderBy="" Type="list">
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="PRODUCT_CLASS" Name="aProductClass" Type=""/>
+            <Param ColumnName="UOM" Name="aUOM" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND  ( (UOM = {2} ) AND (PRODUCT_CLASS = {1} ) )  ) </WhereClause>
+        </Method>
+        <Method Name="ItemIDProductClassAndUOMShipNodeKey" OrderBy="" Type="list">
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="PRODUCT_CLASS" Name="aProductClass" Type=""/>
+            <Param ColumnName="UOM" Name="aUOM" Type=""/>
+            <Param ColumnName="SHIPNODE_KEY" Name="aShipNodeKey" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND  ( (UOM = {2} ) AND  ( (PRODUCT_CLASS = {1} ) AND (SHIPNODE_KEY = {3} ) )  )  ) </WhereClause>
+        </Method>
+        <Method Name="ItemAndShipNode" OrderBy="" Type="select">
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="PRODUCT_CLASS" Name="aProductClass" Type=""/>
+            <Param ColumnName="UOM" Name="aUOM" Type=""/>
+            <Param ColumnName="SHIPNODE_KEY" Name="aShipNodeKey" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND  ( (UOM = {2} ) AND  ( (PRODUCT_CLASS = {1} ) AND (SHIPNODE_KEY = {3} ) )  )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_INVOICE_COLLECTION">
+        <Method Name="OrderInvoiceKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_INVOICE_KEY"
+                Name="anOrderInvoiceKey" Type=""/>
+            <WhereClause> WHERE (ORDER_INVOICE_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ITEM_RESERVATION">
+        <Method
+            Name="ItemIDProductClassUOMShipDateReservationIdReservationPool"
+            OrderBy="" Type="select">
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="PRODUCT_CLASS" Name="aProductClass" Type=""/>
+            <Param ColumnName="UOM" Name="aUOM" Type=""/>
+            <Param ColumnName="SHIP_DATE" Name="aShipDate" Type=""/>
+            <Param ColumnName="RESERVATION_ID" Name="aReseravtionId" Type=""/>
+            <Param ColumnName="RESERVATION_POOL" Name="aReservationPool" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND  ( (UOM = {2} ) AND  ( (PRODUCT_CLASS = {1} ) AND  ( (SHIP_DATE = {3} ) AND  ( (RESERVATION_ID = {4} ) AND (RESERVATION_POOL = {5} ) )  )  )  )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ITEM_SHIP_NODE">
+        <Method Name="ItemIDAndShipNode" OrderBy="" Type="list">
+            <Param ColumnName="ITEM_ID" Name="aItem_Id" Type=""/>
+            <Param ColumnName="SHIPNODE_KEY" Name="aShipNodeKey" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND (SHIPNODE_KEY = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ITEM_STATUS_RULES">
+        <Method Name="ItemIDAndShipNodeKey" OrderBy="" Type="list">
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="SHIPNODE_KEY" Name="aShipNodeKey" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND (SHIPNODE_KEY = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ITEM">
+        <Method Name="ItemID" OrderBy="" Type="select">
+            <Param ColumnName="ITEM_ID" Name="aItem_Id" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_OPEN_ORDER">
+        <Method Name="ItemIDShipDateUOMandProductClass" OrderBy="" Type="select">
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="PRODUCT_CLASS" Name="aProductClass" Type=""/>
+            <Param ColumnName="UOM" Name="aUOM" Type=""/>
+            <Param ColumnName="SHIP_DATE" Name="aShipdate" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND  ( (UOM = {2} )AND  ( (PRODUCT_CLASS = {1} ) AND (SHIP_DATE = {3} ) ) )  ) </WhereClause>
+        </Method>
+        <Method Name="ItemIDShipDateUOMandProductClasslist"
+            OrderBy=" ORDER BY  SHIP_DATE " Type="list">
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="PRODUCT_CLASS" Name="aProductClass" Type=""/>
+            <Param ColumnName="UOM" Name="aUOM" Type=""/>
+            <Param ColumnName="SHIP_DATE" Name="aShipdate" Type=""/>
+            <WhereClause> WHERE  ( (ITEM_ID = {0} ) AND  ( (UOM = {2} )AND  ( (PRODUCT_CLASS = {1} ) AND (SHIP_DATE = {3} ) ) )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_HEADER_H">
+        <Method Name="EnterpriseKeyAndOrderNo" OrderBy="" Type="select">
+            <Param ColumnName="ENTERPRISE_KEY" Name="aEnterpriseKey" Type=""/>
+            <Param ColumnName="ORDER_NO" Name="aOrderNo" Type=""/>
+            <WhereClause> WHERE  ( (ENTERPRISE_KEY = {0} ) AND (ORDER_NO
+                = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="OrderHeaderKeyAndOrderNo" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="ORDER_NO" Name="anOrderNo" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_HEADER_KEY = {0} ) AND (ORDER_NO = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_HEADER">
+        <Method Name="EnterpriseKeyAndOrderNo" OrderBy="" Type="select">
+            <Param ColumnName="ENTERPRISE_KEY" Name="aEnterpriseKey" Type=""/>
+            <Param ColumnName="ORDER_NO" Name="aOrderNo" Type=""/>
+            <WhereClause> WHERE  ( (ENTERPRISE_KEY = {0} ) AND (ORDER_NO  = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="OrderHeaderKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+        <Method Name="OrderNo" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_NO" Name="anOrderNo" Type=""/>
+            <WhereClause> WHERE (ORDER_NO = {0} )</WhereClause>
+        </Method>
+        <Method Name="OrderHeaderKeyAndOrderNo" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="ORDER_NO" Name="anOrderNo" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_HEADER_KEY = {0} ) AND (ORDER_NO = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_INVOICE_DETAIL">
+        <Method Name="OrderLineKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <WhereClause> WHERE (ORDER_LINE_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_INVOICE">
+        <Method Name="OrderHeaderKeyAndShipmentKey" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="SHIPMENT_KEY" Name="aShipmentKey" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_HEADER_KEY = {0} ) AND(SHIPMENT_KEY = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="Invoice_No" OrderBy="" Type="select">
+            <Param ColumnName="INVOICE_NO" Name="anInvoiceNo" Type=""/>
+            <WhereClause> WHERE (INVOICE_NO = {0} )</WhereClause>
+        </Method>
+        <Method Name="Invoiceno" OrderBy="" Type="list">
+            <Param ColumnName="INVOICE_NO" Name="anInvoiceNo" Type=""/>
+            <WhereClause> WHERE (INVOICE_NO = {0} )</WhereClause>
+        </Method>
+        <Method Name="Status" OrderBy="" Type="list">
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE (STATUS = {0} )</WhereClause>
+        </Method>
+        <Method Name="OrderHeaderKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_KIT_LINE">
+        <Method Name="OrderLineKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <WhereClause> WHERE (ORDER_LINE_KEY = {0} )</WhereClause>
+        </Method>
+        <Method Name="OrderLineKeyItemIDAndProductClass" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <Param ColumnName="PRODUCT_CLASS" Name="aProductClass" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_LINE_KEY = {0} ) AND  ( (ITEM_ID = {1} ) AND (PRODUCT_CLASS = {2} ) )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_LINE_H">
+        <Method
+            Name="OrderLineKeyOrderHeaderKeyOrderPrimeLineOrderSubLineItemID"
+            OrderBy="" Type="list">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="PRIME_LINE_NO" Name="anOrderPrimeLine" Type=""/>
+            <Param ColumnName="SUB_LINE_NO" Name="anOrderSubLine" Type=""/>
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_LINE_KEY = {0} ) AND  ( (ORDER_HEADER_KEY = {1} ) AND  ( (PRIME_LINE_NO = {2} )AND  ( (SUB_LINE_NO = {3} ) AND (ITEM_ID = {4} ) )  )  )) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_LINE_STATUS_H">
+        <Method Name="LineKeyAndStatus" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_LINE_KEY = {0} ) AND (STATUS ={1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_LINE_STATUS">
+        <Method Name="HeaderKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+        <Method Name="LineKeyAndStatus" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_LINE_KEY = {0} ) AND (STATUS ={1} ) ) </WhereClause>
+        </Method>
+        <Method Name="LineKeyHeaderKeyAndStatus" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_LINE_KEY = {0} ) AND  (
+                (ORDER_HEADER_KEY = {1} ) AND (STATUS = {2} ) )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_LINE">
+        <Method Name="HeaderKeyAndPrimeLineAndSubLineNo" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="PRIME_LINE_NO" Name="aPrimeLineNo" Type=""/>
+            <Param ColumnName="SUB_LINE_NO" Name="aSubLineNo" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_HEADER_KEY = {0} ) AND  ( (PRIME_LINE_NO = {1} ) AND (SUB_LINE_NO = {2} ) )  ) </WhereClause>
+        </Method>
+        <Method
+            Name="OrderLineKeyOrderHeaderKeyOrderPrimeLineOrderSubLineItemID"
+            OrderBy="" Type="list">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="PRIME_LINE_NO" Name="anOrderPrimeLine" Type=""/>
+            <Param ColumnName="SUB_LINE_NO" Name="anOrderSubLine" Type=""/>
+            <Param ColumnName="ITEM_ID" Name="anItemID" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_LINE_KEY = {0} ) AND  ((ORDER_HEADER_KEY = {1} ) AND  ( (PRIME_LINE_NO = {2} )AND  ( (SUB_LINE_NO = {3} ) AND (ITEM_ID = {4} ) )  )  )) </WhereClause>
+        </Method>
+        <Method Name="OrderHeaderKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_RELEASE_H">
+        <Method Name="OrderReleaseKeyOrderHeaderKeyOrderReleaseNo"
+            OrderBy="" Type="list">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="RELEASE_NO" Name="anOrderReleaseNo" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_RELEASE_KEY = {0} ) AND  (
+                (ORDER_HEADER_KEY = {1} ) AND (RELEASE_NO = {2} ) )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_RELEASE_LINE">
+        <Method Name="PrimaryKey" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <WhereClause> WHERE (ORDER_LINE_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_RELEASE_STATUS_H">
+        <Method Name="ReleaseKeyLineAndStatus" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_RELEASE_KEY = {0} ) AND  ((ORDER_LINE_KEY = {1} ) AND (STATUS = {2} ) )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_RELEASE_STATUS">
+        <Method Name="HeaderKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+        <Method Name="ReleaseKeyLineAndStatus" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_RELEASE_KEY = {0} ) AND  ((ORDER_LINE_KEY = {1} ) AND (STATUS = {2} ) )  ) </WhereClause>
+        </Method>
+        <Method Name="OrderReleaseKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <WhereClause> WHERE (ORDER_RELEASE_KEY = {0} )</WhereClause>
+        </Method>
+        <Method Name="OrderReleaseKeyselect" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <WhereClause> WHERE (ORDER_RELEASE_KEY = {0} )</WhereClause>
+        </Method>
+        <Method Name="ReleaseKeyStatusAndStatusQuantity" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_RELEASE_KEY = {0} ) AND  ((STATUS = {1} ) AND (STATUS_QUANTITY &gt; 0 ) )  ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_RELEASE">
+        <Method Name="HeaderKeyAndReleaseNo" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="RELEASE_NO" Name="aReleaseNo" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_HEADER_KEY = {0} ) AND(RELEASE_NO = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="OrderReleaseKeyOrderHeaderKeyOrderReleaseNo"
+            OrderBy="" Type="list">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <Param ColumnName="RELEASE_NO" Name="anOrderReleaseNo" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_RELEASE_KEY = {0} ) AND  ((ORDER_HEADER_KEY = {1} ) AND (RELEASE_NO = {2} ) )  ) </WhereClause>
+        </Method>
+        <Method Name="HeaderKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_HEADER_KEY" Name="anOrderHeaderKey" Type=""/>
+            <WhereClause> WHERE (ORDER_HEADER_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ORDER_STATUS_RULES">
+        <Method Name="Status" OrderBy="" Type="select">
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE (STATUS = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_PERMISSION">
+        <Method Name="FunctionIDAndUserGroupKey" OrderBy="" Type="select">
+            <Param ColumnName="FUNCTION_ID" Name="aFunctionId" Type=""/>
+            <Param ColumnName="USERGROUP_KEY" Name="aUserGroupKey" Type=""/>
+            <WhereClause> WHERE  ( (FUNCTION_ID = {0} ) AND(USERGROUP_KEY = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="ActiveUserGroupKey" OrderBy="" Type="list">
+            <Param ColumnName="USERGROUP_KEY" Name="aUserGroupKey" Type=""/>
+            <Param ColumnName="ACTIVATE_FLAG" Name="aActivateFlag" Type=""/>
+            <WhereClause> WHERE  ( (USERGROUP_KEY = {0} ) AND(ACTIVATE_FLAG = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_PO_HEADER">
+        <Method Name="OrderReleaseKey" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <WhereClause> WHERE (ORDER_RELEASE_KEY = {0} )</WhereClause>
+        </Method>
+        <Method Name="OrdRelKey" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <WhereClause> WHERE (ORDER_RELEASE_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_PO_LINE">
+        <Method Name="OrderReleaseAndLineKey" OrderBy="" Type="select">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <Param ColumnName="ORDER_LINE_KEY" Name="anOrderLineKey" Type=""/>
+            <WhereClause> WHERE  ( (ORDER_RELEASE_KEY = {0} ) AND(ORDER_LINE_KEY = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="OrderRelease" OrderBy="" Type="list">
+            <Param ColumnName="ORDER_RELEASE_KEY"
+                Name="anOrderReleaseKey" Type=""/>
+            <WhereClause> WHERE (ORDER_RELEASE_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_PO_RECEIPT">
+        <Method Name="Status" OrderBy="" Type="list">
+            <Param ColumnName="STATUS" Name="aStatus" Type=""/>
+            <WhereClause> WHERE (STATUS = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_PRICE_PROGRAM">
+        <Method Name="EnterpriseKeyAndProgName" OrderBy="" Type="select">
+            <Param ColumnName="ENTERPRISE_KEY" Name="sEnterpriseKey" Type=""/>
+            <Param ColumnName="PRICE_PROGRAM_NAME" Name="sPriceProgram" Type=""/>
+            <WhereClause> WHERE  ( (ENTERPRISE_KEY = {0} ) AND(PRICE_PROGRAM_NAME = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_REFERENCE_TABLE_H">
+        <Method Name="TableNameAndTableKey" OrderBy="" Type="list">
+            <Param ColumnName="TABLE_NAME" Name="aTableName" Type=""/>
+            <Param ColumnName="TABLE_KEY" Name="aTableKey" Type=""/>
+            <WhereClause> WHERE  ( (TABLE_NAME = {0} ) AND (TABLE_KEY ={1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_REFERENCE_TABLE">
+        <Method Name="TableNameAndTableKey" OrderBy="" Type="list">
+            <Param ColumnName="TABLE_NAME" Name="aTableName" Type=""/>
+            <Param ColumnName="TABLE_KEY" Name="aTableKey" Type=""/>
+            <WhereClause> WHERE  ( (TABLE_NAME = {0} ) AND (TABLE_KEY ={1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_SCAC_AND_SERVICE">
+        <Method Name="SCACnService" OrderBy="" Type="select">
+            <Param ColumnName="SCAC_KEY" Name="aSCACKey" Type=""/>
+            <Param ColumnName="CARRIER_SERVICE_KEY"
+                Name="aCarrierSrvcKey" Type=""/>
+            <WhereClause> WHERE  ( (SCAC_KEY = {0} ) AND(CARRIER_SERVICE_KEY = {1} ) ) </WhereClause>
+        </Method>
+        <Method Name="SCAC_And_Service_Code" OrderBy="" Type="select">
+            <Param ColumnName="SCAC_AND_SERVICE" Name="aSCACAndService" Type=""/>
+            <WhereClause> WHERE (SCAC_AND_SERVICE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_SCAC">
+        <Method Name="SCAC" OrderBy="" Type="select">
+            <Param ColumnName="SCAC" Name="aSCAC" Type=""/>
+            <WhereClause> WHERE (SCAC = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_SHIPMENT_CONTAINER">
+        <Method Name="ShipmentKey" OrderBy="" Type="list">
+            <Param ColumnName="SHIPMENT_KEY" Name="aShipmentKey" Type=""/>
+            <WhereClause> WHERE (SHIPMENT_KEY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_SHIPMENT">
+        <Method Name="Pickticket_No" OrderBy="" Type="select">
+            <Param ColumnName="PICKTICKET_NO" Name="aPickTicketNo" Type=""/>
+            <WhereClause> WHERE (PICKTICKET_NO = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_SHIP_NODE_H">
+        <Method Name="ShipNode" OrderBy="" Type="select">
+            <Param ColumnName="SHIP_NODE" Name="aShipNode" Type=""/>
+            <WhereClause> WHERE (SHIP_NODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+</Tables>

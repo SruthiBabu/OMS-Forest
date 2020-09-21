@@ -1,0 +1,1996 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+    <Entities>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table stores information for a resource pool. A resource pool represents a collection of resources for providing services. The resources represented by a resource pool should have common characteristics (like regions serviced and skill sets). Capacity for providing services is maintained at the Resource Pool level."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Res_Pool" Prefix="YFS_" TableName="YFS_RES_POOL"
+            TableType="MASTER" XMLName="ResourcePool">
+            <Attributes>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="SERVICE_SLOT_GROUP_ID"
+                    DataType="SlotGroupId" DefaultValue="' ' "
+                    Description="The identifier of the service slot."
+                    Name="Service_Slot_Group_Id" Nullable="false" XMLName="ServiceSlotGroupId"/>
+                <Attribute ColumnName="NODE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The node that is associated with this resource pool."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="CAPACITY_ORGANIZATION_CODE"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The code of the catalog organization. A resource pool is always created wihin the context of a capacity organization. An organization can source services from any resource pool within the same capacity organization."
+                    Name="Capacity_Organization_Code" Nullable="false" XMLName="CapacityOrganizationCode"/>
+                <Attribute ColumnName="RESOURCE_POOL_ID"
+                    DataType="ID-24" DefaultValue="' ' "
+                    Description="The unique identifier of the resource pool."
+                    Name="Resource_Pool_Id" Nullable="false" XMLName="ResourcePoolId"/>
+                <Attribute ColumnName="CAPACITY_UOM" DataType="UOM"
+                    DefaultValue="' ' "
+                    Description="The unit of measure in which resource pool capacity should be specified."
+                    Name="Capacity_Uom" Nullable="false" XMLName="CapacityUnitOfMeasure"/>
+                <Attribute ColumnName="ITEM_GROUP_CODE"
+                    DataType="EnumItemGroupCode2" DefaultValue="' '"
+                    Description="The type of item that this resource pool services."
+                    Name="Item_Group_Code" XMLName="ItemGroupCode"/>
+                <Attribute ColumnName="PROVIDER_ORGANIZATION_CODE"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The code of the organization that owns the resource pool."
+                    IsOrgColumn="Y" Name="Provider_Organization_Code"
+                    Nullable="false" XMLName="ProviderOrganizationCode"/>
+                <Attribute ColumnName="CALENDAR_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The calendar that is associated with this resource pool."
+                    Name="Calendar_Key" Nullable="false" XMLName="CalendarKey"/>
+                <Attribute ColumnName="ALL_REGIONS_SERVICED"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether all regions are serviced by this resource pool."
+                    Name="All_Regions_Serviced" Nullable="false" XMLName="AllRegionsServiced"/>
+                <Attribute ColumnName="PROVIDES_ALL_SERVICES"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether all services are provided by this resource pool."
+                    Name="Provides_All_Services" Nullable="false" XMLName="ProvidesAllServices"/>
+                <Attribute CanTranslate="Y" ColumnName="RESOURCE_POOL_DESC"
+                    DataType="FreeText-100" DefaultValue="' ' "
+                    Description="The desciption of the resource pool."
+                    Name="Resource_Pool_Description" Nullable="false" XMLName="ResourcePoolDescription"/>
+                <Attribute ColumnName="PROVIDER_CONTACT_ADDRESS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The provider contact address that is associated with this resource pool."
+                    Name="Provider_Contact_Address_Key" Nullable="false" XMLName="ProviderContactAddressKey"/>
+                <Attribute ColumnName="CAPACITY_INFO_AVAILABLE"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether this resource pool has capacity information available."
+                    Name="Capacity_Info_Available" Nullable="false" XMLName="CapacityInfoAvailable"/>
+                <Attribute ColumnName="CAP_MAINTAIN_AT_RESOURCE_LEVEL"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether capacity is maintained at the resource level for this resource pool. Default Value is 'N'.  If set to Y, resource pool is allowed to define resources, and Standard and/or Override capacity cannot be defined for the resource pool."
+                    Name="Cap_Maintain_At_Resource_Level"
+                    Nullable="false" XMLName="CapacityMaintainAtResourceLevel"/>
+                <Attribute ColumnName="REGION_SCHEMA_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The region schema associated with this resource pool. If region schema is defined for a resource pool, it will override the region schema associated at provider organization level."
+                    Name="Region_Schema_Key" Nullable="false" XMLName="RegionSchemaKey"/>
+                <Attribute ColumnName="ASSOC_REGION_BY_SLOT"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="The flag indicates whether the resource pool is associated to the regions by using service slots.  Default value is N."
+                    Name="Assoc_Region_By_Slot" Nullable="false" XMLName="AssociateRegionBySlot"/>
+                <Attribute ColumnName="SERVICE_SUPERVISOR_ID"
+                    DataType="UserId" DefaultValue="' '"
+                    Description="This field represents the supervisor responsible for the reosurce pool.This will be a valid user ID in the system. This user will belong to the node owning the reosurce pool."
+                    Name="Service_Supervisor_Id" Nullable="false"/>
+                <Attribute ColumnName="PURPOSE" DataType="INVResourcePoolPurpose"
+                    DefaultValue="' '"
+                    Description="This field indicates if the resource pool is used for service or dock scheduling. Default value: SERVICE."
+                    Name="Purpose" Nullable="false" XMLName="Purpose"/>
+                <Attribute ColumnName="RESTRICT_MAX_CONCURRENT_APPT"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This field indicates if there is a restriction on maximum number of concurrent appointments for the resource pool.  When this is set to Y, the maximum number of concurrent appointments can be specified for a slot and day in the YFS_RES_POOL_DOW_CAPCTY table (CapacityPerSlot).  This is for internal use only.  When the Purpose field is passed as DOCK, this will be set to Y.  Default value: N."
+                    Name="Restrict_Max_Concurrent_Appt" Nullable="false" XMLName="RestrictMaxConcurrentAppointments"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" Name="Resource_Pool_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RESOURCE_POOL_I1"
+                    Name="YFS_RESOURCE_POOL_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_ID"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="CAPACITY_ORGANIZATION_CODE"/>
+                </Index>
+                <Index DB2Name="RESOURCE_POOL_I2"
+                    Name="YFS_RESOURCE_POOL_I2" Unique="false">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="CAPACITY_ORGANIZATION_CODE"/>
+                    <Column Name="ITEM_GROUP_CODE"/>
+                </Index>
+                <Index DB2Name="RESOURCE_POOL_I3"
+                    Name="YFS_RESOURCE_POOL_I3" Unique="false">
+                    <Column Name="PROVIDER_CONTACT_ADDRESS_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    ForeignEntity="Person_Info"
+                    Name="ProviderContactAddress" Type="Unidirectional" XMLName="ProviderContactAddress">
+                    <Attribute Name="Provider_Contact_Address_Key" ParentName="Person_Info_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne" DeleteValidationError="YDB10090"
+                    ForeignEntity="Calendar" Name="ResourceCalendar"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="ResourceCalendar">
+                    <Attribute Name="Calendar_Key" ParentName="Calendar_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" IsParent="true"
+                    DeleteCascade="true"
+                    DeleteValidationError="YDB10091"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WMSResourcePools"
+                    ChildName="WMSResourcePool"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="WMS_ResourcePool_List" Type="Bidirectional" XMLName="WMSResourcePoolList">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                    <Attribute Name="Purpose" ParentName="WMS-RP"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    DeleteValidationError="YDB10092"
+                    ForeignEntity="Organization"
+                    Name="CapacityOrganization" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="CapacityOrganization">
+                    <Attribute Name="Capacity_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    DeleteValidationError="YDB10093"
+                    ForeignEntity="Organization"
+                    Name="ProviderOrganization" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="ProviderOrganization">
+                    <Attribute Name="Provider_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    DeleteValidationError="YDB10094"
+                    ForeignEntity="Service_Slot_Group"
+                    Name="ServiceSlotGroup" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="ServiceSlotGroup">
+                    <Attribute Name="Service_Slot_Group_Id" ParentName="Service_Slot_Group_Id"/>
+                    <Attribute Name="Capacity_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RESOURCE_POOL_ID"/>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table defines the services that a Resource Pool provides. These services are defined as items in the catalog of the Resource Pool's Capacity Organization."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Res_Pool_Item" Prefix="YFS_"
+            TableName="YFS_RES_POOL_ITEM" TableType="MASTER" XMLName="ServicedItem"
+            LockingEntity="Res_Pool">
+            <Attributes>
+                <Attribute ColumnName="SHORT_DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' '  "
+                    Description="A short description for an item."
+                    Name="Short_Description" Nullable="false"
+                    Virtual="true" XMLName="ShortDescription"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="ItemDesc"
+                    DefaultValue="' '  "
+                    Description="Description of an item."
+                    Name="Description" Nullable="false" Virtual="true" XMLName="Description"/>
+                <Attribute ColumnName="RES_POOL_ITEM_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL_ITEM table."
+                    Name="Res_Pool_Item_Key" Nullable="false" XMLName="ResPoolItemKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Link to YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' ' "
+                    Description="Unique identifier for an item serviced by resource pool."
+                    Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_POOL_ITEM_PK">
+                <Attribute ColumnName="RES_POOL_ITEM_KEY" Name="Res_Pool_Item_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_POOL_ITEM_I1"
+                    Name="YFS_RES_POOL_ITEM_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="ITEM_ID"/>
+                </Index>
+                <Index DB2Name="RES_POOL_ITEM_I2"
+                    Name="YFS_RES_POOL_ITEM_I2" Unique="false">
+                    <Column Name="ITEM_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServicedItems"
+                    ChildName="ServicedItem" DeleteCascade="true"
+                    ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="ServicedItem">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RESOURCE_POOL_KEY"/>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores the regions that are serviced by a Resource Pool."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Res_Pool_Region" Prefix="YFS_"
+            TableName="YFS_RES_POOL_REGION" TableType="MASTER" XMLName="RegionServiced"
+            LockingEntity="Res_Pool">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_REGION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL_REGION table."
+                    Name="Res_Pool_Region_Key" Nullable="false" XMLName="ResPoolRegionKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Link to YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="REGION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Link to YFS_REGION table."
+                    Name="Region_Key" Nullable="false" XMLName="RegionKey"/>
+                <Attribute ColumnName="SUNDAY_VALID" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if Sunday is a working day for the resource pool."
+                    Name="Sunday_Valid" Nullable="false" XMLName="SundayValid"/>
+                <Attribute ColumnName="MONDAY_VALID" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if Monday is a working day for the resource pool."
+                    Name="Monday_Valid" Nullable="false" XMLName="MondayValid"/>
+                <Attribute ColumnName="TUESDAY_VALID" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if Tuesday is a working day for the resource pool."
+                    Name="Tuesday_Valid" Nullable="false" XMLName="TuesdayValid"/>
+                <Attribute ColumnName="WEDNESDAY_VALID" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if Wednesday is a working day for the resource pool."
+                    Name="Wednesday_Valid" Nullable="false" XMLName="WednesdayValid"/>
+                <Attribute ColumnName="THURSDAY_VALID" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if Thursday is a working day for the resource pool."
+                    Name="Thursday_Valid" Nullable="false" XMLName="ThursdayValid"/>
+                <Attribute ColumnName="FRIDAY_VALID" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if Friday is a working day for the resource pool."
+                    Name="Friday_Valid" Nullable="false" XMLName="FridayValid"/>
+                <Attribute ColumnName="SATURDAY_VALID" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if Saturday is a working day for the resource pool."
+                    Name="Saturday_Valid" Nullable="false" XMLName="SaturdayValid"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="Priority of the resource pool servicing the region."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    Description="The start time of the valid slot that the resource pool can serve the region."
+                    Name="Start_Time" Nullable="true" XMLName="StartTime"/>
+                <Attribute ColumnName="END_TIME" DataType="Time"
+                    Description="The end time of the valid slot that the resource pool can serve the region."
+                    Name="End_Time" Nullable="true" XMLName="EndTime"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_POOL_REGION_PK">
+                <Attribute ColumnName="RES_POOL_REGION_KEY" Name="Res_Pool_Region_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_POOL_REGION_I1"
+                    Name="YFS_RES_POOL_REGION_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="REGION_KEY"/>
+                    <Column Name="START_TIME"/>
+                    <Column Name="END_TIME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="RegionsServiced"
+                    ChildName="RegionServiced" DeleteCascade="true"
+                    ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="RegionServiced">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    DeleteValidationError="YDB10030"
+                    ForeignEntity="Region" Name="Region"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="Region">
+                    <Attribute Name="Region_Key" ParentName="Region_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RESOURCE_POOL_KEY"/>
+        </Entity>
+        <Entity Cacheable="false" GenerateIndexedListMethods="true"
+            Description="This table defines date ranges for which standard(default) capacity can be maintained for a Resource Pool. These periods cannot overlap for a given Resource Pool."
+            EntityType="TRANSACTION" Extensible="N" Module="inv"
+            Name="Res_Pool_Std_Capacity_Period" Prefix="YFS_"
+            TableName="YFS_RES_POOL_STD_CAPCTY_PERD"
+            TableType="TRANSACTION" XMLName="StandardCapacityPeriod">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_STD_CAPCTY_PERD_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL_STD_CAPCTY_PERD table."
+                    Name="Res_Pool_Std_Capacity_Period_Key"
+                    Nullable="false" XMLName="ResPoolStdCapacityPeriodKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Link to YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="EFFECTIVE_FROM_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="Start date of the effectivity period."
+                    Name="Effective_Start_Date" Nullable="false" XMLName="EffectiveStartDate"/>
+                <Attribute ColumnName="EFFECTIVE_TO_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="End date of the effectivity period."
+                    Name="Effective_End_Date" Nullable="false" XMLName="EffectiveEndDate"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_PL_CAP_PRD_PK" Name="YFS_RES_POOL_CAP_PRD_PK">
+                <Attribute ColumnName="RES_POOL_STD_CAPCTY_PERD_KEY" Name="Res_Pool_Std_Capacity_Period_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_PL_CAP_PRD_I1"
+                    Name="YFS_RES_POOL_CAP_PRD_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="EFFECTIVE_FROM_DATE"/>
+                    <Column Name="EFFECTIVE_TO_DATE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="EffectiveDateRanges"
+                    ChildName="EffectiveDateRange"
+                    ChildXMLName="EffectiveDateRange"
+                    DeleteCascade="true" ForeignEntity="Res_Pool"
+                    Name="ResourcePool" Type="Bidirectional" XMLName="EffectiveDateRange">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RESOURCE_POOL_KEY"/>
+        </Entity>
+        <Entity Cacheable="false" GenerateIndexedListMethods="true"
+            Description="This table defines the standard capacity of each working day/Shift combination for every date range defined in YFS_RES_POOL_STD_CAPCTY_PERD."
+            EntityType="TRANSACTION" Extensible="N" Module="inv"
+            Name="Res_Pool_Dow_Capcty" Prefix="YFS_"
+            TableName="YFS_RES_POOL_DOW_CAPCTY" TableType="TRANSACTION" XMLName="CapacityPerSlot">
+            <Attributes>
+                <Attribute ColumnName="UNDEFINED_SLOT" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicator used to specify if capacity specified is for an undefined slot."
+                    Name="UndefinedSlot" Nullable="false" Virtual="true" XMLName="UndefinedSlot"/>
+                <Attribute ColumnName="UOM" DataType="Text-24"
+                    Description="Capacity will be defined in this UOM."
+                    Name="Uom" Nullable="true" XMLName="CapacityUnitOfMeasure"/>
+                <Attribute ColumnName="RES_POOL_DOW_CAPCTY_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL_DOW_CAPCTY table."
+                    Name="Res_Pool_Dow_Capcty_Key" Nullable="false" XMLName="ResPoolDowCapctyKey"/>
+                <Attribute ColumnName="RES_POOL_STD_CAPCTY_PERD_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Link to YFS_RES_POOL_STD_CAPCTY_PERD table."
+                    Name="Res_Pool_Std_Capacity_Period_Key"
+                    Nullable="false" XMLName="ResPoolStdCapacityPeriodKey"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    DefaultValue="sysdate "
+                    Description="Start time of the Shift. For INVENTORY resource pools, this defaults to 00:00:00."
+                    Name="Start_Time" Nullable="false" XMLName="StartTime"/>
+                <Attribute ColumnName="END_TIME" DataType="Time"
+                    DefaultValue="sysdate "
+                    Description="End time of the shift. For INVENTORY resource pools, this defaults to 23:59:59." Name="End_Time"
+                    Nullable="false" XMLName="EndTime"/>
+                <Attribute ColumnName="SUNDAY_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Capacity for Sunday."
+                    Name="Sunday_Capacity" Nullable="false" XMLName="SundayCapacity"/>
+                <Attribute ColumnName="MONDAY_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Capacity for Monday."
+                    Name="Monday_Capacity" Nullable="false" XMLName="MondayCapacity"/>
+                <Attribute ColumnName="TUESDAY_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Capacity for Tuesday."
+                    Name="Tuesday_Capacity" Nullable="false" XMLName="TuesdayCapacity"/>
+                <Attribute ColumnName="WEDNESDAY_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Capacity for Wednesday."
+                    Name="Wednesday_Capacity" Nullable="false" XMLName="WednesdayCapacity"/>
+                <Attribute ColumnName="THURSDAY_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Capacity for Thursday."
+                    Name="Thursday_Capacity" Nullable="false" XMLName="ThursdayCapacity"/>
+                <Attribute ColumnName="FRIDAY_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Capacity for Friday."
+                    Name="Friday_Capacity" Nullable="false" XMLName="FridayCapacity"/>
+                <Attribute ColumnName="SATURDAY_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Capacity for Saturday."
+                    Name="Saturday_Capacity" Nullable="false" XMLName="SaturdayCapacity"/>
+                <Attribute ColumnName="SUNDAY_SUPPL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Supplemental capacity for Sunday."
+                    Name="Sunday_Suppl_Capacity" Nullable="false" XMLName="SundaySupplementalCapacity"/>
+                <Attribute ColumnName="MONDAY_SUPPL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Supplemental capacity for Monday."
+                    Name="Monday_Suppl_Capacity" Nullable="false" XMLName="MondaySupplementalCapacity"/>
+                <Attribute ColumnName="TUESDAY_SUPPL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Supplemental capacity for Tuesday."
+                    Name="Tuesday_Suppl_Capacity" Nullable="false" XMLName="TuesdaySupplementalCapacity"/>
+                <Attribute ColumnName="WEDNESDAY_SUPPL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Supplemental capacity for Wednesday."
+                    Name="Wednesday_Suppl_Capacity" Nullable="false" XMLName="WednesdaySupplementalCapacity"/>
+                <Attribute ColumnName="THURSDAY_SUPPL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Supplemental capacity for Thursday."
+                    Name="Thursday_Suppl_Capacity" Nullable="false" XMLName="ThursdaySupplementalCapacity"/>
+                <Attribute ColumnName="FRIDAY_SUPPL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Supplemental capacity for Friday."
+                    Name="Friday_Suppl_Capacity" Nullable="false" XMLName="FridaySupplementalCapacity"/>
+                <Attribute ColumnName="SATURDAY_SUPPL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Supplemental capacity for Saturday."
+                    Name="Saturday_Suppl_Capacity" Nullable="false" XMLName="SaturdaySupplementalCapacity"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RESPOOLDOW_CAP_PK">
+                <Attribute ColumnName="RES_POOL_DOW_CAPCTY_KEY" Name="Res_Pool_Dow_Capcty_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RESPOOLDOW_CAP_I1"
+                    Name="YFS_RES_POOL_DOW_CAPCTY_I1" Unique="true">
+                    <Column Name="RES_POOL_STD_CAPCTY_PERD_KEY"/>
+                    <Column Name="UOM"/>
+                    <Column Name="START_TIME"/>
+                    <Column Name="END_TIME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CapacitiesPerSlot"
+                    ChildName="CapacityPerSlot"
+                    ChildXMLName="CapacityPerSlot" DeleteCascade="true"
+                    ForeignEntity="Res_Pool_Std_Capacity_Period"
+                    Name="CapacityPerSlot" Type="Bidirectional" XMLName="CapacityPerSlot">
+                    <Attribute Name="Res_Pool_Std_Capacity_Period_Key" ParentName="Res_Pool_Std_Capacity_Period_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RES_POOL_DOW_CAPCTY_KEY"/>
+        </Entity>
+        <Entity Cacheable="false" GenerateIndexedListMethods="true"
+            Description="This table stores capacity overrides for a specific date/shift combination. This overrides the standard capacity for that specific date/shift."
+            EntityType="TRANSACTION" Extensible="N" Module="inv"
+            Name="Res_Pool_Capcty_Override" Prefix="YFS_"
+            TableName="YFS_RES_POOL_CAPCTY_OVERRIDE"
+            TableType="TRANSACTION" XMLName="CapacityOverride">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_CAPCTY_OVERRIDE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_RES_POOL_CAPCTY_OVERRIDE table."
+                    Name="Res_Pool_Capcty_Override_Key" Nullable="false" XMLName="ResPoolCapctyOverrideKey"/>
+                <Attribute ColumnName="UOM" DataType="Text-24"
+                    Description="Capacity will be defined in this UOM."
+                    Name="Uom" Nullable="true" XMLName="CapacityUnitOfMeasure"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The resource pool associated with this capacity override."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="CAPACITY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date for which capacity is given."
+                    Name="Capacity_Date" Nullable="false" XMLName="Date"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    DefaultValue="sysdate "
+                    Description="The start time of the shift for the specified capacity date. For INVENTORY resource pools, this defaults to 00:00:00."
+                    Name="Start_Time" Nullable="false" XMLGroup="" XMLName="StartTime"/>
+                <Attribute ColumnName="END_TIME" DataType="Time"
+                    DefaultValue="sysdate "
+                    Description="The end time of the shift for the specified capacity date. For INVENTORY resource pools, this defaults to 23:59:59."
+                    Name="End_Time" Nullable="false" XMLGroup="" XMLName="EndTime"/>
+                <Attribute ColumnName="CAPACITY" DataType="Capacity"
+                    DefaultValue="0"
+                    Description="The capacity for the specified capacity date."
+                    Name="Capacity" Nullable="false" XMLGroup="" XMLName="Capacity"/>
+                <Attribute ColumnName="SUPPLEMENTAL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="The overridden supplemental capacity for the specified capacity date."
+                    Name="Supplemental_Capacity" Nullable="false" XMLName="SupplementalCapacity"/>
+                <Attribute ColumnName="OVERRIDE_REASON"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="The reason this capacity was overridden."
+                    Name="Override_Reason" Nullable="false" XMLName="OverrideReason"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_POOL_CAPOVR_PK" Name="YFS_RES_POOL_CAPCTY_OVER_PK">
+                <Attribute ColumnName="RES_POOL_CAPCTY_OVERRIDE_KEY" Name="Res_Pool_Capcty_Override_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_POOL_CAPOVR_I1"
+                    Name="YFS_RES_POOL_CAPCTY_OVER_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="UOM"/>
+                    <Column Name="CAPACITY_DATE"/>
+                    <Column Name="START_TIME"/>
+                    <Column Name="END_TIME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CapacityDates"
+                    ChildName="CapacityOverride"
+                    ChildXMLName="CapacityOverride" DeleteCascade="true"
+                    ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="CapacityOverride">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RES_POOL_CAPCTY_OVERRIDE_KEY"/>
+        </Entity>
+        <Entity Cacheable="false"
+            Description="This table stores resource pool capacity consumption for each date/shift combination."
+            EntityType="TRANSACTION" Extensible="N" Module="inv"
+            Name="Res_Pool_Capcty_Consmptn" Prefix="YFS_"
+            TableName="YFS_RES_POOL_CAPCTY_CONSMPTN"
+            TableType="TRANSACTION" XMLName="ResourcePoolCapacityConsumption">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_CAPCTY_CONSMPTN_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_RES_POOL_CAPCTY_CONSMPTN table."
+                    Name="Res_Pool_Capcty_Consmptn_Key" Nullable="false" XMLName="ResPoolCapctyConsmptnKey"/>
+                <Attribute ColumnName="ADDITIONAL_CAPACITY2"
+                    DataType="Dimension"
+                    Description="Additional capacity blocked."
+                    Name="Additional_Capacity2" Nullable="true" XMLName="AdditionalCapacity2"/>
+                <Attribute ColumnName="ADDITIONAL_CAPACITY1"
+                    DataType="Dimension"
+                    Description="Additional capacity blocked."
+                    Name="Additional_Capacity1" Nullable="true" XMLName="AdditionalCapacity1"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The resource pool associated with this capacity consumption."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="CONSUMPTION_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date that this capacity consumption is specified."
+                    Name="Consumption_Date" Nullable="false" XMLName="ConsumptionDate"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    DefaultValue="sysdate"
+                    Description="The shift start time for which consumption is specified. For INVENTORY resource pools, this defaults to 00:00:00."
+                    Name="Start_Time" Nullable="false" XMLName="StartTime"/>
+                <Attribute ColumnName="END_TIME" DataType="Time"
+                    DefaultValue="sysdate"
+                    Description="The shift end time for which consumption is specified. For INVENTORY resource pools, this defaults to 23:59:59."
+                    Name="End_Time" Nullable="false" XMLName="EndTime"/>
+                <Attribute ColumnName="ALLOCATED_CAPACITY_CONSUMED"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="The allocated capacity consumed."
+                    Name="Allocated_Capacity_Consumed" Nullable="false" XMLName="AllocatedCapacityConsumed"/>
+                <Attribute ColumnName="SERVICE_RESOURCE_ID"
+                    DataType="ID-24" DefaultValue="' ' "
+                    Description="The service resource for which capacity was consumed against."
+                    Name="Service_Resource_ID" Nullable="false" XMLName="ServiceResourceId"/>
+                <Attribute ColumnName="SERVICE_RESOURCE_KEY"
+                    DataType="Key"
+                    Description="Primary key attribute of YFS_SERVICE_RESOURCE table. The service resource for which capacity was consumed against."
+                    Name="Service_Resource_Key" Nullable="true" XMLName="ServiceResourceKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_PLCAP_CONS_PK" Name="YFS_RES_POOL_CAPCTY_CONSMPT_PK">
+                <Attribute ColumnName="RES_POOL_CAPCTY_CONSMPTN_KEY" Name="Res_Pool_Capcty_Consmptn_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <!-- do not increase lenght of primary index... else 'ORA-00972: identifier is too long' will happen  -->
+                <Index DB2Name="RES_PLCAP_CONS_I1"
+                    Name="YFS_RES_POOL_CAPCTY_CONSMPN_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="SERVICE_RESOURCE_KEY"/>
+                    <Column Name="CONSUMPTION_DATE"/>
+                    <Column Name="START_TIME"/>
+                    <Column Name="END_TIME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="YDB10059"
+                    ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Unidirectional" ValidateDelete="true">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Service_Resource"
+                    Name="ServiceResource" Type="Unidirectional">
+                    <Attribute Name="Service_Resource_Key" ParentName="Service_Resource_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RES_POOL_CAPCTY_CONSMPTN_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="The master table for defining service slots (time periods). A Resource Pool is associated to a single Slot Group."
+            EntityType="CONFIGURATION" Extensible="N" Module="inv"
+            Name="Service_Slot_Group" Prefix="YFS_"
+            TableName="YFS_SERVICE_SLOT_GROUP" TableType="MASTER" XMLName="ServiceSlotGroup">
+            <Attributes>
+                <Attribute ColumnName="SERVICE_SLOT_GROUP_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_SLOT_GROUP table."
+                    Name="Service_Slot_Group_Key" Nullable="false" XMLName="ServiceSlotGroupKey"/>
+                <Attribute ColumnName="ORGANIZATION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_ORGANIZATION table."
+                    IsOrgColumn="Y" Name="Organization_Key"
+                    Nullable="false" XMLName="OrganizationKey"/>
+                <Attribute ColumnName="SERVICE_SLOT_GROUP_ID"
+                    DataType="SlotGroupId" DefaultValue="' ' "
+                    Description="Service Slot Group Identifier."
+                    Name="Service_Slot_Group_Id" Nullable="false" XMLName="ServiceSlotGroupId"/>
+                <Attribute ColumnName="SERVICE_SLOT_GROUP_DESC"
+                    DataType="FreeText-100" CanTranslate="Y" DefaultValue="' ' "
+                    Description="Service Slot Group Identifier."
+                    Name="Service_Slot_Group_Desc" Nullable="false" XMLName="ServiceSlotGroupDesc"/>
+				<Attribute ColumnName="ITEM_GROUP_CODE"
+                   	DataType="EnumItemGroupCode2" DefaultValue="' '"
+                    Description="The type of item for this service slot group."
+                    Name="Item_Group_Code" XMLName="ItemGroupCode"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SVC_SLOT_GROUP_PK">
+                <Attribute ColumnName="SERVICE_SLOT_GROUP_KEY" Name="Service_Slot_Group_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SVC_SLOT_GROUP_I1"
+                    Name="YFS_SERVICE_SLOT_GROUP_I1" Unique="true">
+                    <Column Name="ORGANIZATION_KEY"/>
+                    <Column Name="SERVICE_SLOT_GROUP_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="Organization" Type="Unidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Key" ParentName="Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="SERVICE_SLOT_GROUP_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the list of service slots for a Slot Group."
+            EntityType="CONFIGURATION" Extensible="N" Module="inv"
+            Name="Service_Slot" Prefix="YFS_"
+            TableName="YFS_SERVICE_SLOT" TableType="MASTER" XMLName="ServiceSlot"
+            LockingEntity="Service_Slot_Group">
+            <Attributes>
+                <Attribute ColumnName="SERVICE_SLOT_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_SLOT table."
+                    Name="Service_Slot_Key" Nullable="false" XMLName="ServiceSlotKey"/>
+                <Attribute ColumnName="PARENT_SLOT_KEY" DataType="Key"
+                    Description="Key attribute of the parent slot of the current service slot. Will be null if current slot has no parent."
+                    Name="Parent_Slot_Key" Nullable="true" XMLName="ParentSlotKey"/>
+                <Attribute ColumnName="SERVICE_SLOT_GROUP_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_SLOT_GROUP table."
+                    Name="Service_Slot_Group_Key" Nullable="false" XMLName="ServiceSlotGroupKey"/>
+                <Attribute ColumnName="SERVICE_SLOT_DESC"
+                    DataType="FreeText-100" CanTranslate="Y" DefaultValue="' ' "
+                    Description="Service Slot Description."
+                    Name="ServiceSlotDesc" Nullable="false" XMLName="ServiceSlotDesc"/>
+                <Attribute ColumnName="CAN_USE_FOR_APPT" DataType="Flag"
+                    DefaultValue="'Y' "
+                    Description="This flag indicates whether or not appointments can be taken against this service slot."
+                    Name="Can_Use_For_Appt" Nullable="false" XMLName="CanUseForAppointment"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    DefaultValue="sysdate"
+                    Description="Start time of Slot. For INVENTORY resource pools, this defaults to 00:00:00." Name="Start_Time"
+                    Nullable="false" XMLName="StartTime"/>
+                <Attribute ColumnName="END_TIME" DataType="Time"
+                    DefaultValue="sysdate"
+                    Description="End time of Slot. For INVENTORY resource pools, this defaults to 23:59:59." Name="End_Time"
+                    Nullable="false" XMLName="EndTime"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SERVICE_SLOT_PK">
+                <Attribute ColumnName="SERVICE_SLOT_KEY" Name="Service_Slot_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SERVICE_SLOT_I1"
+                    Name="YFS_SERVICE_SLOT_I1" Unique="true">
+                    <Column Name="SERVICE_SLOT_GROUP_KEY"/>
+                    <Column Name="START_TIME"/>
+                    <Column Name="END_TIME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServiceSlotList"
+                    ChildName="ServiceSlot" ChildXMLName="ServiceSlot"
+                    DeleteCascade="true"
+                    ForeignEntity="Service_Slot_Group"
+                    Name="ServiceSlotGroup" Type="Bidirectional" XMLName="SlotRange">
+                    <Attribute Name="Service_Slot_Group_Key" ParentName="Service_Slot_Group_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChildServiceSlotList"
+                    ChildName="ChildServiceSlot"
+                    ChildXMLName="ServiceSlot" DeleteCascade="true"
+                    ForeignEntity="Service_Slot"
+                    Name="Parent_Service_Slot" Type="Bidirectional" XMLName="ParentServiceSlot">
+                    <Attribute Name="Parent_Slot_Key" ParentName="Service_Slot_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="SERVICE_SLOT_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table defines the service skills a Resource Pool has to perform services. These service skills are defined in the catalog of a Resource Pool's Capacity Organization."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Res_Pool_Service_Skill" Prefix="YFS_"
+            TableName="YFS_RES_POOL_SERVICE_SKILL" TableType="MASTER" XMLName="ServiceSkill"
+            LockingEntity="Res_Pool">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_SERVICE_SKILL_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL_SERVICE_SKILL table."
+                    Name="Res_Pool_Service_Skill_Key" Nullable="false" XMLName="ResPoolServiceSkillKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Link to YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_ORGANIZATION table. This will be the Organization Code of the catalog organization of Resource Pool's Capacity Organization."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SERVICE_SKILL_ID"
+                    DataType="ServiceSkillId" DefaultValue="' ' "
+                    Description="Unique identifier for service skill."
+                    Name="Service_Skill_Id" Nullable="false" XMLName="ServiceSkillId"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_PL_SRV_SK_PK">
+                <Attribute ColumnName="RES_POOL_SERVICE_SKILL_KEY" Name="Res_Pool_Service_Skill_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_PL_SRV_SK_I1"
+                    Name="YFS_RES_POOL_SERVICE_SKILL_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="SERVICE_SKILL_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServiceSkills"
+                    ChildName="ServiceSkill" DeleteCascade="true"
+                    ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="ResourcePool">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="YDB100113_55SP2"
+                    ForeignEntity="Service_Skill" Name="Service_Skill"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="ServiceSkill">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Service_Skill_Id" ParentName="Service_Skill_Id"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RESOURCE_POOL_KEY, ORGANIZATION_CODE, SERVICE_SKILL_ID"/>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores the service resources defined for resource pools."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Service_Resource" Prefix="YFS_"
+            TableName="YFS_SERVICE_RESOURCE" TableType="MASTER" XMLName="ServiceResource"
+            LockingEntity="Res_Pool">
+            <Attributes>
+                <Attribute ColumnName="SERVICE_RESOURCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_RESOURCE table."
+                    Name="Service_Resource_Key" Nullable="false" XMLName="ServiceResourceKey"/>
+                <Attribute ColumnName="SERVICE_RESOURCE_ID"
+                    DataType="ID-24" DefaultValue="' ' "
+                    Description="The unique identifier of the service resource."
+                    Name="Service_Resource_ID" Nullable="false" XMLName="ServiceResourceId"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Resource pool that the service resource belongs to."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="CALENDAR_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Calendar for the service resource."
+                    Name="Calendar_Key" Nullable="false" XMLName="CalendarKey"/>
+                <Attribute ColumnName="SERV_RES_CONTACT_ADDRESS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Contact address of service resource."
+                    Name="Service_Resource_Contact_Address_Key"
+                    Nullable="false" XMLName="ServiceResourceContactAddressKey"/>
+                <Attribute ColumnName="NOTES" DataType="Text-4000"
+                    DefaultValue="' ' "
+                    Description="Additional information about the service resource."
+                    Name="Notes" Nullable="false" XMLName="Notes"/>
+                <Attribute ColumnName="NODE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The node that is associated with this resource."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SRV_RES_PK">
+                <Attribute ColumnName="SERVICE_RESOURCE_KEY" Name="Service_Resource_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SRV_RES_I1"
+                    Name="YFS_SERVICE_RESOURCE_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="SERVICE_RESOURCE_ID"/>
+                </Index>
+                <Index DB2Name="SRV_RES_I2"
+                    Name="YFS_SERVICE_RESOURCE_I2" Unique="false">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="SERVICE_RESOURCE_ID"/>
+                </Index>
+                <Index DB2Name="SRV_RES_I3" Name="YFS_SERVICE_RESOURCE_I3">
+                    <Column Name="SERV_RES_CONTACT_ADDRESS_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServiceResources"
+                    ChildName="ServiceResource" DeleteCascade="true" IsParent="true"
+                    ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="ResourcePool">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+					<Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="" ChildName=""
+                    ForeignEntity="Person_Info"
+                    Name="ServiceResourceContactAddress"
+                    Type="Unidirectional" XMLName="ServiceResourceContactAddress">
+                    <Attribute
+                        Name="Service_Resource_Contact_Address_Key" ParentName="Person_Info_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    DeleteValidationError="YDB71_1"
+                    ForeignEntity="Calendar"
+                    Name="ServiceResourceCalendar" Type="Unidirectional"
+                    ValidateDelete="true" XMLName="ServiceResourceCalendar">
+                    <Attribute Name="Calendar_Key" ParentName="Calendar_Key"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany" Enforce="true"
+					ForeignEntity="Ship_Node" Name="Ship_Node"
+					Type="Bidirectional" XMLName="Node" Virtual="true">
+					<Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+				</RelationShip>
+            </RelationShips>
+            <OrderBy Value="RESOURCE_POOL_KEY"/>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores the node users who are defined for a service resource."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Service_Resource_User" Prefix="YFS_"
+            TableName="YFS_SERVICE_RESOURCE_USER" TableType="MASTER" XMLName="ServiceResourceUser"
+            LockingEntity="Service_Resource">
+            <Attributes>
+                <Attribute ColumnName="SERVICE_RESOURCE_USER_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_RESOURCE_USER table."
+                    Name="Service_Resource_User_Key" Nullable="false" XMLName="ServiceResourceUserKey"/>
+                <Attribute ColumnName="SERVICE_RESOURCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_RESOURCE table."
+                    Name="Service_Resource_Key" Nullable="false" XMLName="ServiceResourceKey"/>
+                <Attribute ColumnName="USER_ID" DataType="ID-24"
+                    DefaultValue="' ' "
+                    Description="User Id of the resource member."
+                    Name="User_ID" Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SRV_RES_USR_PK">
+                <Attribute ColumnName="SERVICE_RESOURCE_USER_KEY" Name="Service_Resource_User_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SRV_RES_USR_I1"
+                    Name="YFS_SERVICE_RESOURCE_USER_I1" Unique="true">
+                    <Column Name="SERVICE_RESOURCE_KEY"/>
+                    <Column Name="USER_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServiceResourceUsers"
+                    ChildName="ServiceResourceUser" DeleteCascade="true"
+                    ForeignEntity="Service_Resource"
+                    Name="ServiceResource" Type="Bidirectional" XMLName="ServiceResource">
+                    <Attribute Name="Service_Resource_Key" ParentName="Service_Resource_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="INV73_003" Enforce="true"
+                    ForeignEntity="User" Name="User" ReadOnly="true"
+                    Type="Unidirectional" ValidateDelete="Y"
+                    Virtual="true" XMLName="User">
+                    <Attribute Name="User_ID" ParentName="Loginid"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="false"
+            Description="This table stores capacity consumption details of reservations, service lines, and work order appointments."
+            EntityType="TRANSACTION" Extensible="Y" Module="inv"
+            Name="Res_Pool_Consmptn_Dtls" Prefix="YFS_"
+            TableName="YFS_RES_POOL_CONSMPTN_DTLS"
+            TableType="TRANSACTION" XMLName="ResourcePoolCapacityConsumptionDetails">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_CONSMPTN_DTLS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_RES_POOL_CONSMPTN_DTLS table."
+                    Name="Res_Pool_Consmptn_Dtls_Key" Nullable="false" XMLName="ResPoolConsmptnDtlsKey"/>
+                <Attribute ColumnName="ADDITIONAL_CAPACITY2"
+                    DataType="Dimension"
+                    Description="Additional capacity blocked."
+                    Name="Additional_Capacity2" Nullable="true" XMLName="AdditionalCapacity2"/>
+                <Attribute ColumnName="ADDITIONAL_CAPACITY1"
+                    DataType="Dimension"
+                    Description="Additional capacity blocked."
+                    Name="Additional_Capacity1" Nullable="true" XMLName="AdditionalCapacity1"/>
+                <Attribute ColumnName="RES_POOL_CAPCTY_CONSMPTN_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The capacity consumption associated with this  capacity reservation."
+                    Name="Res_Pool_Capcty_Consmptn_Key" Nullable="false" XMLName="ResPoolCapctyConsmptnKey"/>
+                <Attribute ColumnName="RESERVATION_ID" DataType="Text-100"
+                    DefaultValue="' ' "
+                    Description="The identifier for this capacity reservation."
+                    Name="Reservation_ID" Nullable="false" XMLName="ReservationId"/>
+                <Attribute ColumnName="CAPACITY" DataType="Capacity"
+                    DefaultValue="0"
+                    Description="The capacity consumed by this reservation."
+                    Name="Capacity" Nullable="false" XMLName="Capacity"/>
+                <Attribute ColumnName="RESERVATION_EXPIRATION_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The date on which the reservation expires. Capacity purge agent will remove reservations based on the reservation expiration timestamp."
+                    Name="Reservation_Expiration_Date" Nullable="false" XMLName="ReservationExpirationDate"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order line associated with this capacity reservation. The service line which consumes reservation and blocks capacity."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey"/>
+				<Attribute ColumnName="ORDER_RELEASE_KEY" DataType="Key"
+                    Description="The order release associated with this capacity reservation. Only applicable to inventory capacity resource pool."
+                    Name="Order_Release_Key" Nullable="true" XMLName="OrderReleaseKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The work order associated with this capacity reservation."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="APPT_SEQ" DataType="Count"
+                    DefaultValue="0 "
+                    Description="The appointment sequence that reserved the capacity."
+                    Name="Appt_Seq" Nullable="false" XMLName="AppointmentSequence"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order associated with this capacity reservation."
+                    Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="MANUALLY_CREATED_RESERVATION"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the reservation is created through the system resource capacity UI. Default value is N."
+                    Name="Manually_Created_Reservation" Nullable="false" XMLName="ManuallyCreatedReservation"/>
+                <Attribute ColumnName="RESERVATION_REASON"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="The reason this capacity reservation was created."
+                    Name="Reservation_Reason" Nullable="false" XMLName="ReservationReason"/>
+                <Attribute ColumnName="CAPACITY_OVERRIDDEN"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether capacity was ignored when taking the appointment. Default value is N."
+                    Name="Capacity_Overridden" Nullable="false" XMLName="OverrideCapacityCheck"/>
+                <Attribute ColumnName="IS_SLOT_BASED" DataType="Flag"
+                    DefaultValue="'Y' "
+                    Description="This flag indicates whether the consumption is slot based. Default value is Y."
+                    Name="Is_Slot_Based" Nullable="false" XMLName="IsSlotBased"/>
+                <Attribute ColumnName="WORK_ORDER_APPT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The work order appt associated with this capacity reservation."
+                    Name="Work_Order_Appt_Key" Nullable="false" XMLName="WorkOrderApptKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_CON_DTLS_PK" Name="YFS_RES_POOL_CONSMPT_DTLS_PK">
+                <Attribute ColumnName="RES_POOL_CONSMPTN_DTLS_KEY" Name="Res_Pool_Consmptn_Dtls_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_CON_DTLS_I1"
+                    Name="YFS_RES_POOL_CONSMPN_DTLS_I1" Unique="true">
+                    <Column Name="RESERVATION_ID"/>
+                    <Column Name="ORDER_LINE_KEY"/>
+					<Column Name="ORDER_HEADER_KEY"/>
+					<Column Name="ORDER_RELEASE_KEY"/>
+                    <Column Name="WORK_ORDER_KEY"/>
+                    <Column Name="APPT_SEQ"/>
+                    <Column Name="WORK_ORDER_APPT_KEY"/>
+                    <Column Name="RES_POOL_CAPCTY_CONSMPTN_KEY"/>
+                </Index>
+                <Index DB2Name="RES_CON_DTLS_I2"
+                    Name="YFS_RES_POOL_CONSMPN_DTLS_I2" Unique="false">
+                    <Column Name="MANUALLY_CREATED_RESERVATION"/>
+                </Index>
+                <Index DB2Name="RES_CON_DTLS_I3"
+                    Name="YFS_RES_POOL_CONSMPN_DTLS_I3" Unique="false">
+                    <Column Name="RESERVATION_EXPIRATION_DATE"/>
+                </Index>
+                <Index DB2Name="RES_CON_DTLS_I4"
+                    Name="YFS_RES_POOL_CONSMPN_DTLS_I4" Unique="false">
+                    <Column Name="RES_POOL_CAPCTY_CONSMPTN_KEY"/>
+                </Index>
+                <Index DB2Name="RES_CON_DTLS_I5"
+                    Name="YFS_RES_POOL_CONSMPN_DTLS_I5" Unique="false">
+                    <Column Name="ORDER_LINE_KEY"/>
+                </Index>
+			</Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ConsumptionDetailList"
+                    ChildName="ConsumptionDetail"
+                    ChildXMLName="ConsumptionDetail"
+                    DeleteCascade="true"
+                    ForeignEntity="Res_Pool_Capcty_Consmptn"
+                    Name="ResPoolCapctyConsmptn" Type="Bidirectional" XMLName="CapacityConsumption">
+                    <Attribute Name="Res_Pool_Capcty_Consmptn_Key" ParentName="Res_Pool_Capcty_Consmptn_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    ChildName="ConsumptionDetail"
+                    ChildXMLName="ResourcePoolCapacityConsumptionDetails"
+                    ForeignEntity="Work_Order_Appt"
+                    Name="Work_Order_Appt" Type="Bidirectional" XMLName="WorkOrderAppointment">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                    <Attribute Name="Work_Order_Appt_Key" ParentName="Work_Order_Appt_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table contains units of measures that are used as secondary resource pool capacity constraints."
+            EntityType="CONFIGURATION" Extensible="Y" IsAbstract="N"
+            ListXMLName="AdditionalCapacityLimitList" Module="inv"
+            Name="Res_Pool_Secondary_Uom" Prefix="YFS_"
+            TableName="YFS_RES_POOL_SECONDARY_UOM" TableType="MASTER" XMLName="AdditionalCapacityLimit"
+            LockingEntity="Res_Pool">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_SECONDARY_UOM_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_RES_POOL_SECONDARY_UOM table."
+                    Name="Res_Pool_Secondary_Uom_Key" Nullable="false" XMLName="ResPoolSecondaryUomKey"/>
+                <Attribute ColumnName="UOM" DataType="Text-24"
+                    Description="Secondary UOM in which capacity is defined."
+                    Name="Uom" Nullable="true" XMLName="CapacityUnitOfMeasure"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY"
+                    DataType="Text-24"
+                    Description="Primary key for YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="true" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="RES_POOL_SECOND_PK" Name="YFS_RES_POOL_SECONDARY_UOM_PK">
+                <Attribute ColumnName="RES_POOL_SECONDARY_UOM_KEY" Name="Res_Pool_Secondary_Uom_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_POOL_SECON_I1"
+                    Name="YFS_RES_POOL_SECONDARY_UOM_I1" Unique="true">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="UOM"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdditionalCapacityLimitList"
+                    ChildName="SecondaryUom"
+                    ChildXMLName="AdditionalCapacityLimit"
+                    DeleteCascade="true" ForeignEntity="Res_Pool"
+                    IsParent="true" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="ResourcePool">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains associations of secondary capacity UOMs and corresponding uom types."
+            EntityType="CONFIGURATION" IsAbstract="N"
+            ListXMLName="CapacityUomTypeList" Module="inv"
+            Name="Capacity_Uom_Type" Prefix="YFS_"
+            TableName="YFS_CAPACITY_UOM_TYPE" TableType="CONFIGURATION" XMLName="CapacityUomType">
+            <Attributes>
+                <Attribute ColumnName="CAPACITY_UOM_TYPE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_CAPACITY_UOM_TYPE table."
+                    Name="Capacity_Uom_Type_Key" Nullable="false" XMLName="CapacityUomTypeKey"/>
+                <Attribute ColumnName="ADDITIONAL_CAP_UOM_TYPE1"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="Indicates UOM Type 1 for secondary capacity uom. Column name will be used to match with similar column name in consumption and cons details."
+                    Name="Additional_Cap_Uom_Type1" Nullable="false" XMLName="AdditionalCapacityUOMType1"/>
+                <Attribute ColumnName="ADDITIONAL_CAP_UOM_TYPE2"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="Indicates UOM Type 1 for secondary capacity uom. Column name will be used to match with similar column name in consumption and cons details."
+                    Name="Additional_Cap_Uom_Type2" Nullable="false" XMLName="AdditionalCapacityUOMType2"/>
+                <Attribute ColumnName="ITEM_GROUP_CODE"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="Indicates item group code which secondary uom's are applicable to."
+                    Name="Item_Group_Code" Nullable="false" XMLName="ItemGroupCode"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CAPACITY_UOM_TY_PK" Name="YFS_CAPACITY_UOM_TYPE_PK">
+                <Attribute ColumnName="CAPACITY_UOM_TYPE_KEY"
+                    Name="Capacity_Uom_Type_Key" XmlName="CapacityUomTypeKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CAPACITY_UOM_T_I1"
+                    Name="YFS_CAPACITY_UOM_TYPE_I1" Unique="true">
+                    <Column Name="ITEM_GROUP_CODE"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table stores the resource pools to which a service resource is assigned for a date range."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Service_Resource_Assignment" Prefix="YFS_"
+            TableName="YFS_SRVC_RESOURCE_ASSIGNMENT" TableType="MASTER" XMLName="ServiceResourceAssignment"
+            LockingEntity="Service_Resource">
+            <Attributes>
+                <Attribute ColumnName="SRVC_RESOURCE_ASSIGNMENT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SRVC_RESOURCE_ASSIGNMENT table."
+                    Name="Service_Resource_Assignment_Key"
+                    Nullable="false" XMLName="ServiceResourceAssignmentKey"/>
+                <Attribute ColumnName="SERVICE_RESOURCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_RESOURCE table. The service resource that has this assignment."
+                    Name="Service_Resource_Key" Nullable="false" XMLName="ServiceResourceKey"/>
+                <Attribute ColumnName="ASSIGNED_TO_RESOURCE_POOL_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL table. The resource pool to which the service resource is assigned."
+                    Name="Assigned_To_Resource_Pool_Key"
+                    Nullable="false" XMLName="AssignedToResourcePoolKey"/>
+                <Attribute ColumnName="ASSIGNMENT_START_DATE"
+                    DataType="Date"
+                    Description="Start date of a period during which the service resource is assigned to a resource pool."
+                    Name="Assignment_Start_Date" Nullable="true" XMLName="AssignmentStartDate"/>
+                <Attribute ColumnName="ASSIGNMENT_END_DATE"
+                    DataType="Date"
+                    Description="End date of a period during which the service resource is assigned to a resource pool."
+                    Name="Assignment_End_Date" Nullable="true" XMLName="AssignmentEndDate"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SRVC_RES_ASGMNT_PK" Name="SRVC_RESOURCE_ASSIGNMENT_PK">
+                <Attribute ColumnName="SRVC_RESOURCE_ASSIGNMENT_KEY" Name="Service_Resource_Assignment_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SRVC_RES_ASGMNT_I1"
+                    Name="SRVC_RESOURCE_ASSIGNMENT_I1" Unique="true">
+                    <Column Name="SERVICE_RESOURCE_KEY"/>
+                    <Column Name="ASSIGNED_TO_RESOURCE_POOL_KEY"/>
+                    <Column Name="ASSIGNMENT_START_DATE"/>
+                    <Column Name="ASSIGNMENT_END_DATE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServiceResourceAssignments"
+                    ChildName="ServiceResourceAssignment"
+                    ChildXMLName="ServiceResourceAssignment"
+                    DeleteCascade="true"
+                    ForeignEntity="Service_Resource" IsParent="true"
+                    Name="ServiceResource" Type="Bidirectional" XMLName="ServiceResource">
+                    <Attribute Name="Service_Resource_Key" ParentName="Service_Resource_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ResourcePoolAssignmentList"
+                    ChildName="ResourcePoolAssignment"
+                    ChildXMLName="ResourcePoolAssignment"
+                    DeleteCascade="true" ForeignEntity="Res_Pool"
+                    IsParent="true" Name="AssignedToResourcePool"
+                    Type="Bidirectional" XMLName="AssignedToResourcePool">
+                    <Attribute Name="Assigned_To_Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table stores the resource efficiency percentage against a resource pool."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Service_Resource_Efficiency" Prefix="YFS_"
+            TableName="YFS_SRVC_RESOURCE_EFFICIENCY" TableType="MASTER" XMLName="ServiceResourceEfficiency"
+            LockingEntity="Service_Resource">
+            <Attributes>
+                <Attribute ColumnName="SRVC_RESOURCE_EFFICIENCY_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SRVC_RESOURCE_EFFICIENCY table."
+                    Name="Service_Resource_Efficiency_Key"
+                    Nullable="false" XMLName="ServiceResourceEfficiencyKey"/>
+                <Attribute ColumnName="SERVICE_RESOURCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_SERVICE_RESOURCE table."
+                    Name="Service_Resource_Key" Nullable="false" XMLName="ServiceResourceKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="false" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="EFFICIENCY_PERCENTAGE"
+                    DataType="Percentage"
+                    Description="Efficiency percentage of a resource against a resource pool."
+                    Name="Efficiency_Percentage" Nullable="true" XMLName="EfficiencyPercentage"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SRVC_RES_EFCNCY_PK" Name="SRVC_RESOURCE_EFFICIENCY_PK">
+                <Attribute ColumnName="SRVC_RESOURCE_EFFICIENCY_KEY" Name="Service_Resource_Efficiency_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SRVC_RES_EFCNCY_I1"
+                    Name="SRVC_RESOURCE_EFFICIENCY_I1" Unique="true">
+                    <Column Name="SERVICE_RESOURCE_KEY"/>
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServiceResourceEfficiencies"
+                    ChildName="ServiceResourceEfficiency"
+                    ChildXMLName="ServiceResourceEfficiency"
+                    DeleteCascade="true"
+                    ForeignEntity="Service_Resource" IsParent="true"
+                    Name="ServiceResource" Type="Bidirectional" XMLName="ServiceResource">
+                    <Attribute Name="Service_Resource_Key" ParentName="Service_Resource_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ResourcePoolEfficiencies"
+                    ChildName="ResourcePoolEfficiency"
+                    ChildXMLName="ResourcePoolEfficiency"
+                    DeleteCascade="true" ForeignEntity="Res_Pool"
+                    IsParent="true" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="ResourcePool">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table defines attributes of a Resource Pool."
+            EntityType="CONFIGURATION" Extensible="Y" Module="inv"
+            Name="Res_Pool_Attr" Prefix="YFS_"
+            TableName="YFS_RES_POOL_ATTR" TableType="MASTER" XMLName="ResourcePoolAttribute"
+            LockingEntity="Res_Pool">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_ATTR_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_RES_POOL_ATTR table."
+                    Name="Res_Pool_Attr_Key" Nullable="false" XMLName="ResourcePoolAttributeKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    Description="Link to YFS_RES_POOL table."
+                    Name="Resource_Pool_Key" Nullable="true" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="ATTRB_NAME" DataType="CodeType"
+                    Description="Attribute based on which capacity is defined for this resource pool."
+                    Name="Attribute_Name" Nullable="true" XMLName="AttributeName"/>
+                <Attribute ColumnName="ATTRB_VALUE" DataType="CodeValue"
+                    Description="Value of attribute based on which capacity is defined for this resource pool."
+                    Name="Attribute_Value" Nullable="true" XMLName="AttributeValue"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="RES_POOL_ATTR_PK">
+                <Attribute ColumnName="RES_POOL_ATTR_KEY" Name="Res_Pool_Attr_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="RES_POOL_ATTR_I1"
+                    Name="YFS_RES_POOL_ATTR_I1" Unique="true" Version="9.4">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="ATTRB_NAME"/>
+                    <Column Name="ATTRB_VALUE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ResourcePoolAttributeList"
+                    ChildName="ResourcePoolAttribute" ChildXMLName="ResourcePoolAttribute" 
+                    DeleteCascade="true" ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Bidirectional" XMLName="ResourcePoolAttribute">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="RESOURCE_POOL_KEY"/>
+        </Entity>
+             <Entity Cacheable="false"
+            Description="This table stores resource pool capacity consumption for each date/shift combination."
+            EntityType="TRANSACTION" Extensible="N" GenerateIndexedListMethods="true" Module="inv"
+            Name="Capacity_Availability" Prefix="YFS_"
+            TableName="YFS_CAPACITY_AVAILABILITY"
+            TableType="TRANSACTION" XMLName="CapacityAvailability">
+            <Attributes>
+                <Attribute ColumnName="CAPACITY_AVAILABILITY_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_CAPACITY_AVAILABILITY table."
+                    Name="Capacity_Availability_Key" Nullable="false" XMLName="CapacityAvailabilityKey"/>
+                 <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    Description="The resource pool associated with this capacity availability."
+                    Name="Resource_Pool_Key" Nullable="true" XMLName="ResourcePoolKey"/>
+				<Attribute ColumnName="CAPACITY_ORGANIZATION_CODE"
+                    DataType="Key"
+                    Description="The code of the catalog organization. A resource pool is always created wihin the context of a capacity organization. An organization can source services from any resource pool within the same capacity organization."
+                    Name="Capacity_Organization_Code" Nullable="true" XMLName="CapacityOrganizationCode"/>                
+				<Attribute ColumnName="NODE_KEY" DataType="Key"
+                    Description="The node that is associated with this resource pool."
+                    Name="Node_Key" Nullable="true" XMLName="Node"/>
+                <Attribute ColumnName="RESOURCE_POOL_ID"
+                    DataType="ID-24" 
+                    Description="The unique identifier of the resource pool."
+                    Name="Resource_Pool_Id" Nullable="true" XMLName="ResourcePoolId"/>
+                <Attribute ColumnName="CAPACITY_UOM" DataType="UOM"
+                    Description="The unit of measure in which resource pool capacity should be specified."
+                    Name="Capacity_Uom" Nullable="true" XMLName="CapacityUnitOfMeasure"/>
+                <Attribute ColumnName="ITEM_GROUP_CODE"
+                    DataType="EnumItemGroupCode2"
+                    Description="The type of item that this resource pool services."
+                    Name="Item_Group_Code" Nullable="true" XMLName="ItemGroupCode"/>   
+				<Attribute ColumnName="PURPOSE" DataType="INVResourcePoolPurpose"
+					Description="This field indicates if the resource pool is used for service or inventory scheduling."
+                    Name="Purpose" Nullable="true" XMLName="Purpose"/>               
+				<Attribute ColumnName="DEL_METHOD" DataType="CodeType"
+                    Description="Delivery Method based on which capacity is defined for this resource pool."
+                    Name="Delivery_Method" Nullable="true" XMLName="DeliveryMethod"/>
+                <Attribute ColumnName="AVAILABLE_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date that this capacity consumption is specified."
+                    Name="Available_Date" Nullable="false" XMLName="AvailableDate"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    DefaultValue="sysdate"
+                    Description="The shift start time for which consumption is specified."
+                    Name="Start_Time" Nullable="false" XMLName="StartTime"/>
+                <Attribute ColumnName="END_TIME" DataType="Time"
+                    DefaultValue="sysdate"
+                    Description="The shift end time for which consumption is specified."
+                    Name="End_Time" Nullable="false" XMLName="EndTime"/>	
+                <Attribute ColumnName="AVAIL_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Remaining capacity."
+                    Name="Available_Capacity" Nullable="false" XMLName="AvailableCapacity"/>                				
+				<Attribute ColumnName="TOTAL_STD_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Total Standard capacity."
+                    Name="Total_Standard_Capacity" Nullable="false" XMLName="TotalStandardCapacity"/>
+                <Attribute ColumnName="TOTAL_SUP_CAPACITY"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Total Supplement capacity."
+                    Name="Total_Supplement_Capacity" Nullable="false" XMLName="TotalSupplementCapacity"/>
+                <Attribute ColumnName="ADDLN_STD_CAPACITY1"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Additional Standard Capacity."
+                    Name="Additional_Standard_Capacity1" Nullable="false" XMLName="AdditionalStandardCapacity1"/>
+                <Attribute ColumnName="ADDLN_SUP_CAPACITY1"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Additional Supplement Capacity."
+                    Name="Additional_Supplement_Capacity1" Nullable="false" XMLName="AdditionalSupplementCapacity1"/>
+				<Attribute ColumnName="ADDLN_STD_CAPACITY2"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Additional Standard Capacity."
+                    Name="Additional_Standard_Capacity2" Nullable="false" XMLName="AdditionalStandardCapacity2"/>
+                <Attribute ColumnName="ADDLN_SUP_CAPACITY2"
+                    DataType="Capacity" DefaultValue="0"
+                    Description="Additional Supplement Capacity."
+                    Name="Additional_Supplement_Capacity2" Nullable="false" XMLName="AdditionalSupplementCapacity2"/>               
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+				
+            </Attributes>
+            <PrimaryKey  DB2Name="CAPACITY_AVAIL_PK" Name="YFS_CAPACITY_AVAILABILITY_PK">
+                <Attribute ColumnName="CAPACITY_AVAILABILITY_KEY" Name="Capacity_Availability_Key"/>
+            </PrimaryKey>
+           
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="YDB10059"
+                    ForeignEntity="Res_Pool" Name="ResourcePool"
+                    Type="Unidirectional" ValidateDelete="false">
+                    <Attribute Name="Resource_Pool_Key" ParentName="Resource_Pool_Key"/>
+                </RelationShip>
+              </RelationShips>
+			  <Indices>
+                <Index DB2Name="CAP_AVAIL_I1"
+                    Name="YFS_CAP_AVAIL_I1" Unique="false">
+                    <Column Name="RESOURCE_POOL_ID"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="CAPACITY_ORGANIZATION_CODE"/>
+                </Index>  
+				<Index DB2Name="CAP_AVAIL_I2"
+                    Name="YFS_CAP_AVAIL_I2" Unique="false">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="AVAILABLE_DATE"/>
+                    <Column Name="START_TIME"/>
+					<Column Name="END_TIME"/>
+                </Index>  
+            </Indices>
+        </Entity>
+        <Entity
+            Description="This table is used to synchronize calls fetching resource pool capacity for transactions."
+            EntityType="TRANSACTION" Module="inv" Name="Res_Pool_Capacity_Lock"
+            Prefix="YFS_" TableName="YFS_RES_POOL_CAPACITY_LOCK" TableType="TRANSACTION" XMLName="ResourcePoolCapacityLock">
+            <Attributes>
+                <Attribute ColumnName="RES_POOL_CAPACITY_LOCK_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key of the YFS_RES_POOL_CAPACITY_LOCK table."
+                    Name="Res_Pool_Capacity_Lock_Key" Nullable="false" XMLName="ResPoolCapacityLockKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    Description="The resource pool associated with this res pool capacity lock."
+                    Name="Resource_Pool_Key" Nullable="true" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="AVAILABLE_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date that this capacity consumption is specified."
+                    Name="Available_Date" Nullable="false" XMLName="AvailableDate"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    DefaultValue="sysdate"
+                    Description="The shift start time for which consumption is specified."
+                    Name="Start_Time" Nullable="false" XMLName="StartTime"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_RES_POOL_CAP_LOCK_PK">
+                <Attribute Name="Res_Pool_Capacity_Lock_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_RES_POOL_CAP_LOCK_I1" Unique="true" Version="9.5.0">
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                    <Column Name="AVAILABLE_DATE"/>
+                    <Column Name="START_TIME"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+        </Entity>
+    </Entities>
+</DBSchema>

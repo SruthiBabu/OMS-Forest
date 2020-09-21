@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FormDefs>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPFoundationRulesTreeBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPTree"
+        Icon="com/yantra/ycm/ui/icons/returns.gif"
+        IsPermissionControlled="Y" Name="YCPPM355">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Associated_Document_Types"
+                ID="YCPPM355A06" Icon="com/yantra/ycp/ui/icons/createdocument.gif"
+                IsPermissionControlled="Y" Name="btnAddDocTypeToModule"/>
+            <Action Description="Use_Default_Configuration"
+                ID="YCPPM355A03"
+                Icon="com/yantra/ycp/ui/icons/deletepickupstatus.gif"
+                IsPermissionControlled="Y" Name="btnUseDefaults"/>
+            <Action Description="Yank_Configuration" ID="YCPPM355A02"
+                Icon="com/yantra/ycp/ui/icons/addpickupstatus.gif"
+                IsPermissionControlled="Y" Name="btnYank"/>
+            <Action Description="Load_Rules_For_Organization"
+                ID="YCPPM355A04"
+                Icon="com/yantra/ycp/ui/icons/activateruleset.gif"
+                IsPermissionControlled="Y" Name="btnLoadOrganization"/>
+            <Action Description="Details" ID="YCPPM355A01"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="Y" Name="btnModify"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.omp.ui.screens.OMPReturnRulesBehavior"
+        ClassName="com.yantra.omp.ui.screens.forms.OMPReturnRules"
+        Icon="com/yantra/ycp/ui/icons/returns.gif"
+        IsPermissionControlled="N" Name="OMP021">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="OMP021A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+</FormDefs>

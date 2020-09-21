@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<TransactionTemplates>
+	<TemplateMaster>
+		<Template TemplateType="Transaction_For_Any_Line" TemplateTypeDesc="Template_Type_Transaction_For_Any_Line" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_Having_Any_Item" DependencyType="TRANSACTION" LineType="ANY" DefinitionType="ALL">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Transaction_By_Item" TemplateTypeDesc="Template_Type_Transaction_By_Item" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_ItemID_(ITEMS)" DependencyType="TRANSACTION" LineType="ANY" DefinitionType="ITEMID" >
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PROD" IsDefaultValueValid="Y" />
+			<Parameter Name="Items" SortOrder="4" ArgID="ITEMS" DefaultValue="Click_To_Select_Item_/_s" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Transaction_By_Classification" TemplateTypeDesc="Template_Type_Transaction_By_Classification" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_Having_An_Item_With_Classification_(CLASSIFICATION)" DependencyType="TRANSACTION"  LineType="ANY" DefinitionType="CLASSIFICATION">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Classifications" SortOrder="3" ArgID="CLASSIFICATION" DefaultValue="Click_To_Select_Classification_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Transaction_By_Service_Type" TemplateTypeDesc="Template_Type_Transaction_By_Service_Type" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_A_Service_Of_Type_(SERVICES)" DependencyType="TRANSACTION" LineType="ANY" DefinitionType="SERVICETYPE">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PS" IsDefaultValueValid="Y" />
+			<Parameter Name="ServiceTypes" SortOrder="4" ArgID="SERVICES" DefaultValue="Click_To_Select_Service_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Transaction_For_Bundle_Component" TemplateTypeDesc="Template_Type_Transaction_For_Bundle_Component" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_In_The_Same_Bundle_Having_Any_Item" DependencyType="TRANSACTION" LineType="BUNDLE_COMPONENT" DefinitionType="ANY">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Transaction_For_Bundle_Component_By_Item" TemplateTypeDesc="Template_Type_Transaction_For_Bundle_Component_By_Item" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_In_The_Same_Bundle_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_ItemID_(ITEMS)" DependencyType="TRANSACTION" LineType="BUNDLE_COMPONENT" DefinitionType="ITEMID">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PROD" IsDefaultValueValid="Y" />
+			<Parameter Name="Items" SortOrder="4" ArgID="ITEMS" DefaultValue="Click_To_Select_Item_/_s" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Transaction_For_Bundle_Component_By_Classification" TemplateTypeDesc="Template_Type_Transaction_For_Bundle_Component_By_Classification" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_In_The_Same_Bundle_Having_An_Item_With_Classification_(CLASSIFICATION)" DependencyType="TRANSACTION" LineType="BUNDLE_COMPONENT" DefinitionType="CLASSIFICATION">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Classifications" SortOrder="3" ArgID="CLASSIFICATION" DefaultValue="Click_To_Select_Classification_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Transaction_For_Bundle_Component_By_Service_Type" TemplateTypeDesc="Template_Type_Transaction_For_Bundle_Component_By_Service_Type" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_Any_Line_In_The_Same_Bundle_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_A_Service_Of_Type_(SERVICES)" DependencyType="TRANSACTION" LineType="BUNDLE_COMPONENT" DefinitionType="SERVICETYPE">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PS" IsDefaultValueValid="Y" />
+			<Parameter Name="ServiceTypes" SortOrder="4" ArgID="SERVICES" DefaultValue="Click_To_Select_Service_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Transaction_For_This_Line" TemplateTypeDesc="Template_Type_Transaction_For_This_Line" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_This_Line" DependencyType="TRANSACTION" LineType="SAME_LINE" DefinitionType="ALL">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Transaction_For_Bundle_Parent_Line" TemplateTypeDesc="Template_Type_Transaction_For_Bundle_Parent_Line" HTMLTemplateDesc="Transaction_(TRANSACTION)_Has_Been_Completed_For_(HOURS)_Hours_For_The_Bundle_Parent_Line" DependencyType="TRANSACTION" LineType="BUNDLE_PARENT" DefinitionType="ALL">
+			<Parameter Name="Transaction" SortOrder="1" ArgID="TRANSACTION" DefaultValue="Click_To_Select_A_Transaction_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Time" SortOrder="2" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Date_Type_For_Any_Line" TemplateTypeDesc="Template_Type_Date_Type_For_Any_Line" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_Line_Having_Any_Item" DependencyType="DATE" LineType="ANY" DefinitionType="ALL">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Date_Type_By_Item" TemplateTypeDesc="Template_Type_Date_Type_By_Item" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_Line_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_ItemID_(ITEMS)" DependencyType="DATE" LineType="ANY" DefinitionType="ITEMID">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PROD" IsDefaultValueValid="Y" />
+			<Parameter Name="Items" SortOrder="4" ArgID="ITEMS" DefaultValue="Click_To_Select_Item_/_s" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Date_Type_By_Classification" TemplateTypeDesc="Template_Type_Date_Type_By_Classification" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_Line_Having_An_Item_With_Classification_(CLASSIFICATION)" DependencyType="DATE" LineType="ANY" DefinitionType="CLASSIFICATION">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Classifications" SortOrder="3" ArgID="CLASSIFICATION" DefaultValue="Click_To_Select_Classification_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Date_Type_By_Service_Type" TemplateTypeDesc="Template_Type_Date_Type_By_Service_Type" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_Line_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_A_Service_Of_Type_(SERVICES)" DependencyType="DATE" LineType="ANY" DefinitionType="SERVICETYPE">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PS" IsDefaultValueValid="Y" />
+			<Parameter Name="ServiceTypes" SortOrder="4" ArgID="SERVICES" DefaultValue="Click_To_Select_Service_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Date_Type_For_Bundle_Component" TemplateTypeDesc="Template_Type_Date_Type_For_Bundle_Component" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_In_The_Same_Bundle_Having_Any_Item" DependencyType="DATE" LineType="BUNDLE_COMPONENT" DefinitionType="ALL">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Date_Type_For_Bundle_Component_By_Item" TemplateTypeDesc="Template_Type_Date_Type_For_Bundle_Component_By_Item" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_In_The_Same_Bundle_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_ItemID_(ITEMS)" DependencyType="DATE" LineType="BUNDLE_COMPONENT" DefinitionType="ITEMID">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PROD" IsDefaultValueValid="Y" />
+			<Parameter Name="Items" SortOrder="4" ArgID="ITEMS" DefaultValue="Click_To_Select_Item_/_s" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Date_Type_For_Bundle_Component_By_Classification" TemplateTypeDesc="Template_Type_Date_Type_For_Bundle_Component_By_Classification" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_In_The_Same_Bundle_Having_An_Item_With_Classification_(CLASSIFICATION)" DependencyType="DATE" LineType="BUNDLE_COMPONENT" DefinitionType="CLASSIFICATION">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+			<Parameter Name="Classifications" SortOrder="3" ArgID="CLASSIFICATION" DefaultValue="Click_To_Select_Classification_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Date_Type_For_Bundle_Component_By_Service_Type" TemplateTypeDesc="Template_Type_Date_Type_For_Bundle_Component_By_Service_Type" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_Any_In_The_Same_Bundle_With_Item_Group_Code_(ITEM_GROUP_CODE)_Having_A_Service_Of_Type_(SERVICES)" DependencyType="DATE" LineType="BUNDLE_COMPONENT" DefinitionType="SERVICETYPE">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+			<Parameter Name="ItemGroupCode" SortOrder="3" ArgID="ITEM_GROUP_CODE" DefaultValue="PS" IsDefaultValueValid="Y" />
+			<Parameter Name="ServiceTypes" SortOrder="4" ArgID="SERVICES" DefaultValue="Click_To_Select_Service_/_s" IsDefaultValueValid="N"/>
+		</Template>
+		<Template TemplateType="Date_Type_For_This_Line" TemplateTypeDesc="Template_Type_Date_Type_For_This_Line" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_This_Line" DependencyType="DATE" LineType="SAME_LINE" DefinitionType="ALL">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+		</Template>
+		<Template TemplateType="Date_Type_For_Bundle_Parent_Line" TemplateTypeDesc="Template_Type_Date_Type_For_Bundle_Parent_Line" HTMLTemplateDesc="The_Current_Date_Is_No_Earlier_(HOURS)_hours_(BEFORE)_The_(DATE_TYPE)_For_The_Bundle_Parent_Line" DependencyType="DATE" LineType="BUNDLE_PARENT" DefinitionType="ALL">
+			<Parameter Name="Time" SortOrder="0" ArgID="HOURS" DefaultValue="Click_To_Select_Hours" IsDefaultValueValid="N" />
+			<Parameter Name="Before" SortOrder="1" ArgID="BEFORE" DefaultValue="Click_To_Select_Before_Or_After" IsDefaultValueValid="N" />
+			<Parameter Name="DateType" SortOrder="2" ArgID="DATE_TYPE" DefaultValue="Click_To_Select_Date_Type" IsDefaultValueValid="N" />
+		</Template>
+	</TemplateMaster>
+</TransactionTemplates>

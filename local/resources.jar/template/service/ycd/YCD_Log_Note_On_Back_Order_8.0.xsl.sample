@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+	<xsl:output method="text"/>
+	 <xsl:template match="/Order/OrderLines">
+		<xsl:variable name="noteText">
+			<xsl:variable name="items">
+			<xsl:for-each select="OrderLine">
+				<xsl:value-of select="concat(./StatusBreakupForBackOrderedQty/BackOrderedFrom/@BackOrderedQuantity,' quantity of ',./Item/@ItemID)"/>
+				<xsl:value-of select="concat(',',' ')"/>
+			</xsl:for-each>
+			</xsl:variable>
+			<xsl:value-of select="substring($items,1,string-length($items)-2)"/>
+			<xsl:value-of select="concat(' was',' backordered.')"/>
+		</xsl:variable>
+    		<xsl:value-of select="substring($noteText,1,2000)"/> 
+	</xsl:template>
+</xsl:stylesheet>

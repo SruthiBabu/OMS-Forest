@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+     (C) Copyright IBM Corp. 2001, 2019 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<project basedir=".." name="jaxb.jaxws"  >
+	
+	<property name="compiler" value="modern"/>
+	<property name="wsbeanstmp" value="${installdir}/tmp/xbeanws" />
+	<property name="xbean.inputxml" value="${installdir}/repository/eardata/platform/webservices/webservicebeans.xml" />
+
+	<condition property="additionalAntCompilerTaskArgs" value="${sandbox.ADDITIONAL_ANT_COMPILER_TASK_ARGS}" else="-J-Xms128m -J-Xmx1024m" >
+        <isset property="sandbox.ADDITIONAL_ANT_COMPILER_TASK_ARGS"/>
+    </condition>
+
+	<condition property="generateJAXBBeans.target" value="-generateJAXBBeans-jboss" else="-generateJAXBBeans" >
+			<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true"/>
+	</condition>
+	
+	<condition property="suppress_handlers" value="true">
+		<equals arg1="${buildprop.jaxws.suppress.handlers}" arg2="true" casesensitive="false" trim="true"/>
+	</condition>
+
+	<condition property="update.wsdl" value="true" >
+		<istrue value="${buildprop.jaxws.update.wsdl}"/>
+	</condition>
+
+	<target name="-create-SIXBeanXapiJaxWS" if="build.xbeanws" >
+		
+		<mkdir dir="${wsbeanstmp}/WEB-INF/lib"/>
+		<mkdir dir="${wsbeanstmp}/XSD"/>		
+		<taskdef name="jjhelp" classname="com.yantra.tools.ant.JaxbJaxwsHelper"/>
+		<jjhelp xmlbeanwebservicefile="${xbean.inputxml}"  
+				xsdpath="${installdir}/xapidocs" 
+				tmpdir="${wsbeanstmp}" 
+				appserver="${appserver}" 
+				servicexsdpath="${installdir}/extensions/webservices"
+				xbeannamespace="${buildprop.xbean.package}" 
+				localscoping="${buildprop.jaxb.localscoping}" 
+				alwaysannotateclassnames="${buildprop.jaxb.always.annotate.classnames}"
+				updatewsdl="${buildprop.jaxws.update.wsdl}"
+				suppressjaxwshandlers="${buildprop.jaxws.suppress.handlers}"
+				useoldformat="${buildprop.useoldformat}" />
+
+
+		<property file="${wsbeanstmp}/beannames"  />
+		<sciforeach list="${beannames}" propertyName="beanname" targetName="${generateJAXBBeans.target}" />
+		<sciforeach list="${beannames}" propertyName="beanname" targetName="-compile-jaxb-beans" />				
+		
+		<condition property="wsgen.target" value="-nowsgen" else="-wsgen" >
+			<and>
+				<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true"/>
+				<not>
+					<isset property="update.wsdl" />
+				</not>
+			</and>
+		</condition>
+
+		<antcall target="-apply-handler-extensions"/>
+
+		<antcall target="-apply-custom-descriptors"/>
+
+		<antcall target="${wsgen.target}"/>
+
+		<antcall target="-make-xbean-xapi-webservice-war"/>
+		
+		<condition property="zip.target" value="-update-zip" else="-noupdate-zip">
+			<equals arg1="${appserver}" arg2="websphere" casesensitive="false" trim="true" />
+		</condition>
+		<antcall target="${zip.target}"/>
+	</target>
+
+	<target name="-compile-jaxb-beans">
+       <path id="app.classpath">
+            <fileset dir="${eartmp}" >
+                <include name="**/*.jar"/>
+				<exclude name="**/*ejb.jar"/>
+            </fileset>
+        </path>
+	
+		<path id="compile.path">
+			<path refid="app.classpath"/>
+		</path>
+		<javac srcdir="${wsbeanstmp}/${beanname}" classpathref="compile.path" fork="yes" debug="true" debuglevel="lines" />
+	</target>
+
+	<target name="-noupdate-zip" />
+	
+	<target name="-update-zip">
+		<update-application-xml product.or.doc="product" />
+		<antcall target="-zip-ear" />
+	</target>
+	
+	<target name="-generateJAXBBeans">
+		<mkdir dir="${wsbeanstmp}/${beanname}"/>
+        <exec executable="${sandbox.JAVA_HOME}/bin/xjc" >
+			<arg line="-d ${wsbeanstmp}/${beanname}"/>			
+			<arg line="-extension"/>			
+			<arg line="${wsbeanstmp}/XSD/${beanname}"/>			
+			<arg line="${additionalAntCompilerTaskArgs}"/>
+		</exec>
+	</target>
+
+
+	<!--  Without npa option, namespace attribute is not set on XMLType annotation on generated class. Namespace info
+	is generated on package info class. But JBoss 5 doesn't resolve namespace from package-info, leading to error.
+	With npa, namespace is set on XMLType annotation & package-info is not generated. -->
+	<target name="-generateJAXBBeans-jboss">
+		<mkdir dir="${wsbeanstmp}/${beanname}"/>
+        <exec executable="${sandbox.JAVA_HOME}/bin/xjc" >
+			<arg line="-d ${wsbeanstmp}/${beanname}"/>			
+			<arg line="-extension"/>			
+			<arg line="${wsbeanstmp}/XSD/${beanname}"/>	
+			<arg line="-npa"/>
+			<arg line="${additionalAntCompilerTaskArgs}"/>
+		</exec>
+	</target>
+	
+	<target name="-nowsgen" />
+	
+	<target name="-wsgen">				
+		<property file="${wsbeanstmp}/sei.properties"  />		
+		<sciforeach list="${endpoints}" propertyName="sei" targetName="-invoke-wsgen" />				
+	</target>
+
+	<target name="update-wsdl" if="update.wsdl">
+		<taskdef  name="wsdlupdater" classname="com.yantra.tools.ant.JaxwsWsdlGenerationTool"/>
+		<wsdlupdater wsdl="${wsbeanstmp}/WEB-INF/wsdl/${beanname}Service.wsdl" installdir="${installdir}"/>
+		<condition property="wsdl.override" value="true">
+			<available file="${installdir}/extensions/webservices/${beanname}/${beanname}Service.wsdl"/>
+		</condition>
+		<echo message="wsdl.override=${wsdl.override}"/>
+		<antcall target="override-wsdl"/>
+	</target>
+
+	<target name="override-wsdl" if="wsdl.override" >
+		<copy file="${installdir}/extensions/webservices/${beanname}/${beanname}Service.wsdl" tofile="${wsbeanstmp}/WEB-INF/wsdl/${beanname}Service.wsdl" overwrite="true"/>
+	</target>
+
+	<target name="-apply-custom-descriptors" >
+		<copy todir="${wsbeanstmp}/WEB-INF/" failonerror="false" >
+			<fileset dir="${installdir}/extensions/webservices/descriptors/" />
+	
+		</copy>
+	</target>
+	
+	<target name="-apply-handler-extensions" unless="suppress_handlers">
+			<!-- unzip default handler xml and classes from the afc jar -->
+			<unzip src="${installdir}/jar/platform_afc/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar"
+				dest="${wsbeanstmp}/handlers" >
+				<patternset>
+					<include name="com/ibm/afc/jaxws/handlers/server/**" />
+				</patternset>				
+			</unzip>
+			
+			<jar destfile="${wsbeanstmp}/handlers/DefaultHandlers.jar" basedir="${wsbeanstmp}/handlers">
+				<include name="com/ibm/afc/jaxws/handlers/server/*.class" />
+			</jar>			
+			
+			<property file="${wsbeanstmp}/sei.properties"  />
+			<sciforeach list="${endpoints}" propertyName="sei" targetName="-apply-handler-extension" />
+	</target>
+	
+	<target name="-apply-handler-extension">
+	
+		<!-- get short name for the bean from the sei property -->
+		<sciregexpproperty propertyName="shortname" inputString="${sei}" regexp="(.*\.)*" replacementString="" />		
+		<sciregexpproperty propertyName="copypath" inputString="${sei}" regexp="\." replacementString="/" />		
+		
+		<!-- Check if they supplied the handler xml, otherwise use our defaults -->
+		<condition property="handler.xml" 
+		   value="${installdir}/extensions/webservices/${shortname}/server/${shortname}Handlers.xml"
+		   else="${wsbeanstmp}/handlers/com/ibm/afc/jaxws/handlers/server/DefaultHandlers.xml" >
+			<available file="${installdir}/extensions/webservices/${shortname}/server/${shortname}Handlers.xml"/>
+		</condition>
+		
+		<!-- Check if they supplied the handler jar, otherwise use our defaults -->
+		<condition property="handler.jar" 
+		   value="${installdir}/extensions/webservices/${shortname}/server/${shortname}Handlers.jar"
+		   else="${wsbeanstmp}/handlers/DefaultHandlers.jar" >
+			<available file="${installdir}/extensions/webservices/${shortname}/server/${shortname}Handlers.jar"/>
+		</condition>
+		
+		<copy file="${handler.xml}"
+			  tofile="${wsbeanstmp}/${shortname}/${copypath}Handlers.xml" 
+			  failonerror="false" 
+			  verbose="true" />
+		
+		<copy file="${handler.jar}"
+			  tofile="${wsbeanstmp}/WEB-INF/lib/${shortname}Handlers.jar" 
+			  failonerror="false" 
+			  verbose="true" />
+		
+		<copy todir="${wsbeanstmp}/WEB-INF/lib/" failonerror="false" verbose="true">
+			<fileset dir="${installdir}/extensions/webservices/${shortname}/server" includes="*.jar" />
+		</copy>
+		
+	</target>
+	
+	<target name="-invoke-wsgen">
+	
+       <path id="app.classpath">
+            <fileset dir="${eartmp}" >
+                <include name="**/*.jar"/>
+            </fileset>
+        </path>
+
+		<sciregexpproperty propertyName="beanname" inputString="${sei}" regexp="(.*\.)*" replacementString="" />
+		<AFCdebug property="beanname"/>
+	
+		<path id="wsgen.compile.path" >
+			<path refid="app.classpath" />
+			<pathelement location="${wsbeanstmp}/${beanname}"/>		
+		</path>
+
+		<pathconvert property="wsgen.classpath" >
+            <path refid="wsgen.compile.path"/>
+        </pathconvert>
+		
+		<mkdir dir="${wsbeanstmp}/WEB-INF/wsdl"/>
+        <exec executable="${sandbox.JAVA_HOME}/bin/wsgen">
+			<arg line="${buildprop.jaxws.compiler.jvm.args}"/>
+            <arg line="-cp ${wsgen.classpath}"/>
+            <arg line="-d ${wsbeanstmp}/${beanname}"/>
+            <arg line="-r ${wsbeanstmp}/WEB-INF/wsdl"/>
+            <arg line="-keep"/>
+            <arg line="-wsdl"/>
+			<arg line="-verbose"/>
+            <arg line="${sei}"/>
+        </exec>
+
+		<antcall target="update-wsdl"/>
+
+	</target>
+
+	<target name="package-jaxb-classes">
+		<jar file="${wsbeanstmp}/WEB-INF/lib/${beanname}.jar" >
+			<fileset dir="${wsbeanstmp}/${beanname}" >
+				<include name="*/**/*.class"/>
+				<include name="*/**/*.xml"/>
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="-make-xbean-xapi-webservice-war">
+			<mkdir dir="${wsbeanstmp}/WEB-INF/lib"/>
+			
+			<sciforeach list="${beannames}" propertyName="beanname" targetName="package-jaxb-classes" />		
+
+			<antcall target="-copy-${appserver}-specifics" />					
+			<antcall target="-copy-dcl-libs" />					
+		
+			<!-- since the war is always created with name SIXBeanXapiJaxWS, name & domain attributes have been
+			hard coded below -->
+			<JBossClassloadingXmlGen namespace="urn:jboss:classloading:1.0" name="SIXBeanXapiJaxWS.war" domain="SIXBeanXapiJaxWS.war" parentdomain="${earfile}" exportall="NON_EMPTY" importall="false" outputfile="${wsbeanstmp}/WEB-INF/jboss-classloading.xml" appserver="${appserver}" noejb="${noejb}" parentfirst="true"/>
+
+			<war destfile="${eartmp}/SIXBeanXapiJaxWS.war" webxml="${wsbeanstmp}/WEB-INF/web.xml" >
+				<fileset dir="${wsbeanstmp}" >
+					<include name="WEB-INF/**/*" />
+				</fileset>
+			</war>
+
+	</target>
+
+	<target name="-copy-dcl-libs" if="noejb2">
+		<copy todir="${wsbeanstmp}/WEB-INF/lib" flatten="true">
+		<fileset dir="${libtmp}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="-copy-weblogic-specifics">
+
+	</target>
+	
+	<target name="-copy-jboss-specifics"/>
+	
+	<target name="-copy-websphere-specifics">	
+		<copy todir="${wsbeanstmp}/WEB-INF/lib" flatten="true" >
+			<fileset dir="${installdir}/jar/platform_afc">
+				<include name="**/*.jar" />
+			</fileset>				
+			<fileset dir="${installdir}/jar/platform">
+				<include name="**/*.jar" />
+			</fileset>							
+		</copy>
+	</target>
+	
+	<target name="-validate-SIXBeanXapiJaxWS">
+		<checkfile file="xbean.inputxml" type="file"/>
+	</target>
+
+</project>

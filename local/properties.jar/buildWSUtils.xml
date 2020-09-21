@@ -1,0 +1,410 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2016 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project basedir=".." name="webservice.utils" default="">
+	
+	<property name="compiler" value="modern"/>
+	<import file="buildXBWSUtils.xml" />
+
+    <condition property="build.webservices" value="true" >
+        <isfalse value="${nowebservice}"/>
+    </condition>
+
+	<condition property="ejb3.webservice" value="true">
+		<and>
+			<isset property="ejb3.enabled"/>
+            <istrue value="${ejb3.enabled}"/>
+			<equals arg1="${appserver}" arg2="jboss"/>
+		</and>
+	</condition>
+	
+	<condition property="noejbwebservice" value="true">
+		<and>
+			<isset property="noejb" />
+			<istrue value="${noejb}" />
+		</and>
+	</condition>
+
+	<target name="create-webservice" if="build.webservices">
+		<property file="bin/build.properties" prefix="buildprop"/>
+		<condition property="webservice.types" value="${buildprop.webservices}" else="YIFWebService" >
+			<isset property="buildprop.webservices"/>
+		</condition>
+		
+		<condition property="build.xbeanws" value="true" >
+			<contains string="${webservice.types}" substring="SIXBeanXapiJaxWS" casesensitive="false"/>
+		</condition>
+		
+		<condition property="build.yifws" value="true" >
+			<contains string="${webservice.types}" substring="YIFWebService" casesensitive="false"/>
+		</condition>
+		
+		<antcall target="-create-SIXBeanXapiJaxWS"/>
+		<antcall target="-create-YIFWebService"/>		
+	
+	</target>
+	
+	
+	<target name="-create-YIFWebService" unless="noejbwebservice" if="build.yifws" >
+
+		<property name="webservicetmp" location="${tmpdir}/webservice" />
+		<property name="webservicewar" location="${eartmp}/yantrawebservice.war" />
+		<property name="webservicejar" location="${eartmp}/${ear.basename}wsbe.jar" />
+
+		<condition property="build-props-available" value="true">
+			<available file="./bin/build.properties" />
+		</condition>
+		
+		<AFCfail message="bin/build.properties not found!" unless="build-props-available" />
+
+		<antcall target="-create-webservice-backend" />
+		<ant antfile="./properties/buildEAR.xml" target="-create-webservice-war"  />
+	</target>
+
+	<target name="-create-webservice-war">
+		<ant antfile="./properties/buildEAR.xml" target="-create-webservice-war-${appserver}" />
+	</target>
+
+	<target name="-create-webservice-backend" >
+
+		<mkdir dir="${webservicetmp}/com/yantra/interop/tools/xmldata/" />
+		<!-- First unzip the xsls and xmls into a tmp directory -->
+		<unzip src="${installdir}/jar/platform_afc/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar" dest="${webservicetmp}">
+			<patternset>
+				<include name="**/*.xsl" />
+				<include name="**/*.xml" />				
+			</patternset>
+		</unzip>		
+
+		<!-- Then generate the api.xml document -->
+		<java fork="true" classname="com.yantra.interop.tools.InteropBuildHelper" classpathref="project.classpath">
+			<arg value="-dxml" />			
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xmldata/api.xml" />
+			<arg value="-API" />
+			<arg value="Y" />
+		</java>
+		<!-- Next merge the namedwebservices.xml with the api.xml -->
+		<java classname="com.yantra.interop.tools.NamedWebServiceGenerator" fork="true" classpathref="project.classpath">
+			<classpath>
+				<pathelement location="${webservicetmp}" />
+				<pathelement location="${installdir}/repository/eardata/platform" />
+			</classpath>			
+			<arg value="/com/yantra/interop/tools/xmldata/api.xml" />
+			<arg value="/webservices/namedwebservices.xml" />
+			<arg value="${webservicetmp}/merged.xml" />
+			<arg value="Merged" />
+		</java>
+		<mkdir dir="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb" />
+
+		<condition property="generate-backend-classes-target" else="-generate-ejb2-backend-classes" value="-generate-ejb3-backend-classes">
+                <isset property="ejb3.webservice"/>
+        </condition>
+		
+		<antcall target="${generate-backend-classes-target}"/>
+
+		<!-- Recompile the ejb interface and adapter -->
+		<javac debug="on" srcdir="${webservicetmp}" destdir="${webservicetmp}" fork="yes" classpathref="project.classpath" />
+
+		<antcall target="-update-webservice-backend-jar" />
+	</target>
+
+	<target name="-generate-ejb2-backend-classes" >
+		<!-- Generate the ejb interface and adapter -->
+		<java classname="org.apache.xalan.xslt.Process" fork="true" classpathref="project.classpath">
+			<arg value="-XSL" />
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xsl/webserviceapi.xsl"/>
+			<arg value="-IN" />
+			<arg value="${webservicetmp}/merged.xml" />
+			<arg value="-OUT" />
+			<arg value="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb/YIFWebServiceApi.java" />
+		</java>
+
+		<java classname="org.apache.xalan.xslt.Process" fork="true" classpathref="project.classpath">
+			<arg value="-XSL" />
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xsl/webserviceadapter.xsl"/>
+			<arg value="-IN" />
+			<arg value="${webservicetmp}//merged.xml" />
+			<arg value="-OUT" />
+			<arg value="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb/YIFWebServiceAdapter.java" />
+		</java>
+	</target>
+
+	<target name="-generate-ejb3-backend-classes" >
+		<!-- Generate the ejb interface and adapter -->
+		<java classname="org.apache.xalan.xslt.Process" fork="true" classpathref="project.classpath">
+			<arg value="-XSL" />
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xsl/webserviceapi_ejb3.xsl"/>
+			<arg value="-IN" />
+			<arg value="${webservicetmp}/merged.xml" />
+			<arg value="-OUT" />
+			<arg value="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb/YIFWebServiceApi.java" />
+		</java>
+
+		<java classname="org.apache.xalan.xslt.Process" fork="true" classpathref="project.classpath">
+			<arg value="-XSL" />
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xsl/webservice_ejb3.xsl"/>
+			<arg value="-IN" />
+			<arg value="${webservicetmp}//merged.xml" />
+			<arg value="-OUT" />
+			<arg value="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb/YIFWebService.java" />
+		</java>
+	</target>
+
+	<target name="-update-webservice-backend-jar">			
+
+		<antcall target="-make-webservice-jar"/>
+		<jar destfile="${eartmp}/${ear.basename}ejb.jar" basedir="${webservicetmp}" update="true" />
+		<delete file="${eartmp}/${ear.basename}ejb.jar~" failonerror="false" />
+	</target>
+
+	<target name="-make-webservice-jar" unless="ejb3.webservice">
+		<jar destfile="${webservicejar}" basedir="${webservicetmp}" />
+	</target>
+
+	<!-- ===================================================================================== -->
+	
+	<target name="-create-webservice-war-weblogic">
+		<property file="${installdir}/bin/build.properties" prefix="buildprop" />
+		<condition property="bea.library.path" value="${buildprop.bea.dir}/server/lib">
+			<isset property="buildprop.bea.dir" />
+		</condition>
+
+		<checkproperty property="bea.dir" />
+		<AFCecho message="WebLogic libraries will be picked up from {1}" >
+			<arg value="${bea.library.path}"/>
+		</AFCecho>
+
+		<path id="jwsc.lib.path">
+			<pathelement location="${bea.library.path}/webservices.jar" />
+			<pathelement location="${bea.library.path}/weblogic.jar" />
+			<pathelement location="${installdir}/jar/platform/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/entities.jar" />
+			<pathelement location="${installdir}/jar/platform/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/xapi.jar" />
+			<pathelement location="${installdir}/jar/platform_afc/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar" />
+			<pathelement location="${installdir}/jar/install_foundation.jar" />
+		</path>		
+		
+		<java classname="org.apache.xalan.xslt.Process" fork="true" classpathref="project.classpath">
+			<arg value="-XSL" />
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xsl/webserviceadapterWLS92.xsl" />
+			<arg value="-IN" />
+			<arg value="${webservicetmp}/merged.xml" />
+			<arg value="-OUT" />
+			<arg value="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb/yantrawebservices.java" />
+		</java>
+
+		<taskdef name="jwsc" classname="weblogic.wsee.tools.anttasks.JwscTask" classpathref="jwsc.lib.path" />
+		<jwsc srcdir="${webservicetmp}" destdir="${webservicetmp}" classpathref="project.classpath" classpath="${bea.library.path}/weblogic.jar:${bea.library.path}/webservices.jar" fork="yes" includeJavaRuntime="yes">
+			<jws file="com/yantra/interop/services/webservices/rpc/ejb/yantrawebservices.java" />
+		</jwsc>
+		<copy todir="${eartmp}" flatten="true">
+			<fileset dir="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb" includes="yantrawebservices.war" />
+		</copy>
+	</target>
+	
+	<!-- ===================================================================================== -->
+	
+	<target name="-create-webservice-war-websphere" >
+
+
+		<property file="${installdir}/bin/build.properties" />
+		<checkproperty property="was.dir" />
+		<AFCecho message="WebSphere libraries will be picked up from {1}" >
+			<arg value="${was.dir}"/>
+		</AFCecho>
+
+		<property name="was.bin" value="${was.dir}/bin" />
+		
+		<condition property="was.tool.cmd.extension" value="bat" else="sh" >
+			<os family="windows" />
+		</condition>
+
+		<condition property="websphere-java2wsdl-style1" value="${websphere-java2wsdl-style}">
+			<or>
+				<equals arg1="${websphere-java2wsdl-style}" arg2="rpc" casesensitive="false" trim="true" />
+				<equals arg1="${websphere-java2wsdl-style}" arg2="document" casesensitive="false" trim="true" />
+			</or>
+		</condition>
+		<property name="websphere-java2wsdl-style1" value="rpc" />
+
+		<condition property="websphere-java2wsdl-use" value="literal">
+			<equals arg1="${websphere-java2wsdl-style1}" arg2="document" />
+		</condition>
+		<property name="websphere-java2wsdl-use" value="encoded" />
+
+		<exec dir="${webservicetmp}" executable="${was.bin}/Java2WSDL.${was.tool.cmd.extension}" failonerror="true">
+			<arg line="-output ${webservicetmp}/META-INF/wsdl/YIFWebService.wsdl -implClass com.yantra.interop.services.webservices.rpc.ejb.YIFWebServiceAdapter -style ${websphere-java2wsdl-style1} -use ${websphere-java2wsdl-use} -location http://localhost:9081/${ear.basename}webservices/services/YIFWebService -classpath ${webservicejar}${path.separator}${webservices.build.classpath} com.yantra.interop.services.webservices.rpc.ejb.YIFWebService" />
+		</exec>
+
+		<exec dir="${webservicetmp}" executable="${was.bin}/WSDL2Java.${was.tool.cmd.extension}" failonerror="true">
+			<arg line="-output ${webservicetmp} -role server -container ejb -verbose -genJava No ${webservicetmp}/META-INF/wsdl/YIFWebService.wsdl" />
+		</exec>
+		<replace file="${webservicetmp}/META-INF/webservices.xml" token="??SET THIS TO ejb-name ELEMENT OF ejb-jar.xml??" value="interop.services.webservices.rpc.ejb.YIFWebServiceApi" />
+
+		<jar file="${eartmp}/${ear.basename}ejb.jar" update="true">
+			<zipfileset dir="${webservicetmp}/META-INF" prefix="META-INF" />
+		</jar>
+		<delete file="${eartmp}/${ear.basename}ejb.jar~" failonerror="false" />
+
+		<!-- Next two lines is the same thing that our update-ear target does
+			 but we do it explicitly here becuz our update target get suppressed 
+			 for websphere at the end of the build.
+			  
+			 Reason for this is that the endpoint enabler takes an ear as input
+			 and replaces the ear you give with an webservice war enabled ear.
+		-->
+		
+		<update-application-xml product.or.doc="product" />
+		<antcall target="-zip-ear" />
+		
+		<tempfile property="endpoint.properties" destDir="${webservicetmp}" />
+
+		<propertyfile file="${webservicetmp}/endpoint.properties" comment="For endpoint generation ">
+			<entry key="${ear.basename}ejb.http.routerModuleName" type="string" value="yantrawebservices.war" operation="+" />
+			<entry key="${ear.basename}ejb.http.contextRoot" type="string" value="yantrawebservices" operation="+" />
+		</propertyfile>
+
+		<exec dir="${webservicetmp}" executable="${was.bin}/endptEnabler.${was.tool.cmd.extension}" failonerror="true">
+			<arg line="-properties ${webservicetmp}/endpoint.properties ${dir.external}/${earfile}" />
+		</exec>
+		<delete file="${dir.external}/${earfile}~" failonerror="false" />
+	</target>
+
+	<!-- ===================================================================================== -->
+	
+	<target name="-create-webservice-war-jboss">
+		<condition property="jboss-webservice-war-target" value="-create-webservice-war-jboss-ejb3" else="-create-webservice-war-jboss-ejb2">
+                <isset property="ejb3.webservice"/>
+		</condition>
+		<antcall target="${jboss-webservice-war-target}"/> 
+	</target>
+
+	<target name="-create-webservice-war-jboss-ejb3" >
+	</target>
+
+	<target name="-create-webservice-war-jboss-ejb2" >
+		<property file="${installdir}/bin/build.properties" />
+		<condition property="jboss.dir" value="${env.JBOSS_HOME}">
+			<isset property="env.JBOSS_HOME" />
+		</condition>
+		<checkproperty property="jboss.dir" />
+
+		<condition property="jboss-java2wsdl-style1" value="${jboss-java2wsdl-style}">
+			<or>
+				<equals arg1="${jboss-java2wsdl-style}" arg2="rpc" casesensitive="false" trim="true" />
+				<equals arg1="${jboss-java2wsdl-style}" arg2="document" casesensitive="false" trim="true" />
+			</or>
+		</condition>
+		<property name="jboss-java2wsdl-style1" value="rpc" />
+
+		<condition property="jboss-java2wsdl-xml" value="${webservicetmp}/META-INF/wsdl_config_document.xml">
+			<equals arg1="${jboss-java2wsdl-style1}" arg2="document" />
+		</condition>
+		<property name="jboss-java2wsdl-xml" value="${webservicetmp}/META-INF/wsdl_config.xml" />
+
+		<condition property="jboss-java2wsdl-document" value="true">
+			<equals arg1="${jboss-java2wsdl-style1}" arg2="document" />
+		</condition>
+		
+		<AFCecho message="JBoss libraries will be picked up from {1}" >
+			<arg value="${jboss.dir}"/>
+		</AFCecho>
+
+		<java classname="org.apache.xalan.xslt.Process" fork="true" classpathref="project.classpath">
+			<arg value="-XSL" />
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xsl/web-serviceforjboss.xsl" />
+			<arg value="-IN" />
+			<!-- This file is not used at all -->
+			<arg value="${webservicetmp}/com/yantra/interop/tools/xsl/web-serviceforjboss.xsl" />
+			<arg value="-OUT" />
+			<arg value="${webservicetmp}/com/yantra/interop/services/webservices/rpc/ejb/YIFWebService.java" />
+		</java>
+
+		<javac debug="on" srcdir="${webservicetmp}" destdir="${webservicetmp}" classpathref="project.classpath" includes="com/yantra/interop/services/webservices/rpc/ejb/**" />
+
+		<AFCecho message="Generating WSDL..." />
+
+		<copy todir="${webservicetmp}">
+			<fileset dir="${installdir}/repository/eardata/platform/webservices/${appserver}" includes="META-INF/**/*" />
+		</copy>
+
+		<java classname="org.jboss.ws.tools.WSTools" fork="true" failonerror="true" classpathref="wstools.classpath">
+			<classpath id="wstools.classpath">
+				<fileset dir="${jboss.dir}/client">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<sysproperty key="log4j.configuration" value="wstools-log4j.xml" />
+			<sysproperty key="java.endorsed.dirs" value="${jboss.dir}/lib/endorsed" />
+			<arg value="-classpath" />
+			<arg value="${webservicetmp}:${installdir}/jar/platform_afc/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar:${installdir}/jar/install_foundation.jar:${installdir}/jar/platform_baseutils.jar:${installdir}/jar/platform/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/xapi.jar" />
+			<arg value="-config" />
+			<arg value="${jboss-java2wsdl-xml}" />
+			<arg value="-dest" />
+			<arg value="${webservicetmp}/META-INF" />
+		</java>
+
+		<antcall target="-compile-jboss-document-wsdl-files" />
+
+		<antcall target="-update-webservice-backend-jar" />
+	</target>
+
+	<target name="-compile-jboss-document-wsdl-files" if="jboss-java2wsdl-document">
+		<javac srcdir="${webservicetmp}/META-INF/com/yantra/interop/services/webservices/rpc/ejb" destdir="${webservicetmp}" />
+	</target>
+
+	<target name="validate-setup" if="build.webservices" >
+		
+		<condition property="build-props-available" value="true">
+			<available file="./bin/build.properties" />
+		</condition>
+		<AFCfail message="bin/build.properties not found!" unless="build-props-available" />
+
+		<property file="bin/build.properties" prefix="buildprop"/>
+		<condition property="webservice.types" value="${buildprop.webservices}" else="YIFWebService" >
+			<isset property="buildprop.webservices"/>
+		</condition>			
+		
+		<sciforeach list="${webservice.types}" propertyName="webservice.type" targetName="-delegate-webservice-setup-validation" />
+	</target>
+		
+	<target name="-delegate-webservice-setup-validation">
+		<condition property="valid.webservice.type" value="true" >
+			<or>
+				<equals arg1="${webservice.type}" arg2="YIFWebService" casesensitive="true" trim="true"/>
+				<equals arg1="${webservice.type}" arg2="SIXBeanXapiJaxWS" casesensitive="true" trim="true"/>		
+			</or>				
+		</condition>
+		
+		<AFCfail unless="valid.webservice.type" message="Invalid webservice type given in build.properties: {1}" >
+			<arg value="${webservice.type}"/>
+		</AFCfail>
+		<antcall target="-validate-${webservice.type}"/>
+	</target>
+		
+	<target name="-validate-YIFWebService" >
+		<property name="namedwebservices.inputxml" value="${installdir}/repository/eardata/platform/webservices/namedwebservices.xml"/>
+		<checkfile file="namedwebservices.inputxml" type="file"/>
+		<AFCecho message="Verifying {1} webservice libs." >
+			<arg value="${appserver}"/>
+		</AFCecho>
+		<antcall target="-validate-setup-${appserver}"/>
+	</target>
+		
+	<target name="-validate-setup-weblogic">
+		<checkfile file="buildprop.bea.dir" type="dir" />
+	</target>
+		
+	<target name="-validate-setup-websphere">
+		<checkfile file="buildprop.was.dir" type="dir" />
+	</target>
+		
+	<target name="-validate-setup-jboss">
+		<checkfile file="buildprop.jboss.dir" type="dir" />
+	</target>
+	
+</project>
+
+
+

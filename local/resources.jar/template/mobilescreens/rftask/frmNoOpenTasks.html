@@ -1,0 +1,73 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<html>
+    <body>
+        <form name="frmNoOpenTasks" target="/console/rftask.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+									<input col="1"
+                                    inputbinding="xml:/Task/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+								</td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtInfo" size="20"
+                                    subtype="Label" type="text"
+                                    validate="false" value="Mobile_No_Open_Tasks"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtAddnlInfo1" size="20"
+                                    subtype="Hidden" type="hidden"
+                                    validate="false" value="Mobile_Cannot_Suggest"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtAddnlInfo2" size="20"
+                                    subtype="Hidden" type="hidden"
+                                    validate="false" value="Mobile_Current_Tasks_To_User"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F10" name="Done"
+                                    size="7" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfmenu.ppc?CurrentInnerPanelID=menu"
+                                    validate="false" value="Mobile_DONE"/>
+                                    <input col="10" hotkey="F4" name="Proceed"
+                                    size="10" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rftask.ppc?action=frmCriteria"
+                                    validate="false" value="Mobile_Proceed"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,226 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+     (C) Copyright IBM Corp. 2001, 2019 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project basedir=".." name="precomp.utils" default="precompile-war">
+
+	<import file="AFCTasks.xml"/>
+
+	<!--  ==================================================== -->
+	<target name="precompile-war">
+
+		<property file="${installdir}/bin/build.properties" prefix="buildprop" />
+		<condition property="maxMemoryToFork" value="${buildprop.jboss.PRECOMPILE_MAX_MEMORY}" else="1024m">
+			<isset property="buildprop.jboss.PRECOMPILE_MAX_MEMORY" />
+		</condition>
+		<condition property="minMemoryToFork" value="${buildprop.jboss.PRECOMPILE_MIN_MEMORY}" else="512m">
+			<isset property="buildprop.jboss.PRECOMPILE_MIN_MEMORY" />
+		</condition>
+		<condition property="compilerSourceVM" value="${buildprop.jboss.compilerSourceVM}" else="1.6">
+			<isset property="buildprop.jboss.compilerSourceVM" />
+		</condition>
+		<condition property="compilerTagerVM" value="${buildprop.jboss.compilerTagerVM}" else="1.6">
+			<isset property="buildprop.jboss.compilerTagerVM" />
+		</condition>
+
+
+		<condition property="precompile.target" value="-precompile-war-${appserver}">
+			<or>
+				<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true" />
+				<equals arg1="${appserver}" arg2="weblogic" casesensitive="false" trim="true" />				
+			</or>
+		</condition>
+
+		<property name="precompile.target" value="-precompile-war-none" />
+		<antcall target="${precompile.target}" />
+	</target>
+
+	<!--  ==================================================== -->
+
+	<target name="-precompile-war-jboss">
+		<property file="${installdir}/bin/build.properties" />
+		<condition property="precompileJSPsFlag" value="true">
+			<or>
+				<istrue value="${jboss.precompileJSP}" />
+				<istrue value="${jboss.precompile}" />
+			</or>
+		</condition>
+
+		<property name="jboss.server" value="${jboss.dir}/server/all" />
+		<property name="tomcat.home" value="${jboss.server}/deploy/jbossweb.sar" />
+
+		<property name="webapp.path" value="${wartmpdir}" />
+		<antcall target="-jboss-removegenclasses" />
+		<antcall target="-jboss-precompileJSPs" />
+	</target>
+
+	<target name="-jboss-removegenclasses" if="precompileJSPsFlag">
+		<delete dir="${webapp.path}/WEB-INF/src" />
+	</target>
+
+	<target name="-jboss-precompileJSPs" if="precompileJSPsFlag">
+		<AFCecho message="precompiling jsps... this is a time consuming process..." />
+		<antcall target="-jboss-jspc" />
+		<antcall target="-jboss-compile" />
+		<antcall target="-jboss-mergedescriptors" />
+	</target>
+
+
+	<target name="-jboss-jspc">
+		<mkdir dir="${webapp.path}/WEB-INF/src" />
+		<!-- Cannot use as an Ant task because the jspc in the NoApp
+			classpath is from a different version. -->
+		<java classname="org.apache.jasper.JspC" fork="true"
+			failonerror="true">
+			<classpath>
+				<fileset dir="${jboss.dir}">
+					<include name="lib/*.jar" />
+				</fileset>
+				<fileset dir="${jboss.dir}">
+					<include name="common/lib/*.jar" />
+				</fileset>
+				<fileset dir="${jboss.server}/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${tomcat.home}">
+					<include name="*.jar" />
+				</fileset>
+				<pathelement location="${webapp.path}/WEB-INF/classes" />
+				<path refid="project.classpath" />
+			</classpath>
+			<arg value="-uriroot" />
+			<arg value="${webapp.path}" />
+			<arg value="-webinc" />
+			<arg value="${webapp.path}/WEB-INF/generated_web.xml" />
+			<arg value="-d" />
+			<arg value="${webapp.path}/WEB-INF/src" />
+			<arg value="-die" />
+			<arg value="-source"/>
+			<arg value="${compilerSourceVM}"/>
+			<arg value="-target"/>
+			<arg value="${compilerTagerVM}"/>
+		</java>
+	</target>
+
+	<target name="-jboss-compile">
+
+		<mkdir dir="${webapp.path}/WEB-INF/classes" />
+		<mkdir dir="${webapp.path}/WEB-INF/lib" />
+
+		<javac fork="true" memoryMaximumSize="${maxMemoryToFork}"
+			memoryInitialSize="${minMemoryToFork}"
+			destdir="${webapp.path}/WEB-INF/classes" optimize="off" debug="on"
+			failonerror="true" srcdir="${webapp.path}/WEB-INF/src"
+			excludes="**/*.smap">
+			<classpath>
+				<fileset dir="${jboss.server}/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${jboss.dir}">
+					<include name="common/lib/*.jar" />
+				</fileset>
+				<fileset dir="${tomcat.home}">
+					<include name="*.jar" />
+				</fileset>
+				<pathelement location="${webapp.path}/WEB-INF/classes" />
+				<fileset dir="${webapp.path}/WEB-INF/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${installdir}/extensions/">
+					<include name="**/*.jar" />
+				</fileset>
+				<path refid="project.classpath" />
+			</classpath>
+			<include name="**" />
+			<exclude name="tags/**" />
+		</javac>
+
+		<delete dir="${webapp.path}/WEB-INF/src" />
+	</target>
+
+	<target name="-jboss-mergedescriptors">
+
+		<AFCecho message="Merging web.xml files"/>
+
+		<concat
+			destfile="${webapp.path}/WEB-INF/generated_web_new.xml">
+			<header filtering="no" trimleading="yes">
+				&lt;web-app&gt; &lt;Servlets&gt;
+			</header>
+			<path>
+				<pathelement
+					location="${webapp.path}/WEB-INF/generated_web.xml" />
+			</path>
+			<footer filtering="no" trimleading="yes">
+				&lt;/Servlets&gt; &lt;/web-app&gt;
+			</footer>
+		</concat>
+
+		<move file="${webapp.path}/WEB-INF/web.xml"
+			tofile="${webapp.path}/WEB-INF/web_orig.xml" overwrite="true" />
+
+		<replace file="${webapp.path}/WEB-INF/web_orig.xml"
+			token="PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot; "
+			value="SYSTEM" />
+		<replace file="${webapp.path}/WEB-INF/web_orig.xml"
+			token="http://java.sun.com/dtd/web-app_2_3.dtd"
+			value=" file:${webapp.path}/WEB-INF/web-app_2_3.dtd" />
+
+		<java classname="com.yantra.tools.mdm.WebXMLGenerator"
+			fork="false" failonerror="true">
+			<arg value="-IN" />
+			<arg value="${webapp.path}/WEB-INF/web_orig.xml" />
+			<arg value="-OUT" />
+			<arg value="${webapp.path}/WEB-INF/web.xml" />
+			<arg value="-EXTN" />
+			<arg value="${webapp.path}/WEB-INF/generated_web_new.xml" />
+            <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		</java>
+		<delete file="${webapp.path}/WEB-INF/generated_web.xml" />
+		<delete file="${webapp.path}/WEB-INF/generated_web_new.xml" />
+		<delete file="${webapp.path}/WEB-INF/web_orig.xml" />
+		<replace file="${webapp.path}/WEB-INF/web.xml"
+			value="PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot; "
+			token="SYSTEM" />
+
+		<replace file="${webapp.path}/WEB-INF/web.xml"
+			value="http://java.sun.com/dtd/web-app_2_3.dtd"
+			token=" file:${webapp.path}/WEB-INF/web-app_2_3.dtd" />
+	</target>
+
+	<!--  ==================================================== -->
+
+	<target name="-precompile-war-none">
+		<AFCecho message="Precompile not supported for {1}">
+			<arg value="${appserver}"/> 
+		</AFCecho>
+	</target>
+
+	<!--  ==================================================== -->
+
+	<target name="-precompile-war-weblogic" if="precompile.weblogic" >
+		<!-- TODO:   Basically have this turned off right now.  The resulting ear is not usable.
+					 Gives illegalstateexception during what looks like attempt to recompile at 
+					 first access to login page. 
+		-->	
+		<property file="bin/build.properties"/>
+		<path id="weblogic.project.classpath" >
+			<fileset dir="${bea.dir}/server/lib">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${eartmp}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+		
+			<pathconvert property="weblogic.project.classpath.ref" >
+				<path refid="weblogic.project.classpath"  />
+			</pathconvert>
+		
+		<taskdef name="wlappc" classname="weblogic.ant.taskdefs.j2ee.Appc" classpathref="weblogic.project.classpath"/>		
+		<wlappc source="${wartmpdir}" forceGeneration="true" verbose="true" keepgenerated="true" classpath="${weblogic.project.classpath.ref}" />
+	</target>
+	<!-- ==================================================== -->
+
+</project>

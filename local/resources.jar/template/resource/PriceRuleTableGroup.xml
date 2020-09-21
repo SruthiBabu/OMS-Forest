@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<TableGroup GroupName="PriceRule">
+    <Entity EntityName="Pricing_Rule" Table="YPM_PRICING_RULE" Key="PRICING_RULE_KEY" XMLName="PricingRule">
+    	<ChildEntity EntityName="Pricing_Rule_Assignment" Table="YPM_PRICING_RULE_ASSIGNMENT" Key="PRICING_RULE_ASSIGNMENT_KEY" XMLName="PricingRuleAssignment">
+    		<QueryAttr ChildColumn="PRICING_RULE_KEY" ParentAttrXML="PricingRuleKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Pricing_Rule_Seller_Assignment" Table="YPM_PRC_RULE_SLR_ASSNMNT" Key="PRC_RULE_SLR_ASSNMNT_KEY" XMLName="PricingRuleSellerAssignment">
+    		<QueryAttr ChildColumn="PRICING_RULE_KEY" ParentAttrXML="PricingRuleKey"/>
+    	</ChildEntity>
+    </Entity>
+</TableGroup>

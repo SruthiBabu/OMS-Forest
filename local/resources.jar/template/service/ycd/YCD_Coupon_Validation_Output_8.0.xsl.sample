@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="no"/>
+
+	<xsl:template match="/">
+		<xsl:apply-templates select="Comergent/CouponValidation/PricingCouponList/PricingCoupon" />
+	</xsl:template>
+
+	<xsl:template match="Comergent/CouponValidation/PricingCouponList/PricingCoupon">
+		<Promotion>
+			<xsl:choose>
+				<xsl:when test="CouponStatus='VALID COUPON'">
+					<xsl:attribute name="Valid">Y</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="Valid">N</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:attribute name="ResultMessage">
+				<xsl:value-of select="translate(CouponStatus,' ','_')" />
+			</xsl:attribute>
+		</Promotion>
+	</xsl:template>
+
+</xsl:stylesheet>

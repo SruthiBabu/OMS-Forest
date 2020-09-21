@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<WMS Label="Warehouse_Management" Icon="com/yantra/scw/ui/icons/wms.gif">
+	<PermissionOnlyNode Label="Warehouse_Management_Tree" PermissionId="YWMC080">
+		<Actions Label="Actions" Icon="com/yantra/ycp/ui/icons/actionlist.gif">
+			<Action PermissionId="YWMC080A01"/>
+			<Action PermissionId="YWMC080A02"/>
+			<Action PermissionId="YWMC080A03"/>
+			<Action PermissionId="YWMC080A04"/>
+			<Action PermissionId="YWMC080A05"/>  
+			<Action PermissionId="YWMC080A09"/>  
+			<Action PermissionId="YWMC080A08"/>  
+			<Action PermissionId="YWMC080A07"/>  
+			<Action PermissionId="YWMC080A06"/>  
+		</Actions>
+	</PermissionOnlyNode>
+	<PermissionOnlyNode Label="Process_Type_Specific_Configuration">
+			<ServiceDefinitions Label="Service_Definitions" PermissionId="YSWMS036"/>
+	</PermissionOnlyNode>
+    <WarehouseLayout Label="Warehouse_Layout" Icon="com/yantra/scw/ui/icons/wms.gif" PermissionId="YSWMSM001">
+	     <Equipment PermissionId="YSWMS006" FormName="YSCWMC100" Label="Equipment" GroupName="WMS_WarehouseLayout" EntityName="Equipment" Icon="com/yantra/scw/ui/icons/equipment.gif" ActivityGroupId="Equipment" ScreenMode="Equipment" IsStation="N" UniqueKeySuffix="Equipment" />
+		 <DockSchedulingRule  PermissionId="YSWMS004" DisplayMode="Dialog" FormName="YWMC287" Label="Dock_Scheduling_Rule"  GroupName="HubData" EntityName="Rules" Icon="com/yantra/scw/ui/icons/location.gif"/>
+		 <SystemTablePurgeCriteria Label="Dock_Appointment_Purge_Criteria" PermissionId="YSWMS0243" FormName="YCPPM707" GroupName="BaseSetup" EntityName="PurgeCriteria" SectionName="WMS_Dock_Appointment" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif"/>
+	</WarehouseLayout>
+	<Receiving Label="Receiving" Icon="com/yantra/scw/ui/icons/receiving.gif" BaseProcessType="RECEIPT" PermissionId="YSWMSM005">
+		<ActivityList PermissionId="YSWMS027" FormName="YSCWMC035" Label="Activities"  GroupName="WMS_Activity" EntityName="Activity" Icon="com/yantra/scw/ui/icons/activity.gif" ActivityGroupId="RECEIPT" ShowMultiSkuTab="N"  ShowZonePreferences="Y" ShowSingleSkuTab="Y" IsPutawayStrategyRequired="N" IsRetrivalStrategyRequired="N" AllowActivityConstraints="N" UniqueKeySuffix="Activity_Receiving"/>
+        <DocumentSpecificConfiguration Label="Document_Specific_Configuration" DocumentTypeSpecific="Y" ModuleCode="RECEIPT" Icon="com/yantra/ycp/ui/icons/documenttype.gif" BaseProcessType="RECEIPT">
+		    <Order Label="Order" Icon="com/yantra/ycp/ui/icons/order.gif" BaseProcessType="RECEIPT">
+			  	<ReceiptModificationGroups Label="Receipt_Status_Mod_Groups" PermissionId="YSWMS100" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+				<ProcessTypeDetails Label="Receipt_Process_Type_Details" PermissionId="YSWMS030" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtypes.gif"/>
+                <ReceiptProcessModel Label="Receipt_Process_Model" PermissionId="YSWMS031" FormName="YCPWF001" GroupName="ExtendedProcessModel" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif" DisplayMode="Dock"/>
+		    </Order>
+			<Roles>
+			    <Role RoleKey="HUB"/>
+			    <Role RoleKey="ENTERPRISE"/>
+		    </Roles>
+		</DocumentSpecificConfiguration>
+		<Vendor Label="Vendor" Icon="com/yantra/ycp/ui/icons/vendor.gif">
+			<VendorClass Label="Vendor_Class" PermissionId="YSWMS078" FormName="YCPPM256" GroupName="Vendor" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/vendorclass.gif"/>
+			<Vendor Label="Vendor_Master" PermissionId="YSWMS081" FormName="YOMP0076" GroupName="Vendor" EntityName="Vendor" Icon="com/yantra/ycp/ui/icons/vendor.gif"/>
+			<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+			</Roles>
+		</Vendor>
+	</Receiving>
+	<QualityControl Label="Quality_Control" Icon="com/yantra/scw/ui/icons/taskmodifyreason.gif" PermissionId="YSWMSM006">
+        <ActivityList PermissionId="YSWMS027" FormName="YSCWMC035" Label="Activities"  GroupName="WMS_Activity" EntityName="Activity" Icon="com/yantra/scw/ui/icons/activity.gif" ActivityGroupId="INSPECTION" ShowMultiSkuTab="Y"  ShowZonePreferences="Y" ShowSingleSkuTab="Y" IsPutawayStrategyRequired="N" IsRetrivalStrategyRequired="N" AllowActivityConstraints="N" UniqueKeySuffix="Activity_Quality_Control"/>
+	</QualityControl>
+    <VAS Label="VAS" Icon="com/yantra/scw/ui/icons/vas.gif" BaseProcessType="VAS" PermissionId="YSWMSM008">
+	   	<ActivityList PermissionId="YSWMS027" FormName="YSCWMC035" Label="Activities"  GroupName="WMS_Activity" EntityName="Activity" Icon="com/yantra/scw/ui/icons/activity.gif" ActivityGroupId="VAS" ShowMultiSkuTab="N" ShowSingleSkuTab="Y" ShowZonePreferences="Y" IsPutawayStrategyRequired="N" IsRetrivalStrategyRequired="N" AllowActivityConstraints="N" UniqueKeySuffix="Activity_VAS" />
+		</VAS>
+    <Packing Label="Packing" Icon="com/yantra/scw/ui/icons/packing.gif" BaseProcessType="PACK" PermissionId="YSWMSM009">
+		<ActivityList PermissionId="YSWMS027" FormName="YSCWMC035" Label="Activities"  GroupName="WMS_Activity" EntityName="Activity" Icon="com/yantra/scw/ui/icons/activity.gif" ActivityGroupId="PACK" ShowMultiSkuTab="N" UniqueKeySuffix="Activity_Packing" ShowZonePreferences="Y"
+		IsPutawayStrategyRequired="N" IsRetrivalStrategyRequired="N" AllowActivityConstraints="N" ShowSingleSkuTab="N" />
+		</Packing>
+	<Shipping Label="Shipping" Icon="com/yantra/scw/ui/icons/shipping.gif" PermissionId="YSWMSM010">
+        <Customer Label="Customer" Icon="com/yantra/ycp/ui/icons/buyer.gif">
+			<CustomerClass Label="Customer_Class" PermissionId="YSWMS080" FormName="YCPPM255" GroupName="Customer" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/customerclass.gif"/>
+			<Customer Label="Customer_Master" PermissionId="YSWMS081" FormName="YOMP0073" GroupName="Customer" EntityName="Customer" Icon="com/yantra/ycp/ui/icons/buyer.gif"/>
+			<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+			</Roles>
+        </Customer>
+
+		<ActivityList PermissionId="YSWMS027" FormName="YSCWMC035" Label="Activities" GroupName="WMS_Activity" EntityName="Activity" Icon="com/yantra/scw/ui/icons/activity.gif" ActivityGroupId="SHIP" ShowMultiSkuTab="N" UniqueKeySuffix="Activity"
+		IsPutawayStrategyRequired="N" IsRetrivalStrategyRequired="N" AllowActivityConstraints="N" ShowSingleSkuTab="N" />
+		<CarrierPreferences Label="Parcel_SCAC_Preferences" PermissionId="YSWMSS54" FormName="YCPPM518" GroupName="NodeSetup" EntityName="ScacEx" Icon="com/yantra/scw/ui/icons/shipping.gif"/>
+		<DocumentSpecificConfiguration Label="Document_Specific_Shipping" DocumentTypeSpecific="Y" ModuleCode="SHIP" Icon="com/yantra/ycp/ui/icons/documenttype.gif" BaseProcessType="ORDER_DELIVERY">
+		    <Order Label="Order" Icon="com/yantra/ycp/ui/icons/order.gif" BaseProcessType="ORDER_DELIVERY">
+			  	<ModificationGroups Label="Shipping_Status_Mod_Groups" PermissionId="YSWMS100" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+				<HoldTypes Label="Hold_Types" PermissionId="YSWMS082" FormName="YOMP71005" GroupName="DocSpecific" BaseProcessTypeKey="ORDER_DELIVERY" EntityName="HoldType" Icon="com/yantra/ycp/ui/icons/holdtype.gif"/>
+				<ProcessTypeDetails Label="Shipping_Process_Type_Details" PermissionId="YSWMS056" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtypes.gif"/>
+                <ProcessModel Label="Shipping_Process_Model" PermissionId="YSWMS057" FormName="YCPWF001" GroupName="ExtendedProcessModel" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif" DisplayMode="Dock"/>
+				<ShippingPreference Label="Shipping_Preference" PermissionId="YSWMS099" FormName="OMP019" GroupName="DocSpecific" EntityName="ShippingPreference" Icon="com/yantra/ycp/ui/icons/shipmentmodes.gif"/>
+			  </Order>
+		    <Roles>
+			    <Role RoleKey="HUB"/>
+			    <Role RoleKey="ENTERPRISE"/>
+		    </Roles>
+		</DocumentSpecificConfiguration>
+		<DocumentSpecificConfiguration Label="Document_Specific_Load" DocumentTypeSpecific="Y" ModuleCode="LOAD" Icon="com/yantra/ycp/ui/icons/documenttype.gif" BaseProcessType="LOAD_DELIVERY" RemoveFromModel="Y">
+		    <Order Label="Order" Icon="com/yantra/ycp/ui/icons/order.gif" BaseProcessType="LOAD_DELIVERY">
+			  	<ModificationGroups Label="Load_Status_Mod_Groups" PermissionId="YSWMS100" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+				<HoldTypes Label="Hold_Types" PermissionId="YSWMS082" FormName="YOMP71005" GroupName="DocSpecific" BaseProcessTypeKey="LOAD_DELIVERY" EntityName="HoldType" Icon="com/yantra/ycp/ui/icons/holdtype.gif"/>
+				<ProcessTypeDetails Label="Load_Process_Type_Details" PermissionId="YSWMS059" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtypes.gif"/>
+                <ProcessModel Label="Load_Process_Model" PermissionId="YSWMS060" FormName="YCPWF001"  EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif" GroupName="ExtendedProcessModel" DisplayMode="Dock"/>
+			  </Order>
+		    <Roles>
+			    <Role RoleKey="HUB"/>
+			    <Role RoleKey="ENTERPRISE"/>
+		    </Roles>
+		</DocumentSpecificConfiguration>
+    </Shipping> 
+	<Transportation Label="Transportation" Icon="com/yantra/ycp/ui/icons/logistics.gif" PermissionId="YSWMSM010">
+        <ActivityList PermissionId="YSWMS027" FormName="YSCWMC035" Label="Activities"  GroupName="WMS_Activity" EntityName="Activity" Icon="com/yantra/scw/ui/icons/activity.gif" ActivityGroupId="TRANSPORTATION" ShowMultiSkuTab="N" UniqueKeySuffix="Activity"
+		IsPutawayStrategyRequired="N" IsRetrivalStrategyRequired="N" AllowActivityConstraints="N" ShowSingleSkuTab="N" />
+	</Transportation>
+	<TaskManagement Label="Task_Management" Icon="com/yantra/scw/ui/icons/task.gif" PermissionId="YSWMSM011">
+        <TaskType  PermissionId="YSWMS066" FormName="YSCWMC051" Label="Task_Types"  GroupName="NodeSetup" EntityName="BaseActivityGroup" Icon="com/yantra/scw/ui/icons/tasktype.gif"/>
+        <Productivity Label="Productivity" Icon="com/yantra/ycp/ui/icons/slot.gif"> 
+			<ProductivityType Label="Productivity_Types" PermissionId="YSWMS068" FormName="YWMCPT01" GroupName="ProductivityType" EntityName="ProductivityType" Icon="com/yantra/ycp/ui/icons/slot.gif"/>
+			<SystemTablePurgeCriteria Label="Purge_Criteria" PermissionId="YSWMS069" FormName="YCPPM670" GroupName="BaseSetup" EntityName="PurgeCriteria" SectionName="WMS_Productivity" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif"/>
+		</Productivity>
+		<SystemTablePurgeCriteria Label="Purge_Criteria" PermissionId="YSWMS072" FormName="YCPPM025" GroupName="BaseSetup" EntityName="PurgeCriteria" SectionName="WMS_Task" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif"/> 
+	</TaskManagement>
+   <ResourcePlanning Label="Resource_Planning" Icon="com/yantra/ycp/ui/icons/inventoryconsiderations.gif" PermissionId="YSWMSM013">
+       <PlanningNodeAttributes  Label="Node_Planning_Attributes" DisplayMode="Dialog" PermissionId="YSWMS085" FormName="YWMC085" GroupName="WMS_ResourcePlanning" EntityName="ShipNode" SectionName="RESOURCE_PLANNING" Icon="com/yantra/ycp/ui/icons/slot.gif"/>
+	   <ResourcePools Label="Resource_Pools" PermissionId="YSWMS084" FormName="YWMC081"   GroupName="WMS_ResourcePlanning" EntityName="ResourcePool" SectionName="RESOURCE_PLANNING" Purpose="WMS-RP" ItemGroupCode="PS" Icon="com/yantra/ycp/ui/icons/resourcepool.gif"/>
+	   <TaskTypes Label="Task_Type_Associations" PermissionId="YSWMS086" FormName="YWMC195" GroupName="WMS_ResourcePlanning" EntityName="TaskTypeResourcePool" Icon="com/yantra/scw/ui/icons/task.gif"/>
+	   <SystemTablePurgeCriteria Label="Purge_Criteria" PermissionId="YSWMS0242" FormName="YCPPM705" GroupName="BaseSetup" EntityName="PurgeCriteria" SectionName="WMS_ResourcePlanning" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif"/>
+   </ResourcePlanning>
+</WMS>	

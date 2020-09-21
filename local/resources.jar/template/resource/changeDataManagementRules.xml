@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- 
+This XML defines Change Data Management rules for the current deployment.
+
+DeploymentName						:	A unique name used to define this installation/deployment.
+Rules:
+	MaintainEntityChanges			:	If set to Y, tracks changes for the Table Types configured under the rule.
+	EnableChangeProjectManagement	:	If set to Y, tracks changes using Change Projects and Change Requests.
+	ChangeProjectIDPrefix			: 	A prefix used to generate Change Project IDs. It should be uniquely defined for every
+										installation that contributes data to another system.
+	ExportProjects					: 	If set to Y, exports Change Project definitions.
+	PreventTableImport				:	If set to Y, prevents data import for the list of tables configured under the rule.
+	
+Sample XML:
+
+<ChangeDataManagementRules DeploymentName="STAGING">
+	<Rules>
+		<Rule Name="MaintainEntityChanges" Value="Y">
+			<TableTypeList>
+				<TableType Type="CONFIGURATION"/>
+				<TableType Type="MASTER"/>
+			</TableTypeList>
+		</Rule>
+		<Rule Name="EnableChangeProjectManagement" Value="Y"/>
+		<Rule Name="ChangeProjectIDPrefix" Value="ST"/>
+		<Rule Name="ExportProjects" Value="N"/>
+		<Rule Name="PreventTableImport" Value="Y">
+			<TableList>
+				<Table Name="YFS_SYNC_DB_EXPORT"/>
+			</TableList>
+		</Rule>
+		<Rule Name="DisableChangeTracking" Value="Y">
+			<TableList>
+			    <Table Name="YFS_CUSTOMER"/>
+				<Table Name="YFS_CUSTOMER_GRADE"/>
+				<Table Name="YFS_CUSTOMER_ASSIGNMENT"/>
+				<Table Name="YFS_CONSUMER"/>
+				<Table Name="YFS_CUSTOMER_ADDNL_ADDRESS"/>
+				<Table Name="YFS_CUSTOMER_ANALYTICS"/>
+				<Table Name="YFS_CUSTOMER_CONTACT"/>
+				<Table Name="YFS_CUSTOMER_CURRENCY"/>
+				<Table Name="YFS_CUSTOMER_PAYMENT_METHOD"/>
+				<Table Name="YFS_CUSTOMER_SCH_PREFERENCE"/>
+				<Table Name="YFS_CUSTOMER_SLOT_PREFERENCE"/>
+				<Table Name="YFS_PARTICIPANT_NOTE"/>
+			</TableList>
+		</Rule>
+        <Rule Name="ExcludeFromSync" Value="Y">
+          <ExcludeList>
+            <Exclude Name="YFS_SYNC_SUBSCRIPTION"/>
+            <Exclude Name="YFS_SYNC_DB_EXPORT"/>
+          </ExcludeList>
+        </Rule>
+	</Rules>
+</ChangeDataManagementRules>
+ -->
+<ChangeDataManagementRules DeploymentName="">
+	<Rules>
+		<Rule Name="MaintainEntityChanges" Value="">
+			<TableTypeList>
+				<TableType Type=""/>
+			</TableTypeList>
+		</Rule>
+		<Rule Name="EnableChangeProjectManagement" Value=""/>
+		<Rule Name="ChangeProjectIDPrefix" Value=""/>
+		<Rule Name="ExportProjects" Value=""/>
+		<Rule Name="PreventTableImport" Value="">
+			<TableList>
+				<Table Name=""/>
+			</TableList>
+		</Rule>
+		<Rule Name="DisableChangeTracking" Value="">
+			<TableList>
+				<Table Name=""/>
+			</TableList>
+		</Rule>
+	</Rules>
+</ChangeDataManagementRules>

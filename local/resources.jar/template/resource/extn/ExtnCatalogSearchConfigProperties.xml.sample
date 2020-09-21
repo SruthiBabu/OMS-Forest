@@ -1,0 +1,29 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2010, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<SearchConfigurations>
+	<IndexSets>
+		<IndexSet Name="CatalogIndex">
+			<Locales>
+				<Locale LocaleCode="fr_FR" QueryParserClass="package.FrenchQueryParser.class" AnalyzerClass="package.FrenchAnalyzer.class" SynonymFile="FrenchSynonym.properties" />
+			</Locales>
+			<Entities>
+				<Entity Name="Item">
+					<Attributes>
+						<Attribute XMLName="MyExtendedDescription" DefaultWeight="1.0" Index="ANALYZED" Store="Y" UseSynonyms="N" Searchable="Y" />
+						<Attribute IndexFieldName="CustomerItemDescription" DefaultWeight="1.0" Index="ANALYZED" Store="Y" UseSynonyms="N" Searchable="Y" GetExternalValue="Y"/>
+					</Attributes>
+					<Entity Name="Asset" RelationshipName="AssetList">
+						<Attributes>
+							<Attribute Type="Text" FileExtension="pdf" Parser="PDFParser.class" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="Y"/>
+						</Attributes>
+					</Entity>
+				</Entity>
+			</Entities>
+		</IndexSet>
+	</IndexSets>
+</SearchConfigurations>
+

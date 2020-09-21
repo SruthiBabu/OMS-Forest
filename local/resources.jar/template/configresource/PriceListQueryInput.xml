@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery QueryType="PriceList">
+   <PricelistHeader DisplayName="Pricelist_Header" TableName="YPM_PRICELIST_HDR" IconFile="item.gif" ShowNotButtons="Y">
+		<SellerOrganizationCode Type="Leaf" Id="SellerOrganizationCode" DisplayName="SellerOrganizationCode" DataType="OrgCode" ControlType="Text" ColumnName="SELLER_ORGANIZATION_CODE">
+		 <QryTypes DefaultQryTypeId="EQ">
+			<QryType QryTypeName="Is" QryTypeId="EQ"/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="NEQ"/>
+		 </QryTypes>
+		 <MasterData MasterDataId="SellerOrganizationCode" IsReqd="" OverRidingClass=""/>
+		</SellerOrganizationCode>
+	  <PricelistName Type="Leaf" Id="PricelistName" DisplayName="PricelistName" DataType="PricelistName" ControlType="Text" ColumnName="PRICELIST_NAME">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="PricelistName" IsReqd="" OverRidingClass=""/>
+	  </PricelistName>
+	  <PricingStatus Type="Leaf" Id="PricingStatus" DisplayName="PricingStatus" DataType="PricingStatus" ControlType="Combo" ColumnName="PRICING_STATUS">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="PricingStatus" IsReqd="" OverRidingClass="" IsStatic="true">
+			<PricingStatus Desc="Active" Code="ACTIVE"/>
+			<PricingStatus Desc="Inactive" Code="INACTIVE"/>
+		</MasterData>
+	  </PricingStatus>
+	  <StartDateActive Type="Leaf" Id="StartDateActive" DisplayName="StartDateActive" DataType="TimeStamp" ControlType="Text" ColumnName="START_DATE_ACTIVE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+		  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+		</QryTypes>
+		<MasterData MasterDataId="StartDateActive" IsReqd="" OverRidingClass=""/>
+	  </StartDateActive>
+	  <EndDateActive Type="Leaf" Id="EndDateActive" DisplayName="EndDateActive" DataType="TimeStamp" ControlType="Text" ColumnName="END_DATE_ACTIVE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+		  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+		</QryTypes>
+		<MasterData MasterDataId="EndDateActive" IsReqd="" OverRidingClass=""/>
+	  </EndDateActive>
+	  <Currency Type="Leaf" Id="Currency" DisplayName="Currency" DataType="Currency" ControlType="Text" ColumnName="CURRENCY">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="Currency" IsReqd="" OverRidingClass=""/>
+	  </Currency>
+	</PricelistHeader>
+</AdvancedQuery>

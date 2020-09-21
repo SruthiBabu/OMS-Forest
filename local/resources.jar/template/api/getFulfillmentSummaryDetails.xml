@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Call Center for Commerce
+(C) Copyright IBM Corp. 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Order OrderHeaderKey="">
+	<PriceInfo Currency="" />
+	<ShippingGroups>
+		<ShippingGroup CarrierServiceCode="" ExpectedDeliveryStartDate="" ExpectedDeliveryEndDate="">
+			<PersonInfoShipTo />
+			<CarrierServiceList IsModifiable="">
+				<CarrierService CarrierServiceCode="" CarrierServiceDesc="" Currency="" DeliveryEndDate="" DeliveryStartDate="" OrganizationCode="" Price=""/>
+			</CarrierServiceList>
+			<OrderLines>
+				<OrderLine AvailableQty="" EarliestShipDate="" NoOfInteractions="" RequiredQty="">
+					<CarrierServiceList IsModifiable="">
+						<CarrierService CarrierServiceCode="" CarrierServiceDesc="" Currency="" DeliveryEndDate="" DeliveryStartDate="" OrganizationCode="" Price=""/>
+					</CarrierServiceList>
+				</OrderLine>
+			</OrderLines>
+		</ShippingGroup>
+	</ShippingGroups>
+	<PickupGroups>
+		<PickupGroup ShipNode="">
+			 <Shipnode Description=""  ShipNode="" >
+				<ShipNodePersonInfo  City="" Country=""  ZipCode=""/>
+			</Shipnode>
+			<OrderLines>
+					<OrderLine EarliestShipDate="" AvailableQty="" RequiredQty="">
+					<PersonInfoMarkFor  />
+				</OrderLine>
+			</OrderLines>
+		</PickupGroup>
+	</PickupGroups>
+	<UnavailableLines>
+		<ShippingLines>
+			<OrderLine UnavailableQty="">
+			
+			</OrderLine>
+		</ShippingLines>
+		<PickupLines>
+			<OrderLine UnavailableQty="">
+			
+			</OrderLine>
+		</PickupLines>
+	</UnavailableLines>
+</Order>

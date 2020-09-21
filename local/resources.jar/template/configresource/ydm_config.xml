@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+
+<LogisticsManagement Label="Logistics_Management" BaseDocumentType="1001" Icon="com/yantra/ycp/ui/icons/loaddelivery.gif">
+	<PermissionOnlyNode Label="Logistics_Management_Tree" PermissionId="YCPPM353">
+		<Actions Label="Actions" Icon="com/yantra/ycp/ui/icons/actionlist.gif">
+			<Action PermissionId="YCPPM353A01"/>
+			<Action PermissionId="YCPPM353A02"/>
+			<Action PermissionId="YCPPM353A03"/>
+			<Action PermissionId="YCPPM353A04"/>
+			<Action PermissionId="YCPPM353A06"/>
+		</Actions>
+	</PermissionOnlyNode>
+    <CommonConfiguration Label="Common_Configuration" Icon="com/yantra/ycp/ui/icons/ruleset.gif">
+        <CarrierServices Label="Carrier_Services" PermissionId="YSYDM000" FormName="YCPPM200" GroupName="ExtendedCarrierService" EntityName="CarrierService" Icon="com/yantra/ycp/ui/icons/carrierservices.gif"/>
+		<CarrierServices Label="Carrier_Special_Services" PermissionId="YSYDM012" 
+						 FormName="YDM00114" GroupName="HubData" EntityName="SpecialServices" Icon="com/yantra/ycp/ui/icons/carrierservices.gif"/>
+		<LogisticsRules Label="Logistics_Rules" PermissionId="YSYDM028" FormName="YDM00126" GroupName="CustomCommonCode" EntityName="Rules" Icon="com/yantra/ycp/ui/icons/transactionrules.gif"/>
+		<Transportation Label="Transportation" Icon="com/yantra/ycp/ui/icons/logistics.gif" PermissionId="YSYDM000">
+			<ActivityList  PermissionId="YSWYDM027" FormName="YDM00125" Label="Activities"  GroupName="HubData" GroupLevel="Hub" EntityName="Activity" Icon="com/yantra/wms/ui/icons/activity.gif" />
+	    </Transportation>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </CommonConfiguration>
+    <DocumentSpecificConfiguration Label="Document_Specific_Load" DocumentTypeSpecific="Y" ModuleCode="LOAD" Icon="com/yantra/ycp/ui/icons/documenttype.gif" BaseProcessType="LOAD_DELIVERY">
+		<Load Label="Load" Icon="com/yantra/ycp/ui/icons/loaddelivery.gif" BaseProcessType="LOAD_DELIVERY">
+			<LoadModification Label="Load_Modification" Icon="com/yantra/ycp/ui/icons/ordermodification.gif">
+                  <ModificationTypes Label="Load_Modification_Types" PermissionId="YSOMD020" FormName="YCPPM505" GroupName="HubDocDefn" EntityName="StatusModificationType" Icon="com/yantra/ycp/ui/icons/statusmodificationrules.gif"/>
+                 <ModificationGroups Label="Load_Status_Mod_Groups" PermissionId="YSYDM031" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+					<AuditedModifications Label="Load_Modifications_Requiring_Auditing" PermissionId="YSYDM030" FormName="YCPPM125" GroupName="HubDocDefn" EntityName="StatusModificationType" Icon="com/yantra/ycp/ui/icons/modifyadditionalattribute.gif"/>
+            </LoadModification>
+			<ModificationReasons Label="Modification_Reasons" PermissionId="YSYDM001" FormName="YDM00118" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/modificationreason.gif"/>
+			<HoldTypes Label="Hold_Types" PermissionId="YSYDM028" FormName="YOMP71005" GroupName="DocSpecific" BaseProcessTypeKey="LOAD_DELIVERY" EntityName="HoldType" Icon="com/yantra/ycp/ui/icons/holdtype.gif"/>		
+			<ProcessTypeDetails Label="Process_Type_Details" PermissionId="YSYDM011" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtype.gif"/>
+			<FulfillmentProcessModel Label="Load_Execution_Process_Model" PermissionId="YSYDM009" FormName="YCPWF001" DisplayMode="Dock" GroupName="ExtendedProcessModel" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif">
+			</FulfillmentProcessModel>
+			<InstructionTypes Label="Instruction_Types" PermissionId="YSYDM002" FormName="YCPPM144" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/instructiontype.gif"/>
+            <ChargeCategories Label="Charge_Categories" PermissionId="YSYDM003" FormName="YCPPM145" GroupName="DocSpecific" EntityName="ChargeCategory" Icon="com/yantra/ycp/ui/icons/chargecategory.gif"/>
+			<PurgeCriteria Label="Purge_Criteria" PermissionId="YSYDM004" FormName="YCPPM660" GroupName="DocSpecific" EntityName="PurgeCriteria" SectionName="Document" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif"/>
+			<LoadType Label="Load_Type" PermissionId="YSYDM005" FormName="YCPPM512" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/loadtype.gif"/>
+			<StopType Label="Stop_Type" PermissionId="YSYDM006" FormName="YCPPM513" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/stoptype.gif"/>
+			
+			<PermissionOnlyNode Label="Process_Type_Specific_Configuration">
+				<ServiceDefinitions Label="Service_Definitions" PermissionId="YSYDM010"/>
+			</PermissionOnlyNode>
+		</Load>
+	    <Roles>
+		    <Role RoleKey="HUB"/>
+		    <Role RoleKey="ENTERPRISE"/>
+	    </Roles>
+	</DocumentSpecificConfiguration>
+   <DocumentSpecificConfiguration Label="Document_Specific_Shipping" DocumentTypeSpecific="Y" ModuleCode="SHIP" Icon="com/yantra/ycp/ui/icons/documenttype.gif" BaseProcessType="ORDER_DELIVERY">
+		<Order Label="Order" Icon="com/yantra/ycp/ui/icons/order.gif" BaseProcessType="ORDER_DELIVERY">
+			<ModificationGroups Label="Shipping_Status_Mod_Groups" PermissionId="YSYDM031" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+			<HoldTypes Label="Hold_Types" PermissionId="YSYDM028" FormName="YOMP71005" GroupName="DocSpecific" BaseProcessTypeKey="ORDER_DELIVERY" EntityName="HoldType" Icon="com/yantra/ycp/ui/icons/holdtype.gif"/>
+			<ProcessTypeDetails Label="Shipping_Process_Type_Details" PermissionId="YSYDM011" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtypes.gif"/>
+			<ProcessModel Label="Shipping_Process_Model" PermissionId="YSYDM009" FormName="YCPWF001" GroupName="ExtendedProcessModel" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif" DisplayMode="Dock"/>
+			<ShippingPreference Label="Shipping_Preference" PermissionId="YSYDM0829" FormName="OMP019" GroupName="DocSpecific" EntityName="ShippingPreference" Icon="com/yantra/ycp/ui/icons/shipmentmodes.gif"/>
+		</Order>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </DocumentSpecificConfiguration>
+	<Logistics Label="Logistics" Icon="com/yantra/ycp/ui/icons/logistics.gif">
+		<FreightTerms Label="Freight_Terms" PermissionId="YSYDM013" FormName="YCPPM560" GroupName="Logistics" EntityName="FreightTerms" Icon="com/yantra/ycp/ui/icons/freightterms.gif"/>
+		 <Organization Label="Shipment_Planning" PermissionId="YSYDM014" FormName="YOMP0100" GroupName="Logistics" EntityName="Organization" Icon="com/yantra/ycp/ui/icons/carrierrouting.gif"/>
+		 <Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+	</Logistics>
+</LogisticsManagement>

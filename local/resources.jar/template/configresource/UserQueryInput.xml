@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery QueryType="User">
+   <User DisplayName="User" TableName="YFS_USER" IconFile="item.gif" ShowNotButtons="Y">
+	  <Activateflag Type="Leaf" Id="Activateflag" DisplayName="Activateflag" DataType="Flag" ControlType="Combo" ColumnName="ACTIVATEFLAG">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="Activateflag" IsReqd="" OverRidingClass="" IsStatic="true">
+		  <Activateflag Code="Y" Desc="Yes"/>
+		  <Activateflag Code="N" Desc="No"/>
+		</MasterData>
+	  </Activateflag>
+	  <IsCustomer Type="Leaf" Id="IsCustomer" DisplayName="IsCustomer" DataType="Flag" ControlType="Combo" ColumnName="IS_CUSTOMER">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="IsCustomer" IsReqd="" OverRidingClass="" IsStatic="true">
+		  <IsCustomer Code="Y" Desc="Yes"/>
+		  <IsCustomer Code="N" Desc="No"/>
+		</MasterData>
+	  </IsCustomer>
+	  <IsSupervisor Type="Leaf" Id="IsSupervisor" DisplayName="IsSupervisor" DataType="Flag" ControlType="Combo" ColumnName="IS_SUPERVISOR">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="IsSupervisor" IsReqd="" OverRidingClass="" IsStatic="true">
+		  <IsSupervisor Code="Y" Desc="Yes"/>
+		  <IsSupervisor Code="N" Desc="No"/>
+		</MasterData>
+	  </IsSupervisor>
+	  <DataSecurityGroupId Type="Leaf" Id="DataSecurityGroupId" DisplayName="DataSecurityGroupId" DataType="DataSecurityGroupId" ControlType="Text" ColumnName="DATA_SECURITY_GROUP_ID">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="DataSecurityGroupId" IsReqd="" OverRidingClass=""/>
+	  </DataSecurityGroupId>
+	  <Localecode Type="Leaf" Id="Localecode" DisplayName="Localecode" DataType="Locale" ControlType="Text" ColumnName="LOCALECODE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="Localecode" IsReqd="" OverRidingClass=""/>
+	  </Localecode>
+	  <Usertype Type="Leaf" Id="Usertype" DisplayName="Usertype" DataType="EnumUserType" ControlType="Combo" ColumnName="USERTYPE">
+		 <QryTypes DefaultQryTypeId="EQ">
+			<QryType QryTypeName="Is" QryTypeId="EQ"/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="NEQ"/>
+		 </QryTypes>
+		<MasterData MasterDataId="Usertype" IsReqd="" OverRidingClass="" IsStatic="true">
+			<Usertype Desc="Internal_User" Code="INTERNAL"/>
+			<Usertype Desc="External_User" Code="EXTERNAL"/>
+			<Usertype Desc="External_LDAP_User" Code="EXTERNAL_LDAP_N"/>
+		</MasterData>
+	  </Usertype>
+   </User>
+</AdvancedQuery>

@@ -1,0 +1,573 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management  (5725-D10)
+# IBM Sterling Configure Price Quote (5725-D11)
+# Copyright IBM Corp. 2007,2019 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+##################################################################################################################
+# These properties are used by Sterling Commerce - UBX Integration Services provided OOB.
+##################################################################################################################
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_ubx_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_ubx_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## These properties are used by IBM - UBX Integration Services provided OOB.
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.ordercreated.event.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.ordercreated.event.flow=UBX_OrderCreatedOnSuccessSend
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.orderchanged.event.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.orderchanged.event.flow=UBX_OrderChangedOnSuccessSend
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.ordershipped.event.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.ordershipped.event.flow=UBX_OrderShippedOnSuccessSend
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.shipmentmodified.event.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.shipmentmodified.event.flow=UBX_ShipmentModifiedOnSuccessSend
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.capacity.event.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.capacity.event.flow=UBX_CapacityDataPublish
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.shipnode.sync.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.shipnode.sync.flow=UBX_ShipNodeDataPublish
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.item.sync.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.item.sync.flow=UBX_ItemDataPublish
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.enterprise.sync.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.enterprise.sync.flow=UBX_EnterpriseDataPublish
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.providerurl
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide URL value as corbaloc::<host>:<bootstrap port>
+ubx.integration.providerurl=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide QueueConnectionFactory Name.
+ubx.integration.qcf=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name
+ubx.integration.event.queue=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.event.publish.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.event.publish.url=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.oms.endpoint.auth.key
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##
+ubx.oms.endpoint.auth.key=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.enable.implicit.connection.trust
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N ,true ,false
+## PROPERTY_DESCRIPTION
+## When boolean value is true, this disables hostname and certificate validation checks for secure connections routed through IV Remote APIs
+## Valid values:
+## true or Y: Disable hostname and certificate validation checks for secure connections.
+## false or N: (default) Perform hostname and certificate validation checks for secure connections.
+ubx.enable.implicit.connection.trust=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.max.connections
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE:Integer
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## No of max connections for http client
+##
+ubx.max.connections=200
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.max.connections.per.route
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE:Integer
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## No of max connections for http client
+##
+ubx.max.connections.per.route=20
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.connections.time.out
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE:Integer
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Timeout in seconds for http connection to UBX
+##
+ubx.connections.time.out=5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.max.file.size
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE:Integer
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Max file size in KB that is supported by UBX for data transfer
+##
+ubx.max.file.size=160
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.request.load.factor
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE:Decimal
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Value used in conjuction with ubx.max.file.size to prevent payload overload during request to UBX
+##
+ubx.request.load.factor=0.5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.shipnode.statuschange.event.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Event will be raised whenever a node is turned ON/OFF
+##
+
+ubx.shipnode.statuschange.event.flow=UBX_ShipNodeStatusChangeSend
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.enabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N, true, false
+## PROPERTY_DESCRIPTION
+## When the boolean value resolves to true, this application is enabled for integration with UBX.
+## Valid values:
+## Y/true: Publish OMS data to UBX.
+## N/false: (Default) Do not publish data to UBX.
+#ubx.integration.enabled=N
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.exception.publish.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## UBX event will be raised for every reassign exception that occurs in the asynchronous process(BUCAgentsServer)
+ubx.exception.publish.flow=PublishUBXEvent
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.shortageReason.event.flow
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+##UBX event gets raised when a Shortage is recorded during one of the Store operations such as a Backroom pick/pack, Batch pick or customer pick
+##
+
+ubx.shortageReason.event.flow=UBX_RecordShortageReasonSend
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.order.created.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name for OrderCreated event 
+ubx.integration.order.created.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.order.changed.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name for OrderChanged event 
+ubx.integration.order.changed.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.order.shipped.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name for OrderShipped event 
+ubx.integration.order.shipped.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.record.shortage.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name for RecordShortageReason event 
+ubx.integration.record.shortage.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.shipnode.status.change.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name for ShipNodeStatusChange event 
+ubx.integration.shipnode.status.change.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.shipment.modified.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name for ShipmentModified event 
+ubx.integration.shipment.modified.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.capacity.availability.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name for CapacityAvailability event 
+ubx.integration.capacity.availability.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.config.fullsync.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name DataPublish agent for ConfigFullsync event 
+ubx.integration.config.fullsync.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.master.deltasync.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name DataPublish agent for MasterDeltasync event 
+ubx.integration.master.deltasync.event.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: ubx.integration.master.fullsync.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: UBX - Integration
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## Provide Queue name DataPublish agent for MasterFullsync event 
+ubx.integration.master.fullsync.event.queue=
+## PROPERTY_END

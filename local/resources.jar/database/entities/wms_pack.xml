@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity holds all the optional constraints on which an node enterprise can configure the optional do not mix constraints."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Base_Pack_Do_Not_Mix" Prefix="YFS_"
+            TableName="YFS_BASE_PACK_DO_NOT_MIX"
+            TableType="CONFIGURATION" XMLName="BasePackDoNotMix">
+            <Attributes>
+                <Attribute ColumnName="BASE_PACK_DO_NOT_MIX_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_BASE_PACK_DO_NOT_MIX table."
+                    Name="Base_Pack_Do_Not_Mix_Key" Nullable="false"/>
+                <Attribute ColumnName="FIELD_NAME" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the field name for do not mix criteria."
+                    Name="Field_Name" Nullable="false"/>
+                <Attribute CanTranslate="Y" ColumnName="FIELD_NAME_DESC"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="A brief description of the field name."
+                    Name="Field_Name_Desc" Nullable="false"/>
+                <Attribute ColumnName="PURPOSE" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="This field indicates the purpose for which the attributes are applicable."
+                    Name="Purpose" Nullable="false" XMLName="Purpose"/>
+                <Attribute ColumnName="SYSTEM_DEFINED" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This field indicates if the optional constraint is system defined."
+                    Name="System_Defined" Nullable="false" XMLName="SystemDefined"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="BSEPCKDONOTMIX_PK" Name="YFS_BASE_PACK_DO_NOT_MIX_PK">
+                <Attribute ColumnName="BASE_PACK_DO_NOT_MIX_KEY" Name="Base_Pack_Do_Not_Mix_Key"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="Pack Constraints Do Not Mix Attributes Configuration."
+            EntityType="CONFIGURATION" ListXMLName="PackDoNotMixList"
+            Module="wms" Name="Pack_Do_Not_Mix" Prefix="YFS_"
+            TableName="YFS_PACK_DO_NOT_MIX" TableType="CONFIGURATION" XMLName="PackDoNotMix">
+            <Attributes>
+                <Attribute ColumnName="PACK_DO_NOT_MIX_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The pack do not mix key that is associated with the pack do not mix."
+                    Name="Pack_Do_Not_Mix_Key" Nullable="false" XMLName="PackDoNotMixKey"/>
+                <Attribute ColumnName="PACK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The pack strategy key that is associated with the pack do not mix."
+                    Name="Pack_Strategy_Key" Nullable="false" XMLName="PackStrategyKey"/>
+                <Attribute ColumnName="ATTR_NAME" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="This field indicates the attribute name of the field, which has to be either included or excluded."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="CONTAINER_TYPE"
+                    DataType="EnumContainerType" DefaultValue="' '"
+                    Description="This field indicates if the DoNotMix configuration is applicable for a Case or Pallet."
+                    Name="Container_Type" Nullable="false" XMLName="ContainerType"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PACK_DO_NOT_MIX_PK" Name="YFS_PACK_DO_NOT_MIX_PK">
+                <Attribute ColumnName="PACK_DO_NOT_MIX_KEY" Name="Pack_Do_Not_Mix_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PACK_DO_NOT_MIX_I1"
+                    Name="YFS_PACK_DO_NOT_MIX_I1" Unique="true">
+                    <Column Name="PACK_STRATEGY_KEY"/>
+                    <Column Name="CONTAINER_TYPE"/>
+                    <Column Name="ATTR_NAME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PackStrategyDoNotMixList"
+                    ChildName="PackStrategyDoNotMix"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Pack_Strategy" IsParent="true"
+                    Name="Pack_Strategy" Type="Bidirectional"
+                    XMLName="PackStrategy">
+                    <Attribute Name="Pack_Strategy_Key" ParentName="Pack_Strategy_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DoNotMixInCaseList"
+                    ChildName="DoNotMixInCase" DeleteCascade="true"
+                    ForeignEntity="Pack_Strategy"
+                    Name="Pack_Strategy_Case" Type="Bidirectional" XMLName="DoNotMixInCase">
+                    <Attribute Name="Pack_Strategy_Key" ParentName="Pack_Strategy_Key"/>
+                    <Attribute Name="Container_Type" ParentName="Case"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DoNotMixInPalletList"
+                    ChildName="DoNotMixInPallet" DeleteCascade="true"
+                    ForeignEntity="Pack_Strategy"
+                    Name="Pack_Strategy_Pallet" Type="Bidirectional" XMLName="DoNotMixInPallet">
+                    <Attribute Name="Pack_Strategy_Key" ParentName="Pack_Strategy_Key"/>
+                    <Attribute Name="Container_Type" ParentName="Pallet"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity describes how how packing strategy can be different for different carrier types within a node - enterprise combination."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pack_Stgy_Ship_Mode" Prefix="YFS_"
+            TableName="YFS_PACK_STGY_SHIP_MODE"
+            TableType="CONFIGURATION" XMLName="PackStgyShipMode">
+            <Attributes>
+                <Attribute ColumnName="PACK_STGY_SHIP_MODE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PACK_STGY_SHIP_MODE table."
+                    Name="Pack_Stgy_Ship_Mode_Key" Nullable="false" XMLName="PackStgyShipModeKey"/>
+                <Attribute ColumnName="PACK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PACK_STGY_SHIP_MODE table."
+                    Name="Pack_Strategy_Key" Nullable="false" XMLName="PackStrategyKey"/>
+                <Attribute ColumnName="CARRIER_TYPE"
+                    DataType="EnumCarrierType" DefaultValue="' '"
+                    Description="This field indicates the carrier type."
+                    Name="Carrier_Type" Nullable="false" XMLName="CarrierType"/>
+                <Attribute ColumnName="SCM_LABEL_REQD"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates whether the SCM labels are required."
+                    Name="SCM_Label_Reqd" Nullable="false" XMLName="SCMLabelReqd"/>
+                <Attribute ColumnName="SCM_LABEL_LEVEL"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates if the SCM labels should be generated at the Case level or for every Shipping Container."
+                    Name="SCM_Label_Level" Nullable="false" XMLName="SCMLabelLevel"/>
+                <Attribute ColumnName="GEN_CNTR_INFO" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether the system generates the SCM information."
+                    Name="Gen_Cntr_Info" Nullable="false" XMLName="GenCntrInfo"/>
+                <Attribute ColumnName="SCM_GENERATED_AT"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates whether the container SCM is generated during wave release or manually generated while packing the container."
+                    Name="SCM_Generated_At" Nullable="false" XMLName="SCMGeneratedAt"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PCKSTGYSHIPMODE_PK" Name="YFS_PACK_STGY_SHIP_MODE_PK">
+                <Attribute ColumnName="PACK_STGY_SHIP_MODEKEY" Name="Pack_Stgy_Ship_Mode_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PCKSTGYSHIPMODE_I1"
+                    Name="YFS_PACK_STGY_SHIP_MODE_I1" Unique="true">
+                    <Column Name="PACK_STRATEGY_KEY"/>
+                    <Column Name="CARRIER_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PackStgyShipModeList"
+                    ChildName="PackStgyShipMode" DeleteCascade="true"
+                    Enforce="true" ForeignEntity="Pack_Strategy"
+                    IsParent="true" Name="Pack_Strategy"
+                    Type="Bidirectional" XMLName="PackStrategy">
+                    <Attribute Name="Pack_Strategy_Key" ParentName="Pack_Strategy_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This configuration table stores different constraints used in packing operation."
+            EntityType="CONFIGURATION" Module="wms" Name="Pack_Strategy"
+            Prefix="YFS_" TableName="YFS_PACK_STRATEGY"
+            TableType="CONFIGURATION" XMLName="PackStrategy">
+            <Attributes>
+                <Attribute ColumnName="PACK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PACK_STRATEGY table."
+                    Name="Pack_Strategy_Key" Nullable="false" XMLName="PackStrategyKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with the pack strategy."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field identifies the enterprise for which these constraints are applicable."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="MAX_SKU_QTY_IN_CNTR"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This field specifies the maximum number of items that can be placed into a single container."
+                    Name="Max_Sku_Qty_In_Cntr" Nullable="false" XMLName="MaxSkuQtyInCntr"/>
+                <Attribute ColumnName="OVERPACK_CASE_VOLUME"
+                    DataType="Dimension" DefaultValue="0"
+                    Description="This field indicates that if the volume of the container exceeds the container dimension, then the container will be considered for Overpack."
+                    Name="Overpack_Case_Volume" Nullable="false"/>
+                <Attribute ColumnName="OVERPACK_CASE_VOLUME_UOM"
+                    DataType="UOM" DefaultValue="' '"
+                    Description="This field specifies the unit of measure of the overpack case volume."
+                    Name="Overpack_Case_Volume_Uom" Nullable="false"/>
+                <Attribute ColumnName="" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the unit of measures should be read from the buyer's catalog or seller's catalog."
+                    Name="Read_Uom_From_Buyer" Nullable="false"
+                    Virtual="true" XMLName="ReadUomFromBuyer"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PACK_STRATEGY_PK" Name="YFS_PACK_STRATEGY_PK">
+                <Attribute ColumnName="PACK_STRATEGY_KEY" Name="Pack_Strategy_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PACK_STRATEGY_I1"
+                    Name="YFS_PACK_STRATEGY_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PackStrategyList"
+                    ChildName="PackStrategy" DeleteCascade="true"
+                    Enforce="true" ForeignEntity="Ship_Node"
+                    Name="ShipNode" Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PackStrategyList"
+                    ChildName="PackStrategy" DeleteCascade="true"
+                    Enforce="true" ForeignEntity="Organization"
+                    Name="Organization" Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This configuration table stores different attibutes and its values required in defining a pack strategy."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pack_Strategy_Attr" Prefix="YFS_"
+            TableName="YFS_PACK_STRATEGY_ATTR" TableType="CONFIGURATION" XMLName="PackStrategyAttr">
+            <Attributes>
+                <Attribute ColumnName="PACK_STRATEGY_ATTR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PACK_STRATEGY_ATTR table."
+                    Name="Pack_Strategy_Attr_Key" Nullable="false" XMLName="PackStrategyAttrKey"/>
+                <Attribute ColumnName="PACK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PACK_STRATEGY_ATTR table."
+                    Name="Pack_Strategy_Key" Nullable="false" XMLName="PackStrategyKey"/>
+                <Attribute ColumnName="PACK_STGY_SHIP_MODE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PACK_STRATEGY_ATTR table."
+                    Name="Pack_Stgy_Ship_Mode_Key" Nullable="false" XMLName="PackStgyShipModeKey"/>
+                <Attribute ColumnName="ATTR_NAME"
+                    DataType="AtrributeName" DefaultValue="' '"
+                    Description="This field indicates the attribute names."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="VALUE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field stores the Containerization categories that has to be considered during Overpack or for SCM lable generation for PARCEL, LTL, or TL shipments."
+                    Name="Value" Nullable="false" XMLName="Value">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PACK_STGY_ATTR_PK" Name="YFS_PACK_STRATEGY_ATTR_PK">
+                <Attribute ColumnName="PACK_STRATEGY_ATTR_KEY" Name="Pack_Strategy_Attr_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PACK_STGY_ATTR_I1"
+                    Name="YFS_PACK_STRATEGY_ATTR_I1" Unique="true">
+                    <Column Name="PACK_STRATEGY_KEY"/>
+                    <Column Name="PACK_STGY_SHIP_MODE_KEY"/>
+                    <Column Name="ATTR_NAME"/>
+                    <Column Name="VALUE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PackStrategyAttrList"
+                    ChildName="PackStrategyAttr" DeleteCascade="true"
+                    Enforce="true" ForeignEntity="Pack_Strategy"
+                    IsParent="true" Name="Pack_Strategy"
+                    Type="Bidirectional" XMLName="PackStrategy">
+                    <Attribute Name="Pack_Strategy_Key" ParentName="Pack_Strategy_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PackStgyShipModeAttrList"
+                    ChildName="PackStgyShipModeAttr"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Pack_Stgy_Ship_Mode"
+                    Name="Pack_Stgy_Ship_Mode" Type="Bidirectional" XMLName="PackStgyShipMode">
+                    <Attribute Name="Pack_Stgy_Ship_Mode_Key" ParentName="Pack_Stgy_Ship_Mode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CntrCategoryAttrList"
+                    ChildName="CntrCategoryAttr" DeleteCascade="true"
+                    ForeignEntity="Pack_Strategy"
+                    Name="Category_Pack_Strategy" Type="Bidirectional" XMLName="CategoryPackStrategy">
+                    <Attribute Name="Pack_Strategy_Key" ParentName="Pack_Strategy_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CntrCategory"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CntrItemAttrList"
+                    ChildName="CntrItemAttr" DeleteCascade="true"
+                    ForeignEntity="Pack_Strategy"
+                    Name="Item_Pack_Strategy" Type="Bidirectional" XMLName="ItemPackStrategy">
+                    <Attribute Name="Pack_Strategy_Key" ParentName="Pack_Strategy_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CntrItem"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

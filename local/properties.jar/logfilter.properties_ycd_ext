@@ -1,0 +1,50 @@
+# Licensed Materials - Property of IBM
+# IBM Call Center for Commerce
+# (C) Copyright IBM Corp. 2013, 2016 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: logfilter.properties_ycd_ext
+## PROPERTY_IN_FILE_NAME: logfilter.properties_ycd_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## Controls filtering of log messages
+## PROPERTY_FILE_DETAIL_END
+
+## DATABASE_SUPPORT: N
+
+## The default filterset to use for a Filter
+default.rcp.filter.filterset=com_filter
+
+## The default filterset to use for a Layout (inside an Appender)
+default.rcp.layout.filterset=com_layout
+
+## Define filters and replacement strings here. Consult product documentation
+## for the full description of these properties. Note the regular expressions
+## may be applied against the full log string, including any extra items added
+## by a Layout.
+
+filterset.com_filter.pattern.1=(?i)@creditcardno
+filterset.com_filter.pattern.2=(?i)@secureauthenticationcode
+
+#Filters out the CVV from the input XML
+filterset.com_layout.pattern.1=(SecureAuthenticationCode|CreditCardNo|Password|SVCNo)=(["'][^"']+["'])
+#Fitlers out the CVV from UE Struct
+filterset.com_layout.pattern.2=(&secureAuthenticationCode=)([^&]+[&])
+filterset.com_layout.pattern.3=(&secureAuthenticationCode=)([^&]+)$
+filterset.com_layout.pattern.4=(?i).*@creditcardno.*
+filterset.com_layout.pattern.5=(?i).*@secureauthenticationcode.*
+filterset.com_layout.pattern.6=(?i).*cvv.*
+filterset.com_layout.pattern.7=(?i).*txtcreditcardno.*
+
+
+#Replaces all the CVV with ***
+filterset.com_layout.replace.1=$1="***"
+filterset.com_layout.replace.2=$1="***"
+filterset.com_layout.replace.3=$1="***"
+filterset.com_layout.replace.4=Filtered
+filterset.com_layout.replace.5=Filtered
+filterset.com_layout.replace.6=Filtered
+filterset.com_layout.replace.7=Filtered
+
+
+#filterset.<name>.includes=<name>,<name>,...

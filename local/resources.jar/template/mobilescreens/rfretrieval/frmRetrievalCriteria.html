@@ -1,0 +1,133 @@
+<html>
+    <body>
+        <form name="frmRetrievalCriteria" target="/console/rfretrieval.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblRetrieval"
+                                    type="text" validate="false" value="Mobile_Criteria"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblEquipment"
+                                    type="text" validate="false" value="Mobile_Equipment_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblTaskList"
+                                    size="20" subtype="Label"
+                                    type="text" validate="false" value=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@TaskListId"
+                                    name="txtTaskListId"
+                                    outputbinding="xml:/Task/@TaskListId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Task/@TaskListId"
+                                    type="text" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@TaskType"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@BatchNo"
+                                    name="txtBatchNo"
+                                    outputbinding="xml:/Task/TaskReferences/@BatchNo"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskReferences/@BatchNo"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@ContainerNo"
+                                    name="txtContainerNo"
+                                    outputbinding="xml:/Task/TaskReferences/@ContainerNo"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskReferences/@ContainerNo"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@ShipmentNo"
+                                    name="txtShipmentNo"
+                                    outputbinding="xml:/Task/TaskReferences/@ShipmentNo"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskReferences/@ShipmentNo"
+                                    type="hidden" validate="false"/>
+									<input type="hidden" subtype="Hidden" name="txtWaveNo" size="10" tag="binding=xml:/Task/TaskReferences/@WaveNo" inputbinding="xml:/Task/@WaveNo" outputbinding="xml:/Task/TaskReferences/@WaveNo" validate="false"  col="1"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/@WorkOrderNo"
+                                    name="txtWorkOrderNo"
+                                    outputbinding="xml:/Task/TaskReferences/@WorkOrderNo"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskReferences/@WorkOrderNo"
+                                    type="hidden" validate="false"/>	
+									<input type="hidden" subtype="Hidden" 
+									name="txtTargetZone" size="10" 
+									tag="binding=xml:/Task/@TargetZoneId" inputbinding="xml:/NewTask/@TargetZoneId" outputbinding="xml:/Task/@TargetZoneId" 
+									validate="false"  col="1"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblStartLocation"
+                                    type="text" validate="false" value="Mobile_Start_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="text" validate="true"/>
+                                    <input col="1"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

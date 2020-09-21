@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--getNegotiationStatus Output XML-->
+<Negotiations>
+<Negotiation ApplicationAction="" ApplicationReference="" DocumentNo="" DocumentType="" EnterpriseCode="" EnterpriseKey="" FreightTerms="" HeaderEntity="" HeaderEntityKey="" HeaderTermsNegotiated="" InitiatorOrgCode="" LastInitiatorResponseNo="" LastNegotiatorResponseNo="" LastResponseAction="" LastResponseOrgCode="" NegotiationExpirationDate="" NegotiationHeaderKey="" NegotiationNo="" NegotiationRuleID="" NegotiationRuleKey="" NegotiatorOrgCode="" PaymentTerms="" PipelineKey="" 
+ReleaseNo="" Status="" StatusDate="" StatusDescription="" CanInitiatorRespond="" CanNegotiatorRespond="" >
+   <AdditionalAttributes>
+      <AdditionalAttribute Name="" Value=""/>
+   </AdditionalAttributes>
+   <LastInitiatorHeaderResponse 
+   ResponseNo="" Notes="" EnteredBy="" ReasonCode=""  
+    ForResponseNo="" ResponseAction="">
+      <HeaderTerms PaymentTerms="" FreightTerms="" />
+   </LastInitiatorHeaderResponse>
+   <LastNegotiatorHeaderResponse ResponseNo="" Notes="" EnteredBy="" ReasonCode=""  ForResponseNo="" ResponseAction="">
+      <HeaderTerms PaymentTerms="" FreightTerms="" />
+   </LastNegotiatorHeaderResponse>
+   <NegotiatedHeaderResponse ResponseNo="" Notes="" EnteredBy="" ReasonCode=""  ForResponseNo="" ResponseAction="">
+      <HeaderTerms PaymentTerms="" FreightTerms="" />
+   </NegotiatedHeaderResponse>
+   <NegotiationLines>
+      <NegotiationLine ApplicationAction="" ApplicationReference="" DeliveryDate="" FreightTerms="" ItemID="" 
+			LastInitiatorResponseNo="" LastNegotiatorResponseNo="" LastResponseAction="" LastResponseActionDesc="" 
+			LastResponseOrgCode="" LineEntity="" LineEntityKey="" LineGroupKey="" 
+			LineTermsNegotiated="" NegotiationHeaderKey="" NegotiationLineKey="" Price="" PrimeLineNo="" 
+			ProductClass="" Quantity="" ScheduleNo="" ShipDate="" SubLineNo="" UnitOfMeasure="">
+         <AdditionalAttributes>
+            <AdditionalAttribute Name="" Value=""/>
+         </AdditionalAttributes>
+         <NegotiatedLineResponse ResponseNo="" Notes="" EnteredBy="" ReasonCode=""  ForResponseNo="" ForOptionNo="" ResponseAction="">
+            <LineTerms>
+               <LineTermsDetail OptionNo="" SequenceNo="" ItemID="" UnitOfMeasure="" ProductClass="" Quantity="" Price="" DeliveryDate="" ShipDate="" FreightTerms=""/>
+            </LineTerms>
+         </NegotiatedLineResponse>
+         <LastInitiatorLineResponse ResponseNo="" Notes="" EnteredBy="" ReasonCode=""  ForResponseNo="" ForOptionNo="" ResponseAction="">
+            <LineTerms>
+               <LineTermsDetail OptionNo="" SequenceNo="" ItemID="" UnitOfMeasure="" ProductClass="" Quantity="" Price="" DeliveryDate="" ShipDate="" FreightTerms=""/>
+            </LineTerms>
+         </LastInitiatorLineResponse>
+         <LastNegotiatorLineResponse ResponseNo="" Notes="" EnteredBy="" ReasonCode=""  ForResponseNo="" ForOptionNo="" ResponseAction="">
+            <LineTerms>
+               <LineTermsDetail OptionNo="" SequenceNo="" ItemID="" UnitOfMeasure="" ProductClass="" Quantity="" Price="" DeliveryDate="" ShipDate="" FreightTerms=""/>
+            </LineTerms>
+         </LastNegotiatorLineResponse>
+      </NegotiationLine>
+   </NegotiationLines>
+	<NegotiationRule NegotiationRuleKey="" NegotiationRuleId="" AllowOverage="" >
+		<NegotiableHdrAttrs>
+			<NegotiableHdrAttr AttributeName="" />
+		</NegotiableHdrAttrs>
+		<NegotiableLineAttrs>
+			<NegotiableLineAttr AttributeName="" CanSplitLine="" />
+		</NegotiableLineAttrs>
+	</NegotiationRule>
+</Negotiation>
+</Negotiations>

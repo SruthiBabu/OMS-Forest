@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the list of Colonies that are associated with a particular Enterprise. Either EnterpriseColonyMapKey or both EnterpriseCode and ShardedOrganizationCode must be passed to uniquely identify a record."
+            Extensible="N" Name="Enterprise_Colony_Map" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_ENTERPRISE_COLONY_MAP" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="EnterpriseColonyMap">
+            <Attributes>
+                <Attribute ColumnName="ENTERPRISE_COLONY_MAP_KEY" DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_ENTERPRISE_COLONY_MAP table."
+                    Name="Enterprise_Colony_Map_Key" Nullable="false" XMLName="EnterpriseColonyMapKey"/>
+                <Attribute ColumnName="ENTERPRISE_CODE" DataType="OrgCode" 
+					Description="The Enterprise to which this Colony is associated through a configuration."
+                    Name="Enterprise_Code" IsOrgColumn="Y" Nullable="true" XMLName="EnterpriseCode"/>
+				<Attribute ColumnName="SHARDED_ORGANIZATION_CODE" DataType="OrgCode" 
+					Description="The Organization associated to an Enterprise, which decided to shard it's transactional data and configured this Colony. For eg: A Store."
+                    Name="Sharded_Organization_Code" Nullable="true" XMLName="ShardedOrganizationCode"/>
+                <Attribute ColumnName="COLONY_ID" DataType="ColonyId"
+					Description="The Colony that is configured either to the Enterprise or to a Store."
+                    Name="Colony_Id" Nullable="true" XMLName="ColonyId"/>
+                <Attribute ColumnName="SEQUENCE" DataType="LongSequence"
+                    Description="Indicates the sequence of the Colony due to Re-Assignment."
+                    Name="Sequence" Nullable="true" XMLName="Sequence"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey Name="YFS_ENTERPRISE_COLONY_MAP_PK" DB2Name="YFS_ENT_COL_MAP_PK">
+    	         <Attribute ColumnName="ENTERPRISE_COLONY_MAP_KEY" Name="Enterprise_Colony_Map_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_ENTERPRISE_COLONY_MAP_I1" DB2Name="YFS_ENT_COL_MAP_I1" Unique="true">
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="SHARDED_ORGANIZATION_CODE"/>
+                    <Column Name="SEQUENCE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany" DeleteCascade="true" Enforce="true"
+                    Type="Bidirectional" ForeignEntity="Organization" 					
+					Name="Enterprise" XMLName="Enterprise"
+					ChildName="ShardedOrganization"
+					ChildListXMLName="ShardedOrganizationList" ChildXMLName="ShardedOrganization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToOne" DeleteCascade="true" Enforce="true"
+                    Type="Unidirectional" ForeignEntity="Organization" 					
+					Name="ShardedOrganization" XMLName="ShardedOrganization">
+                    <Attribute Name="Sharded_Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity> 
+        <Entity AuditRequired="N" Cacheable="false"
+            Description="This table contains a list of in-transition indexable entitiy keys. For every instance of modification of an indexable entity's record, an entry will be added here. The entry will be deleted once the search index is successfully updated."
+            Extensible="N" Name="Awaiting_Index" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_AWAITING_INDEX" EntityType="TRANSACTION" TableType="TRANSACTION"
+            XMLName="AwaitingIndex">
+            <Attributes>
+                <Attribute ColumnName="AWAITING_INDEX_KEY" DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_AWAITING_INDEX table."
+                    Name="Awaiting_Index_Key" Nullable="false" XMLName="AwaitingIndexKey"/>
+                <Attribute ColumnName="ENTITY_NAME" DataType="TableName" 
+                    Description="The table name of the indexable entity's record that has been changed."
+                    Name="Entity_Name" Nullable="true" XMLName="EntityName"/>
+                <Attribute ColumnName="ENTITY_KEY" DataType="Key" 
+                    Description="The key of the indexable entity's record that has been changed."
+                    Name="Entity_Key" Nullable="true" XMLName="EntityKey"/>
+                <Attribute ColumnName="TO_DELETE" DataType="Flag" 
+                    Description="This indicates that the entity's record is pending delete from index."
+                    Name="To_Delete" Nullable="true" XMLName="ToDelete"/>
+           		<Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey Name="YFS_AWAITING_INDEX_PK" DB2Name="YFS_AWAIT_IDX_PK">
+    	         <Attribute ColumnName="AWAITING_INDEX_KEY" Name="Awaiting_Index_Key"/>
+            </PrimaryKey>
+		</Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains the sanity of the index server with respect to index build and search operations. Both these operations read this table before attempting on index server. Besides that they update this table if any issues with the index server is found during the opearation."
+            Extensible="N" Name="Index_Status" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_INDEX_STATUS" EntityType="TRANSACTION" TableType="STATISTICS"
+            XMLName="IndexStatus">
+            <Attributes>
+                <Attribute ColumnName="INDEX_STATUS_KEY" DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_INDEX_STATUS table."
+                    Name="Index_Status_Key" Nullable="false" XMLName="IndexStatusKey"/>
+				<Attribute ColumnName="INDEX_NAME" DataType="IndexName"
+					Description="The name of the index. This is the XMLName of the corresponding entity. For eg: Indexing is enabled for Order_Header and Shipment entities. Hence name of the indices would be Order and Shipment respectively." 
+					Name="Index_Name" Nullable="true" XMLName="IndexName"/> 	  
+                <Attribute ColumnName="INDEX_WORKING" DataType="Flag" 
+                    Description="This indicates that indexing operation is working for this index."
+                    Name="Index_Working" Nullable="false" DefaultValue="' ' " XMLName="IndexWorking"/>
+                <Attribute ColumnName="SEARCH_WORKING" DataType="Flag" 
+                    Description="This indicates that search operation is working for this index."
+                    Name="Search_Working" Nullable="false" DefaultValue="' ' " XMLName="SearchWorking"/>
+           		<Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey Name="YFS_INDEX_STATUS_PK" DB2Name="YFS_INDEX_STS_PK">
+    	         <Attribute ColumnName="INDEX_STATUS_KEY" Name="Index_Status_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_INDEX_STATUS_I1" DB2Name="YFS_INDEX_STS_I1" Unique="true">
+                    <Column Name="INDEX_NAME"/>
+                </Index>
+			</Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToOne" Type="Unidirectional"
+					ForeignEntity="Index_Config" Name="IndexConfig" XMLName="IndexConfig">
+					<Attribute Name="Index_Name" ParentName="Index_Name"/>
+				</RelationShip>
+			</RelationShips>
+		</Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains the information whether the index is in sync with the database. The search operation checks this table and searches on index only if it is sync. The index update and sync agents modifies this table with the sync results." 
+			Extensible="N" Name="Index_Sync" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_INDEX_SYNC" EntityType="TRANSACTION" TableType="STATISTICS"
+            XMLName="IndexSync">
+            <Attributes>
+                <Attribute ColumnName="INDEX_SYNC_KEY" DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_INDEX_SYNC table."
+                    Name="Index_Sync_Key" Nullable="false" XMLName="IndexSyncKey"/>
+				<Attribute ColumnName="INDEX_NAME" DataType="IndexName"
+					Description="The name of the index. This is the XMLName of the corresponding entity. For eg: Indexing is enabled for Order_Header and Shipment entities. Hence name of the indices would be Order and Shipment respectively." 
+					Name="Index_Name" Nullable="true" XMLName="IndexName"/> 	  
+                <Attribute ColumnName="ENTERPRISE_CODE" DataType="OrgCode" DataSecurityUsageType="ORG" 
+                    Description="The enterprise to which the index syncing operation is tracked."
+                    Name="Enterprise_Code" Nullable="true" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="IN_SYNC" DataType="Flag" 
+                    Description="This indicates that the index is in sync with the database."
+                    Name="In_Sync" Nullable="false" DefaultValue="' ' " XMLName="InSync"/>
+           		<Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey Name="YFS_INDEX_SYNC_PK" DB2Name="YFS_INDEX_SYNC_PK">
+    	         <Attribute ColumnName="INDEX_SYNC_KEY" Name="Index_Sync_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_INDEX_SYNC_I1" DB2Name="YFS_INDEX_SYNC_I1" Unique="true">
+                    <Column Name="INDEX_NAME"/>
+					<Column Name="ENTERPRISE_CODE"/>
+                </Index>
+            </Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany" Type="Bidirectional"
+					ChildListXMLName="IndexSyncForEnterprises" ChildName="IndexSync" ChildXMLName="IndexSync"
+					ForeignEntity="Index_Status" Name="IndexStatus" XMLName="IndexStatus">
+					<Attribute Name="Index_Name" ParentName="Index_Name"/>
+				</RelationShip>
+			</RelationShips>
+		</Entity>
+ 	</Entities>
+</DBSchema>

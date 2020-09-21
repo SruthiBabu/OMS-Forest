@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NodeInventory Node="REQUIRED">
+    <LocationInventoryList > 
+        <LocationInventory LocationId="REQUIRED" InventoryItemKey=" "
+            MultipleSummaryAttributes="" PendInQty=""
+            PendOutQty="" Quantity="" ZoneId="REQUIRED">
+            <InventoryItem ItemID="" OrganizationCode="" ProductClass="" UnitOfMeasure="">
+                <Item ItemID="" ItemKey="" OrganizationCode="" UnitOfMeasure="">
+                    <PrimaryInformation Description="" ShortDescription=""/>
+                </Item>
+            </InventoryItem>
+            <SummaryAttributes CaseId="" CountryOfOrigin=" " FifoNo=" "
+                 InventoryStatus=""
+                InventoryTagKey=" " PalletId="" ReceiptHeaderKey=" "
+                Segment=" " SegmentType=" " ShipByDate=" ">
+                <Receipt ReceiptNo=""/>
+                <TagSummary LotAttribute1=" " LotAttribute2=" "
+                    LotAttribute3=" " LotExpirationDate=" "
+                    LotKeyReference=" " LotNumber=" "
+                    ManufacturingDate=" " RevisionNo=" " />
+            </SummaryAttributes>
+            <ItemInventoryDetailList >
+                <ItemInventoryDetail CaseId="" CountryOfOrigin=" "
+                    FifoNo=" " InventoryItemKey=" " InventoryStatus=""
+                    InventoryTagKey=" " PalletId="" PendInQty=""
+                    PendOutQty="" Quantity="" ReceiptHeaderKey=" " Segment=" "
+                    SegmentType=" " ShipByDate=" ">
+                    <Receipt ReceiptNo=""/>
+                    <TagDetail BatchNo="" LotAttribute1=" " LotAttribute2=" "
+                        LotAttribute3=" " LotExpirationDate=" "
+                        LotKeyReference=" " LotNumber=" "
+                        ManufacturingDate=" " RevisionNo=" " />
+					<SerialList>
+						<SerialDetail SerialNo="" SecondarySerial1="" SecondarySerial2="" SecondarySerial3=""/>
+					</SerialList>
+                </ItemInventoryDetail>
+            </ItemInventoryDetailList>
+        </LocationInventory>
+    </LocationInventoryList>
+    <LPNList >
+        <LPN CaseId="" CaseQuantity="" Height="" Length=""
+            OrganizationCode="" PalletId="" ReceiptHeaderKey=""
+            Weight="" Width="" DimensionUOM="" Segment="" SegmentType="" WeightUOM="">
+            <Receipt ReceiptNo=""/>
+            <LPNLocation LocationId="" ZoneId=""/>
+            <ParentLPN CaseId="" PalletId=""/>
+            <OuterMostLPN CaseId="" PalletId=""/>
+        </LPN>
+    </LPNList>
+</NodeInventory>

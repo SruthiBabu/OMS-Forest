@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite - Foundation
+(C) Copyright IBM Corp 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+-->
+<Platform Label="Platform" Icon="com/yantra/ycp/ui/icons/systemadmin.gif">
+	<PermissionOnlyNode Label="Platform_Tree" PermissionId="YCPPM356">
+		<Actions Label="Actions" Icon="com/yantra/ycp/ui/icons/actionlist.gif">
+			<Action PermissionId="YCPPM356A01"/>
+			<Action PermissionId="YCPPM356A02"/>
+			<Action PermissionId="YCPPM356A03"/>
+			<Action PermissionId="YCPPM356A05"/>
+		</Actions>
+	</PermissionOnlyNode>
+	<ParticipantModeling Label="Participant_Modeling" Icon="com/yantra/ycp/ui/icons/organization.gif">
+		<ParticipantSetup Label="Participant_Setup" PermissionId="YSYCP000" FormName="YCPPM001" GroupName="OrganizationModel" EntityName="Organization" Icon="com/yantra/ycp/ui/icons/participants.gif"/>
+		<NodeTypes Label="Node_Types" PermissionId="YSYCP037" FormName="YCPPM684" GroupName="HubData" EntityName="NodeType" Icon="com/yantra/ycp/ui/icons/codevalue.gif">
+			<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+			</Roles>
+		</NodeTypes>
+	</ParticipantModeling>
+	<ProcessModeling Label="Process_Modeling" PermissionId="YSYCP001" FormName="YCPWF024" GroupName="ExtendedProcessModel" EntityName="BaseDocumentParams" Icon="com/yantra/ycp/ui/icons/repository.gif">
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+		<PermissionOnlyNode Label="Service_Definitions" PermissionId="YSYCP045"/>
+	</ProcessModeling>
+    <Security Label="Security" Icon="com/yantra/ycp/ui/icons/permission.gif">
+        <Users Label="Users" PermissionId="YSYCP002" FormName="YCPPM032" GroupName="Security" EntityName="User" Icon="com/yantra/ycp/ui/icons/user.gif"/>
+        <Groups Label="Groups" PermissionId="YSYCP003" FormName="YCPPM114" GroupName="UserGroup" EntityName="UserGroup" Icon="com/yantra/ycp/ui/icons/group.gif"/>
+        <DataSecurityGroups Label="Data_Security_Groups" PermissionId="YSYCP040" FormName="YCPPM700" GroupName="Security" EntityName="DataSecurityGroup" Icon="com/yantra/ycp/ui/icons/datasecurity.gif">
+			<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+                <Role RoleKey="NODE"/>
+			</Roles>
+		</DataSecurityGroups>
+		<DataAccessPolicyRules Label="Data_Access_Policy_Rules" PermissionId="YSYCP056" FormName="YCPSM029" GroupName="HubData" EntityName="DataAccessPolicyRules" Icon="com/yantra/ycp/ui/icons/accesspolicyrules.gif">
+		<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+                <Role RoleKey="NODE"/>
+			</Roles>
+		</DataAccessPolicyRules>
+		<Resources Label="API_Security" PermissionId="YSYCP058" FormName="YCPSE001" GroupName="HubData" EntityName="Application"  DisplayMode="Dock" Icon="com/yantra/ycp/ui/icons/resource.gif">
+		<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+			</Roles>
+		</Resources>
+    </Security>
+    <SystemAdministration Label="System_Administration" Icon="com/yantra/ycp/ui/icons/systemadminrules.gif">
+        <SystemTablePurgeCriteria Label="System_Table_Purge_Criteria" PermissionId="YSYCP004" FormName="YCPPM025" GroupName="HubData" EntityName="PurgeCriteria" SectionName="System" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif"/>
+        <UserExitManagement Label="User_Exit_Management" PermissionId="YSYCP005" FormName="YCPWFU002" GroupName="ExtendedProcessModel" EntityName="UserExit" Icon="com/yantra/ycp/ui/icons/userexit.gif"/>
+        <InstallationRules Label="Installation_Rules" PermissionId="YSYCP006" FormName="YCPPM310" GroupName="HubData" EntityName="Rules" Icon="com/yantra/ycp/ui/icons/installation.gif"/>
+		<AgentCriteriaGroup Label="Agent_Criteria_Groups" PermissionId="YSYCP047" FormName="YCPPM276" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/agentcriteria.gif"/>
+        <InitialContextFactoryCodes Label="Initial_Context_Factory_Codes" PermissionId="YSYCP030" FormName="YCPWF092" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/initialcontextfactory.gif"/>
+        <HealthMonitorRules Label="Health_Monitor_Rules" PermissionId="YSYHM001" FormName="YCPHM001" GroupName="HubData" EntityName="Rules" Icon="com/yantra/ycp/ui/icons/passthrough.gif"/>
+        <ServerDetails Label="Server_Configuration_List" PermissionId="YSYCP001" FormName="YCPPM709" GroupName="HubData" EntityName="Server" Icon="com/yantra/ycp/ui/icons/services.gif"/>
+		<ItemConfigurator Label="Item_Configurator" PermissionId="YSYCP057" FormName="YCPPM1410" GroupName="HubData" EntityName="Rules" Icon="com/yantra/ycp/ui/icons/item.gif"/>
+		<ApplicationVersion Label="Application_Version" PermissionId="YSYCP062" FormName="YCPPM913" GroupName="HubData" EntityName="ApplicationVersion" Icon="com/yantra/ycp/ui/icons/interop.gif"/>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </SystemAdministration>
+    <UnitOfMeasure Label="Unit_Of_Measure" Icon="com/yantra/ycp/ui/icons/uom.gif">
+        <Quantity Label="Quantity" PermissionId="YSYCP007" FormName="YCPPM175" GroupName="HubData" EntityName="Uom" Icon="com/yantra/ycp/ui/icons/quantityuom.gif"/>
+        <ServiceQuantity Label="Service_Quantity" PermissionId="YSYCP046" FormName="YCPPM275" GroupName="HubData" EntityName="Uom" Icon="com/yantra/ycp/ui/icons/servicequantityuom.gif"/>
+        <Dimension Label="Dimension" PermissionId="YSYCP007" FormName="YCPPM075" GroupName="HubData" EntityName="Uom" Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"/>
+        <Volume Label="Volume" PermissionId="YSYCP008" FormName="YCPPM076" GroupName="HubData" EntityName="Uom" Icon="com/yantra/ycp/ui/icons/volumeuom.gif"/>
+        <Weight Label="Weight" PermissionId="YSYCP009" FormName="YCPPM077" GroupName="HubData" EntityName="Uom" Icon="com/yantra/ycp/ui/icons/weightuom.gif"/>
+        <Time Label="Time" PermissionId="YSYCP010" FormName="YCPPM510" GroupName="HubData" EntityName="Uom" Icon="com/yantra/ycp/ui/icons/timeuom.gif"/>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </UnitOfMeasure>
+    <Internationalization Label="Internationalization" Icon="com/yantra/ycp/ui/icons/internationalization.gif">
+        <Countries Label="Countries" PermissionId="YSYCP011" FormName="YCPPM061" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/countrycodedefn.gif"/>
+        <Languages Label="Languages" PermissionId="YSYCP012" FormName="YCPPM063" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/languagedefn.gif"/>
+        <DateFormats Label="Date_Formats" PermissionId="YSYCP013" FormName="YCPPM065" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/dateformat.gif"/>
+        <TimeFormats Label="Time_Formats" PermissionId="YSYCP014" FormName="YCPPM520" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/timeformat.gif"/>
+        <DateTimeFormats Label="Date_Time_Formats" PermissionId="YSYCP015" FormName="YCPPM067" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/datetimeformat.gif"/>
+        <CurrencyDefinitions Label="Currency_Definitions" PermissionId="YSYCP016" FormName="YCPPM030" GroupName="HubData" EntityName="Currency" Icon="com/yantra/ycp/ui/icons/currencydefinition.gif"/>
+        <CurrencyConversions Label="Currency_Conversions" PermissionId="YSYCP017" FormName="YCPPM059" GroupName="CurrencyConversion" EntityName="CurrencyConversion" Icon="com/yantra/ycp/ui/icons/currencyconversion.gif"/>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </Internationalization>
+    <Presentation Label="Presentation" Icon="com/yantra/ycp/ui/icons/genericrules.gif">
+        <Locales Label="Locales" PermissionId="YSYCP018" FormName="YCPPM008" GroupName="HubData" EntityName="Locale" Icon="com/yantra/ycp/ui/icons/locale.gif"/>
+        <Menu Label="Menu" PermissionId="YSYCP019" FormName="YCPSM001" GroupName="ExtendedMenu" EntityName="Menu"  DisplayMode="Dock" Icon="com/yantra/ycp/ui/icons/menuhierarchy.gif"/>
+        <Resources Label="Resources" PermissionId="YSYCP020" FormName="YCPSM021" GroupName="HubData" EntityName="Application"  DisplayMode="Dock" Icon="com/yantra/ycp/ui/icons/resource.gif"/>
+        <Themes Label="Themes" PermissionId="YSYCP021" FormName="YCPPM313" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/theme.gif"/>
+        <CustomCommonCodeTypes Label="Custom_Common_Code_Types" PermissionId="YSYCP022" FormName="YCPPM319" GroupName="HubData" EntityName="BaseCommonCode" Icon="com/yantra/ycp/ui/icons/codetype.gif"/>
+        <CustomCommonCodes Label="Custom_Common_Codes" PermissionId="YSYCP023" FormName="YCPPM320" EntityName="BaseCommonCode" Icon="com/yantra/ycp/ui/icons/custommodifications.gif"/>
+        <CustomErrorCodes Label="Custom_Error_Codes" PermissionId="YSYCP050" GroupName="HubData" FormName="YCPPM480" EntityName="ErrorCode" Icon="com/yantra/ycp/ui/icons/customerrorcodes.gif"/>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </Presentation>
+    <Communication Label="Communication" Icon="com/yantra/ycp/ui/icons/communication.gif">
+        <Protocols Label="Protocols" PermissionId="YSYCP024" FormName="YCPPM104" GroupName="HubData" EntityName="Protocol" Icon="com/yantra/ycp/ui/icons/protocol.gif"/>
+        <DocumentFormats Label="Document_Formats" PermissionId="YSYCP025" FormName="YCPPM120" GroupName="HubData" EntityName="DocumentFormat" Icon="com/yantra/ycp/ui/icons/documentformat.gif"/>
+        <BusinessDocuments Label="Business_Documents" PermissionId="YSYCP026" FormName="YCPPM140" GroupName="HubData" EntityName="BusinessDocument" Icon="com/yantra/ycp/ui/icons/businessdocument.gif"/>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </Communication>
+    <Nomenclature Label="Nomenclature" Icon="com/yantra/ycp/ui/icons/financials.gif">
+        <NomenclatureCodes Label="Nomenclature_Codes" PermissionId="YSYCP027" FormName="YCPXF017" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/draft.gif">
+			<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+			</Roles>
+		</NomenclatureCodes>
+        <NomenclatureDefinition Label="Nomenclature_Definition" PermissionId="YSYCP028" FormName="YCPXF001" GroupName="Xref" EntityName="XrefCode" Icon="com/yantra/ycp/ui/icons/documentformat.gif"/>
+        <NomenclatureConfiguration Label="Nomenclature_Configuration" PermissionId="YSYCP029" FormName="YCPXF011" GroupName="Xref" EntityName="XrefConfigHdr" Icon="com/yantra/ycp/ui/icons/label.gif"/>
+    </Nomenclature>
+    <QueueManagement Label="Queue_Management" PermissionId="YSYCP031" FormName="YCPPM010" GroupName="Queue" EntityName="Queue" Icon="com/yantra/ycp/ui/icons/queue.gif"/>
+    <RegionDefinition Label="Region_Definition" Icon="com/yantra/ycp/ui/icons/region.gif">
+    	<RegionLevels Label="Region_Levels" PermissionId="YSYCP032" FormName="YCP00090" GroupName="HubData" EntityName="RegionLevel" Icon="com/yantra/ycp/ui/icons/regionlevel.gif"/>
+
+		<RegionMatchPreferences Label="Region_Match_Preferences" PermissionId="YSYCP036" FormName="YCP00095" GroupName="Region" EntityName="RegionMatchPref" Icon="com/yantra/ycp/ui/icons/dte.gif"/>
+		
+		<RegionSchemas Label="Region_Schemas" PermissionId="YSYCP033" FormName="YCP00060" GroupName="Region" EntityName="RegionSchema" Icon="com/yantra/ycp/ui/icons/regionschema.gif"/>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+	</RegionDefinition>
+	<!-- Device Entry -->
+	<Device Label="Device" PermissionId="YSYCP044" FormName="YCPDV107" GroupName="Device" EntityName="Device" Icon="com/yantra/ycp/ui/icons/weightuom.gif"/>
+	
+	<Printer Label="Prints" Icon="com/yantra/wms/ui/icons/printer.gif">
+    	<PrintDocument Label="Print_Documents" PermissionId="YSYCP043" FormName="YCPPS102" GroupName="Printer" EntityName="PrintDocument" Icon="com/yantra/ycp/ui/icons/documentformat.gif"/>
+		<LabelFormat Label="Label_Formats" PermissionId="YSYCP048" FormName="YCPPS101" GroupName="Printer" EntityName="LabelFormat" Icon="com/yantra/wms/ui/icons/cartonlabel.gif"/>
+		<PrintAdapter Label="Print_Adapters" PermissionId="YSYCP075" FormName="YCPPS103" GroupName="Printer" EntityName="PrintAdapter" Icon="com/yantra/wms/ui/icons/cartonlabel.gif"/>
+	</Printer>
+	<Alert Label="Alert" Icon="com/yantra/ycp/ui/icons/exclusion.gif">
+	 <ExceptionType Label="Exception_Type" PermissionId="YSYCP051" FormName="YCPPM017" GroupName="HubData" EntityName="ExceptionType" Icon="com/yantra/ycp/ui/icons/exclusiondelete.gif"/>
+	 <ExceptionTypeRole Label="Exception_Type_Role" PermissionId="YSYCP052" FormName="YCPPM092" GroupName="HubData" EntityName="ExceptionTypeRole" Icon="com/yantra/ycp/ui/icons/exclusionedit.gif"/>
+	 <OrgExceptionType Label="Org_Exception_Type" PermissionId="YSYCP053" FormName="YCPPM094" GroupName="Queue" EntityName="OrgExceptionType" Icon="com/yantra/ycp/ui/icons/exclusionnew.gif"/>
+     </Alert>
+	 <BarCode Label="Bar_Codes" PermissionId="YSYCP042" FormName="YCPBC001"  GroupName="BarCode" EntityName="BarCodeTranslation" Icon="com/yantra/ycp/ui/icons/barcodetranslation.gif"/>
+     <ConfigVersionLabel Label="Configuration_Version_Labels" PermissionId="YSYCP054" GroupName="HubData" FormName="YCPPM919" EntityName="ConfigVersionLabel" Icon="com/yantra/ycp/ui/icons/configversionlabel.gif"/>
+     <AttributeManagement Label="Attribute_Post_Fix" PermissionId="YSYCP055" GroupName="AttributeDomain" FormName="YCPPM531" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/paymentinfo.gif"/>
+	<PasswordPolicyManagement Label="Password_Policy_Management" Icon="com/yantra/ycp/ui/icons/interop.gif">
+		<PasswordRuleDefinition Label="Password_Rule_Definition" PermissionId="YSYCP059" FormName="YCPPM915" GroupName="PasswordRuleDefn" EntityName="PasswordRuleDefn" Icon="com/yantra/ycp/ui/icons/transactionrules.gif"/>
+		<PasswordPolicy Label="Password_Policy" PermissionId="YSYCP060" FormName="YCPPM920" GroupName="PasswordPolicy" EntityName="PasswordPolicy" Icon="com/yantra/ycp/ui/icons/transactions.gif"/>
+		<AuthQuestion Label="Question" PermissionId="YSYCP061" FormName="YCPPM928" GroupName="AuthQuestion" EntityName="AuthQuestion" Icon="com/yantra/ycp/ui/icons/additionalquestions.gif"/>
+		<PasswordPolicyRules Label="Password_Policy_Rules" PermissionId="YSYCP067" FormName="YCPPM930" GroupName="PasswordPolicy" EntityName="Rules" Icon="com/yantra/ycp/ui/icons/transactiondependencygrp.gif"/>
+	</PasswordPolicyManagement>
+	<ChangeProjectManagement Label="Change_Project_Management" Icon="com/yantra/ycp/ui/icons/changeprojectmgmt.gif">
+		<ChangeRequest Label="Change_Requests" PermissionId="YSYCP069" FormName="YCPPM850" GroupName="ChangeProjectMgmnt" EntityName="ChangeRequest" Icon="com/yantra/ycp/ui/icons/change_request.gif"/>
+		<ChangeProjectRules Label="Change_Project_Rules" PermissionId="YSYCP070" FormName="YCPPM852" GroupName="ChangeProjectMgmnt" EntityName="Rules" Icon="com/yantra/ycp/ui/icons/changeprojectrules.gif"/>
+	</ChangeProjectManagement>
+	<DataSynchronization Label="Data_Synchronization_Queries" PermissionId="YSYDSM71" FormName="YCPDSM70" GroupName="SyncQueries" EntityName="Query" Icon="com/yantra/ycp/ui/icons/additionalcapacitylimits.gif"/>
+	<QualifiedTagInformation  Label="Qualified_Tag_Information" Icon="com/yantra/ycp/ui/icons/history.gif">
+		<QualifiedTagType Label="Qualified_Tag_Type" PermissionId="YSYCP063" FormName="YCPPM903" GroupName="HubData" EntityName="QualifiedTagType" Icon="com/yantra/ycp/ui/icons/orderconsole.gif"/>
+		<QualifiedTag Label="Qualified_Tag" PermissionId="YSYCP064" FormName="YCPPM905" GroupName="HubData" EntityName="QualifiedTag" Icon="com/yantra/ycp/ui/icons/generate.gif"/>
+		<QualifiedTagVersionCompatibility Label="Qualified_Tag_Version_Compatibility" PermissionId="YSYCP065" FormName="YCPPM907" GroupName="HubData" EntityName="QualifiedTagVersionCompatibility" Icon="com/yantra/ycp/ui/icons/maxaction.gif"/>
+		<SupportLevel Label="Support_Level" PermissionId="YSYCP066" FormName="YCPPM337" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/additionalattributes.gif"/>
+	</QualifiedTagInformation>
+	<PermissionOnlyNode Label="MENU_CONFIG_Help">
+		<ErrorSearch Label="Error_Search" PermissionId="YCPPM013"/>
+		<OnlineHelp Label="Online_Help" PermissionId="YCPPM999"/>
+		<AboutYantraConfigurator Label="About_Yantra_Configurator" PermissionId="YCPPM000"/>
+	</PermissionOnlyNode>
+	<Analytics Label="Analytics" Icon="com/yantra/ycp/ui/icons/analytics.gif">
+		<RegionUsages Label="Region_Usage_For_Analytics" PermissionId="YSYCP068" FormName="YCPPM723" DisplayMode="Dialog" GroupName="HubData" SectionName="ANALYTICS" EntityName="RegionUsage" Icon="com/yantra/ycp/ui/icons/regionschema.gif">
+		<Roles>
+			<Role RoleKey="HUB"/>
+		</Roles>
+		</RegionUsages>   
+    </Analytics>
+</Platform>

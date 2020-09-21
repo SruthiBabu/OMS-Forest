@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM IBM Sterling Selling and Fulfillment 
+	Suite - Foundation, IBM Order Management (5737-D18) (C) Copyright IBM Corp. 2007, 2017 All Rights Reserved. 
+	US Government Users Restricted Rights - Use, duplication or disclosure restricted 
+	by GSA ADP Schedule Contract with IBM Corp. -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template match="Order">
+		<MultiApi>
+			<API Name="getWorkOrderList">
+				<Input>
+					<WorkOrder>
+						<xsl:attribute name="OrderHeaderKey">
+							<xsl:value-of select="@OrderHeaderKey" />
+						</xsl:attribute>
+						<xsl:attribute name="Status">
+							<xsl:value-of select="1600" />
+						</xsl:attribute>
+						<xsl:attribute name="StatusQryType">
+							<xsl:text>LT</xsl:text>
+						</xsl:attribute>
+					</WorkOrder>
+				</Input>
+				<Template>
+					<WorkOrders TotalNumberOfRecords="">
+	    				<WorkOrder NodeKey="" WorkOrderKey="" WorkOrderNo="" Timezone="">
+	      					<Order OrderHeaderKey="" OrderName="" OrderNo="" />
+	        		<WorkOrderServiceLines>
+	            		<WorkOrderServiceLine ItemDescription="" ItemID="" ItemShortDescription="">
+	                		<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo="">
+	                		<LinePriceInfo ListPrice="" DisplayUnitPrice=""/>
+                            <ItemDetails ItemID="">
+                                <PrimaryInformation
+                                    ExtendedDisplayDescription=""
+                                    ImageID="" ImageLabel="" ImageLocation=""/>
+                            </ItemDetails>
+                        </OrderLine>
+                        </WorkOrderServiceLine>
+	       			</WorkOrderServiceLines>
+	        		<WorkOrderAppointments>
+	            		<WorkOrderAppointment ApptSeq="" PromisedApptEndDate="" PromisedApptStartDate="" WorkOrderApptKey=""/>
+	        		</WorkOrderAppointments>
+	           			</WorkOrder>
+					</WorkOrders>
+			</Template>
+			</API>
+			
+			<API Name="getCompleteOrderDetails">
+				<Input>
+					<Order>
+						<xsl:attribute name="OrderHeaderKey">
+							<xsl:value-of select="@OrderHeaderKey" />
+						</xsl:attribute>
+					</Order>
+				</Input>
+				<Template>
+					<Order OrderNo="" OrderHeaderKey="">
+						<PersonInfoBillTo AddressID="" AddressLine1=""
+                        AddressLine2="" AddressLine3="" AddressLine4=""
+                        AddressLine5="" AddressLine6=""
+                        AlternateEmailID="" Beeper="" City="" Company=""
+                        Country="" CountryDesc="" DayFaxNo=""
+                        DayPhone="" Department="" EMailID=""
+                        EveningFaxNo="" EveningPhone="" FirstName=""
+                        IsCommercialAddress="" JobTitle="" LastName=""
+                        MiddleName="" MobilePhone="" OtherPhone=""
+                        PersonID="" PersonInfoKey="" ShortZipCode=""
+                        State="" Suffix="" TaxGeoCode="" Title="" ZipCode=""/>
+                        <OrderLines TotalNumberOfRecords="">
+                        	<OrderLine OrderLineKey=""/>
+                        </OrderLines>
+                        <OverallTotals AdjustedSubtotalWithoutTaxes="" GrandAdjustmentsWithoutTotalShipping="" GrandDeliveryCharges="" 
+                        	GrandRefundTotal="" GrandShippingTotal="" GrandTax="" GrandTotal="" GrandDiscount="" HdrShippingCharges="" 
+                        	HeaderAdjustmentWithoutShipping="" LineSubTotal="" OrderHeaderKey="" SubtotalWithoutTaxes="" />
+                    </Order>    
+				</Template>
+			</API>
+			
+			<API Name="getCurrencyList">
+				<Input>
+					<Currency>
+						<xsl:attribute name="Currency">
+							<xsl:value-of select="@Currency" />
+						</xsl:attribute>
+					</Currency>
+				</Input>
+				<Template>
+					<CurrencyList>
+						<Currency Currency="" PostfixSymbol="" PrefixSymbol="" CurrencyKey="" CurrencyDescription=""/>
+					</CurrencyList>
+				</Template>
+			</API>
+			
+			<API Name="getItemUOMMasterList">
+				<Input>
+					<ItemUOMMaster>
+						<xsl:attribute name="CallingOrganizationCode">
+							<xsl:value-of select="@OrganizationCode" />
+						</xsl:attribute>
+					</ItemUOMMaster>
+				</Input>
+				<Template>
+					<ItemUOMMasterList>
+						<ItemUOMMaster UnitOfMeasure="" Description="" />
+					</ItemUOMMasterList>
+				</Template>
+			</API>
+			
+		</MultiApi>
+	</xsl:template>
+</xsl:stylesheet>

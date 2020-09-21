@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity Name="Action">
+      <PrimaryKey>
+         <Attribute Name="ActionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Actioncode"/>
+         <Attribute Name="OwnerKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Adapter">
+      <PrimaryKey>
+         <Attribute Name="AdapterKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="AdditionalAttribute">
+      <PrimaryKey>
+         <Attribute Name="AdditionalAttributeKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ParentTable"/>
+         <Attribute Name="ParentKey"/>
+         <Attribute Name="Name"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ApplicationMenu">
+      <PrimaryKey>
+         <Attribute Name="ApplicationMenuKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="MenuId"/>
+         <Attribute Name="ApplicationName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="BusinessDocument">
+      <PrimaryKey>
+         <Attribute Name="BusinessDocumentKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="DocumentId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Carrier">
+      <PrimaryKey>
+         <Attribute Name="CarrierKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Carriercode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CarrierService">
+      <PrimaryKey>
+         <Attribute Name="CarrierServiceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="CarrierServiceCode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CommonCode">
+      <PrimaryKey>
+         <Attribute Name="CommonCodeKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="CodeType"/>
+         <Attribute Name="CodeValue"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Condition">
+      <PrimaryKey>
+         <Attribute Name="ConditionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ConditionID"/>
+         <Attribute Name="ProcessTypeKey"/>
+         <Attribute Name="OwnerKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ConditionID"/>
+         <Attribute Name="OwnerKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ConditionVariables">
+      <PrimaryKey>
+         <Attribute Name="ConditionVarKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Currency">
+      <PrimaryKey>
+         <Attribute Name="CurrencyKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="Currency"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CurrencyConversion">
+      <PrimaryKey>
+         <Attribute Name="CurrencyConversionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="BaseCurrency"/>
+         <Attribute Name="OtherCurrency"/>
+         <Attribute Name="EffectiveFrom"/>
+         <Attribute Name="EffectiveTo"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Customer">
+      <PrimaryKey>
+         <Attribute Name="CustomerKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="SellerOrganizationCode"/>
+         <Attribute Name="CustomerId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Document">
+      <PrimaryKey>
+         <Attribute Name="DocumentKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="DocumentFormat">
+      <PrimaryKey>
+         <Attribute Name="DocumentFormatKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="FormatId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="DocumentParams">
+      <PrimaryKey>
+         <Attribute Name="DocumentParamsKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="DocumentType"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Enterprise">
+      <PrimaryKey>
+         <Attribute Name="EnterpriseKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Enterprisecode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="EnterpriseSupplierRef">
+      <PrimaryKey>
+         <Attribute Name="EnterpriseSupplierRefKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Error">
+      <PrimaryKey>
+         <Attribute Name="ErrorTxnId"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ErrorCauseAction">
+      <PrimaryKey>
+         <Attribute Name="ErrorCauseActionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ErrorCode">
+      <PrimaryKey>
+         <Attribute Name="ErrorCodeKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ErrorCode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ErrorDispatch">
+      <PrimaryKey>
+         <Attribute Name="ErrorTxnId"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Event">
+      <PrimaryKey>
+         <Attribute Name="EventKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="TransactionKey"/>
+         <Attribute Name="Eventid"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="EventCondition">
+      <PrimaryKey>
+         <Attribute Name="EventConditionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="EventKey"/>
+         <Attribute Name="ConditionKey"/>
+         <Attribute Name="OwnerKey"/>
+         <Attribute Name="ActionKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="GraphUI">
+      <PrimaryKey>
+         <Attribute Name="GraphUIKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="GraphType"/>
+         <Attribute Name="GraphRefKey"/>
+         <Attribute Name="OwnerKey"/>
+         <Attribute Name="ProcessTypeKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Inbox">
+      <PrimaryKey>
+         <Attribute Name="InboxKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InboxAudit">
+      <PrimaryKey>
+         <Attribute Name="InboxAuditKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InboxReferences">
+      <PrimaryKey>
+         <Attribute Name="InboxReferenceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="InboxKey"/>
+         <Attribute Name="ReferenceType"/>
+         <Attribute Name="Name"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Instruction">
+      <PrimaryKey>
+         <Attribute Name="InstructionDetailKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Locale">
+      <PrimaryKey>
+         <Attribute Name="LocaleKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Localecode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Menu">
+      <PrimaryKey>
+         <Attribute Name="MenuKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrgDocument">
+      <PrimaryKey>
+         <Attribute Name="OrgDocumentKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationKey"/>
+         <Attribute Name="RoleDocumentKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrgEnterprise">
+      <PrimaryKey>
+         <Attribute Name="OrgEnterpriseKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationKey"/>
+         <Attribute Name="EnterpriseOrganizationKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrgProtocol">
+      <PrimaryKey>
+         <Attribute Name="OrgProtocolKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationKey"/>
+         <Attribute Name="ProtocolKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrgProtocolReference">
+      <PrimaryKey>
+         <Attribute Name="OrgProtocolReferenceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrgProtocolKey"/>
+         <Attribute Name="Name"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrgRole">
+      <PrimaryKey>
+         <Attribute Name="OrgRoleKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationKey"/>
+         <Attribute Name="RoleKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrgService">
+      <PrimaryKey>
+         <Attribute Name="OrgServiceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationKey"/>
+         <Attribute Name="ServiceKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Organization">
+      <PrimaryKey>
+         <Attribute Name="OrganizationKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PersonInfo">
+      <PrimaryKey>
+         <Attribute Name="PersonInfoKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ZipCode"/>
+         <Attribute Name="LastName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PersonInfoH">
+      <PrimaryKey>
+         <Attribute Name="PersonInfoKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Pipeline">
+      <PrimaryKey>
+         <Attribute Name="PipelineKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="PipelineId"/>
+         <Attribute Name="OwnerKey"/>
+         <Attribute Name="ProcessTypeKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PipelineCondition">
+      <PrimaryKey>
+         <Attribute Name="PipelineConditionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="PipelineDefinition">
+      <PrimaryKey>
+         <Attribute Name="PipelineDefinitionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="PipelineKey"/>
+         <Attribute Name="TransactionKey"/>
+         <Attribute Name="TransactionInstanceKey"/>
+         <Attribute Name="DropStatus"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PipelineDropStatusCondition">
+      <PrimaryKey>
+         <Attribute Name="PipelineDropStsCondKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="PipelineDefinitionKey"/>
+         <Attribute Name="ConditionKey"/>
+         <Attribute Name="ConditionPriority"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PipelinePickupTran">
+      <PrimaryKey>
+         <Attribute Name="PipelinePickupTranKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ProcessTaskType">
+      <PrimaryKey>
+         <Attribute Name="ProcessTaskTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ProcessType">
+      <PrimaryKey>
+         <Attribute Name="ProcessTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Protocol">
+      <PrimaryKey>
+         <Attribute Name="ProtocolKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ProtocolName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PurgeCriteria">
+      <PrimaryKey>
+         <Attribute Name="PurgeCriteriaKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Query">
+      <PrimaryKey>
+         <Attribute Name="QueryKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Queue">
+      <PrimaryKey>
+         <Attribute Name="QueueKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="QueueId"/>
+         <Attribute Name="OwnerKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="QueueSubscription">
+      <PrimaryKey>
+         <Attribute Name="QueueSubscriptionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Resource">
+      <PrimaryKey>
+         <Attribute Name="ResourceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ResourceId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ResourcePermission">
+      <PrimaryKey>
+         <Attribute Name="ResourcePermissionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ResourceKey"/>
+         <Attribute Name="UsergroupKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Role">
+      <PrimaryKey>
+         <Attribute Name="RoleKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="RoleId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="RoleDocument">
+      <PrimaryKey>
+         <Attribute Name="RoleDocumentKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="RoleKey"/>
+         <Attribute Name="DocumentId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Rules">
+      <PrimaryKey>
+         <Attribute Name="RulesKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="RuleSetName"/>
+         <Attribute Name="RuleSetId"/>
+         <Attribute Name="RuleSetFieldName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Scac">
+      <PrimaryKey>
+         <Attribute Name="ScacKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Scac"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ScacAndService">
+      <PrimaryKey>
+         <Attribute Name="ScacAndServiceKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ScacCrossRef">
+      <PrimaryKey>
+         <Attribute Name="ScacCrossRefKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ScacEx">
+      <PrimaryKey>
+         <Attribute Name="ScacExKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Service">
+      <PrimaryKey>
+         <Attribute Name="ServiceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ServiceName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ShipNode">
+      <PrimaryKey>
+         <Attribute Name="ShipnodeKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ShipNode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="SpecialServiceRef">
+      <PrimaryKey>
+         <Attribute Name="SpecialServiceRefKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="SpecialServices">
+      <PrimaryKey>
+         <Attribute Name="SpecialServicesKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Status">
+      <PrimaryKey>
+         <Attribute Name="StatusKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Status"/>
+         <Attribute Name="ProcessTypeKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="StatusAudit">
+      <PrimaryKey>
+         <Attribute Name="StatusAuditKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="StatusCondition">
+      <PrimaryKey>
+         <Attribute Name="StatusConditionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="EnterpriseKey"/>
+         <Attribute Name="Status"/>
+         <Attribute Name="Priority"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Supplier">
+      <PrimaryKey>
+         <Attribute Name="SupplierKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Suppliercode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="TaskQueue">
+      <PrimaryKey>
+         <Attribute Name="TaskQKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="TransactionKey"/>
+         <Attribute Name="DataType"/>
+         <Attribute Name="DataKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Transaction">
+      <PrimaryKey>
+         <Attribute Name="TransactionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Tranid"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="TransactionDropStatus">
+      <PrimaryKey>
+         <Attribute Name="TransactionDropStatusKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="TransactionKey"/>
+         <Attribute Name="Status"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="TransactionPickupStatus">
+      <PrimaryKey>
+         <Attribute Name="TransactionPickStsKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="TransactionKey"/>
+         <Attribute Name="Status"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Uom">
+      <PrimaryKey>
+         <Attribute Name="UomKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="Uom"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="UomConversion">
+      <PrimaryKey>
+         <Attribute Name="UomConversionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="UomFrom"/>
+         <Attribute Name="UomTo"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="User">
+      <PrimaryKey>
+         <Attribute Name="UserKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Loginid"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="UserException">
+      <PrimaryKey>
+         <Attribute Name="Userexceptionid"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="UserGroup">
+      <PrimaryKey>
+         <Attribute Name="UsergroupKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="UsergroupId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="UserGroupList">
+      <PrimaryKey>
+         <Attribute Name="UserGroupListKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="UserKey"/>
+         <Attribute Name="UsergroupKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ZipCodeLocation">
+      <PrimaryKey>
+         <Attribute Name="ZipCodeLocationKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ZipCode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ContactPersonInfo">
+      <PrimaryKey>
+         <Attribute Name="PersonInfoKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ZipCode"/>
+         <Attribute Name="LastName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="BillingPersonInfo">
+      <PrimaryKey>
+         <Attribute Name="PersonInfoKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ZipCode"/>
+         <Attribute Name="LastName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Import">
+      <PrimaryKey>
+         <Attribute Name="ImportKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Export">
+      <PrimaryKey>
+         <Attribute Name="ExportKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Calendar">
+      <PrimaryKey>
+         <Attribute Name="CalendarKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="CalendarDayException">
+      <PrimaryKey>
+         <Attribute Name="CalendarDayExceptionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="CalendarKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ExceptionShift">
+      <PrimaryKey>
+         <Attribute Name="ExceptionShiftKey"/>
+		 <Attribute Name="ShiftKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="CalendarDayExceptionKey"/>
+		 <Attribute Name="ShiftKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="EffectivePeriod">
+      <PrimaryKey>
+         <Attribute Name="ShiftEffectivePeriodKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="CalendarKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Shift">
+      <PrimaryKey>
+         <Attribute Name="ShiftKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ShiftEffectivePeriodKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ShipmentSelector">
+      <PrimaryKey>
+         <Attribute Name="ShipmentSelectorKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ShipmentSelectAttr">
+      <PrimaryKey>
+         <Attribute Name="ShipmentSelectAttrKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ShipmentSelectorKey"/>
+         <Attribute Name="AttrName"/>
+         <Attribute Name="Value"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CostFactorGroup">
+      <PrimaryKey>
+         <Attribute Name="CostFactorGroupKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="CostFactorPurpose">
+      <PrimaryKey>
+         <Attribute Name="CostFactorPurposeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="CostFactorGroupDetail">
+      <PrimaryKey>
+         <Attribute Name="CostFactorGroupDtlKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HoldType">
+      <PrimaryKey>
+         <Attribute Name="HoldTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HoldTypeTran">
+      <PrimaryKey>
+         <Attribute Name="HoldTypeTranKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HoldTypeModType">
+      <PrimaryKey>
+         <Attribute Name="HoldTypeModTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderTagDetermination">
+      <PrimaryKey>
+         <Attribute Name="OrderTagDeterminationKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderTagModType">
+      <PrimaryKey>
+         <Attribute Name="OrderTagModTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+</Entities>

@@ -1,0 +1,64 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2006, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!--PAYMENT_EXECUTION.COLLECTION_FAILED event template XML. -->
+<Order AllocationRuleID="" AuthorizationExpirationDate="" BillToID=""
+    BuyerOrganizationCode="" CarrierAccountNo="" CarrierServiceCode=""
+    ChargeActualFreightFlag="" CustomerEMailID="" CustomerPONo=""
+    DeliveryCode="" Division="" DocumentType="" DraftOrderFlag=""
+    EnteredBy="" EnterpriseCode="" EntryType="" 
+    FreightTerms="" HoldFlag="" HoldReasonCode="" MaxOrderStatus=""
+    MaxOrderStatusDesc="" MinOrderStatus="" MinOrderStatusDesc=""
+    NotificationReference="" NotificationType=""
+    NotifyAfterShipmentFlag="" OrderDate="" OrderHeaderKey=""
+    OrderName="" OrderNo="" OrderType="" OriginalTax=""
+    OriginalTotalAmount="" OtherCharges="" PaymentStatus=""
+    PersonalizeCode="" PriceProgramKey="" PriorityCode=""
+    PriorityNumber="" Purpose="" ReceivingNode="" ReqCancelDate="" ReqDeliveryDate=""
+    ReqShipDate="" 
+    RulesetKey="" SCAC="" ScacAndService="" ScacAndServiceKey=""
+    SearchCriteria1="" SearchCriteria2="" SellerOrganizationCode=""
+    ShipCompleteFlag="" ShipToID="" Status="" TaxExemptFlag=""
+    TaxExemptionCertificate="" TaxJurisdiction="" TaxPayerId=""
+    TermsCode="" TotalAdjustmentAmount="" isHistory="">
+    <PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <PersonInfoBillTo AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <PaymentMethods>
+        <!--Only one payment info can be specified. In future releases multiple payment methods may be enabled.-->
+	<PaymentMethod PaymentKey="" PaymentType="" ChargeSequence="" CustomerAccountNo="" CustomerPONo="" CreditCardType="" CreditCardName="" CreditCardNo="" CreditCardExpDate="" DisplayCreditCardNo="" PaymentReference1="" PaymentReference2="" PaymentReference3="" CheckNo="" CheckReference="" MaxChargeLimit="" TotalAuthorized="" TotalCharged="" RequestedAuthAmount="" RequestedChargeAmount="" AwaitingAuthInterfaceAmount="" AwaitingChargeInterfaceAmount="" TotalRefundedAmount="" IncompletePaymentType="" SuspendAnyMoreCharges="" UnlimitedCharges=""/>
+    </PaymentMethods>
+    <ChargeTransactionDetails TotalCredits="" TotalDebits=""
+        TotalOpenAuthorizations="" TotalOpenBookings="">
+        <ChargeTransactionDetail AuditTransactionID="" AuthorizationExpirationDate="" AuthorizationID="" BookAmount="" ChargeTransactionKey="" ChargeType="" CollectionDate="" CreditAmount="" DebitAmount="" DistributedAmount="" HoldAgainstBook="" OpenAuthorizedAmount="" OrderHeaderKey="" OrderInvoiceKey="" PaymentKey="" RequestAmount="" SettledAmount="" Status="" StatusReason="" TransactionDate="" UserExitStatus="">
+            <CreditCardTransactions>
+                <CreditCardTransaction AuthAmount="" AuthAvs=""
+                    AuthCode="" AuthReturnCode="" AuthReturnFlag=""
+                    AuthReturnMessage="" AuthTime=""
+                    ChargeTransactionKey="" CreditCardTransactionKey=""
+                    InternalReturnCode="" InternalReturnFlag=""
+                    InternalReturnMessage="" ParentKey="" Reference1=""
+                    Reference2="" RequestId="" TranAmount=""
+                    TranRequestTime="" TranReturnCode=""
+                    TranReturnFlag="" TranReturnMessage="" TranType=""/>
+            </CreditCardTransactions>
+	    <PaymentMethod PaymentKey="" PaymentType="" ChargeSequence="" CustomerAccountNo="" CustomerPONo="" CreditCardType="" CreditCardName="" CreditCardNo="" CreditCardExpDate="" DisplayCreditCardNo="" PaymentReference1="" PaymentReference2="" PaymentReference3="" CheckNo="" CheckReference="" MaxChargeLimit="" TotalAuthorized="" TotalCharged="" RequestedAuthAmount="" RequestedChargeAmount="" AwaitingAuthInterfaceAmount="" AwaitingChargeInterfaceAmount="" TotalRefundedAmount="" IncompletePaymentType="" SuspendAnyMoreCharges="" UnlimitedCharges=""/>
+        </ChargeTransactionDetail>
+    </ChargeTransactionDetails>
+	<CollectionFailureDetails FailureReasonCode="" AuthReturnCode="" AuthReturnFlag="" AuthReturnMessage="" ChargeType="" CreditCardExpirationDate="" CreditCardName="" CreditCardNo="" CreditCardType="" DisplayCreditCardNo="" DisplaySvcNo="" HoldOrderAndRaiseEvent="" HoldReason="" InternalReturnCode="" InternalReturnFlag="" InternalReturnMessage="" PaymentReference1="" PaymentReference2="" PaymentReference3="" PaymentType="" PaymentTypeGroup="" RequestAmount="" SvcNo="" TranAmount="" TranRequestTime="" TranReturnCode="" TranReturnFlag="" TranReturnMessage="" TranType="">		
+	</CollectionFailureDetails>
+</Order>

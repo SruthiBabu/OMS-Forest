@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- Action Void implies action Create-Modify -->
+<!-- OverrideModificationRules is used to override the statuses of shipment that can be included in to or removed from a delivery plan. This is determined using the modification_type SHIPMENT_INCLUDE_IN_DELIVERY_PLAN and SHIPMENT_REMOVE_FROM_DELIVERY_PLAN respectively.-->
+<!-- RemoveContentOnDelete is applicable only when the Action is Delete -->
+<DeliveryPlan>
+    <Shipments>
+        <!-- AssociationAction Void implies action Add -->
+        <!-- One of ShipmentKey or ShipmentNo must be specified -->
+        <Shipment/>
+    </Shipments>
+</DeliveryPlan>

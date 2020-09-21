@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2012, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Order AuthorizationExpirationDate="" 
+    DocumentType="" DraftOrderFlag="" 
+    EnterpriseCode="" OrderHeaderKey="" 
+    OrderNo="" PaymentStatus="">
+    <PaymentMethods>
+        <PaymentMethod AwaitingAuthInterfaceAmount=""
+            AwaitingChargeInterfaceAmount="" BillToKey=""
+            ChargeSequence="" CheckNo="" CheckReference=""
+            CreditCardExpDate="" CreditCardName="" CreditCardNo=""
+            CreditCardType="" CustomerAccountNo="" CustomerPONo=""
+            DisplayCreditCardNo="" DisplayCustomerAccountNo=""
+            DisplayPaymentReference1="" DisplaySvcNo="" FirstName=""
+            FundsAvailable="" GetFundsAvailableUserExitInvoked=""
+            IncompletePaymentType="" LastName="" MaxChargeLimit=""
+            MiddleName="" PaymentKey="" PaymentReference1=""
+            PaymentReference2="" PaymentReference3="" PaymentType="" PrimaryAccountNo="" DisplayPrimaryAccountNo=""
+            RequestedAuthAmount="" RequestedChargeAmount=""
+            SuspendAnyMoreCharges="" SvcNo="" TotalAuthorized=""
+            TotalCharged="" TotalRefundedAmount="" UnlimitedCharges="" PlannedRefundAmount="">
+
+            <PersonInfoBillTo AddressID="" AddressLine1=""
+                AddressLine2="" AddressLine3="" AddressLine4=""
+                AddressLine5="" AddressLine6="" AlternateEmailID=""
+                Beeper="" City="" Company="" Country="" DayFaxNo=""
+                DayPhone="" Department="" EMailID="" EveningFaxNo=""
+                EveningPhone="" FirstName="" IsAddressVerified=""
+                IsCommercialAddress="" JobTitle="" LastName=""
+                Latitude="" Longitude="" MiddleName="" MobilePhone=""
+                OtherPhone="" PersonID="" PersonInfoKey="" State=""
+                Suffix="" TaxGeoCode="" Title="" ZipCode=""/>
+        </PaymentMethod>
+    </PaymentMethods>
+    <ChargeTransactionDetails AdditionalExpectedAuthorizations=""
+        RemainingAmountToAuth="" TotalCredits="" TotalDebits=""
+        TotalOpenAuthorizations="" TotalOpenBookings=""
+        TotalTransferredIn="" TotalTransferredOut="">
+        <ChargeTransactionDetail AuditTransactionID=""
+            AuthorizationExpirationDate="" AuthorizationID=""
+            BookAmount="" ChargeTransactionKey="" ChargeType=""
+            CollectionDate="" CreditAmount="" DebitAmount=""
+            DistributedAmount="" ExecutionDate="" HoldAgainstBook=""
+            OpenAuthorizedAmount="" OrderHeaderKey="" OrderInvoiceKey=""
+            PaymentKey="" RequestAmount="" SettledAmount="" Status=""
+            StatusReason="" TransactionDate="" TransferFromOhKey=""
+            TransferToOhKey="" UserExitStatus="" VoidTransaction="" InPerson="">
+            <TransferToOrder  DocumentType="" DraftOrderFlag=""
+                ExchangeType="" EnterpriseCode=""
+                OrderHeaderKey="" OrderNo=""
+                PaymentStatus=""
+                PendingTransferIn="" 
+                ReturnOrderHeaderKeyForExchange=""/>
+            <TransferFromOrder DocumentType="" DraftOrderFlag=""
+                ExchangeType="" EnterpriseCode=""
+                OrderHeaderKey="" OrderNo=""
+                PaymentStatus=""
+                PendingTransferIn="" 
+                ReturnOrderHeaderKeyForExchange=""/>
+        </ChargeTransactionDetail>
+    </ChargeTransactionDetails>
+    <ExchangeOrders>
+        <ExchangeOrder  AuthorizationExpirationDate="" 
+	    DocumentType="" DraftOrderFlag="" 
+	    EnterpriseCode="" OrderHeaderKey="" 
+	    OrderNo="" ExchangeType="" PaymentStatus=""
+            ReturnOrderHeaderKeyForExchange="" PendingTransferIn=""/>
+    </ExchangeOrders>
+</Order>

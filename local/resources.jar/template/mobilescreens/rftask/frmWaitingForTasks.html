@@ -1,0 +1,50 @@
+<html>
+    <meta http-equiv="refresh" content="/console/rftask.ppc?action=frmWaitingForTasks"/>
+    <body>
+        <form name="frmWaitingForTasks" target="/console/rftask.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+								<td>
+									<input col="1" name="lblEquipmentId"
+                                    size="20" subtype="Hidden"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+									tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+								</td>
+							</tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtInfo" size="20"
+                                    subtype="Label" type="text"
+                                    validate="false" value="Mobile_Waiting_For_Tasks"/>
+                                    <!-- <input col="-1" name="dummyField" size="0"
+                                    subtype="Text" type="text"/> -->
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F10" name="Cancel"
+                                    size="7" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfmenu.ppc?CurrentInnerPanelID=menu"
+                                    validate="false" value="Mobile_Cancel"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+	<Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="All equipment types of the warehouse are defined in this table. e.g. GRABTRUCK, FORKLIFT etc."
+            EntityType="CONFIGURATION" ListXMLName="EquipmentTypes"
+            Module="scw" Name="Equipment_Type" Prefix="YFS_"
+            TableName="YFS_EQUIPMENT_TYPE" TableType="CONFIGURATION" XMLName="EquipmentType">
+            <Attributes>
+                <Attribute ColumnName="EQUIPMENT_TYPE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_TYPE table."
+                    Name="Equipment_Type_Key" Nullable="false" FactName="false"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' '"
+                    Description="This field specifies the equipment type."
+                    Name="Equipment_Type" Nullable="false"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="A brief description of the equipment."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_TYPE table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="MODELED_AS"
+                    DataType="EnumModeledAs" DefaultValue="' '"
+                    Description="This field indicates whether the equipment type is modeled as Case, Pallet or Location. The three supported values are 'Case', 'Pallet', and 'Location'."
+                    Name="Modeled_As" Nullable="false" XMLName="ModeledAs"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="EQUIPMENT_TYPE_PK" Name="YFS_EQUIPMENT_TYPE_PK">
+                <Attribute ColumnName="EQUIPMENT_TYPE_KEY" Name="Equipment_Type_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="EQUIPMENT_TYPE_I1"
+                    Name="YFS_EQUIPMENT_TYPE_I1" Unique="true">
+                    <Column Name="EQUIPMENT_TYPE"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="An equipment may have more than a placeholder location associated with it. The placeholder is also known as a slot. For example, a cart may have one or more locations to indicate stock in various bins. For example, left top, right bottom etc. Another example is a sortation equipment that has more than a lane associated with it."
+            EntityType="CONFIGURATION"
+            ListXMLName="EquipmentTypeDetails" Module="scw"
+            Name="Equipment_Type_Detail" Prefix="YFS_"
+            TableName="YFS_EQUIPMENT_TYPE_DETAIL"
+            TableType="CONFIGURATION" XMLName="EquipmentTypeDetail">
+            <Attributes>
+                <Attribute ColumnName="EQUIPMENT_TYPE_DETAIL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_TYPE_DETAIL table."
+                    Name="Equipment_Type_Detail_Key" Nullable="false"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' '"
+                    Description="This field identifies the equipment type."
+                    Name="Equipment_Type" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_TYPE_DETAIL table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCATION_LOGICAL_NAME"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This field indicates the logical name of the location. For example, a cart location may have various positions that may be occupied by the cartons based on the carton size. For example, right top, left bottom, A1...A4 etc."
+                    Name="Location_Logical_Name" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="EQUP_TYPE_DTL_PK" Name="YFS_EQUIPMENT_TYPE_DETAIL_PK">
+                <Attribute ColumnName="EQUIPMENT_TYPE_DETAIL_KEY" Name="Equipment_Type_Detail_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="EquipmentTypeDetails"
+                    ChildName="Equipment_Type_Detail"
+                    ChildXMLName="EquipmentTypeDetail"
+                    DeleteCascade="true" ForeignEntity="Equipment_Type"
+                    IsParent="true" Name="Type_Of_Equipment"
+                    Type="Bidirectional" XMLName="EquipmentType">
+                    <Attribute Name="Equipment_Type" ParentName="Equipment_Type"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="All equipments used in the warehouse are defined in this table. The equipment table stores instance of an equipment of a particular type."
+            EntityType="CONFIGURATION" ListXMLName="Equipments"
+            Module="scw" Name="Equipment" Prefix="YFS_"
+            TableName="YFS_EQUIPMENT" TableType="MASTER" XMLName="Equipment">
+            <Attributes>
+                <Attribute ColumnName="EQUIPMENT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT table."
+                    Name="Equipment_Key" Nullable="false"/>
+                <Attribute ColumnName="EQUIPMENT_ID"
+                    DataType="EquipmentId" DefaultValue="' '"
+                    Description="This field identifies the equipment. For example, if the warehouse has 10 fork lifts, the equipment IDs can be FORKLIFT1 to FORKLIFT10."
+                    Name="Equipment_Id" Nullable="false"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' '"
+                    Description="This field identifies the equipment type, such as  FORKLIFT, GRABTRUCK. The equipment types are defined in the YFS_EQUIPMENT_TYPE entity."
+                    Name="Equipment_Type" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+				<Attribute ColumnName="CHECK_DIGIT" DataType="VText-5"
+                    Description="Check Digit is a numeric representation of Equipment. It is generally used by Voice Systems to verify the Equipment. Equipment Check Digit is unique for a Node."                            Name="Check_Digit" Nullable="true" XMLName="CheckDigit"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_EQUIPMENT_PK">
+                <Attribute ColumnName="EQUIPMENT_KEY" Name="Equipment_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_EQUIPMENT_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="EQUIPMENT_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Equipments" ChildName="Equipment"
+                    ChildXMLName="Equipment" DeleteCascade="true"
+                    ForeignEntity="Equipment_Type"
+                    Name="Type_Of_Equipment" Type="Bidirectional" XMLName="EquipmentType">
+                    <Attribute Name="Equipment_Type" ParentName="Equipment_Type"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="An equipment may have more than a placeholder location associated with it. For example, a cart may have one or more locations to indicate stock in various bins. For example, left top, right bottom etc. Another example is a sortation equipment that has more than a lane associated with it."
+            EntityType="CONFIGURATION" ListXMLName="EquipmentDetails"
+            Module="scw" Name="Equipment_Detail" Prefix="YFS_"
+            TableName="YFS_EQUIPMENT_DETAIL" TableType="MASTER" XMLName="EquipmentDetail">
+            <Attributes>
+                <Attribute ColumnName="EQUIPMENT_DETAIL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_DETAIL table."
+                    Name="Equipment_Detail_Key" Nullable="false"/>
+                <Attribute ColumnName="EQUIPMENT_ID"
+                    DataType="EquipmentId" DefaultValue="' '"
+                    Description="This field indicates the equipment identifier."
+                    Name="Equipment_Id" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_DETAIL table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' '"
+                    Description="This field identifies the equipment type, such as FORKLIFT, GRABTRUCK. The equipment types are defined in the YFS_EQUIPMENT_TYPE entity."
+                    Name="Equipment_Type" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_LOGICAL_NAME"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This field indicates the locagical name of the location. For example, a cart location may have various positions that may be occupied by the cartons based on the carton size. For example, right top, left bottom, A1...A4 etc."
+                    Name="Location_Logical_Name" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the location ID associated with the location in order to query and track inventory in the location."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="EQUP_DETAIL_PK" Name="YFS_EQUIPMENT_DETAIL_PK">
+                <Attribute ColumnName="EQUIPMENT_DETAIL_KEY" Name="Equipment_Detail_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="EquipmentDetails"
+                    ChildName="Equipment_Detail"
+                    ChildXMLName="EquipmentDetail" DeleteCascade="true"
+                    ForeignEntity="Equipment" IsParent="true"
+                    Name="Equipment" Type="Bidirectional" XMLName="Equipment">
+                    <Attribute Name="Equipment_Id" ParentName="Equipment_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="NodeEquipmentDetails"
+                    ChildName="NodeEquipmentDetail"
+                    ChildXMLName="NodeEquipmentDetail"
+                    ForeignEntity="Ship_Node" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Equipment may have one or more devices associated with it. For example, a forklift has an RF scanner associated with it. Similarly, a packing station has a scanner and printer associated with it."
+            EntityType="CONFIGURATION" ListXMLName="EquipmentDevices"
+            Module="scw" Name="Equipment_Device" Prefix="YFS_"
+            TableName="YFS_EQUIPMENT_DEVICE" TableType="MASTER" XMLName="EquipmentDevice">
+            <Attributes>
+                <Attribute ColumnName="EQUIPMENT_DEVICE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_DEVICE table."
+                    Name="Equipment_Device_Key" Nullable="false"/>
+                <Attribute ColumnName="EQUIPMENT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_DEVICE table."
+                    Name="Equipment_Key" Nullable="false"/>
+                <Attribute ColumnName="DEVICE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIPMENT_DEVICE table."
+                    Name="Device_Key" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="EQUP_DEVICE_PK" Name="YFS_EQUIPMENT_DEVICE_PK">
+                <Attribute ColumnName="EQUIPMENT_DEVICE_KEY" Name="Equipment_Device_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="EQUP_DEVICE_I1"
+                    Name="YFS_EQUIPMENT_DEVICE_I1" Unique="true">
+                    <Column Name="DEVICE_KEY"/>
+                    <Column Name="EQUIPMENT_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="EquipmentDevices"
+                    ChildName="Equipment_Device"
+                    ChildXMLName="EquipmentDevice" DeleteCascade="true"
+                    ForeignEntity="Equipment" IsParent="true"
+                    Name="Equipment" Type="Bidirectional"
+                    XMLName="Equipment">
+                    <Attribute Name="Equipment_Key" ParentName="Equipment_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="EquipDevices"
+                    ChildName="Equip_Device" ChildXMLName="EquipDevice"
+                    DeleteCascade="true" ForeignEntity="Device"
+                    Name="Device" Type="Bidirectional" XMLName="Device">
+                    <Attribute Name="Device_Key" ParentName="Device_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Certain types of tasks require certain type of equipment to complete the task. For example, put away of pallets requires a forklift with a RF scanner for scanning in data."
+            EntityType="CONFIGURATION" ListXMLName="EquipTypeTaskTypes"
+            Module="scw" Name="Equip_Type_Task_Type" Prefix="YFS_"
+            TableName="YFS_EQUIP_TYPE_TASK_TYPE"
+            TableType="CONFIGURATION" XMLName="EquipTypeTaskType">
+            <Attributes>
+                <Attribute ColumnName="EQUIP_TYPE_TASK_TYPE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIP_TYPE_TASK_TYPE table."
+                    Name="Equip_Type_Task_Type_Key" Nullable="false"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIP_TYPE_TASK_TYPE table."
+                    Name="Equipment_Type_Key" Nullable="false"/>
+                <Attribute ColumnName="TASK_TYPE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_EQUIP_TYPE_TASK_TYPE table."
+                    Name="Task_Type_Key" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="EQUIP_TP_TS_TP_PK" Name="YFS_EQUIP_TYPE_TASK_TYPE_PK">
+                <Attribute ColumnName="EQUIP_TYPE_TASK_TYPE_KEY" Name="Equip_Type_Task_Type_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="EQUIP_TP_TS_TP_I1"
+                    Name="YFS_EQUIP_TYPE_TASK_TYPE_I1" Unique="true">
+                    <Column Name="TASK_TYPE_KEY"/>
+                    <Column Name="EQUIPMENT_TYPE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="EquipTypeTaskTypes"
+                    ChildName="Equip_Type_Task_Type"
+                    ChildXMLName="EquipTypeTaskType"
+                    DeleteCascade="true" ForeignEntity="Equipment_Type"
+                    IsParent="true" Name="Equipment_Type"
+                    Type="Bidirectional" XMLName="EquipmentType">
+                    <Attribute Name="Equipment_Type_Key" ParentName="Equipment_Type_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="EquipTypeTaskTypes"
+                    ChildName="Equip_Type_Task_Type"
+                    ChildXMLName="EquipTypeTaskType"
+                    DeleteCascade="true" ForeignEntity="Task_Type"
+                    Name="Task_Type" Type="Bidirectional"
+                    XMLName="TaskType">
+                    <Attribute Name="Task_Type_Key" ParentName="Task_Type_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+	</Entities>
+</DBSchema>

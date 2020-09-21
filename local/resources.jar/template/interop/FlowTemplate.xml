@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2014 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<IntegrationFlowTemplate>
+    <Node NodeGroup="Transport" NodeId="" NodeText="Weblogic_JMS" NodeType="WLJMS"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="Generic_JMS" NodeType="GJMS"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="JMS_Topic" NodeType="TOPICJMS"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="MQSeries_JMS" NodeType="MQJMS"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="Database" NodeType="DB"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="DCS62_Database" NodeType="DBINFC"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="MSMQ" NodeType="MSMQ"/>
+    <Node NodeGroup="Transport" NodeId=""
+        NodeText="Flow_Sync_Weblogic_JMS" NodeType="SWLJMS"/>
+    <Node NodeGroup="Transport" NodeId=""
+        NodeText="Flow_Synch_MQSeries_JMS" NodeType="SMQJMS"/>
+    <Node NodeGroup="Transport" NodeId=""
+        NodeText="Flow_Sync_Generic_JMS" NodeType="SGJMS"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="File_IO" NodeType="FILE"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="EJB" NodeType="EJB"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="HTTPREST" NodeType="HTTPREST"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="HTTP" NodeType="HTTP"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="COM" NodeType="COM"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="FTP" NodeType="FTP"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="WebService" NodeType="WEBSERVICE"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="Local_Invocation" NodeType="LOCAL"/>
+    <Node NodeGroup="Transport" NodeId="" NodeText="CUSTOM_TRANSPORT" NodeType="CUSTOM_TRANSPORT"/>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Text_Translator" NodeType="TextTranslator">
+        <Properties DataFormat="" InputDataType="Text"
+            OutputDataType="XML" SchemaName="">
+            <DataTypes>
+                <DataType Name="Text" Value="Text"/>
+                <DataType Name="XML" Value="XML"/>
+            </DataTypes>
+            <DataFormats>
+                <DataFormat Name="Positional" Value="Positional"/>
+                <DataFormat Name="Delimited" Value="Delimited"/>
+                <DataFormat Name="XML" Value="XML"/>
+            </DataFormats>
+        </Properties>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="XSL_Translator" NodeType="XSL">
+        <Properties XSLName=""/>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="API" NodeType="API">
+        <Properties APIName="" APIType="System" ClassName="" MethodName="">
+            <Args/>
+            <FactList/>
+            <Template FileName="" IsFileSpecified="Y"/>
+        </Properties>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Send_Mail" NodeType="SendMail">
+        <Properties BCC="" BodyTemplate="" CC="" From="" Host=""
+            Port="25" Subject="" To=""/>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Flow_DTE" NodeType="DTE">
+        <Properties XmlName=""/>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Flow_Defaulting" NodeType="Defaulting">
+        <Properties CustomClass="" LocaleCodePath="" ResourceName=""/>
+    </Node>
+    <Node NodeGroup="Flow" NodeText="Flow_Data_Security" NodeType="DataSecurity">
+        <Properties AttributeXPath="" ClassName=""
+            UserIdentification="Environment" UserKey="" ValidationType="Enterprise">
+            <Args/>
+        </Properties>
+    </Node>
+    <Node NodeGroup="Flow" NodeText="Flow_Jasper_Print" NodeType="JasperPrint">
+        <Properties JasperReportName="" Locale="" NoOfCopies="1"
+            Orientation="Portrait" PrinterName="" RootNode="">
+            <Orientations>
+                <Orientation Name="Landscape" Value="Landscape"/>
+                <Orientation Name="Portrait" Value="Portrait"/>
+            </Orientations>
+            <Variables/>
+        </Properties>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Condition_Evaluator" NodeType="Condition">
+        <Properties ConditionKey="" ProcessTypeKey=""/>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Action" NodeType="Action">
+        <Properties ActionKey=""/>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Flow_Sub_Flow" NodeType="CompositeFlow">
+        <Properties>
+            <FlowList/>
+        </Properties>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Router" NodeType="Router">
+        <Properties DocumentId="">
+            <RoleList/>
+        </Properties>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="PassThrough" NodeType="PassThrough">
+        <Properties/>
+    </Node>
+    <Node NodeGroup="Flow" NodeId="" NodeText="Alert" NodeType="Alert">
+        <Properties AssignedToUserKey="" Description="" ExceptionType=""
+            ListTemplate="" Priority="" QueueKey="" ResolveBy=""
+            RoutingRequired="N" TemplateName="">
+            <Args>
+                <Arg Name="EnterpriseKey" Value=""/>
+                <Arg Name="OwnerKey" Value=""/>
+                <Arg Name="InboxType" Value=""/>
+                <Arg Name="ShipnodeKey" Value=""/>
+                <Arg Name="ItemId" Value=""/>
+                <Arg Name="OrderHeaderKey" Value=""/>
+                <Arg Name="OrderLineKey" Value=""/>
+                <Arg Name="OrderNo" Value=""/>
+                <Arg Name="SupplierKey" Value=""/>
+                <Arg Name="ShipmentNo" Value=""/>
+                <Arg Name="ShipmentKey" Value=""/>
+                <Arg Name="LoadNo" Value=""/>
+                <Arg Name="WaveNo" Value=""/>
+                <Arg Name="WaveKey" Value=""/>
+                <Arg Name="MoveRequestKey" Value=""/>
+                <Arg Name="WorkOrderKey" Value=""/>
+                <Arg Name="WorkOrderNo" Value=""/>
+                <Arg Name="BillToID" Value=""/>
+                <Arg Name="TeamCode" Value=""/>
+            </Args>
+            <ReferencesList/>
+            <DateConsolidationLevels>
+                <DateConsolidationLevel Name="Day" Value="Day"/>
+                <DateConsolidationLevel Name="Hour" Value="Hour"/>
+            </DateConsolidationLevels>
+            <ConsolidationTemplate ConsolidationRequired="N"
+                ConsolidationWindow="Day" DefaultConsolidation="Y" NewConsolidationTemplate="Y"/>
+            <AlertRoutingList>
+                <AlertRouting Name="ENTERPRISE" SystemDefined="Y" Value=""/>
+                <AlertRouting Name="NODE" SystemDefined="Y" Value=""/>
+                <AlertRouting Name="BUYER" SystemDefined="Y" Value=""/>
+                <AlertRouting Name="SELLER" SystemDefined="Y" Value=""/>
+                <AlertRouting Name="DEPARTMENT CODE" SystemDefined="Y" Value=""/>
+            </AlertRoutingList>
+        </Properties>
+    </Node>
+    <Link FromNode="" ToNode="" Type="Simple"/>
+    <!-- Weblogic Request/Response JMS Queue -->
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="SWLJMS" Type="Sync">
+        <Properties Compressible="N" InitialContextFactory=""
+            ProviderURL="" QCFLookup="">
+            <RequestProperties QName="">
+                <MessageHeaders/>
+            </RequestProperties>
+            <ResponseProperties MessageSelector="" QName="" ResponseTimeOut=""/>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="SMQJMS" Type="Sync">
+        <Properties Compressible="N" InitialContextFactory=""
+            ProviderURL="" QCFLookup="">
+            <RequestProperties QName="">
+                <MessageHeaders/>
+            </RequestProperties>
+            <ResponseProperties MessageSelector="" QName="" ResponseTimeOut=""/>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="SGJMS" Type="Sync">
+        <Properties Compressible="N" InitialContextFactory=""
+            ProviderURL="" QCFLookup="">
+            <RequestProperties QName="">
+                <MessageHeaders/>
+            </RequestProperties>
+            <ResponseProperties MessageSelector="" QName="" ResponseTimeOut=""/>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="HTTP" Type="Sync">
+        <Properties HTTPPostVariableName="" KeyStore=""
+            KeyStorePassword="" KeyStoreType="" Secure="N" TrustStore=""
+            TrustStorePassword="" URL="">
+            <PostVariables>
+                <!--PostVariable Name="" Value=""/-->
+            </PostVariables>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="HTTPREST" Type="Sync">
+        <Properties HTTPMethod="POST" HTTPPostVariableName=""
+            IsRestCall="true" KeyStore="" KeyStorePassword=""
+            KeyStoreType="" Secure="N" TrustStore=""
+            TrustStorePassword="" URL="">
+            <PostVariables>
+                <!--PostVariable Name="" Value=""/-->
+            </PostVariables>
+            <Setup>
+                <RequestMethods>
+                    <RequestMethod Name="GET" Value="GET"/>
+                    <RequestMethod Name="POST" Value="POST"/>
+                    <RequestMethod Name="HEAD" Value="HEAD"/>
+                    <RequestMethod Name="OPTIONS" Value="OPTIONS"/>
+                    <RequestMethod Name="PUT" Value="PUT"/>
+                    <RequestMethod Name="DELETE" Value="DELETE"/>
+                    <RequestMethod Name="TRACE" Value="TRACE"/>
+                </RequestMethods>
+            </Setup>
+        </Properties>
+    </Link>
+    <!--Link Type="Sync" IsReceiver="N" TransportType="HTTP" FromNode="" ToNode="" LinkId="" >
+		<Properties IsListForm="Y" ClassName="" ValidationClass="" IsValidationRequired="" />
+		    <Args>
+			<Arg Name="URL" Value="" IsMandatory="" DataType="" />
+			<Arg Name="HTTPPostVariableName" Value="" IsMandatory="" DataType=""/>
+			<Arg Name="Secure" Value="N" IsMandatory="" DataType=""/>
+		    </Args>
+		</Properties>
+	</Link-->
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="EJB" Type="Sync">
+        <Properties Authenticate="N" EJBHomeName=""
+            InitialContextFactory="" JNDIName="" MethodName=""
+            ProviderURL="" SecurityCredential="" SecurityPrincipal=""/>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="WEBSERVICE" Type="Sync">
+        <Properties EncodingStyleURI="" IsYantraWebService="N"
+            KeyStore="" KeyStorePassword="" KeyStoreType=""
+            MethodName="" ParameterName="" SOAPActionURI="" Secure="N"
+            TargetObjectURN="" TrustStore="" TrustStorePassword="" URL="">
+            <Args/>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="N" ToNode="" TransportType="COM" Type="Sync">
+        <Properties ProgramID=""/>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="FILE" Type="Async">
+        <Properties CompletionDirectory="" CompletionFileSuffix=".done"
+            CreateEOFMessage="N" EncodingType="" ErrorDirectory=""
+            ErrorFileSuffix=".err" FileFormat=""
+            FileProcessingSequence="" IncludesPattern=""
+            IncomingDirectory="" IncomingFileSuffix=""
+            MaxErrorsPerFile="10" PollingFrequency="600" RunTimeId="" WorkingDirectory="">
+            <FileProcessingSequences>
+                <FileProcessingSequence Name="LastModifiedTime" Value="LastModifiedTime"/>
+                <FileProcessingSequence Name="ByName" Value="ByName"/>
+            </FileProcessingSequences>
+            <FileFormats>
+                <FileFormat Name="XML" Value="XML"/>
+                <FileFormat Name="Delimited" Value="Delimited"/>
+                <FileFormat Name="Positional" Value="Positional"/>
+            </FileFormats>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="FILE"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="FILE" Type="Async">
+        <Properties CompletionDirectory="" EncodingType="" FilePrefix=""
+            FileSuffix="" MaxOutputFileSize="" MaxTimeToRollOver=""
+            MaxTransactionsPerFile="" OutputFileFormat="" WorkingDirectory="">
+            <FileFormats>
+                <FileFormat Name="Delimited" Value="Delimited"/>
+                <FileFormat Name="Positional" Value="Positional"/>
+                <FileFormat Name="XML" Value="XML"/>
+            </FileFormats>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="WLJMS" Type="Async">
+        <Properties Compressible="N" InitialContextFactory=""
+            MessageSelector="" ProviderURL="" QCFLookup="" QName=""
+            ReceivingMode="Transactional" RootNodeNameForEOF=""
+            RunTimeId="" ServiceInvokedOnEOF="" Threads="">
+            <ReceivingModes>
+                <ReceivingMode Name="Transactional" Value="Transactional"/>
+                <ReceivingMode Name="NonTransactional" Value="Non Transactional"/>
+            </ReceivingModes>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="WLJMS"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="WLJMS" Type="Async">
+        <Properties Compressible="N" DeliveryMode="Persistent"
+            InitialContextFactory="" IsTransacted="Y" ProviderURL=""
+            QCFLookup="" QName="" TimeToLive="">
+            <MessageHeaders/>
+            <DeliveryModes>
+                <DeliveryMode Name="Persistent" Value="Persistent"/>
+                <DeliveryMode Name="NonPersistent" Value="Non Persistent"/>
+            </DeliveryModes>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="GJMS" Type="Async">
+        <Properties Compressible="N" InitialContextFactory=""
+            MessageSelector="" ProviderURL="" QCFLookup="" QName=""
+            ReceivingMode="Transactional" RootNodeNameForEOF=""
+            RunTimeId="" ServiceInvokedOnEOF="" Threads="">
+            <ReceivingModes>
+                <ReceivingMode Name="Transactional" Value="Transactional"/>
+                <ReceivingMode Name="NonTransactional" Value="Non Transactional"/>
+            </ReceivingModes>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="GJMS"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="GJMS" Type="Async">
+        <Properties Compressible="N" DeliveryMode="Persistent"
+            InitialContextFactory="" IsTransacted="Y" ProviderURL=""
+            QCFLookup="" QName="" SecurityMode="" TimeToLive="">
+            <MessageHeaders/>
+            <DeliveryModes>
+                <DeliveryMode Name="Persistent" Value="Persistent"/>
+                <DeliveryMode Name="NonPersistent" Value="Non Persistent"/>
+            </DeliveryModes>
+            <SecurityModes>
+                <DeliveryMode Name="QueueBased" Value="QueueBased"/>
+                <DeliveryMode Name="JNDIBased" Value="JNDIBased"/>
+            </SecurityModes>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="TOPICJMS" Type="Async">
+        <Properties Compressible="N" InitialContextFactory=""
+            MessageSelector="" ProviderURL="" QCFLookup="" QName=""
+            ReceivingMode="Transactional" RootNodeNameForEOF=""
+            RunTimeId="" ServiceInvokedOnEOF="" Threads="1">
+            <ReceivingModes>
+                <ReceivingMode Name="Transactional" Value="Transactional"/>
+                <ReceivingMode Name="NonTransactional" Value="Non Transactional"/>
+            </ReceivingModes>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="TOPICJMS"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="TOPICJMS" Type="Async">
+        <Properties Compressible="N" DeliveryMode="Persistent"
+            InitialContextFactory="" IsTransacted="Y" ProviderURL=""
+            QCFLookup="" QName="" SecurityMode="" TimeToLive="">
+            <MessageHeaders/>
+            <DeliveryModes>
+                <DeliveryMode Name="Persistent" Value="Persistent"/>
+                <DeliveryMode Name="NonPersistent" Value="Non Persistent"/>
+            </DeliveryModes>
+            <SecurityModes>
+                <DeliveryMode Name="QueueBased" Value="QueueBased"/>
+                <DeliveryMode Name="JNDIBased" Value="JNDIBased"/>
+            </SecurityModes>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="MQJMS" Type="Async">
+        <Properties Compressible="N" InitialContextFactory=""
+            MessageSelector="" ProviderURL="" QCFLookup="" QName=""
+            ReceivingMode="Transactional" RootNodeNameForEOF=""
+            RunTimeId="" ServiceInvokedOnEOF="" Threads="">
+            <ReceivingModes>
+                <ReceivingMode Name="Transactional" Value="Transactional"/>
+                <ReceivingMode Name="NonTransactional" Value="Non Transactional"/>
+            </ReceivingModes>
+        </Properties>
+        <Server ServerKey="" ServerName="ServerName" ServerType="" TransportTypeKey="MQJMS"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="MQJMS" Type="Async">
+        <Properties Compressible="N" DeliveryMode="Persistent"
+            InitialContextFactory="" IsTransacted="Y" ProviderURL=""
+            QCFLookup="" QName="" TimeToLive="">
+            <MessageHeaders/>
+            <DeliveryModes>
+                <DeliveryMode Name="Persistent" Value="Persistent"/>
+                <DeliveryMode Name="NonPersistent" Value="Non Persistent"/>
+            </DeliveryModes>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="FTP" Type="Async">
+        <Properties RunTimeId="">
+            <ConnectionParameters Password="" Port="21" ServerAddress="" UserId=""/>
+            <LocalFileParameters IncludesPattern=""
+                LocalCompletionDir="" LocalCompletionSuffix=".done"
+                LocalFileSeparator="" LocalWorkingDir="" PollingFrequency="60"/>
+            <RemoteFileParameters RemoteCompletionDir=""
+                RemoteCompletionSuffix="" RemoteFileSeparator="" RemoteStagingDir=""/>
+            <CompressionParameters CompressFile="N" LocalZipCompletionDirectory=""/>
+            <TransferMode IsBinary="Y" Passive="N" Verbose="N"/>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="FTP"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="FTP" Type="Async">
+        <Properties RunTimeId="">
+            <ConnectionParameters Password="" Port="21" ServerAddress="" UserId=""/>
+            <LocalFileParameters IncludesPattern=""
+                LocalCompletionDir="" LocalCompletionSuffix=".done"
+                LocalFileSeparator="" LocalWorkingDir="" PollingFrequency="60"/>
+            <RemoteFileParameters RemoteCompletionDir=""
+                RemoteCompletionSuffix="" RemoteFileSeparator="" RemoteStagingDir=""/>
+            <CompressionParameters CompressFile="N"/>
+            <TransferMode IsBinary="Y" Passive="N" Verbose="N"/>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="FTP"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="DB" Type="Async">
+        <Properties MessageSelector="" PollingFrequency="600"
+            RootNodeNameForEOF="" RunTimeId="" ServiceInvokedOnEOF=""
+            TableName="YFS_EXPORT" Threads="1">
+            <TableNames>
+                <TableName Name="YFS_EXPORT" Value="YFS_EXPORT"/>
+                <TableName Name="YFS_IMPORT" Value="YFS_IMPORT"/>
+            </TableNames>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="DB"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="DB" Type="Async">
+        <Properties Compressible="N" IsTransacted="Y" TableName="YFS_EXPORT">
+            <MessageHeaders/>
+            <TableNames>
+                <TableName Name="YFS_EXPORT" Value="YFS_EXPORT"/>
+                <TableName Name="YFS_IMPORT" Value="YFS_IMPORT"/>
+            </TableNames>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="DBINFC" Type="Async">
+        <Properties MessageSelector="" PollingFrequency="600"
+            RootNodeNameForEOF="" RunTimeId="" ServiceInvokedOnEOF=""
+            TableType="DNLD" Threads="1"/>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="DBINFC"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="DBINFC" Type="Async">
+        <Properties Compressible="N" IsTransacted="Y" TableType="UPLD"/>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="MSMQ" Type="Async">
+        <Properties MessageSelector="" QName=""
+            ReceivingMode="Transactional" RootNodeNameForEOF=""
+            RunTimeId="" ServiceInvokedOnEOF="" Threads="">
+            <ReceivingModes>
+                <ReceivingMode Name="Transactional" Value="Transactional"/>
+                <ReceivingMode Name="NonTransactional" Value="Non Transactional"/>
+            </ReceivingModes>
+        </Properties>
+        <Server ServerKey="" ServerName="ServerName" ServerType="" TransportTypeKey="MSMQ"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+    <Link FromNode="" IsReceiver="N" LinkId="" ToNode=""
+        TransportType="MSMQ" Type="Async">
+        <Properties Compressible="N" DeliveryMode="Persistent"
+            IsTransacted="Y" QName="" TimeToLive="" TransactionalMode="NonTransactional">
+            <DeliveryModes>
+                <DeliveryMode Name="Persistent" Value="Persistent"/>
+                <DeliveryMode Name="NonPersistent" Value="Non Persistent"/>
+            </DeliveryModes>
+        </Properties>
+    </Link>
+    <Link FromNode="" IsReceiver="Y" LinkId="" ToNode=""
+        TransportType="CUSTOM_TRANSPORT" Type="Async">
+        <Properties ClassName="" RootNodeNameForEOF="" RunTimeId=""
+            ServiceInvokedOnEOF="" Threads="">
+            <NameValueProperties/>
+        </Properties>
+        <Server ServerKey="" ServerName="" ServerType="" TransportTypeKey="CUSTOM_TRANSPORT"/>
+        <ExceptionHandling ErrorSequenceUE="" ExceptionGroup=""
+            ExceptionQName="" ExceptionType="" IsSequenceable=""
+            Reprocess="" RestartWaitTime="" Restartable="">
+            <ExceptionReferences/>
+        </ExceptionHandling>
+    </Link>
+</IntegrationFlowTemplate>

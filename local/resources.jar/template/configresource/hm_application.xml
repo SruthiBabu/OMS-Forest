@@ -1,0 +1,117 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Application title="Sterling System Monitor">
+    <Menu MenuDescription="Applications" MenuKey="Applications" Active="Y">
+        <SubMenu>
+            <Menu MenuDescription="Tools" MenuKey="Tools" Active="Y">
+                 <SubMenu>
+                    <Menu MenuKey="CreateGroupMenu" MenuDescription="Create_Monitoring_Group" ResourceKey="YHMONITORGROUPDETAIL" Active="Y" DisplayMode="Dialog"/>
+                    <Menu MenuKey="TraceListMenu" MenuDescription="Trace_Components" ResourceKey="YHMFULLTRACELIST" Active="Y" DisplayMode="Dialog"/>
+					<Menu MenuKey="AgentServerListMenu" MenuDescription="View_Live_Agents_Integration_Servers" ResourceKey="YHMAGENTSERVERLIST" Active="Y" DisplayMode="Dialog"/>
+                 </SubMenu>
+            </Menu>
+         </SubMenu>
+         <SubMenu>
+            <Menu MenuDescription="MENU_CONFIG_Help" MenuKey="Tools" Active="Y">
+                 <SubMenu>
+                    <Menu MenuKey="SysManagementMenu" MenuDescription="Online_Help" ResourceKey="YHMONLINEHELP" Active="Y" DisplayMode="Dialog" Icon="com/yantra/ycp/ui/icons/onlinehelp.gif"/>
+                    <Menu MenuKey="SysManagementAbout" MenuDescription="About" ResourceKey="YHMABOUT" Active="Y" DisplayMode="Dialog" Icon="com/yantra/ycp/ui/icons/menuabout.gif"/>
+                 </SubMenu>
+            </Menu>
+         </SubMenu>
+    </Menu>
+    <FormDefs>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMTopLevelBehavior"
+			ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMTopLevel"
+			IsPermissionControlled="N" Name="YHMMAIN"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMMonitorGroupBehavior" 
+			ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMMonitorGroup"
+			Icon="" IsPermissionControlled="N" Name="YHMONITORGROUPDETAIL"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMAddJMSQueueToGroupBehavior" 
+			ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMAddJMSQueueToGroup"
+			Icon="com/yantra/ycp/hm/ui/icons/jms.gif" IsPermissionControlled="N" Name="YHM00003"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMApiDetailBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMApiDetail"
+            Icon="com/yantra/ycp/hm/ui/icons/api.gif"
+            IsPermissionControlled="N" Name="YHMAPIDETAIL"/>		
+        <Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMApiGroupSummaryBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMGroupSummary"
+            Icon="com/yantra/ycp/hm/ui/icons/api.gif"
+            IsPermissionControlled="N" Name="YHMAPISUMMARY"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMAppServerDetailBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMAppServerDetail"
+            Icon="com/yantra/ycp/hm/ui/icons/appserver.gif"
+            IsPermissionControlled="N" Name="YHMAPPSERVERDETAIL"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMAppServerGroupSummaryBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMGroupSummary"
+            Icon="com/yantra/ycp/hm/ui/icons/appserver.gif"
+            IsPermissionControlled="N" Name="YHMAPPSERVERSUMMARY"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMAgentServerGroupSummaryBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMGroupSummary"
+            Icon="com/yantra/ycp/hm/ui/icons/agent.gif"
+            IsPermissionControlled="N" Name="YHMAGENTSERVERSUMMARY"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMAgentIntegrationServerDetailBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMAgentIntegrationServerDetail"
+            Icon="com/yantra/ycp/hm/ui/icons/agent.gif"
+            IsPermissionControlled="N" Name="YHMAGENTSERVERDETAIL"/>
+        <Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMChangeThresholdBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMChangeThreshold"
+            Icon="" HideScreenLevelHelp="Y"
+            IsPermissionControlled="N" Name="YHMTHRESHOLD"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMSummaryGraphContainerBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMSummaryGraphContainer"
+            Icon="" HideScreenLevelHelp="Y"
+            IsPermissionControlled="N" Name="YHMSUMMARYGRAPHCONTAINER"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMTraceListBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMTraceList"
+            Icon=""
+            IsPermissionControlled="N" Name="YHMFULLTRACELIST"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMTraceDetailsBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMTraceDetails"
+            Icon=""
+            IsPermissionControlled="N" Name="YHMTRACEDETAILS"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMHostServerListBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMHostServerList"
+            Icon="com/yantra/ycp/hm/ui/icons/appserver.gif" HideScreenLevelHelp="Y"
+            IsPermissionControlled="N" Name="YHMHOSTSERVERLIST"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMHostServerDetailBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMHostServerDetail"
+            Icon="com/yantra/ycp/hm/ui/icons/appserver.gif"
+            IsPermissionControlled="N" Name="YHMHOSTSERVERDETAILS"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMServerPropertiesListBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMServerPropertiesList"
+            Icon="com/yantra/ycp/hm/ui/icons/appserver.gif" HideScreenLevelHelp="Y"
+            IsPermissionControlled="N" Name="YHMSERVERPROPERTIESLIST"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMJMSQueueGroupSummaryBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMGroupSummary"
+            Icon="com/yantra/ycp/hm/ui/icons/jms.gif"
+            IsPermissionControlled="N" Name="YHMJMSQUEUESUMMARY"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMJMSQueueDetailBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMJMSQueueDetail"
+            Icon="com/yantra/ycp/hm/ui/icons/jms.gif"
+            IsPermissionControlled="N" Name="YHMJMSQUEUEDETAIL"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMTableLevelCacheListBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMTableLevelCacheList"
+            Icon=""
+            IsPermissionControlled="N" Name="YHMTABLELEVELCACHELIST"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMCacheLimitBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMCacheLimit"
+            Icon="" HideScreenLevelHelp="Y"
+            IsPermissionControlled="N" Name="YHMCACHELIMIT"/>
+        <Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMEmptyBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMOnlineHelp"
+            Icon="com/yantra/ycp/ui/icons/help.gif" HideScreenLevelHelp="Y"
+            IsPermissionControlled="N" Name="YHMONLINEHELP"/>
+        <Form BehaviorClassName="com.yantra.ycp.ui.screens.YCPEmptyBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMAbout"
+            Icon="com/yantra/ycp/ui/icons/menuabout.gif" HideScreenLevelHelp="Y"
+            IsPermissionControlled="N" Name="YHMABOUT"/>
+		<Form BehaviorClassName="com.yantra.ycp.hm.ui.screens.YHMAgentIntegrationServerListBehavior"
+            ClassName="com.yantra.ycp.hm.ui.screens.forms.YHMAgentIntegrationServerList"
+            Icon="com/yantra/ycp/hm/ui/icons/agent.gif"
+            IsPermissionControlled="N" Name="YHMAGENTSERVERLIST"/>
+    </FormDefs>
+</Application>

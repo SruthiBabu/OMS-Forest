@@ -1,0 +1,73 @@
+<html>
+    <body>
+        <form name="frmTrailerLoadingMain" target="/console/rftrailerload.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblTrailerLoading"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTrailerLoading"
+                                    type="text" validate="false" value="Mobile_Trailer_Loading"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblTrailer"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTrailer"
+                                    type="text" validate="false" value="Mobile_Trailer"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding=""
+                                    mandatory="false"
+                                    name="txtTrailer"
+                                    outputbinding="xml:/Trailer/@Trailer"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Trailer/@Trailer"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLoad"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLoad"
+                                    type="text" validate="false" value="Mobile_Load"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding=""
+                                    mandatory="false" name="txtLoad"
+                                    outputbinding="xml:/Trailer/@LoadNo"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Trailer/@LoadNo"
+                                    type="text" validate="always"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <!--TODO-->
+                                    <input col="8" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rftrailerload.ppc?action=frmContainerEntry"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

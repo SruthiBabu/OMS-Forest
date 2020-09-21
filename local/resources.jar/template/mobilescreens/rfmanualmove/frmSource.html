@@ -1,0 +1,150 @@
+<html>
+    <body>
+        <form name="frmSource" target="/console/rfmanualmove.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                   <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="true"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/@IgnoreExistingAllocations"
+                                    name="txtIgnoreExistingAllocations"
+                                    outputbinding="xml:/Task/@IgnoreExistingAllocations"
+                                    size="1" subtype="Hidden"
+                                    tag="binding=xml:/Task/@IgnoreExistingAllocations"
+                                    type="hidden" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/TaskType/@ActivityCode"
+                                    name="txtActivityCode"
+                                    outputbinding="xml:/Task/TaskType/@ActivityCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskType/@ActivityCode"
+                                    type="hidden" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/TaskType/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/TaskType/@ActivityGroupId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskType/@ActivityGroupId"
+                                    type="hidden" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/TaskType/@ResourceIdOverride"
+                                    name="txtResourceId"
+                                    outputbinding="xml:/Task/TaskType/@ResourceIdOverride"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskType/@ResourceIdOverride"
+                                    type="hidden" validate="true"/>
+
+	                                <input col="1"                                   
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Source_Manual_Move"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLocation"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation"
+                                    type="text" validate="false" value="Mobile_Location_Container"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task1/@BarCode1"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@BarCode1"
+                                    size="20" defaultoutput="false"
+                                    subtype="Text"
+                                    tag="binding=xml:/Task/@BarCode1"
+	                                type="text" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task1/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" defaultoutput="false"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Task/@LocationId"
+                                    type="hidden" validate="true"/>
+	                               <input col="1" inputbinding="xml:/Task1/Inventory/@SourceCaseId"
+                                    name="txtCaseId" outputbinding="xml:/Task/Inventory/@SourceCaseId"
+                                    size="20" subtype="Hidden" tag="binding=xml:/Task/Inventory/@SourceCaseId"
+                                    type="hidden" validate="false"/>                                
+	                               <input col="1" inputbinding="xml:/Task1/Inventory/@SourcePalletId"
+                                    name="txtPalletId" outputbinding="xml:/Task/Inventory/@SourcePalletId"
+                                    size="20" subtype="Hidden" tag="binding=xml:/Task/Inventory/@SourcePalletId"
+                                    type="hidden" validate="false"/>                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblInv"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblInv"
+                                    type="text" validate="false" value="Mobile_Item_ID_Case_ID_Pallet_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblInv1"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblInv1"
+                                    type="text" validate="false" value="Mobile_Serial_#"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task1/@BarCode"
+                                    name="txtInv" outputbinding="xml:/Task/@BarCode"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Task/@BarCode"
+                                    type="text" validate="true"/>
+	                               <input col="1" inputbinding="xml:/Task1/Inventory/InventoryItem/@ItemID"
+                                    name="txtItemID" outputbinding="xml:/Task/Inventory/InventoryItem/@ItemID"
+                                    size="20" subtype="Hidden" tag="binding=xml:/Task/Inventory/InventoryItem/@ItemID"
+                                    type="hidden" validate="false"/>                                
+	                               <input col="1" inputbinding="xml:/Task1/Inventory/@CaseId"
+                                    name="txtCaseId" outputbinding="xml:/Task/Inventory/@CaseId"
+                                    size="20" subtype="Hidden" tag="binding=xml:/Task/Inventory/@CaseId"
+                                    type="hidden" validate="false"/>                                
+	                               <input col="1" inputbinding="xml:/Task1/Inventory/@PalletId"
+                                    name="txtPalletId" outputbinding="xml:/Task/Inventory/@PalletId"
+                                    size="20" subtype="Hidden" tag="binding=xml:/Task/Inventory/@PalletId"
+                                    type="hidden" validate="false"/>                                
+
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfmanualmove.ppc?action=frmSourceValtxtInv"
+                                    validate="false" value="Mobile_Go"/>
+                                    <input col="5" hotkey="F8"
+                                    name="Deposit" size="8"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfmanualmove.ppc?action=frmDeposit"
+                                    validate="false" value="Mobile_Deposit"/>
+                                </td>
+                            </tr>
+                          </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

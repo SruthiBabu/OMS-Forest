@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+>
+
+<xsl:template name="DisplaySummaryOfCharges">
+	<xsl:param name="LineSubTotal">0</xsl:param>
+	<xsl:param name="TotalCharges">0</xsl:param>
+	<xsl:param name="TotalTax">0</xsl:param>
+	<xsl:param name="TotalDiscount">0</xsl:param>
+	<xsl:param name="GrandTotal">0</xsl:param>
+	<xsl:param name="Currency"></xsl:param>
+
+	<tbody>
+		<tr>
+			<td class="numerictablecolumn">
+				Line Sub Total
+			</td>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$LineSubTotal"/><xsl:text> </xsl:text> <xsl:value-of select="$Currency"/>
+			</td>
+			<td width="75%"> </td>
+		</tr>
+		<tr>
+			<td class="numerictablecolumn">
+				Total Charges
+			</td>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$TotalCharges"/><xsl:text> </xsl:text> <xsl:value-of select="$Currency"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="numerictablecolumn">
+				Total Tax
+			</td>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$TotalTax"/><xsl:text> </xsl:text> <xsl:value-of select="$Currency"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="numerictablecolumn">
+				Total Discount
+			</td>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$TotalDiscount"/><xsl:text> </xsl:text> <xsl:value-of select="$Currency"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="numerictablecolumn">
+				Grand Total
+			</td>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$GrandTotal"/><xsl:text> </xsl:text> <xsl:value-of select="$Currency"/>
+			</td>
+		</tr>
+	</tbody>
+
+</xsl:template>
+
+<xsl:template name="InvoiceHeader">
+	<thead>
+		<tr>
+			<td class="tablecolumnheader">
+				Invoice Number
+			</td>
+
+			<td class="tablecolumnheader" style="text-align:right;">
+				Total Additional Charges
+			</td>
+
+			<td class="tablecolumnheader" style="text-align:right;">
+				Total Tax
+			</td>
+
+			<td class="tablecolumnheader" style="text-align:right;">
+				Discount
+			</td>
+			<td class="tablecolumnheader" style="text-align:right;">
+				Line Total
+			</td>
+			<td class="tablecolumnheader" style="text-align:right;">
+				Total
+			</td>
+			<td  WIDTH="30%">
+			</td>
+		</tr>
+	</thead>
+
+</xsl:template>
+
+
+
+<xsl:template name="DisplayShipmentChargeSummary">
+	<xsl:param name="InvoiceNo">0</xsl:param>
+	<xsl:param name="TotalCharges">0</xsl:param>
+	<xsl:param name="TotalTax">0</xsl:param>
+	<xsl:param name="Discount">0</xsl:param>
+	<xsl:param name="LineSubTotal">0</xsl:param>
+	<xsl:param name="OrderTotal">0</xsl:param>
+
+	<tbody>
+		<tr>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$InvoiceNo"/>
+			</td>
+
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$TotalCharges"/>
+			</td>
+
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$TotalTax"/>
+			</td>
+
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$Discount"/>
+			</td>
+
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$LineSubTotal"/>
+			</td>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="$OrderTotal"/>
+			</td>
+		</tr>
+	</tbody>
+
+</xsl:template>
+
+</xsl:stylesheet>

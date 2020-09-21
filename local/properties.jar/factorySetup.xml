@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="factory setup support"
+         basedir="."
+         default="all">
+
+<!--properties-->
+    <property file="${dir.properties}${file.separator}sandbox.cfg" 
+              prefix="sandbox"/>
+    <property name="dir.factorysetup"
+              value="${basedir}${file.separator}" />
+    <property name="dir.factorysetup.xmls"
+              value="${dir.factorysetup}${file.separator}XMLS"/>
+    <property name="file.installer"
+              value="${dir.factorysetup}${file.separator}installer.xml"/>
+    <property name="file.vendor.properties"
+              value="${dir.properties}${file.separator}servers.properties"/>
+    	<condition property="sysproperty.key1"   
+value="os400.security.properties">
+        <and>
+            <isset property="OS400" />
+            <equals arg1="${java.vm.name}" arg2="Classic VM"/>
+               </and>
+    </condition>
+    <condition property="sysproperty.key1" value="java.security.properties" >   
+         <isset property="OS400" />   
+    </condition>   
+    <condition property="sysproperty.value1"   
+               value="${sandbox.JAVA_LIB_SECURITY_DIR}/java.security">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    <condition property="sysproperty.key2"   
+               value="java.ext.dirs">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    <condition property="sysproperty.value2"   
+               value="${sandbox.JAVA_LIB_EXT_DIR}">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    
+    <condition property="sysproperty.key3"   
+               value="java.endorsed.dirs">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    <condition property="sysproperty.value3"   
+               value="${sandbox.JAVA_LIB_ENDORSED_DIR}">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    <condition property="sysproperty.key4"   
+               value="os400.jit.nocompile.class">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    <condition property="sysproperty.value4"   
+               value="com/sterlingcommerce/woodstock/services/sapsuite/common/InstanceParameter">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    
+    <condition property="additionalAntJavaTaskArgs" value="${sandbox.ADDITIONAL_ANT_JAVA_TASK_ARGS}" else="" >
+        <isset property="sandbox.ADDITIONAL_ANT_JAVA_TASK_ARGS"/>
+    </condition>
+
+    
+    <condition property="sysproperty.key5"   
+               value="java.version">   
+         <isset property="sandbox.OS400" />   
+    </condition>
+        <condition property="sysproperty.value5"   
+               value="${sandbox.JAVA_VERSION}">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+    
+    
+    <condition property="java.fork.flag"   
+               value="false">   
+         <isset property="sandbox.JAVA_NO_FORK_FLAG" />   
+    </condition>   
+    
+    <condition property="java.fork.flag"   
+               value="true">   
+         <not>   
+         <isset property="sandbox.JAVA_NO_FORK_FLAG" />   
+         </not>   
+    </condition>   
+    
+    <condition property="javac.fork.flag"   
+               value="false">   
+         <isset property="sandbox.JAVAC_NO_FORK_FLAG" />   
+    </condition>   
+    
+    <condition property="javac.fork.flag"   
+               value="true">   
+         <not>   
+         <isset property="sandbox.JAVAC_NO_FORK_FLAG" />   
+         </not>   
+    </condition>   
+
+    <condition property="load.factorysetup" value="true">   
+		<or>
+		<not>
+         	<isset property="sandbox.LOAD_FACTORY_SETUP" />   
+		</not>
+		<isTrue value="${sandbox.LOAD_FACTORY_SETUP}"/>
+		</or>
+    </condition>   
+
+    <condition property="additionalAntJavaTaskArgs" value="${sandbox.ADDITIONAL_ANT_JAVA_TASK_ARGS}" else="" >
+        <isset property="sandbox.ADDITIONAL_ANT_JAVA_TASK_ARGS"/>
+    </condition>
+
+
+
+	<condition property="load.factorysetup.audit" value="true">   
+       <and>
+			<isset property="sandbox.AUDIT_FACTORY_SETUP" />   
+			<isTrue value="${sandbox.AUDIT_FACTORY_SETUP}"/>
+	  </and>
+    </condition>
+
+	<import file="AFCTasks.xml" />
+
+<!--create and install temporary resources jar to get us past the YCP0005 errors-->
+    <target name="-tempResourceJar">
+        <AFCecho message="Creating temporary resource jar: begin"/>
+        <jar destfile="${sandbox.SYSTMP_DIR}/resources.jar">
+            <zipfileset dir="${sandbox.INSTALL_DIR}/resources" prefix="resources">
+                <exclude name="**/*.in"/>
+            </zipfileset>
+			<zipfileset dir="${sandbox.INSTALL_DIR}/repository/entity" prefix="database" includes="entities.txt" />
+			<zipfileset dir="${sandbox.INSTALL_DIR}/repository/datatypes" includes="datatypes.xml" fullpath="template/api/YFSDataTypes.xml" />
+			<zipfileset dir="${sandbox.INSTALL_DIR}/repository/datatypes" includes="extn/datatypes.xml" fullpath="template/api/extn/YFSDataTypes.xml" />
+			<zipfileset dir="${sandbox.INSTALL_DIR}/repository/xapi/template/merged" prefix="template"/>
+			<zipfileset dir="${sandbox.INSTALL_DIR}/repository/entity" prefix="database/entities">
+				<exclude name="entities.txt" />
+			</zipfileset>
+        </jar>
+        <AFCecho message="Creating temporary resource jar: complete"/>
+    </target>
+
+<!--target: factory setup-->
+
+    <target name="-factorysetup" depends="override-schema" if="load.factorysetup" >
+    	<property name="apiresource.skip" value="false" />
+    	<property name="apiresource.logfile" value="" />
+       	<property name="apiresource.infile" value="" />
+    	
+        <java fork="true" failonerror="true" maxmemory="512m"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" >
+		<classpath>
+			<pathelement location="${sandbox.JAR_DIR}/bootstrapper.jar" />
+			<fileset dir="${sandbox.JAR_DIR}/icu4j">
+				<include name="**/*.jar"/>
+			</fileset>
+		</classpath>
+			<jvmarg line="${additionalAntJavaTaskArgs}"/>
+            <arg value="-p" />
+            <arg value="${sandbox.SYSTMP_DIR}/resources.jar" />
+            <arg value="-p" />
+            <arg value="${sandbox.INSTALL_DIR}/repository/xapi" />
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />            
+	    <arg value="-ap" />
+	    <arg value="${sandbox.INSTALL_DIR}/repository/bin" />
+	    <arg value="-class" />
+            <arg value="com.yantra.tools.migrator.MigratorMain" />            
+            <arg value="-invokeargs" />            
+            
+	<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+	<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+	<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+	<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+	<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+
+            <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+			<sysproperty key="DISABLE_DS_EXTENSIONS" value="Y"/>
+        	<sysproperty key="DISABLE_EXTENSIONS" value="Y"/>
+        	<sysproperty key="yfs.validatePKPrefix" value="N" />
+            <sysproperty key="yfs.dblogin.yantraschema.override" value="${sql.schema}"/>
+            <sysproperty key="yfs.migrator.xml.directory" value="${dir.factorysetup.xmls}"/>
+            <sysproperty key="audit.required" value="${load.factorysetup.audit}"/>
+            <sysproperty key="vendor" value="shell"/>
+            <sysproperty key="vendorFile" value="${file.vendor.properties}"/>
+			<sysproperty key="override.pk.generation" value="${sandbox.OVERRIDE_LOAD_DEFAULTS_PK_GEN}"/>
+        	<sysproperty key="apiresource.skip" value="${apiresource.skip}" />
+        	<sysproperty key="apiresource.logfile" value="${apiresource.logfile}" />
+           	<sysproperty key="apiresource.infile" value="${apiresource.infile}" />
+            <arg value="-xml" />
+            <arg value="${file.installer}" />
+        </java>
+    </target>
+    <target name="override-schema" >
+        <condition property="sql.schema" value="${sandbox.DB_SCHEMA_OWNER}" else="${sandbox.DB_USER}"  >
+            <isset property="sandbox.DB_SCHEMA_OWNER" />
+        </condition>
+    </target>
+
+
+<!--target: all-->
+    <target name="all" depends="-tempResourceJar, -factorysetup"/>
+</project>
+ 

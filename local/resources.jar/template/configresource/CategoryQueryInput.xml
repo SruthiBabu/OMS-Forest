@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery QueryType="Category">
+   <Category DisplayName="Category" TableName="YFS_CATEGORY" IconFile="item.gif" ShowNotButtons="Y">
+	  <CategoryID Type="Leaf" Id="CategoryID" DisplayName="CategoryID" DataType="Text-40" ControlType="Text" ColumnName="CATEGORY_ID">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="CategoryID" IsReqd="" OverRidingClass=""/>
+	  </CategoryID>
+	  <Status Type="Leaf" Id="Status" DisplayName="Status" DataType="EnumShortStatus" ControlType="Combo" ColumnName="STATUS">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="Status" IsReqd="" OverRidingClass="" IsStatic="true">
+			<Status Desc="Published" Code="3000"/>
+			<Status Desc="Held" Code="2000"/>
+		</MasterData>
+	  </Status>
+	  <CategoryPath Type="Leaf" Id="CategoryPath" DisplayName="CategoryPath" DataType="Text-800" ControlType="Text" ColumnName="CATEGORY_PATH">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="CategoryPath" IsReqd="" OverRidingClass=""/>
+	  </CategoryPath>
+   </Category>
+</AdvancedQuery>

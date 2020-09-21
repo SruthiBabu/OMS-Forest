@@ -1,0 +1,55 @@
+<html>
+    <body>
+        <form name="frmGetOBContainer" target="/console/rfobsorting.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="2" name="lblOBCntr" size="5" subtype="Label" value="Mobile_Pick"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblContainer"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblContainer"
+                                    type="text" validate="false" value="Mobile_Case_ID_Pallet_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Container/@ContainerSCM"
+                                    name="txtContainer"
+                                    outputbinding="xml:/Container/@ContainerSCM"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Container/@ContainerSCM"
+                                    type="text" validate="true"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Container/@TransactionId"
+                                    name="txtTranId"
+                                    outputbinding="xml:/Container/@TransactionId"
+                                    size="20" subtype="Hidden"
+                                    tag="xml:/Container/@TransactionId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfobsorting.ppc?action=frmGetOBContainerValtxtContainer"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

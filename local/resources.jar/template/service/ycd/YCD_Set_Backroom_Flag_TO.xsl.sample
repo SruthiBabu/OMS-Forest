@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+
+    <xsl:output indent="yes"/>
+
+    
+    <xsl:template match="MultiApi">
+      <MultiApi>
+			<xsl:element name="API">
+				<xsl:attribute name="Name">
+					<xsl:text>changeShipment</xsl:text>
+				</xsl:attribute>
+				<xsl:element name="Input">    
+			    		<xsl:element name="Shipment">
+         
+ 						<xsl:for-each select="/MultiApi/API[(normalize-space(@Name) = &quot;getRuleDetails&quot;)]" >
+								<xsl:for-each select="Output/Rules">
+									<xsl:if test="@RuleSetFieldName='WSC_TO_BP_REQD'">
+										<xsl:attribute name="BackroomPickRequired">
+											<xsl:value-of select="@RuleSetValue"/>
+										 </xsl:attribute>
+										 <xsl:attribute name="PickTicketPrinted">
+											<xsl:text>N</xsl:text>
+										 </xsl:attribute>
+									</xsl:if>
+								</xsl:for-each>
+						</xsl:for-each> 
+
+						<xsl:for-each select="/MultiApi/API[(normalize-space(@Name) = &quot;getShipmentDetails&quot;)]" >
+	      		      				<xsl:for-each select="Output/Shipment" >		
+	      								<xsl:attribute name="ShipmentKey">
+	      							<xsl:value-of select="@ShipmentKey"/>
+	      						</xsl:attribute>	      			
+	      					</xsl:for-each>
+						</xsl:for-each>      
+              				</xsl:element>
+				</xsl:element>
+				<Template>	
+					  <Shipment ShipmentKey="" ShipmentNo="" ShipNode="" SellerOrganizationCode="" BackroomPickRequired=""/>
+				</Template>                                 
+			</xsl:element>
+
+			<xsl:element name="API">
+				<xsl:attribute name="Name">
+					<xsl:text>changeShipmentStatus</xsl:text>
+				</xsl:attribute>
+				<xsl:element name="Input">    
+			    		<xsl:element name="Shipment">
+         
+							<xsl:for-each select="/MultiApi/API[(normalize-space(@Name) = &quot;getRuleDetails&quot;)]" >
+								<xsl:for-each select="Output/Rules">
+									<xsl:if test="@RuleSetFieldName='WSC_TO_BP_REQD'">
+										<xsl:if test="@RuleSetValue='Y'">
+											<xsl:attribute name="BaseDropStatus">
+												<xsl:text>1100.70.06.10</xsl:text>
+											</xsl:attribute>
+										</xsl:if>
+										
+										<xsl:if test="@RuleSetValue='N'">
+											<xsl:attribute name="BaseDropStatus">
+												<xsl:text>1100.70.06.50</xsl:text>
+											</xsl:attribute>
+											
+										</xsl:if>
+									</xsl:if>
+								</xsl:for-each>
+							</xsl:for-each> 
+
+							<xsl:for-each select="/MultiApi/API[(normalize-space(@Name) = &quot;getShipmentDetails&quot;)]" >
+	      		      					<xsl:for-each select="Output/Shipment" >		
+	      								<xsl:attribute name="ShipmentKey">
+	      									<xsl:value-of select="@ShipmentKey"/>
+	      								</xsl:attribute>
+									<xsl:if test="@DocumentType='0006'">
+										<xsl:attribute name="TransactionId">
+	      										<xsl:text>YCD_CHECK_FOR_BACKROOM_PICK.0006</xsl:text>
+	      									</xsl:attribute>
+									</xsl:if>
+	      							</xsl:for-each>
+							</xsl:for-each>      
+              				</xsl:element>
+				</xsl:element>                                
+			</xsl:element>
+			
+			<xsl:if test="/MultiApi/API[@Name='getRuleDetails']/Output/Rules[@RuleSetFieldName='WSC_TO_BP_REQD']/@RuleSetValue='Y' and 
+			/MultiApi/API[@Name='getShipmentDetails']/Output/Shipment/@Code != 'CREATED_AT_NODE' ">
+			<API FlowName="ISFCreateSIMPickRequest">
+				<Input>
+					<Shipment>
+						<xsl:attribute name="ShipmentKey">
+							<xsl:value-of select="/MultiApi/API[@Name='getShipmentDetails']/Output/Shipment/@ShipmentKey"/>
+						</xsl:attribute>
+					</Shipment>
+				</Input>
+				
+			</API>
+			</xsl:if>
+        </MultiApi>
+    </xsl:template>
+
+</xsl:stylesheet>

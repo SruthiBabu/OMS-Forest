@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DBSchema>
+  <!--This is a sample extension file to prevent the upgrade of the below columns to nullable and or varchar.  See the Upgrade Guide for more information.-->
+  <Entities>
+    <Entity TableName="YFS_ACTIVITY_DEMAND">
+      <Attributes>
+        <Attribute ColumnName="WORK_ORDER_KEY" Name="Work_Order_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_CONTAINER_DETAILS">
+      <Attributes>
+        <Attribute ColumnName="ORDER_RELEASE_KEY" Name="Order_Release_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_LINE_KEY" Name="Order_Line_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_IBA_ORD_DEMAND_VW">
+      <Attributes>
+        <Attribute ColumnName="SHIP_NODE" Name="Ship_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="PROCURE_FROM_NODE" Name="Procure_From_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="CHAINED_TO_ORDER_LINE_KEY" Name="Chained_To_Order_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="CHAINED_FROM_ORDER_LINE_KEY" Name="Chained_From_Order_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="OVERRIDE_PRODUCT_CLASS" Name="Override_Product_Class" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="EXCHANGE_TYPE" Name="Exchange_Type" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="BILL_TO_ID" Name="Bill_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIP_TO_ID" Name="Ship_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_IBA_RESV_DEMAND_VW">
+      <Attributes>
+        <Attribute ColumnName="CHAINED_FROM_ORDER_LINE_KEY" Name="Chained_From_Order_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="EXCHANGE_TYPE" Name="Exchange_Type" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="BILL_TO_ID" Name="Bill_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIP_TO_ID" Name="Ship_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_INBOX">
+      <Attributes>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="WORK_ORDER_KEY" Name="Work_Order_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_INVTDMDDTL_VW">
+      <Attributes>
+        <Attribute ColumnName="BUYER_ORGANIZATION_CODE" Name="Buyer_Organization_Code" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_LOAD">
+      <Attributes>
+        <Attribute ColumnName="DELIVERY_PLAN_KEY" Name="Delivery_Plan_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="SEAL_NO" Name="Seal_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="TRAILER_NO" Name="Trailer_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="PRO_NO" Name="Pro_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="POD_NO" Name="Pod_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="BOL_NO" Name="Bol_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="APPOINTMENT_NO" Name="Appointment_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="MARK_FOR_KEY" Name="Mark_For_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="BUYER_ORGANIZATION_CODE" Name="Buyer_Organization_Code" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="MANIFEST_KEY" Name="Manifest_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="AIRWAY_BILL_NO" Name="Airway_Bill_No" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_LOAD_SHIPMENT">
+      <Attributes>
+        <Attribute ColumnName="BOL_NO" Name="Bol_No" DataType="DocumentNo"/>
+        <Attribute ColumnName="PRO_NO" Name="Pro_No" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_LOAD_STOP">
+      <Attributes>
+        <Attribute ColumnName="CARRIER_APPOINTMENT_NO" Name="Carrier_Appointment_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_LOADED_CONTAINER">
+      <Attributes>
+        <Attribute ColumnName="TRAILER_NO" Name="Trailer_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_LOCN_INVENTORY_AUDIT">
+      <Attributes>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="BOL_NO" Name="Bol_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_MANIFEST">
+      <Attributes>
+        <Attribute ColumnName="MANIFEST_NO" Name="Manifest_No" DataType="DocumentNo"/>
+        <Attribute ColumnName="TRAILER_NO" Name="Trailer_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_ORDER_HEADER">
+      <Attributes>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" DataType="DocumentNo"/>
+        <Attribute ColumnName="SOURCING_CLASSIFICATION" Name="Sourcing_Classification" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="BUYER_ORGANIZATION_CODE" Name="Buyer_Organization_Code" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="BILL_TO_ID" Name="Bill_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="VENDOR_ID" Name="Vendor_ID" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="ID-24"/>
+        <Attribute ColumnName="SHIP_TO_ID" Name="Ship_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIP_NODE" Name="Ship_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="RECEIVING_NODE" Name="Receiving_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="MARK_FOR_KEY" Name="Mark_For_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="DEFAULT_TEMPLATE" Name="Default_Template" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_PURPOSE" Name="Order_Purpose" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="RETURN_OH_KEY_FOR_EXCHANGE" Name="Return_Oh_Key_For_Exchange" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="EXCHANGE_TYPE" Name="Exchange_Type" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ALLOCATION_RULE_ID" Name="Allocation_Rule_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="ID-10"/>
+        <Attribute ColumnName="CONTACT_KEY" Name="Contact_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="NOTIFICATION_TYPE" Name="Notification_Type" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="NOTIFICATION_REFERENCE" Name="Notification_Reference" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="ENTERED_BY" Name="Entered_By" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="PAYMENT_RULE_ID" Name="Payment_Rule_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="PAYMENT_STATUS" Name="Payment_Status" DataType="ShortStatus"/>
+        <Attribute ColumnName="CUSTOMER_EMAILID" Name="Customer_Emailid" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="PRICE_PROGRAM_KEY" Name="Price_Program_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="OPTIMIZATION_TYPE" Name="Optimization_Type" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_ORDER_INVOICE">
+      <Attributes>
+        <Attribute ColumnName="DERIVED_FROM_ORDER_HEADER_KEY" Name="Derived_From_Order_Header_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_ORDER_LINE">
+      <Attributes>
+        <Attribute ColumnName="DEPENDENT_ON_LINE_KEY" Name="Dependent_On_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="CURRENT_WORK_ORDER_KEY" Name="Current_Work_Order_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="DEPENDENCY_SHIPPING_RULE" Name="Dependency_Shipping_Rule" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="MERGE_NODE" Name="Merge_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SOURCE_FROM_ORGANIZATION" Name="Source_From_Organization" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="CHAINED_FROM_ORDER_LINE_KEY" Name="Chained_From_Order_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="CHAINED_FROM_ORDER_HEADER_KEY" Name="Chained_From_Order_Header_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="DERIVED_FROM_ORDER_LINE_KEY" Name="Derived_From_Order_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="DERIVED_FROM_ORDER_HEADER_KEY" Name="Derived_From_Order_Header_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="DERIVED_FROM_ORDER_RELEASE_KEY" Name="Derived_From_Order_Release_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="DISTRIBUTION_RULE_ID" Name="Distribution_Rule_Id" Nullable="false" DefaultValue="' '  " VirtualDefaultValue="' '  "/>
+        <Attribute ColumnName="SHIPNODE_KEY" Name="Shipnode_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="PROCURE_FROM_NODE" Name="Procure_From_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIP_TO_KEY" Name="Ship_To_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="MARK_FOR_KEY" Name="Mark_For_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIP_TO_ID" Name="Ship_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SUPPLIER_CODE" Name="Supplier_Code" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="Text-30"/>
+        <Attribute ColumnName="RECEIVING_NODE" Name="Receiving_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIPMENT_CONSOL_GROUP_ID" Name="Shipment_Consolidation_Group_Id" DataType="ShipNode"/>
+        <Attribute ColumnName="ORIG_ORDER_LINE_KEY" Name="Orig_Order_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_ORDER_LINE_SCHEDULE">
+      <Attributes>
+        <Attribute ColumnName="SHIP_NODE" Name="Ship_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="RECEIVING_NODE" Name="Receiving_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="OVERRIDE_PRODUCT_CLASS" Name="Override_Product_Class" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="SOURCE_FROM_ORGANIZATION" Name="Source_From_Organization" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="PROCURE_FROM_NODE" Name="Procure_From_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_ORDER_RELEASE">
+      <Attributes>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="WORK_ORDER_KEY" Name="Work_Order_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="WORK_ORDER_APPT_KEY" Name="Work_Order_Appt_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="MERGE_NODE" Name="Merge_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="BUYER_ORGANIZATION_CODE" Name="Buyer_Organization_Code" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="BILL_TO_ID" Name="Bill_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIP_TO_ID" Name="Ship_To_Id" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="PICK_LIST_NO" Name="Pick_List_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SHIPMENT_CONSOL_GROUP_ID" Name="Shipment_Consolidation_Group_Id" DataType="ShipNode"/>
+        <Attribute ColumnName="SALES_ORDER_NO" Name="Sales_Order_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="MARK_FOR_KEY" Name="Mark_For_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="NOTIFICATION_TYPE" Name="Notification_Type" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="NOTIFICATION_REFERENCE" Name="Notification_Reference" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="SUPPLIER_CODE" Name="Supplier_Code" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="Text-30"/>
+        <Attribute ColumnName="RECEIVING_NODE" Name="Receiving_Node" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_ORDER_RELEASE_STATUS">
+      <Attributes>
+        <Attribute ColumnName="ORDER_RELEASE_KEY" Name="Order_Release_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="CHAINED_TO_ORDER_LINE_KEY" Name="Chained_To_Order_Line_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="CHAINED_TO_ORDER_HEADER_KEY" Name="Chained_To_Order_Header_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_PRODUCTIVITY">
+      <Attributes>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="ORDER_LINE_KEY" Name="Order_Line_Key" Nullable="false" DefaultValue="' '  " VirtualDefaultValue="' '  "/>
+        <Attribute ColumnName="ORDER_RELEASE_KEY" Name="Order_Release_Key" Nullable="false" DefaultValue="' '  " VirtualDefaultValue="' '  "/>
+        <Attribute ColumnName="BOL_NO" Name="Bol_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="TRAILER_NO" Name="Trailer_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="MANIFEST_NO" Name="Manifest_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="WORK_ORDER_KEY" Name="Work_Order_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_RECEIPT_LINE">
+      <Attributes>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_RELEASE_KEY" Name="Order_Release_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_LINE_KEY" Name="Order_Line_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_RECEIVING_PREFERENCE">
+      <Attributes>
+        <Attribute ColumnName="BUYER_ORGANIZATION_CODE" Name="Buyer_Organization_Code" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_RESPONSE">
+      <Attributes>
+        <Attribute ColumnName="ENTERED_BY" Name="Entered_By" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_SHIPMENT">
+      <Attributes>
+        <Attribute ColumnName="PICK_LIST_NO" Name="Pick_List_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="MERGE_NODE" Name="Merge_Node" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="PICKTICKET_NO" Name="Pickticket_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="ID-24"/>
+        <Attribute ColumnName="RECEIVING_NODE" Name="Receiving_Node" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="SHIPMENT_CONSOL_GROUP_ID" Name="Shipment_Consolidation_Group_Id" DataType="ShipNode"/>
+        <Attribute ColumnName="BILL_TO_CUSTOMER_ID" Name="Bill_To_Customer_Id" DataType="CustomerId"/>
+        <Attribute ColumnName="PARENT_SHIPMENT_KEY" Name="Parent_Shipment_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="SEAL_NO" Name="Seal_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="TRACKING_NO" Name="Tracking_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="TRAILER_NO" Name="Trailer_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="MANIFEST_NO" Name="Manifest_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="PRO_NO" Name="Pro_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="POD_NO" Name="Pod_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="BOL_NO" Name="Bol_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="IT_NO" Name="It_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="Text-30"/>
+        <Attribute ColumnName="APPOINTMENT_NO" Name="Appointment_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="DELIVERY_PLAN_KEY" Name="Delivery_Plan_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="BUYER_ORGANIZATION_CODE" Name="Buyer_Organization_Code" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="MANIFEST_KEY" Name="Manifest_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_RELEASE_KEY" Name="Order_Release_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="WORK_ORDER_KEY" Name="Work_Order_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="WORK_ORDER_APPT_KEY" Name="Work_Order_Appt_Key" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="MARK_FOR_KEY" Name="Mark_For_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="AIRWAY_BILL_NO" Name="Airway_Bill_No" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_SHIPMENT_CONTAINER">
+      <Attributes>
+        <Attribute ColumnName="MANIFEST_KEY" Name="Manifest_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="TRACKING_NO" Name="Tracking_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="MANIFEST_NO" Name="Manifest_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_SHIPMENT_LINE">
+      <Attributes>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_RELEASE_KEY" Name="Order_Release_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_LINE_KEY" Name="Order_Line_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+        <Attribute ColumnName="REQUESTED_TAG_NUMBER" Name="Requested_Tag_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' "/>
+        <Attribute ColumnName="MARK_FOR_KEY" Name="Mark_For_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="SHIPMENT_CONSOL_GROUP_ID" Name="Shipment_Consolidation_Group_Id" DataType="ShipNode"/>
+        <Attribute ColumnName="EXTERNAL_RELEASE_IDENTIFIER" Name="External_Release_Identifier" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_TASK">
+      <Attributes>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="ORDER_HEADER_KEY" Name="Order_Header_Key" Nullable="false" DefaultValue="' '  " VirtualDefaultValue="' '  "/>
+        <Attribute ColumnName="ORDER_LINE_KEY" Name="Order_Line_Key" Nullable="false" DefaultValue="' '  " VirtualDefaultValue="' '  "/>
+        <Attribute ColumnName="ORDER_RELEASE_KEY" Name="Order_Release_Key" Nullable="false" DefaultValue="' '  " VirtualDefaultValue="' '  "/>
+        <Attribute ColumnName="BOL_NO" Name="Bol_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="TRAILER_NO" Name="Trailer_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="MANIFEST_NO" Name="Manifest_No" Nullable="false" DefaultValue="' ' " VirtualDefaultValue="' ' " DataType="DocumentNo"/>
+        <Attribute ColumnName="WORK_ORDER_KEY" Name="Work_Order_Key" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_WORK_ORDER">
+      <Attributes>
+        <Attribute ColumnName="BUYER_ORGANIZATION_CODE" Name="Buyer_Organization_Code" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="ORDER_NO" Name="Order_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '" DataType="DocumentNo"/>
+      </Attributes>
+    </Entity>
+  </Entities>
+</DBSchema>

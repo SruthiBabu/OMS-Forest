@@ -1,0 +1,147 @@
+<html>
+    <body>
+        <form name="frmSKUPickingInstructions" target="/console/rftask.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@TaskKey"
+                                    name="txtTaskKey"
+                                    outputbinding="xml:/Task/@TaskKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EnterpriseKey"
+                                    name="txtEnterprise"
+                                    outputbinding="xml:/Task/@EnterpriseKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EnterpriseKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" name="lblPick" size="7" subtype="Label" value="Mobile_Pick-"
+                                    type="text" validate="false"/>
+                                    <input col="8"
+                                    inputbinding="xml:/Task/@TaskType"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="12" subtype="Label"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    outputbinding="xml:/Task/@FromItemInstructionsScreen"
+                                    size="10" subtype="Hidden" value="Y"
+                                    tag="binding=xml:/Task/@FromItemInstructionsScreen"
+                                    type="hidden" validate="false"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemID"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+									inputbinding="xml:/Item/@DisplayItemId"
+									name="txtDisplayItemId" size="20"
+	                                outputbinding="xml:/Item/@DisplayItemId"
+                                    subtype="ProtectedText"
+									tag="binding=xml:/Item/@DisplayItemId"
+                                    type="Text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/@ItemId"
+                                    mandatory="false"
+                                    name="txtItemID"
+                                    outputbinding="xml:/Task/Inventory/@ItemId"
+                                    size="20"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Task/Inventory/@ItemId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Item/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Task/Inventory/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/Inventory/@UnitOfMeasure"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblInstr" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblInstr"
+                                    type="text" validate="false" value="Mobile_Instructions"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table binding="/List/@Instruction"
+                                    col="1" gridcols="2"
+                                    gridrows="4" id="Instruction"
+                                    mandatory="false"
+                                    name="grdItemInstructionList"
+                                    namespace="List" size="20"
+                                    tag="binding=grdItemInstructionList" validate="false">
+                                    <tr>
+                                    <td>
+                                    <input colno="0" colName=" "
+                                    size="0"
+                                    type="hidden" value=""/>
+                                    <input colno="1" colName="Instruction"
+                                    inputbinding="xml:/Instruction/@InstructionText"
+                                    size="20" type="text"/>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="5" subtype="Command"
+                                    type="button"
+                                    url="/console/rftask.ppc?action=frmTaskCheckAttributes"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

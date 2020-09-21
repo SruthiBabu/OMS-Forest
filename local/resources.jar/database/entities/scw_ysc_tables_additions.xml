@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+	<Entities>
+          <Entity TableName="YFS_LABEL_PREFERENCE" TableType="CONFIGURATION">
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LabelPreferences"
+                    ChildName="Label_Preference"
+                    ChildXMLName="LabelPreference"
+                    DeleteValidationError="YDB100177" Enforce="true"
+                    ForeignEntity="Equipment_Type" Name="Equipment_Type"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="EquipmentType">
+                    <Attribute Name="Equipment_Type" ParentName="Equipment_Type"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+		<Entity TableName="YFS_BATCH" TableType="TRANSACTION">
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Batches" ChildName="Batch"
+                    ChildXMLName="Batch" ForeignEntity="Equipment_Type"
+                    Name="EquipmentType" ReadOnly="true"
+                    Type="Bidirectional" XMLName="EquipmentType">
+                    <Attribute Name="Equipment_Type" ParentName="Equipment_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+		<Entity TableName="YFS_BATCH_RULE" TableType="CONFIGURATION">
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BatchRuleList"
+                    ChildName="BatchRule" ChildXMLName="BatchRule"
+                    DeleteValidationError="YDB100151"
+                    ForeignEntity="Equipment_Type" Name="EquipmentType"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="EquipmentType">
+                    <Attribute Name="Equipment_Type" ParentName="Equipment_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+	</Entities>
+</DBSchema>

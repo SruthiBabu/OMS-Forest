@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite, IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2005, 2017 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Sequence Cachesize="100" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YPM_ASSIGNMENTID" Startwith="100000000" TableType="TRANSACTION"/>
+    	<Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CHANGE_PROJECT_ID" Startwith="100000000" TableType="CONFIGURATION"/>
+       	<Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CHANGE_REQUEST_ID" Startwith="100000000" TableType="CONFIGURATION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CHANGE_PROJECT_FILE_ID" Startwith="1" TableType="CONFIGURATION"/>
+        <Sequence Cachesize="100" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_ORDER_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="9999999999"
+            Minvalue="1" Name="SEQ_YFS_INVOICE_NO" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="9999999"
+            Minvalue="1" Name="SEQ_YCP_NEGOTIATION_NO" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="9999999 "
+            Minvalue="1" Name="SEQ_YFS_SUB_LINE_NO" Startwith="10000 " TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_DELIVERY_PLAN_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_LOAD_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_SHIPMENT_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_MANIFEST_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CONTAINER_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_PICK_LIST_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_RECEIPT_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="100" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_TASK" Order="false" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="99999999"
+            Minvalue="1" Name="SEQ_YFS_BATCH" Startwith="10000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_LOCN_INVENTORY_AUDIT" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_COUNT_REQUEST_NO" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_MOVE_REQUEST" Startwith="10000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="99999"
+            Minvalue="1" Name="SEQ_YFS_WAVE_NO" Startwith="10000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_WORK_ORDER_NO" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_BOL_NO_SUFFIX" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CASE_SCM_SUFFIX" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_PALLET_SCM_SUFFIX" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="99999"
+            Minvalue="1" Name="SEQ_YFS_WAVE_SEQ_NO" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" ImplementedAsTable="Y" Increment="1"
+            Maxvalue="999999999" Minvalue="1"
+            Name="SEQ_YFS_SHIP_ADVICE_NO" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_DOCK_APPOINTMENT_NO" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_PLANNED_TASK_CAP_RESV_ID" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_OPEN_CONTAINER" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_FEDX_OPEN_SHIP_INDEX" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_STOP_DEL_REQ_ID" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CUSTOMER_ADDNL_ADDR_ID" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CUSTOMER_ID" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999"
+            Minvalue="1" Name="SEQ_TRAN_REQ_NO" Startwith="100000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="9999999999"
+            Minvalue="1" Name="SEQ_YPM_PRICELIST_LINE_KEY" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="9999999999"
+            Minvalue="1" Name="SEQ_YFS_MASS_AUDIT_ID" Startwith="1" TableType="TRANSACTION"/>
+		<Sequence Cachesize="10" Increment="1" Maxvalue="9999999999"
+            Minvalue="1" Name="SEQ_YFS_SEARCH_TRIGGER_ID" Startwith="1" TableType="TRANSACTION"/>
+		<Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_ASSIGNMENT_NO" Startwith="1" TableType="METADATA"/>
+		<Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_OPPORTUNITY_ID" Startwith="100000000" TableType="TRANSACTION"/>
+         <Sequence Cachesize="10" Increment="1" ImplementedAsTable="Y" Maxvalue="9999999999"
+            Minvalue="1" Name="SEQ_YFS_ITEM_ATTR_KEY" Startwith="1" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" ImplementedAsTable="Y" Maxvalue="9999999999"
+            Minvalue="1" Name="SEQ_YFS_ADDNL_ATTR_KEY" Startwith="1" TableType="TRANSACTION"/>
+		<Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_CUSTOMER_CONTACT_ID" Startwith="100000000" TableType="TRANSACTION"/>
+		<Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_LOGIN_ID" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YFS_TRAN_INFO_ID" Startwith="100000000" TableType="TRANSACTION"/>
+        <Sequence Cachesize="10" Increment="1" Maxvalue="999999999"
+            Minvalue="1" Name="SEQ_YPM_PRICELISTLINE_ATTRID" Startwith="1" TableType="CONFIGURATION"/>
+ </Entities>
+</DBSchema>

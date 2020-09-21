@@ -1,0 +1,53 @@
+<html>
+    <body>
+        <form name="frmClosePallet" target="/console/rfpalletbuild.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="2" mandatory="false"
+                                    size="19" subtype="Label"
+                                    tag="binding=lblPalletBuild"
+                                    type="text" validate="false" value="Mobile_Close_Pallet_Case"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblPalletId"
+                                    type="text" validate="false" value="Mobile_Container_SCM"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding=""
+                                    mandatory="false"
+                                    name="txtPalletId"
+                                    outputbinding="xml:/Container/@PalletId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Container/@PalletId"
+                                    type="text" validate="always"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="10" hotkey="F3"
+                                    name="Go" size="3"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfpalletbuild.ppc?action=frmClosePalletValtxtPalletId"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

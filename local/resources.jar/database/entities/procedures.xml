@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema Name="procedures">
+  <Entities>
+    <Procedure Name="yfs_sp_getseqno" SqlServerProcedure="CREATE PROCEDURE yfs_sp_getseqno @seqname CHARACTER(30), @generatedno INT OUTPUT AS BEGIN BEGIN transaction S1 SAVE TRANSACTION KEY_1 declare @insert_statement as varchar(2000) set @insert_statement = 'insert into YFS_' + @seqname +'(field1) values (1)' exec(@insert_statement) SELECT @generatedno = @@Identity ROLLBACK TRANSACTION KEY_1 commit transaction S1 END"/>
+    <Procedure Name="yfs_sp_getkey" SqlServerProcedure="CREATE PROCEDURE yfs_sp_getkey @key VARCHAR(24) OUTPUT AS BEGIN DECLARE @sDatepart CHARACTER(14), @seq_no INT EXECUTE yfs_sp_getseqno 'SEQ_KEY', @seq_no OUTPUT select @sDatepart = rtrim(convert(char,getdate() ,112)) + replace(convert(char, getdate() ,108),':','') select @key = @sDatepart + right(rtrim(convert(char,@seq_no)),9) END"  /> 
+  </Entities>
+</DBSchema>

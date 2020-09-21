@@ -1,0 +1,85 @@
+<html>
+    <body>
+        <form name="frmTaskCriteria" target="/console/rftask.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="CurrentInnerPanelID"
+                                    size="15" subtype="Hidden"
+                                    tag="binding=CurrentInnerPanelID"
+                                    type="hidden" validate="false" value="rftaskD1IP1"/>
+                                    <input col="1" name="entitybase"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=entitybase"
+                                    type="hidden" validate="false" value="/rf/wms/task"/>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblTask"
+                                    type="text" validate="false" value="Mobile_Criteria"/>
+									<input col="1"
+                                    outputbinding="xml:/Task/@FromTaskController"
+                                    size="10" subtype="Hidden" value="Y"
+                                    tag="binding=xml:/Task/@FromTaskController"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblEquipment"
+                                    type="text" validate="false" value="Mobile_Equipment_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lbllocation"
+                                    type="text" validate="false" value="Mobile_Start_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rftask.ppc?action=frmTaskController"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

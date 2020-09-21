@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ Licensed Materials - Property of IBM
+
+ IBM Sterling Selling and Fullfillment Suite
+
+ (c) Copyright IBM Corp. 2007 All Rights Reserved.
+
+ US Government Users Restricted Rights - Use, duplication or disclosure restricted
+ by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+    <Entities>
+    	<Entity Description="This table stores the BOM header." EntityType="TRANSACTION/MASTER" Module="yic"
+			ListXMLName="BOMHeaderList" Name="BOM_Header" Prefix="YIC_" TableName="YIC_BOM_HEADER"
+			Extensible="Y" XMLName="BOMHeader" HasHistory="Y" >
+            <TableType Name="MASTER"/>
+            <TableType Name="TRANSACTION"/>
+			<Attributes>
+				<Attribute ColumnName="BOM_HEADER_KEY" DataType="Key" Name="BOM_Header_Key"
+					Description="Primary key attribute of YIC_BOM_HEADER table." DefaultValue="' '"
+					Nullable="false" XMLName="BOMHeaderKey" />
+				<Attribute ColumnName="BOM_ID" DataType="Key" Name="BOM_Id"
+					Description="Configuration Id of the BOM."
+					Nullable="false" XMLName="BOMId" DefaultValue="' '" />
+				<Attribute ColumnName="SKU_NAME" DataType="Text-120" Name="SKU"
+					Description="ItemID of the product that this configuration represents."
+					Nullable="true" XMLName="SKU" />
+				<Attribute ColumnName="TYPE" DataType="Text-120"
+					Name="Type" Description="Type of saved configuration type (preconfiguration, punchin, punchout, etc)."
+					Nullable="true" XMLName="Type" />
+  				<Attribute ColumnName="VERSION" DataType="PositiveInteger" Name="Version"
+	  				Description="Saved configuration BOM version number."
+  					Nullable="true" XMLName="Version" />
+				<Attribute ColumnName="CONTAINER_FLAG" DataType="Flag" Name="Container"
+					Description="Is the configuration a container?"
+					Nullable="true" XMLName="Container" />
+				<Attribute ColumnName="MODEL_NAME" DataType="Text-254" Name="ModelName"
+					Description="Model name for this configuration."
+					Nullable="true" XMLName="ModelName" />
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" DefaultValue="0 " XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyprogid"/>
+			</Attributes>
+			<PrimaryKey Name="YIC_BOM_HR_PK">
+				<Attribute ColumnName="BOM_HEADER_KEY" Name="BOM_Header_Key" />
+			</PrimaryKey>
+			<Indices>
+				<Index Name="YIC_BOM_HR_I1" Unique="true">
+					<Column Name="BOM_ID" />
+				</Index>
+			</Indices>
+			<RelationShips>
+            </RelationShips>
+		</Entity>
+		<Entity Description="This table stores the BOM lines that are associated with the BOM Header."
+			EntityType="TRANSACTION/MASTER" Module="yic" ListXMLName="BOMLineList" Name="BOM_Line" Prefix="YIC_"
+			Extensible="Y" XMLName="BOMLine" TableName="YIC_BOM_LINE" HasHistory="Y" LockingEntity="BOM_Header">
+            <TableType Name="MASTER"/>
+            <TableType Name="TRANSACTION"/>
+			<Attributes>
+				<Attribute ColumnName="BOM_LINE_KEY" DataType="Key" Name="BOM_Line_Key"
+					Description="Primary Key.  A unique record identifier for a saved configuration line."
+					Nullable="false" XMLName="BOMLineKey" DefaultValue="' '" />
+				<Attribute ColumnName="BOM_HEADER_KEY" DataType="Key" Name="BOM_Header_Key"
+					Description="BOM Header key for which the BOM lines are maintained."
+					Nullable="false" XMLName="BOMHeaderKey" DefaultValue="' '" />
+				<Attribute ColumnName="PARENT_LINE_KEY" DataType="Key" Name="Parent_Line_Key" Nullable="true"
+					Description="Key of the parent BOM line."
+					XMLName="ParentLineKey" />
+				<Attribute ColumnName="SKU_NAME" DataType="Text-120" Name="SKU"
+					Description="The sku for this line."
+					Nullable="true" XMLName="SKU" />
+				<Attribute ColumnName="UOM" DataType="UOM" Name="UOM"
+					Description="UOM of the product that this saved configuration line represents."
+					Nullable="true" XMLName="UOM" />
+				<Attribute ColumnName="NAME" DataType="Text-120" Name="Name"
+					Description="The name for this line."
+					Nullable="true" XMLName="Name" />
+				<Attribute ColumnName="DESCRIPTION" DataType="Text-480" Name="Description"
+					Description="The description for this line."
+					Nullable="true" XMLName="Description" />
+				<Attribute ColumnName="QUANTITY" DataType="Integer" Name="Quantity" Nullable="true"
+					Description="The quantity for this line."
+					XMLName="Quantity" />
+				<Attribute ColumnName="ITEM_ID" DataType="Integer" Name="ItemId" Nullable="true"
+					Description="unique configuration item number. This number is unique for a node in a model for a given version of that model."
+					XMLName="ItemId" />
+				<Attribute ColumnName="VALUE" DataType="Text-240"
+					Description="user entered value for the BOM line."
+					Name="ItemValue" Nullable="true" XMLName="ItemValue" >
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+				<Attribute ColumnName="VISIBLE" DataType="Flag" Name="Visible"
+					Description="Is this BOM line visible."
+					Nullable="true" XMLName="Visible" />
+				<Attribute ColumnName="PRICE" DataType="UnitPrice" Name="Price"
+					Description="Price for the item."
+					Nullable="true" XMLName="Price" />
+				<Attribute ColumnName="PRICE_LOCKED" DataType="Flag" Name="PriceLocked"
+					Description="Is the price fixed ?"
+					Nullable="true" XMLName="PriceLocked" />
+				<Attribute ColumnName="LI_KEY" DataType="Key" Name="CommerceItemKey"
+					Description="Is an optional key to a commerce line item."
+					Nullable="true" XMLName="CommerceItemKey" />
+				<Attribute ColumnName="RULE_PICK" DataType="Flag" Name="RulePick"
+					Description="Is the item picked by a rule ?"
+					Nullable="true" XMLName="RulePick" />
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" DefaultValue="0 " XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyprogid"/>
+			</Attributes>
+			<PrimaryKey Name="YIC_BOM_LI_PK">
+				<Attribute ColumnName="BOM_LINE_KEY" Name="BOM_Line_Key" />
+			</PrimaryKey>
+			<Indices>
+				<Index Name="YIC_BOM_LI_I1" Unique="false">
+					<Column Name="BOM_HEADER_KEY" />
+				</Index>
+				<Index Name="YIC_BOM_LI_I2" Unique="false">
+					<Column Name="PARENT_LINE_KEY" />
+				</Index>
+			</Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BOMLineList" ChildName="BOMLine" ChildXMLName="BOMLine"
+                    DeleteCascade="true" ForeignEntity="BOM_Header"
+                    Name="BOM_Header" Type="Bidirectional" XMLName="BOMHeader">
+                    <Attribute Name="BOM_Header_Key" ParentName="BOM_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" ForeignEntity="BOM_Line" ChildListXMLName="ChildBOMLineList"
+					ChildName="ChildBOMLine" Name="ChildBOMLine" Type="Bidirectional" XMLName="ChildBOMLine">
+					<Attribute Name="Parent_Line_Key" ParentName="BOM_Line_Key"/>
+				</RelationShip>
+            </RelationShips>
+            <OrderBy Value="PARENT_LINE_KEY,ITEM_ID"/>
+		</Entity>
+    	<Entity Description="This table stores the BOM messages that are associated with the BOM Header."
+			EntityType="TRANSACTION/MASTER" Module="yic" ListXMLName="BOMMessageList" Name="BOM_Message" Prefix="YIC_"
+			Extensible="Y" XMLName="BOMMessage" TableName="YIC_BOM_MESSAGE" HasHistory="Y" LockingEntity="BOM_Header">
+            <TableType Name="MASTER"/>
+            <TableType Name="TRANSACTION"/>
+			<Attributes>
+				<Attribute ColumnName="BOM_MESSAGE_KEY" DataType="Key" Name="BOM_Message_Key"
+					Description="Primary Key. A unique record identifier for a saved configuration message."
+					Nullable="false" XMLName="BOMMessageKey" DefaultValue="' '" />
+				<Attribute ColumnName="BOM_HEADER_KEY" DataType="Key" Name="BOM_Header_Key"
+					Description="BOM Header key for which the BOM messages are maintained."
+					Nullable="false" XMLName="BOMHeaderKey" DefaultValue="' '" />
+				<Attribute ColumnName="MESSAGE" DataType="Text-240" Name="Message" Nullable="true"
+					Description="Message."
+					XMLName="Message" />
+				<Attribute ColumnName="MESSAGE_TYPE" DataType="Text-120" Name="MessageType"
+					Description="The message type of this message."
+					Nullable="true" XMLName="MessageType" />
+				<Attribute ColumnName="ITEM_NAME" DataType="Text-480" Name="Name"
+					Description="The full configurator path name of the item."
+					Nullable="true" XMLName="Name" />
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" DefaultValue="0 " XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyprogid"/>
+			</Attributes>
+			<PrimaryKey Name="YIC_BOM_MSG_PK">
+				<Attribute ColumnName="BOM_MESSAGE_KEY" Name="BOM_Message_Key" />
+			</PrimaryKey>
+			<Indices>
+				<Index Name="YIC_BOM_MSG_I1" Unique="false">
+					<Column Name="BOM_HEADER_KEY" />
+				</Index>
+			</Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BOMMessageList" ChildName="BOMMessage" ChildXMLName="BOMMessage"
+                    DeleteCascade="true" ForeignEntity="BOM_Header"
+                    Name="BOM_Header" Type="Bidirectional" XMLName="BOMHeader">
+                    <Attribute Name="BOM_Header_Key" ParentName="BOM_Header_Key"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+
+    	<Entity Description="This table stores the BOM properties that are associated with the BOM Header and BOM Lines."
+			EntityType="TRANSACTION/MASTER" Module="yic" ListXMLName="BOMPropertyList" Name="BOM_Property" Prefix="YIC_"
+			Extensible="Y" XMLName="BOMProperty" TableName="YIC_BOM_PROP" HasHistory="Y" LockingEntity="BOM_Header">
+            <TableType Name="MASTER"/>
+            <TableType Name="TRANSACTION"/>
+			<Attributes>
+				<Attribute ColumnName="BOM_PROPERTY_KEY" DataType="Key" Name="BOM_Property_Key"
+					Description="Primary Key. A unique record identifier for a saved BOM Property."
+					Nullable="false" XMLName="BOMPropertyKey" DefaultValue="' '" />
+				<Attribute ColumnName="BOM_HEADER_KEY" DataType="Key" Name="BOM_Header_Key"
+					Description="BOM Header key for which the BOM messages are maintained."
+					Nullable="false" XMLName="BOMHeaderKey" DefaultValue="' '" />
+				<Attribute ColumnName="BOM_LINE_KEY" DataType="Key" Name="BOM_Line_Key"
+					Description="BOM line key for which the property is maintained."
+					Nullable="false" XMLName="BOMLineKey" DefaultValue="' '" />
+				<Attribute ColumnName="PROPERTY_NAME" DataType="Text-480" Name="Property_Name" Nullable="true"
+					Description="The name of the property."
+					XMLName="PropertyName" />
+				<Attribute ColumnName="PROPERTY_VALUE" DataType="Text-480" Name="Property_Value" Nullable="true"
+					Description="The value of the property."
+					XMLName="PropertyValue" />
+				<Attribute ColumnName="PROPERTY_TYPE" DataType="Integer" Name="Property_Type"
+					Description="The configurator property type code for this property."
+					Nullable="true" XMLName="PropertyType" />
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" DefaultValue="0 " XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyprogid"/>
+			</Attributes>
+			<PrimaryKey Name="YIC_BOM_PROP_PK">
+				<Attribute ColumnName="BOM_PROPERTY_KEY" Name="BOM_Property_Key" />
+			</PrimaryKey>
+			<Indices>
+				<Index Name="YIC_BOM_PROP_I1" Unique="true">
+					<Column Name="BOM_PROPERTY_KEY" />
+					<Column Name="BOM_HEADER_KEY" />
+					<Column Name="BOM_LINE_KEY" />
+				</Index>
+				<Index Name="YIC_BOM_PROP_I2" Unique="false">
+					<Column Name="BOM_LINE_KEY" />
+				</Index>
+			</Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BOMPropertyList" ChildName="BOMProperty" ChildXMLName="BOMProperty"
+                    DeleteCascade="true" ForeignEntity="BOM_Header"
+                    Name="BOM_Header" Type="Bidirectional" XMLName="BOMHeader">
+                    <Attribute Name="BOM_Header_Key" ParentName="BOM_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BOMPropertyList" ChildName="BOMProperty" ChildXMLName="BOMProperty"
+                    DeleteCascade="true" ForeignEntity="BOM_Line"
+                    Name="BOM_Line" Type="Bidirectional" XMLName="BOMLine">
+                    <Attribute Name="BOM_Line_Key" ParentName="BOM_Line_Key"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+    	<!-- <Entity Description="This table stores the BOM auxiliary prices that are associated with the BOM Header and BOM Lines."
+			EntityType="TRANSACTION" TableType="TRANSACTION" Module="yic" ListXMLName="BOMAuxPriceList" Name="BOM_Aux_Price" Prefix="YIC_"
+			Extensible="Y" XMLName="BOMAuxPrice" TableName="YIC_BOM_AUX_PRICE" HasHistory="Y" >
+			<Attributes>
+				<Attribute ColumnName="BOM_AUX_PRICE_KEY" DataType="Key" Name="BOM_Aux_Price_Key"
+					Description="Primary Key. A unique record identifier for a saved Auxiliary price."
+					Nullable="false" XMLName="BOMAuxPriceKey" />
+				<Attribute ColumnName="BOM_HEADER_KEY" DataType="Key" Name="BOM_Header_Key"
+					Description="BOM Header key for which the BOM messages are maintained."
+					Nullable="false" XMLName="BOMHeaderKey" />
+				<Attribute ColumnName="BOM_LINE_KEY" DataType="Key" Name="BOM_Line_Key"
+					Description="BOM line key for which the property is maintained."
+					Nullable="false" XMLName="BOMLineKey" />
+				<Attribute ColumnName="PRICE" DataType="UnitPrice" Name="Price" Nullable="true"
+					Description="The auxiliary price value."
+					XMLName="AuxPrice" />
+				<Attribute ColumnName="PRICE_TYPE_CODE" DataType="Integer" Name="Price_Type_Code" Nullable="true"
+					Description="The type of auxiliary price."
+					XMLName="AuxPriceType" />
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" DefaultValue="0 " XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"
+                    DefaultValue="sysdate " XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"
+                    DefaultValue="' '" XMLName="Modifyprogid"/>
+			</Attributes>
+			<PrimaryKey Name="YIC_BOM_AUX_PK">
+				<Attribute ColumnName="BOM_AUX_PRICE_KEY" Name="BOM_Aux_Price_Key" />
+			</PrimaryKey>
+			<Indices>
+				<Index Name="YIC_BOM_AUX_I1" Unique="true">
+					<Column Name="BOM_AUX_PRICE_KEY" />
+					<Column Name="BOM_HEADER_KEY" />
+					<Column Name="BOM_LINE_KEY" />
+				</Index>
+			</Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BOMAuxPriceList" ChildName="BOMAuxPrice" ChildXMLName="BOMAuxPrice"
+                    DeleteCascade="true" ForeignEntity="BOM_Header"
+                    Name="BOM_Header" Type="Unidirectional" XMLName="BOMHeader">
+                    <Attribute Name="BOM_Header_Key" ParentName="BOM_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BOMAuxPriceList" ChildName="BOMAuxPrice" ChildXMLName="BOMAuxPrice"
+                    DeleteCascade="true" ForeignEntity="BOM_Line"
+                    Name="BOM_Line" Type="Unidirectional" XMLName="BOMLine">
+                    <Attribute Name="BOM_Line_Key" ParentName="BOM_Line_Key"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity> -->
+		<Entity Description="This table stores the request and response of test cases trapped by regression testing tool." EntityType="TRANSACTION" Module="yic" 
+			ListXMLName="ConfigRegressionTestList" Name="Config_Regression_Test" Prefix="YIC_"
+			Extensible="N" XMLName="ConfigRegressionTest" TableName="YIC_CONFIG_REGRESSION_TEST" HasHistory="N">
+			<TableType Name="TRANSACTION"/>
+			<Attributes>
+				<Attribute ColumnName="TEST_KEY" Name="TEST_KEY" 
+					Description="Test Case Key" DataType="Key" DefaultValue="' '"
+					XMLName="TestKey"/>
+				<Attribute ColumnName="GROUP_ID" Nullable="false" Type="VARCHAR2" Name="GROUP_ID" 
+					Size="50" Description="Group Identifier"
+					XMLName="GroupId" />
+				<Attribute ColumnName="TEST_ID" Nullable="false" Type="VARCHAR2" Name="TEST_ID"
+					Size="50" Description="Test Case Identifier"
+					XMLName="TestId" />
+				<Attribute ColumnName="DESCRIPTION" Nullable="false" Type="VARCHAR2" Name="DESCRIPTION"
+					Size="500" Description="Test Case Description"
+					XMLName="Description" />
+				<Attribute ColumnName="REQUEST" Type="CLOB" Name="REQUEST"
+					Nullable="true" Description="Request XML" XMLName="Request"/>
+				<Attribute ColumnName="RESPONSE" Type="CLOB" Name="RESPONSE"
+					Nullable="true" Description="Response XML" XMLName="Response"/>
+				<Attribute ColumnName="BASELINE" Type="CLOB" Name="BASELINE"
+					Nullable="true" Description="Baseline XML" XMLName="Baseline"/>
+				<Attribute ColumnName="REPORT" Type="CLOB" Name="REPORT"
+					Nullable="true" Description="Report XML" XMLName="Report"/>
+				<Attribute ColumnName="BASELINE_TAKEN" DataType="TimeStamp" Name="BASELINE_TAKEN"
+					Nullable="true" Description="Baseline Taken Time" XMLName="BaselineTaken"/>	
+				<Attribute ColumnName="LAST_TESTED" DataType="TimeStamp" Name="LAST_TESTED"
+					Nullable="true" Description="Last Test Time" XMLName="LastTested"/>
+				<Attribute ColumnName="BASE_PERFORMANCE" DataType="PositiveInteger" Name="BASE_PERFORMANCE"
+					Nullable="true" Description="Baseline Execution Time in Millisecond" XMLName="BasePerformance"/>
+				<Attribute ColumnName="TEST_PERFORMANCE" DataType="PositiveInteger" Name="TEST_PERFORMANCE"
+					Nullable="true" Description="Test Execution Time in Millisecond" XMLName="TestPerformance"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp" Name="CREATETS"
+					DefaultValue="sysdate" Description="Create TimeStamp" />
+				<Attribute ColumnName="MODIFYTS" DataType="TimeStamp" Name="MODIFYTS"
+					DefaultValue="sysdate" Description="Modify TimeStamp" />
+				<Attribute ColumnName="CREATEUSERID" DataType="UserId" Name="CREATEUSERID"
+					DefaultValue="' '" Description="Creating User ID" />
+				<Attribute ColumnName="MODIFYUSERID" DataType="UserId" Name="MODIFYUSERID"
+					DefaultValue="' '" Description="Modifying User ID" />
+				<Attribute ColumnName="CREATEPROGID" DataType="ProgramID" Name="CREATEPROGID"
+					DefaultValue="' '" Description="Creating Program ID" />
+				<Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" Name="MODIFYPROGID"
+					DefaultValue="' '" Description="Modifying Program ID" />
+				<Attribute ColumnName="LOCKID" DataType="Lockid" Name="LOCKID"
+					DefaultValue="0" Description="Lock ID" />
+			</Attributes>
+			<PrimaryKey Name="YIC_CRT_PK">
+				<Attribute ColumnName="TEST_KEY" Name="TEST_KEY" XmlName="TestKey"/>
+			</PrimaryKey>
+			<Indices>
+				<Index Name="YIC_CRT_I1" Unique="True">
+					<Column Name="GROUP_ID" />
+					<Column Name="TEST_ID" />
+				</Index>
+			</Indices>
+		</Entity>
+	</Entities>
+</DBSchema>

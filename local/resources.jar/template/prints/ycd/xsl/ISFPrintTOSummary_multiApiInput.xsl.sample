@@ -1,0 +1,75 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2007, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:template match="/">
+		<xsl:apply-templates select="/Order" />
+	</xsl:template>
+	
+	<xsl:template match="/Order">
+		<MultiApi>
+				<API Name="getOrderDetails">
+					<Input>
+						<Order>
+							<xsl:attribute name="OrderHeaderKey">
+								<xsl:value-of select="@OrderHeaderKey" />
+							</xsl:attribute>
+						</Order>
+					</Input>
+					<Template>
+						<Order OrderHeaderKey="" OrderNo="" OrderDate="">
+							<PersonInfoShipTo/>
+							<ShipNode Description="" Localecode="">
+								<ShipNodePersonInfo/>
+							</ShipNode>
+							<OrderLines>
+								<OrderLine OrderedQty="" >
+									 <ItemDetails ItemID="" UnitOfMeasure="">
+			                                <PrimaryInformation Description="" />
+			                            </ItemDetails>
+									<References>
+										<Reference Name="" Value="" />
+									</References>
+								</OrderLine>
+							</OrderLines>
+						</Order>
+					</Template>
+				</API>
+					<API Name="getRuleDetails">
+						<Input>
+							<Rules RuleSetFieldName="YCD_USE_TRANSACTIONAL_QUANTITY">
+								<xsl:attribute name="CallingOrganizationCode">
+									<xsl:value-of select="@ShipNode" />
+								</xsl:attribute>
+							</Rules>
+						</Input>
+					</API>
+					<API Name="getItemUOMMasterList">
+						<Input>
+							<ItemUOMMaster ItemGroupCode="PROD">
+								<xsl:attribute name="CallingOrganizationCode">
+									<xsl:value-of select="@ShipNode" />
+								</xsl:attribute>
+							</ItemUOMMaster>
+						</Input>
+					</API>
+					<API Name="getOrganizationHierarchy">
+						<Input>
+							<Organization>
+								<xsl:attribute name="OrganizationCode">
+									<xsl:value-of select="@ReceivingNode" />
+								</xsl:attribute>
+							</Organization>
+						</Input>
+						<Template>
+							<Organization OrganizationCode="" OrganizationName="" >
+							</Organization>
+						</Template>
+					</API>
+		</MultiApi>
+	</xsl:template>
+</xsl:stylesheet>

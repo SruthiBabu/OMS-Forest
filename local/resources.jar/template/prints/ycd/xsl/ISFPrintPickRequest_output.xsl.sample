@@ -1,0 +1,297 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2007, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:java="http://xml.apache.org/xslt/java"
+	xmlns:fopUtil="com.yantra.pca.ycd.fop.YCDFOPUtils" exclude-result-prefixes="java">
+	<xsl:output method="html" encoding="UTF-8" indent="yes" />
+ 	<xsl:variable name="ireport.scriptlethandling" select="2"/>
+	<xsl:variable name="ireport.encoding" select="UTF-8"/>
+	<xsl:variable name="DelMethodShip">SHP</xsl:variable>
+	<xsl:variable name="DelMethodPick">PICK</xsl:variable>
+	<xsl:variable name="DelMethodDel">DEL</xsl:variable>
+
+ 	<xsl:variable name="locale">
+		<xsl:value-of select="/MultiApi/API[@Name='getOrganizationHierarchy']/Output/Organization/@LocaleCode" />
+	</xsl:variable>
+
+	<xsl:template match="/">
+		<xsl:apply-templates select="/MultiApi" />
+	</xsl:template>
+	<xsl:template match="MultiApi">
+		<html>
+			<xsl:attribute name="lang">
+				<xsl:value-of select="$locale" />
+			</xsl:attribute>
+			<body>
+			<style>
+				<xsl:text disable-output-escaping="yes">
+					body {
+						font-family: "IBMPlexSans", "IBM Plex Sans", "HelvNeueRomanforIBM", Helvetica, Arial, Tahoma, Verdana, sans-serif;
+						font-size: 12px;
+					}
+			
+					table {
+						font-size: 12px;
+					}
+			
+					div.page {
+						width: 100%;
+					}
+					div.page:not(:last-child) {
+						page-break-after: always;
+					}
+					div.already_printed, div.already_printed table {
+						color: #666;
+					}
+			
+					.storedetails {
+						width: 100%;
+					}
+					.storedetails td {
+						width: 50%;
+					}
+					.storedetails td:first-child{
+						font-size: 40px;
+						color: #C8C8F8;
+					}
+			
+					.storedetails .storeaddress {
+						float: right;
+					}
+			
+					.storedetails .storeaddress .company {
+						font-weight: bold;
+					}
+			
+					.title {
+							text-align: center;
+							font-size: 25px;
+							background-color: #C8C8F8;
+							padding: 2px 0px;
+					}
+						
+					.orderheader {
+						padding-top: 10px;
+						width:100%;
+					}
+					.orderheader table {
+						border-spacing: 0px 5px;
+					}
+			
+					.orderheader table tr td:first-child {
+						font-weight: bold;
+						padding-right: 20px;
+						padding-left: 5px;
+					}
+			
+					.orderheader .currentdate {
+						vertical-align:top;
+					}
+			
+					.orderheader .currentdate table{
+						float: right;
+					}
+			
+					.orderheader .addressheader {
+						background-color: C8C8F8;
+					}
+			
+					.orderheader .addressheader td{
+						padding: 5px;
+					}
+			
+					.orderheader table tr.addressdetails td{
+						font-weight: normal;
+					}
+			
+					table.shipmentlines {
+						width: 100%;
+						margin-left: 5px;
+					}
+			
+					table.shipmentlines, table.shipmentlines th, table.shipmentlines td {
+						border:1px solid;
+						border-collapse: collapse;
+						padding: 2px 2px;
+					}
+			
+					table.shipmentlines th {
+						padding: 5px 2px;
+						background-color:#DDDDDD;
+					}
+			
+					.footer {
+						padding-top: 10px;
+						bottom:0px;
+						text-align:center;
+					}
+
+				</xsl:text>
+			</style>
+			<xsl:for-each select="API[(normalize-space(@Name) = &quot;&quot;)]">
+				<div>
+				<xsl:attribute name="class">
+					<xsl:text>page </xsl:text>
+				</xsl:attribute>
+				<xsl:apply-templates select="Output/pickRequest" />
+				<footer class="footer">
+				<div><xsl:text>---END OF PICK REQUEST---</xsl:text></div>
+				</footer>
+				</div>
+			</xsl:for-each>
+		</body>
+		</html>
+	</xsl:template>
+
+	<xsl:template match="pickRequest">
+		<xsl:apply-templates select="/MultiApi/API[@Name='getOrganizationHierarchy']/Output/Organization" />
+		<div class="title"><xsl:value-of select="fopUtil:getLocalizedString('PICK REQUEST',$locale)" /></div>
+
+		<table class="orderheader">
+			<tr>
+
+				<td>
+					<table>
+							<tr>
+								<td>
+									<xsl:choose>
+									<xsl:when test="@deliveryMethod=&quot;SHIP&quot;">
+									<xsl:value-of select="fopUtil:getLocalizedString('Ship order #',$locale)" />
+									</xsl:when>
+									<xsl:when test="@deliveryMethod=&quot;PICK&quot;">
+									<xsl:value-of select="fopUtil:getLocalizedString('Pick-up order #',$locale)" />
+									</xsl:when>
+									<xsl:when test="@deliveryMethod=&quot;CARRY&quot;">
+									<xsl:value-of select="fopUtil:getLocalizedString('Walk-in order #',$locale)" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="fopUtil:getLocalizedString('Order #',$locale)" />
+									</xsl:otherwise>
+									</xsl:choose>
+								</td>
+								<td>
+									<xsl:value-of select="fopUtil:getDisplayOrderNo(@orderNo)" />
+								</td>
+							</tr>
+							
+					</table>
+					</td>
+					<td class="currentdate">
+						<table>
+							<tr>
+								<td>
+									<xsl:value-of select="fopUtil:getLocalizedString('Shipment #',$locale)" />
+								</td>
+								<td>
+									<xsl:value-of select="@shipmentNo" />
+								</td>
+					  		</tr>
+					  		<xsl:if test="string-length(pickTasks/@targetLocationId)">
+							<tr>
+								<td>
+									<xsl:value-of select="fopUtil:getLocalizedString('Staging Location:',$locale)" />
+								</td>
+								<td>
+									<xsl:value-of select="pickTasks/@targetLocationId" />
+								</td>
+							</tr>
+							</xsl:if>
+					  	</table>
+					</td>
+				</tr>
+		</table> 
+
+		 <table class="shipmentlines">
+			<thead>
+				<tr>
+					<th>
+						<xsl:value-of select="fopUtil:getLocalizedString('Sl. No',$locale)" />
+					</th>
+					<th>
+						<xsl:value-of select="fopUtil:getLocalizedString('Product ID',$locale)" />
+					</th>
+					<th>
+						<xsl:value-of select="fopUtil:getLocalizedString('Product Description',$locale)" />
+					</th>
+					<th>
+						<xsl:value-of select="fopUtil:getLocalizedString('Pick Location',$locale)" />
+					</th>
+					<th>
+						<xsl:value-of select="fopUtil:getLocalizedString('Requested Quantity',$locale)" />
+					</th>
+					<th>
+						<xsl:value-of select="fopUtil:getLocalizedString('Picked Quantity',$locale)" />
+					</th>
+					<!--<th>
+						<xsl:value-of select="fopUtil:getLocalizedString('UOM',$locale)" />
+					</th>-->					
+				</tr>
+			</thead>
+			<xsl:for-each select="pickTasks">
+				<tr>
+					<xsl:variable name="i" select="position()" />
+					<td>
+						<xsl:value-of select="$i" />
+					</td>
+					<td>
+						<xsl:value-of select="@productId" />
+					</td>
+					<td>
+						<xsl:value-of select="Item/PrimaryInformation/@Description" />
+					</td>
+					<td><xsl:value-of select="@sourceLocationId" /></td>
+					<td style="text-align:right">
+						<xsl:variable name="lineQty" select="@requestedQuantity" />
+						<!--<xsl:variable name="lineUOM" select="@UnitOfMeasure" />
+						<xsl:value-of select="concat(fopUtil:getFormattedQuantity($lineQty,$locale),' ',/MultiApi/API[@Name='getItemUOMMasterList']/Output/ItemUOMMasterList/ItemUOMMaster[@UnitOfMeasure=$lineUOM]/@Description)" />-->
+						
+						<xsl:value-of select="fopUtil:getFormattedQuantity($lineQty,$locale)"/>
+					</td>
+					
+					<td style="text-align:right">
+						<xsl:variable name="pickedQty" select="@pickedQuantity" />
+						<xsl:value-of select="fopUtil:getFormattedQuantity($pickedQty,$locale)"/>
+					</td>
+					<!--<td>
+					</td>-->
+				</tr>
+			</xsl:for-each>
+		</table>
+	</xsl:template>
+	
+	<xsl:template match="Organization">
+		<xsl:variable name="StoreCity"  >
+			<xsl:if test="string-length(CorporatePersonInfo/@City)">
+				<xsl:value-of select="concat(CorporatePersonInfo/@City,', ')" />
+			</xsl:if>
+		</xsl:variable>
+		<xsl:variable name="StoreState">
+			<xsl:if test="string-length(CorporatePersonInfo/@State)">
+				<xsl:value-of select="concat(CorporatePersonInfo/@State,', ')" />
+			</xsl:if>
+		</xsl:variable>
+		<xsl:variable name="StoreZipCode" select="CorporatePersonInfo/@ZipCode"/>
+		<xsl:variable name="FormattedCityStateZipCodeStore">
+			<xsl:value-of select="concat($StoreCity, $StoreState, $StoreZipCode)" />
+		</xsl:variable>
+		<table class="storedetails">
+			<tr>
+				<td><xsl:value-of select="@OrganizationName" /></td>
+				<td>
+					<div class="storeaddress">
+					<div class="company"><xsl:value-of select="CorporatePersonInfo/@Company" /></div>
+					<div><xsl:value-of select="CorporatePersonInfo/@AddressLine1" /></div>
+					<div><xsl:value-of select="CorporatePersonInfo/@AddressLine2" /></div>
+					<div><xsl:value-of select="$FormattedCityStateZipCodeStore" /></div>
+					<div><xsl:value-of select="CorporatePersonInfo/@DayPhone" /></div>
+					<div><xsl:value-of select="CorporatePersonInfo/@EMailID" /></div>
+					</div>
+				</td>
+			</tr>
+		</table>		
+	</xsl:template>
+	
+</xsl:stylesheet>

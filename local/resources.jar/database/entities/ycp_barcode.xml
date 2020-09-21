@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table defines how barcodes are validated based on the context of the data."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="BarCode_Translation" Prefix="YFS_"
+            TableName="YFS_BARCODE_TRANSLATION"
+            TableType="CONFIGURATION" XMLName="BarCodeTranslation">
+            <Attributes>
+                <Attribute ColumnName="BARCODE_TRANSLATION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key of YFS_BARCODE_TRANSLATION table."
+                    Name="BarCode_Translation_Key" Nullable="false" XMLName="BarCodeTranslationKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This is the organization ID for the owner of that bar code."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="BARCODE_TYPE" DataType="Text-100"
+                    DefaultValue="' '"
+                    Description="This identifies the data type of the field being scanned in the UI. BarCodeDataType attribute in the yfsdatatypes.xml must be set to one of the two values. For an exhaustive listing of supported data types, see Appendix A. All supported bar code types are available under common code of type 'BARCODE_TYPE'."
+                    Name="BarCode_Type" Nullable="false" XMLName="BarCodeType"/>
+                <Attribute ColumnName="TRANSLATION_SEQUENCE"
+                    DataType="Integer" DefaultValue="0"
+                    Description="The barcode for a given barcode_type is translated in the sequence specified here. For example, if barcode_data_type 'Item' has three barcode_sources defined called ItemID, UPC and UPCCaseCode. If the seq# were 2,3,1 respectively, then the order of translator call will be UPCCaseCode, ItemID and UPC respectively."
+                    Name="Translation_Sequence" Nullable="false" XMLName="TranslationSequence"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' '"
+                    Description="Description of the validation setup."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="VARIABLE_LENGTH_FLAG"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="Y/N. Used to indicate if the barcode length is not fixed. Ex: scanning a item bar code, itemID could be of different lengths."
+                    Name="Variable_Length_Flag" Nullable="false" XMLName="VariableLengthFlag"/>
+                <Attribute ColumnName="BARCODE_LENGTH"
+                    DataType="BarCodeInteger" DefaultValue="0"
+                    Description="Length of barcode. Used to identify the barcode when validating the scanned data. This is the length of the entire stream scanned."
+                    Name="BarCode_Length" Nullable="false" XMLName="BarCodeLength"/>
+                <Attribute ColumnName="BARCODE_VAL_START_POSITION"
+                    DataType="BarCodeInteger" DefaultValue="0"
+                    Description="Bar code start position."
+                    Name="BarCode_Val_Start_Position" Nullable="false" XMLName="BarCodeStartPosition"/>
+                <Attribute ColumnName="BARCODE_VAL_END_POSITION"
+                    DataType="BarCodeInteger" DefaultValue="0"
+                    Description="Bar code end position."
+                    Name="BarCode_Val_End_Position" Nullable="false" XMLName="BarCodeEndPosition"/>
+                <Attribute ColumnName="BARCODE_TRANSLATION_SOURCE"
+                    DataType="Text-100" DefaultValue="' '"
+                    Description="Identifies a predefined validation source such as ITEM, ITEM_ALIAS, etc. or an externally translated source (EXTERNALLY_TRANSLATED). The externally translated source is implemented using an application extension. A flow must be associated with all externally translated sources.For an exhaustive listing of bar code translation sources, see appendix A. All bar code translation sources supported out of the box are available under common code of type 'BARCODE_TRANSLATION_SOURCE'."
+                    Name="BarCode_Translation_Source" Nullable="false" XMLName="BarCodeTranslationSource"/>
+                <Attribute ColumnName="ALIAS_NAME" DataType="Text-100"
+                    DefaultValue="' '"
+                    Description="Only valid when the translation source is ITEM_ALIAS."
+                    Name="Alias_Name" Nullable="false" XMLName="AliasName"/>
+                <Attribute ColumnName="FLOW_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Will define the flow executed when the translation is done externally (EXTERNALLY_TRANSLATED)."
+                    Name="Flow_Key" Nullable="false" XMLName="FlowKey"/>
+                <Attribute ColumnName="APPLICATION_IDENTIFIER"
+                    DataType="Text-100" DefaultValue="' '"
+                    Description="Any alphanumeric string. If the value is present, then the part of the bar code from the start position up to the length of the application identifier is validated to check that it matches the application identifier. Basically, this allows selection of a data source based on the nature of the data."
+                    Name="Application_Identifier" Nullable="false" XMLName="ApplicationIdentifier"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="BARCODE_TRANS_PK">
+                <Attribute Name="BarCode_Translation_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="BARCODE_TRAN_I1"
+                    Name="YFS_BARCODE_TRANSLATION_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BARCODE_TYPE"/>
+                    <Column Name="BARCODE_TRANSLATION_SOURCE"/>
+                    <Column Name="ALIAS_NAME"/>
+                    <Column Name="FLOW_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BarCodeTranslationList"
+                    ChildName="BarCode_Translation"
+                    ChildXMLName="BarCodeTranslation"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    IsParent="true" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

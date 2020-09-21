@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<TableGroup GroupName="Catalog">
+    <Entity EntityName="Item" Table="YFS_ITEM" Key="ITEM_KEY" XMLName="Item">
+    	<ChildEntity EntityName="Item_Node_Defn" Table="YFS_ITEM_NODE_DEFN" Key="ITEM_NODE_DEFN_KEY" XMLName="ItemNodeDefn">
+    		<QueryAttr ChildColumn="ITEM_ID" ParentAttrXML="ItemID"/>
+    		<QueryAttr ChildColumn="UOM" ParentAttrXML="UnitOfMeasure"/>
+    		<QueryAttr ChildColumn="ORGANIZATION_CODE" ParentAttrXML="OrganizationCode"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Service_Activity" Table="YFS_SERVICE_ACTIVITY" Key="SERVICE_ACTIVITY_KEY" XMLName="ServiceActivity">
+    		<QueryAttr ChildColumn="ITEM_KEY" ParentAttrXML="ItemKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Asset" Table="YFS_ASSET" Key="ASSET_KEY" XMLName="Asset">
+    		<LiteralAttr ChildColumn="PARENT_TABLE" Literal="YFS_ITEM"/>
+    		<QueryAttr ChildColumn="PARENT_KEY" ParentAttrXML="ItemKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Association" Table="YFS_ASSOCIATION" Key="ASSOCIATION_KEY" XMLName="Association">
+    		<LiteralAttr ChildColumn="PARENT_TABLE" Literal="YFS_ITEM"/>
+    		<QueryAttr ChildColumn="PARENT_KEY" ParentAttrXML="ItemKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Item_Service_Assoc" Table="YFS_ITEM_SERVICE_ASSOC" Key="ITEM_SERVICE_ASSOC_KEY" XMLName="ItemServiceAssoc">
+    		<QueryAttr ChildColumn="ITEM_KEY" ParentAttrXML="ItemKey"/>
+    	</ChildEntity> 
+    	<ChildEntity EntityName="Additional_Attribute" Table="YFS_ADDITIONAL_ATTRIBUTE" Key="ADDITIONAL_ATTRIBUTE_KEY" XMLName="AdditionalAttribute">
+    		<LiteralAttr ChildColumn="PARENT_TABLE" Literal="YFS_ITEM"/>
+    		<QueryAttr ChildColumn="PARENT_KEY" ParentAttrXML="ItemKey"/>
+    	</ChildEntity>
+    </Entity>
+</TableGroup>

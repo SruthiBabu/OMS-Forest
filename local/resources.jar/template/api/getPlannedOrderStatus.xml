@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--getOrderStatus Output XML-->
+<Order DocumentType="" EnterpriseCode="" BuyerOrganizationCode="" SellerOrganizationCode="" Division="" OrderNo="" OrderHeaderKey="" OrderName="" OrderDate="" OrderType="" PriorityCode="" PriorityNumber="" ReceivingNode="" ReqDeliveryDate="" ReqCancelDate="" ReqShipDate="" SCAC="" CarrierServiceCode="" CarrierAccountNo="" CustCarrierAccountNo="" NotifyAfterShipmentFlag="" NotificationType="" NotificationReference="" ShipCompleteFlag="" EntryType="" EnteredBy="" PersonalizeCode="" HoldFlag="" HoldReasonCode="" ChargeActualFreightFlag="" DeliveryCode="" CustomerEMailID="" AllocationRuleID="" PaymentStatus="" FreightTerms="" AORFlag="" SearchCriteria1="" SearchCriteria2="" PersonalizeCharges="" Tax="" TotalAmount="" OriginalTotalAmount="" Currency="" TermsCode="" BillToID="" ShipToID="" TaxPayerId="" TaxJurisdiction="" TaxExemptFlag="" TaxExemptionCertificate="" Purpose="" ReadFromHistory="">
+   <OrderLines>
+      <!--1 or more order line-->
+      <OrderLine PrimeLineNo="" SubLineNo="" OrderLineKey="" LineType="" OrderedQty="" ShipNode="" ReqDeliveryDate="" ReqCancelDate="" ReqShipDate="" SCAC="" CarrierServiceCode="" CarrierAccountNo="" PickableFlag="" ShipTogetherNo="" KitCode="" HoldFlag="" HoldReasonCode="" PersonalizeCode="" DepartmentCode="" DeliveryCode="" ReservationID="" ReservationPool="" CustomerPONo="" CustomerLinePONo="" PackListType="" FreightTerms="" Segment="" SegmentType="" SerialNo="" ShipToID="" ImportLicenseNo="" ImportLicenseExpDate="" Purpose="">
+         <Item ItemID="" ProductClass="" ItemWeight="" ItemWeightUOM="" ItemDesc="" ItemShortDesc="" UnitOfMeasure="" CustomerItem="" CustomerItemDesc="" SupplierItem="" SupplierItemDesc="" UPCCode="" UnitCost="" ISBN="" HarmonizedCode="" ManufacturerItem="" ManufacturerItemDesc="" ManufacturerName="" ProductLine="" CountryOfOrigin="" NMFCCode="" NMFCClass="" NMFCDescription="" ECCNNo="" Schedule_B_Code="" TaxProductCode=""/>
+         <PersonInfoShipTo Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID="" PersonInfoKey=""/>
+         <!--Optional-->
+         <PersonInfoMarkFor Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" MarkForID="" PersonInfoKey=""/>
+         <!--Optional-->
+         <Instructions>
+            <Instruction InstructionType="" InstructionURL="" InstructionText=""/>
+         </Instructions>
+         <LinePriceInfo DiscountPercentage="" ListPrice="" RetailPrice=""  PricingUOM="" PricingQty="" PricingQtyConversionFactor="" InvoicedPricingQty="">
+            <OverallTotals Charges="" Discount="" ExtendedPrice="" LineTotal="" Tax="" UnitPrice=""/>
+            <InvoicedTotals Charges="" Discount="" ExtendedPrice="" LineTotal="" Tax="" UnitPrice=""/>
+            <RemainingTotals Charges="" Discount="" ExtendedPrice="" LineTotal="" Tax="" UnitPrice=""/>
+            <LineCharges>
+               <LineCharge ChargeCategory="" ChargeName="" InvoicedChargeAmount="" InvoicedChargePerLine="" InvoicedChargePerUnit="" OverallChargeAmount="" OverallChargePerLine="" OverallChargePerUnit="" Reference="" RemainingChargeAmount="" RemainingChargePerLine="" RemainingChargePerUnit=""/>
+            </LineCharges>
+            <LineTaxes>
+               <LineTax ChargeNameKey="" ChargeCategory="" ChargeName="" InvoicedTax="" OverallTax="" Reference_1="" Reference_2="" Reference_3="" RemainingTax="" TaxName="" TaxPercentage=""/>
+               <TaxSummary>
+                  <TaxSummaryDetail InvoicedTax="" OverallTax="" RemainingTax="" TaxName=""/>
+               </TaxSummary>
+            </LineTaxes>
+         </LinePriceInfo>
+         <!--Optional-->
+         <References>
+            <Reference Name="" Value=""/>
+            <Reference Name="" Value=""/>
+            <Reference Name="" Value=""/>
+         </References>
+         <!--Optional-->
+         <KitLines>
+            <KitLine ItemID="" ProductClass="" UnitOfMeasure="" ItemShortDesc="" ItemDesc="" CustomerItem="" CustomerItemDesc="" SupplierItem="" SupplierItemDesc="" KitQty="" DepartmentCode="" ItemWeight="" ItemWeightUOM="" UPCCode=""/>
+         </KitLines>
+         <AdditionalAddresses>
+            <AdditionalAddress AddressType="">
+               <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+               <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+            </AdditionalAddress>
+            <AdditionalAddress AddressType="">
+               <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+               <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+            </AdditionalAddress>
+         </AdditionalAddresses>
+         <OrderStatuses>
+            <OrderStatus Status="" StatusDescription="" StatusDate="" StatusReason="" StatusQty="" ShipNode="" ReceivingNode="" OrderReleaseKey="">
+               <Schedule TagNumber="" ShipByDate="" ExpectedShipmentDate="" ScheduleNo="">
+                  <KitLines>
+                     <KitLine ItemID="" ProductClass="" UnitOfMeasure="">
+                        <KitSchedules>
+                           <KitSchedule TagNumber="" ShipByDate="" ExpectedShipmentDate="" Quantity=""/>
+                        </KitSchedules>
+                     </KitLine>
+                  </KitLines>
+               </Schedule>
+            </OrderStatus>
+         </OrderStatuses>
+      </OrderLine>
+   </OrderLines>
+   <Instructions>
+      <Instruction InstructionType="" InstructionURL="" InstructionText=""/>
+   </Instructions>
+   <!--Optional-->
+   <PersonInfoShipTo Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID="" PersonInfoKey=""/>
+   <!--Either at  line level or at header level-->
+   <PersonInfoBillTo Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" BillToID="" PersonInfoKey=""/>
+   <PersonInfoMarkFor Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" MarkForID="" PersonInfoKey=""/>
+   <PersonInfoContact Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" ContactID="" PersonInfoKey=""/>
+   <AdditionalAddresses>
+      <AdditionalAddress AddressType="">
+         <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+         <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+      </AdditionalAddress>
+      <AdditionalAddress AddressType="">
+         <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+         <PersonInfo AddressType="" Title="" FirstName="" MiddleName="" LastName="" Suffix="" Department="" Company="" JobTitle="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" City="" State="" ZipCode="" Country="" DayPhone="" EveningPhone="" MobilePhone="" Beeper="" OtherPhone="" DayFaxNo="" EveningFaxNo="" EMailID="" AlternateEmailID="" PersonID=""/>
+      </AdditionalAddress>
+   </AdditionalAddresses>
+   <References>
+      <Reference Name="" Value=""/>
+      <Reference Name="" Value=""/>
+      <Reference Name="" Value=""/>
+   </References>
+   <PriceInfo Currency="">
+      <OverallTotals GrandCharges="" GrandDiscount="" GrandTax="" GrandTotal="" HdrCharges="" HdrDiscount="" HdrTax="" HdrTotal="" LineSubTotal=""/>
+      <InvoicedTotals GrandCharges="" GrandDiscount="" GrandTax="" GrandTotal="" HdrCharges="" HdrDiscount="" HdrTax="" HdrTotal="" LineSubTotal=""/>
+      <RemainingTotals GrandCharges="" GrandDiscount="" GrandTax="" GrandTotal="" HdrCharges="" HdrDiscount="" HdrTax="" HdrTotal="" LineSubTotal=""/>
+      <HeaderCharges>
+         <HeaderCharge ChargeCategory="" ChargeName="" InvoicedChargeAmount="" OverallChargeAmount="" Reference="" RemainingChargeAmount=""/>
+      </HeaderCharges>
+      <HeaderTaxes>
+         <HeaderTax ChargeNameKey="" ChargeCategory="" ChargeName="" InvoicedTax="" OverallTax="" Reference_1="" Reference_2="" Reference_3="" RemainingTax="" TaxName="" TaxPercentage=""/>
+         <TaxSummary>
+            <TaxSummaryDetail InvoicedTax="" OverallTax="" RemainingTax="" TaxName=""/>
+         </TaxSummary>
+      </HeaderTaxes>
+   </PriceInfo>
+   <!--Optional-->
+   <PrimaryPaymentInfo CustomerAccountNo="" CustomerPONo="" PaymentType="" CreditCardType="" CreditCardName="" CreditCardNo="" CreditCardExpDate="" PaymentReference1="" PaymentReference2="" PaymentReference3="" CheckNo="" CheckReference="" TermsCode="" CustCustPONo=""/>
+</Order>

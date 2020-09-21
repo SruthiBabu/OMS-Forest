@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<DBSchema>
+   <Entities>
+   	   <Entity Cacheable="false" Description="This Table Store the Competitor Information used in a Price Match" EntityType="TRANSACTION" HasHistory="N" Module="ycd" Name="Competitor" Prefix="YFS_" TableName="YFS_COMPETITOR" TableType="TRANSACTION" XMLName="Competitor">
+		<Attributes>
+      		<Attribute ColumnName="COMPETITOR_KEY" DataType="Key" DefaultValue="' '" Description="The primary key for the YFS_COMPETITOR table." Name="Competitor_Key" Nullable="false" XMLName="CompetitorKey"/>
+      		<Attribute ColumnName="COMPETITOR_NAME" DataType="Text-40" DefaultValue="' '" Description="Competitor Name" Name="Competitor_Name" Nullable="false" XMLName="CompetitorName"/>
+      		<Attribute ColumnName="COMPETITOR_DESC" DataType="Text-2000" DefaultValue="' '" Description="Competitor Description used for notes and descriptions." Name="Competitor_Desc" Nullable="false" XMLName="CompetitorDesc" />
+      		<Attribute ColumnName="ENTERPRISE_CODE" DataSecurityUsageType="ORG" DataType="Key" DefaultValue="' '" Description="Enteprise that the Competitor is Competing with" Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode" />
+      		<Attribute ColumnName="WEB_ADDRESS" DataType="URL-100" DefaultValue="' '" Description="Competitor Web Site" Name="Web_Address" Nullable="false" XMLName="WebAddress" />
+      		<Attribute ColumnName="STATUS" DataType="Status" Description="Authorization Status" Name="Status" Nullable="true" XMLName="Status"/>
+      		<Attribute ColumnName="PERCENT_PRICE_MATCH" DataType="Percentage" DefaultValue="100" Description="Percentage of Price Match" Name="Percent_Price_Match" Nullable="false" XMLName="PercentPriceMatch"/>
+      		<Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+      		<Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+      		<Attribute ColumnName="CREATEUSERID" DataType="Createuserid" DefaultValue="' ' " Description="User who created the record." Name="Createuserid" Nullable="false"/>
+      		<Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid" DefaultValue="' ' " Description="User who modified the record." Name="Modifyuserid" Nullable="false"/>
+      		<Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' ' " Description="Program that created the record." Name="Createprogid" Nullable="false"/>
+      		<Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="' ' " Description="Program that modified the record." Name="Modifyprogid" Nullable="false"/>
+      		<Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0 " Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+   		</Attributes>
+      	<PrimaryKey DB2Name="PRICE_MATCH_CP_PK" Name="YFS_PRICE_MATCH_COMPETE_PK">
+      		<Attribute ColumnName="COMPETITOR_KEY" Name="Competitor_Key"/>
+   		</PrimaryKey>
+   		<Indices>
+ 			<Index DB2Name="PRICE_MATCH_CP_I1" Name="YFS_PRICE_MATCH_COMPETE_I1" Unique="true">
+        		<Column Name="COMPETITOR_NAME"/>
+        		<Column Name="ENTERPRISE_CODE"/>
+      		</Index>
+   		</Indices>
+		 <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+		</RelationShips>
+	   </Entity>
+      <Entity Description="This Table Stores information about the price of Items at which the competitors are offering items in different Regions" EntityType="TRANSACTION" HasHistory="Y" Module="ycd" Name="Price_Match" Prefix="YFS_" TableName="YFS_PRICE_MATCH"  TableType="TRANSACTION" XMLName="PriceMatch">
+         <Attributes>
+            <Attribute ColumnName="PRICE_MATCH_KEY" DataType="Key" DefaultValue="' '" Description="The primary key for the YFS_PRICE_MATCH table." Name="Price_Match_Key" Nullable="false" XMLName="PriceMatchKey"/>
+            <Attribute ColumnName="ENTERPRISE_CODE" DataSecurityUsageType="ORG" DataType="Key" DefaultValue="' '" Description="Enterprise that performed the price match" Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+            <Attribute ColumnName="ITEM_ID" DataType="ItemID" DefaultValue="' '" Description="The ItemId of the Item for which the price match was performed." Name="Item_ID" Nullable="false" XMLName="ItemID"/>
+            <Attribute ColumnName="UNIT_OF_MEASURE" DataType="UOM" DefaultValue="' '" Description="The Unit Of Measure for the Item for which price Match is to be performed" Name="Unit_Of_Measure" Nullable="false" XMLName="UnitOfMeasure"/>
+            <Attribute ColumnName="COMPETITOR_KEY" DataType="Key" DefaultValue="' '" Description="Competitor Key that had the lower price" Name="Competitor_Key" Nullable="false" XMLName="CompetitorKey"/>
+            <Attribute ColumnName="MINIMUM_QUANTITY" DataType="Number" DefaultValue="0" Description="Minimum quantity required to get the lower price" Name="Minimum_Quantity" Nullable="false" XMLName="MinimumQuantity"/>
+            <Attribute ColumnName="COMPETITOR_UNIT_PRICE" DataType="UnitPrice" DefaultValue="0" Description="Competitors Price to be matched " Name="Competitor_Unit_Price" Nullable="false" XMLName="CompetitorUnitPrice" />
+      		<Attribute ColumnName="COMPETITOR_DISCOUNTS" DataType="Money" DefaultValue="0" Description="Competitors Discounts applied to order line" Name="Competitor_Discounts" Nullable="false" XMLName="CompetitorDiscounts" />
+      		<Attribute ColumnName="REGION_CITY" DataType="City" DefaultValue="' '" Description="If the price that was matched is only offered in a specific region, this field should store the region's city" Name="Region_City" Nullable="false" XMLName="RegionCity"/>
+            <Attribute ColumnName="REGION_STATE" DataType="State" DefaultValue="' '" Description="If the price that was matched is only offered in a specific region, this field should store the region's state." Name="Region_State" Nullable="false" XMLName="RegionState"/>
+            <Attribute ColumnName="EXPIRATION_DATE" DataType="TimeStamp" DefaultValue="sysdate" Description="When the price offered by the competitor expires. If not entered, this should default to 30 days." Name="Expiration_Date" Nullable="false" XMLName="ExpirationDate"/>
+            <Attribute ColumnName="CURRENCY" DataType="Currency" DefaultValue="' '" Description="This the Currency for which is price is applied for the Item" Name="Currency" Nullable="false" XMLName="Currency"/>
+            <Attribute ColumnName="NO_HASSLE_OVERRIDDEN" DataType="Flag" DefaultValue="'N'" Description="This is to indicate that the data which is being entered follows Enterprise rules for Price Match or Not" Name="NoHassleOverridden" Nullable="false" XMLName="NoHassleOverridden"/>
+            <Attribute ColumnName="STATUS" DataType="Status" Description="The status the Price Match is in" Name="Status" Nullable="false" XMLName="Status" DefaultValue="' '"/>
+            <Attribute ColumnName="PRICE_MATCH_DESCRIPTION" DataType="Text-2000" DefaultValue="' '" Description="Stores a description of the price match for information about the price match" Name="Price_Match_Description" Nullable="false" XMLName="PriceMatchDescription"/>
+            <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+            <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+            <Attribute ColumnName="CREATEUSERID" DataType="Createuserid" DefaultValue="' ' " Description="User who created the record." Name="Createuserid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid" DefaultValue="' ' " Description="User who modified the record." Name="Modifyuserid" Nullable="false"/>
+            <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' ' " Description="Program that created the record." Name="Createprogid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="' ' " Description="Program that modified the record." Name="Modifyprogid" Nullable="false"/>
+            <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0 " Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+         </Attributes>
+         <PrimaryKey DB2Name="PRICE_MATCH_PK" Name="YFS_PRICE_MATCH_PK">
+            <Attribute ColumnName="PRICE_MATCH_KEY" Name="Price_Match_Key"/>
+         </PrimaryKey>
+         <Indices>
+     	 <Index DB2Name="PRICE_MATCH_I1" Name="YFS_PRICE_MATCH_I1" >
+        	<Column Name="ITEM_ID"/>
+         	<Column Name="COMPETITOR_KEY"/>
+         	<Column Name="UNIT_OF_MEASURE" />
+         	<Column Name="ENTERPRISE_CODE" />
+         	<Column Name="MINIMUM_QUANTITY" />
+      	</Index>
+   		</Indices>
+        <RelationShips>
+      	 	<RelationShip Cardinality="OneToMany" ForeignEntity="Competitor" Name="Competitor" Type="Unidirectional" XMLName="Competitor">
+         		<Attribute Name="Competitor_Key" ParentName="Competitor_Key"/>
+         	</RelationShip>
+        </RelationShips>
+      </Entity>
+      <Entity Cacheable="true" ConfigurableByOrgOrNode="Y" Description="This table will contain the RelationshipType to be used for an association type" EntityType="CONFIGURATION" HasHistory="N" Module="ycd" Name="Assc_Relationship" Prefix="YFS_" TableName="YFS_ASSC_RELATIONSHIP" TableType="CONFIGURATION" XMLName="AsscRelationship">
+         <Attributes>
+            <Attribute ColumnName="ENTERPRISE_CODE"  DataType="Key" IsOrgColumn="Y" DefaultValue="' '" Description="Enterprise for which the relationship type to be used for association type is defined." Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+            <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40" Description="The Document Type for which the relationship was created." Name="Document_Type" Nullable="true" XMLName="DocumentType"/>
+            <Attribute ColumnName="ASSC_RELATIONSHIP_KEY" DataType="Key" DefaultValue="' '" Description="The primary key for the YFS_ASSC_RELATIONSHIP table." Name="Assc_Relationship_Key" Nullable="false" XMLName="AsscRelationshipKey"/>
+            <Attribute ColumnName="ASSOCIATION_TYPE" DataType="Text-20" DefaultValue="' ' " Description="Type of association maintained." Name="Association_Type" Nullable="false" XMLName="AssociationType"/>
+            <Attribute ColumnName="RELATIONSHIP_TYPE" DataType="Text-20" DefaultValue="' ' " Description="Type of Relation between Order Lines" Name="Relationship_Type" Nullable="true" XMLName="RelationshipType"/>
+            <Attribute ColumnName="SHOW_IN_UI" DataType="Flag" DefaultValue="'N'" Description="This flag indicates whether the association should be displayed on UI." Name="Show_In_UI" Nullable="false" XMLGroup="" XMLName="ShowInUI"/>
+            <Attribute ColumnName="SHOW_IN_WC_UI" DataType="Flag" DefaultValue="'N'" Description="This flag indicates whether the association should be displayed on Web Channel UI." Name="Show_In_WC_UI" Nullable="false" XMLGroup="" XMLName="ShowInWCUI"/>
+			<Attribute ColumnName="MAX_NUMBER_TO_SHOW" DataType="MaxRecordCount" DefaultValue="5" Description="This attribute stores the maximum number of items to show for an association-relationship type combination." Name="Max_Number_To_Show" Nullable="false" XMLName="MaxNumberToShow"/>
+            <Attribute ColumnName="INVENTORY_CHECK_REQUIRED" DataType="Flag" DefaultValue="'N'" Description="This flag indicates whether inventory check should be performed for the particular association." Name="INVENOTRY_CHECK_REQUIRED" Nullable="false" XMLGroup="" XMLName="InventoryChkRequired"/>
+			<Attribute ColumnName="ASSC_FUNCTION" DataType="Text-40" DefaultValue="'RELATE'" Description="The function (Replace or Relate) using which the item is to be added to the order" Name="Function" Nullable="true" XMLName="Function"/>
+            <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+            <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+            <Attribute ColumnName="CREATEUSERID" DataType="Createuserid" DefaultValue="' ' " Description="User who created the record." Name="Createuserid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid" DefaultValue="' ' " Description="User who modified the record." Name="Modifyuserid" Nullable="false"/>
+            <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' ' " Description="Program that created the record." Name="Createprogid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="' ' " Description="Program that modified the record." Name="Modifyprogid" Nullable="false"/>
+            <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0 " Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+         </Attributes>
+         <PrimaryKey DB2Name="ASSC_RELSHIP_PK" Name="YFS_ASSC_RELSHIP_PK">
+            <Attribute ColumnName="ASSC_RELATIONSHIP_KEY" Name="Assc_Relationship_Key"/>
+         </PrimaryKey>
+         <Indices>
+            <Index DB2Name="ASSC_RELSHIP_I1" Name="YFS_ASSC_RELATIONSHIP_I1">
+               <Column Name="ASSOCIATION_TYPE"/>
+               <Column Name="RELATIONSHIP_TYPE"/>
+               <Column Name="DOCUMENT_TYPE" />
+            </Index>
+         </Indices>
+		 <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+		</RelationShips>
+      </Entity>
+	  <Entity Cacheable="true" ConfigurableByOrgOrNode="Y" Description="This table stores the configuration for order audit." EntityType="CONFIGURATION" HasHistory="N" Module="ycd" Name="Event_Auditor" Prefix="YFS_"  TableName="YFS_EVENT_AUDITOR" TableType="CONFIGURATION" XMLName="EventAuditor" Extensible="N">
+		<Attributes> 
+			<Attribute ColumnName="EVENT_AUDITOR_KEY" DataType="Key" DefaultValue="' '" Description="The primary key of the YFS_EVENT_AUDITOR table." Nullable="false" Name="Event_Auditor_Key" XMLName="EventAuditorKey"/>
+			<Attribute ColumnName="ORGANIZATION_CODE"  DataType="OrgCode" DefaultValue="' '" Description="The organization code assocaited with this event auditor." IsOrgColumn="Y" Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+			<Attribute ColumnName="EVENT_AUDITOR_TYPE" DataType="Text-24" DefaultValue="' '" Description="Determines the type of auditor event this record corresponds to. Valid values are: TRANSACTION_EVENT, HOLD_ADDED_EVENT, HOLD_RESOLVED_EVENT, HOLD_REJECTED_EVENT, or APPLICATION_EVENT." Nullable="false" Name="Event_Auditor_Type" XMLName="EventAuditorType" />
+			<Attribute ColumnName="TRANID" DataType="TranId" Description="If this auditor record corresponds to a transaction event, this column stores the transaction ID." Name="Tranid" Nullable="true" XMLName="Tranid"/>
+			<Attribute ColumnName="EVENTID" DataType="ID-40" Description="If this auditor record corresponds to a transaction event, this column stores the event ID.." Name="Eventid" Nullable="true" XMLName="Eventid"/>
+			<Attribute ColumnName="HOLD_TYPE" DataType="CodeType" Description="If this auditor record corresponds to a hold event, this column stores the hold type that this record corresponds to." Name="Hold_Type" Nullable="true" XMLName="HoldType"/>
+			<Attribute ColumnName="WIZARD_ID" DataType="Text-255" Description="If this auditor record corresponds to a wizard id, when a wizard closes a note with the provided reason and note text will automatically be logged against the Order Object" Name="Wizard_Id" Nullable="true" XMLName="WizardID" />
+			<Attribute ColumnName="APPLICATION_CODE" DataType="ApplicationCode" Description="This is the corresponding application code for the wizard id provided and is used to add notes on confirmation of a wizard flow." Name="Application_Code" Nullable="true" XMLName="ApplicationCode" />
+			<Attribute ColumnName="NOTE_TYPE" DataType="ReasonCode" Description="The note type that will be logged in the notes table (stored in the notes table as ReasonCode)." Nullable="false" DefaultValue="' '" Name="Note_Type" XMLName="NoteType" />
+			<Attribute ColumnName="NOTE_TEXT" DataType="Text-2000" Description="If provided, this field will be used to set the text in a note." Name="Note_Text" Nullable="true" XMLName="NoteText" />
+			<Attribute ColumnName="TRANSFORMATION_FILE" DataType="FileName" Description="The XSL file that will be used to transform the XML data to the notes text." Nullable="false" DefaultValue="' '" Name="Transformation_File" XMLName="TransformationFile"/>
+			<Attribute ColumnName="ACTIVE" DataType="Flag" Description="Y/N flag indicating if this auditor event is active and should perform the action it corresponds to." Nullable="false" DefaultValue="' '" Name="ACTIVE" XMLName="Active"/>
+			<Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+            <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+            <Attribute ColumnName="CREATEUSERID" DataType="Createuserid" DefaultValue="' '" Description="User who created the record." Name="Createuserid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid" DefaultValue="' '" Description="User who modified the record." Name="Modifyuserid" Nullable="false"/>
+            <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' '" Description="Program that created the record." Name="Createprogid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="' '" Description="Program that modified the record." Name="Modifyprogid" Nullable="false"/>
+            <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0" Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+		</Attributes>
+		<PrimaryKey DB2Name="EVENT_AUDITOR_PK" Name="YFS_EVENT_AUDITOR_PK">
+            <Attribute ColumnName="EVENT_AUDITOR_KEY" Name="Event_Auditor_Key"/>
+        </PrimaryKey>
+		<Indices>
+			<Index DB2Name="EVENT_AUDITOR_I1" Name="YFS_EVENT_AUDITOR_I1" Unique="true" Version="9.3.0">
+				<Column Name="ORGANIZATION_CODE"/>
+                <Column Name="TRANID"/>
+				<Column Name="EVENTID"/>
+				<Column Name="WIZARD_ID" Version="9.3.0"/>
+				<Column Name="EVENT_AUDITOR_TYPE"/>
+				<Column Name="HOLD_TYPE"/>
+			</Index>
+        </Indices>
+		<RelationShips>
+			<RelationShip Cardinality="OneToMany" ForeignEntity="Organization" Name="Organization"
+            Type="Unidirectional" XMLName="Organization">
+				<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+            </RelationShip>
+		</RelationShips>
+	  </Entity>
+	  <Entity Description="This Table is a hang off table for the yfs_order_line table and stores the information about the price match and the relationship between Order Line and Price Match" EntityType="TRANSACTION" HasHistory="Y" Module="ycd" Name="Order_Line_Price_Match" Prefix="YFS_" TableName="YFS_ORDER_LINE_PRICE_MATCH"  TableType="TRANSACTION" XMLName="OrderLinePriceMatch" GenerateIndexedListMethods="true">
+		<Attributes>
+			<Attribute ColumnName="ORDER_LINE_PRICE_MATCH_KEY" DataType="Key" Description="The primary key for the YFS_ORDER_LINE_PRICE_MATCH table" Name="Order_Line_Price_Match_Key" Nullable="false" DefaultValue="' '" XMLName="OrderLinePriceMatchKey"/>
+			<Attribute ColumnName="ORDER_LINE_KEY" DataType="Key" Description="The primary key for the YFS_ORDER_LINE table." Name="Order_Line_Key" Nullable="false" DefaultValue="' '" XMLName="OrderLineKey"/>
+			<Attribute ColumnName="PRICE_MATCH_KEY" DataType="Key" Description="The primary key for the YFS_PRICE_MATCH table." Name="Price_Match_Key" Nullable="false" DefaultValue="' '" XMLName="PriceMatchKey"/>
+			<Attribute ColumnName="EXISTING_UNIT_PRICE" DataType="UnitPrice" Description="Existing price for a unit quantity of item, used to derive the price match difference" Name="Existing_Unit_Price" Nullable="false" DefaultValue="0" XMLName="ExistingUnitPrice" />
+			<Attribute ColumnName="EXISTING_DISCOUNTS" DataType="Money" DefaultValue="0" Description="Existing Discounts for the item, used to derive the price match difference" Nullable="false" XMLName="ExistingDiscounts" />
+			<Attribute ColumnName="EXISTING_CHARGES" DataType="Money" DefaultValue="0" Description="Existing Charges for the item, used to derive the price match difference" Name="Existing_Charges" Nullable="false" XMLName="ExistingCharges" />
+			<Attribute ColumnName="COMPETING_CHARGES" DataType="Money" DefaultValue="0" Description="Competitors Charges applied to the order line" Name="Competing_Charges" Nullable="false" XMLName="CompetingCharges" />
+			<Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was created." Name="Createts" Nullable="false"/>
+            <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="Timestamp when the record was last modified." Name="Modifyts" Nullable="false"/>
+            <Attribute ColumnName="CREATEUSERID" DataType="Createuserid" DefaultValue="' '" Description="User who created the record." Name="Createuserid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid" DefaultValue="' '" Description="User who modified the record." Name="Modifyuserid" Nullable="false"/>
+            <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' '" Description="Program that created the record." Name="Createprogid" Nullable="false"/>
+            <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="' '" Description="Program that modified the record." Name="Modifyprogid" Nullable="false"/>
+            <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0" Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false"/>
+            <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key" DefaultValue="' '" Description="Order header key for this order line price match record" Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey"/>
+		</Attributes>
+		<PrimaryKey DB2Name="ORDER_LINE_PM_PK" Name="YFS_ORDER_LINE_PRICEMAT_PK">
+                <Attribute ColumnName="ORDER_LINE_PRICE_MATCH_KEY" Name="Order_Line_Price_Match_Key"/>
+        </PrimaryKey>
+        <Parent ParentTableName="YFS_ORDER_LINE" >
+			<Attribute ParentColumnName="ORDER_LINE_KEY" ColumnName="ORDER_LINE_KEY"/>
+		</Parent>
+		<Indices>
+ 			<Index DB2Name="ORD_LINE_PM_I1" Name="YFS_ORD_LINE_PRICEMATM_I1" Unique="true">
+        		<Column Name="ORDER_LINE_KEY"/>
+        		<Column Name="PRICE_MATCH_KEY"/>
+      		</Index>
+   		</Indices>
+		<RelationShips>
+			<RelationShip Cardinality="OneToOne" DeleteCascade="true" ForeignEntity="Order_Line" Name="PriceMatchOrderLine" Type="Bidirectional" XMLName="PriceMatchOrderLine">
+				<Attribute Name="Order_Line_Key" ParentName="Order_Line_Key"/>
+			</RelationShip>
+			<RelationShip Cardinality="OneToMany" ForeignEntity="Price_Match" Name="PriceMatch" Type="Unidirectional" XMLName="PriceMatch">
+				<Attribute Name="Price_Match_Key" ParentName="Price_Match_Key"/>
+    	    </RelationShip>
+			<RelationShip Cardinality="OneToMany" DeleteCascade="true" ForeignEntity="Order_Header" Name="PriceMatchOrderHeader" Type="Bidirectional" XMLName="PriceMatchOrderHeader">
+				<Attribute Name="Order_Header_Key" ParentName="Order_Header_Key" UsedForDataSecurity="true" />
+			</RelationShip>
+		</RelationShips>
+	</Entity>
+	</Entities>
+</DBSchema>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Licensed Materials - Property of IBM
+IBM Sterling Order Management  (5725-D10)
+IBM Call Center for Commerce
+(C) Copyright IBM Corp. 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project default="dojo-ide-stand-alone" name="dojoIDEStandAlone">
+    <property name="build.package.name" value="dojo_ide_stand_alone"/>
+    <property name="package.name" value="atlas"/>
+    <property file="sandbox.cfg" prefix="sandbox"/>
+    <property location="${sandbox.INSTALL_DIR}" name="installdir"/>
+    <property location="${installdir}/external_deployments" name="dir.external"/>
+    <property location="${installdir}/../product/platform_uifwk_ide" name="base.dir"/>
+    <property location="${base.dir}/build" name="build.dir"/>
+    <property
+        location="${base.dir}/product/resources/files/dojoidestandalone" name="stand.alone.files.dir"/>
+    <property location="${build.dir}/${build.package.name}" name="build.package.path"/>
+    <property location="${build.package.path}/${package.name}" name="package.path"/>
+    <target depends="clean" name="setup">
+        <echo message="Creating directories"/>
+        <mkdir dir="${package.path}"/>
+    </target>
+    <target name="clean">
+        <echo message="Cleaning old files and directories"/>
+        <delete dir="${build.package.path}"/>
+        <delete file="${build.dir}/${package.name}.zip"/>
+        <delete file="${dir.external}/${package.name}.zip"/>
+    </target>
+    <target depends="setup" name="dojo-ide-stand-alone">
+        <echo message="Packaging Stand Alone Dojo IDE"/>
+        <copy todir="${package.path}">
+            <fileset dir="${stand.alone.files.dir}/installscripts"/>
+        </copy>
+        <copy file="${dir.external}/${package.name}.war" tofile="${package.path}/${package.name}.war"/>
+        <zip basedir="${build.package.path}" destfile="${build.dir}/${package.name}.zip"/>
+        <copy file="${build.dir}/${package.name}.zip" tofile="${dir.external}/${package.name}.zip"/>
+    </target>
+</project>

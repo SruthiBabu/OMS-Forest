@@ -1,0 +1,1269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="N" Cacheable="true"
+            Description="This table stores the zone level setup details for a warehouse. The warehouse may be divided into multiple zones based on the product storage, packaging types, etc. Zone is a way of classifying a set of locations that share common properties. Locations belong to zones. Zone level storage constraints are auto propagated to locations through membership in a zone. The mix and do not mix constraints at zone level, apply to every single location in the zone."
+            EntityType="CONFIGURATION" Extensible="Y"
+            ListXMLName="Zones" Module="wms" Name="Zone" Prefix="YFS_"
+            TableName="YFS_ZONE" TableType="MASTER" XMLName="Zone">
+            <Attributes>
+                <Attribute ColumnName="ZONE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_ZONE table."
+                    Name="Zone_Key" Nullable="false" XMLName="ZoneKey"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The field indicates the zone identifier. This forms a unique key for the YFS_ZONE table associated with the NODE_KEY."
+                    Name="Zone_Id" Nullable="false" XMLName="ZoneId"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="FreeText-200" DefaultValue="' '"
+                    Description="A brief description of the zone."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this zone."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="BUILDING_NUMBER"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="This field identifies the building number where zone is located."
+                    Name="Building_Number" Nullable="false"/>
+                <Attribute ColumnName="ATTEMPT_SKU_CONSOLIDATION"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the putaway item should be consolidated in a location that contains similar items as per the inventory. This attribute is used during putaway location selection."
+                    Name="Attempt_SKU_Consolidation" Nullable="false" XMLName="AttemptSKUConsolidation"/>
+                <Attribute ColumnName="IS_ACTIVE_ZONE" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the zone is a forward pick zone. This is used by putaway location selection."
+                    Name="Is_Active_Zone" Nullable="false" XMLName="IsActiveZone"/>
+                <Attribute ColumnName="PRIMARY_BULK_ZONE_ID"
+                    DataType="ZoneId" DefaultValue="' '"
+                    Description="This field identifies the primary bulk zone identifier. The primary bulk zone identifies the active zone in which a bulk stock is stored to replenish the zone. This is used for forward pick zones when suggesting putaway to locations nearest to the dedicated locations."
+                    Name="Primary_Bulk_Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="TRACK_INVENTORY" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the inventory is tracked in this zone. In instances where a warehouse has a manufacturing plant attached to it, and it is required that there be a hand-off of inventory between these two systems, then the WMS application will simply move inventory to a location in this zone, and automatically move inventory out of the system."
+                    Name="Track_Inventory" Nullable="false" XMLName="TrackInventory"/>
+                <Attribute ColumnName="TRACK_CARTON_LPN" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the inventory is tracked in this zone. Typically, in forward pick zone, the business process may mandate that inventory should not be tracked at license plate level to avoid extra scans from the user at every pick. Otherwise, the user would need to scan the license plate for every unit picked to specify the license plate from where the stock was picked up."
+                    Name="Track_Carton_LPN" Nullable="false" XMLName="TrackCaseLPN"/>
+                <Attribute ColumnName="TRACK_PALLET_LPN" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the inventory is tracked in this zone. Typically, in forward pick zone, the business process may mandate that inventory should not be tracked at license plate level to avoid extra scans from the user at every pick. Otherwise, the user would need to scan the license plate for every unit picked, to specify the license plate from where the stock was picked up."
+                    Name="Track_Pallet_LPN" Nullable="false" XMLName="TrackPalletLPN"/>
+                <Attribute ColumnName="MIX_ENTERPRISE"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items belonging to different enterprises can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items belonging to different enterprises will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items belonging to different enterprises, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory belonging to various enterprises within that zone. Never allow: Indicates that items belonging to different enterprises will never be mixed in this zone."
+                    Name="Mix_Enterprise" Nullable="false" XMLName="MixEnterprise"/>
+                <Attribute ColumnName="MIX_SKU"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items belonging to different SKUs can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items belonging to different SKUs will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items belonging to different SKUs, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory belonging to various SKUs within that zone. Never allow: Indicates that items belonging to different SKUs will never be mixed in this zone."
+                    Name="Mix_SKU" Nullable="false" XMLName="MixSKU"/>
+                <Attribute ColumnName="MIX_INVENTORY_TAG"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items belonging to different lots can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items belonging to different lots will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items belonging to different lots, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory belonging to various lots within that zone. Never allow: Indicates that items belonging to different lots will never be mixed in this zone."
+                    Name="Mix_Inventory_Tag" Nullable="false" XMLName="MixInventoryTag"/>
+                <Attribute ColumnName="MIX_PRODUCT_CLASS"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items belonging to different product classes can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items belonging to different product classes will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items belonging to different product classes, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory belonging to various product classes within that zone. Never allow: Indicates that items belonging to different product classes will never be mixed in this zone."
+                    Name="Mix_Product_Class" Nullable="false" XMLName="MixProductClass"/>
+                <Attribute ColumnName="MIX_FIFO"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items arriving at the node on a  different date and at a different time with different FIFO numbers can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items with different FIFO numbers will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items with different FIFO numbers, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory with different FIFO numbers within that zone. Never allow: Indicates that items with different FIFO numbers will never be mixed in this zone."
+                    Name="Mix_Fifo" Nullable="false" XMLName="MixFifo"/>
+                <Attribute ColumnName="MIX_RECEIPT_NO"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items belonging to different receipts can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items belonging to different receipts will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items belonging to different receipts, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory belonging to different receipts within that zone. Never allow: Indicates that items belonging to different receipts will never be mixed in this zone. This ensures that the receipt number of all non-license plated stock in that location will be blanked out."
+                    Name="Mix_Receipt_No" Nullable="false" XMLName="MixReceiptNo"/>
+                <Attribute ColumnName="MIX_INVENTORY_STATUS"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This flag indicates whether the items belonging to different statuses can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items belonging to different statuses will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items belonging to different statuses, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory belonging to different statuses within that zone. Never allow: Indicates that items belonging to different statuses will never be mixed in this zone."
+                    Name="Mix_Inventory_Status" Nullable="false" XMLName="MixInventoryStatus"/>
+                <Attribute ColumnName="MIX_SHIP_BY_DATE"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items with different ship by date can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items with different ship by date will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items with different ship by date, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory with different ship by date within that zone. Never allow: Indicates that items with different ship by date will never be mixed in this zone."
+                    Name="Mix_Ship_By_Date" Nullable="false" XMLName="MixShipByDate"/>
+                <Attribute ColumnName="MIX_COUNTRY_OF_ORIGIN"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items with different country of origin can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items with different country of origin will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that items with different country of origin, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory with different country of origin within that zone. Never allow: Indicates that items with different country of origin will never be mixed in this zone."
+                    Name="Mix_Country_Of_Origin" Nullable="false" XMLName="MixCountryOfOrigin"/>
+                <Attribute ColumnName="MIX_SEGMENT"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This field indicates whether the items customized for a customer or a customer's order can be mixed in a location within the zone. Valid values are: Allow only if license plated: This indicates that the items customized for a customer or a customer's order will be mixed in this zone, only if they are license plated. Warehouses with most of their items license plated will choose this option. Always allow: Indicates that customized for a customer or a customer's order, whether license plated or not, would always be mixed in this zone. Some warehouses may choose to always allow mixing for want of real estate. A physical separation may be used to differentiate between inventory customized for a customer or a customer's order within that zone. Never allow: Indicates that items customized for a customer or a customer's order will never be mixed in this zone."
+                    Name="Mix_Segment" Nullable="false" XMLName="MixSegment"/>
+                <Attribute ColumnName="LOCATIONS_PER_ITEM"
+                    DataType="NonZeroCount" DefaultValue="0"
+                    Description="This field indicates the maximum number of locations that any item can occupy in this zone. This is relevant in zones that are close to the docks, considered premium zones, which typically stock all representative fast selling items. The number of locations per item should not exceed this number as they may occupy a more number of locations when they arrive in large numbers while receiving."
+                    Name="Locations_Per_Item" Nullable="false" XMLName="LocationsPerItem"/>
+                <Attribute ColumnName="PUT_ON_VARIANCE_HOLD"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the locations belonging to a zone are put on variance hold for pick and putaway. When negative variance is found during the count process, all locations belonging to the zone with this flag checked will be put on variance hold for pick and putaway."
+                    Name="Put_On_Variance_Hold" Nullable="false" XMLName="PutOnVarianceHold"/>
+                <Attribute ColumnName="SPLIT_UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates whether the specified quantity can be picked pup in multiples of the specified unit of measure from all locations in the zone."
+                    Name="Split_Uom" Nullable="false"/>
+                <Attribute ColumnName="FORCE_LOCN_SCAN_ON_VISIT"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether an RF user is forced to scan a location per visit."
+                    Name="Force_Locn_Scan_On_Visit" Nullable="false" XMLName="ForceLocnScanOnVisit"/>
+                <Attribute ColumnName="CNF_LOCN_EMT_AFTER_PICK"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the empty location confirmation screen on the mobile pick and retrieval transaction displays whenever the location is empty, as a part of the pick process."
+                    Name="Confirm_Locn_Empty_After_Pick"
+                    Nullable="false" XMLName="ConfirmLocnEmptyAfterPick"/>
+				<Attribute ColumnName="REPLENISH_UPTO_CAPACITY"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether to split replenishment tasks according to target location capacity and release only those tasks which will fit into the location."
+                    Name="Replenish_Upto_Capacity" Nullable="false"/>
+				<Attribute ColumnName="TRIGGER_PERCENT"
+                    DataType="Percentage" DefaultValue="0"
+                    Description="In case of capacity tracked locations, replenishment is considered only when the inventory goes below this much percentage of location capacity."
+                    Name="Trigger_Percent" Nullable="false"/>
+				<Attribute ColumnName="MAX_CAPACITY_TOLERANCE"
+                    DataType="Percentage" DefaultValue="0"
+                    Description="In case of capacity tracked locations, a location is replenished up to this much percent more than the maximum capacity of the location, when demand exceeds maximum capacity of the location."
+                    Name="Max_Capacity_Tolerance" Nullable="false"/>
+				<Attribute ColumnName="CNT_ALL_ITEMS_AT_LOC"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag is set to 'Y' if user wants to count location when an item is put on count in that location."
+                    Name="Cnt_All_Items_At_Loc" Nullable="false" XMLName="CntAllItemsAtLoc"/>
+				 <Attribute ColumnName="TRANSFER_OWN_TO_INV_ORG"
+                    DataType="Flag"
+                    Description="The flag indicates when the inventory moves to this area  the ownership is transferred to the primary inventory org."
+                    Name="Transfer_Ownership_To_Inventory_Org"
+                    Nullable="true" XMLName="TransferOwnershipToInventoryOrg"/>
+                <Attribute ColumnName="ALLOW_MULT_USERS_IN_LOCN"
+                    DataType="Flag" DefaultValue="'Y'"
+                    Description="This flag indicates whether multiple users can work simultaneously in a location of this zone."
+                    Name="Allow_Multiple_Users_In_Locn" Nullable="false" XMLName="AllowMultipleUsersInLocn"/>
+				<Attribute ColumnName="CHECK_DIGIT" DataType="VText-5"
+                    Description="Check Digit is a numeric representation of Zone. It is generally used by Voice Systems to verify the Zone. Zone Check Digit is unique for a Node."
+                    Name="Check_Digit" Nullable="true" XMLName="CheckDigit"/>
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_ZONE_PK">
+                <Attribute ColumnName="ZONE_KEY" Name="Zone_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_ZONE_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ZONE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Zones" ChildName="Zone"
+                    ChildXMLName="Zone" DeleteCascade="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="Ship_Node" Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ActiveZones"
+                    ChildName="ActiveZone" ChildXMLName="ActiveZone"
+                    ForeignEntity="Zone" Name="PrimaryBulkZone"
+                    Type="Bidirectional" XMLName="PrimaryBulkZone">
+                    <Attribute Name="Primary_Bulk_Zone_Id" ParentName="Zone_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="ZONE_ID"/>
+        </Entity>
+        <Entity AuditRequired="N" Cacheable="true"
+            Description="Warehouse zones are further divided into locations of different sizes where inventory is stored. Each location belongs to a zone and a node. It is classified as INTRANSIT, REGULAR, VIRTUAL, STAGING or DOCK. It has attributes like aisle number, bay number, level number etc."
+            EntityType="CONFIGURATION" Extensible="Y"
+            ListXMLName="Locations" Module="wms" Name="Location"
+            Prefix="YFS_" TableName="YFS_LOCATION" TableType="MASTER" XMLName="Location">
+            <Attributes>
+                <Attribute ColumnName="LOCATION_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION table."
+                    Name="Location_Key" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="This field indicates the unique identifier for the location. The combination of the LOCATION_ID and NODE_KEY forms the unique key for the YFS_LOCATION table."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCATION_BAR_CODE"
+                    DataType="LocationBarCode" DefaultValue="' '"
+                    Description="This field indicates that a numeric barcode of the location identifier is stored for this location. The way this is intended to be used in WMS is that an RF operator when prompted to scan the location Id is also expected to scan the location bar code on the RF terminal. This ensures that the operator has traveled to the location suggested by the system and picked up or dropped off inventory at the specified location. Simply keying in the human readable form of the location ID on the RF terminal will be rejected by the system. The objective of this feature is to ensure inventory accuracy."
+                    Name="Location_Bar_Code" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_TYPE"
+                    DataType="EnumLocationType" DefaultValue="' '"
+                    Description="This field is a system defined classification of location to aid association of locations of certain types for certain other operations with WMS. The supported types are: INTRANSIT (Mobile locations), STAGING, VIRTUAL, REGULAR and DOCK. For example, all equipment locations should be of type INTRANSIT."
+                    Name="Location_Type" Nullable="false"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="This field indicates the zone to which a location belongs. This when associated with the  node key identifies a unique zone within the node."
+                    Name="Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="AISLE_NUMBER" DataType="Integer"
+                    DefaultValue="0"
+                    Description="This field indicates the aisle Number of the location. The locations belong to zones which have travel aisle's between them. A zone could belong to multiple aisles and multiple zones could belong to an aisle. But a location in a zone always belongs to one and only one aisle."
+                    Name="Aisle_Number" Nullable="false"/>
+				<Attribute ColumnName="AISLE_SUFFIX" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="this field indicates the aisle section of the location id."
+                    Name="Aisle_Suffix" Nullable="false"/>
+                <Attribute ColumnName="LEVEL_NUMBER" DataType="Integer"
+                    DefaultValue="0 "
+                    Description="This field indicates the level number of the location. The height of the location (y-co-ordinate of the location from the floor) is classified as levels. The level attribute of the location is used in arriving at locations nearest to the dedicated locations algorithm used during the putaway process. Typically, the level attribute is contained within the location ID."
+                    Name="Level_Number" Nullable="false"/>
+                <Attribute ColumnName="BAY_NUMBER" DataType="Integer"
+                    DefaultValue="0 "
+                    Description="This field indicates the location's bay number. Typically, the aisle, level and bay put together represents the physical location of the location in a node, if they are based on coordinate system. The bay attribute of the location (x-coordinate from the beginning of the aisle) is used in arriving at locations nearest to the dedicated locations algorithm that is used in putaway. Typically, the bay attribute is contained within the location ID."
+                    Name="Bay_Number" Nullable="false"/>
+                <Attribute ColumnName="FREEZE_MOVE_IN" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the inventory is moved into the location. This is used for warehouses with certain number of locations. However, the usage of locations is phased out over a period of time."
+                    Name="Freeze_Move_In" Nullable="false" XMLName="FreezeMoveIn"/>
+                <Attribute ColumnName="MOVE_IN_SEQ_NO"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="This field is used by task management to suggest location while moving in the inventory (putaway). The putaway location selection algorithm uses this information to select locations from a list of locations based on the move in sequence."
+                    Name="Move_In_Seq_No" Nullable="false"/>
+                <Attribute ColumnName="FREEZE_MOVE_OUT" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether inventory is moved out of the location."
+                    Name="Freeze_Move_Out" Nullable="false" XMLName="FreezeMoveOut"/>
+                <Attribute ColumnName="MOVE_OUT_SEQ_NO"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="This field is used by task management to suggest location while moving out inventory (picking). The pick location selection algorithm uses this information to select locations from a list of locations based on its move in sequence."
+                    Name="Move_Out_Seq_No" Nullable="false"/>
+                <Attribute ColumnName="IN_STAGING_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="This field indicates that the inventory is dropped into the drop off locations."
+                    Name="In_Staging_Location_Id" Nullable="false"/>
+                <Attribute ColumnName="OUT_STAGING_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="This field indicates the Out Drop off Location where moves originated at this location, and may be dropped."
+                    Name="Out_Staging_Location_Id" Nullable="false"/>
+                <Attribute ColumnName="VELOCITY_CODE"
+                    DataType="VelocityCode" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as 'A', 'B' or 'C' class items based on whether they are fast selling, not so fast selling and low selling items. These item classifications are typically followed by all enterprises to optimize certain operations such as sourcing and stocking. The reason to have locations that prefer certain velocity codes is to have locations closer to dock stocking 'A' class items, and locations furthest away from the dock stocking 'C' class items. The velocity code is a preference on the location and not a constraint. If 'A' class items fill up all locations meant for 'A' class items, then they can be moved to 'B' and later 'C'. Similarly, 'C' can go to 'B' and 'A' for lack of space in the respective locations preferred for a specific velocity code. The 'B' class items move into 'C' and then into 'A'."
+                    Name="Velocity_Code" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="LocationSizeCode" DefaultValue="' '"
+                    Description="This field defines the capacity of the location. All locations having the same size (dimensions and ability to hold the same weight) are classified under the same size code. This maps to the primary key attribute of the YFS_LOCATION_SIZE table."
+                    Name="Location_Size_Code" Nullable="false"/>
+                <Attribute ColumnName="STORAGE_CODE"
+                    DataType="StorageCode" DefaultValue="' '"
+                    Description="This field is an attribute of the location that allows the warehouse to store items with similar storage profile as that of the location.  For example, hazardous inflammable items need locations close to fire extinguishers. In this case the locations will be marked as having a storage code, which is suitable for storing Inflammable items. This ensures that only inflammable items get to these locations."
+                    Name="Storage_Code" Nullable="false"/>
+                <Attribute ColumnName="DOCK_TYPE" DataType="Text-10"
+                    DefaultValue="' '"
+                    Description="This field depicts the type of the dock location. For a non-dock location, this field is set to blank. For a dock location, it is set to INBOUND if it is used exclusively for inbound activities. Similarly, it is set to OUTBOUND if is used exclusively for outbound activities. In case, the dock location is used for both inbound and outbound activities, this attribute is set to BOTH."
+                    Name="Dock_Type" Nullable="false"/>
+				<Attribute ColumnName="X_CO_ORDINATE" DataType="Number"
+                    DefaultValue="0"
+                    Description="This field indicates the X co-ordinate of the location."
+                    Name="X_Co_Ordinate" Nullable="false"/>
+				<Attribute ColumnName="Y_CO_ORDINATE" DataType="Number"
+                    DefaultValue="0"
+                    Description="This field indicates the Y co-ordinate of the location."
+                    Name="Y_Co_Ordinate" Nullable="false"/>
+				<Attribute ColumnName="Z_CO_ORDINATE" DataType="Number"
+                    DefaultValue="0"
+                    Description="This field indicates the Z co-ordinate of the location."
+                    Name="Z_Co_Ordinate" Nullable="false"/>
+				<Attribute ColumnName="CHECK_DIGIT" DataType="VText-5"
+                    Description="Check Digit is a numeric representation of Location. It is generally used by Voice Systems to verify the Location. Location Check Digit is non unique."
+                    Name="Check_Digit" Nullable="true" XMLName="CheckDigit"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_LOCATION_PK">
+                <Attribute ColumnName="LOCATION_KEY" Name="Location_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_LOCATION_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_ID"/>
+                </Index>
+                <Index Name="YFS_LOCATION_I2" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_BAR_CODE"/>
+                </Index>
+                <Index Name="YFS_LOCATION_I3">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ZONE_ID"/>
+                </Index>
+                <Index Name="YFS_LOCATION_I4">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="IN_STAGING_LOCATION_ID"/>
+                </Index>
+                <Index Name="YFS_LOCATION_I5">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="OUT_STAGING_LOCATION_ID"/>
+                </Index>
+                <Index Name="YFS_LOCATION_I6">
+                    <Column Name="VELOCITY_CODE"/>
+                </Index>
+				<Index Name="YFS_LOCATION_I7">
+                    <Column Name="NODE_KEY"/>
+					<Column Name="ZONE_ID"/>
+					<Column Name="FREEZE_MOVE_IN"/>
+					<Column Name="LOCATION_TYPE"/>
+					<Column Name="VELOCITY_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ZoneLocations"
+                    ChildName="ZoneLocation" ChildXMLName="ZoneLocation"
+                    DeleteCascade="true" ForeignEntity="Zone"
+                    IsParent="true" Name="Zone" Type="Bidirectional" XMLName="Zone">
+                    <Attribute Name="Zone_Id" ParentName="Zone_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="NodeLocations"
+                    ChildName="NodeLocation" ChildXMLName="NodeLocation"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    Name="Ship_Node" Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="SameSizedLocations"
+                    ChildName="SameSizedLocation"
+                    ChildXMLName="SameSizedLocation"
+                    DeleteCascade="true" ForeignEntity="Location_Size"
+                    Name="Location_Size" Type="Bidirectional" XMLName="LocationSize">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Location_Size_Code" ParentName="Location_Size_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="SameStorageLocations"
+                    ChildName="SameStorageLocation"
+                    ChildXMLName="SameStorageLocation"
+                    ForeignEntity="Location_Storage_Code"
+                    Name="Location_Storage_Code" Type="Bidirectional" XMLName="LocationStorageCode">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Storage_Code" ParentName="Location_Storage_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TargetLocations"
+                    ChildName="TargetLocation"
+                    ChildXMLName="TargetLocation"
+                    ForeignEntity="Location" Name="InStagingLocation"
+                    Type="Bidirectional" XMLName="InStagingLocation">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="In_Staging_Location_Id" ParentName="Location_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="SourceLocations"
+                    ChildName="SourceLocation"
+                    ChildXMLName="SourceLocation"
+                    ForeignEntity="Location" Name="OutStagingLocation"
+                    Type="Bidirectional" XMLName="OutStagingLocation">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Out_Staging_Location_Id" ParentName="Location_Id"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="Location's transactional attributes like volume, weight, empty/full etc., are maintained in this table. The reason this is not a part of the YFS_LOCATION table is because we would like to use caching capacity for heavily accessed master configurations such as locations, items etc. Only those attributes that are likely to be modified based on transactions need to be read from the database at every access."
+            EntityType="TRANSACTION" Module="wms" Name="Tran_Locn_Attrs"
+            Prefix="YFS_" TableName="YFS_TRAN_LOCN_ATTRS"
+            TableType="TRANSACTION" XMLName="TransactionalLocationAttributes">
+            <Attributes>
+                <Attribute ColumnName="TRAN_LOCN_ATTRS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_TRAN_LOCN_ATTRS table."
+                    Name="Tran_Locn_Attrs_Key" Nullable="false" XMLName="TransactionalLocationAttributesKey"/>
+                <Attribute ColumnName="LOCATION_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_TRAN_LOCN_ATTRS table."
+                    Name="Location_Key" Nullable="false"/>
+				<Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="This field indicates the unique identifier for the location. The combination of the LOCATION_ID and NODE_KEY forms the unique key for the YFS_LOCATION table."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+				<Attribute ColumnName="LOCATION_TYPE"
+                    DataType="EnumLocationType" DefaultValue="' '"
+                    Description="This field is a system defined classification of location to aid association of locations of certain types for certain other operations with WMS. The supported types are: INTRANSIT (Mobile locations), STAGING, VIRTUAL, REGULAR and DOCK. For example, all equipment locations should be of type INTRANSIT."
+                    Name="Location_Type" Nullable="false"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="This field indicates the zone to which a location belongs. This when associated with the  node key identifies a unique zone within the node."
+                    Name="Zone_Id" Nullable="false"/>
+				<Attribute ColumnName="MOVE_IN_SEQ_NO"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="This field is used by task management to suggest location while moving in the inventory (putaway). The putaway location selection algorithm uses this information to select locations from a list of locations based on the move in sequence."
+                    Name="Move_In_Seq_No" Nullable="false"/>
+                <Attribute ColumnName="VELOCITY_CODE"
+                    DataType="VelocityCode" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as 'A', 'B' or 'C' class items based on whether they are fast selling, not so fast selling and low selling items. These item classifications are typically followed by all enterprises to optimize certain operations such as sourcing and stocking. The reason to have locations that prefer certain velocity codes is to have locations closer to dock stocking 'A' class items, and locations furthest away from the dock stocking 'C' class items. The velocity code is a preference on the location and not a constraint. If 'A' class items fill up all locations meant for 'A' class items, then they can be moved to 'B' and later 'C'. Similarly, 'C' can go to 'B' and 'A' for lack of space in the respective locations preferred for a specific velocity code. The 'B' class items move into 'C' and then into 'A'."
+                    Name="Velocity_Code" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="LocationSizeCode" DefaultValue="' '"
+                    Description="This field defines the capacity of the location. All locations having the same size (dimensions and ability to hold the same weight) are classified under the same size code. This maps to the primary key attribute of the YFS_LOCATION_SIZE_CODE table."
+                    Name="Location_Size_Code" Nullable="false"/>
+                <Attribute ColumnName="STORAGE_CODE"
+                    DataType="StorageCode" DefaultValue="' '"
+                    Description="This field is an attribute of the location that allows the warehouse to store items with similar storage profile as that of the location.  For example, hazardous inflammable items need locations close to fire extinguishers. In this case the locations will be marked as having a storage code, which is suitable for storing Inflammable items. This ensures that only inflammable items get to these locations."
+                    Name="Storage_Code" Nullable="false"/>
+                <Attribute ColumnName="FILL_CODE"
+                    DataType="EnumFillCode" DefaultValue="' '"
+                    Description="Indicates if the location is Empty('0'), Partially Full('1') or Full('2'). These three values are updated by the applications based on stock movements to and from the location."
+                    Name="Fill_Code" Nullable="false"/>
+                <Attribute ColumnName="AVAILABLE_VOLUME"
+                    DataType="Number" DefaultValue="0"
+                    Description="This field indicates that the unoccupied physical volume of the location that is available for moving in stock. This does not include the PEND_IN_VOLUME. (See explanation against this field in this entity)."
+                    Name="Available_Volume" Nullable="false"/>
+                <Attribute ColumnName="AVAILABLE_WEIGHT"
+                    DataType="Number" DefaultValue="0"
+                    Description="This field indicates the additional physical weight the location can withstand when products are moved into this location to fill in the unoccupied volume. This does not include the PEND_IN_WEIGHT. (See explanation against this field in this entity)."
+                    Name="Available_Weight" Nullable="false"/>
+                <Attribute ColumnName="PEND_IN_VOLUME" DataType="Number"
+                    DefaultValue="0"
+                    Description="This field indicates the volume of the stock expected to move into this location."
+                    Name="Pend_In_Volume" Nullable="false"/>
+                <Attribute ColumnName="PEND_IN_WEIGHT" DataType="Number"
+                    DefaultValue="0"
+                    Description="This field indicates the weight of the stock expected to move into this location."
+                    Name="Pend_In_Weight" Nullable="false"/>
+                <Attribute ColumnName="NET_AVAIL_VOLUME"
+                    DataType="Number" DefaultValue="0"
+                    Description="This field indicates the volume of the location that is available after considering the PEND_IN_VOLUME."
+                    Name="Net_Available_Volume" Nullable="false"/>
+                <Attribute ColumnName="NET_AVAIL_WEIGHT"
+                    DataType="Number" DefaultValue="0"
+                    Description="This field indicates the weight that this location can withstand after considering the PEND_IN_WEIGHT."
+                    Name="Net_Available_Weight" Nullable="false"/>
+                <Attribute ColumnName="FREEZE_ON_VARIANCE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the location has an item with negative variance that was detected during the count operation. This determines whether a pick or putaway operation can be performed in the location."
+                    Name="Freeze_On_Variance" Nullable="false" XMLName="FreezeOnVariance"/>
+				<Attribute ColumnName="FREEZE_MOVE_IN" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the inventory is moved into the location. This is used for warehouses with certain number of locations. However, the usage of locations is phased out over a period of time."
+                    Name="Freeze_Move_In" Nullable="false" XMLName="FreezeMoveIn"/>
+				<Attribute ColumnName="LAST_COUNTED_DATE"
+                    DataType="TimeStamp" 
+                    Description="This attribute records what is the date on which the location has been put on count."
+                    Name="Last_Counted_Date" Nullable="true" XMLName="LastCountedDate"/>
+				<Attribute ColumnName="LAST_MANUALLY_PUT_ON_COUNT"
+                    DataType="TimeStamp" 
+                    Description="This attribute records what is the date on which the location has been manually put on count."
+                    Name="Last_Manually_Put_On_Count" Nullable="true" XMLName="LastManuallyPutOnCount"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TRAN_LOCN_ATTR_PK" Name="YFS_TRAN_LOCN_ATTRS_PK">
+                <Attribute ColumnName="TRAN_LOCN_ATTRS_KEY" Name="Tran_Locn_Attrs_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="TRAN_LOCN_ATTR_I1"
+                    Name="YFS_TRAN_LOCN_ATTRS_I1" Unique="true">
+                    <Column Name="LOCATION_KEY"/>
+                </Index>
+                <Index DB2Name="TRAN_LOCN_ATTR_I2" Name="YFS_TRAN_LOCN_ATTRS_I2">
+                    <Column Name="FREEZE_ON_VARIANCE"/>
+                    <Column Name="FILL_CODE"/>
+                    <Column Name="AVAILABLE_VOLUME"/>
+                </Index>
+                <Index DB2Name="TRAN_LOCN_ATTR_I3" Name="YFS_TRAN_LOCN_ATTRS_I3">
+                    <Column Name="FILL_CODE"/>
+                </Index>
+                <Index DB2Name="TRAN_LOCN_ATTR_I4" Name="YFS_TRAN_LOCN_ATTRS_I4">
+                    <Column Name="NET_AVAIL_VOLUME"/>
+                </Index>
+                <Index DB2Name="TRAN_LOCN_ATTR_I5" Name="YFS_TRAN_LOCN_ATTRS_I5">
+                    <Column Name="NET_AVAIL_WEIGHT"/>
+                </Index>
+				<Index DB2Name="TRAN_LOCN_ATTR_I6" Name="YFS_TRAN_LOCN_ATTRS_I6">
+                    <Column Name="NODE_KEY"/>
+					<Column Name="FREEZE_MOVE_IN"/>
+					<Column Name="FREEZE_ON_VARIANCE"/>
+					<Column Name="VELOCITY_CODE"/>
+					<Column Name="NET_AVAIL_VOLUME"/>
+					<Column Name="NET_AVAIL_WEIGHT"/>
+					<Column Name="MOVE_IN_SEQ_NO"/>
+					<Column Name="LOCATION_ID"/>
+					<Column Name="ZONE_ID"/>
+					<Column Name="LOCATION_TYPE"/>
+					<Column Name="LOCATION_SIZE_CODE"/>
+					<Column Name="FILL_CODE"/>
+                </Index>
+				<Index DB2Name="TRAN_LOCN_ATTR_I7" Name="YFS_TRAN_LOCN_ATTRS_I7">
+                    <Column Name="NODE_KEY"/>
+					<Column Name="FREEZE_MOVE_IN"/>
+					<Column Name="FREEZE_ON_VARIANCE"/>
+					<Column Name="NET_AVAIL_VOLUME"/>
+					<Column Name="NET_AVAIL_WEIGHT"/>
+					<Column Name="VELOCITY_CODE"/>
+					<Column Name="MOVE_IN_SEQ_NO"/>
+					<Column Name="LOCATION_ID"/>
+					<Column Name="ZONE_ID"/>
+					<Column Name="LOCATION_TYPE"/>
+					<Column Name="LOCATION_SIZE_CODE"/>
+					<Column Name="FILL_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    DeleteCascade="true" ForeignEntity="Location"
+                    IsParent="true" Name="Location" Type="Bidirectional" XMLName="Location">
+                    <Attribute Name="Location_Key" ParentName="Location_Key"/>
+					<Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="N" Cacheable="true"
+            Description="This contains definitions of locations that are dedicated to certain SKUs."
+            EntityType="CONFIGURATION" ListXMLName="SKUDedications"
+            Module="wms" Name="SKU_Dedication" Prefix="YFS_"
+            TableName="YFS_SKU_DEDICATION" TableType="MASTER" XMLName="SKUDedication">
+            <Attributes>
+                <Attribute ColumnName="SKU_DEDICATION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SKU_DEDICATION table."
+                    Name="SKU_Dedication_Key" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="This field specifies the location identifier. This field when associated with the NODE_KEY identifies a unique location in the node."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SKU_DEDICATION table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field identifies the enterprise to which the location is dedicated ."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="This field specifies the item's ID."
+                    Name="Item_Id" Nullable="false" XMLName="ItemId"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The item's unit of measure." Name="Uom"
+                    Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="This field specifies the item's product class."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="This field stores customization details for items that are custom specific."
+                    Name="Segment_Type" Nullable="false"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="This field stores customization details for those items that are custom specific. When the inventory is customized for a specific order, it needs to be tracked separately so that it can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+				<Attribute ColumnName="MIN_QTY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="If the inventory at the dedicated location goes below this quantity then replenishment is triggered for the location. Replenishment is triggered by Release Wave and Location Monitor transactions upon additional configuration."
+                    Name="Min_Qty" Nullable="false" XMLName="MinQty"/>
+				<Attribute ColumnName="MAX_QTY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="This quantity indicates the maximum quantity upto which location can be replenished. This quantity is used by Release Wave and Location Monitor transactions while replenishing."
+                    Name="Max_Qty" Nullable="false" XMLName="MaxQty"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="SKU_DEDICATION_PK" Name="YFS_SKU_DEDICATION_PK">
+                <Attribute ColumnName="SKU_DEDICATION_KEY" Name="SKU_Dedication_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SKU_DEDICATION_I1"
+                    Name="YFS_SKU_DEDICATION_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="ITEM_ID"/>
+                    <Column Name="UOM"/>
+                    <Column Name="PRODUCT_CLASS"/>
+                    <Column Name="SEGMENT_TYPE"/>
+                    <Column Name="SEGMENT"/>
+                    <Column Name="LOCATION_ID"/>
+                </Index>
+                <Index DB2Name="SKU_DEDICATION_I2" Name="YFS_SKU_DEDICATION_I2">
+					<Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="SKUDedications"
+                    ChildName="SKU_Dedication"
+                    ChildXMLName="SKUDedication" DeleteCascade="true"
+                    ForeignEntity="Location" Name="Location"
+                    Type="Bidirectional" XMLName="Location">
+                    <Attribute Name="Location_Id" ParentName="Location_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Ship_Node" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="A location may be associated with a location storage code. A storage code indicates a storage classification of location. It is an attribute of the location that allows the warehouse to store items that have the same storage profile as that of the location.  For example, hazardous inflammable items need locations close to fire extinguishers. In this case the locations will be marked as having a storage code which is suitable for storing inflammable item. This ensures that only inflammable items get to these locations."
+            EntityType="CONFIGURATION"
+            ListXMLName="LocationStorageCodes" Module="wms"
+            Name="Location_Storage_Code" Prefix="YFS_"
+            TableName="YFS_LOCATION_STORAGE_CODE" TableType="MASTER" XMLName="LocationStorageCode">
+            <Attributes>
+                <Attribute ColumnName="LOCATION_STORAGE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_STORAGE_CODE table."
+                    Name="Location_Storage_Key" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_STORAGE_CODE"
+                    DataType="StorageCode" DefaultValue="' '"
+                    Description="A storage code indicates a storage classification of the location. It is an attribute of the location that allows the warehouse to store items with similar storage profile as that of the location.  For example, hazardous inflammable items need locations close to fire extinguishers. In this case, the locations will be marked as having a storage code which is suitable for storing inflammable item. This ensures that only inflammable items are stored in these locations."
+                    Name="Location_Storage_Code" Nullable="false"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="A brief description of the storage code."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Node Identifier. Primary key of the YFS_SHIP_NODE table. Identifies the node to which the location belongs."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOC_STOR_CODE_PK" Name="YFS_LOCATION_STORAGE_CODE_PK">
+                <Attribute ColumnName="LOCATION_STORAGE_KEY" Name="Location_Storage_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LOC_STOR_CODE_I1"
+                    Name="YFS_LOCATION_STORAGE_CODE_I1" Unique="true">
+                    <Column Name="LOCATION_STORAGE_CODE"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Each location has a certain capacity in terms of number of packages of certain packaging type. Item has dimensions and so has the location (size code). We could very easily have computed the location capacity by volume of item versus the volume of the location. If you notice, we have classified locations as belonging to locations of a certain size type and then associated dimensions with the size type. This significantly reduces the amount of data that needs to be configured. Similarly, we would need to classify items into categories for purposes of capacity calculations, so that we have lesser data to configure. For example, all items coming in a 2 feet * 2 feet * 2 feet box can be classified as having a capacity code of 2 feet cube packaged as a carton (packaging type). Similarly we could have the same item coming in a 6 * 6 * 6 feet pallet, which could be classified as 6 feet cube pallet. What is defined here is how many such packages can fit within the location of a particular size code. If this is not setup here at the item classification level, then capacity computation is done using volumes of the item versus volume of the location."
+            EntityType="CONFIGURATION" ListXMLName="LocationCapacities"
+            Module="wms" Name="Location_Capacity" Prefix="YFS_"
+            TableName="YFS_LOCATION_CAPACITY" TableType="MASTER" XMLName="LocationCapacity">
+            <Attributes>
+                <Attribute ColumnName="LOCATION_CAPACITY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_CAPACITY table."
+                    Name="Location_Capacity_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_CAPACITY table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="LocationSizeCode" DefaultValue="' '"
+                    Description="This field specifies the location size identifier."
+                    Name="Location_Size_Code" Nullable="false"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field specifies the enterprise identifier."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_CODE"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field specifies the item classification identifier. This field allows to dynamically select a capacity classification attribute of an item for defining the capacity constraints."
+                    Name="Item_Classification_Code" Nullable="false"/>
+                <Attribute ColumnName="PACKAGING_TYPE"
+                    DataType="PackagingType" DefaultValue="' '"
+                    Description="This field indicates the packaging type, such as Pallets, Cartons."
+                    Name="Packaging_Type" Nullable="false" XMLName="PackagingType"/>
+                <Attribute ColumnName="NO_OF_PACKAGES"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This field indicates the location capacity in terms of number of packages."
+                    Name="No_Of_Packages" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOC_CAPACITY_PK" Name="YFS_LOCATION_CAPACITY_PK">
+                <Attribute ColumnName="LOCATION_CAPACITY_KEY" Name="Location_Capacity_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LOC_CAPACITY_I1"
+                    Name="YFS_LOCATION_CAPACITY_I1" Unique="true">
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_SIZE_CODE"/>
+                    <Column Name="ITEM_CLASSIFICATION_CODE"/>					
+                    <Column Name="PACKAGING_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationCapacities"
+                    ChildName="Location_Capacity"
+                    ChildXMLName="LocationCapacity" DeleteCascade="true"
+                    ForeignEntity="Location_Size" Name="Location_Size"
+                    Type="Bidirectional" XMLName="LocationSize">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Location_Size_Code" ParentName="Location_Size_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="NodeLocationCapacities"
+                    ChildName="NodeLocationCapacity"
+                    ChildXMLName="NodeLocationCapacity"
+                    ForeignEntity="Ship_Node" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="N" Cacheable="true"
+            Description="Each location belongs to a specific location size code. Location size code defines the dimensions of the location, and the weight that it can withstand when products are stored in the location."
+            EntityType="CONFIGURATION" ListXMLName="LocationSizes"
+            Module="wms" Name="Location_Size" Prefix="YFS_"
+            TableName="YFS_LOCATION_SIZE" TableType="MASTER" XMLName="LocationSize">
+            <Attributes>
+                <Attribute ColumnName="LOCATION_SIZE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_SIZE table."
+                    Name="Location_Size_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_SIZE table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="LocationSizeCode" DefaultValue="' '"
+                    Description="This field specifies the location size identifier."
+                    Name="Location_Size_Code" Nullable="false"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="A brief description of the size code."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="LENGTH" DataType="Dimension"
+                    DefaultValue="0"
+                    Description="This field specifies the length of the location. The length is as per the dimension UOM set up against the node's locale."
+                    Name="Length" Nullable="false"/>
+                <Attribute ColumnName="WIDTH" DataType="Number"
+                    DefaultValue="0 "
+                    Description="This field specifies the width of the location. The dimension UOM of breadth is as per the dimension UOM set up against the node's locale."
+                    Name="Width" Nullable="false"/>
+                <Attribute ColumnName="HEIGHT" DataType="Dimension"
+                    DefaultValue="0"
+                    Description="This field indicates the height of location. The height is as per the dimension UOM set up against the node's locale."
+                    Name="Height" Nullable="false"/>
+                <Attribute ColumnName="MAX_WEIGHT" DataType="Dimension"
+                    DefaultValue="0"
+                    Description="This field indicates the maximum weight that this location can hold. The weight's UOM is as per the weight UOM set up against the node's locale."
+                    Name="Max_Weight" Nullable="false"/>
+                <Attribute ColumnName="IS_INFINITE_CAPACITY"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the dimension related fields are used to compute capacity, and whether the capacity checks are done."
+                    Name="Is_Infinite_Capacity" Nullable="false" XMLName="IsInfiniteCapacity"/>
+                <Attribute ColumnName="TRIGGER_PERCENT"
+                    DataType="Percentage" DefaultValue="0"
+                    Description="This field is used to trigger inventory monitor if the inventory at the location falls below the percentage of the location capacity that is defined."
+                    Name="Trigger_Percent" Nullable="false" XMLName="TriggerPercent"/>
+                <Attribute ColumnName="IS_SINGLE_DEEP" DataType="Flag"
+                    DefaultValue="'Y'"
+                    Description="This field indicates whether the location is single deep or multi-deep type."
+                    Name="Is_Single_Deep" Nullable="false" XMLName="IsSingleDeep"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOCATION_SIZE_PK" Name="YFS_LOCATION_SIZE_PK">
+                <Attribute ColumnName="LOCATION_SIZE_KEY" Name="Location_Size_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LOCATION_SIZE_I1"
+                    Name="YFS_LOCATION_SIZE_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_SIZE_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationSizes"
+                    ChildName="LocationSize" ChildXMLName="LocationSize"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table defines different enterprises that store inventory in a given zone. One or more enterprise's inventory can be stored in a zone. However, whether inventory from two different enterprises can be mixed in a location depends on the mix enterprise attribute on the zone, which is propagated to every location of the zone."
+            EntityType="CONFIGURATION" ListXMLName="ZoneEnterprises"
+            Module="wms" Name="Zone_Enterprise" Prefix="YFS_"
+            TableName="YFS_ZONE_ENTERPRISE" TableType="MASTER" XMLName="ZoneEnterprise">
+            <Attributes>
+                <Attribute ColumnName="ZONE_ENTERPRISE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_ZONE_ENTERPRISE table."
+                    Name="Zone_Enterprise_Key" Nullable="false"/>
+                <Attribute ColumnName="ZONE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_ZONE_ENTERPRISE table."
+                    Name="Zone_Key" Nullable="false"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field specifies the enterprise identifier. This is a unique key attribute of the YFS_ENTERPRISE table."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_SHIP_NODE table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ZONE_ENTPRISE_PK" Name="YFS_ZONE_ENTERPRISE_PK">
+                <Attribute ColumnName="ZONE_ENTERPRISE_KEY" Name="Zone_Enterprise_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ZONE_ENTPRISE_I1"
+                    Name="YFS_ZONE_ENTERPRISE_I1" Unique="true">
+                    <Column Name="ZONE_KEY"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ZoneEnterpriseList"
+                    ChildName="ZoneEnterprise"
+                    ChildXMLName="ZoneEnterprise" DeleteCascade="true"
+                    ForeignEntity="Organization" Name="Enterprise"
+                    Type="Unidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ZoneEnterprises"
+                    ChildName="ZoneEnterprise"
+                    ChildXMLName="ZoneEnterprise" DeleteCascade="true"
+                    ForeignEntity="Zone" Name="Zone"
+                    Type="Bidirectional" XMLName="Zone">
+                    <Attribute Name="Zone_Key" ParentName="Zone_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Ship_Node" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores one or more records indicating what items or category of items may be stored in a zone/location. This could also be imagined to as having dedication information for a zone/location for an item, product line, velocity, catalog organization, etc. While doing put away, these constraints are used to determine the zone to stow away received inventory. Zones or locations with no storage constraints can store any inventory."
+            EntityType="CONFIGURATION" ListXMLName="StorageConstraints"
+            Module="wms" Name="Storage_Constraint" Prefix="YFS_"
+            TableName="YFS_STORAGE_CONSTRAINT" TableType="MASTER" XMLName="StorageConstraint">
+            <Attributes>
+                <Attribute ColumnName="STORAGE_CONSTRAINT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_STORAGE_CONSTRAINT table."
+                    Name="Storage_Constraint_Key" Nullable="false"/>
+                <Attribute ColumnName="ZONE_ENTERPRISE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_STORAGE_CONSTRAINT table."
+                    Name="Zone_Enterprise_Key" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under item classification one."
+                    Name="Item_Classification_1" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under item classification two."
+                    Name="Item_Classification_2" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under item classification three."
+                    Name="Item_Classification_3" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="STOR_CONSTRAINT_PK" Name="YFS_STORAGE_CONSTRAINT_PK">
+                <Attribute ColumnName="STORAGE_CONSTRAINT_KEY" Name="Storage_Constraint_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="STOR_CONSTRAINT_I1"
+                    Name="YFS_STORAGE_CONSTRAINT_I1" Unique="true">
+                    <Column Name="ZONE_ENTERPRISE_KEY"/>
+                    <Column Name="ITEM_CLASSIFICATION_1"/>
+                    <Column Name="ITEM_CLASSIFICATION_2"/>
+                    <Column Name="ITEM_CLASSIFICATION_3"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="StorageConstraints"
+                    ChildName="StorageConstraint"
+                    ChildXMLName="StorageConstraint"
+                    DeleteCascade="true" ForeignEntity="Zone_Enterprise"
+                    IsParent="true" Name="Zone_Enterprise"
+                    Type="Bidirectional" XMLName="ZoneEnterprise">
+                    <Attribute Name="Zone_Enterprise_Key" ParentName="Zone_Enterprise_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+		 <Entity
+            Description="Zone level transactional attributes like available volume, weight etc are maintained in this table."
+            EntityType="TRANSACTION" Module="wms" Name="Tran_Zone_Attrs"
+            Prefix="YFS_" TableName="YFS_TRAN_ZONE_ATTRS"
+            TableType="TRANSACTION" XMLName="TransactionalZoneAttributes">
+            <Attributes>
+                <Attribute ColumnName="TRAN_ZONE_ATTRS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_TRAN_ZONE_ATTRS table."
+                    Name="Tran_Zone_Attrs_Key" Nullable="false" XMLName="TransactionalZoneAttributesKey"/>
+                <Attribute ColumnName="ZONE_KEY" DataType="Key"
+                    Description="The unique key for the YFS_TRAN_ZONE_ATTRS table."
+                    Name="Zone_Key" Nullable="false"/>
+                <Attribute ColumnName="AVAILABLE_VOLUME"
+                    DataType="Number" DefaultValue="0"
+                    Description="This field indicates that the unoccupied physical volume of the zone that is available for moving in stock. This does not include the PEND_IN_VOLUME. (See explanation against this field in this entity)."
+                    Name="Available_Volume" Nullable="false"/>
+                <Attribute ColumnName="AVAILABLE_WEIGHT"
+                    DataType="Number" DefaultValue="0"
+                    Description="This field indicates the additional physical weight the zone can withstand when products are moved into this zone to fill in the unoccupied volume. This does not include the PEND_IN_WEIGHT. (See explanation against this field in this entity)."
+                    Name="Available_Weight" Nullable="false"/>
+                <Attribute ColumnName="PEND_IN_VOLUME" DataType="Number"
+                    DefaultValue="0"
+                    Description="This field indicates the volume of the stock expected to move into this zone."
+                    Name="Pend_In_Volume" Nullable="false"/>
+                <Attribute ColumnName="PEND_IN_WEIGHT" DataType="Number"
+                    DefaultValue="0"
+                    Description="This field indicates the weight of the stock expected to move into this zone."
+                    Name="Pend_In_Weight" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TRAN_ZONE_ATTR_PK" Name="YFS_TRAN_ZONE_ATTRS_PK">
+                <Attribute ColumnName="TRAN_ZONE_ATTRS_KEY" Name="Tran_Zone_Attrs_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    DeleteCascade="true" ForeignEntity="Zone"
+                    IsParent="true" Name="Zone" Type="Bidirectional" XMLName="Zone">
+                    <Attribute Name="Zone_Key" ParentName="Zone_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+	</Entities>
+</DBSchema>

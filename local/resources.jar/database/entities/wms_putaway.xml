@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="Stores attributes values based on whose values locations where the activity may be perfomed is configured. Allows setup at Item classification level, by inventory status (quality status), UOM etc. The Location selection algorithm uses the best matched configuration for determining locations."
+            EntityType="CONFIGURATION" ListXMLName="ActivityConstraints"
+            Module="wms" Name="Activity_Constraint" Prefix="YFS_"
+            TableName="YFS_ACTIVITY_CONSTRAINT"
+            TableType="CONFIGURATION" XMLName="ActivityConstraint">
+            <Attributes>
+                <Attribute ColumnName="ACTIVITY_CONSTRAINT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_ACTIVITY_CONSTRAINT table."
+                    Name="Activity_Constraint_Key" Nullable="false"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="CONSTRAINT_DESCRIPTION"
+                    DataType="FreeText-200" DefaultValue="' '"
+                    Description="A brief description of the activity constraint."
+                    Name="Constraint_Description" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_ACTIVITY_CONSTRAINT table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="FOR_ACTIVITY_CODE"
+                    DataType="Activity" DefaultValue="' '"
+                    Description="This field uniquely identifies an activity for which the constraint is defined."
+                    Name="For_Activity_Code" Nullable="false" XMLName="ForActivityCode"/>
+                <Attribute ColumnName="FROM_ACTIVITY_GROUP"
+                    DataType="ActivityGroup" DefaultValue="' '"
+                    Description="This field identifies an activity group for the activity for which the constraint is defined. However, the constraint activity need not belong to this activity group."
+                    Name="From_Activity_Group" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_TYPE"
+                    DataType="EnumWMSInventoryType" DefaultValue="' '"
+                    Description="Indicates the putaway type. Supported types are Single SKU put away, multi SKU put away or Put away of pallets/cases without contents."
+                    Name="Inventory_Type" Nullable="false" XMLName="InventoryType"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="This field indicates the LPN type that was putaway. At this time the supported values are Pallet and Case."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the unit of measure of the stock that is considered for put away. This attribute is used for a 'Single SKU' putaway."
+                    Name="UOM" Nullable="false" XMLName="UOM"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under the item classification one."
+                    Name="Item_Classification_1" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under the item classification two."
+                    Name="Item_Classification_2" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under the item classification three."
+                    Name="Item_Classification_3" Nullable="false"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="This field indicates the product class of the stock that is considered for putaway."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="This field is an unique key of YFS_INVENTORY_STATUS table. This field refers to an inventory sub-classification based on the inventory control processe results within the warehouse."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field is an audit reference, which indicates that the inventory transaction is for an order associated with this enterprise."
+                    IsOrgColumn="Y" Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="This field indicates that when inventory is customized, it needs to be tracked separately. This field indicates the buyer or buyer category for who the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="This field indicates that when inventory is customized for a specific order, it needs to be tracked separately so that it can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="SPLIT_PALLET" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether the pallet can be split to perform this activity."
+                    Name="Split_Pallet" Nullable="false" XMLName="SplitPallet"/>
+                <Attribute ColumnName="MIX_SHIPMENT"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This flag indicates whether the various shipments can be combined."
+                    Name="Mix_Shipment" Nullable="false" XMLName="MixShipment"/>
+                <Attribute ColumnName="MIX_LOAD"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This flag indicates whether the various loads can be combined."
+                    Name="Mix_Load" Nullable="false" XMLName="MixLoad"/>
+                <Attribute ColumnName="MIX_SCAC"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This flag indicates whether the SCAC can be combined."
+                    Name="Mix_Scac" Nullable="false" XMLName="MixScac"/>
+                <Attribute ColumnName="MIX_CARRIER_SERVICE"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This flag indicates whether the various carrier services can be combined."
+                    Name="Mix_Carrier_Service" Nullable="false" XMLName="MixCarrierService"/>
+                <Attribute ColumnName="MIX_SHIP_DATE"
+                    DataType="EnumMixConstraints" DefaultValue="' '"
+                    Description="This flag indicates whether the ship dates can be combined."
+                    Name="Mix_Ship_Date" Nullable="false" XMLName="MixShipDate"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ACT_CONSTRAINT_PK" Name="YFS_ACTIVITY_CONSTRAINT_PK">
+                <Attribute ColumnName="ACTIVITY_CONSTRAINT_KEY" Name="Activity_Constraint_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ACT_CONSTRAINT_I1"
+                    Name="YFS_ACTIVITY_CONSTRAINT_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="FOR_ACTIVITY_CODE"/>
+                    <Column Name="FROM_ACTIVITY_GROUP"/>
+                    <Column Name="INVENTORY_TYPE"/>
+                    <Column Name="UOM"/>
+                    <Column Name="ITEM_CLASSIFICATION_1"/>
+                    <Column Name="ITEM_CLASSIFICATION_2"/>
+                    <Column Name="ITEM_CLASSIFICATION_3"/>
+                    <Column Name="PRODUCT_CLASS"/>
+                    <Column Name="INVENTORY_STATUS"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="LPN_TYPE"/>
+                    <Column Name="SEGMENT_TYPE"/>
+                    <Column Name="SEGMENT"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ActivityConstraints"
+                    ChildName="Activity_Constraint"
+                    ChildXMLName="ActivityConstraint"
+                    ForeignEntity="Activity" Name="Activity"
+                    Type="Bidirectional" XMLName="Activity">
+                    <Attribute Name="For_Activity_Code" ParentName="Activity_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    Name="Ship_Node" Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Enterprise"
+                    Name="Enterprise" Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity ConfigurableByOrgOrNode="Y"
+            Description="Demand on inventory may be placed for an activity from another activity group. This entity stores information about such demands placed."
+            EntityType="TRANSACTION" ListXMLName="ActivityDemands"
+            Module="wms" Name="Activity_Demand" Prefix="YFS_"
+            TableName="YFS_ACTIVITY_DEMAND" TableType="TRANSACTION" XMLName="ActivityDemand">
+            <Attributes>
+                <Attribute ColumnName="ACTIVITY_DEMAND_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_ACTIVITY_DEMAND table."
+                    Name="Activity_Demand_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_ACTIVITY_DEMAND table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="FROM_ACTIVITY_GROUP"
+                    DataType="EnumActivityGroup" DefaultValue="' '"
+                    Description="This field identifies an activity group on which the demand is placed."
+                    Name="From_Activity_Group" Nullable="false"/>
+                <Attribute ColumnName="FOR_ACTIVITY_CODE"
+                    DataType="Activity" DefaultValue="' '"
+                    Description="This field uniquely identifies an activity for which the demand is placed."
+                    Name="For_Activity_Code" Nullable="false" XMLName="ForActivityCode"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_ACTIVITY_DEMAND table."
+                    Name="Shipment_Key" Nullable="false"/>
+                <Attribute ColumnName="FOR_SHIPMENT_LINE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The shipment line key that is associated with this activity demand."
+                    Name="For_Shipment_Line_Key" Nullable="false" XMLName="ForShipmentLineKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    Description="The primary key for the YFS_ACTIVITY_DEMAND table."
+                    Name="Work_Order_Key" Nullable="true" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="FOR_WORK_ORDER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The work order key associated with this activity demand."
+                    Name="For_Work_Order_Key" Nullable="false" XMLName="ForWorkOrderKey"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The case or pallet License Plate Number. This key is a unique key for the YFS_LPN_HDR table."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="FOR_MOVE_REQUEST_LINE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The move request line key associated with this activity demand."
+                    Name="For_Move_Request_Line_Key" Nullable="false" XMLName="ForMoveRequestLineKey"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="Primary key of YFS_Order_Header table."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="ORDER_NO" DataType="VarcharDocumentNo"
+                    Description="One of the unique identifiers of the order against which the demand is created."
+                    Name="Order_No" Nullable="true" XMLName="OrderNo"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The document type that is associated with the order against which the demand is created. For example, Sales Order document (0001), Planned Order document (0002), Return Order document (0003) , and Purchase Order document (0005)."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="This field indicates the LPN type to be putaway. At this time the supported values are Pallet and Case."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The inventory organization against which the inventory is stocked for this item in the location inventory tables. Even though the Enterprise Code is passed as input in the activity demand APIs, it is not referenced to inventory consolidator. This is done because putaway is performed for the stock based on the demand and existing inventory."
+                    Name="Organization_Code" Nullable="false"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="This field indicates the unique item identifier associated with the organization code."
+                    IsOrgColumn="Y" Name="Item_Id" Nullable="false"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="This field indicates the item's unit of measure."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' ' "
+                    Description="Inventory classification of an item based on product's characteristics. Typical values are FQ - First Quality, SQ - Second Quality etc."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The unique key of the YFS_INVENTORY_STATUS table. This key refers to an inventory sub-classification based on the results of the inventory control processes within a warehouse."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="This field indicates that when inventory is customized, the inventory needs to be tracked separately for the buyer or buyer category for whom the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="This field indicates that when inventory is customized for a specific order, it needs to be tracked separately so that it can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="DEMAND_QTY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="This field specifies the demand quantity that should be placed in a location to perform the activity."
+                    Name="Demand_Qty" Nullable="false" XMLName="DemandQty"/>
+                <Attribute ColumnName="SATISFIED_QTY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This field specifies the actual quantity diverted till now. This quantity bucket gets updated every time a product is diverted for a specific purpose."
+                    Name="Satisfied_Qty" Nullable="false" XMLName="SatisfiedQty"/>
+                <Attribute ColumnName="DEMAND_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="This field specifies the location identifier. This in conjunction with NODE_KEY identifies a unique location in the node, the location where  an activity can be performed on the product. Typically, this field will be selected when the product should be placed in a specific location. For example, if the warehouse has just one QC location, then the quantity being requested should be placed in the QC location."
+                    Name="Demand_Location_Id" Nullable="false"/>
+                <Attribute ColumnName="DEMAND_SATISFIED" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the demand has been satisifed. This is automatically determined by the system based on demand quantities."
+                    Name="Demand_Satisfied" Nullable="false" XMLName="DemandSatisfied"/>
+                <Attribute ColumnName="IS_INFINITE_DEMAND"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the demand is of a permanent nature. All permanent demands are never marked satisfied but purged when it is out of context. For e.g. when a shipment gets purged, all unsatisfied demands for the shipment are also purged."
+                    Name="Is_Infinite_Demand" Nullable="false" XMLName="IsInfiniteDemand"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="This field identifies the priority with which the demand is created."
+                    Name="Priority" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ACTIVITY_DEMAND_PK" Name="YFS_ACTIVITY_DEMAND_PK">
+                <Attribute ColumnName="ACTIVITY_DEMAND_KEY" Name="Activity_Demand_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ACTIVITY_DEMAND_I1" Name="YFS_ACTIVITY_DEMAND_I1">
+                    <Column Name="SHIPMENT_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ActivityDemands"
+                    ChildName="Activity_Demand"
+                    ChildXMLName="ActivityDemand"
+                    ForeignEntity="Shipment" Name="Shipment"
+                    Type="Bidirectional" XMLName="Shipment">
+                    <Attribute Name="Shipment_Key" ParentName="Shipment_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ActivityDemands"
+                    ChildName="Activity_Demand"
+                    ChildXMLName="ActivityDemand"
+                    ForeignEntity="Work_Order" Name="Work_Order"
+                    Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ActivityDemands"
+                    ChildName="Activity_Demand"
+                    ChildXMLName="ActivityDemand"
+                    ForeignEntity="Shipment_Line" Name="Shipment_Line"
+                    ReadOnly="true" Type="Bidirectional" XMLName="ShipmentLine">
+                    <Attribute Name="For_Shipment_Line_Key" ParentName="Shipment_Line_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ActivityDemands"
+                    ChildName="Activity_Demand"
+                    ChildXMLName="ActivityDemand"
+                    ForeignEntity="Order_Header" Name="Order_Header"
+                    Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="For an activity, the preference list of zones where that activity may be performed is configured by priority."
+            EntityType="CONFIGURATION" ListXMLName="LocationPreferences"
+            Module="wms" Name="Location_Preference" Prefix="YFS_"
+            TableName="YFS_LOCATION_PREFERENCE"
+            TableType="CONFIGURATION" XMLName="LocationPreference">
+            <Attributes>
+                <Attribute ColumnName="LOCATION_PREFERENCE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_PREFERENCE table."
+                    Name="Location_Preference_Key" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_PREFERENCE table."
+                    Name="Location_Key" Nullable="false"/>
+                <Attribute ColumnName="ACTIVITY_CONSTRAINT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_PREFERENCE table."
+                    Name="Activity_Constraint_Key" Nullable="false" XMLName="ActivityConstraintKey"/>
+                <Attribute ColumnName="ZONE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_PREFERENCE table."
+                    Name="Zone_Key" Nullable="false" XMLName="ZoneKey"/>
+                <Attribute ColumnName="LOCATION_STORAGE_CODE"
+                    DataType="StorageCode" DefaultValue="' '"
+                    Description="Ths field is an attribute of the location that allows the warehouse to store items, which has the same storage profile as that of the location.  For example, hazardous inflammable items need locations close to fire extinguishers. In this case, the locations will be marked as having a storage code, which is suitable for storing 'Inflammable item'. This ensures that only inflammable items get to these locations. A list of zones in the order of priority will be used for putaway after filtering out locations that honor the storage code."
+                    Name="Location_Storage_Code" Nullable="false"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="This field indicates the zone priority where the product must be putaway based upon the business criteria."
+                    Name="Priority" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOC_PREF_PK" Name="YFS_LOCATION_PREFERENCE_PK">
+                <Attribute ColumnName="LOCATION_PREFERENCE_KEY" Name="Location_Preference_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LOC_PREF_I1"
+                    Name="YFS_LOCATION_PREFERENCE_I1" Unique="true">
+                    <Column Name="ACTIVITY_CONSTRAINT_KEY"/>
+                    <Column Name="ZONE_KEY"/>
+                    <Column Name="LOCATION_STORAGE_CODE"/>
+                    <Column Name="LOCATION_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationPreferences"
+                    ChildName="Location_Preference"
+                    ChildXMLName="LocationPreference"
+                    DeleteCascade="true"
+                    ForeignEntity="Activity_Constraint" IsParent="true"
+                    Name="Activity_Constraint" Type="Bidirectional"
+                    XMLName="ActivityConstraint">
+                    <Attribute Name="Activity_Constraint_Key" ParentName="Activity_Constraint_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationPreferences"
+                    ChildName="Location_Preference"
+                    ChildXMLName="LocationPreference"
+                    ForeignEntity="Location" Name="Location"
+                    Type="Unidirectional" XMLName="Location">
+                    <Attribute Name="Location_Key" ParentName="Location_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationPreferences"
+                    ChildName="Location_Preference"
+                    ChildXMLName="LocationPreference"
+                    ForeignEntity="Zone" Name="Zone"
+                    Type="Unidirectional" XMLName="Zone">
+                    <Attribute Name="Zone_Key" ParentName="Zone_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

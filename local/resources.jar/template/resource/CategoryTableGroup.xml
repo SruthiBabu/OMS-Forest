@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<TableGroup GroupName="Category">
+    <Entity EntityName="Category" Table="YFS_CATEGORY" Key="CATEGORY_KEY" XMLName="Category">
+    	<ChildEntity EntityName="Item_Attr" Table="YFS_ITEM_ATTR" Key="ITEM_ATTR_KEY" XMLName="ItemAttribute">
+    		<QueryAttr ChildColumn="CATEGORY_KEY" ParentAttrXML="CategoryKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Asset" Table="YFS_ASSET" Key="ASSET_KEY" XMLName="Asset">
+    		<LiteralAttr ChildColumn="PARENT_TABLE" Literal="YFS_CATEGORY"/>
+    		<QueryAttr ChildColumn="PARENT_KEY" ParentAttrXML="CategoryKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Item_Service_Assoc" Table="YFS_ITEM_SERVICE_ASSOC" Key="ITEM_SERVICE_ASSOC_KEY" XMLName="ItemServiceAssoc">
+    		<QueryAttr ChildColumn="CATEGORY_KEY" ParentAttrXML="CategoryKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Additional_Attribute" Table="YFS_ADDITIONAL_ATTRIBUTE" Key="ADDITIONAL_ATTRIBUTE_KEY" XMLName="AdditionalAttribute">
+    		<LiteralAttr ChildColumn="PARENT_TABLE" Literal="YFS_CATEGORY"/>
+    		<QueryAttr ChildColumn="PARENT_KEY" ParentAttrXML="CategoryKey"/>
+    	</ChildEntity>
+    </Entity>
+</TableGroup>

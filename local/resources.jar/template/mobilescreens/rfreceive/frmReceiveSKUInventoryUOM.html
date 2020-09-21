@@ -1,0 +1,152 @@
+<html>
+    <body>
+        <form name="frmReceiveSKUInventoryUOM" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ShipmentKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    mandatory="false"
+                                    name="DoNotVerifyCaseContent"
+                                    outputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ReceiptHeaderKey"
+                                    mandatory="false"
+                                    name="ReceiptHeaderKey"
+                                    outputbinding="xml:/Receipt/@ReceiptHeaderKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceiptHeaderKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    mandatory="false"
+                                    name="ParentPalletId" size="20"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ParentLPN/@PalletId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ReceivingDock"
+                                    mandatory="false"
+                                    name="ReceivingDock"
+                                    outputbinding="xml:/Receipt/@ReceivingDock"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceivingDock"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@LocationId"
+                                    mandatory="false"
+                                    name="ReceivingLocation"
+                                    outputbinding="xml:/Receipt/@LocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@LocationId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Receipt/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@OrganizationCode"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Receipt/@OrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@OrganizationCode"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@CaseId"
+                                    mandatory="false"
+                                    name="txtCaseId"
+                                    outputbinding="xml:/Receipt1/@CaseId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt1/@CaseId"
+                                    type="hidden" validate="false"/>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblItemId"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemId"
+                                    outputbinding="xml:/Receipt1/ReceiptLines/ReceiptLine/@ItemID"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Receipt1/ReceiptLines/ReceiptLine/@ItemID"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblInvUOM"
+                                    type="text" validate="false" value="Mobile_Inventory_UOM"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt2/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Receipt1/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Receipt1/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    type="text" validate="true"/>
+                                    <input col="1" mandatory="false"
+                                    name="FocusField"
+                                    outputbinding="xml:/Receipt/@FocusField"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@FocusField"
+                                    type="hidden" validate="false" value="txtPO"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfreceive.ppc?action=frmReceiveSKUInventoryUOMValtxtUOM"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,170 @@
+<html>
+    <body>
+        <form name="frmReceivingCriteria" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@DocumentType"
+                                    mandatory="false" name="DocType"
+                                    outputbinding="xml:/Shipment/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@DocumentType"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@TaskType"
+                                    mandatory="false" name="TaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="hidden" validate="false" value=""/>
+                                    <input col="1"
+                                    inputbinding="xml:/Node/@Enterprise"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Shipment/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@TransactionId"
+                                    mandatory="false"
+                                    name="TransactionId"
+                                    outputbinding="xml:/Shipment/@TransactionId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@TransactionId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ReceiptTransactionId"
+                                    mandatory="false"
+                                    name="ReceiptTransactionId"
+                                    outputbinding="xml:/Shipment/@ReceiptTransactionId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@ReceiptTransactionId"
+                                    type="hidden" validate="false"/>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblShipRef"
+                                    type="text" validate="false" value="Mobile_Shipment_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ShipmentNo"
+                                    mandatory="false"
+                                    name="txtShipmentNo"
+                                    outputbinding="xml:/Shipment/@ShipmentNo"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@ShipmentNo"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblPONo"
+                                    type="text" validate="false" value="Mobile_Order_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@OrderNo"
+                                    mandatory="false" name="txtPONo"
+                                    outputbinding="xml:/Shipment/@OrderNo"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@OrderNo"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblBolNo"
+                                    type="text" validate="false" value="Mobile_Bol_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@BolNo"
+                                    mandatory="false"
+                                    name="txtBolNo"
+                                    outputbinding="xml:/Shipment/@BolNo"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@BolNo"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblVendor"
+                                    type="text" validate="false" value="Mobile_Seller"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@SellerOrganizationCode"
+                                    mandatory="false"
+                                    name="txtSellerOrganizationCode"
+                                    outputbinding="xml:/Shipment/@SellerOrganizationCode"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@SellerOrganizationCode"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfreceive.ppc?action=frmReceivingCriteriaUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+                                    <input col="5" hotkey="F8"
+                                    mandatory="false"
+                                    name="ReceivePallet" size="7"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmReceiveCaseWithoutShipment"
+                                    validate="false" value="Mobile_Receive"/>
+                                    <input col="13" hotkey="F4" mandatory="false"
+                                    name="action1" size="5"
+                                    subtype="CommandBack"
+                                    type="button" validate="false" value="Back"/>
+                                </td>
+                            </tr>
+							<tr>
+								<td>
+									<input col="1" hotkey="F11"
+                                    mandatory="false" name="VerifyReceipt"
+                                    size="15" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfreceive.ppc?action=frmVerifyReceiptForShipment"
+                                    validate="false" value="Mobile_Verify_Receipt"/>
+								</td>  
+							</tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

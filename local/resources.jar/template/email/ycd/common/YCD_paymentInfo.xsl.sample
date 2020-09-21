@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template name="PaymentTypeCreditCard">
+		<xsl:param name="PaymentAmount">0</xsl:param>
+		<xsl:param name="CreditCardType"></xsl:param>
+		<xsl:param name="DisplayCreditCardNo"></xsl:param>
+		CREDIT CARD:		<xsl:value-of select="$CreditCardType"/>  
+		'XXXXXXXXXXXX<xsl:value-of select="$DisplayCreditCardNo"/>',
+
+		<xsl:if test="$PaymentAmount > 0"><xsl:text>	AMOUNT: $</xsl:text><xsl:value-of select="$PaymentAmount"/></xsl:if>
+	</xsl:template>
+
+	<xsl:template name="PaymentTypeSVC">
+		<xsl:param name="PaymentAmount">0</xsl:param>
+		<xsl:param name="DisplaySvcNo"></xsl:param>
+		STORED VALUE CARD:	'XXXXXXXXXXXX<xsl:value-of select="$DisplaySvcNo"/>'
+
+		<xsl:if test="$PaymentAmount > 0"><xsl:text>	AMOUNT: $</xsl:text><xsl:value-of select="$PaymentAmount"/></xsl:if>
+	</xsl:template>
+
+	<xsl:template name="PaymentTypeCheck">
+		<xsl:param name="PaymentAmount">0</xsl:param>
+		<xsl:param name="CheckNo"></xsl:param>
+		CHECK:			Check No: 'XXXXXXXXXXXX<xsl:value-of select="$CheckNo"/>'
+
+		<xsl:if test="$PaymentAmount > 0"><xsl:text>	AMOUNT: $</xsl:text><xsl:value-of select="$PaymentAmount"/></xsl:if>
+	</xsl:template>
+
+</xsl:stylesheet>

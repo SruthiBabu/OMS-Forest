@@ -1,0 +1,561 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2014, 2019 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_omp_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_omp_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## This file contains the yfs properties to configure the order management behaviors in the product.
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.solver.MaxChoiceFailures
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Determines the number of constraint failures before giving up and going with the current best option. If the promising
+## optimization engine hasn't found a best option, it will continue to process until it finds one.
+#yfs.solver.MaxChoiceFailures=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.promising.GenerateSolutionsWithMoreBackorderedQuantity
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Determines whether the promising optimization engine should consider generating options even if backordered
+## quantity increases. If this is not set and yfs.solver.MaxChoiceFailures is set, then this will be assumed Y.
+## Valid values:
+## Y: Generate options with more backordered quantity.
+## N: Avoid generating options with more backordered quantity.
+#yfs.promising.GenerateSolutionsWithMoreBackorderedQuantity=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.promsing.GenerateSolutionsWithMoreShipmentsWhenLandedCostEnabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Determines whether the promising optimization engine should consider generating options where the number of shipments
+## increases when optimizing with Landed Cost. If this is not set and yfs.solver.MaxChoiceFailures is set, then this
+## will be assumed Y.
+## Valid values:
+## Y: Generate options with more shipments.
+## N: Avoid generating options with more shipments.
+#yfs.promsing.GenerateSolutionsWithMoreShipmentsWhenLandedCostEnabled=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.order.monitor.nolock
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: Y
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Indicates whether to lock the order record or not during order monitoring.
+## Valid values:
+## Y: Do not lock the order record when moniotring the order.
+## N: (default) lock the order record when monitoring the order.
+#yfs.order.monitor.nolock=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.nodecapacity.considerSlotEndTime
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: Y
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Determines whether the expected Shipment Date calculation is based on the Start Time Stamp or End Time Stamp of the chosen Service Slot for capacity Consumption. If set to true
+## Valid values:
+## Y: Service Slot's End Time stamp is used for expected Shipment Date calculation.
+## N: (default) Service Slot's Start Time stamp is used for expected Shipment Date calculation.
+#yfs.nodecapacity.considerSlotEndTime=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.sourcing.audit.start.publisher
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: Y
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## Determines if the scheduled executor service to publish the sourcing audit data is started during Application/Agent server start.  
+## This must be enabled for sourcing audit to publish the data i.e, the scheduled executor service must be running if yfs.sourcing.audit.enabled is set to Y.
+## Valid values:
+## Y: Publisher service is started during Application/Agent server start.
+## N: Publisher service is not started during Application/Agent server start.
+#yfs.sourcing.audit.start.publisher=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.sourcing.audit.enabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: Y
+## USER_OVERRIDE: Y
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## Determines if Sourcing audit is enabled.
+## yfs.sourcing.audit.start.publisher must be enabled for sourcing audit to publish the data i.e, the scheduled executor service must be running if yfs.sourcing.audit.enabled is set to Y.
+## Valid values:
+## Y: Sourcing audit is enabled.
+## N: Sourcing audit is disabled.
+#yfs.sourcing.audit.enabled=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.sourcing.audit.datahandler.local.service
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: Y
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## The name for the SDF service that handles publishing of the sourcing audit data. 
+## If both local service and ReST service properties are set, local service would be invoked instead of the ReST service.   
+## The default value is not set.
+#yfs.sourcing.audit.datahandler.local.service=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.sourcing.audit.datahandler.rest.service
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: Y
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## The URL for the external ReST service that handles publishing of the sourcing audit data to an external system.
+## If both local service and ReST service properties are set, local service would be invoked instead of the ReST service.   
+## The default value is not set.
+#yfs.sourcing.audit.datahandler.rest.service=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.sourcing.audit.datahandler.rest.service.username
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: Y
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## The username for the Basic authentication for the ReST service that handles publishing of the sourcing audit data to external system.  
+## The default value is not set.
+#yfs.sourcing.audit.datahandler.rest.service.username=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.sourcing.audit.datahandler.rest.service.password
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: Y
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## The password for the Basic authentication for the ReST service that handles publishing of the sourcing audit data to external system.  
+## The default value is not set.
+#yfs.sourcing.audit.datahandler.rest.service.password=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YFS_PAYMENT.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#YFS_PAYMENT.personalinfoattributes=FirstName,LastName,MiddleName,CheckNo,CreditCardName,CreditCardType,CreditCardExpDate,CustomerAccountNo,CustomerPONo,DebitCardNo,DisplayCreditCardNo,DisplayCustomerAccountNo,DisplayDebitCardNo,SvcNo
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YFS_ORDER_HEADER.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#YFS_ORDER_HEADER.personalinfoattributes=CustomerFirstName,CustomerLastName,CustomerPhoneNo,CustomerEMailID
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YFS_OPPORTUNITY.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#YFS_OPPORTUNITY.personalinfoattributes=CustomerFirstName,CustomerLastName
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.payment.processReturnOrderCompleteTraversalRequired
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## Default value is N.
+## Setting the property to yfs.payment.processReturnOrderCompleteTraversalRequired=Y
+## will trigger the below flow for processReturnOrder or computeRefundPayments API.
+## When run, this API will default all payment methods from the sales orders linked to this return(Immediate parent), (these will be ignored if the return is a gift return),
+## and considering the payments on the sales orders, as well as any amount on the return not linked to a sales order,
+## will compute how the system would refund the return considering limits of usage of payment methods and how much is being refunded from each sales order.
+## The amount to refund will be stamped as the PlannedRefundAmount on each of the return order payment methods .
+## If there are still amount remaining to return for which a planned refund amount was not computed,
+## system will now traverse up the chain for linked returns and exchange order till the first Sales order from which the return was initiated.
+## System will get all the linked sales and exchange orders and copy payment tenders that are valid for return from this set to the return order that is being processed.
+## System will now calculate the planned refund on the payment method starting from the very first Sales order.
+#yfs.payment.processReturnOrderCompleteTraversalRequired=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.calcPlanRefForAllSuppressRefSettleWaitTillReturnInv
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## A yfs.calcPlanRefForAllSuppressRefSettleWaitTillReturnInv property is introduced. By default the 
+## value for yfs.calcPlanRefForAllSuppressRefSettleWaitTillReturnInv is set to N. To enable the enhancement, set the property to Y
+## Enable this property in the processReturnOrder API to calculate the planned refund amount for the payment methods 
+## with configuration refund to the "New Payment method".
+## With planned refund amount populated for the payment methods, system creates the refund charges without return order invoice.
+## Setting this property to Y suppresses the creation of refund charges until the return order invoice is created.
+yfs.calcPlanRefForAllSuppressRefSettleWaitTillReturnInv=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.buc.agents.providerurl
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## The ProviderURL value for the asynchronous transactions in OMS BUC integration.
+## For eg: Reassign Order Release.
+yfs.buc.agents.providerurl=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.buc.agents.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## The Queue Connection Factory name for the asynchronous transactions in OMS BUC integration.
+## For eg: Reassign Order Release.
+yfs.buc.agents.qcf=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.buc.agents.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## The Queue name for the asynchronous transactions in OMS BUC integration.
+## For eg: Reassign Order Release.
+yfs.buc.agents.queue=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.useNodeLocaleTimeForCapacityCheck
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## When install locale and node locale are very different w.r.t time, property needs to be ebaled so that capacity consumptions is based on time at node 
+##	and not in install locale time.
+yfs.useNodeLocaleTimeForCapacityCheck=false
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.solver.exploreMoreNodeDateOptions
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: true, false
+## PROPERTY_DESCRIPTION
+## Helps in further optimizing the solution generation in case of required quantity on a line is not completely available at single node
+#yfs.solver.exploreMoreNodeDateOptions=false
+## PROPERTY_END
+## PROPERTY_START
+## PROPERTY_NAME: yfs.order.maintainProductServiceAssociationExternally
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## Following property yfs.order.maintainProductServiceAssociationExternally is introduced and when enabled maintains Product-Service Association 
+## outside of catalog module in OMS
+#yfs.order.maintainProductServiceAssociationExternally=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: order.audit.publish.listener
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: Implementation
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property is applicable only when property 'publish.mode' is set as 'OrderAudit'. This property is used to specify a custom implementation of 
+## the interface 'com.yantra.ycp.core.IDataPublishListener'. This implementation will receive the published order audit data and can be used to 
+## process this data
+#order.audit.publish.listener=
+## PROPERTY_END
+
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.RTAM.ActivityPurposeToConsider
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: boolean
+## PROPERTY_PERMISSIBLE_VALUES: true, false
+## PROPERTY_DESCRIPTION
+## Realtime Activity Based Monitor in the activity based mode (01) has been enhanced to consider only the specific activities for bundle items in a JVM
+## This is JVM specific and needs to be used with ActivityPurposeToExclude in other JVM's
+#yfs.RTAM.ActivityPurposeToConsider=70
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.RTAM.ActivityPurposeToExclude
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: boolean
+## PROPERTY_PERMISSIBLE_VALUES: true, false
+## PROPERTY_DESCRIPTION
+## Realtime Activity Based Monitor in the activity based mode (01) has been enhanced to not consider specific activities for bundle items in a JVM
+## This is JVM specific and needs to be used with ActivityPurposeToConsider in other JVM's
+#yfs.RTAM.ActivityPurposeToExclude=70
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.delayAuthorizationForBundleParentUntilLastComponent
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## Default value is N.
+## If this property is set to "Y", it would delay the authorization for bundle parent till the last components release date.
+## Note : The rule "INVOICE_PARENT_ON_LAST_COMP_IN_KIT_INVOICE - Create Shipment Invoice For a Bundle Parent On Invoicing Of : All Bundle Components" should be enabled. 
+## This rule takes precedence over the property. The new feature will be enabled only when the above mentioned Financial rule is enabled.
+#yfs.delayAuthorizationForBundleParentUntilLastComponent=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.bDoNotConsiderNonInvHeaderDiscountForAdjInv
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## Default value is N.
+## If this property is set to "Y", it would stop creating adjustment invoice for any changes 
+## in charge type "Discount" till the charge is either partially invoiced or completely invoiced. 
+#yfs.bDoNotConsiderNonInvHeaderDiscountForAdjInv=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.payment.overrideDeferredCreditRefundWithAllowImmRefFromHold
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## Default value is N.
+## Setting this property to Y along with payment rule "Allow Immediate refund from hold amount" would calculate the sum of negative debit (negative invoice) that are not yet
+## refunded (distributed).
+## System would try to refund the complete Negative debit from the amount that is held against book.(Charges with hold against book as Y).
+yfs.payment.overrideDeferredCreditRefundWithAllowImmRefFromHold=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.bSkipADJForChangesInPartialInvDiscount
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## Default value is N.
+## Set yfs.bSkipADJForChangesInPartialInvDiscount=Y to skip adjustment invoice creation for the chargeType discount in the partial invoice scenario
+yfs.bSkipADJForChangesInPartialInvDiscount=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.pricing.upgrade.complete
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## As part of upgrade, a SQL query creates seller assignments for all existing price lists that do not have a seller assignment. This property 
+## indicates whether the pricing upgrade has been completed and therefore, whether all seller assignments have been created.
+#yfs.pricing.upgrade.complete=
+## PROPERTY_END

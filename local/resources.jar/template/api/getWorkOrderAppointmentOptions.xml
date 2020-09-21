@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Promise AllocationRuleID="" ApptSeq="" CheckCapacity="" CheckInventory="" ConsiderSupplementalCapacity="" DelayWindow="" EnterpriseCode="" IgnoreMinNotificationTime="" IgnoreProductLines="" IgnoreServices="" IsPartialSubstitutionAllowed="" MaximumRecords="" OptimizationType="" OrderHeaderKey="" OrderLineKey="" OrderNo="" PrimeLineNo="" ProductSearchWindow="" RequestedCapacity="" ResourceId="" ResourcePoolId="" ReturnMultipleSrvcSlots="" ServiceSearchWindow="" SubLineNo="" WorkOrderKey="" ConsiderCurrentSlot="" ReturnSlotsWithUnavailableCapacity="" WorkOrderNo="" NodeKey="" >
+	<SuggestedOption>
+		<Option FirstDate="" HasAnyUnavailableQty="" LastDate="" LeastPriority="" MaxPriority="" OptionNo="">
+		<!-- OrderLineKey attribute in PromiseLine and PromiseServiceLine element is mandatory in the template. If the attribute is not passed in the template the PromiseLine and PromiseServiceLine elements will not be returned in the output. -->
+			<PromiseLines TotalNumberOfRecords="">
+				<PromiseLine AutoReplacedByPreferredSubstitute="" CannotSchedule="" CannotScheduleAfterDate="" CannotScheduleBeforeDate="" CarrierServiceCode="" DeliveryEndSearchDate="" DeliveryMethod="" DeliveryStartSearchDate="" DistributionRuleId="" IsBundleParent="" ItemID="" NewItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" RequiredQty="" ScheduleLineKey="" ScheduleNo="" ShipEndSearchDate="" ShipStartSearchDate="" SubLineNo="" TagNumber="" UnitOfMeasure="" WaitingForSeqLine="">
+					<Assignments TotalNumberOfRecords="">
+						<Assignment AvailableFromUnplannedInventory="" DeliveryDate="" Distance="" EmptyAssignmentReason="" ExternalNode="" InteractionNo="" MergeNode="" NodePriority="" ProcuredQty="" ProductAvailDate="" Quantity="" ReservedQty="" SCAC="" SegmentChangeQty="" ShipDate="" ShipNode="" SubstitutedQty="">
+							<SubstituteItems>
+								<SubstituteItem ItemID="" ProductClass="" Quantity="" ReservedQty="" UOM="" ProcuredQty="" >
+									<Procurements>
+										<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate=""/>
+									</Procurements>
+								</SubstituteItem>
+							</SubstituteItems>
+							<Procurements>
+								<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate=""/>
+							</Procurements>
+						</Assignment>
+					</Assignments>
+				</PromiseLine>
+			</PromiseLines>
+			<PromiseServiceLines TotalNumberOfRecords="">
+				<PromiseServiceLine CannotSchedule="" CannotScheduleAfterDate="" CannotScheduleBeforeDate="" DeliveryEndSearchDate="" DeliveryStartSearchDate="" ItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" RequiredQty="" SubLineNo="" UnitOfMeasure="" WaitingForSeqLine="" >
+					<AdditionalCapacityLimits>
+						<AdditionalCapacityLimit CapacityUnitOfMeasure="" Capacity=""/>
+					</AdditionalCapacityLimits>
+					<Assignments TotalNumberOfRecords="">
+						<Assignment ApptDate="" ApptEndTimestamp="" ApptStartTimestamp="" CannotScheduleAfterDate="" CannotScheduleBeforeDate="" EndTime="" ExternalNode="" InteractionNo="" MergeNode="" NodePriority="" SCAC="" ShipNode="" StartTime="" SubstitutedQty="" TimeZone=""/>
+					</Assignments>
+					<Slots TimeZone="" TotalNumberOfRecords="">
+						<Slot EndTime="" ServiceSlotDesc="" StartTime="">
+							<AvailableDates>
+								<AvailableDate AvailableCapacity="" CapacityAvailable="" Confirmed="" Date="" Preferred="" RegionServiced="">
+									<ResourcePools>
+										<ResourcePool CapacityAvailable="" Confirmed="" RegionServiced="" ResourcePoolId="" ResourcePoolKey="" ServiceResource="">
+											<AdditionalCapacityLimits>
+												<AdditionalCapacityLimit CapacityUnitOfMeasure="" AvailableCapacity=""/>
+											</AdditionalCapacityLimits>
+										</ResourcePool>
+									</ResourcePools>
+								</AvailableDate>
+							</AvailableDates>
+						</Slot>
+					</Slots>
+				</PromiseServiceLine>
+			</PromiseServiceLines>
+			<Interactions TotalNumberOfRecords="">
+				<Interaction ApptEndTimestamp="" ApptStartTimestamp="" Carrier="" CarrierServiceCode="" DeliveryDate="" DeliveryMethod="" EarliestDate="" InteractionNo="" IsDelivery="" ItemGroupCode="" LastDate="" Node="" OrganizationCode="" Schedulable="" ShipDate="">
+					<PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" ErrorTxt="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" IsAddressVerified="" IsCommercialAddress="" JobTitle="" LastName="" Latitude="" Longitude="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PreferredShipAddress="" State="" Suffix="" TaxGeoCode="" Title="" UseCount="" VerificationStatus="" ZipCode="" isHistory=""/>
+					<NonWorkingDays>
+						<NonWorkingDay Date=""/>
+					</NonWorkingDays>
+				</Interaction>
+			</Interactions>
+		</Option>
+		<UnavailableLines>
+			<UnavailableLine AssignedQty="" ItemGroupCode="" ItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" SubLineNo="" ToReleaseQty="" ToScheduleQty="" UnitOfMeasure="">
+				<Messages>
+					<Message Text=""/>
+				</Messages>
+				<Reasons>
+					<Reason Text=""/>
+				</Reasons>
+			</UnavailableLine>
+		</UnavailableLines>
+	</SuggestedOption>
+	<Options TotalNumberOfRecords="">
+		<Option AvailableFromUnplannedInventory="" FirstDate="" HasAnyUnavailableQty="" LastDate="" LeastPriority="" MaxPriority="" OptionNo="">
+			<PromiseLines TotalNumberOfRecords="">
+				<PromiseLine AutoReplacedByPreferredSubstitute="" CannotSchedule="" CannotScheduleAfterDate="" CannotScheduleBeforeDate="" CarrierServiceCode="" DeliveryEndSearchDate="" DeliveryMethod="" DeliveryStartSearchDate="" DistributionRuleId="" IsBundleParent="" ItemID="" NewItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" RequiredQty="" ScheduleLineKey="" ScheduleNo="" ShipEndSearchDate="" ShipStartSearchDate="" SubLineNo="" TagNumber="" UnitOfMeasure="" WaitingForSeqLine="">
+					<Assignments TotalNumberOfRecords="">
+						<Assignment AvailableFromUnplannedInventory="" DeliveryDate="" Distance="" EmptyAssignmentReason="" ExternalNode="" InteractionNo="" MergeNode="" NodePriority="" ProcuredQty="" ProductAvailDate="" Quantity="" ReservedQty="" SCAC="" SegmentChangeQty="" ShipDate="" ShipNode="" SubstitutedQty="">
+							<SubstituteItems>
+								<SubstituteItem ItemID="" ProductClass="" Quantity="" ReservedQty="" UOM="">
+									<Procurements>
+										<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate=""/>
+									</Procurements>
+								</SubstituteItem>
+							</SubstituteItems>
+							<Procurements>
+								<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate=""/>
+							</Procurements>
+						</Assignment>
+					</Assignments>
+				</PromiseLine>
+			</PromiseLines>
+			<PromiseServiceLines TotalNumberOfRecords="">
+				<PromiseServiceLine CannotSchedule="" CannotScheduleAfterDate="" CannotScheduleBeforeDate="" DeliveryEndSearchDate="" DeliveryStartSearchDate="" ItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" RequiredQty="" SubLineNo="" UnitOfMeasure="" WaitingForSeqLine="" >
+					<Assignments TotalNumberOfRecords="">
+						<Assignment ApptDate="" ApptEndTimestamp="" ApptStartTimestamp="" EndTime="" ExternalNode="" InteractionNo="" NodePriority="" SCAC="" ShipNode="" StartTime="" TimeZone=""/>
+					</Assignments>
+					<Slots TimeZone="" TotalNumberOfRecords="">
+						<Slot EndTime="" ServiceSlotDesc="" StartTime="">
+							<AvailableDates>
+								<AvailableDate AvailableCapacity="" CapacityAvailable="" Confirmed="" Date="" Preferred="" RegionServiced="">
+									<ResourcePools>
+										<ResourcePool CapacityAvailable="" Confirmed="" RegionServiced="" ResourcePoolId="" ResourcePoolKey="" ServiceResource="">
+											<AdditionalCapacityLimits>
+												<AdditionalCapacityLimit CapacityUnitOfMeasure="" AvailableCapacity=""/>
+											</AdditionalCapacityLimits>
+										</ResourcePool>
+									</ResourcePools>
+								</AvailableDate>
+							</AvailableDates>
+						</Slot>
+					</Slots>
+					<AdditionalCapacityLimits>
+						<AdditionalCapacityLimit CapacityUnitOfMeasure="" Capacity=""/>
+					</AdditionalCapacityLimits>
+				</PromiseServiceLine>
+			</PromiseServiceLines>
+			<Interactions TotalNumberOfRecords="">
+				<Interaction ApptEndTimestamp="" ApptStartTimestamp="" Carrier="" CarrierServiceCode="" DeliveryDate="" DeliveryMethod="" EarliestDate="" InteractionNo="" IsDelivery="" ItemGroupCode="" LastDate="" Node="" OrganizationCode="" Schedulable="" ShipDate="">
+					<PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" ErrorTxt="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" IsAddressVerified="" JobTitle="" LastName="" Latitude="" Longitude="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PreferredShipAddress="" State="" Suffix="" TaxGeoCode="" Title="" UseCount="" VerificationStatus="" ZipCode="" isHistory=""/>
+					<NonWorkingDays>
+						<NonWorkingDay Date=""/>
+					</NonWorkingDays>
+				</Interaction>
+			</Interactions>
+		</Option>
+	</Options>
+	<Overrides ReqDeliveryDate=""/>
+	<ScheduledLines>
+		<ScheduledLine ItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" SubLineNo="" UnitOfMeasure="">
+			<Statuses>
+				<LineStatus ExpectedShipmentDate="" ProcureFromNode="" ShipNode="" Status="" StatusQty=""/>
+			</Statuses>
+		</ScheduledLine>
+	</ScheduledLines>
+	<OmittedLines>
+		<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo=""/>
+	</OmittedLines>
+</Promise>

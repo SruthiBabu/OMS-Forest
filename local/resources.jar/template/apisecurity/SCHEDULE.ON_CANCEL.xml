@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ORDER_CHANGE.ON_CANCEL event xml -->
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Order>
+    <OrderLines>
+        <!--ChangeInOrderedQty is returned with sign. In case of this event it should always come with negative sign. -->
+        <OrderLine>
+            <OrderLineTranQuantity/>
+            <Item/>
+            <!--ChangeInLineTotal is returned with sign. -->
+            <LinePriceInfo/>
+            <StatusBreakupForCanceledQty>
+                <CanceledFrom>
+                    <CanceledFromTranQuantity/>
+                    <Details/>
+                </CanceledFrom>
+            </StatusBreakupForCanceledQty>
+        </OrderLine>
+    </OrderLines>
+    <PriceInfo/>
+</Order>

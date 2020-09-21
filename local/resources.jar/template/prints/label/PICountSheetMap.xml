@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LabelFieldMap>
+    <LabelField Binding="/Batch/@BatchNo" LabelFieldName="BatchNo" RepeatingElement=""/>
+    <LabelField Binding="/Batch/PrintCountSheetList/PrintItem/@SourceLocationId" LabelFieldName="CountLocation" RepeatingElement="PrintItem"/>
+    <LabelField Binding="/Batch/PrintCountSheetList/PrintItem/@ShortDescription" LabelFieldName="ItemDesc" RepeatingElement="PrintItem"/>
+	<LabelField Binding="/Batch/PrintCountSheetList/PrintItem/@ItemID" LabelFieldName="ItemId" RepeatingElement="PrintItem"/>
+	 <LabelField Binding="/Batch/PrintCountSheetList/PrintItem/@ProductClass" LabelFieldName="ProductClass" RepeatingElement="PrintItem"/>
+	 <LabelField Binding="/Batch/PrintCountSheetList/PrintItem/@LPN" LabelFieldName="LPN" RepeatingElement="PrintItem"/>
+	<LabelField Binding="/Batch/@OrganizationCode" LabelFieldName="Node" RepeatingElement=""/>
+    <LabelField Binding="/Batch/@BatchNo" LabelFieldName="BatchBarCode" RepeatingElement=""/>
+    <RepeatingFields>
+        <RepeatingField LabelFieldName="CountLocation" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+        <RepeatingField LabelFieldName="ItemDesc" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+		<RepeatingField LabelFieldName="ItemId" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+		<RepeatingField LabelFieldName="LPN" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+		<RepeatingField LabelFieldName="ProductClass" MaxFirstPage="10"
+            MaxLastPage="10" MaxMidPage="10"/>
+    </RepeatingFields>
+</LabelFieldMap>

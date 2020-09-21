@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults DefaultRecordDelimiter="Newline" DefaultFieldDelimiter="," DefaultPadCharacter="#" RecordIdStartPosition="1">
+   </ParserDefaults>
+
+   <Root Name="AdjustLocationInventoryList">
+         <Header Name="LocationInventory" RecordName="ALOCINVN" MinOccurence="1" MaxOccurence="1"/>
+   </Root>
+ 
+   <RecordDefinitions>
+    <Record RecordId="ALOCINVN" Name="ALOCINVN" XMLName="AdjustLocationInventory">
+        <Field Name="EnterpriseCode" FieldPosition="2" XMLName="EnterpriseCode"/>
+        <Field Name="Node" FieldPosition="3" XMLName="Node"/> 
+        <Field Name="CaseId" FieldPosition="4" XMLName="CaseId"/>
+        <Field Name="LocationId" FieldPosition="5" XMLName="LocationId"/>
+        <Field Name="PalletId" FieldPosition="6" XMLName="PalletId"/>
+        <Field Name="InventoryStatus" FieldPosition="7" XMLName="InventoryStatus"/>
+        <Field Name="SegmentType" FieldPosition="8" XMLName="SegmentType"/>
+        <Field Name="Segment" FieldPosition="9" XMLName="Segment"/>
+        <Field Name="Quantity" FieldPosition="10" XMLName="Quantity"/>
+        <Field Name="ItemID" FieldPosition="11" XMLName="ItemID"/>
+        <Field Name="UnitOfMeasure" FieldPosition="12" XMLName="UnitOfMeasure"/>
+        <Field Name="ProductClass" FieldPosition="13" XMLName="ProductClass"/>
+         <Field Name="LotNumber" FieldPosition="14" XMLName="LotNumber"/>
+         <Field Name="LotAttribute1" FieldPosition="15" XMLName="LotAttribute1"/>
+         <Field Name="LotAttribute2" FieldPosition="16" XMLName="LotAttribute2"/>
+         <Field Name="ShipByDate" FieldPosition="17" XMLName="ShipByDate"/>
+         <Field Name="SerialNo" FieldPosition="18" XMLName="SerialNo"/>
+         <Field Name="ReasonCode" FieldPosition="19" XMLName="ReasonCode"/>
+  </Record>
+ </RecordDefinitions>
+</FlatfileDelimitedSchema>
+
+

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed Materials - Property of IBM IBM Sterling Business Center (C) 
+	Copyright IBM Corp. 2012, 2013 All Rights Reserved. US Government Users Restricted 
+	Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract 
+	with IBM Corp. -->
+
+<ApprovalConfig>
+	<DomainList>
+		<Domain Name="Order" DisplayName="b_Order">
+			<Attributes>
+			    <Attribute Name="BillToID" DisplayName="b_Customer_ID"
+					XPath="Order" CompareAny="true">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovaltriggercontrol"
+									valueBinding="CustomerList/Customer/CustomerID" entity="CustomerSearch"
+									singleSelect="true" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="GrandTotal" DataCaptureName="MaxNegativeTotalAmount" DisplayName="b_Grand_Total"
+					XPath="Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="6" allowNegative="true"  minValue="-9999999999999" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="true"  minValue="-9999999999999" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="true"  minValue="-9999999999999" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="true"  minValue="-9999999999999" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="true" minValue="-9999999999999" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="CustomerLevel" DisplayName="b_CustomerLevel"
+					XPath="Order/SelectionCriteria" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getCustomerLevel.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="CodeShortDescription" valueField="CodeValue"
+									optionsBinding="CommonCodeList/CommonCode" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="CustomerType" DisplayName="b_CustomerType"
+					XPath="Order/SelectionCriteria" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getCustomerType.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="CodeShortDescription" valueField="CodeValue"
+									optionsBinding="CommonCodeList/CommonCode" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="RelationshipType" DisplayName="b_RelationshipType"
+					XPath="Order/SelectionCriteria" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getCustomerRelationshipType.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="CodeShortDescription" valueField="CodeValue"
+									optionsBinding="CommonCodeList/CommonCode" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="Vertical" DisplayName="b_Vertical"
+					XPath="Order/SelectionCriteria" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getCustomerVertical.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="CodeShortDescription" valueField="CodeValue"
+									optionsBinding="CommonCodeList/CommonCode" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+
+				<Attribute Name="Currency" DataCaptureName="Currency" DisplayName="b_Currency" XPath="Order/PriceInfo" DefaultQueryType="EQUALS">
+						<QueryTypes>
+							<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+								<GreexFunction Name="equals" />
+								<Configuration ActionURL="/sbc/pricing/getCurrencyListForSearch.do">
+									<UIControlConfiguration xtype="xapprovalcombocontrol"
+										displayField="CurrencyDescription" valueField="Currency"
+										mandatory="true"  optionsBinding="CurrencyList/Currency"/>
+								</Configuration>
+							</QueryType>
+					</QueryTypes>
+				</Attribute>
+			</Attributes>
+		</Domain>
+		<Domain Name="OrderLine" DisplayName="b_OrderLine">
+			<Attributes>
+				<Attribute Name="ItemID" DisplayName="b_Item_ID"
+					XPath="Order/OrderLines/OrderLine/Item" CompareAny="true">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovaltriggercontrol"
+									valueBinding="ItemList/Item/ItemID" entity="item" singleSelect="true" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+
+				<Attribute Name="UnitOfMeasure" DisplayName="b_UnitOfMeasure"
+					XPath="Order/OrderLines/OrderLine/Item" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getUnitOfMeasure.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="Description" valueField="UnitOfMeasure"
+									optionsBinding="ItemUOMMasterList/ItemUOMMaster" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+
+				<Attribute Name="ProductClass" DisplayName="b_ProductClass"
+					XPath="Order/OrderLines/OrderLine/Item" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getProductClass.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="CodeShortDescription" valueField="CodeValue"
+									optionsBinding="CommonCodeList/CommonCode" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+
+				<Attribute Name="OrderedQty" DisplayName="b_Ordered_Qty"
+					XPath="Order/OrderLines/OrderLine" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true" maxValue="9999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true" maxValue="9999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true" maxValue="9999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true" maxValue="9999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true" maxValue="9999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+			</Attributes>
+		</Domain>
+	</DomainList>
+</ApprovalConfig>

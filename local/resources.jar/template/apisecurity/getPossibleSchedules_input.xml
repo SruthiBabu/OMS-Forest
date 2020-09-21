@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--getPossibleSchedules Input XML-->
+<!-- Either OrderHeaderKey or OrderNo, DocumentType and EnterpriseCode is required -->
+<!-- Only multiple product lines can be selected. Inclusion of service line will be returned as an error -->
+<!-- When a delivery service line is passed as input, all assoicated product lines are automatically included -->
+<!-- When a parent line of dependency group is passed, all child lines are automatically selected -->
+<!-- If a line is passed that is awaiting a previosuly sequenced line to be shceduled, that part of the dependency is ignored -->
+<Promise>
+    <ShipToAddress/>
+    <Overrides/>
+    <OmittedLines>
+        <OrderLine/>
+    </OmittedLines>
+    <MultipleOrderLines>
+        <OrderLine/>
+    </MultipleOrderLines>
+</Promise>

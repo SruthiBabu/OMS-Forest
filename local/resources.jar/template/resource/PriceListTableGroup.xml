@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<TableGroup GroupName="PriceList">
+    <Entity EntityName="Pricelist_Header" Table="YPM_PRICELIST_HDR" Key="PRICELIST_HDR_KEY" XMLName="PricelistHeader">
+    	<ChildEntity EntityName="Pricelist_Assignment" Table="YPM_PRICELIST_ASSIGNMENT" Key="PRICELIST_ASSIGNMENT_KEY" XMLName="PricelistAssignment">
+    		<QueryAttr ChildColumn="PRICELIST_HDR_KEY" ParentAttrXML="PricelistHeaderKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Pricelist_Seller_Assignment" Table="YPM_PRCLST_SLR_ASSNMNT" Key="PRCLST_SLR_ASSNMNT_KEY" XMLName="PricelistSellerAssignment">
+    		<QueryAttr ChildColumn="PRICELIST_HDR_KEY" ParentAttrXML="PricelistHeaderKey"/>
+    	</ChildEntity>
+    </Entity>
+    <Entity EntityName="Pricelist_Line" Table="YPM_PRICELIST_LINE" Key="PRICELIST_LINE_KEY" XMLName="PricelistLine"/>
+</TableGroup>

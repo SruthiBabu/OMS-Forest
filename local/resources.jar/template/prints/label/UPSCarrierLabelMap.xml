@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+	<!-- From AddressInfo is obtained from ShipNodePersonInfo of Shipment or Load -->
+    <LabelField Binding="translate(concat(/Container/Shipment/ShipNode/ShipNodePersonInfo/@FirstName,' ',substring(/Container/Shipment/ShipNode/ShipNodePersonInfo/@MiddleName,1,1),' ',/Container/Shipment/ShipNode/ShipNodePersonInfo/@LastName),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromName" RepeatingElement=""/>
+	<LabelField Binding="/Container/Shipment/ShipNode/ShipNodePersonInfo/@DayPhone" LabelFieldName="FromPhone" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ShipNode/ShipNodePersonInfo/@AddressLine1,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ShipNode/ShipNodePersonInfo/@AddressLine2,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromAddressLine2" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ShipNode/ShipNodePersonInfo/@AddressLine3,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromAddressLine3" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ShipNode/ShipNodePersonInfo/@City,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromCity" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ShipNode/ShipNodePersonInfo/@State,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromState" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ShipNode/ShipNodePersonInfo/@ZipCode,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromZip" RepeatingElement=""/>
+    <LabelField Binding="translate(concat(/Container/Shipment/ToAddress/@FirstName,' ',substring(/Container/Shipment/ToAddress/@MiddleName,1,1),' ',/Container/Shipment/ToAddress/@LastName),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="ToName" RepeatingElement=""/>
+	<LabelField Binding="/Container/Shipment/ToAddress/@DayPhone" LabelFieldName="ToPhone" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ToAddress/@AddressLine1,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="ToAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ToAddress/@AddressLine2,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="ToAddressLine2" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ToAddress/@Company,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="ToCompany" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ToAddress/@City,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="ToCity" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ToAddress/@State,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="ToState" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ToAddress/@ZipCode,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="ToZip" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/ToAddress/@ZipExtension" LabelFieldName="ToZipExtension" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/ToAddress/@Company" LabelFieldName="ToCompany" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/ToAddress/@Department" LabelFieldName="ToDepartment" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerInfo/@PackageNumber" LabelFieldName="PackageNumber" RepeatingElement=""/>
+    <LabelField Binding="/Container/@ActualWeight" LabelFieldName="Weight" RepeatingElement=""/>
+    <LabelField Binding="/Container/@ActualWeightUOM" LabelFieldName="WeightUOM" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerInfo/@TotalPackages" LabelFieldName="TotalPackages" RepeatingElement=""/>
+    <LabelField Binding="/Container/@RoutingCode" LabelFieldName="RoutingCode" RepeatingElement=""/>
+    <LabelField Binding="/Container/@TrackingNo" LabelFieldName="TrackingNo" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerInfo/@ServiceIdentifier" LabelFieldName="ServiceIdentifier" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerInfo/@JulianDay" LabelFieldName="Day" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerInfo/@AddressValidation" LabelFieldName="AddressValidation" RepeatingElement=""/>
+    <LabelField Binding="translate(/Container/Shipment/ScacAndService/@ScacAndServiceDesc,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="CarrierServiceTitle" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerInfo/@CarrierServiceIcon" LabelFieldName="CarrierServiceIcon" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerInfo/@BillingOption" LabelFieldName="FreightTerms" RepeatingElement=""/>
+    <LabelField Binding="/Container/ScacEx/@OnlineControlNumber" LabelFieldName="ControlNumber" RepeatingElement=""/>
+    <LabelField Binding="/Container/RoutingInstructions/@RouteCode" LabelFieldName="RouteCode" RepeatingElement=""/>
+	<LabelField Binding="/Container/RoutingInstructions/RoutingInstruction/@Instruction" LabelFieldName="Instruction" RepeatingElement="RoutingInstruction"/>
+    <RepeatingFields>
+		<RepeatingField LabelFieldName="Instruction" MaxFirstPage="2"
+            MaxLastPage="0" MaxMidPage="0"/>
+	</RepeatingFields>
+</LabelFieldMap>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APIIndexLookup>
+    <getShipmentListForOrder>
+        <Index Name="Order" Path="Order"/>
+    </getShipmentListForOrder>
+    <getOrderReleaseList>
+        <Index Name="Order" Path="OrderRelease/Order"/>
+    </getOrderReleaseList>
+    <getOrderList>
+        <Index Name="Order" Path="Order"/>
+    </getOrderList>
+    <getOrderLineStatusList>
+        <Index Name="Order" Path="OrderLineStatus"/>
+    </getOrderLineStatusList>
+    <getOrderLineList>
+        <Index Name="Order" Path="OrderLine/Order"/>
+    </getOrderLineList>
+    <getOrderInvoiceList>
+        <Index Name="Order" Path="OrderInvoice/Order"/>
+    </getOrderInvoiceList>
+    <getOrderInvoiceDetailList>
+        <Index Name="Order" Path="OrderInvoiceDetail/InvoiceHeader/Order"/>
+    </getOrderInvoiceDetailList>
+    <getShipmentList>
+        <Index Name="Shipment" Path="Shipment"/>
+        <Index Name="Order" Path="Shipment/ShipmentLines/ShipmentLine/Order"/>
+    </getShipmentList>
+    <getShipmentLineList>
+        <Index Name="Shipment" Path="ShipmentLine/Shipment"/>
+        <Index Name="Order" Path="ShipmentLine/Order"/>
+    </getShipmentLineList>
+    <getShipmentContainerList>
+        <Index Name="Shipment" Path="Container/Shipment"/>
+    </getShipmentContainerList>
+    <getExceptionListForOrder>
+        <Index Name="Order" Path="Inbox"/>
+        <Index Name="Order" Path="Inbox/Order"/>
+    </getExceptionListForOrder>
+    <getExceptionList>
+        <Index Name="Order" Path="Inbox"/>
+        <Index Name="Shipment" Path="Inbox"/>
+    </getExceptionList>
+    <getStoreBatchList>
+        <Index Name="Shipment" Path="StoreBatch/ShipmentIndexLookup"/>
+    </getStoreBatchList>
+    <getNewBatchesUE>
+        <Index Name="Shipment" Path="StoreBatch/ShipmentIndexLookup"/>
+    </getNewBatchesUE>
+    <getCompleteOrderLineList>
+        <Index Name="Order" Path="OrderLine/Order"/>
+    </getCompleteOrderLineList>
+    <addAllContainersToManifest>
+        <Index Name="Shipment" Path="Container/Shipment"/>
+    </addAllContainersToManifest>
+    <getOrdersForReturn>
+        <Index Name="Order" Path="Order"/>
+    </getOrdersForReturn>
+</APIIndexLookup>

@@ -1,0 +1,96 @@
+<html>
+    <body>
+        <form name="frmLocnLPNDtl" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Containers"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input colno="1" 
+									inputbinding="xml:CurrentUser:/User/@Node"  
+                                    outputbinding="xml:CurrentUser:/User/@Node"  
+                                    size="0" subtype="Hidden"
+									tag="binding=xml:CurrentUser:/User/@Node"
+                                    type="hidden" validate="false"/>
+									<input col="1" defaultoutput="false"
+                                    inputbinding="xml:/LocationLPNList/@LocationId"
+                                    name="txtLocation" outputbinding="xml:/LocationLPNList/@LocationId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/LocationLPNList/@LocationId"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+     						<tr>
+								<td>
+									<input col="9" defaultoutput="false"
+                                    inputbinding="xml:/LocationLPNList/@More"
+                                    name="txtMore" 
+                                    size="11" subtype="ProtectedText"
+                                    tag="binding=xml:/LocationLPNList/@More"
+                                    type="text" validate="false"/>
+								</td>
+							</tr>
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/LocationLPNList/@LocationLPN"
+                                    col="1" gridcols="20"
+                                    gridrows="6" id="LocationLPN"
+                                    mandatory="false"
+                                    name="gridLocationLPNList"
+                                    namespace="LocationLPNList" size="20"
+                                    tag="binding=gridLocationLPNList" validate="false">
+                                    <tr>
+                                    <td>
+									<input colno="0" name="lblProceed" colName=" " size="0"
+                                    type="hidden" value="/console/rfinvinq.ppc?action=frmInvInqCriteriaValtxtBarCode"/>
+                                    <input colno="1" colName="1" inputbinding="xml:CurrentUser:/User/@Node"
+                                    outputbinding="xml:CurrentUser:/User/@Node"
+                                    size="0" type="hidden"/>
+                                    <input colno="2" colName="2" inputbinding="xml:/LocationLPN/@LocationId"
+                                    outputbinding="xml:/LocationLPN/@LocationId"
+                                    size="0" type="hidden"/>
+									<input colno="3" colName="3" inputbinding="xml:/LocationLPN/@ContainerNo"
+                                    outputbinding="xml:/InvInqCriteria/@ContainerNo"
+                                    size="0" type="hidden"/>
+									<input colno="4" colName="4" inputbinding="xml:/LocationLPN/@ContainerNo"
+                                    outputbinding="xml:/InvInqCriteria/@BarCodeData"
+                                    size="0" type="hidden"/>
+ 									<input colno="5" colName="5" inputbinding="xml:/LocationLPN/@DimensionUOM"
+                                    outputbinding="xml:/LocationLPN/@DimensionUOM"
+                                    size="0" type="hidden"/>
+									<input colno="6" colName="Container_#"
+									inputbinding="xml:/LocationLPN/@ContainerNo" size="20" type="text"/>
+									</td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+									subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

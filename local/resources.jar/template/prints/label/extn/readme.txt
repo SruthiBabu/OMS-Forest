@@ -1,0 +1,1 @@
+This folder contains the Loftware Label (.lwl) and Mapping XML files for custom prints.

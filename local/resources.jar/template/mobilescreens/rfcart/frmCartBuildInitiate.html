@@ -1,0 +1,87 @@
+<html>
+    <body>
+        <form name="frmCartBuildInitiate" target="/console/rfcart.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+									<input col="9" 
+                                    name="lblTitle"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Build_Cart"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblBarCodeData"
+                                    type="text" validate="false" value="Mobile_Task_Reference_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/Batch/@BarCodeData"
+                                    name="txtBarCodeData"
+                                    outputbinding="xml:/Batch/@BarCodeData"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Batch/@BarCodeData"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblCartLocationId"
+                                    type="text" validate="false" value="Mobile_Cart_Location_Id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/Batch/@CartLocationId"
+                                    name="txtCartLocationId"
+                                    outputbinding="xml:/Batch/@CartLocationId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Batch/@CartLocationId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rfcart.ppc?action=frmCartBuildProceed"
+                                    validate="false" value="Mobile_Go"/>
+									<input col="6" hotkey="F8"
+                                    mandatory="false" name="Done"
+                                    size="5" subtype="Command"
+                                    type="button"
+                                    url="/console/rfcart.ppc?action=frmCartBuildComplete"
+                                    validate="false" value="Mobile_Done"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F9"
+                                    mandatory="false" name="StartPick"
+                                    size="11" subtype="Command"
+                                    type="button"
+                                    url="/console/rfcart.ppc?action=frmCartStartPick"
+                                    validate="false" value="Mobile_Start_Pick"/>								
+                                </td>
+                            </tr>
+                        </table>
+                    </td>					
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- 
+This XML defines Entity Transformation rules for the current deployment.
+Column value or XPath value will be replaced by the Replace String if the Match String matches while exporting the data.
+Column value or XPath value will be replaced by the Match String if the Replace String matches while importing the data.
+
+Table.Name - The Table Name for which the transform is defined.
+Column.Name - The Column of the Table for which the transform is defined.
+Transform.Match - The String that needs to be matched with the column value while exporting data.
+Transform.Replace - The String that needs to replace the column value.
+Transform.XPath - Xpath of the Attribute (in case column value is an XML) that needs to be matched and replaced. 
+
+For e.g.:
+<Transformations>
+    <Table Name="YFS_SUB_FLOW">
+		<Columns>
+			<Column Name="CONFIG_XML">
+				<Transform Match="t3://localhost:7001" Replace="${PROVIDER_URL}" XPath ="xml:/SubFlowConfig/Link/Properties/@ProviderURL"/>
+			</Column>
+		</Columns>
+	</Table>
+</Transformations>
+-->
+
+<Transformations>
+    <Table Name="">
+    	<Columns>
+	        <Column Name="">
+	            <Transform Match="" Replace="" XPath=""/>
+	        </Column>
+	   	</Columns>
+    </Table>
+</Transformations>

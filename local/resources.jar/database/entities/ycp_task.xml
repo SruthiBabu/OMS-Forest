@@ -1,0 +1,1639 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite - Foundation
+(C) Copyright IBM Corp 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+-->
+<DBSchema>
+    <Entities>
+        <Entity
+            Description="This table stores transactional constraints automatically created by the system.  Transactional constraints are temporary in nature, and are automatically purged by the system when the corresponding transaction data is purged.  When tasks are suggested to a user, these constraints have to be met.  If no constraints are specified here, it means that any type of task can be suggested to the user."
+            EntityType="TRANSACTION" Extensible="N" Module="ysc"
+            Name="Auto_User_Constraints" Prefix="YFS_"
+            TableName="YFS_AUTO_USER_CONSTRAINTS"
+            TableType="TRANSACTION" XMLName="AutoUserConstraint">
+            <Attributes>
+                <Attribute ColumnName="AUTO_USER_CONSTRAINTS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute."
+                    Name="Auto_User_Constraints_Key" Nullable="false" XMLName="AutoUserConstraintsKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="NODE" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Owner organization of the node."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="ASSIGNED_TO_USER_ID"
+                    DataType="LoginId" DefaultValue="' '"
+                    Description="User for whom transactional constraints are being defined."
+                    Name="Assigned_To_User_Id" Nullable="false" XMLName="AssignedToUserId"/>
+                <Attribute ColumnName="ENTERPRISE_KEY"
+                    DataSecurityUsageType="ORG" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Within a Node, operations can vary by Enterprise.  Therefore, Task Type level attributes are maintained at Enterprise level for a Node."
+                    Name="Enterprise_Key" Nullable="false" XMLName="EnterpriseKey"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="Identifies the task type that the user is eligible to perform."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="BATCH_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="Identifies the batch for which user is currently performing a task."
+                    Name="Batch_No" Nullable="false" XMLName="BatchNo"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="Identifies the shipment for which user is currently performing a task."
+                    Name="Shipment_No" Nullable="false" XMLName="ShipmentNo"/>
+                <Attribute ColumnName="CONTAINER_NO"
+                    DataType="ContainerNo" DefaultValue="' '"
+                    Description="Identifies the container for which user is currently performing a task."
+                    Name="Container_No" Nullable="false" XMLName="ContainerNo"/>
+                <Attribute ColumnName="ACTIVE_FLAG" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Y or blank: If the constraint should be applied.  N: If the constraint should not be used for further processing."
+                    DescriptionRows="3" Name="Active_Flag"
+                    Nullable="false" XMLName="ActiveFlag"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="AUTO_USR_CONS_PK" Name="YFS_AUTO_USER_CONSTRAINTS_PK">
+                <Attribute ColumnName="AUTO_USER_CONSTRAINTS_KEY" Name="Auto_User_Constraints_Key"/>
+            </PrimaryKey>
+			<Indices>
+                <Index Name="YFS_AUTO_USER_I7" Unique="false">
+                    <Column Name="ASSIGNED_TO_USER_ID"/>
+                    <Column Name="ACTIVE_FLAG"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+				</Index>
+            </Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AutoUserConstraintList"
+                    ChildName="AutoUserConstraint"
+                    ChildXMLName="AutoUserConstraint"
+                    ForeignEntity="User" Name="User" ReadOnly="true"
+                    Type="Bidirectional" XMLName="User">
+                    <Attribute Name="Assigned_To_User_Id" ParentName="Loginid"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores the batches of tasks.  A batch of tasks is typically sized such that it takes one user around 30 minutes to complete."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="ysc" Name="Batch" Prefix="YFS_"
+            TableName="YFS_BATCH" TableType="TRANSACTION" XMLName="Batch">
+            <Attributes>
+                <Attribute ColumnName="BATCH_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="the primary key of the YFS_BATCH table."
+                    Name="Batch_Key" Nullable="false" XMLName="BatchKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="NODE" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The node's organization code."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="BATCH_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The batch number associated with the node."
+                    Name="Batch_No" Nullable="false" XMLName="BatchNo"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="The type of the task. A batch can only contain tasks of the same task type.  This attribute marks task type for all tasks within this batch."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The shipment number associated with this batch."
+                    Name="Shipment_No" Nullable="false" XMLName="ShipmentNo"/>
+                <Attribute ColumnName="STATUS" DataType="EnumStatus"
+                    DefaultValue="' '"
+                    Description="The status of the Batch." Name="Status"
+                    Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="REQ_BATCH_COMPLETION_XML"
+                    DataType="CLOB" DefaultValue="' '"  CompressionSupported="true"
+                    Description="The field stores the input XML passed for completing the batch (input to registerBatchCompletion) when running in offline mode."
+                    Name="Requested_Batch_Completion_XML"
+                    Nullable="false" XMLName="RequestedBatchCompletionXML"/>
+                <Attribute ColumnName="MANUALLY_CREATED" DataType="Flag" 
+                    Description="This flag indicates whether the batch is created by the system or manually by the user."
+                    Name="Manually_Created" Nullable="true" XMLName="ManuallyCreated"/>
+				<Attribute ColumnName="REMAINING_MINUTES"
+                    DataType="Count"
+                    Description="Indicates the estimated time required to complete all the open tasks."
+                    Name="Remaining_Minutes" Nullable="true"
+                    Virtual="true" XMLName="RemainingMinutes"/>
+				<Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' ' "
+                    Description="The equipment type is used to move product within a warehouse. For exampe, cart."
+                    Name="Equipment_Type" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_BATCH_PK">
+                <Attribute ColumnName="BATCH_KEY" Name="Batch_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_BATCH_I1" Unique="true">
+                    <Column Name="BATCH_NO"/>
+                </Index>
+                <Index Name="YFS_BATCH_I2">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="STATUS"/>
+                    <Column Name="TASK_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Batches" ChildName="Batch"
+                    ChildXMLName="Batch" ForeignEntity="Task_Type"
+                    Name="TaskType" ReadOnly="true" Type="Bidirectional" XMLName="TaskType">
+                    <Attribute Name="Task_Type" ParentName="Task_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores batch rules.  Batching algorithm applies these constraints during batch creation. Batch rules can be specified at node level."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Batch_Rule" Prefix="YFS_" TableName="YFS_BATCH_RULE"
+            TableType="CONFIGURATION" XMLName="BatchRule">
+            <Attributes>
+                <Attribute ColumnName="BATCH_RULE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute."
+                    Name="Batch_Rule_Key" Nullable="false" XMLName="BatchRuleKey" FactName="false"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Owner organization of the node."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="MAX_TRANSACTIONS"
+                    DataType="Count" DefaultValue="0 "
+                    Description="Maximum number of tasks for the PrimaryTaskReference that a batch can have."
+                    Name="Max_Transactions" Nullable="false" XMLName="MaxTransactions"/>
+                <Attribute ColumnName="MAX_VOLUME" DataType="Count"
+                    DefaultValue="0 "
+                    Description="Maximum volume that a batch can have."
+                    Name="Max_Volume" Nullable="false" XMLName="MaxVolume"/>
+                <Attribute ColumnName="MAX_TASKS" DataType="Count"
+                    DefaultValue="0 "
+                    Description="Maximum number of tasks that a batch can have."
+                    Name="Max_Tasks" Nullable="false" XMLName="MaxTasks"/>
+                <Attribute ColumnName="PRIMARY_BATCH_REFERENCE"
+                    DataType="CommonCode" DefaultValue="' ' "
+                    Description="This field is used in conjunction with Max Transactions field.  If the Max Transactions is set to n, then it results in only n shipment / wave / container (whichever is selected as the Primary Task Reference) in a batch. Invalid setup if 'max transactions' is specified but 'PrimaryTaskReference' is not defined."
+                    DescriptionRows="10" Name="Primary_Batch_Reference"
+                    Nullable="false" XMLName="PrimaryBatchReference"/>
+                <Attribute ColumnName="SEPARATE_MULTI_AREA_BATCHES"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="Y if separate batch needs to be created for tasks requiring picking from multiple areas. If Y, tasks requiring multiple area picking can be batched together."
+                    Name="Separate_Multi_Area_Batches" Nullable="false" XMLName="SeparateMultiAreaBatches"/>
+                <Attribute ColumnName="DO_NOT_SPLIT_ATTRIBUTE"
+                    DataType="CommonCode" DefaultValue="' ' "
+                    Description="If specified, all open tasks for the attribute will be batched together."
+                    Name="Do_Not_Split_Attribute" Nullable="false" XMLName="DoNotSplitAttribute"/>
+				<Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' ' "
+                    Description="Equipment type is used move product within a warehouse (eg Cart)."
+                    Name="Equipment_Type" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_BATCH_RULE_PK">
+                <Attribute ColumnName="BATCH_RULE_KEY" Name="Batch_Rule_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    IsParent="true" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores list of all tasks across nodes.  Tasks represent a logical or a physical activity.  Every task must belong to a task type, which identifies the type of activity."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="ysc" Name="Task" Prefix="YFS_" TableName="YFS_TASK"
+            TableType="TRANSACTION" XMLName="Task">
+            <Attributes>
+                <Attribute ColumnName="TASK_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_TASK table."
+                    Name="Task_Key" Nullable="false" XMLName="TaskKey"/>
+                <Attribute ColumnName="TASK_ID" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The one up number that uniquely identifies the task.  This is system generated."
+                    Name="Task_Id" Nullable="false" XMLName="TaskId"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="NODE" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The ship node's organization code."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="The task type that the user is eligible to perform."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="ENTERPRISE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The enterprise key that is associated with this task."
+                    Name="Enterprise_Key" Nullable="false" XMLName="EnterpriseKey"/>
+                <Attribute ColumnName="PARENT_TASK_ID"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="The identifier of the parent task of this task."
+                    Name="Parent_Task_Id" Nullable="false" XMLName="ParentTaskId"/>
+                <Attribute ColumnName="IS_PARENT" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag allows distinguishing between multi-user tasks and multi-user subtasks."
+                    Name="Is_Parent" Nullable="false" XMLName="IsParent"/>
+                <Attribute ColumnName="PREDECESSOR_TASK_ID"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="The identifier of the predecessor task. The predecessaor task should be completed or canceled prior to suggesting this task."
+                    HasSkewedData="true" Name="Predecessor_Task_Id"
+                    Nullable="false" XMLName="PredecessorTaskId"/>
+                <Attribute ColumnName="CONSOLIDATED_TASK_ID"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="The tasks that were suggested to the user as one consolidated task.  This is system generated."
+                    Name="Consolidated_Task_Id" Nullable="false" XMLName="ConsolidatedTaskId"/>
+                <Attribute ColumnName="IS_SUMMARY_TASK" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the task is a summary task."
+                    Name="Is_Summary_Task" Nullable="false" XMLName="IsSummaryTask"/>
+                <Attribute ColumnName="SOURCE_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The location at which the movement of a product starts in a warehouse."
+                    Name="Source_Location_Id" Nullable="false" XMLName="SourceLocationId"/>
+                <Attribute ColumnName="SOURCE_ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The Zone corresponding to the source location.  Denormalized here for better performance."
+                    Name="Source_Zone_Id" Nullable="false" XMLName="SourceZoneId"/>
+                <Attribute ColumnName="SOURCE_AISLE" DataType="Integer"
+                    DefaultValue="0"
+                    Description="The Aisle corresponding to the source location.  Denormalized here for better performance."
+                    Name="Source_Aisle" Nullable="false" XMLName="SourceAisle"/>
+                <Attribute ColumnName="TARGET_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The location at which the task ends.  This may be overridden during execution."
+                    Name="Target_Location_Id" Nullable="false" XMLName="TargetLocationId"/>
+                <Attribute ColumnName="TARGET_ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The Zone corresponding to the target location.  Denormalized here for better performance."
+                    Name="Target_Zone_Id" Nullable="false" XMLName="TargetZoneId"/>
+                <Attribute ColumnName="TARGET_AISLE" DataType="Integer"
+                    DefaultValue="0"
+                    Description="The Aisle corresponding to the target location.  Denormalized here for better performance."
+                    Name="Target_Aisle" Nullable="false" XMLName="TargetAisle"/>
+                <Attribute ColumnName="SOURCE_SORT_SEQUENCE"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="The sequence of the source sort. This should be passed to the createTask or changeTask API. This information is used by the getNextTask API to prioritize the task suggestion in a list of tasks."
+                    Name="Source_Sort_Sequence" Nullable="false"/>
+                <Attribute ColumnName="TARGET_SORT_SEQUENCE"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="The sequence of the target sort. This should be passed to the createTask or changeTask API. This information is used by the getNextTask API."
+                    Name="Target_Sort_Sequence" Nullable="false"/>
+                <Attribute ColumnName="TASK_PRIORITY"
+                    DataType="Priority" DefaultValue="0"
+                    Description="The priority within the tasks of a specific task type."
+                    Name="Task_Priority" Nullable="false" XMLName="TaskPriority"/>
+                <Attribute ColumnName="FINISH_NO_LATER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the time by which a task has to be completed. Tasks that are past or near their expected completion time are suggested first."
+                    Name="Finish_No_Later_Than" Nullable="false" XMLName="FinishNoLaterThan"/>
+                <Attribute ColumnName="START_NO_EARLIER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The time before which a task should not be started. Tasks are suggested only after the start no earlier than time is past."
+                    Name="Start_No_Earlier_Than" Nullable="false" XMLName="StartNoEarlierThan"/>
+                <Attribute ColumnName="ASSIGNED_TO_USER_ID"
+                    DataType="LoginId" DefaultValue="' '"
+                    Description="The user to whom this task is assigned."
+                    Name="Assigned_To_User_Id" Nullable="false" XMLName="AssignedToUserId"/>
+				<Attribute ColumnName="MANUALLY_ASSIGNED_USER_ID"
+                    DataType="LoginId" DefaultValue="' '"
+                    Description="The user to whom this task is assigned manually."
+                    Name="Manually_Assigned_User_Id" Nullable="false" XMLName="ManuallyAssignedUserId"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="The identifier of the item for which the task is created."
+                    Name="Item_Id" Nullable="false" XMLGroup="Inventory" XMLName="ItemId"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="The product class ofthe item."
+                    Name="Product_Class" Nullable="false"
+                    XMLGroup="Inventory" XMLName="ProductClass"/>
+                <Attribute ColumnName="UNIT_OF_MEASURE" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The unit of measure of the item."
+                    Name="Unit_Of_Measure" Nullable="false"
+                    XMLGroup="Inventory" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION1"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The first item classification for the task."
+                    Name="Item_Classification1" Nullable="false" XMLName="ItemClassification1"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION2"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The second item classification for the task."
+                    Name="Item_Classification2" Nullable="false" XMLName="ItemClassification2"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION3"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The third item classification for the task."
+                    Name="Item_Classification3" Nullable="false" XMLName="ItemClassification3"/>
+                <Attribute ColumnName="SOURCE_LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The Case Id or Pallet Id for the task."
+                    Name="Source_LPN_No" Nullable="false"
+                    XMLGroup="Inventory" XMLName="SourceLPNNo"/>
+                <Attribute ColumnName="SOURCE_LPN_TYPE"
+                    DataType="EnumLPNType" DefaultValue="' '"
+                    Description="The system defined values for the type of LPN. The types that are currently supported are CASE and PALLET."
+                    Name="Source_LPN_Type" Nullable="false"
+                    XMLGroup="Inventory" XMLName="SourceLPNType"/>
+                <Attribute ColumnName="TARGET_LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The target Case Id or Target Pallet Id for the task."
+                    Name="Target_LPN_No" Nullable="false" XMLName="TargetLPNNo"/>
+                <Attribute ColumnName="SUGGESTED_LPN_NO"
+                    DataType="LPNNo"
+                    Description="This indicates that the LPN is selected for this task and system cannot consider this LPN for other demands. This information is useful during task execution where system can warn the user if he picks a different LPN."
+                    Name="Suggested_LPN_No" Nullable="true" XMLName="SuggestedLPNNo"/>
+                <Attribute ColumnName="TARGET_LPN_TYPE"
+                    DataType="EnumLPNType" DefaultValue="' '"
+                    Description="The system defined values for the type of LPN. The types that are currently supported are CASE and PALLET."
+                    Name="Target_LPN_Type" Nullable="false" XMLName="TargetLPNType"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' '"
+                    Description="The tag number of the item."
+                    Name="Tag_Number" Nullable="false"
+                    XMLGroup="Inventory" XMLName="TagNumber"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="SerialNo"
+                    DefaultValue="' '"
+                    Description="The serial number of the item."
+                    Name="Serial_No" Nullable="false"
+                    XMLGroup="Inventory" XMLName="SerialNo"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' ' "
+                    Description="The segment type. SKUs are sometimes custom made. This field stores the customization details."
+                    Name="Segment_Type" Nullable="false" XMLGroup="Inventory"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="The segment number. When inventory is customized for a specific order, it needs to be tracked separately so that it can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLGroup="Inventory" XMLName="Segment"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The status of the inventory."
+                    Name="Inventory_Status" Nullable="false"
+                    XMLGroup="Inventory" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The quantity for which the task is created."
+                    Name="Quantity" Nullable="false"
+                    XMLGroup="Inventory" XMLName="Quantity"/>
+                <Attribute ColumnName="OVER_PICKED_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The quantity that was over picked during picking operation."
+                    Name="Over_Picked_Quantity" Nullable="false"
+                    XMLGroup="Inventory" XMLName="OverPickedQuantity"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The receipt header key that is associated with this task. This links the task to the receipt information.  When a QC recall is made for a specific shipment, it may be required to cancel any open task against the receipt.  This link between the task and the receipt enables you to do that."
+                    Name="Receipt_Header_Key" Nullable="false"
+                    XMLGroup="Inventory" XMLName="ReceiptHeaderKey"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate "
+                    Description="The date by which the shipment has to be shipped."
+                    Name="Ship_By_Date" Nullable="false"
+                    XMLGroup="Inventory" XMLName="ShipByDate"/>
+                <Attribute ColumnName="TASK_STATUS" DataType="Status"
+                    DefaultValue="' '"
+                    Description="The status of the task.  Following are the values of task status:   * 1050: Draft  * 1100: Open  * 1200: Suggested  * 1300: In Progress  * 1400: Held  * 2000: Completed  * 9000: Canceled."
+                    DescriptionRows="4" Name="Task_Status"
+                    Nullable="false" XMLName="TaskStatus"/>
+                <Attribute ColumnName="FIFO_NO" DataType="Integer"
+                    DefaultValue="0"
+                    Description="A date based inventory attribute that helps understand the order in which stock arrived at the node. This is used to send out items that arrived earlier than the ones that arrived later."
+                    Name="Fifo_No" Nullable="false" XMLGroup="Inventory" XMLName="FifoNo"/>
+                <Attribute ColumnName="COUNTRY_OF_ORIGIN"
+                    DataType="Country" DefaultValue="' '"
+                    Description="The country in which the item was manufactured."
+                    Name="Country_Of_Origin" Nullable="false"
+                    XMLGroup="Inventory" XMLName="CountryOfOrigin"/>
+                <Attribute ColumnName="EQUIPMENT_ID" DataType="ID-40"
+                    DefaultValue="' '"
+                    Description="The specific equipment that is used to perform this task."
+                    Name="Equipment_Id" Nullable="false" XMLName="EquipmentId"/>
+                <Attribute ColumnName="EQUIPMENT_LOCATION_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The identifier of the location associated with the location placeholder for the equipment, so that inventory in the location can be queried and tracked."
+                    Name="Equipment_Location_Id" Nullable="false"/>
+                <Attribute ColumnName="EXCEPTION_HOLD" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether an exception has been detected.  The exception may be system detected or user detected. Y: Exception has been detected.  Exception hold reason will give the details of why the task is held. N: No prevailing exception. Once the exception is resolved, it is set to N.  This attribute is used to hold the task if inventory shortage is detected by system.  It is also used when supervisors want to hold tasks for operational reasons."
+                    DescriptionRows="6" Name="Exception_Hold"
+                    Nullable="false" XMLName="ExceptionHold"/>
+                <Attribute ColumnName="HOLD_REASON_CODE"
+                    DataType="HoldReasonCode" DefaultValue="' '"
+                    Description="The reason for the hold, if the task is held due to an exception. The system will ship with one system defined value for this field:  Y01: Inventory Shortage. Users can add more reasons during installation.  Example values are: 02: Equipment malfunction 03: Location Repair."
+                    DescriptionRows="4" Name="Hold_Reason_Code"
+                    Nullable="false" XMLName="HoldReasonCode"/>
+                <Attribute ColumnName="HOLD_REASON_TEXT"
+                    DataType="HoldReasonText" DefaultValue="' '"
+                    Description="A description of the reason, if the task is held by an explicit user action."
+                    Name="Hold_Reason_Text" Nullable="false" XMLName="HoldReasonText"/>
+                <Attribute ColumnName="DEPENDENCY_HOLD" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the predecessor of the current task is not yet complete, and therefore this task is held. When the predecessor task is completed, the successor tasks are released from hold by setting this flag to N."
+                    DescriptionRows="6" Name="Dependency_Hold"
+                    Nullable="false" XMLName="DependencyHold"/>
+                <Attribute ColumnName="BATCH_HOLD" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the task requires batching."
+                    DescriptionRows="6" Name="Batch_Hold"
+                    Nullable="false" XMLName="BatchHold"/>
+                <Attribute ColumnName="ORDER_NO" DataType="VarcharDocumentNo"
+                    Description="The order number."
+                    Name="Order_No" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="OrderNo"/>
+                <Attribute ColumnName="RECEIPT_NO" DataType="ReceiptNo"
+                    DefaultValue="' ' "
+                    Description="The receipt number." Name="Receipt_No"
+                    Nullable="false" XMLGroup="TaskReferences" XMLName="ReceiptNo"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The document type to which the task belongs."
+                    Name="Document_Type" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="DocumentType"/>
+                <Attribute ColumnName="RELEASE_NO" DataType="Count"
+                    DefaultValue="0 "
+                    Description="The number of the release."
+                    Name="Release_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="ReleaseNo"/>
+                <Attribute ColumnName="PRIME_LINE_NO" DataType="LineNo"
+                    DefaultValue="0 "
+                    Description="The prime line number. This is a part of the unique key of the line."
+                    Name="Prime_Line_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="PrimeLineNo"/>
+                <Attribute ColumnName="SUB_LINE_NO" DataType="LineNo"
+                    DefaultValue="0 "
+                    Description="The sub line number. This is a part of the unique key of the line."
+                    Name="Sub_Line_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="SubLineNo"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="The order header key that is associated with this task."
+                    Name="Order_Header_Key" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    Description="The order line key that is associated with this task."
+                    Name="Order_Line_Key" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="ORDER_RELEASE_KEY" DataType="Key"
+                    Description="The order release key that is associated with this task."
+                    Name="Order_Release_Key" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="OrderReleaseKey"/>
+                <Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The wave to which this task belongs."
+                    Name="Wave_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="WaveNo"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The shipment number of the task."
+                    Name="Shipment_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="ShipmentNo"/>
+                <Attribute ColumnName="CONTAINER_NO"
+                    DataType="ContainerNo" DefaultValue="' '"
+                    Description="The container number."
+                    Name="Container_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="ContainerNo"/>
+                <Attribute ColumnName="SHIPMENT_LINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The shipment line key that is associated with this task."
+                    Name="Shipment_Line_Key" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="ShipmentLineKey"/>
+                <Attribute ColumnName="SHIPMENT_CONTAINER_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The shipment container key that is associated with this task."
+                    Name="Shipment_Container_Key" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="ShipmentContainerKey"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The shipment key that is associated with this task."
+                    Name="Shipment_Key" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="ShipmentKey"/>
+                <Attribute ColumnName="BATCH_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The batch number to which this task belongs."
+                    HasSkewedData="true" Name="Batch_No"
+                    Nullable="false" XMLGroup="TaskReferences" XMLName="BatchNo"/>
+                <Attribute ColumnName="BATCH_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The batch key that is associated with this task."
+                    Name="Batch_Key" Nullable="false" XMLName="BatchKey"/>
+                <Attribute ColumnName="SCAC" DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The carrier organization code."
+                    Name="Scac" Nullable="false" XMLGroup="TaskReferences"/>
+                <Attribute ColumnName="LOAD_NO" DataType="DocumentNo"
+                    DefaultValue="' ' " Description="The load number."
+                    Name="Load_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="LoadNo"/>
+                <Attribute ColumnName="BOL_NO" DataType="VarcharDocumentNo"
+                    Description="The bill of lading number."
+                    Name="Bol_No" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="BolNo"/>
+                <Attribute ColumnName="TRAILER_NO" DataType="VarcharDocumentNo"
+                    Description="The trailer number by which the shipment leaves the node."
+                    Name="Trailer_No" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="TrailerNo"/>
+                <Attribute ColumnName="MANIFEST_NO"
+                    DataType="VarcharDocumentNo" 
+                    Description="An attribute used to store manifest number assigned by carrier server."
+                    Name="Manifest_No" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="ManifestNo"/>
+                <Attribute ColumnName="MOVE_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The move request key that is associated with this task."
+                    Name="Move_Request_Key" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="MoveRequestKey"/>
+                <Attribute ColumnName="MOVE_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The move request within the context of a module for a node."
+                    Name="Move_Request_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="MoveRequestNo"/>
+                <Attribute ColumnName="MOVE_REQUEST_LINE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The move request line key that is associated with this task."
+                    Name="Move_Request_Line_Key" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="MoveRequestLineKey"/>
+                <Attribute ColumnName="COUNT_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The count request key that is associated with this task."
+                    Name="Count_Request_Key" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="CountRequestKey"/>
+                <Attribute ColumnName="COUNT_PROGRAM_NAME"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="The name of the count program for which the count request is created."
+                    Name="Count_Program_Name" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="CountProgramName"/>
+                <Attribute ColumnName="COUNT_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The identifier of a count request along with Document type and Node."
+                    Name="Count_Request_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="CountRequestNo"/>
+                <Attribute ColumnName="WORK_ORDER_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="A work order within the context of a node and enterprise."
+                    Name="Work_Order_No" Nullable="false"
+                    XMLGroup="TaskReferences" XMLName="WorkOrderNo"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    Description="The work order key that is associated with this task."
+                    Name="Work_Order_Key" Nullable="true"
+                    XMLGroup="TaskReferences" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="NODE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The node key that is associated with this task. Since operations vary for each node, task type level attributes are maintained at a node level."
+                    Name="Node_Key" Nullable="false" Virtual="true" XMLName="Node"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' '"
+                    Description="The reason code for the change, if the task is changed (like priority)."
+                    DescriptionRows="4" Name="Reason_Code"
+                    Nullable="false" Virtual="true" XMLName="ReasonCode"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' '"
+                    Description="A description of the reason, if the task is changed (like priority)."
+                    Name="Reason_Text" Nullable="false" Virtual="true" XMLName="ReasonText"/>
+                <Attribute ColumnName="PRODUCTIVITY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The productivity key that is associated with this task."
+                    Name="Productivity_Key" Nullable="false" XMLName="ProductivityKey"/>
+                <Attribute ColumnName="IS_CONSOLIDATED_TASK"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the task is consolidated."
+                    Name="Is_Consolidated_Task" Nullable="false"
+                    Virtual="true" XMLName="IsConsolidatedTask"/>
+                <Attribute ColumnName="START_TIME_STAMP"
+                    DataType="TimeStamp"
+                    Description="The time stamp of when the task status is changed to InProgress."
+                    Name="Start_Time_Stamp" Nullable="true" XMLName="StartTimeStamp"/>
+                <Attribute ColumnName="END_TIME_STAMP"
+                    DataType="TimeStamp"
+                    Description="The time stamp of when the task status is changed to completed or cancelled."
+                    Name="End_Time_Stamp" Nullable="true" XMLName="EndTimeStamp"/>
+                <Attribute ColumnName="REFERENCE_SORT_SEQUENCE"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="The sequence of the reference sort. This forms a parameter in prioritizing the tasks in a list of tasks during suggestion."
+                    Name="Reference_Sort_Sequence" Nullable="false" XMLName="ReferenceSortSequence"/>
+                <Attribute ColumnName="HELD_FOR_INVENTORY_SHORTAGE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the task was made held due to inventory shortage."
+                    HasSkewedData="true"
+                    Name="Held_For_Inventory_Shortage" Nullable="false" XMLName="HeldForInventoryShortage"/>
+                <Attribute ColumnName="HELD_FOR_CAPACITY_CONSTRAINTS"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the task was made held due to target location's capacity constraints."
+                    HasSkewedData="true"
+                    Name="Held_For_Capacity_Constraints"
+                    Nullable="false" Virtual="true" XMLName="HeldForCapacityConstraints"/>
+		<Attribute ColumnName="INV_ORG_TO_TRANSFER"
+                    DataType="OrgCode"
+                    Description="This is the enterprise to which the ownership will be transferred on the completion of the task."
+                    Name="Inventory_Org_To_Transfer" Nullable="true" XMLName="InventoryOrgToTransfer"/>
+		<Attribute ColumnName="ROOT_TASK_ID"
+                    DataType="SequenceNo"
+                    Description="The identifier of the root task whose execution led to the creation of this task."
+                    Name="Root_Task_Id" Nullable="true" XMLName="RootTaskId"/>
+		<Attribute ColumnName="ASSIGNMENT_NO"
+                    DataType="SequenceNo" 
+                    Description="For Voice Based Task Execution, we have integrated with External Voice System Voxware(VLP). As Part of the integration the Task has to be updated with Assignment Number. Assignment on VLP represents a group of Tasks that are executed together in a trip. This column represents the Assignment on VLP."
+                    Name="Assignment_No" Nullable="true" XMLName="AssignmentNo"/>
+		<Attribute ColumnName="ASSIGN_STATUS" DataType="AssignmentStatus"
+                    Description="The status of the assignment to which task belongs."
+                    DescriptionRows="4" Name="Assign_Status"
+                    Nullable="true" XMLName="AssignmentStatus"/>
+		<Attribute ColumnName="PLA_ZONE_SET_KEY" DataType="Key"
+                    Description="This field indicates the PLA rule that got used to create this Task. This field will be stamped for Outbound Pick tasks, Replenishment Tasks and Retrieval Tasks."
+                    Name="Pla_Zone_Set_Key" Nullable="true" XMLName="PlaZoneSetKey"/>
+		<Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName=" " DataType="Action"
+                    DefaultValue="' ' " Description="Action."
+                    Name="Action" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName=" " DataType="Flag"
+                    DefaultValue="' ' " Name="Internal_App"
+                    Nullable="false" Virtual="true"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_TASK_PK">
+                <Attribute ColumnName="TASK_KEY" Name="Task_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_TASK_I1" Unique="true">
+                    <Column Name="TASK_ID"/>
+                </Index>
+                <!-- Index Name="YFS_TASK_I2">
+                    <Column Name="TASK_TYPE"/>
+                </Index-->
+                <Index Name="YFS_TASK_I3">
+                    <Column Name="WAVE_NO"/>
+                </Index>
+                <!--Index Name="YFS_TASK_I4">
+                    <Column Name="TASK_STATUS"/>
+                    <Column Name="ASSIGNED_TO_USER_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TASK_TYPE"/>
+                </Index-->
+                <Index Name="YFS_TASK_I5">
+                    <Column Name="PREDECESSOR_TASK_ID"/>
+                    <Column Name="TASK_STATUS"/>
+                </Index>
+                <Index Name="YFS_TASK_I6">
+                    <Column Name="SHIPMENT_KEY"/>
+                    <Column Name="TASK_STATUS"/>
+                </Index>
+                <Index Name="YFS_TASK_I7">
+                    <Column Name="PARENT_TASK_ID"/>
+                    <Column Name="TASK_STATUS"/>
+                </Index>
+                <!--Index Name="YFS_TASK_I8">
+                    <Column Name="COUNT_REQUEST_KEY"/>
+                </Index-->
+                <Index Name="YFS_TASK_I9">
+                    <Column Name="MOVE_REQUEST_NO"/>
+                </Index>
+                <Index Name="YFS_TASK_I10">
+                    <Column Name="BATCH_NO"/>
+                </Index>
+                <Index Name="YFS_TASK_I11">
+                    <Column Name="WORK_ORDER_KEY"/>
+                </Index>
+                <Index Name="YFS_TASK_I12">
+                    <Column Name="CONTAINER_NO"/>
+                </Index>
+                <Index Name="YFS_TASK_I13">
+                    <Column Name="CONSOLIDATED_TASK_ID"/>
+                </Index>
+                <Index Name="YFS_TASK_I14">
+                    <Column Name="SHIPMENT_NO"/>
+                </Index>
+                <Index Name="YFS_TASK_I15">
+                    <Column Name="MOVE_REQUEST_KEY"/>
+                </Index>
+				<Index Name="YFS_TASK_I16">
+                    <Column Name="SHIPMENT_LINE_KEY"/>
+                </Index>
+				<Index Name="YFS_TASK_I17">
+                    <Column Name="BATCH_KEY"/>
+                </Index>
+				<!--Index Name="YFS_TASK_I18">
+                    <Column Name="PRODUCT_CLASS"/>
+					<Column Name="UNIT_OF_MEASURE"/>
+					<Column Name="ITEM_ID"/>
+					<Column Name="TASK_STATUS"/>
+					<Column Name="ORGANIZATION_CODE"/>
+                </Index-->
+				<Index Name="YFS_TASK_I19">
+                    <Column Name="SHIPMENT_CONTAINER_KEY"/>
+                </Index>
+				<Index Name="YFS_TASK_I20">
+					<Column Name="ASSIGNED_TO_USER_ID"/>
+					<Column Name="TASK_STATUS"/>
+					<Column Name="TASK_TYPE"/>
+                    <Column Name="TASK_PRIORITY"/>
+					<Column Name="REFERENCE_SORT_SEQUENCE"/>
+					<Column Name="FINISH_NO_LATER_THAN"/>
+					<Column Name="SOURCE_SORT_SEQUENCE"/>
+					<Column Name="SOURCE_LOCATION_ID"/>
+					<Column Name="TASK_ID"/>
+                </Index>
+				<Index Name="YFS_TASK_I21">
+                    <Column Name="TARGET_LPN_NO"/>
+                </Index>
+				<Index Name="YFS_TASK_I22">
+                    <Column Name="SOURCE_LPN_NO"/>
+                </Index>
+				<Index Name="YFS_TASK_I23">
+                    <Column Name="RECEIPT_HEADER_KEY"/>
+                </Index>
+				<!--Index Name="YFS_TASK_I24">
+                    <Column Name="PARENT_TASK_ID"/>
+                </Index-->
+				<!--Index Name="YFS_TASK_I25">
+                    <Column Name="PREDECESSOR_TASK_ID"/>
+                </Index-->
+				<Index Name="YFS_TASK_I26"  Unique="false">
+                    <Column Name="COUNT_REQUEST_KEY"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+					<Column Name="SOURCE_LOCATION_ID"/>
+                </Index>
+				<Index Name="YFS_TASK_I27"  Unique="false">
+                    <Column Name="ITEM_ID"/>
+					<Column Name="UNIT_OF_MEASURE"/>
+					<Column Name="PRODUCT_CLASS"/>
+					<Column Name="TASK_STATUS"/>
+					<Column Name="TASK_TYPE"/>
+					<Column Name="ORGANIZATION_CODE"/>
+					<Column Name="END_TIME_STAMP"/>
+                </Index>
+				<!--Index Name="YFS_TASK_I28"  Unique="false">
+                    <Column Name="ORGANIZATION_CODE"/>
+					<Column Name="ASSIGNED_TO_USER_ID"/>
+					<Column Name="SOURCE_ZONE_ID"/>
+					<Column Name="TASK_STATUS"/>
+					<Column Name="TASK_TYPE"/>
+                </Index-->
+                <Index Name="YFS_TASK_I29"  Unique="false">
+                    <Column Name="ASSIGNED_TO_USER_ID"/>
+					<Column Name="SOURCE_ZONE_ID"/>
+					<Column Name="TASK_TYPE"/>
+					<Column Name="ORGANIZATION_CODE"/>
+					<Column Name="TASK_STATUS"/>
+					<Column Name="ASSIGN_STATUS"/>
+                </Index>
+                <Index Name="YFS_TASK_I30"  Unique="false">
+                    <Column Name="TARGET_LOCATION_ID"/>
+					<Column Name="TASK_STATUS"/>
+                </Index> 
+				<Index Name="YFS_TASK_I31"  Unique="false">
+                    <Column Name="ORGANIZATION_CODE"/>
+					<Column Name="SOURCE_LOCATION_ID"/>
+					<Column Name="TASK_STATUS"/>
+                </Index> 
+				<Index Name="YFS_TASK_I32"  Unique="false">
+                    <Column Name="ORGANIZATION_CODE"/>
+					<Column Name="TASK_ID"/>
+					<Column Name="PARENT_TASK_ID"/>
+                </Index> 
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Tasks" ChildName="Task"
+                    ChildXMLName="Task" ForeignEntity="Task_Type"
+                    Name="TaskType" ReadOnly="true" Type="Bidirectional" XMLName="TaskType">
+                    <Attribute Name="Task_Type" ParentName="Task_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Tasks" ChildName="Task"
+                    ChildXMLName="Task" ForeignEntity="Batch"
+                    Name="Batch" Type="Bidirectional" XMLName="Batch">
+                    <Attribute Name="Batch_No" ParentName="Batch_No"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="SuccessorTasks"
+                    ChildName="SuccessorTask"
+                    ChildXMLName="SuccessorTask" ForeignEntity="Task"
+                    Name="Predecessor_Task" Type="Bidirectional" XMLName="PredecessorTask">
+                    <Attribute Name="Predecessor_Task_Id" ParentName="Task_Id"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains the applicable task references for each tak type group."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Task_Reference" Prefix="YFS_"
+            TableName="YFS_TASK_REFERENCE" TableType="CONFIGURATION" XMLName="TaskReference"
+            LockingEntity="Base_Activity_Group">
+            <Attributes>
+                <Attribute ColumnName="TASK_REFERENCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute."
+                    Name="Task_Reference_Key" Nullable="false"/>
+                <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Activity group to which reference belongs to."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+                <Attribute ColumnName="TASK_REFERENCE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="It is a reference name that will be passed to the task."
+                    Name="Task_Reference" Nullable="false" XMLName="TaskReference"/>
+                <Attribute ColumnName="SYSTEM_DEFINED" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Y: Indicates this reference is System Defined and should not be allowed to change.  N: This is a user defined Reference."
+                    DescriptionRows="9" Name="System_Defined"
+                    Nullable="false" XMLName="SystemDefined"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TASK_REF_PK" Name="YFS_TASK_REFERENCE_PK">
+                <Attribute ColumnName="TASK_REFERENCE_KEY" Name="Task_Reference_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="TASK_REF_I1"
+                    Name="YFS_TASK_REFERENCE_I1" Unique="true">
+                    <Column Name="ACTIVITY_GROUP_ID"/>
+                    <Column Name="TASK_REFERENCE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TaskReferences"
+                    ChildName="TaskReference"
+                    ForeignEntity="Base_Activity_Group"
+                    Name="BaseActivityGroup" Type="Bidirectional" XMLName="BaseActivityGroup">
+                    <Attribute Name="Activity_Group_Id" ParentName="Activity_Group_Id"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="Stores task status change audit. Each time the task status changes because of a business process, an audit is posted along with the status, timestamp, reason code and text, user ID and program ID."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="ysc" Name="Task_Status_Audit" Prefix="YFS_"
+            TableName="YFS_TASK_STATUS_AUDIT" TableType="TRANSACTION" XMLName="TaskStatusAudit">
+            <Attributes>
+                <Attribute ColumnName="TASK_STATUS_AUDIT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_TASK_STATUS_AUDIT table."
+                    Name="Task_Status_Audit_Key" Nullable="false"/>
+                <Attribute ColumnName="TASK_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Task for which a status change audit is written."
+                    Name="Task_Key" Nullable="false"/>
+                <Attribute ColumnName="OLD_STATUS"
+                    DataType="ShortStatus" DefaultValue="' ' "
+                    Description="Status of the task before the status change."
+                    Name="Old_Status" Nullable="false"/>
+                <Attribute ColumnName="NEW_STATUS"
+                    DataType="ShortStatus" DefaultValue="' ' "
+                    Description="Status of the task after the status change."
+                    Name="New_Status" Nullable="false"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' ' "
+                    Description="Reason code indicating the reason for the status change."
+                    Name="Reason_Code" Nullable="false"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' ' "
+                    Description="Free-form reason text indicating any additional information related to the status change."
+                    Name="Reason_Text" Nullable="false"/>
+                <Attribute ColumnName="USER_ID" DataType="LoginId"
+                    DefaultValue="' ' "
+                    Description="The id of the system user that created this audit record."
+                    Name="User_Id" Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TASK_STA_AUDIT_PK" Name="YFS_TASK_STATUS_AUDIT_PK">
+                <Attribute ColumnName="TASK_STATUS_AUDIT_KEY" Name="Task_Status_Audit_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="TASK_STA_AUDIT_I1" Name="YFS_TASK_STATUS_AUDIT_I1">
+                    <Column Name="TASK_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TaskStatusAudits"
+                    ChildName="TaskStatusAudit" ForeignEntity="Task"
+                    Name="Task" Type="Bidirectional"
+                    UsedForDataSecurity="true" XMLName="Task">
+                    <Attribute Name="Task_Key" ParentName="Task_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="MODIFYTS"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores different types of tasks performed in a warehouse.  Different task types typically represent tasks that are physically different.  For instance, paper based putaway as opposed to RF based putaway."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Task_Type" Prefix="YFS_" TableName="YFS_TASK_TYPE"
+            TableType="CONFIGURATION" XMLName="TaskType">
+            <Attributes>
+                <Attribute ColumnName="TASK_TYPE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_TASK_TYPE table."
+                    Name="Task_Type_Key" Nullable="false" XMLName="TaskTypeKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The owner organization of the node for which this task type is defined."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="The identifier of the task type. Typically, this would be a short two-digit code."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The activities performed in a warehouse are grouped in an activity group Id. For example, PUTAWAY. Activity groups are system defined."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+                <Attribute ColumnName="ACTIVITY_CODE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The code of the activity within the Activity Group.  For example, STORAGE.  This is system defined."
+                    Name="Activity_Code" Nullable="false" XMLName="ActivityCode"/>
+                <Attribute CanTranslate="Y" ColumnName="TASK_TYPE_NAME"
+                    DataType="TaskTypeName" DefaultValue="' ' "
+                    Description="The descriptive name of the task type.  This is used to display data in drop-downs in the user interface, wherever the user can select a task type."
+                    Name="Task_Type_Name" Nullable="false" XMLName="TaskTypeName"/>
+                <Attribute ColumnName="TASK_TYPE_PRIORITY"
+                    DataType="Priority" DefaultValue="0"
+                    Description="The priority of this task type over other task types.  This priority controls the order in which tasks are suggested to a user.  Priority 1 will get suggested before Priority 2, and so on.  Tasks are suggested in ascending order of task type priority (there are several other factors that influence the order in which tasks are suggested)."
+                    Name="Task_Type_Priority" Nullable="false"
+                    Virtual="true" XMLName="TaskTypePriority"/>
+                <Attribute ColumnName="EXEC_TASKS_THRU_DROPOFF"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether to execute tasks through drop off locations.   Y: indicates that this type of task is physically broken up by drop off locations (on system, this does not automatically translate into multiple tasks). N: indicates that this type of task is carried out without being broken up into drop-off locations.  That is, product is carried directly from origin to destination without being stopped at drop off locations.    This information is used by createTask API:  If this is set to Y, and pick method is not 'pick to pallet', then tasks are created split by drop off location (drop off chaining).  Putaway RF screen: if this is Y, then it displays the drop off location on pick screen if that drop off location is different from the target location on the task.   updateTaskStatus API: when status is moved to PICKED, then if the task needs to be split, then internally, createTask API is called, which considers this rule."
+                    DescriptionRows="16" Name="Exec_Tasks_Thru_Dropoff"
+                    Nullable="false" XMLName="ExecTasksThruDropoff"/>
+                <Attribute ColumnName="ALLOW_OVER_PICKING"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether over picking of inventory is allowed."
+                    Name="Allow_Over_Picking" Nullable="false" XMLName="AllowOverPicking"/>
+                <Attribute ColumnName="IS_AD_HOC_MOVE" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether putaway can be performed on an ad hoc basis."
+                    Name="Is_Ad_Hoc_Move" Nullable="false" XMLName="IsAdHocMove"/>
+                <Attribute ColumnName="ALLOW_MULTIPLE_USERS"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether more than one user can perform the task."
+                    Name="Allow_Multiple_Users" Nullable="false" XMLName="AllowMultipleUsers"/>
+                <Attribute ColumnName="SOURCE_TASK_SUGGESTION"
+                    DataType="Text-4" DefaultValue="' ' "
+                    Description="The suggestion for the source task. 01: User sequenced User is presented with a set of tasks, and the user selects the order in which they are done  02: System sequenced System presents the user with tasks one by one, and the user has to perform them in that order (override possible)."
+                    DescriptionRows="12" Name="Source_Task_Suggestion"
+                    Nullable="false" XMLName="SourceTaskSuggestion"/>
+                <Attribute ColumnName="SOURCE_TASK_ORDER_BY"
+                    DataType="Text-4" DefaultValue="' ' "
+                    Description="The sequence in which to order the source task. 01: Move-In Sequence. Typically, this is used during putaway.  02: Move-out Sequence. Typically, this is used during replenishment and order picking."
+                    DescriptionRows="12" Name="Source_Task_Order_By"
+                    Nullable="false" XMLName="SourceTaskOrderBy"/>
+                <Attribute ColumnName="TARGET_TASK_SUGGESTION"
+                    DataType="Text-4" DefaultValue="' ' "
+                    Description="The suggestion for the target task. 01: User sequenced - User is presented with a set of deposit tasks, and the user selects the order in which deposit is done  02: System sequenced - System presents the user with deposit tasks one by one, and the user has to deposit in that order (override possible)."
+                    DescriptionRows="12" Name="Target_Task_Suggestion"
+                    Nullable="false" XMLName="TargetTaskSuggestion"/>
+                <Attribute ColumnName="TARGET_TASK_ORDER_BY"
+                    DataType="Text-4" DefaultValue="' ' "
+                    Description="The sequence in which to order target tasks. 01: Move-In Sequence Typically, this is used during putaway.  02: Move-out Sequence Typically, this is used during replenishment and order picking."
+                    DescriptionRows="12" Name="Target_Task_Order_By"
+                    Nullable="false" XMLName="TargetTaskOrderBy"/>
+                <Attribute ColumnName="BATCH_REQUIRED" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether tasks need to be batched on creation.Y:  When tasks are created, they need to be batched and printed.  This typically represents a paper based process, but it may also represent an RF based process.  N:  No batching required  This information is used by createTask API: When tasks are created, if this flag is Y, then they are 'Held for batching'."
+                    DescriptionRows="9" Name="Batch_Required"
+                    Nullable="false" XMLName="BatchRequired"/>
+                <Attribute ColumnName="HOLD_TASK_ON_CREATION"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether tasks are held in creation. Tasks held on creation may be released manually later. This information is used by the createTask API. When tasks are created, if this flag is Y, then they are 'Held for batching'."
+                    DescriptionRows="9" Name="Hold_Task_On_Creation"
+                    Nullable="false" XMLName="HoldTaskOnCreation"/>
+                <Attribute ColumnName="BATCH_RULE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The batch rule key that is associated with this task type."
+                    Name="Batch_Rule_Key" Nullable="false" XMLName="BatchRuleKey"/>
+                <Attribute ColumnName="MAX_USERS_ALLOWED"
+                    DataType="Count" DefaultValue="0 "
+                    Description="The number of users who can be suggested tasks of this task type and primary task reference combination."
+                    Name="Max_Users_Allowed" Nullable="false" XMLName="MaxUsersAllowed"/>
+                <Attribute ColumnName="PRIMARY_TASK_REFERENCE"
+                    DataType="CommonCode" DefaultValue="' ' "
+                    Description="The smallest group of tasks that need to be kept together for a particular user.  For instance, in the case of strict order pick, user picks one shipment at a time.  In such a case, if the first task that is suggested to a user has shipment number A, then all other tasks belonging to that shipment number must be suggested only to that user.  In order to accomplish this, system automatically creates a temporary user level transaction constraint for this shipment."
+                    DescriptionRows="10" Name="Primary_Task_Reference"
+                    Nullable="false" XMLName="PrimaryTaskReference"/>
+                <Attribute ColumnName="STANDARD_RATE" DataType="Count"
+                    DefaultValue="0 "
+                    Description="The rate at which tasks of this task type are executed. The rate can be either the number of tasks per hour or in units per hour, as specified in standard rate unit of  measure. It is derived from allowed minutes per task column in YFS_PRODUCTIVITY_TYPE table."
+                    Name="Standard_Rate" Nullable="false" Virtual="true" XMLName="StandardRate"/>
+                <Attribute ColumnName="STANDARD_RATE_UOM"
+                    DataType="Text-4" DefaultValue="0 "
+                    Description="The unit of  measure at which tasks of this task type are executed. The rate can be either number of tasks per hour or in units per hour."
+                    Name="Standard_Rate_Uom" Nullable="false"
+                    Virtual="true" XMLName="StandardRateUom"/>
+                <Attribute ColumnName="IS_GRANULARITY_VARIANCE"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the tasks belonging to this task type have the granularity of variance."
+                    Name="Is_Granularity_Variance" Nullable="false"
+                    XMLGroup="Count" XMLName="IsGranularityVariance"/>
+                <Attribute ColumnName="PICK_INTO_OUTBOUND_CONTAINER"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The outbound case Id or pallet Id into which the item is picked."
+                    Name="Pick_Into_Outbound_Container" Nullable="false" XMLName="PickIntoOutboundContainer"/>
+                <Attribute ColumnName="PICK_INTO_INVENTORY_CONTAINER"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The case Id or pallet Id into which products are picked directly."
+                    Name="Pick_Into_Inventory_Container"
+                    Nullable="false" XMLName="PickIntoInventoryContainer"/>
+                <Attribute ColumnName="CONTAINERIZATION_SCHEME"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The containerization scheme."
+                    Name="Containerization_Scheme" Nullable="false" XMLName="ContainerizationScheme"/>
+                <Attribute ColumnName="PICK_STRATEGY" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The pick strategy used."
+                    Name="Pick_Strategy" Nullable="false" XMLName="PickStrategy"/>
+				<Attribute ColumnName="VOICE_WORK_FLOW_ID" DataType="ID-40"
+                    Description="Indicates the Voice Work Flow to be used to execute the Tasks belonging to this Task Type."
+                    Name="Voice_Work_Flow_Id" Nullable="true" XMLName="VoiceWorkFlowId"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="NODE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The node key that is associated with this task type. Since operations vary for each node, task type level attributes are maintained at a node level."
+                    Name="Node_Key" Nullable="false" Virtual="true" XMLName="Node"/>
+                <Attribute ColumnName="PRODUCTIVITY_TYPE"
+                    DataType="ProductivityType" DefaultValue="' ' "
+                    Description="The productivity type to which this Task type is associated. It is possible that a task type can not have a productivity type associated."
+                    Name="Productivity_Type" Nullable="false" XMLName="ProductivityType"/>
+                <Attribute ColumnName="PICK_TO_TARGET_ZONE"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether to restrict picking in a trip to a target zone."
+                    DescriptionRows="9" Name="Pick_To_Target_Zone"
+                    Nullable="false" XMLName="PickToTargetZone"/>
+                <Attribute ColumnName="EXECUTION_DEVICE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The device that executes the task."
+                    Name="Execution_Device" Nullable="false" XMLName="ExecutionDevice"/>
+                <Attribute ColumnName="PACK_WHILE_PICK" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether  to pack while picking."
+                    DescriptionRows="9" Name="Pack_While_Pick"
+                    Nullable="false" XMLName="PackWhilePick"/>
+                <Attribute ColumnName="APPLY_IDENTIFICATION_LABEL"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whetherto apply the identification label."
+                    DescriptionRows="9"
+                    Name="Apply_Identification_Label" Nullable="false" XMLName="ApplyIdentificationLabel"/>
+                <Attribute ColumnName="PICK_INTO_CONTAINER"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This flag indicates whether to pick into a container."
+                    Name="Pick_Into_Container" Nullable="false" XMLName="PickIntoContainer"/>
+                <Attribute ColumnName="OUT_STAGING_TASK_TYPE"
+                    DataType="TaskType" DefaultValue="' ' "
+                    Description="The out-staging task type."
+                    Name="Out_Staging_Task_Type" Nullable="false" XMLName="OutStagingTaskType"/>
+                <Attribute ColumnName="IN_STAGING_TASK_TYPE"
+                    DataType="TaskType" DefaultValue="' ' "
+                    Description="The In-staging task type."
+                    Name="In_Staging_Task_Type" Nullable="false" XMLName="InStagingTaskType"/>
+                <Attribute ColumnName="SUPPRESS_WARN_ON_LOCN_OVERRIDE"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether to display a warning message when the depositing location is different from the suggested."
+                    DescriptionRows="9"
+                    Name="Suppress_Warn_On_Locn_Override"
+                    Nullable="false" XMLName="SuppressWarnOnLocnOverride"/>
+				<Attribute ColumnName="PRIMARY_EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' ' "
+                    Description="Identifies the equipment type that would be typically be used to perform the task of this type. This is used in resource planning. Even if multiple equipments types may be used, planning is done using this equipment type."
+                    Name="Primary_Equipment_Type" Nullable="false" XMLName="PrimaryEquipmentType"/>
+                <Attribute ColumnName="RESOURCE_ID_OVERRIDE"
+                    DataType="Text-40" DefaultValue="' '  "
+                    Description="The unique identifier of a resource, which will be used for a task type. This resource will override the default resource associated with the task type."
+                    Name="Resource_Id_Override" Nullable="false" XMLName="ResourceIdOverride"/>
+				<Attribute ColumnName="PERF_TASK_USING_EQUIP_TYPE"
+                    DataType="Flag"
+                    Description="This flag indicates that tasks can be performed using selected equipment type only."
+                    Name="Perf_Task_Using_Equip_Type" Nullable="true" XMLName="PerfTaskUsingEquipType"/>
+				<Attribute ColumnName="DISPLAY_EACH_SKU" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether display each sku while deposit."
+                    DescriptionRows="9" Name="Display_Each_Sku"
+                    Nullable="false" XMLName="DisplayEachSku"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_TASK_TYPE_PK">
+                <Attribute ColumnName="TASK_TYPE_KEY" Name="Task_Type_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_TASK_TYPE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TASK_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TaskTypes" ChildName="TaskType"
+                    ChildXMLName="TaskType" ForeignEntity="Batch_Rule"
+                    Name="BatchRule" Type="Bidirectional" XMLName="BatchRule">
+                    <Attribute Name="Batch_Rule_Key" ParentName="Batch_Rule_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TaskTypeList" ChildName="TaskType"
+                    DeleteCascade="true"
+                    DeleteValidationError="YDB100142" Enforce="true"
+                    ForeignEntity="Organization" IsParent="true"
+                    Name="Organization" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TaskTypeList" ChildName="TaskType"
+                    DeleteValidationError="YDB100143" Enforce="true"
+                    ForeignEntity="Activity" Name="Activity"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Activity">
+                    <Attribute Name="Activity_Code" ParentName="Activity_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TaskTypes" ChildName="TaskType"
+                    ForeignEntity="Productivity_Type"
+                    Name="ProductivityType" Type="Bidirectional" XMLName="ProductivityType">
+					<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Productivity_Type" ParentName="Productivity_Type"/>
+					<Attribute Name="Primary_Equipment_Type" ParentName="Equipment_Type"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="TASK_TYPE_NAME"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores task types that a user group performs.  System should suggest only those task to the user that belong to one of the task types specified here.  If no task types have been specified, it means that any type of task can be suggested to the user."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="User_Task_Type" Prefix="YFS_"
+            TableName="YFS_USER_TASK_TYPE" TableType="CONFIGURATION" XMLName="UserTaskType">
+            <Attributes>
+                <Attribute ColumnName="USER_TASK_TYPE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute."
+                    Name="User_Task_Type_Key" Nullable="false" XMLName="UserTaskTypeKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="node's Organization Code."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="DATA_SECURITY_GROUP_ID"
+                    DataType="DataSecurityGroupId" DefaultValue="' '"
+                    Description="Data Security Group Id."
+                    Name="Data_Security_Group_Id" Nullable="false" XMLName="DataSecurityGroupId"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="Identifies the task type that the user is eligible to perform."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="TASK_TYPE_PRIORITY"
+                    DataType="Priority" DefaultValue="0"
+                    Description="Specifies the priority of the task type for the current user.  Tasks that belong to a task type of numerically lower priority are suggested first."
+                    Name="Task_Type_Priority" Nullable="false" XMLName="TaskTypePriority"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="USER_TASK_TYPE_PK" Name="YFS_USER_TASK_TYPE_PK">
+                <Attribute ColumnName="USER_TASK_TYPE_KEY" Name="User_Task_Type_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="USER_TASK_TYPE_I1"
+                    Name="YFS_USER_TASK_TYPE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TASK_TYPE"/>
+                    <Column Name="DATA_SECURITY_GROUP_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserTaskTypeList"
+                    ChildName="UserTaskType" DeleteCascade="true" 
+                    DeleteValidationError="YDB100144" Enforce="true"
+                    ForeignEntity="Organization" IsParent="true"
+                    Name="Organization" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserTaskTypeList"
+                    ChildName="UserTaskType" ChildXMLName="UserTaskType"
+                    DeleteValidationError="YDB100145"
+                    ForeignEntity="Data_Security_Group"
+                    Name="Data_Security_Group" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="DataSecurityGroup">
+                    <Attribute Name="Data_Security_Group_Id" ParentName="Data_Security_Group_Id"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true"
+                    DeleteValidationError="YDB100146"
+                    ForeignEntity="Task_Type" Name="TaskType"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="TaskType">
+                    <Attribute Name="Task_Type" ParentName="Task_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="TASK_TYPE_PRIORITY"/>
+        </Entity>
+        <Entity
+            Description="This table stores transactional constraints, such as order number and shipment number.  Transactional constraints are temporary in nature, and are automatically purged by the system when the corresponding transaction data is purged.  When tasks are suggested to a user, these constraints have to be met.  If no constraints are specified here, it means that any type of task can be suggested to the user."
+            EntityType="TRANSACTION" Extensible="N" Module="ysc"
+            Name="User_Tran_Constraints" Prefix="YFS_"
+            TableName="YFS_USER_TRAN_CONSTRAINTS"
+            TableType="TRANSACTION" XMLName="UserTranConstraint">
+            <Attributes>
+                <Attribute ColumnName="USER_TRAN_CONSTRAINTS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_USER_TRAN_CONSTRAINTS table."
+                    Name="User_Tran_Constraints_Key" Nullable="false" XMLName="UserTranConstraintsKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="NODE" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The node to which the user belongs."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="ASSIGNED_TO_USER_ID"
+                    DataType="LoginId" DefaultValue="' '"
+                    Description="The identifier of the user for whom the transactional constraints are being defined."
+                    Name="Assigned_To_User_Id" Nullable="false" XMLName="AssignedToUserId"/>
+                <Attribute ColumnName="ENTERPRISE_KEY"
+                    DataSecurityUsageType="ORG" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The enterprise key that is associated with this user tran constraints. &#xd;&#xa;Within a Node, operations can vary by Enterprise.  Therefore, task type level attributes are maintained at an enterprise level for a node."
+                    Name="Enterprise_Key" Nullable="false" XMLName="EnterpriseKey"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="The identifier of the task type that the user is eligible to perform."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="BATCH_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The batch in which the user can work."
+                    Name="Batch_No" Nullable="false" XMLName="BatchNo"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The shipment on which the user can work."
+                    Name="Shipment_No" Nullable="false" XMLName="ShipmentNo"/>
+                <Attribute ColumnName="CONTAINER_NO"
+                    DataType="ContainerNo" DefaultValue="' '"
+                    Description="The container in which the user is eligibile to work."
+                    Name="Container_No" Nullable="false" XMLName="ContainerNo"/>
+                <Attribute ColumnName="RECEIPT_NO" DataType="ReceiptNo"
+                    DefaultValue="' '"
+                    Description="The receipt on which the user is eligible to work."
+                    Name="Receipt_No" Nullable="false" XMLName="ReceiptNo"/>
+                <Attribute ColumnName="WORK_ORDER_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The work order on which the user is eligible to work."
+                    Name="Work_Order_No" Nullable="false" XMLName="WorkOrderNo"/>
+                <Attribute ColumnName="ACTIVE_FLAG" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the constraint should be applied."
+                    DescriptionRows="3" Name="Active_Flag"
+                    Nullable="false" XMLName="ActiveFlag"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="USR_TRAN_CONS_PK" Name="YFS_USER_TRAN_CONSTRAINTS_PK">
+                <Attribute ColumnName="USER_TRAN_CONSTRAINTS_KEY" Name="User_Tran_Constraints_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserTranConstraintList"
+                    ChildName="UserTranConstraint"
+                    DeleteValidationError="YDB100147" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserTranConstraintList"
+                    ChildName="UserTranConstraint"
+                    ChildXMLName="UserTranConstraint"
+                    DeleteValidationError="YDB100148"
+                    ForeignEntity="User" Name="User" ReadOnly="true"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="User">
+                    <Attribute Name="Assigned_To_User_Id" ParentName="Loginid"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserTranConstraintList"
+                    ChildName="UserTranConstraint"
+                    DeleteValidationError="YDB100149" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Enterprise_Key" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserTranConstraintList"
+                    ChildName="UserTranConstraint"
+                    DeleteValidationError="YDB100150" Enforce="true"
+                    ForeignEntity="Task_Type" Name="TaskType"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="TaskType">
+                    <Attribute Name="Task_Type" ParentName="Task_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table has information regarding the resource corresponding to an activity group."
+            EntityType="CONFIGURATION"
+            ListXMLName="ActivityGrpResRefList" Module="ysc"
+            Name="Activity_Grp_Res_Ref" Prefix="YFS_"
+            TableName="YFS_ACTIVITY_GRP_RES_REF"
+            TableType="CONFIGURATION" XMLName="ActivityGrpResRef">
+            <Attributes>
+                <Attribute ColumnName="ACTIVITY_GRP_RES_REF_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute."
+                    Name="Activity_Grp_Res_Ref_Key" Nullable="false" XMLName="ActivityGrpResRefKey"/>
+                <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Every task type must belong to a task type group.  Task Type Groups are sytem defined."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+                <Attribute ColumnName="RESOURCE_ID" DataType="Text-40"
+                    DefaultValue="' '  "
+                    Description="The unique identifier of a resource."
+                    Name="Resource_Id" Nullable="false" XMLName="ResourceId"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ACTGRP_RES_REF_PK" Name="YFS_ACTIVITY_GRP_RES_REF_PK">
+                <Attribute ColumnName="ACTIVITY_GRP_RES_REF_KEY"
+                    Name="Activity_Grp_Res_Ref_Key" XmlName="ActivityGrpResRefKey"/>
+            </PrimaryKey>
+        </Entity>
+    </Entities>
+</DBSchema>

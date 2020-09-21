@@ -1,0 +1,43 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2006, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+    <Entities>
+	    <Entity TableName="YFS_SHIPMENT" Prefix="YFS_" Name="Shipment" XMLName="Shipment" Module="ydm">
+		    <Attributes>
+			    <Attribute ColumnName="NOTIFICATION_SENT" DataType="Flag" VirtualDefaultValue="'N'" Description="This flag indicates whether the customer is informed about this shipment." Nullable="true" HasSkewedData="true" />
+				<Attribute ColumnName="PICKTICKET_PRINTED" DataType="Flag" Description="This flag indicates whether the pick ticket has been printed." Nullable="true" HasSkewedData="false" XMLName="PickTicketPrinted" />
+				<Attribute ColumnName="BACKROOM_PICK_REQUIRED" DataType="Flag" Description="This flag indicates whether the backroom pick is required or not." Nullable="true" HasSkewedData="false" XMLName="BackroomPickRequired" />
+				<Attribute ColumnName="INCLUDED_IN_BATCH" DataType="Flag" Description="This flag indicates whether shipment is included in batch for picking." Nullable="true" HasSkewedData="false" XMLName="IncludedInBatch" />
+				<!-- <Attribute ColumnName="CUST_VERIFICATION_REASON" DataType="CodeValue" Description="This stores the customer verification code used during in store pick up" Nullable="true" HasSkewedData="false" XMLName="CustVerificationReason" /> -->
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_SHIPMENT_LINE" Prefix="YFS_" Name="Shipment_Line" XMLName="ShipmentLine" Module="ydm">
+			<Attributes>   
+				<Attribute ColumnName="BACKROOM_PICKED_QTY" DataType="Quantity" Description="This field contains the quantity picked during backroom pick." Nullable="true" HasSkewedData="false" XMLName="BackroomPickedQty"/>
+				<Attribute ColumnName="CUSTOMER_PICKED_QTY" DataType="Quantity" Description="This field contains the quantity picked by the customer" Nullable="true" HasSkewedData="false" XMLName="CustomerPickedQuantity"/>
+				<Attribute ColumnName="SHORTAGE_RESOLUTION_REASON" DataType="CodeValue" Description="This field contains the shortage resolution reason while picking the line quantity" Nullable="true" HasSkewedData="false" XMLName="ShortageResolutionReason" />
+				<Attribute ColumnName="CANCEL_REASON" DataType="CodeValue" Description="This field contains the cancel reason for shipment line" Nullable="true" HasSkewedData="false" XMLName="CancelReason" />
+				<Attribute ColumnName="IS_PACK_COMPLETE" DataType="Flag" Description="This field indicates whether the packing of shipment line is complete.The filed will be Y when the container packing is complete" Nullable="true" HasSkewedData="false" XMLName="IsPackComplete"/>
+			    <Attribute ColumnName="BACKROOM_PICK_COMPLETE" DataType="Flag" Description="This field indicates whether the backroom pick of shipment line is complete.The filed will be Y when the Backroom pick is complete" Nullable="true" HasSkewedData="false" XMLName="BackroomPickComplete"/>
+			    <Attribute ColumnName="IS_CUSTOMER_PICK_COMPLETE" DataType="Flag" Description="This field indicates whether the customer pick for a shipment line is complete.The filed will be Y when the customer picking is complete" Nullable="true" HasSkewedData="false" XMLName="IsCustomerPickComplete"/>
+			    <Attribute ColumnName="STAGING_COMPLETE" DataType="Flag" Description="This field indicates whether the shipment line quantity is completely assigned to a staging location or not.The flag will be Y when the staging is complete" Nullable="true" HasSkewedData="false" XMLName="StagingComplete"/>
+			    <Attribute ColumnName="STAGED_QTY" DataType="Quantity" Description="This field contains the quantity put in the staging location" Nullable="true" HasSkewedData="false" XMLName="StagedQuantity"/>
+			    <Attribute ColumnName="STORE_BATCH_KEY" DataType="Text-24" Description="This field contains the StoreBatchKey of the batch to which this shipment line belongs. This is for batch picking." Nullable="true" HasSkewedData="false" XMLName="StoreBatchKey"/>
+			    <Attribute ColumnName="BATCH_PICK_PRIORITY" DataType="LineNo" Description="This field contains the priority in which the shipment line is picked when the shipment line is included in a batch." Nullable="true" HasSkewedData="false" XMLName="BatchPickPriority"/>
+			</Attributes>
+			<RelationShips>
+				 <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentLines"
+                    ChildName="Shipment_Line"
+                    ChildXMLName="ShipmentLine" ForeignEntity="Store_Batch"
+                    Name="Store_Batch" Type="Bidirectional" XMLName="StoreBatch">
+                    <Attribute Name="Store_Batch_Key" ParentName="Store_Batch_Key"/>
+					</RelationShip>
+			</RelationShips>
+		</Entity>
+	</Entities>
+</DBSchema>

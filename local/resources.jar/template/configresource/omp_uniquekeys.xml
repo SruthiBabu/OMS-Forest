@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity Name="AllocationRule">
+      <PrimaryKey>
+         <Attribute Name="AllocationRuleKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="AllocationRuleId"/>
+         <Attribute Name="OrganizationCode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ChargeCategory">
+      <PrimaryKey>
+         <Attribute Name="ChargeCategoryKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ChargeName">
+      <PrimaryKey>
+         <Attribute Name="ChargeNameKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="CreditCardTransaction">
+      <PrimaryKey>
+         <Attribute Name="CreditCardTransactionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ChargeTransactionKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CreditCardTransactionH">
+      <PrimaryKey>
+         <Attribute Name="CreditCardTransactionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HeaderCharges">
+      <PrimaryKey>
+         <Attribute Name="HeaderChargesKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="HeaderKey"/>
+         <Attribute Name="RecordType"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="HeaderChargesH">
+      <PrimaryKey>
+         <Attribute Name="HeaderChargesKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HeaderResponse">
+      <PrimaryKey>
+         <Attribute Name="ResponseHdrKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ResponseKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="InvoiceCharge">
+      <PrimaryKey>
+         <Attribute Name="InvoiceChargeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InvoiceCollection">
+      <PrimaryKey>
+         <Attribute Name="InvoiceCollectionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InvoiceCollectionH">
+      <PrimaryKey>
+         <Attribute Name="InvoiceCollectionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemPriceSet">
+      <PrimaryKey>
+         <Attribute Name="ItemPriceSetKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="PriceSetKey"/>
+         <Attribute Name="ItemId"/>
+         <Attribute Name="Uom"/>
+         <Attribute Name="ProductClass"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ItemPriceSetDtl">
+      <PrimaryKey>
+         <Attribute Name="ItemPriceSetDtlKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemPriceSetKey"/>
+         <Attribute Name="PriceSetKey"/>
+         <Attribute Name="BreakQtyLow"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="KitSchedule">
+      <PrimaryKey>
+         <Attribute Name="OrderKitLineScheduleKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="LineCharges">
+      <PrimaryKey>
+         <Attribute Name="LineChargesKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="LineChargesH">
+      <PrimaryKey>
+         <Attribute Name="LineChargesKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="LineResponse">
+      <PrimaryKey>
+         <Attribute Name="ResponseLineKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ResponseKey"/>
+         <Attribute Name="NegotiationLineKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="LineTermsDetail">
+      <PrimaryKey>
+         <Attribute Name="ResponseLineDtlKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ResponseLineKey"/>
+         <Attribute Name="OptionNo"/>
+         <Attribute Name="SequenceNo"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="NegotiableHdrAttr">
+      <PrimaryKey>
+         <Attribute Name="NegotiableHdrAttrKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="NegotiableLineAttr">
+      <PrimaryKey>
+         <Attribute Name="NegotiableLineAttrKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Negotiation">
+      <PrimaryKey>
+         <Attribute Name="NegotiationHdrKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="EnterpriseKey"/>
+         <Attribute Name="NegotiationNo"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="NegotiationLine">
+      <PrimaryKey>
+         <Attribute Name="NegotiationLineKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="NegotiationRule">
+      <PrimaryKey>
+         <Attribute Name="NegotiationRuleKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Order">
+      <PrimaryKey>
+         <Attribute Name="OrderHeaderKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderNo"/>
+         <Attribute Name="EnterpriseCode"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="OrderDate"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ReqShipDate"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="CustomerEMailID"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrderAudit">
+      <PrimaryKey>
+         <Attribute Name="OrderAuditKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderHeaderKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrderAuditH">
+      <PrimaryKey>
+         <Attribute Name="OrderAuditKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderCharge">
+      <PrimaryKey>
+         <Attribute Name="OrderChargeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderInvoice">
+      <PrimaryKey>
+         <Attribute Name="OrderInvoiceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderHeaderKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ShipmentKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrderInvoiceDetail">
+      <PrimaryKey>
+         <Attribute Name="OrderInvoiceDetailKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderInvoiceKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="OrderLineKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrderInvoiceDetailH">
+      <PrimaryKey>
+         <Attribute Name="OrderInvoiceDetailKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderInvoiceH">
+      <PrimaryKey>
+         <Attribute Name="OrderInvoiceKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderLine">
+      <PrimaryKey>
+         <Attribute Name="OrderLineKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderLineStatus">
+      <PrimaryKey>
+         <Attribute Name="OrderLineStatusKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderLineStatusH">
+      <PrimaryKey>
+         <Attribute Name="OrderLineStatusKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderModification">
+      <PrimaryKey>
+         <Attribute Name="OrderModificationKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ProcessTypeKey"/>
+         <Attribute Name="ModificationType"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ProcessTypeKey"/>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="ModificationType"/>
+         <Attribute Name="ModificationLevel"/>
+         <Attribute Name="Status"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrderRelease">
+      <PrimaryKey>
+         <Attribute Name="OrderReleaseKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderHeaderKey"/>
+         <Attribute Name="OrderReleaseKey"/>
+         <Attribute Name="ShipNode"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ShipNode"/>
+         <Attribute Name="PickListNo"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ShipNode"/>
+         <Attribute Name="OrderHeaderKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ShipNode"/>
+         <Attribute Name="ReqShipDate"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="SalesOrderNo"/>
+         <Attribute Name="OrderReleaseKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="OrderReleaseH">
+      <PrimaryKey>
+         <Attribute Name="OrderReleaseKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="OrderStatus">
+      <PrimaryKey>
+         <Attribute Name="OrderReleaseStatusKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderReleaseKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="OrderLineKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="OrderHeaderKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="Status"/>
+         <Attribute Name="OrderHeaderKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="Status"/>
+         <Attribute Name="OrderReleaseKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="POHeader">
+      <PrimaryKey>
+         <Attribute Name="PoHeaderKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="POHeaderH">
+      <PrimaryKey>
+         <Attribute Name="PoHeaderKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="POLine">
+      <PrimaryKey>
+         <Attribute Name="PoLineKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="POLineH">
+      <PrimaryKey>
+         <Attribute Name="PoLineKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="POReceipt">
+      <PrimaryKey>
+         <Attribute Name="PoReceiptKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="POReceiptH">
+      <PrimaryKey>
+         <Attribute Name="PoReceiptKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Payment">
+      <PrimaryKey>
+         <Attribute Name="PaymentKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="PaymentCollectionDetail">
+      <PrimaryKey>
+         <Attribute Name="ChargeTransactionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="PaymentType">
+      <PrimaryKey>
+         <Attribute Name="PaymentTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="PriceProgram">
+      <PrimaryKey>
+         <Attribute Name="PriceProgramKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="PriceProgramName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PriceProgramDefn">
+      <PrimaryKey>
+         <Attribute Name="PriceProgramDefnKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="PriceProgramKey"/>
+         <Attribute Name="PriceSetKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="PriceSet">
+      <PrimaryKey>
+         <Attribute Name="PriceSetKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="PriceSetName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ReferenceTable">
+      <PrimaryKey>
+         <Attribute Name="ReferenceKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="TableName"/>
+         <Attribute Name="TableKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ReferenceTableH">
+      <PrimaryKey>
+         <Attribute Name="ReferenceKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Response">
+      <PrimaryKey>
+         <Attribute Name="ResponseKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="NegotiationHdrKey"/>
+         <Attribute Name="ResponseNo"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ReturnDisposition">
+      <PrimaryKey>
+         <Attribute Name="DispositionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Schedule">
+      <PrimaryKey>
+         <Attribute Name="OrderLineScheduleKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="TaxBreakup">
+      <PrimaryKey>
+         <Attribute Name="TaxBreakupKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="TaxBreakupH">
+      <PrimaryKey>
+         <Attribute Name="TaxBreakupKey"/>
+      </PrimaryKey>
+   </Entity>
+</Entities>

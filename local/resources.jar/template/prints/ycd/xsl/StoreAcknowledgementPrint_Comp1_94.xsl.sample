@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2008, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+	<!--
+	Document   : StoreAcknowledgementPrint_Comp1_94.xsl
+	Author     : Pradeep Kariyappa
+	Description: This xsl is used to format the input xml to facilitate call to multiApi.
+	-->
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+	<xsl:output indent="yes"/>
+	<xsl:template match="Shipment">
+		<MultiApi>
+			<API>
+				<xsl:attribute name="Name">
+					<xsl:text>getCurrencyList</xsl:text>
+				</xsl:attribute>
+				<Input>
+					<Currency>
+						<xsl:attribute name="Currency">
+							<xsl:value-of select="/Shipment/@Currency"/>
+						</xsl:attribute>
+					</Currency>
+				</Input>
+				<Template>
+					<CurrencyList>
+						<Currency PostfixSymbol="" PrefixSymbol=""  /> 
+					</CurrencyList>
+				</Template>
+			</API>
+			<API Name="getOrganizationHierarchy">
+				<Input>
+					<Organization>
+						<xsl:attribute name="OrganizationCode">
+							<xsl:value-of select="/Shipment/@ShipNode" />
+						</xsl:attribute>
+					</Organization>
+				</Input>
+				<Template>
+					<Organization LocaleCode="" />				
+				</Template>
+			</API>			
+			<API>
+				<xsl:attribute name="Name">
+					<xsl:text>getItemUOMMasterList</xsl:text>
+				</xsl:attribute>
+				<Input>
+					<ItemUOMMaster>
+						<xsl:attribute name="CallingOrganizationCode">
+							<xsl:value-of select="/Shipment/@ShipNode"/>
+						</xsl:attribute>
+					</ItemUOMMaster>
+				</Input>
+				<Template>
+					<ItemUOMMasterList>
+						<ItemUOMMaster UnitOfMeasure="" Description=""/> 
+					</ItemUOMMasterList>
+				</Template>
+			</API>
+			<API>
+				<xsl:attribute name="Name">
+					<xsl:text>getSortedShipmentDetails</xsl:text>
+				</xsl:attribute>
+				<Input>
+					<Shipment>
+						<xsl:attribute name="ShipmentKey">
+							<xsl:value-of select="/Shipment/@ShipmentKey"/>
+						</xsl:attribute>						
+					</Shipment>
+				</Input>
+				<Template>
+					<Shipment DisplayOrderNo="" Currency="" ShipmentKey="" OrderNo="" ShipmentNo="" ShipNode="" ActualShipmentDate="" ExpectedShipmentDate=""  RequestedShipmentDate="" >
+						<ToAddress LastName="" FirstName=""/>
+						<FromAddress AddressLine1="" AddressLine2="" AddressLine3="" City="" State="" ZipCode=""/>
+						<ShipmentLines TotalNumberOfRecords="">
+							<ShipmentLine OrderNo="" ItemDesc="" ItemID="" ProductClass="" ActualQuantity="" UnitOfMeasure=""  Quantity="" >
+								<OrderLine ItemID="" GiftFlag="" >
+									<LinePriceInfo UnitPrice="" PricingUOM="" />
+									<ItemDetails ItemID="">
+										<PrimaryInformation ExtendedDisplayDescription="" />
+									</ItemDetails>
+								</OrderLine>
+							</ShipmentLine>
+						</ShipmentLines>
+						 <ShipNode Description="" ShipNode="">
+						   <ShipNodePersonInfo AddressLine1=""
+							AddressLine2="" AddressLine3="" AddressLine4=""
+							AddressLine5="" AddressLine6="" AlternateEmailID=""
+							Beeper="" City="" Company="" Country=""
+							DayFaxNo="" DayPhone="" Department="" EMailID="" ErrorTxt=""
+							EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl=""
+							JobTitle="" LastName="" MiddleName="" MobilePhone=""
+							OtherPhone="" PersonID=""
+							PersonInfoKey="" PreferredShipAddress=""
+							State="" Suffix="" Title="" UseCount=""
+							VerificationStatus="" ZipCode=""/>
+						</ShipNode>
+					</Shipment>
+				</Template>
+			</API>
+		</MultiApi>
+	</xsl:template>
+</xsl:stylesheet>

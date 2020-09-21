@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2005, 2019  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Config Name="IBM Sterling Order Management  (5725-D10) IBM Sterling Configure Price Quote (5725-D11) Configuration">
+    <IgnoreColumns>
+        <Column Name="CREATETS"/>
+        <Column Name="MODIFYTS"/>
+        <Column Name="CREATEPROGID"/>
+        <Column Name="MODIFYPROGID"/>
+        <Column Name="CREATEUSERID"/>
+        <Column Name="MODIFYUSERID"/>
+        <Column Name="LOCKID"/>
+        <Column Name="LAST_RUN_START_TS"/>
+        <Column Name="LAST_RUN_END_TS"/>
+        <Column Name="NEXT_STARTTS"/>
+        <Column Name="NEXT_RUN"/>
+        <Column Name="RUNNING_STATUS"/>
+    </IgnoreColumns>
+    <Group CheckAbandonedRecords="true" Name="Metadata" SupportCDV="false">
+        <Table Name="PLT_DB_COLONY"/>
+        <Table Name="PLT_DB_COLONY_POOL"/>
+        <Table Name="PLT_DB_POOL"/>
+        <Table Name="PLT_UNIQUE_ID"/>
+    </Group>
+    <Group CheckAbandonedRecords="true" Name="Configuration Data" SupportCDV="true">
+        <Group Name="HUB Data">
+            <Group Name="Base Setup">
+                <Group Name="Base Transactions">
+                    <Table Name="YFS_BASE_TRANSACTION">
+                        <Table Name="YFS_BASE_PICKUP_DROP_STS"/>
+                        <Table Name="YFS_AGENT_CRITERIA_TEMPLATE"/>
+                        <Table Name="YFS_BASE_EVENT"/>
+                        <Table Name="YFS_BASE_TRAN_HOLD_PRO_TYPE"/>
+                    </Table>
+                </Group>
+                <Table Name="YFS_ERROR_CODE">
+                    <Table Name="YFS_ERROR_CAUSE_ACTION"/>
+                </Table>
+                <Table Name="YFS_BASE_CONFIG_TABLES"/>
+                <Table Name="YFS_BASE_COMMON_CODE"/>
+                <Table Name="YFS_BASE_PURGE_CRITERIA"/>
+                <Table Name="YFS_BASE_CONFIG_GRP_DEFN"/>
+                <Table Name="YFS_BASE_RULES"/>
+                <Table Name="YFS_BASE_CONFIG_TASK"/>
+                <Table Name="YFS_BASE_CONFIG_TASK_DEP"/>
+                <Table Name="YFS_CONFIG_TASK_KNWGE"/>
+                <Table Name="YFS_DOC_TYPE_DETER"/>
+                <Table Name="YFS_BASE_SHIP_CONSTRAINTS"/>
+                <Table Name="YFS_BASE_PACK_DO_NOT_MIX"/>
+            </Group>
+            <Group Name="Carrier">
+                <Table Name="YFS_CARRIER_ADAPTER_IMPL"/>
+                <Table Name="YFS_SCAC_ADAPTER_SUPPORT"/>
+                <Table Name="YFS_CARRIER"/>
+            </Group>
+            <Group Name="Cross Reference">
+                <Table Name="YFS_XREF_VALUE"/>
+                <Table Name="YFS_XREF_CODE"/>
+                <Table Name="YFS_XREF_MAPPING"/>
+                <Table Name="YFS_XREF_CONFIG_HDR">
+                    <Table Name="YFS_XREF_CONFIG_DTL"/>
+                </Table>
+            </Group>
+            <Group Name="Document Types">
+                <Table Name="YFS_AGENT_CRITERIA_TEMPLATE"/>
+                <Table Name="YFS_BASE_EVENT"/>
+                <Table Name="YFS_BASE_DOCUMENT_PARAMS">
+                    <Table Name="YFS_BASE_DOCUMENT_TEMPLATE"/>
+                    <Table Name="YFS_BASE_PROCESS_TYPE">
+                        <Table Name="YFS_BASE_ACTIVITY_GROUP">
+                            <Table Name="YFS_TASK_REFERENCE"/>
+                        </Table>
+                    </Table>
+                </Table>
+                <Table Name="YFS_ROLE">
+                    <Table Name="YFS_ROLE_DOCUMENT"/>
+                </Table>
+                <Table Name="YFS_BUSINESS_DOCUMENT"/>
+                <Table Name="YFS_DOCUMENT_FORMAT"/>
+                <Table Name="YFS_MODULE_DOCUMENT_TYPE"/>
+                <Driver Name="YFS_DOCUMENT_PARAMS">
+                    <Table Name="YFS_DOCUMENT_TEMPLATE"/>
+                    <Table Name="YFS_PROCESS_TYPE">
+                        <Table Name="YFS_CONDITION_VARIABLES"/>
+                        <Table Name="YFS_PROCESS_TASK_TYPE"/>
+                        <Table Name="YFS_MONITOR_TYPE"/>
+                        <Table Name="YFS_STATUS_MODIFICATION_TYPE">
+                            <Table Name="YFS_MODIFICATION_ATTRIBUTE"/>
+                        </Table>
+                    </Table>
+                </Driver>
+            </Group>
+            <Group Name="Health Monitor">
+                <Table Name="YFS_HM_GROUPS"/>
+                <Table Name="YFS_HM_THRESHOLDS"/>
+            </Group>
+            <Group Name="Inventory">
+                <Table Name="YFS_INVENTORY_CONSIDERATIONS"/>
+                <Table Name="YFS_INVENTORY_DEMAND_TYPE"/>
+                <Table Name="YFS_INVENTORY_SUPPLY_TYPE"/>
+                <Table Name="YFS_NODE_COST"/>
+                <Table Name="YFS_STATUS_INVENTORY_TYPES">
+                    <Table Name="YFS_STATUS">
+                        <Table Name="YFS_STATUS_INVENTORY_TYPES">
+                            <Table Name="YFS_STATUS_INV_SELECTION"/>
+                        </Table>
+                        <Table Name="YFS_STATUS_MILESTONE"/>
+                        <Table Name="YFS_STATUS_CONDITION"/>
+                    </Table>
+                    <Table Name="YFS_STATUS_INV_SELECTION"/>
+                </Table>
+            </Group>
+            <Group Name="Item Attributes">
+                <Table Name="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <Table Name="YFS_ITEM_ATTR_GRP_TYPE_LOCALE"/>
+                </Table>
+                <Table Name="YFS_ITEM_ATTR_GROUP">
+                    <Table Name="YFS_ITEM_ATTR_GROUP_LOCALE"/>
+                </Table>
+            </Group>
+            <Group Name="Negotiation">
+                <Table Name="YFS_NEGOTIATION_RULE">
+                    <Table Name="YFS_NEGOTIABLE_HDR_ATTR"/>
+                    <Table Name="YFS_NEGOTIABLE_LINE_ATTR"/>
+                </Table>
+            </Group>
+            <Group Name="Region Definitions">
+                <Table Name="YFS_REGION_MATCH_PREF"/>
+                <Table Name="YFS_REGION_LEVEL">
+                    <Table Name="YFS_REGION_LEVEL_ASSOC"/>
+                </Table>
+                <Table Name="YFS_REGION_SCHEMA">
+                    <Table Name="YFS_REGION">
+                        <Table Name="YFS_REGION_DETAIL"/>
+                        <Table Name="YFS_REGION_BEST_MATCH"/>
+                    </Table>
+                </Table>
+            </Group>
+            <Group Name="Tag Definition">
+                <Table Name="PLT_QUALIFIED_TAG_TYPE"/>
+                <Table Name="PLT_QUALIFIED_TAG"/>
+                <Table Name="PLT_QUALIFIED_TAG_VER_COMPTBLT"/>
+                <Table Name="YFS_ORDER_TAG_DETMN">
+                    <Table Name="YFS_ORDER_TAG_MOD_TYPE"/>
+                    <Table Name="YFS_CONDITION" RelationshipXMLName="HeaderCondition">
+                        <Table Name="YFS_CONDITION_PROPS"/>
+                    </Table>
+                    <Table Name="YFS_CONDITION" RelationshipXMLName="LineCondition">
+                        <Table Name="YFS_CONDITION_PROPS"/>
+                    </Table>
+                </Table>
+            </Group>
+            <Group Name="Resources">
+                <Table Name="YFS_RESOURCE">
+                    <Table Name="YFS_RESOURCE_PERMISSION"/>
+                </Table>
+            </Group>
+            <Group Name="Servers and User Exits">
+                <Table Name="YFS_SERVER"/>
+                <Table Name="YFS_USER_EXIT">
+                    <Table Name="YFS_TRAN_USER_EXIT"/>
+                </Table>
+            </Group>
+            <Group Name="VAS">
+                <Table Name="YFS_WORK_ORDER_ALLOC_CONS"/>
+            </Group>
+            <Group Name="WMS Hub Level Entities">
+                <Table Name="YFS_ACTIVITY"/>
+                <Table Name="YFS_ACTIVITY_GRP_RES_REF"/>
+                <Table Name="YFS_PHY_CNT_CATEGORY">
+                    <Table Name="YFS_PHY_CNT_CAT_ACT_GRP"/>
+                </Table>
+            </Group>
+            <Group Name="WMS Non-Node Entities">
+                <Group Name="Printer">
+                    <Table Name="YFS_PRINT_ADAPTER"/>
+                    <Table Name="YFS_LABEL_FORMAT"/>
+                    <Table Name="YFS_PRINT_DOCUMENT"/>
+                    <Table Name="YFS_PRINT_DOCUMENT_TRAN_ATTR"/>
+                </Group>
+                <Table Name="YFS_DEVICE_TYPE">
+                    <Table Name="YFS_DEVICE_TYPE_TEMPLATE"/>
+                </Table>
+            </Group>
+            <Group Name="YCS">
+                <Table Name="YCS_CARRIER_SERVICE"/>
+                <Table Name="YCS_CARRIER_SPECIAL_SERVICE"/>
+                <Table Name="YCS_CARRIER_ZONE"/>
+                <Table Name="YCS_FREIGHT_CHARGE"/>
+                <Table Name="YCS_GENERAL_CODES"/>
+                <Table Name="YCS_PLD_DETAIL"/>
+                <Table Name="YCS_PLD_USER_DEFAULTS"/>
+                <Table Name="YCS_PROCESS_CONTROL"/>
+                <Table Name="YCS_SPECIAL_SERVICE"/>
+                <Table Name="YCS_SPECIAL_SERVICE_GROUP"/>
+                <Table Name="YCS_SURCHARGES"/>
+                <Table Name="YCS_SURCHARGE_APPLICABLE"/>
+                <Table Name="YCS_UPS_ROUTING_CODE"/>
+            </Group>
+            <Group Name="ZipCodes">
+                <Table Name="YFS_ZIP_CODE_LOCATION"/>
+            </Group>
+            <Group Name="Other Organization Independent Setup">
+                <Table Name="YFS_HAZMAT_COMPLIANCE"/>
+                <Table Name="YFS_LOCALE"/>
+                <Table Name="YFS_INSTALL_DEFAULTS"/>
+                <Table Name="YFS_ADAPTER"/>
+                <Table Name="YFS_CAPACITY_UOM_TYPE"/>
+                <Table Name="YFS_PROTOCOL"/>
+                <Table Name="YFS_SERVICE"/>
+                <Table Name="YFS_ORG_RELATIONSHIP_TYPE"/>
+                <Table Name="YFS_LOCALIZED_STRINGS"/>
+                <Table Name="YFS_NONLOCALIZED_STRINGS"/>
+                <Table Name="YFS_CURRENCY">
+                    <Table Name="YFS_CURRENCY_CONVERSION"/>
+                </Table>
+                <Table Name="YFS_NODE_TYPE"/>
+                <Table Name="YFS_PROCESS_TRAN_HOLD_LEVEL"/>
+                <Table Name="PLT_PROPERTY_METADATA">
+                    <Table Name="PLT_PROPERTY"/>
+                </Table>
+                <Table Name="YFS_SPECIAL_SERVICES"/>
+                <Table Name="PLT_ACTIVITY_CONFIG_METADATA"/>
+                <Table Name="PLT_ACTIVITY_CONFIG">
+                    <Table Name="PLT_SERVER_ACTIVITY_CONFIG"/>
+                </Table>
+                <Table Name="PLT_CALLOUT">
+                    <Table Name="PLT_CALLOUT_IMPL"/>
+                    <Table Name="PLT_CALLOUT_CLASS_LOADER"/>
+                </Table>
+                <Table Name="YFS_COMPONENT_STATUS"/>
+                <Table Name="YFS_COMPONENT_ENDPOINT"/>
+            </Group>
+            <Group Name="Search Index Configuration">
+                <Table Name="PLT_INDEX_CONFIG"/>
+            </Group>
+            <Group Name="Commerce on Cloud Data Services">
+                <Table Name="YFS_DATA_EXTR_CFG">
+                    <Table Name="YFS_DATA_EXTR_CLM"/>
+                </Table>
+            </Group>
+            <Group Name="Voice Integration">
+                <Table Name="YFS_VOICE_APPLICATION">
+                    <Table Name="YFS_VOICE_APPLICATION_INSTANCE"/>
+                    <Table Name="YFS_VOICE_WORK_FLOW">
+                        <Table Name="YFS_VOICE_WORK_FLOW_ACT_ASSOC"/>
+                    </Table>
+                </Table>
+            </Group>
+        </Group>
+        <Group Name="Organization Driven Configuration Data">
+            <Driver ColonyIdAttr="AssignedColonyId"
+                CompareValueArg="CompareOrganizationCode"
+                CompareValueMandatory="Y"
+                CompareValuePrompt="Enter Organization Code(s) To Compare"
+                FilterType="ColonyId" Name="YFS_ORGANIZATION">
+                <Group Name="Templates">
+                    <Table Name="PLT_API_TEMPLATE"/>
+                </Group>
+                <Group Name="Print Formatting">
+                    <Table Name="YFS_TRANSFORMATION_CONFIG">
+                        <Table Name="YFS_TRANSFORMATION_HEADER">
+                            <Table Name="YFS_TRANS_HEADER_LOCALE"/>
+                        </Table>
+                    </Table>
+                </Group>
+                <Group Name="Enterprise Shard Info">
+                    <Table Name="YFS_ENTERPRISE_COLONY_MAP"/>
+                </Group>
+                <Group Name="DataSync">
+                    <Table Name="YFS_SYNC_SUBSCRIPTION">
+                        <Table Name="YFS_SYNC_PROFILE_SUBSCRIPTION">
+                            <Table Name="YFS_SYNC_PROFILE"/>
+                        </Table>
+                        <Table Name="YFS_SYNC_TARGET"/>
+                    </Table>
+                    <Table Name="YFS_SYNC_DB_IMPORT"/>
+                    <Table Name="YFS_SYNC_DB_EXPORT"/>
+                </Group>
+                <Group Name="Approvals">
+                    <Table Name="YFS_APPROVAL_GROUP">
+                        <Table Name="YFS_APPROVAL_PLAN"/>
+                    </Table>
+                </Group>
+                <Group Name="Business Validation">
+                    <Table Name="YFS_VALIDATION_DOMAIN"/>
+                    <Table Name="YFS_VALIDATION">
+                        <Table Name="YFS_VALIDATION_REFERENCE"/>
+                    </Table>
+                </Group>
+                <Group Name="Carrier">
+                    <Table Name="YFS_CARRIER_SERVICE">
+                        <Table Name="YFS_CARRIER_SERVICE_DOW"/>
+                        <Table Name="YFS_CARRIER_SERVICE_OVR"/>
+                    </Table>
+                </Group>
+                <Group Name="Catalog">
+                    <Group Name="Service Types">
+                        <Table Name="YFS_SERVICE_TYPE"/>
+                    </Group>
+                    <Table Name="YFS_ITEM_UOM_MASTER"/>
+                    <Table Name="YFS_CATEGORY_DOMAIN">
+                        <Table Name="YFS_CAT_DOMAIN_LOCALE"/>
+                        <Table Name="YFS_ASSET">
+                            <Table Name="YFS_ASSET_LOCALE"/>
+                        </Table>
+                    </Table>
+                    <Table Name="YFS_CLASSIFICATION_PURPOSE"/>
+                </Group>
+                <Group Name="Change Project Management">
+                    <Table Name="YFS_CHANGE_PROJECT">
+                        <Table Name="YFS_CHANGE_PROJECT_LOCALE"/>
+                        <Table Name="YFS_CHANGE_PROJECT_APPROVER"/>
+                        <Table Name="YFS_CHANGE_REQUEST">
+                            <Table Name="YFS_CHANGE_REQUEST_LOCALE"/>
+                            <Table Name="YFS_CHANGE_REQUEST_ASSIGNMENT"/>
+                        </Table>
+                    </Table>
+                </Group>
+                <Group MergeToOrg="Y" Name="Cost factors">
+                    <Table Name="YFS_COST_FACTOR_PURPOSE"/>
+                    <Table Name="YFS_COST_FACTOR_GROUP">
+                        <Table Name="YFS_COST_FACTOR_GROUP_DTL"/>
+                    </Table>
+                </Group>
+                <Group MergeToOrg="Y" Name="Customer Grade">
+                    <Table Name="YFS_CUSTOMER_GRADE"/>
+                </Group>
+                <Group Name="Data Security">
+                    <Table Name="YFS_DATA_SECURITY_GROUP">
+                        <Table Name="YFS_DATA_SECURITY_DOC_TYPE"/>
+                        <Table Name="YFS_DATA_SECURITY_ENTERPRISE"/>
+                        <Table Name="YFS_DATA_SECURITY_NODES"/>
+                    </Table>
+                    <Table Name="YFS_DATA_ACCESS_POL_RULES"/>
+                </Group>
+                <Group MergeToOrg="Y" Name="Event Condition">
+                    <Table Name="YFS_EVENT_CONDITION"/>
+                </Group>
+                <Group Name="Label Preferences For Organizations">
+                    <Table Name="YFS_LABEL_PREFERENCE"/>
+                </Group>
+                <Group Name="Menus">
+                    <Table Name="YFS_MENU">
+                        <Table Name="YFS_APPLICATION_MENU"/>
+                    </Table>
+                </Group>
+                <Group Name="Password Policy">
+                    <Table Name="PLT_PWD_POLICY">
+                        <Table Name="PLT_PWD_RULE_CFG"/>
+                    </Table>
+                    <Table Name="PLT_AUTH_QUESTION"/>
+                    <Table Name="PLT_PWD_RULE_DEFN"/>
+                </Group>
+                <Group MergeToOrg="Y" Name="Person Info">
+                    <Table Name="YFS_PERSON_INFO" RelationshipXMLName="CorporatePersonInfo"/>
+                    <Table Name="YFS_PERSON_INFO" RelationshipXMLName="ContactPersonInfo"/>
+                    <Table Name="YFS_PERSON_INFO" RelationshipXMLName="BillingPersonInfo"/>
+                </Group>
+                <Group Name="Pipelines">
+                    <Driver Name="YFS_PIPELINE">
+                        <Table Name="YFS_PIPELINE_DEFINITION">
+                            <Table Name="YFS_PIPELINE_DROP_STS_COND"/>
+                        </Table>
+                        <Table Name="YFS_PIPELINE_PICKUP_TRAN"/>
+                        <Table Name="YFS_PIPELINE_LISTENER"/>
+                        <Table Name="YFS_GRAPH_UI"/>
+                        <Table Name="YFS_MONITOR_RULE"/>
+                    </Driver>
+                </Group>
+                <Group MergeToOrg="Y" Name="Queues">
+                    <Table Name="YFS_QUEUE"/>
+                </Group>
+                <Group Name="Services">
+                    <Table Name="YFS_FLOW">
+                        <Table Name="YFS_GRAPH_UI"/>
+                        <Table Name="YFS_SUB_FLOW"/>
+                    </Table>
+                    <Table Name="YFS_USER_EXIT_IMPL"/>
+                </Group>
+                <Group Name="Statuses">
+                    <Table Name="YFS_STATUS_MOD_GROUP"/>
+                    <Table Name="YFS_STATUS_MODIFICATION"/>
+                    <Table Name="YFS_STATUS">
+                        <Table Name="YFS_GRAPH_UI"/>
+                        <Table Name="YFS_STATUS_INVENTORY_TYPES">
+                            <Table Name="YFS_STATUS_INV_SELECTION"/>
+                        </Table>
+                        <Table Name="YFS_STATUS_MILESTONE"/>
+                        <Table Name="YFS_STATUS_CONDITION"/>
+                    </Table>
+                </Group>
+                <Group Name="Transactions">
+                    <Table Name="YFS_TRANSACTION">
+                        <Table Name="YFS_TRANSACTION_PICKUP_STS"/>
+                        <Table Name="YFS_TRANSACTION_DROP_STATUS"/>
+                        <Table Name="YFS_TRAN_HOLD_PROCESS_TYPE"/>
+                        <Table Name="YFS_TRAN_COMPLETE_STATUS"/>
+                        <Table Name="YFS_TRAN_ROLLBACK_STATUS"/>
+                        <Table Name="YFS_EVENT">
+                            <Table Name="YFS_GRAPH_UI"/>
+                        </Table>
+                        <Table Name="YFS_TRAN_FLOW"/>
+                        <Table Name="YFS_AGENT_CRITERIA"/>
+                    </Table>
+                </Group>
+                <Group Name="UserGroup">
+                    <Table Name="YFS_USER_GROUP">
+                        <Table Name="YFS_DATA_ACCESS_POL_OVERRIDE"/>
+                    </Table>
+                </Group>
+                <Group MergeToOrg="Y" Name="VAS">
+                    <Table Name="YFS_INBOUND_VAS_COMPLIANCE"/>
+                </Group>
+                <Group Name="WMS Organization Level Entities">
+                    <Table Name="YFS_TASK_TYPE">
+                        <Table Name="YFS_USER_TASK_TYPE"/>
+                    </Table>
+                    <Table Name="YFS_BARCODE_TRANSLATION"/>
+                    <Table Name="YFS_PRODUCTIVITY_TYPE">
+                        <Table Name="YFS_PRODUCTIVITY_REFERENCE"/>
+                    </Table>
+                </Group>
+                <Group MergeToOrg="Y" Name="Consigned Inventory">
+                    <Table Name="YFS_INV_ORG_RELATIONSHIP"/>
+                    <Table Name="YFS_ITEM_CNSPTN_PTTN_HDR">
+                        <Table Name="YFS_ITEM_CNSPTN_PTTN_DTL"/>
+                    </Table>
+                    <Table Name="YFS_CLSSFTN_CNSPTN_PTTN_HDR">
+                        <Table Name="YFS_CLSSFTN_CNSPTN_PTTN_DTL"/>
+                    </Table>
+                </Group>
+                <Group Name="Price and Payments">
+                    <Table Name="YFS_PAYMENT_TYPE">
+                        <Table Name="YFS_PAYMENT_CARD_TYPE"/>
+                    </Table>
+                    <Table Name="YFS_PRICE_PROGRAM">
+                        <Table Name="YFS_PRICE_PROGRAM_DEFN"/>
+                    </Table>
+                    <Table Name="YFS_PRICE_SET">
+                        <Table Name="YFS_ITEM_PRICE_SET">
+                            <Table Name="YFS_ITEM_PRICE_SET_DTL"/>
+                        </Table>
+                    </Table>
+                </Group>
+                <Group Name="Hold Types">
+                    <Table Name="YFS_HOLD_TYPE">
+                        <Table Name="YFS_HOLD_TYPE_USER_GROUP"/>
+                        <Table Name="YFS_HOLD_TYPE_MOD_TYPE"/>
+                        <Table Name="YFS_HOLD_TYPE_TRAN"/>
+                    </Table>
+                </Group>
+                <Table Name="YFS_COMMON_CODE">
+                    <Table Name="YFS_COMMON_CODE_ATTRIBUTE"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_BARCODE_TRANSLATION"/>
+                <Table MergeToOrg="Y" Name="YFS_QUERY"/>
+                <Table MergeToOrg="Y" Name="YFS_EXCEPTION_TYPE"/>
+                <Table MergeToOrg="Y" Name="YFS_ORG_EXCEPTION_TYPE"/>
+                <Table MergeToOrg="Y" Name="YFS_EXCEPTION_TYPE_ROLE"/>
+                <Table MergeToOrg="Y" Name="YFS_EXCEPTION_ROUTING_RULE"/>
+                <Table MergeToOrg="Y" Name="YFS_DATE_TYPE"/>
+                <Table MergeToOrg="Y" Name="YFS_MONITORING_CONSOLIDATION"/>
+                <Table Name="YFS_ACTION">
+                    <Table Name="YFS_INVOKED_FLOWS"/>
+                </Table>
+                <Table Name="YFS_CONDITION">
+                    <Table Name="YFS_CONDITION_PROPS"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_SUB_CAT_ORG_ASSIGN"/>
+                <Table Name="YFS_BASE_CONFIG_TASK_STATUS"/>
+                <Group Name="Database Extensibility">
+                    <Table Name="YFS_ENTITY_ATTRIBUTE_DOMAIN">
+                        <Table Name="YFS_ENTITY_CUSTOM_ATTRIBUTE"/>
+                    </Table>
+                </Group>
+                <Table Name="YFS_ATTRIBUTE_DOMAIN">
+                    <Table Name="YFS_ATTR_DOMAIN_LOCALE"/>
+                    <Table Name="YFS_ATTRIBUTE_GROUP">
+                        <Table Name="YFS_ATTR_GRP_LOCALE"/>
+                        <Table Name="YFS_ATTRIBUTE">
+                            <Table Name="YFS_ATTRIBUTE_LOCALE"/>
+                            <Table Name="YFS_ATTR_ALLOWED_VALUE">
+                                <Table Name="YFS_ATTR_ALLOW_VAL_LOCALE"/>
+                                <Table Name="YFS_ASSET">
+                                    <Table Name="YFS_ASSET_LOCALE"/>
+                                </Table>
+                            </Table>
+                            <Table Name="YFS_ATTRIBUTE_REFERENCE"/>
+                            <Table Name="YFS_ASSET">
+                                <Table Name="YFS_ASSET_LOCALE"/>
+                            </Table>
+                        </Table>
+                    </Table>
+                </Table>
+                <Table Name="YFS_QUESTION">
+                    <Table Name="YFS_ANSWER_OPTION">
+                        <Table Name="YFS_ANSWER_CAPACITY_IMPACT"/>
+                    </Table>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_LINE_RELATIONSHIP_TYPE"/>
+                <Table MergeToOrg="Y" Name="YFS_REGION_USAGE"/>
+                <Table MergeToOrg="Y" Name="YFS_REGION_ADDNL_CAPACITY"/>
+                <Table MergeToOrg="Y" Name="YFS_ESP_TERMS"/>
+                <Table MergeToOrg="Y" Name="YFS_ORDER_VALIDATION"/>
+                <Table MergeToOrg="Y" Name="YFS_CHARGE_CATEGORY">
+                    <Table Name="YFS_CHARGE_NAME"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_RECEIVING_DISCR_REASON"/>
+                <Table MergeToOrg="Y" Name="YFS_RECEIVING_PREFERENCE" RelationshipXMLName="Organization"/>
+                <Table MergeToOrg="Y" Name="YFS_RECEIVING_PREFERENCE" RelationshipXMLName="BuyerOrganization"/>
+                <Table MergeToOrg="Y" Name="YFS_RECEIVING_PREFERENCE" RelationshipXMLName="SellerOrganization"/>
+                <Table MergeToOrg="Y" Name="YFS_SHIP_CONSTRAINTS"/>
+                <Table MergeToOrg="Y" Name="YFS_SHIPPING_PREFERENCE"/>
+                <Table MergeToOrg="Y" Name="YFS_ALLOCATION_RULE"/>
+                <Table Name="YFS_SOURCING_RULE_HDR">
+                    <Table Name="YFS_SOURCING_RULE_DTL"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_SOURCING_CONFIG"/>
+                <Table MergeToOrg="Y" Name="YFS_ENT_NODE_TYPE"/>
+                <Table MergeToOrg="Y" Name="YFS_INV_NODE_TYPE"/>
+                <Table Name="YFS_UOM">
+                    <Table Name="YFS_UOM_CONVERSION"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_RULES"/>
+                <Table Name="YFS_PURGE_CRITERIA">
+                    <Table Name="YFS_PURGE_CRITERIA_ADDNL"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_INVENTORY_MONITOR_RULES">
+                    <Table Name="INV_MON_RULE_DEL_METHOD"/>
+                    <Table Name="INV_MON_RULE_FULFILLMENT_TYPE"/>
+                </Table>
+                <Table Name="YFS_IBA_SEQUENCE_HDR">
+                    <Table Name="YFS_IBA_SEQUENCE_DTL"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_INV_AVAIL_SAFETY_FACTOR"/>
+                <Table MergeToOrg="Y" Name="YFS_ATP_RULES"/>
+                <Table MergeToOrg="Y" Name="YFS_ORDER_LINE_TYPE"/>
+                <Table Name="YFS_RETURN_DISPOSITION">
+                    <Table Name="YFS_DISPOSITION_TRANSITION"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_DISTRIBUTION_RULE">
+                    <Table Name="YFS_ITEM_SHIP_NODE"/>
+                </Table>
+                <Table Name="YFS_CALENDAR">
+                    <Table Name="YFS_CALENDAR_SHIFT_EFF_PERD">
+                        <Table Name="YFS_CALENDAR_SHIFT"/>
+                    </Table>
+                    <Table Name="YFS_CALENDAR_DAY_EXCP">
+                        <Table Name="YFS_CALENDAR_EXCP_SHIFT"/>
+                    </Table>
+                </Table>
+                <Table Name="YFS_GRAPH_UI"/>
+                <Table MergeToOrg="Y" Name="YFS_PIPELINE_CONDITION"/>
+                <Table MergeToOrg="Y" Name="YFS_PAYMENT_RULE"/>
+                <Table MergeToOrg="Y" Name="YFS_ENTERPRISE">
+                    <Table Name="YFS_SCAC_EX"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_SCAC_EX"/>
+                <Table Name="YFS_TRANSACTION_DEPENDENCY_GRP">
+                    <Table Name="YFS_TRANSACTION_DEPENDENCY"/>
+                </Table>
+                <Table Name="YFS_SCAC">
+                    <Table Name="YFS_SCAC_EX"/>
+                    <Table Name="YFS_SCAC_AND_SERVICE"/>
+                    <Table Name="YFS_PRO_NO_DATA"/>
+                    <Table Name="YFS_PERSON_INFO" RelationshipXMLName="BillingPersonInfo"/>
+                    <Table Name="YFS_PERSON_INFO" RelationshipXMLName="ContactPersonInfo"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_ORG_ENTERPRISE"/>
+                <Table Name="YFS_ROUTING_GUIDE">
+                    <Table Name="YFS_ROUTING_GUIDE_DETAIL">
+                        <Table Name="YFS_ROUTING_GUIDE_ATTR"/>
+                        <Table Name="YFS_ROUTING_GUIDE_DTL_CARRIER">
+                            <Table Name="YFS_PERSON_INFO"/>
+                        </Table>
+                    </Table>
+                    <Table Name="YFS_PERSON_INFO"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_INBOUND_COMPLIANCE"/>
+                <Table MergeToOrg="Y" Name="YFS_FREIGHT_TERMS"/>
+                <Table MergeToOrg="Y" Name="YFS_OUTBOUND_CONSTRAINTS"/>
+                <Table MergeToOrg="Y" Name="YFS_DEPARTMENT"/>
+                <Table MergeToOrg="Y" Name="YFS_BUYER_INSTRUCTION"/>
+                <Table MergeToOrg="Y" Name="YFS_ORG_GROUP_OVERRIDE"/>
+                <Table MergeToOrg="Y" Name="YFS_ORG_PROTOCOL">
+                    <Table Name="YFS_ORG_PROTOCOL_REFERENCE"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_ORG_SERVICE"/>
+                <Table MergeToOrg="Y" Name="YFS_MONITOR_RULE"/>
+                <Table MergeToOrg="Y" Name="YFS_BATCH_RULE"/>
+                <Table Name="YFS_DEVICE" RelationshipXMLName="OrganizationRelation"/>
+                <Table Name="YFS_DEVICE_SUB_TYPE">
+                    <Table Name="YFS_PRINTER_TYPE_PRNT_DOCS"/>
+                </Table>
+                <Table MergeToOrg="Y" Name="YFS_ORG_THEME"/>
+                <Table MergeToOrg="Y" Name="YFS_ORG_DOCUMENT"/>
+                <Table MergeToOrg="Y" Name="YFS_ORG_RELATIONSHIP"/>
+                <Group Name="Organization Owned Ship Node Data">
+                    <Driver Name="YFS_SHIP_NODE" RelationshipXMLName="OwnerOrganization">
+                        <Table Name="YFS_NODE_TRANSFER_SCHEDULE"/>
+                        <Table Name="YFS_NODE_TRAN_SCH_OVERRIDE"/>
+                        <Table Name="YFS_NODE_NOTIFICATION_PERD">
+                            <Table Name="YFS_NODE_NOTIFICATION">
+                                <Table Name="YFS_NODE_NOTIFICATION_DOW"/>
+                            </Table>
+                        </Table>
+                        <Table Name="YFS_NODE_SRVC_PICKUP_DOW"/>
+                        <Table Name="YFS_NODE_SRVC_PICKUP_OVR"/>
+                        <Table Name="YFS_ITEM_STATUS_RULES"/>
+                        <Table Name="YFS_WO_SS_DETMN"/>
+                        <Table Name="YFS_NODE_CAN_SHIP_TO_NT"/>
+                        <Table Name="YFS_PERSON_INFO" RelationshipXMLName="ShipNodePersonInfo"/>
+                        <Table Name="YFS_PERSON_INFO" RelationshipXMLName="ContactPersonInfo"/>
+                        <Group Name="Equipments">
+                            <Table Name="YFS_EQUIPMENT_TYPE">
+                                <Table Name="YFS_EQUIP_TYPE_TASK_TYPE"/>
+                                <Table Name="YFS_EQUIPMENT_TYPE_DETAIL"/>
+                            </Table>
+                        </Group>
+                        <Group Name="Resource Planning">
+                            <Table Name="YFS_PLANNED_TASK_COND_SET">
+                                <Table Name="YFS_PLANNED_TASK_COND">
+                                    <Table Name="YFS_PLANNED_TASK_COND_RSLT"/>
+                                </Table>
+                            </Table>
+                        </Group>
+                        <Group Name="Miscellaneous">
+                            <Table Name="YFS_DEVICE"/>
+                        </Group>
+                    </Driver>
+                </Group>
+                <Group Name="Count">
+                    <Table Name="YFS_COUNT_PROGRAM">
+                        <Table Name="YFS_COUNT_PROGRAM_COND">
+                            <Table Name="YFS_CNT_PROG_COND_ATTR"/>
+                        </Table>
+                    </Table>
+                </Group>
+                <Group Name="Warehouse Data">
+                    <Driver Name="YFS_SHIP_NODE" RelationshipXMLName="Organization">
+                        <Table Name="YFS_WAVE_SIZE_CONSTRAINT" RelationshipXMLName="ShipNodeOnly"/>
+                        <Group Name="Inventory">
+                            <Table Name="YFS_INVENTORY_STATUS"/>
+                            <Table Name="YFS_INVENTORY_STATUS_TRAN"/>
+                            <Table Name="YFS_ADJUSTMENT_REASON">
+                                <Table Name="YFS_ADJUSTMENT_REASON_DTL"/>
+                                <Table Name="YFS_ADJUSTMENT_LOCN_SEQ"/>
+                            </Table>
+                        </Group>
+                        <Group Name="Activity Constraint">
+                            <Table Name="YFS_ACTIVITY_CONSTRAINT">
+                                <Table Name="YFS_LOCATION_PREFERENCE"/>
+                            </Table>
+                        </Group>
+                        <Group Name="Receiving">
+                            <Table Name="YFS_NODE_DISPOSITION"/>
+                            <Table Name="YFS_NODE_RECEIVING_PREF"/>
+                        </Group>
+                        <Group Name="Putaway">
+                            <Table Name="YFS_PUTAWAY_STRATEGY">
+                                <Table Name="YFS_PUTAWAY_STRATEGY_DTL"/>
+                            </Table>
+                        </Group>
+                        <Group Name="Task Management">
+                            <Table Name="YFS_EXECUTION_EXCEPTION"/>
+                        </Group>
+                        <Group Name="Pick Planning">
+                            <Table Name="YFS_SHIPMENT_GROUP">
+                                <Table Name="YFS_SHIPMENT_SELECTOR">
+                                    <Table Name="YFS_SHIPMENT_SELECT_ATTR"/>
+                                </Table>
+                                <Table Name="YFS_PICK_STRATEGY">
+                                    <Table Name="YFS_PLA_ACTIVITY_DETER">
+                                    <Table Name="YFS_PLA_ITEM_PICK_STAGING_ZONE"/>
+                                    </Table>
+                                    <Table Name="Item_Pick_Pla_Item_Condition">
+                                    <!-- Providing entity name in place of table name as table name doesnot exist for subclasses  -->
+                                    <Table Name="YFS_PLA_UOM_CONDITION">
+                                    <Table Name="YFS_PLA_CONDITION_ATTR"/>
+                                    <Table Name="Item_Pick_Pla_Zone_Set">
+                                    <!-- Providing entity name in place of table name as table name doesnot exist for subclasses  -->
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="ItemPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    <Table Name="Batch_Pick_Pla_Zone_Set">
+                                    <!-- Providing entity name in place of table name as table name doesnot exist for subclasses  -->
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="BatchPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    <Table Name="Order_Pick_Pla_Zone_Set">
+                                    <!-- Providing entity name in place of table name as table name doesnot exist for subclasses  -->
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="OrderPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    </Table>
+                                    </Table>
+                                    <Table Name="Batch_Pick_Pla_Item_Condition">
+                                    <!-- Providing entity name in place of table name as table name doesnot exist for subclasses  -->
+                                    <Table Name="YFS_PLA_UOM_CONDITION">
+                                    <Table Name="YFS_PLA_CONDITION_ATTR"/>
+                                    <Table Name="Item_Pick_Pla_Zone_Set">
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="ItemPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    <Table Name="Batch_Pick_Pla_Zone_Set">
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="BatchPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    <Table Name="Order_Pick_Pla_Zone_Set">
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="OrderPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    </Table>
+                                    </Table>
+                                    <Table Name="Order_Pick_Pla_Item_Condition">
+                                    <!-- Providing entity name in place of table name as table name doesnot exist for subclasses  -->
+                                    <Table Name="YFS_PLA_UOM_CONDITION">
+                                    <Table Name="YFS_PLA_CONDITION_ATTR"/>
+                                    <Table Name="Item_Pick_Pla_Zone_Set">
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="ItemPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    <Table Name="Batch_Pick_Pla_Zone_Set">
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="BatchPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    <Table Name="Order_Pick_Pla_Zone_Set">
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="OrderPickPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    </Table>
+                                    </Table>
+                                </Table>
+                                <Table Name="YFS_SORT_STRATEGY">
+                                    <Table Name="YFS_CHUTE_DEDICATION" RelationshipXMLName="CarrierSortRule"/>
+                                    <Table Name="YFS_CHUTE_DEDICATION" RelationshipXMLName="ShipmentSortRule"/>
+                                </Table>
+                            </Table>
+                            <Table Name="YFS_RETRIEVAL_STRATEGY">
+                                <Table Name="YFS_RETRIEVAL_ATTR"/>
+                                <Table Name="Retrieval_Pla_Item_Condition">
+                                    <Table Name="YFS_PLA_UOM_CONDITION">
+                                    <Table Name="YFS_PLA_CONDITION_ATTR"/>
+                                    <Table Name="Retrieval_Pla_Zone_Set">
+                                    <Table Name="YFS_PLA_ACTIVITY_TASK_TYPE"/>
+                                    <Table
+                                    Name="YFS_PLA_ZONE_ATTR" RelationshipXMLName="RetrievalPlaZoneSet"/>
+                                    <Table Name="YFS_PLA_UPGRADE_UOM"/>
+                                    </Table>
+                                    </Table>
+                                </Table>
+                            </Table>
+                        </Group>
+                        <Group Name="Pack Planning">
+                            <Table Name="YFS_PACK_STRATEGY">
+                                <Table Name="YFS_PACK_STGY_SHIP_MODE">
+                                    <Table Name="YFS_PACK_STRATEGY_ATTR"/>
+                                </Table>
+                                <Table Name="YFS_PACK_DO_NOT_MIX"/>
+                                <Table Name="YFS_PACK_STRATEGY_ATTR"/>
+                            </Table>
+                        </Group>
+                        <Group Name="Miscellaneous">
+                            <Table Name="YFS_LOCN_MONITOR_RULE">
+                                <Table Name="YFS_LOCN_MONITOR_FILTER"/>
+                            </Table>
+                            <Table Name="YFS_COUNT_STRATEGY"/>
+                            <Table Name="YFS_AISLE_USER_CONSTRAINT"/>
+                        </Group>
+                    </Driver>
+                </Group>
+            </Driver>
+        </Group>
+    </Group>
+</Config>

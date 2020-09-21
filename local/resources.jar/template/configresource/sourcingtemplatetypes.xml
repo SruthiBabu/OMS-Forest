@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<SourcingTemplates>
+	<SourcingTemplateUsage>
+		<TemplateUsage UsageType="Sourcing_Rule_For_Product_Being_Shipped">
+			<Template TemplateType="All_Nodes_Of_Type"/>
+			<Template TemplateType="Primary_Vendor"/>
+			<Template TemplateType="Specific_Node"/>
+			<Template TemplateType="Distribution_Group"/>
+			<Template TemplateType="Receiving_Nodes_Relationship"/>
+			<Template TemplateType="Externally_Defined"/>
+		</TemplateUsage>
+		<TemplateUsage UsageType="Provided_Services_Sourcing_Rule">
+			<Template TemplateType="Seller_Nodes_Relationship">
+			<!-- example of a direction filter override 
+				<Relationships>
+					<Relationship ArgID="ORG_REL_1" DirectionFilter="F"/>
+				</Relationships>
+
+			-->
+			</Template>
+			<Template TemplateType="All_Nodes_Of_Type"/>
+			<Template TemplateType="Specific_Node"/>
+			<Template TemplateType="Distribution_Group"/>
+			<Template TemplateType="Externally_Defined"/>
+		</TemplateUsage>
+		<TemplateUsage UsageType="Sourcing_Rule_For_Product_Being_Delivered">
+			<Template TemplateType="All_Nodes_Of_Type"/>
+			<Template TemplateType="Seller_Nodes_Relationship"/>
+			<Template TemplateType="Specific_Node"/>
+			<Template TemplateType="Distribution_Group"/>
+			<Template TemplateType="Externally_Defined"/>
+		</TemplateUsage>
+		<TemplateUsage UsageType="Sourcing_Rule_For_Procurement">
+			<Template TemplateType="Ship_Nodes_Relationship"/>
+			<Template TemplateType="All_Node_Types_Ship_Node_Relationship"/>
+			<Template TemplateType="All_Nodes_Of_Type"/>
+			<Template TemplateType="Primary_Vendor"/>
+			<Template TemplateType="Specific_Node"/>
+			<Template TemplateType="Distribution_Group"/>
+			<Template TemplateType="Idle_Asset_By_Radius_Dist_Grp"/>
+			<Template TemplateType="Externally_Defined"/>
+		</TemplateUsage>
+		<TemplateUsage UsageType="Sourcing_Rule_For_Forwading">
+		</TemplateUsage>
+	</SourcingTemplateUsage>
+	<SourcingTemplateMaster>
+		<SourcingTemplate TemplateType="Seller_Nodes_Relationship" TemplateTypeDesc="Template_Type_Seller_Nodes_Relationship" HTMLTemplateDesc="Seller_Nodes_ORG_REL_1">
+			  <Parameter Name="RelationshipType" SortOrder="1" ArgID="ORG_REL_1" DefaultValue="Click_To_Select_A_Relationship_Type" IsDefaultValueValid="N" DisplayDirectionOnUI="Y" DirectionFilter="T"/>
+		</SourcingTemplate>
+		<SourcingTemplate TemplateType="Ship_Nodes_Relationship" TemplateTypeDesc="Template_Type_Ship_Nodes_Relationship" HTMLTemplateDesc="Ship_Nodes_ORG_REL_1">
+			  <Parameter Name="RelationshipType" SortOrder="1" ArgID="ORG_REL_1" DefaultValue="Click_To_Select_A_Relationship_Type" IsDefaultValueValid="N" DisplayDirectionOnUI="Y" DirectionFilter="F"/>
+		</SourcingTemplate>
+		<SourcingTemplate TemplateType="All_Node_Types_Ship_Node_Relationship" TemplateTypeDesc="Template_Type_All_Node_Types_Ship_Node_Relationship"  HTMLTemplateDesc="All_Nodes_of_Type/s_NODE_TYPE_1_replenished_by_(ORG_REL_1)_ship_nodes_ORG_REL_2" HTMLAlign="left">
+			  <Parameter Name="NodeTypes" SortOrder="1" ArgID="NODE_TYPE_1" DefaultValue="Click_To_Select_Node_Type_/_s" IsDefaultValueValid="N"/>
+			  <Parameter Name="RelationshipType" SortOrder="2" ArgID="ORG_REL_1" DefaultValue="Click_To_Select_A_Relationship_Type_1" IsDefaultValueValid="N" DisplayDirectionOnUI="N" DirectionFilter="T"/>
+			  <Parameter Name="RelationshipType" SortOrder="3" ArgID="ORG_REL_2" DefaultValue="Click_To_Select_A_Relationship_Type" IsDefaultValueValid="N" DisplayDirectionOnUI="Y" DirectionFilter="F"/>
+		</SourcingTemplate>
+		<SourcingTemplate TemplateType="All_Nodes_Of_Type" TemplateTypeDesc="Template_Type_All_Nodes_Of_Type" HTMLTemplateDesc="All_Nodes_of_Type/s_NODE_TYPE_1" HTMLAlign="left">
+			  <Parameter Name="NodeTypes" SortOrder="1" ArgID="NODE_TYPE_1" DefaultValue="Click_To_Select_Node_Type_/_s" IsDefaultValueValid="N"/>
+		</SourcingTemplate>
+		<SourcingTemplate TemplateType="Primary_Vendor" TemplateTypeDesc="Template_Type_Primary_Vendor" HTMLTemplateDesc="Primary_Vendor">
+		</SourcingTemplate>
+		<SourcingTemplate TemplateType="Specific_Node" TemplateTypeDesc="Template_Type_Specific_Node" HTMLTemplateDesc="Specific_Nodes_NODE_1">
+			  <Parameter Name="Node" SortOrder="1" ArgID="NODE_1" DefaultValue="Click_To_Select_A_Node" IsDefaultValueValid="N"/>
+		</SourcingTemplate>  
+		<SourcingTemplate TemplateType="Distribution_Group" TemplateTypeDesc="Template_Type_Distribution_Group" HTMLTemplateDesc="Distribution_Group_DISTRIBUTION_GROUP_1">
+			  <Parameter Name="DistributionGroup" SortOrder="1" ArgID="DISTRIBUTION_GROUP_1" DefaultValue="Click_To_Select_A_Distribution_Group" IsDefaultValueValid="N"/>
+		</SourcingTemplate>
+		<SourcingTemplate TemplateType="Receiving_Nodes_Relationship" TemplateTypeDesc="Template_Type_Receiving_Nodes_Relationship" HTMLTemplateDesc="Receiving_Nodes_ORG_REL_1">
+			  <Parameter Name="RelationshipType" SortOrder="1" ArgID="ORG_REL_1" DefaultValue="Click_To_Select_A_Relationship_Type" IsDefaultValueValid="N" DisplayDirectionOnUI="Y" DirectionFilter="F"/>
+		</SourcingTemplate>		
+		<SourcingTemplate TemplateType="Idle_Asset_By_Radius_Dist_Grp" TemplateTypeDesc="Template_Type_Idle_Asset_By_Radius_Dist_Grp" HTMLTemplateDesc="All_Nodes_In_DISTRIBUTION_GROUP_1_within_RADUIS_RADIUS_UOM_where_idle_asset">
+			<Parameter Name="DistributionGroup" SortOrder="1" ArgID="DISTRIBUTION_GROUP_1" DefaultValue="Click_To_Select_A_Distribution_Group" IsDefaultValueValid="N"/>
+			<Parameter Name="Radius" SortOrder="2" ArgID="RADIUS" IsAdditionalAttribute="Y" AttributeType="DOUBLE" DefaultValue="Click_To_Select_A_Radius" IsDefaultValueValid="N"/>
+			<Parameter Name="RadiusUOM" SortOrder="3" ArgID="RADIUS_UOM" IsAdditionalAttribute="Y" AttributeType="UOM" DefaultValue="Click_To_Select_A_UOM" IsDefaultValueValid="N"/>
+			<Parameter Name="IdleAsset" SortOrder="999" ArgID="IDLE_ASSET" IsAdditionalAttribute="Y" AttributeType="BOOLEAN" DefaultValue="Y" IsDefaultValueValid="Y"/>
+		</SourcingTemplate>
+		<SourcingTemplate TemplateType="Externally_Defined" TemplateTypeDesc="Externally_Defined_Sourcing_Rule" HTMLTemplateDesc="Externally_Defined_Using_Reason_REASON_CODE_1">
+			  <Parameter Name="ExternallyDefinedReasonCode" SortOrder="1" ArgID="REASON_CODE_1" DefaultValue="Click_To_Select_A_Reason_Code"  IsAdditionalAttribute="Y" IsDefaultValueValid="N" AttributeType="TEXT"/>
+		</SourcingTemplate>
+  </SourcingTemplateMaster>
+</SourcingTemplates>

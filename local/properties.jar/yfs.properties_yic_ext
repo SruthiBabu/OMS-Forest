@@ -1,0 +1,144 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2014, 2017 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_yic_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_yic_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## This file contains the yfs properties to configure the item configurator behaviors in the product.
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.function.handler.files
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## A comma separated list of file names in the classpath,
+## that contains the configurator function handlers for different organizations.
+## Comma is used as delimiter to specify multiple function handler property files.
+yfs.function.handler.files=/functionHandlers.properties
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.control.handler.files
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## A comma separated list of file names in the classpath,
+## that contains the configurator UI controls for different organizations.
+## Comma is used as delimiter to specify multiple control handler property files.
+yfs.control.handler.files=/controls.properties
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.objectmap.extension.file
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## yfs.objectmap.extension.file property is used for objectmap properties.If the default implementation is used
+## ObjectMap.properties file will be loaded OOB. If the property is declared through
+## the customer_overrides.properties the custom file value needs to be declared .
+## Accordingly the meta custom properties will be updated or added to the objectmap.
+yfs.objectmap.extension.file=/ObjectMap.properties
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ehcache.override.files
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## yfs.ehcache.override.files property is used for Ehcache.If the default implementation is used
+## EhCache.xml file will be loaded OOB. If the property is declared through
+## the customer_overrides.properties the custom file value needs to be declared .
+## The custom file will be used to override the complete EhCache.xml values .
+## So the custom file needs to respect the format of EhCache.xml
+yfs.ehcache.override.files=/EhCache.xml
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cachetypes.extension.files
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## yfs.cachetypes.extension.files property is used for cachetypes properties.If the default implementation is used
+## cacheTypes.properties file will be loaded OOB. If the property is declared through
+## the customer_overrides.properties the custom file value needs to be declared .
+## Accordingly the meta custom properties will be updated or added to the cachetypes.
+yfs.cachetypes.extension.files=/cacheTypes.properties
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.regressiontestreport.override.file
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## yfs.regressiontestreport.override.file property is used for RegressionTestReport.If the default implementation is used
+## RegressionTestReport.xml file will be loaded OOB. If the property is declared through
+## the customer_overrides.properties the custom file value needs to be declared .
+## The custom file will be used to override the complete RegressionTestReport.xml values .
+## So the custom file needs to respect the format of RegressionTestReport.xml
+yfs.regressiontestreport.override.file=/RegressionTestReport.xml
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.enableCamelCaseOutputForProductConfiguratorAPIs
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## yfs.enableCamelCaseOutputForProductConfiguratorAPIs is used to enable camel case output
+## for Product Configurator APIs. From version 9.4, the XML elements and attribute names in
+## API output are created in title case format by default. If camel case format is required,
+## value of this property should be set to Y in customer_overrides.properties.
+yfs.enableCamelCaseOutputForProductConfiguratorAPIs=N
+## PROPERTY_END

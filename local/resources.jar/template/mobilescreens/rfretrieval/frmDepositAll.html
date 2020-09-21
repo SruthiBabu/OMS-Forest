@@ -1,0 +1,77 @@
+<html>
+    <body>
+        <form name="frmDepositAll" target="/console/rfretrieval.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/TaskType/@TaskTypeName"
+                                    name="lblDeposit" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblDeposit"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLocation"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@TargetLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@TargetLocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@SourceLocationId"
+                                    name="txtSourceLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfretrieval.ppc?action=frmDepositUpdate"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

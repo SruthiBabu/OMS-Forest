@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity Name="Association">
+      <PrimaryKey>
+         <Attribute Name="AssociationKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ParentTable"/>
+         <Attribute Name="ParentKey"/>
+         <Attribute Name="AssociationType"/>
+         <Attribute Name="EffectiveFrom"/>
+         <Attribute Name="EffectiveTo"/>
+         <Attribute Name="AssociatedTable"/>
+         <Attribute Name="AssociatedKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Category">
+      <PrimaryKey>
+         <Attribute Name="CategoryKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="CategoryPath"/>
+         <Attribute Name="CategoryID"/>
+         <Attribute Name="ParentCategoryKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CategoryDomain">
+      <PrimaryKey>
+         <Attribute Name="CategoryDomainKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="CategoryDomain"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CategoryItem">
+      <PrimaryKey>
+         <Attribute Name="CategoryItemKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="CategoryKey"/>
+         <Attribute Name="ItemKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Item">
+      <PrimaryKey>
+         <Attribute Name="ItemKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemID"/>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="UnitOfMeasure"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ItemAlias">
+      <PrimaryKey>
+         <Attribute Name="ItemAliasKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemKey"/>
+         <Attribute Name="AliasName"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ContainerBuyerAssociation">
+      <PrimaryKey>
+         <Attribute Name="CntrBuyerAssocKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ContainerItemAssociation">
+      <PrimaryKey>
+         <Attribute Name="CntrCategoryAssocKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="CntrCapacityDefn">
+	  <PrimaryKey>
+	     <Attribute Name="CntrCapacityDefnKey"/>
+	  </PrimaryKey>
+	  <UniqueKey>
+	    <Attribute Name="ItemKey"/>
+	  </UniqueKey>
+   </Entity>
+   <Entity Name="ItemExclusion">
+      <PrimaryKey>
+         <Attribute Name="ItemExclusionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemKey"/>
+         <Attribute Name="ExclusionCode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="KitLine">
+      <PrimaryKey>
+         <Attribute Name="OrderKitLineKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderLineKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="MasterCatalog">
+      <PrimaryKey>
+         <Attribute Name="MasterCatalogKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrganizationCode"/>
+         <Attribute Name="MasterCatalogID"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ItemInstruction">
+      <PrimaryKey>
+         <Attribute Name="ItemInstructionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemUOM">
+      <PrimaryKey>
+         <Attribute Name="ItemUOMKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="AlternateUOM">
+      <PrimaryKey>
+         <Attribute Name="ItemUOMKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemTag">
+      <PrimaryKey>
+         <Attribute Name="ItemTagKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryTagAttributes">
+      <PrimaryKey>
+         <Attribute Name="ItemTagKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemServiceAssoc">
+      <PrimaryKey>
+         <Attribute Name="ItemServiceAssocKey"/>
+      </PrimaryKey>
+   </Entity>
+</Entities>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity
+            Description="This table stores information about all open pallets available in the system."
+            EntityType="TRANSACTION" Module="wms" Name="Open_Container"
+            Prefix="YFS_" TableName="YFS_OPEN_CONTAINER"
+            TableType="TRANSACTION" XMLName="OpenContainer">
+            <Attributes>
+                <Attribute ColumnName="OPEN_CONTAINER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_OPEN_CONTAINER table."
+                    Name="Open_Container_Key" Nullable="false"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The case or pallet License Plate Number. This field is a foreign key to the YFS_LPN_HDR table."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="This field indicates the system defined values for the LPN type associated with the LPN number for which an open container exists. Currently, the system supports only CASE and PALLET LPN types."
+                    Name="LPN_Type" Nullable="false"/>
+                <Attribute ColumnName="IS_SHIPPING_CONTAINER"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the container is a shipping container or inventory container."
+                    Name="Is_Shipping_Container" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with the open container."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="This field indicates the location in a warehouse where the container exists."
+                    Name="Location_Id" Nullable="false" XMLName="LocationId"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="This field identifies the zone in which the container exists."
+                    Name="Zone_Id" Nullable="false" XMLName="ZoneId"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The shipment key that is associated with the open container."
+                    Name="Shipment_Key" Nullable="false"/>
+                <Attribute ColumnName="LOAD_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The load key that is associated with the open container."
+                    Name="Load_Key" Nullable="false"/>
+                <Attribute ColumnName="SCAC" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The Standard Carrier Alpha Code (SCAC) associated with the open container. This code is assigned to identify the carrier."
+                    Name="Scac" Nullable="false"/>
+                <Attribute ColumnName="SHIP_DATE" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The date by which the container must be shipped."
+                    Name="Ship_Date" Nullable="false"/>
+                <Attribute ColumnName="TARGET_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="Location to which the container should move the Inventory."
+                    Name="Target_Location_Id" Nullable="true"/>
+                <Attribute ColumnName="IS_DUMMY_CONTAINER"
+                    DataType="Flag"
+                    Description="This flag indicates whether the container is a dummy container or not."
+                    Name="Is_Dummy_Container" Nullable="true"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="OPEN_CONTAINER_PK" Name="YFS_OPEN_CONTAINER_PK">
+                <Attribute ColumnName="OPEN_CONTAINER_KEY" Name="Open_Container_Key"/>
+            </PrimaryKey>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+					ForeignEntity="Ship_Node" Name="Ship_Node" Virtual="true"
+					Type="Unidirectional" XMLName="Node">
+					<Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+				</RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="OPEN_CONTAINER_I1"
+                    Name="YFS_OPEN_CONTAINER_I1" Unique="true">
+                    <Column Name="LPN_NO"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity Description="This table stores wave definitions."
+            EntityType="TRANSACTION" Module="wms" Name="Wave"
+            Prefix="YFS_" TableName="YFS_WAVE" TableType="TRANSACTION" XMLName="Wave">
+            <Attributes>
+                <Attribute ColumnName="WAVE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_WAVE table."
+                    Name="Wave_Key" Nullable="false"/>
+                <Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The wave number is a one up number that system generates to uniquely identify the wave in a node."
+                    Name="Wave_No" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_WAVE table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="FreeText-200"
+                    DefaultValue="' '"
+                    Description="A brief description of the wave."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_GROUP_ID"
+                    DataType="ID-10" DefaultValue="' ' "
+                    Description="This field identifies the shipment group to which the wave belongs. The combination of the Node_Key and Shipment_Group_Id columns form a foreign key to the YFS_Wave table."
+                    Name="Shipment_Group_Id" Nullable="false" XMLName="ShipmentGroupId"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the document type to which the wave belongs."
+                    Name="Document_Type" Nullable="false"/>
+                <Attribute ColumnName="PIPELINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The pipeline key that is associated with the wave."
+                    Name="Pipeline_Key" Nullable="false"/>
+                <Attribute ColumnName="WAVE_STATUS" DataType="Status"
+                    DefaultValue="' '"
+                    Description="This field indicates the status the wave is currently in."
+                    Name="Wave_Status" Nullable="false"/>
+                <Attribute ColumnName="BG_WAVE_STATUS" DataType="Status"
+                    DefaultValue="' '"
+                    Description="This field indicates the status of the wave, when processed in background. Possible values are blank (not running in background), 00 (Cancellation Requested) and 01 (Cancellation Failed)."
+                    Name="Background_Wave_Status" Nullable="true"/>
+                <Attribute ColumnName="RELEASE_NO_EARLIER_THAN"
+                    DataType="TimeStamp"
+                    Description="This field indicates that the wave is not released for picking before this date."
+                    Name="Release_No_Earlier_Than" Nullable="true"/>
+                <Attribute ColumnName="RELEASE_NO_LATER_THAN"
+                    DataType="TimeStamp"
+                    Description="This field indicates that the wave is not released for picking after this date."
+                    Name="Release_No_Later_Than" Nullable="true"/>
+                <Attribute ColumnName="SEQ_NO" DataType="Count"
+                    DefaultValue="0 "
+                    Description="This field indicates the sequence number associated with the wave."
+                    Name="Seq_No" Nullable="false" XMLName="SeqNo"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="This field indicates the priority to apply to the wave. All waves will be processed in the order of this priority."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' '"
+                    Description="This field indicates the reason code for modifying the wave."
+                    Name="Reason_Code" Nullable="false"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' '"
+                    Description="This field describes any additional information as to why the wave was modified."
+                    Name="Reason_Text" Nullable="false"/>
+                <Attribute ColumnName="OVERRIDE_RELEASE_DATE"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the wave overrides the wave release date. If 'Y' is selected, the Assign Pick Location (Release Wave) agent ignores the Release No Earlier Than and Release No Later Than date ranges."
+                    Name="Override_Release_Date" Nullable="false"/>
+                <Attribute ColumnName="OVERRIDE_CONCURRENT_WAVE"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the wave overrides the concurrent wave that is released. If 'Y' is selected, the Assign Pick Location (Release Wave) agent ignores the number of waves released concurrently that is defined for a specific shipment group."
+                    Name="Override_Concurrent_Wave" Nullable="false"/>
+                <Attribute ColumnName="ESTIMATED_MINUTES"
+                    DataType="Count"
+                    Description="Indicates the number of minutes it is estimated that the wave would take to execute."
+                    Name="Estimated_Minutes" Nullable="true" XMLName="EstimatedMinutes"/>
+                <Attribute ColumnName="REMAINING_MINUTES"
+                    DataType="Count"
+                    Description="Indicates the time required for the planned tasks that are not yet complete."
+                    Name="Remaining_Minutes" Nullable="true"
+                    Virtual="true" XMLName="RemainingMinutes"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_WAVE_PK">
+                <Attribute ColumnName="WAVE_KEY" Name="Wave_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_WAVE_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="WAVE_NO"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveList" ChildName="Wave"
+                    ForeignEntity="Shipment_Group" Name="ShipmentGroup"
+                    ReadOnly="true" Type="Bidirectional" XMLName="ShipmentGroup">
+                    <Attribute Name="Shipment_Group_Id" ParentName="Shipment_Group_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveList" ChildName="Wave"
+                    ChildXMLName="Wave" DeleteCascade="true"
+                    ForeignEntity="Ship_Node" Name="Ship_Node"
+                    ReadOnly="true" Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Description="This table stores audits for a wave."
+            EntityType="TRANSACTION" Module="wms" Name="Wave_Audit"
+            Prefix="YFS_" TableName="YFS_WAVE_AUDIT"
+            TableType="TRANSACTION" XMLName="WaveAudit">
+            <Attributes>
+                <Attribute ColumnName="WAVE_AUDIT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_WAVE_AUDIT table."
+                    Name="Wave_Audit_Key" Nullable="false" XMLName="WaveAuditKey"/>
+                <Attribute ColumnName="WAVE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Unique Identifier of the Wave that is being audited."
+                    Name="Wave_Key" Nullable="false" XMLName="WaveKey"/>
+                <Attribute ColumnName="WAVE_AUDIT_TRAN_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Unique key of the transaction."
+                    Name="Wave_Audit_Tran_Key" Nullable="false" XMLName="WaveAuditTranKey"/>
+                <Attribute ColumnName="USER_ID" DataType="LoginId"
+                    DefaultValue="' '"
+                    Description="The User who performed the specified Wave operation."
+                    Name="User_Id" Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="MODIFICATION_LEVEL"
+                    DataType="TableName" DefaultValue="' '"
+                    Description="This column indicates at what level the modification is done - either at Wave level or Shipment level."
+                    Name="Modification_Level" Nullable="false" XMLName="ModificationLevel"/>
+                <Attribute ColumnName="MODIFICATION_TYPE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The Context of the modification."
+                    Name="Modification_Type" Nullable="false" XMLName="ModificationType"/>
+                <Attribute ColumnName="ATTRIBUTE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The attribute that got modified."
+                    Name="Attribute" Nullable="false" XMLName="Attribute"/>
+                <Attribute ColumnName="OLD_VALUE" DataType="Text-40"
+                    Description="Old Value of the Modified Attribute."
+                    Name="Old_Value" Nullable="true" XMLName="OldValue"/>
+                <Attribute ColumnName="NEW_VALUE" DataType="Text-40"
+                    Description="New Value of the Modified Attribute."
+                    Name="New_Value" Nullable="true" XMLName="NewValue"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode"
+                    Description="Reason code for modifying the Wave."
+                    Name="Reason_Code" Nullable="true" XMLName="ReasonCode"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText"
+                    Description="Additional Information as to why the wave was modified."
+                    Name="Reason_Text" Nullable="true" XMLName="ReasonText"/>
+                <Attribute ColumnName="NO_OF_SHIPMENTS"
+                    DataType="Number" DefaultValue="0"
+                    Description="This gives the number of shipments in the Wave."
+                    Name="No_Of_Shipments" Nullable="false" XMLName="NoOfShipments"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_WAVE_AUDIT_PK">
+                <Attribute ColumnName="WAVE_AUDIT_KEY" Name="Wave_Audit_Key"/>
+            </PrimaryKey>
+            <Indices/>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveAuditList"
+                    ChildName="Wave_Audit" ChildXMLName="WaveAudit"
+                    ForeignEntity="Wave" Name="Wave"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="Wave">
+                    <Attribute Name="Wave_Key" ParentName="Wave_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

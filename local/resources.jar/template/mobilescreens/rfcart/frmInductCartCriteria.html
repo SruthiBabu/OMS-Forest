@@ -1,0 +1,90 @@
+<html>
+    <body>
+        <form name="frmInductCartCriteria" target="/console/rfcart.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+									<input col="8" 
+                                    name="lblTitle"
+                                    size="12" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Induct_Cart"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+									<input col="1" name="lblCartId"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblCartId"
+                                    type="text" validate="false" value="Mobile_Cart_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/InductCart/@CartId"
+                                    name="txtCartId"
+                                    outputbinding="xml:/InductCart/@CartId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/InductCart/@CartId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+									<input col="1" name="lblBatchNo"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblBatchNo"
+                                    type="text" validate="false" value="Mobile_Batch_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/InductCart/@BatchNo"
+                                    name="txtBatchNo"
+                                    outputbinding="xml:/InductCart/@BatchNo"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/InductCart/@BatchNo"
+                                    type="text" validate="true"/>
+									<input col="1" inputbinding="xml:/InductCart/@MandateBatch"
+                                    name="txtMandateBatch"
+                                    outputbinding="xml:/InductCart/@MandateBatch"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/InductCart/@MandateBatch"
+                                    type="hidden" validate="false"/>
+									<input col="1" inputbinding="xml:/InductCart/@StartPick"
+                                    name="txtStartPick"
+                                    outputbinding="xml:/InductCart/@StartPick"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/InductCart/@StartPick"
+                                    type="hidden" validate="false"/>
+									<input col="1" inputbinding="xml:/InductCart/@HasOpenTasks"
+                                    name="txtHasOpenTasks"
+                                    outputbinding="xml:/InductCart/@HasOpenTasks"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/InductCart/@HasOpenTasks"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+									url="/console/rfcart.ppc?action=frmInductCartUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr/>
+                        </table>
+                    </td>					
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

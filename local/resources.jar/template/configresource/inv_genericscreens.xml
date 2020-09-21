@@ -1,0 +1,1702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity EntityTitle="DistributionRule" EntityName="DistributionRule" OrganizationAttribute="OwnerKey" PrimaryKeyAttributeName="DistributionRuleKey"> 
+	<ConfigurationAttributes  TableName="YFS_DISTRIBUTION_RULE">
+		<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV002" IsPrimary="Y"/>
+	</ConfigurationAttributes>
+      <YCPPM500 Title="Product_Sourcing_Distribution_Rules" ScreenType="List">
+         <API Servlet="/yantra/entities/DistributionRule/list" APIName="" Message="Message_Retrieving_Distribution">
+				<StaticAttributes ItemGroupCode="PROD" Purpose="SOURCING"/>
+         </API>
+        <ListInfo NamePrefix="/" ChildTag="DistributionRule"> 
+            <List AttributeName="@DistributionRuleId" ColumnTitle="Group_ID" DataType="Key"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-40"/>
+            <Modify DisplayForm="YCPPM501" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" CallingOrganizationCode="@CallingOrganizationCode" 
+                   DistributionRuleId="@DistributionRuleId" />
+				<!-- StaticAttributes ItemGroupCode="PROD" /-->
+            </Modify>
+            <CreateNew DisplayForm="YCPPM501" DisplayMode="Dialog" NextAction="Modify">
+                <DynamicAttributes OwnerKey="@CallingOrganizationCode" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" />
+				<StaticAttributes ItemGroupCode="PROD" Purpose="SOURCING"/>
+            </CreateNew>
+            <Delete>
+              <API Servlet="com.yantra.ycp.pm.ui.backend.YCPDistributionRuleAPI" APIName="delete" Message="Message_Deleting_Distribution_Rule"/>
+            </Delete> 
+        </ListInfo>
+      </YCPPM500>
+      <YCPPM500_85 Title="Delivery_Service_Distribution_Groups" ScreenType="List">
+         <API Servlet="/yantra/entities/DistributionRule/list" APIName="" Message="Message_Retrieving_Distribution">
+				<StaticAttributes ItemGroupCode="DS" Purpose="SOURCING"/>
+         </API>
+        <ListInfo NamePrefix="/" ChildTag="DistributionRule"> 
+            <List AttributeName="@DistributionRuleId" ColumnTitle="Group_ID" DataType="Key"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-40"/>
+            <Modify DisplayForm="YCPPM501" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" CallingOrganizationCode="@CallingOrganizationCode" 
+                   DistributionRuleId="@DistributionRuleId" />
+				<!-- StaticAttributes ItemGroupCode="PROD" /-->
+            </Modify>
+            <CreateNew DisplayForm="YCPPM501" DisplayMode="Dialog" NextAction="Modify">
+                <DynamicAttributes OwnerKey="@CallingOrganizationCode" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" />
+				<StaticAttributes ItemGroupCode="DS" Purpose="SOURCING"/>
+            </CreateNew>
+            <Delete>
+              <API Servlet="com.yantra.ycp.pm.ui.backend.YCPDistributionRuleAPI" APIName="delete" Message="Message_Deleting_Distribution_Rule"/>
+            </Delete> 
+        </ListInfo>
+      </YCPPM500_85>
+	  <YCPPM408 Title="Provided_Service_Distribution_Rules" ScreenType="List">
+         <API Servlet="/yantra/entities/DistributionRule/list" APIName="" Message="Message_Retrieving_Distribution">
+				<StaticAttributes ItemGroupCode="PS" Purpose="SOURCING"/>
+         </API>
+        <ListInfo NamePrefix="/" ChildTag="DistributionRule"> 
+            <List AttributeName="@DistributionRuleId" ColumnTitle="Group_ID" DataType="Key"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-40"/>
+            <Modify DisplayForm="YCPPM501" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" CallingOrganizationCode="@CallingOrganizationCode" 
+                                   DistributionRuleId="@DistributionRuleId"/>
+				<!-- StaticAttributes ItemGroupCode="PS"/-->
+            </Modify>
+            <CreateNew DisplayForm="YCPPM501" DisplayMode="Dialog" NextAction="Modify">
+                <DynamicAttributes OwnerKey="@CallingOrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+				<StaticAttributes ItemGroupCode="PS" Purpose="SOURCING"/>
+            </CreateNew>
+            <Delete>
+              <API Servlet="com.yantra.ycp.pm.ui.backend.YCPDistributionRuleAPI" APIName="delete" Message="Message_Deleting_Distribution_Rule"/>
+            </Delete> 
+        </ListInfo>
+      </YCPPM408>
+      <YCPPM501 Title="Distribution_Group_Details" ScreenType="Detail" > 
+         <DetailInfo>
+            <Get>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Distribution_Rule_Details"/>
+                <InnerPanels>
+                    <ListPanel FormName="YCPPM405" ListPanel="pnlDistributionList" >
+                        <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" />
+                    </ListPanel>
+					<ListPanel FormName="YCPPM406" ListPanel="pnlDistributionGrpNewList" >
+                        <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" />
+                    </ListPanel>
+                </InnerPanels>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/DistributionRule/modify" APIName="" Message="Message_Saving_Distribution_Rule"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPDistributionRuleAPI" APIName="createDistributionRule" Message="Message_Creating_New_Distribution_Rule"/>
+            </CreateNew>
+            <LogicalKeys>
+                <LogicalKey ComponentType="JTextField" ComponentName="txtDistRuleId"/>
+            </LogicalKeys>
+        </DetailInfo>
+      </YCPPM501>
+      <!-- Called from menu -->
+      <YCPPM502 Title="Distribution_Rules" ScreenType="List">
+         <API Servlet="/yantra/entities/DistributionRule/list" APIName="" Message="Message_Retrieving_Distribution">
+            <SpecialAttributes OwnerKey="OrganizationCode"/>
+         </API>
+         <ListInfo NamePrefix="/" ChildTag="DistributionRule"> 
+            <List AttributeName="@DistributionRuleId" ColumnTitle="Rule_Id" DataType="Key"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-40"/>
+            <Modify DisplayForm="YCPPM501" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey"  CallingOrganizationCode="@CallingOrganizationCode" 
+                                   DistributionRuleId="@DistributionRuleId"/>
+            </Modify>
+            <CreateNew DisplayForm="YCPPM501" DisplayMode="Dialog" NextAction="Modify">
+                <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode" >
+                </DynamicAttributes>
+            </CreateNew>
+            <Delete>
+              <API Servlet="com.yantra.ycp.pm.ui.backend.YCPDistributionRuleAPI" APIName="delete" Message="Message_Deleting_Distribution_Rule"/>
+            </Delete> 
+            <SaveAs DisplayForm="YCPPM501" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId"
+                    FromDistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode">
+                </DynamicAttributes>
+            </SaveAs>
+          </ListInfo>
+      </YCPPM502>
+	  <YCPPM570 Title="Procurement_Distribution_Groups" ScreenType="List">
+         <ConfigurationAttributes  TableName="YFS_DISTRIBUTION_RULE">
+            <ApplicationSpecificAttributes ApplicationCode="omd" PermissionId="YSOMD054" IsPrimary="Y"/>
+         </ConfigurationAttributes>
+         <API Servlet="/yantra/entities/DistributionRule/list" APIName="" Message="Message_Retrieving_Distribution">
+			<StaticAttributes ItemGroupCode="PROD" Purpose="PROCUREMENT"/>
+         </API>
+        <ListInfo NamePrefix="/" ChildTag="DistributionRule"> 
+            <List AttributeName="@DistributionRuleId" ColumnTitle="Group_ID" DataType="Key"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-40"/>
+            <Modify DisplayForm="YCPPM571" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" CallingOrganizationCode="@CallingOrganizationCode" DistributionRuleId="@DistributionRuleId"/>
+            </Modify>
+            <CreateNew DisplayForm="YCPPM571" DisplayMode="Dialog" NextAction="Modify">
+                <DynamicAttributes OwnerKey="@CallingOrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+				<StaticAttributes ItemGroupCode="PROD" Purpose="PROCUREMENT"/>
+            </CreateNew>
+            <Delete>
+              <API Servlet="com.yantra.ycp.pm.ui.backend.YCPDistributionRuleAPI" APIName="delete" Message="Message_Deleting_Distribution_Rule"/>
+            </Delete> 
+        </ListInfo>
+      </YCPPM570>
+      <YCPPM571 Title="Distribution_Group_Details" ScreenType="Detail" > 
+         <DetailInfo>
+            <Get>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Distribution_Rule_Details"/>
+                <InnerPanels>
+					<ListPanel FormName="YCPPM572" ListPanel="pnlDistributionGroupList" >
+                        <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" />
+                    </ListPanel>
+                </InnerPanels>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/DistributionRule/modify" APIName="" Message="Message_Saving_Distribution_Rule"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPDistributionRuleAPI" APIName="createDistributionRule" Message="Message_Creating_New_Distribution_Rule"/>
+            </CreateNew>
+            <LogicalKeys>
+                <LogicalKey ComponentType="JTextField" ComponentName="txtDistRuleId"/>
+            </LogicalKeys>
+        </DetailInfo>
+      </YCPPM571>
+		<YCPPM691 Title="List_of_Values" ScreenType="List" >
+			<ListInfo NamePrefix="/" ChildTag="DistributionRule">
+				<List AttributeName="@DistributionRuleId" ColumnTitle="Group_ID" DataType="Key"/>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-40"/>
+		        <Delete/>
+	        </ListInfo>
+			<API Servlet="/yantra/entities/DistributionRule/list" APIName="" Message="Message_Retrieving_Distribution"/>
+      </YCPPM691>
+      <YCPPM692 Title="Create_Distribution_Group" ScreenType="Detail" > 
+		<ConfigurationAttributes  TableName="YFS_DISTRIBUTION_RULE">
+			<ApplicationSpecificAttributes ApplicationCode="omd" PermissionId="YSOMD072" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+         <DetailInfo>
+            <Get>
+				<API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/DistributionRule/modify" APIName="" Message="Message_Saving_Distribution_Rule"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/DistributionRule/create" APIName="" Message="Message_Creating_New_Distribution_Rule"/>
+            </CreateNew>
+            <LogicalKeys>
+                <LogicalKey ComponentType="JTextField" ComponentName="txtDistRuleId"/>
+            </LogicalKeys>
+        </DetailInfo>
+      </YCPPM692>
+   </Entity>
+   <Entity EntityTitle="Distribution" EntityName="ItemShipNode" OrganizationAttribute="OwnerKey" PrimaryKeyAttributeName="ItemshipnodeKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM_SHIP_NODE">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV002" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPPM405 Title="Distribution" ScreenType="List">
+         <API Servlet="/yantra/entities/ItemShipNode/list" APIName="" Message="Message_Retrieving_Distribution">
+         </API>
+         <ListInfo NamePrefix="/" ChildTag="ItemShipNode">
+            <List AttributeName="@EffectiveStartDate" ColumnTitle="Effective_Start_Date" DataType="Date"/>
+            <List AttributeName="@EffectiveEndDate" ColumnTitle="Effective_End_Date" DataType="Date"/>
+            <List AttributeName="@ItemId" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@ShipnodeKey" ColumnTitle="Ship_Node" DataType="Key"/>
+            <List AttributeName="@SourceFromOrganization" ColumnTitle="Source_External_Organization" DataType="Key"/>
+            <List AttributeName="@Priority" ColumnTitle="Priority" DataType="PriorityWithDecimal"/>
+            <List AttributeName="@ActiveFlag" ColumnTitle="Active_Distribution" DataType="Boolean"/>
+            <Modify DisplayForm="YCPPM006" DisplayMode="Dialog">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" />
+			</Modify>
+            <CreateNew DisplayForm="YCPPM006" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode" >
+                </DynamicAttributes>
+                <StaticAttributes ActiveFlag="Y" EffectiveEndDate="25000101T00:00:00" 
+						EffectiveStartDate="19000101T00:00:00"/>
+            </CreateNew>
+            <Delete>
+                <API Servlet="/yantra/entities/ItemShipNode/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete> 
+            <SaveAs DisplayForm="YCPPM006" DisplayMode="Dialog"/>
+         </ListInfo>
+      </YCPPM405>
+	  <YCPPM406 Title="Distribution_Group_List" ScreenType="List">
+         <API Servlet="/yantra/entities/ItemShipNode/list" APIName="" Message="Message_Retrieving_Distribution">
+         </API>
+         <ListInfo NamePrefix="/" ChildTag="ItemShipNode">
+            <!--List AttributeName="@EffectiveStartDate" ColumnTitle="Effective_Start_Date" DataType="Date"/>
+            <List AttributeName="@EffectiveEndDate" ColumnTitle="Effective_End_Date" DataType="Date"/>
+            <List AttributeName="@ItemId" ColumnTitle="Item_ID" DataType="ItemID"/-->
+            <List AttributeName="@ShipnodeKey" ColumnTitle="Ship_Node" DataType="Key"/>
+            <List AttributeName="@SourceFromOrganization" ColumnTitle="Source_External_Organization" DataType="Key"/>
+            <List AttributeName="@Priority" ColumnTitle="Priority" DataType="PriorityWithDecimal"/>
+            <!--List AttributeName="@ActiveFlag" ColumnTitle="Active" DataType="Boolean"/-->
+            <Modify DisplayForm="YCPPM407" DisplayMode="Dialog">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" />
+			</Modify>
+            <CreateNew DisplayForm="YCPPM407" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" >
+					<DistributionRule ItemGroupCode="@ItemGroupCode" >
+					</DistributionRule>
+                </DynamicAttributes>
+				<StaticAttributes ActiveFlag="Y" />
+                <!--StaticAttributes ActiveFlag="Y" EffectiveEndDate="25000101T00:00:00" 
+						EffectiveStartDate="19000101T00:00:00"/-->
+            </CreateNew>
+            <Delete>
+                <API Servlet="/yantra/entities/ItemShipNode/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete> 
+            <SaveAs DisplayForm="YCPPM407" DisplayMode="Dialog" >
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode" />
+			</SaveAs>
+         </ListInfo>
+      </YCPPM406>
+      <YCPPM006 Title="Distribution_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Distribution_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemShipNode/modify" APIName="" Message="Message_Saving_Distribution_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemShipNode/create" APIName="" Message="Message_Creating_New_Distribution"/>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/ItemShipNode/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete>
+            <LogicalKeys>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpShipNode"/>
+               <LogicalKey ComponentType="JTextField" ComponentName="lkpItemID"/>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpExternalOrg"/>
+            </LogicalKeys>
+        	<Validations>
+        		<FromTo LesserComponent="txtEffectiveFrom" LesserLabel="Effective_Start_Date" GreaterComponent="txtEffectiveTo" GreaterLabel="Effective_End_Date" DataType="Date" />
+        	</Validations>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="Organization" XMLName="ExternalInventoryOrganization"> 
+                <StaticAttributes InventoryKeptExternally="Y" OrganizationKeyQryType="NE" />
+                <DynamicAttributes OrganizationKey="@OwnerKey" />
+            </Table>
+            <Table Name="Organization" XMLName="CatalogOrganization"> 
+                <DynamicAttributes OrganizationKey="@OwnerKey" />
+            </Table>
+            <Table Name="ShipNode" RemoveCallingOrgCode="Y">
+               <CodeAttributes>
+                  <CodeAttribute ShipnodeKey="@ShipnodeKey"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="Item">
+               <CodeAttributes>
+                  <CodeAttribute ItemID="@ItemId"/>
+               </CodeAttributes>
+             <SpecialAttributes OrganizationCode="OrganizationCode"/>
+            </Table>
+         </MasterData>
+      </YCPPM006>
+	  <YCPPM407 Title="Distribution_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Distribution_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemShipNode/modify" APIName="" Message="Message_Saving_Distribution_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemShipNode/create" APIName="" Message="Message_Creating_New_Distribution">
+					<StaticAttributes ItemId="ALL" ItemType="ALL"/>
+			   </API>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/ItemShipNode/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete>
+            <!--LogicalKeys>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpShipNode"/>
+               <LogicalKey ComponentType="JTextField" ComponentName="lkpItemID"/>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpExternalOrg"/>
+            </LogicalKeys>
+        	<Validations>
+        		<FromTo LesserComponent="txtEffectiveFrom" LesserLabel="Effective_Start_Date" GreaterComponent="txtEffectiveTo" GreaterLabel="Effective_End_Date" DataType="Date" />
+        	</Validations-->
+         </DetailInfo>
+         <MasterData>
+            <Table Name="Organization" XMLName="ExternalInventoryOrganization"> 
+                <StaticAttributes InventoryKeptExternally="Y" OrganizationKeyQryType="NE" />
+                <DynamicAttributes OrganizationKey="@OwnerKey" />
+            </Table>
+            <Table Name="Organization" XMLName="CatalogOrganization"> 
+                <DynamicAttributes OrganizationKey="@OwnerKey" />
+            </Table>
+            <Table Name="ShipNode" RemoveCallingOrgCode="Y">
+               <CodeAttributes>
+                  <CodeAttribute ShipnodeKey="@ShipnodeKey"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="Item">
+               <CodeAttributes>
+                  <CodeAttribute ItemID="@ItemId"/>
+               </CodeAttributes>
+             <SpecialAttributes OrganizationCode="OrganizationCode"/>
+            </Table>
+         </MasterData>
+      </YCPPM407>
+	  <YCPPM572 Title="Distribution_Group_List" ScreenType="List">
+         <API Servlet="/yantra/entities/ItemShipNode/list" APIName="" Message="Message_Retrieving_Distribution">
+         </API>
+         <ListInfo NamePrefix="/" ChildTag="ItemShipNode">
+            <List AttributeName="@ShipnodeKey" ColumnTitle="Ship_Node" DataType="Key"/>
+            <Modify DisplayForm="YCPPM573" DisplayMode="Dialog">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" />
+			</Modify>
+            <CreateNew DisplayForm="YCPPM573" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@OwnerKey" DistributionRuleId="@DistributionRuleId" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" >
+					<DistributionRule ItemGroupCode="@ItemGroupCode" >
+					</DistributionRule>
+                </DynamicAttributes>
+				<StaticAttributes ActiveFlag="Y" />
+            </CreateNew>
+            <Delete>
+                <API Servlet="/yantra/entities/ItemShipNode/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete> 
+         </ListInfo>
+      </YCPPM572>
+	  <YCPPM573 Title="Distribution_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Distribution_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemShipNode/modify" APIName="" Message="Message_Saving_Distribution_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemShipNode/create" APIName="" Message="Message_Creating_New_Distribution">
+					<StaticAttributes ItemId="ALL" ItemType="ALL"/>
+			   </API>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/ItemShipNode/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="Organization" XMLName="ExternalInventoryOrganization"> 
+                <StaticAttributes InventoryKeptExternally="Y" OrganizationKeyQryType="NE" />
+                <DynamicAttributes OrganizationKey="@OwnerKey" />
+            </Table>
+            <Table Name="Organization" XMLName="CatalogOrganization"> 
+                <DynamicAttributes OrganizationKey="@OwnerKey" />
+            </Table>
+            <Table Name="ShipNode" RemoveCallingOrgCode="Y">
+               <CodeAttributes>
+                  <CodeAttribute ShipnodeKey="@ShipnodeKey"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="Item">
+               <CodeAttributes>
+                  <CodeAttribute ItemID="@ItemId"/>
+               </CodeAttributes>
+             <SpecialAttributes OrganizationCode="OrganizationCode"/>
+            </Table>
+         </MasterData>
+      </YCPPM573>
+   </Entity>
+   <Entity EntityTitle="Atp Rules" EntityName="AtpRules" PrimaryKeyAttributeName="AtpRuleKey">
+		<ConfigurationAttributes  TableName="YFS_ATP_RULES">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV000" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPPM022 Title="ATP_Rules" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="AtpRules">
+            <List AttributeName="@AtpRule" ColumnTitle="Atp_Rule" DataType="Text-24"/>
+            <List AttributeName="@AtpRuleName" ColumnTitle="Atp_Rule_Name" DataType="Text-40"/>
+               <Modify DisplayForm="YCPPM026" DisplayMode="Dialog"/>
+               <SaveAs DisplayForm="YCPPM026" DisplayMode="Dialog"/>
+               <Delete>
+                  <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="deleteATPRule" Message="Message_Deleting_AtpRule"/>
+               </Delete>
+               <CreateNew DisplayForm="YCPPM026" DisplayMode="Dialog">
+            <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+           </CreateNew>
+         </ListInfo>
+         <API Servlet="/yantra/entities/AtpRules/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+      </YCPPM022>
+      <YCPPM026 Title="Atp_Rule_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_AtpRule"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/AtpRules/modify" APIName="" Message="Message_Saving_AtpRule"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/AtpRules/create" APIName="" Message="Message_Creating_AtpRule"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtRuleID"/>
+            </LogicalKeys>
+        <Validations>        
+        <FromTo LesserComponent="txtAccumulationDays" LesserLabel="Accumulation_Time" GreaterComponent="txtBackwardConsumptionDays" GreaterLabel="Backward_Consumption_Time" DataType="Number"/>
+        </Validations>
+         </DetailInfo>
+      </YCPPM026>
+   </Entity>
+   <Entity EntityTitle="Atp Monitor Rules" EntityName="InventoryMonitorRules" PrimaryKeyAttributeName="InventoryMonitorRulesKey">
+		<ConfigurationAttributes  TableName="YFS_INVENTORY_MONITOR_RULES">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV000" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPPM023 Title="ATP_Monitor_Rules" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="InventoryMonitorRules">
+            <List AttributeName="@InventoryMonitorRule" ColumnTitle="Atp_Monitor_Rule" DataType="Key"/>
+            <List AttributeName="@InventoryMonitorRuleName" ColumnTitle="Atp_Monitor_Rule_Name" DataType="Text-40"/>
+            <List AttributeName="@DisableFlag" ColumnTitle="Disabled" DataType="Boolean"/>
+               <Modify DisplayForm="YCPPM027" DisplayMode="Dialog">
+            <DynamicAttributes OrganizationCode="@OrganizationCode"/>
+           </Modify>
+               <SaveAs DisplayForm="YCPPM027" DisplayMode="Dialog">
+                   <DynamicAttributes OrganizationCode="@OrganizationCode"/>
+           </SaveAs>    
+               <Delete>
+                  <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="deleteMonitorRule" Message="Message_Deleting_Atp_Monitor_Rule"/>
+               </Delete>
+               <CreateNew DisplayForm="YCPPM027" DisplayMode="Dialog">
+            <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+           </CreateNew>
+     </ListInfo>
+         <API Servlet="/yantra/entities/InventoryMonitorRules/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+      </YCPPM023>
+      <YCPPM027 Title="ATP_Monitor_Rule_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+             <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Atp_Monitor_Rule"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/InventoryMonitorRules/modify" APIName="" Message="Message_Saving_Atp_Monitor_Rule"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/InventoryMonitorRules/create" APIName="" Message="Message_Creating_Atp_Monitor_Rule"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtRuleId"/>
+               <LogicalKey ComponentName="radEventBasedRule"/>
+               <LogicalKey ComponentName="radActionBasedRule"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="Action" XMLName="Action">
+	           <DynamicAttributes CallingOrganizationCode="@OwnerKey"/>
+               <CodeAttributes>
+                  <CodeAttribute ActionKey="@LeadTimeLevel1Action"/>
+                  <CodeAttribute ActionKey="@LeadTimeLevel2Action"/>
+                  <CodeAttribute ActionKey="@LeadTimeLevel3Action"/>
+                  <CodeAttribute ActionKey="@BeyondLeadTimeLevel1Action"/>
+                  <CodeAttribute ActionKey="@BeyondLeadTimeLevel2Action"/>
+                  <CodeAttribute ActionKey="@BeyondLeadTimeLevel3Action"/>
+               </CodeAttributes>
+            </Table>
+         </MasterData>
+      </YCPPM027>
+   </Entity>
+   <Entity EntityTitle="StatusInventoryTypes" EntityName="StatusInventoryTypes" PrimaryKeyAttributeName="StatusInventoryTypesKey">
+		<ConfigurationAttributes  TableName="YFS_STATUS_INVENTORY_TYPES">
+			<ApplicationSpecificAttributes ApplicationCode="omd" PermissionId="YSOMD025" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <PermanentRecordAttributes SystemDefined="Y"/>
+      <YCPWF026 Title="Status_Inventory_Types_For_Orders_Without_Chaining" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="StatusInventoryTypes">
+            <List AttributeName="/StatusOfInventory@Description" ColumnTitle="Status" DataType="Text-40"/>
+            <List AttributeName="/BuyerSupplyTypeOfInventory@Description" ColumnTitle="Buyer_Supply_Type" DataType="Text-40"/>
+            <List AttributeName="/SellerSupplyTypeOfInventory@Description" ColumnTitle="Seller_Supply_Type" DataType="Text-40"/>
+            <List AttributeName="@IncrementSellerSupply" ColumnTitle="Update_Seller_Supply" DataType="Boolean"/>
+            <List AttributeName="/SellerDemandTypeOfInventory@Description" ColumnTitle="Seller_Demand_Type" DataType="Text-40"/>
+            <CreateNew DisplayForm="YCPWF027" DisplayMode="Dialog">
+               <StaticAttributes SystemDefined="N" HasChainedChild="N" HasChainedParent="N" IncrementSellerSupply="N" StatusInventoryID="DEFAULT"/>
+               <DynamicAttributes DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey"/>
+            </CreateNew>
+            <Modify DisplayForm="YCPWF027" DisplayMode="Dialog"/>
+            <SaveAs DisplayForm="YCPWF027" DisplayMode="Dialog">
+               <StaticAttributes SystemDefined="N" StatusInventoryID="DEFAULT"/>
+               <DynamicAttributes DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey"/>
+            </SaveAs>
+            <Delete>
+               <API Servlet="/yantra/entities/StatusInventoryTypes/delete" APIName="" Message="Message_Deleting_Status_Inventory_Type"/>
+            </Delete>
+         </ListInfo>
+         <API Servlet="/yantra/entities/StatusInventoryTypes/list" APIName="" Message="Message_Retrieving_Search_Results">
+            <StaticAttributes HasChainedChild="N" HasChainedParent="N" StatusInventoryID="DEFAULT"/>
+         </API>
+      </YCPWF026>
+      <YCPWF075 Title="Status_Inventory_Types_For_Orders_With_Chained_Children" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="StatusInventoryTypes">
+            <List AttributeName="/StatusOfInventory@Description" ColumnTitle="Status" DataType="Text-40"/>
+            <List AttributeName="/BuyerSupplyTypeOfInventory@Description" ColumnTitle="Buyer_Supply_Type" DataType="Text-40"/>
+            <List AttributeName="/SellerSupplyTypeOfInventory@Description" ColumnTitle="Seller_Supply_Type" DataType="Text-40"/>
+            <List AttributeName="@IncrementSellerSupply" ColumnTitle="Update_Seller_Supply" DataType="Boolean"/>
+            <List AttributeName="/SellerDemandTypeOfInventory@Description" ColumnTitle="Seller_Demand_Type" DataType="Text-40"/>
+            <CreateNew DisplayForm="YCPWF027" DisplayMode="Dialog">
+               <StaticAttributes SystemDefined="N" HasChainedChild="Y" HasChainedParent="N"  IncrementSellerSupply="N" StatusInventoryID="DEFAULT"/>
+               <DynamicAttributes DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey"/>
+            </CreateNew>
+            <Modify DisplayForm="YCPWF027" DisplayMode="Dialog"/>
+            <SaveAs DisplayForm="YCPWF027" DisplayMode="Dialog">
+               <StaticAttributes SystemDefined="N" StatusInventoryID="DEFAULT"/>
+               <DynamicAttributes DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey"/>
+            </SaveAs>
+            <Delete>
+               <API Servlet="/yantra/entities/StatusInventoryTypes/delete" APIName="" Message="Message_Deleting_Status_Inventory_Type"/>
+            </Delete>
+         </ListInfo>
+         <API Servlet="/yantra/entities/StatusInventoryTypes/list" APIName="" Message="Message_Retrieving_Search_Results">
+            <StaticAttributes HasChainedChild="Y" HasChainedParent="N" StatusInventoryID="DEFAULT"/>
+         </API>
+      </YCPWF075>
+	  <YCPWF076 Title="Orders_With_Procurement" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="StatusInventoryTypes">
+            <List AttributeName="/StatusOfInventory@Description" ColumnTitle="Status" DataType="Text-40"/>
+            <List AttributeName="/BuyerSupplyTypeOfInventory@Description" ColumnTitle="Buyer_Supply_Type" DataType="Text-40"/>
+            <List AttributeName="/SellerSupplyTypeOfInventory@Description" ColumnTitle="Seller_Supply_Type" DataType="Text-40"/>
+            <List AttributeName="@IncrementSellerSupply" ColumnTitle="Update_Seller_Supply" DataType="Boolean"/>
+            <List AttributeName="/SellerDemandTypeOfInventory@Description" ColumnTitle="Seller_Demand_Type" DataType="Text-40"/>
+            <CreateNew DisplayForm="YCPWF027" DisplayMode="Dialog">
+               <StaticAttributes SystemDefined="N" IncrementBuyerSupply="N" IncrementSellerSupply="N" HasChainedChild="N" HasChainedParent="N" StatusInventoryID="PROCURE"/>
+               <DynamicAttributes DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey"/>
+            </CreateNew>
+            <Modify DisplayForm="YCPWF027" DisplayMode="Dialog"/>
+            <SaveAs DisplayForm="YCPWF027" DisplayMode="Dialog">
+               <StaticAttributes SystemDefined="N" StatusInventoryID="PROCURE"/>
+               <DynamicAttributes DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey"/>
+            </SaveAs>
+            <Delete>
+               <API Servlet="/yantra/entities/StatusInventoryTypes/delete" APIName="" Message="Message_Deleting_Status_Inventory_Type"/>
+            </Delete>
+         </ListInfo>
+         <API Servlet="/yantra/entities/StatusInventoryTypes/list" APIName="" Message="Message_Retrieving_Search_Results">
+            <StaticAttributes HasChainedChild="N" HasChainedParent="N" StatusInventoryID="PROCURE"/>
+         </API>
+      </YCPWF076>
+      <YCPWF027 Title="Status_Inventory_Type_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+             <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Status_Inventory_Type"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/StatusInventoryTypes/modify" APIName="" Message="Message_Saving_Status_Inventory_Type"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/StatusInventoryTypes/create" APIName="" Message="Message_Creating_Status_Inventory_Type"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpFulfillmentStatus"/>
+            </LogicalKeys>
+     </DetailInfo>
+         <MasterData>
+            <Table Name="InventorySupplyType" XMLName="InventorySupplyType"/>
+            <Table Name="InventoryDemandType" XMLName="InventoryDemandType"/>
+            <Table Name="Status" XMLName="Status">
+               <DynamicAttributes ProcessTypeKey="@ProcessTypeKey"/>
+            </Table>
+         </MasterData>
+      </YCPWF027>
+   </Entity>
+    <Entity EntityName="InventoryConsiderations" EntityTitle="Inventory Considerations" PrimaryKeyAttributeName="InventoryConsiderationsKey">
+		<ConfigurationAttributes  TableName="YFS_INVENTORY_CONSIDERATIONS">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV001" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPIM006 Title="Inventory_Types_and_Considerations" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Inventory_Types_and_Considerations"/>
+            </Get>
+        </DetailInfo>
+     </YCPIM006>
+      <YCPIM001 Title="Inventory_Considerations" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="getInventoryConsiderationsModelDocument" Message="Message_Loading_Inventory_Considerations"/>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="modifyInventoryConsiderations" Message="Message_Saving_Inventory_Considerations"/>
+            </Modify>
+        </DetailInfo>
+     </YCPIM001>
+    </Entity>
+	<Entity EntityTitle="Main Inventory Availability Safety Factor" EntityName="InvAvailSafetyFactor" PrimaryKeyAttributeName="CallingOrganizationCode">
+      <YIN7501 Title="Inventory_Availability_Safety_Factor" ScreenType="Detail">
+		<ConfigurationAttributes TableName="YFS_INV_AVAIL_SAFETY_FACTOR">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV023" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+         <DetailInfo>
+            <Get>
+			   <InnerPanels>
+				  <ListPanel FormName="YIN101" ListPanel="pnlOnhandInvAvailSafetyFactorList">
+					 <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" Owned="@Owned" Inheritable="@Inheritable"    
+						  CallingNodeKey="@CallingNodeKey" ModifyFlag="@ModifyFlag" GroupName="@GroupName" GroupLevel="@GroupLevel" 
+						  DocumentType="@DocumentType" />
+				  </ListPanel>
+				  <ListPanel FormName="YIN102" ListPanel="pnlFutureInvAvailSafetyFactorList" >
+					 <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" Owned="@Owned" Inheritable="@Inheritable"    
+						  CallingNodeKey="@CallingNodeKey" ModifyFlag="@ModifyFlag" GroupName="@GroupName" GroupLevel="@GroupLevel" 
+						  DocumentType="@DocumentType" />
+   				  </ListPanel>
+			   </InnerPanels>
+            </Get>
+         </DetailInfo>
+      </YIN7501>
+	</Entity>
+	<Entity EntityTitle="Inventory Availability Safety Factor" EntityName="InvAvailSafetyFactor" PrimaryKeyAttributeName="InvAvailSafetyFactorKey">
+		<ConfigurationAttributes TableName="YFS_INV_AVAIL_SAFETY_FACTOR">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV023" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YIN101 Title="Current_Inventory_Availability_Safety_Factor" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="InvAvailSafetyFactor" ShowFooter="N">
+				<List AttributeName="@SupplyType" ColumnTitle="Supply_Type" DataType="Text-40"/>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+				<List AttributeName="@ApplySafetyFactor" ColumnTitle="Apply_Safety_Factor_Percentage" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@SafetyFactorPercentage" ColumnTitle="Safety_Factor_Percentage" DataType="Percentage" Editable="Y" EditableComponent="textbox">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<Get>
+					<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"/>
+				</Get>				
+				<Save>
+					<API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiManageAPI" Message="Saving_Current_Inventory_Availability_Safety_Factor">
+					</API>
+				</Save>
+			</ListInfo>
+			<MasterData>
+				<Table Name="InventorySupplyType" XMLName="InventorySupplyType">
+					<StaticAttributes OnhandSupply="Y"/>
+				</Table>
+			</MasterData>
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument" Message="Message_Retrieving_Supply_Type"/>
+		</YIN101>
+		<YIN102 Title="Future_Inventory_Availability_Safety_Factor" ScreenType="List">
+			<ListInfo  AllowResize="Y" NamePrefix="/" ChildTag="InvAvailSafetyFactor" ShowFooter="N">
+				<List AttributeName="@SupplyType" ColumnTitle="Supply_Type" DataType="Text-40"/>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+				<List AttributeName="@ApplySafetyFactor" ColumnTitle="Apply_Safety_Factor_Percentage" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@SafetyFactorPercentage" ColumnTitle="Safety_Factor_Percentage" DataType="Percentage" Editable="Y" EditableComponent="textbox">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<Get>
+					<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"/>
+				</Get>				
+				<Save>
+					<API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiManageAPI" Message="Saving_Futuer_Inventory_Availability_Safety_Factor">
+					</API>
+				</Save>
+			</ListInfo>
+			<MasterData>
+				<Table Name="InventorySupplyType" XMLName="InventorySupplyType">
+					<StaticAttributes OnhandSupply="N"/>
+				</Table>
+			</MasterData>
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument" Message="Message_Retrieving_Supply_Type"/>
+		</YIN102>
+	</Entity>
+	<Entity EntityTitle="Inventory Supply Types" EntityName="InventorySupplyType" PrimaryKeyAttributeName="InventorySupplyTypeKey">
+      <PermanentRecordAttributes SystemDefined="Y"/>
+		<ConfigurationAttributes  TableName="YFS_INVENTORY_SUPPLY_TYPE">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV001" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPIM002 Title="Inventory_Supply_Types" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="InventorySupplyType">
+            <List AttributeName="@SupplyType" ColumnTitle="Supply_Type" DataType="Text-40"/>
+            <List AttributeName="@Description" ColumnTitle="Supply_Type_Description" DataType="Text-100"/>
+            <List AttributeName="@CostingRequired" ColumnTitle="Costing_Required" DataType="Boolean"/>
+            <List AttributeName="@RetainReference" ColumnTitle="Retain_Reference" DataType="Boolean"/>
+            <List AttributeName="@OnhandSupply" ColumnTitle="Onhand_Supply" DataType="Boolean"/>
+               <Modify DisplayForm="YCPIM003" DisplayMode="Dialog"/>
+               <CreateNew DisplayForm="YCPIM003" DisplayMode="Dialog">
+            		<StaticAttributes SupplyTypePrefixLiteral="Custom_Code_Prefix" 
+						SupplyTypePostfixLiteral="Custom_Code_Postfix"
+						SystemDefined="N" CostingRequired="N" RetainReference="N" OnhandSupply="N"/>
+               </CreateNew>
+               <Delete>
+              <API Servlet="/yantra/entities/InventorySupplyType/delete" APIName="" Message="Message_Deleting_Supply_Type"/>
+               </Delete> 
+               <SaveAs DisplayForm="YCPIM003" DisplayMode="Dialog">
+            		<StaticAttributes SupplyTypePrefixLiteral="Custom_Code_Prefix" 
+						SupplyTypePostfixLiteral="Custom_Code_Postfix"
+						SystemDefined="N"/>
+           		</SaveAs>
+         </ListInfo>
+         <API Servlet="/yantra/entities/InventorySupplyType/list" APIName="" Message="Message_Retrieving_Supply_Type">
+         </API>
+      </YCPIM002>
+      <YCPIM003 Title="Inventory_Supply_Type_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Supply_Type_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/InventorySupplyType/modify" APIName="" Message="Message_Saving_Supply_Type_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/InventorySupplyType/create" APIName="" Message="Message_Creating_New_Supply_Type"/>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/InventorySupplyType/delete" APIName="" Message="Message_Deleting_Supply_Type"/>
+            </Delete>
+            <LogicalKeys>
+           <LogicalKey ComponentType="JTextField" ComponentName="txtSupplyType"/>
+        </LogicalKeys>
+        </DetailInfo>
+       </YCPIM003>
+    </Entity>
+    <Entity EntityTitle="Inventory Demand Types" EntityName="InventoryDemandType" PrimaryKeyAttributeName="InventoryDemandTypeKey">
+		<ConfigurationAttributes  TableName="YFS_INVENTORY_DEMAND_TYPE">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV001" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <PermanentRecordAttributes SystemDefined="Y"/>
+      <YCPIM004 Title="Inventory_Demand_Types" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="InventoryDemandType">
+            <List AttributeName="@DemandType" ColumnTitle="Demand_Type" DataType="Text-40"/>
+            <List AttributeName="@Description" ColumnTitle="Demand_Type_Description" DataType="Text-100"/>
+            <List AttributeName="@CommittedLevelDesc" ColumnTitle="Committed_Level" DataType="Text-20"/>
+               <Modify DisplayForm="YCPIM005" DisplayMode="Dialog"/>
+               <CreateNew DisplayForm="YCPIM005" DisplayMode="Dialog">
+            		<StaticAttributes DemandTypePrefixLiteral="Custom_Code_Prefix" 
+						DemandTypePostfixLiteral="Custom_Code_Postfix"
+						SystemDefined="N"/>
+               </CreateNew>
+               <Delete>
+              <API Servlet="/yantra/entities/InventoryDemandType/delete" APIName="" Message="Message_Deleting_Demand_Type"/>
+               </Delete> 
+               <SaveAs DisplayForm="YCPIM005" DisplayMode="Dialog">
+            		<StaticAttributes DemandTypePrefixLiteral="Custom_Code_Prefix" 
+						DemandTypePostfixLiteral="Custom_Code_Postfix"
+						SystemDefined="N"/>
+           		</SaveAs>
+         </ListInfo>
+         <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="getDemandTypeList" Message="Message_Retrieving_Demand_Type">
+         </API>
+      </YCPIM004>
+      <YCPIM005 Title="Inventory_Demand_Type_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="getDemandTypeDetails" Message="Message_Getting_Demand_Type_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="modifyDemandTypeDetails" Message="Message_Saving_Demand_Type_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="createDemandTypeDetails" Message="Message_Creating_New_Demand_Type"/>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/InventoryDemandType/delete" APIName="" Message="Message_Deleting_Demand_Type"/>
+            </Delete>
+            <LogicalKeys>
+           <LogicalKey ComponentType="JTextField" ComponentName="txtDemandType"/>
+        </LogicalKeys>
+        </DetailInfo>
+       </YCPIM005>
+    </Entity>
+    <Entity EntityTitle="ItemStatusRules" EntityName="ItemStatusRules" 
+   		PrimaryKeyAttributeName="RuleKey"> 
+		<ConfigurationAttributes  TableName="YFS_ITEM_STATUS_RULES">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV000" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPPM514 Title="Onhand_Inventory_Monitor_Rules" ScreenType="List" >
+         <API Servlet="/yantra/entities/ItemStatusRules/list" APIName="" Message="Message_Retrieving_Item_Status_Rules"/>
+        <ListInfo NamePrefix="/" ChildTag="ItemStatusRules"> 
+            <List AttributeName="@ItemId" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@ShipnodeKey" ColumnTitle="Node" DataType="Key"/>
+            <Modify DisplayForm="YCPPM515" DisplayMode="Dialog"/>
+            <CreateNew DisplayForm="YCPPM515" DisplayMode="Dialog">
+                <DynamicAttributes OwnerKey="@CallingOrganizationCode"/>
+            </CreateNew>
+            <Delete>
+              <API Servlet="/yantra/entities/ItemStatusRules/delete" APIName="" Message="Message_Deleting_Item_Status_Rules"/>
+            </Delete> 
+            <SaveAs DisplayForm="YCPPM515" DisplayMode="Dialog"/>
+        </ListInfo>
+      </YCPPM514>
+      <YCPPM515 Title="Onhand_Inventory_Monitor_Rule_Details" ScreenType="Detail" > 
+         <DetailInfo>
+            <Get>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Item_Status_Rule_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemStatusRules/modify" APIName="" Message="Message_Saving_Item_Status_Rule"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemStatusRules/create" APIName="" Message="Message_Creating_New_Item_Status_Rule"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpShipNode"/>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpItemID"/>
+            </LogicalKeys>
+        </DetailInfo>
+         <MasterData>
+            <Table Name="Action"> 
+               <CodeAttributes>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MinAction1"/>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MinAction2"/>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MinAction3"/>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MinAction4"/>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MaxAction1"/>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MaxAction2"/>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MaxAction3"/>
+                  <CodeAttribute ActionKey="/ItemStatusRules@MaxAction4"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="ShipNode" RemoveCallingOrgCode="Y">
+               <CodeAttributes>
+                  <CodeAttribute ShipnodeKey="@ShipnodeKey"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="Item">
+               <CodeAttributes>
+                  <CodeAttribute ItemID="@ItemId"/>
+               </CodeAttributes>
+            </Table>
+		</MasterData>
+      </YCPPM515>
+    </Entity>
+    <Entity EntityTitle="Inventory_Synchronization" EntityName="InventorySynchronization" PrimaryKeyAttributeName="OrganizationCode">
+       <YCPPM351 Title="IS_Rules" ScreenType="Tree">
+         <TreeInfo RelationshipAttribute="">
+            <FilterNodeList>
+               <FilterNode NodeName="Tables"/>
+            </FilterNodeList>
+            <Get>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPRuleSetAPI" APIName="getConfigRulesXML" Message="Message_Loading_Inventory_Synchronization_Rules">
+                   <StaticAttributes ApplicationCode="inv"/>
+                </API>    
+            </Get>
+            <DeleteDocumentType>
+                    <API Servlet="/yantra/entities/ModuleDocumentType/delete" APIName="" Message="Message_Deleting_Module_Document_Type"/>
+            </DeleteDocumentType>
+         </TreeInfo>
+      </YCPPM351>
+    </Entity>
+    <Entity EntityTitle="Resource_Pool" EntityName="ResourcePool" PrimaryKeyAttributeName="ResourcePoolKey">
+		<ConfigurationAttributes  TableName="YFS_RES_POOL">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV004" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+    	<YIN001 Title="Resource_Pool_Search" ScreenType="Search">
+    		<SearchInfo ListFormName="YIN002" ListPanel="pnlList"/>
+	        <MasterData>
+            	<Table Name="QryType"/>
+            	<Table Name="OrganizationForCapacity" XMLName="Organization"/>
+                <Table Name="ShipNode" RemoveCallingOrgCode="Y"/>
+            	<Table Name="CommonCode" XMLName="Country" AllRecords="Y">
+	               <StaticAttributes CodeType="COUNTRY"/>
+	            </Table>
+				<Table Name="Organization" XMLName="CallingOrganization">
+	               <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+	            </Table>
+				<Table Name="RegionMatchPref" XMLName="RegionMatchPref" />
+         	</MasterData>
+    		<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Resource_Pool_Search">
+				<StaticAttributes ItemGroupCode="DS"/>
+			</API>
+    	</YIN001>
+    	<YIN002 Title="Search_Results" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ResourcePool">
+            <List AttributeName="@ResourcePoolId" ColumnTitle="Resource_Pool_Id" DataType="Text-24"/>
+            <List AttributeName="@ResourcePoolDescription" ColumnTitle="Resource_Pool_Description" DataType="Text-100"/>
+            <List AttributeName="@CapacityOrganizationCode" ColumnTitle="Capacity_Organization" DataType="Text-24"/>
+            <CreateNew DisplayForm="YIN004" DisplayMode="Dialog" NextAction="Modify">
+                <StaticAttributes ProvidesAllServices="Y" CapacityInfoAvailable="Y" ItemGroupCode="DS"/>
+            </CreateNew>
+            <Modify DisplayForm="YIN003">
+				<DynamicAttributes Node="@Node" />
+			</Modify>
+            <Delete>
+               <API Servlet="/yantra/entities/ResourcePool/delete" APIName="" Message="Message_Deleting_Resource_Pool"/>
+        	</Delete>
+            <SaveAs DisplayForm="YIN004" DisplayMode="Dialog" NextAction="Modify"/>
+         </ListInfo>         
+         <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="getResourcePoolList" Message="Message_Retrieving_Search_Results"/>
+      </YIN002>
+      <YIN003 Title="Resource_Pool_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="getResourcePoolDetails" Message="Message_Loading_Resource_Pool_Details"/>
+               <InnerPanels>
+               		<AddressPanel FormName="YIN020" ListPanel="pnlExtProviderAddress" AddressElement="ProviderContactAddress"/>
+                    <ListPanel FormName="YIN031" ListPanel="pnlResPoolServiceSkill">
+                        <DynamicAttributes ResourcePoolKey="@ResourcePoolKey" CapacityOrganizationCode="@CapacityOrganizationCode"/>
+                    </ListPanel>
+					<ListPanel FormName="YIN71001" ListPanel="pnlResourceList">
+		                <DynamicAttributes ResourcePoolKey="@ResourcePoolKey" CapacityOrganizationCode="@CapacityOrganizationCode"  CallingOrganizationCode="@CallingOrganizationCode" Node="@Node"/>
+		            </ListPanel>
+               </InnerPanels>               
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="modifyResourcePool" Message="Message_Saving_Resource_Pool"/>
+            </Modify>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtResourcePoolId"/>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtServiceClass"/>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtCapacityOrganization"/>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtNode"/>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtCapacityUOM"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+        	<Table Name="Calendar">
+               <DynamicAttributes CallingOrganizationCode="@Node"/>
+               <StaticAttributes MeantForInternal="Y" MeantForInternalQryType="NE"/>
+        	</Table>
+        	<Table Name="Uom" XMLName="WeightUOM">
+			<StaticAttributes UomType="WEIGHT"/>
+        	</Table>
+        	<Table Name="Uom" XMLName="VolumeUOM">
+			<StaticAttributes UomType="VOLUME"/>
+        	</Table>
+        	<Table Name="ItemUOMMaster" XMLName="UOM">
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode" CallingOrganizationCode="@CallingOrganizationCode" UnitOfMeasure="@CapacityUnitOfMeasure"/>
+        	</Table>        	
+        	<Table Name="ServiceSlotGroup" AllRecords="Y"/>
+        	<Table Name="RegionSchema" XMLName="RegionSchema"/>
+        	<Table Name="User" XMLName="User">       
+				<DynamicAttributes CallingOrganizationCode="@Node" OrganizationKey="@Node"/>
+        	</Table>
+			<Table Name="ExtendedAttributes" XMLName="ExtendedAttributes"/>
+     	</MasterData>
+      </YIN003>
+      <YIN004 Title="Create_Resource_Pool" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Resource_Pool"/>
+            </Get>
+            <CreateNew>
+			   <API Servlet="/yantra/entities/ResourcePool/create" APIName="" Message="Message_Creating_Resource_Pool"/>
+            </CreateNew>
+			<RefreshMasterData>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="refreshMasterData" Message="Message_Loading"/>
+            </RefreshMasterData>
+         </DetailInfo>
+         <MasterData>
+	    	<Table Name="OrganizationForCapacity" XMLName="Organization"/>
+            <Table Name="ShipNode" RemoveCallingOrgCode="Y">
+				<DynamicAttributes OwnerKey="@ShipNodeOwnerKey"/>
+			</Table>
+            <Table Name="ServiceSlotGroup" RemoveCallingOrgCode="Y">
+				<DynamicAttributes OrganizationKey="@CapacityOrganizationCode"/>
+            </Table>
+            <Table Name="ItemUOMMaster" XMLName="UOM">
+                <StaticAttributes IsInventoryUOM="Y"/>
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode" CallingOrganizationCode="@CatalogOrganizationCode" UOMType="@UOMType"/>
+            </Table>
+			<Table Name="Organization" XMLName="CallingOrganization">
+			   <DynamicAttributes OrganizationCode="@ProviderOrganizationCode"/>
+			</Table>
+			<Table Name="Organization" XMLName="ContextOrganization">
+			   <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+			</Table>
+			<Table Name="RegionSchema" XMLName="RegionSchema"/>
+         </MasterData>
+      </YIN004>      
+    </Entity>
+    <Entity EntityTitle="Person Info" EntityName="PersonInfo" PrimaryKeyAttributeName="PersonInfoKey">
+      <YIN020 Title="Provider_Contact_Address" ScreenType="None"/>
+	  <YIN71004 Title="Contact_Address" ScreenType="None"/>
+    </Entity>
+    <Entity EntityTitle="Resource_Pool_Item" EntityName="ResPoolItem" PrimaryKeyAttributeName="ResPoolItemKey">
+		<ConfigurationAttributes  TableName="YFS_RES_POOL_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV004" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		  <YIN030 Title="Serviced_Items" ScreenType="List">
+		     <ListInfo NamePrefix="/" ChildTag="ServicedItem">
+		        <List AttributeName="@ItemID" ColumnTitle="Item" DataType="ItemID"/>
+		        <List AttributeName="@ShortDescription" ColumnTitle="Description" DataType="Text-100"/>
+                <CreateNew DisplayMode="Dialog" >
+                    <DynamicAttributes ResourcePoolKey="@ResourcePoolKey" UnitOfMeasure="@UnitOfMeasure" CallingOrganizationCode="@CapacityOrganizationCode"/>
+		        </CreateNew>
+		        <Delete>
+		           <API Servlet="/yantra/entities/ResPoolItem/delete" APIName="" Message="Message_Deleting_Service_Item"/>
+		    	</Delete>
+		     </ListInfo>         
+		     <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="getResourcePoolServicedItems" Message="Message_Retrieving_Serviced_Items"/>
+		  </YIN030>
+	</Entity>
+    <Entity EntityTitle="Resource_Pool_Service_Skill" EntityName="ResPoolServiceSkill" PrimaryKeyAttributeName="ResPoolServiceSkillKey">
+        <ConfigurationAttributes  TableName="YFS_RES_POOL_SERVICE_SKILL">
+            <ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV004" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+          <YIN031 Title="Service_Skills" ScreenType="List">
+             <ListInfo NamePrefix="/" ChildTag="ServiceSkill">
+                <List AttributeName="@ServiceSkillId" ColumnTitle="Service_Skill_ID" DataType="Text-40"/>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+                <CreateNew DisplayForm="YCM00088" DisplayMode="Dialog">
+                    <DynamicAttributes ResourcePoolKey="@ResourcePoolKey" CallingOrganizationCode="@CapacityOrganizationCode"/>
+                </CreateNew>
+                <Delete>
+                   <API Servlet="/yantra/entities/ResPoolServiceSkill/delete" APIName="" Message="Message_Removing_Service_Skill_From_Resource_Pool"/>
+                </Delete>
+             </ListInfo>
+             <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="getResourcePoolServiceSkills" RemoveCallingOrgCode="Y" Message="Message_Retrieving_Service_Skills"/>
+          </YIN031>
+    </Entity>
+	<Entity EntityTitle="Resource_Pool_Region" EntityName="ResPoolRegion" PrimaryKeyAttributeName="ResPoolRegionKey">
+		<ConfigurationAttributes  TableName="YFS_RES_POOL_REGION">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV004" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		  <YIN040 Title="Regions" ScreenType="List" >
+		     <ListInfo NamePrefix="/" ChildTag="RegionServiced"  AllowResize="Y">
+                <List AttributeName="/Region@RegionName" ColumnTitle="Region" DataType="Text-40" EditableAddRow="N"/>
+                <List AttributeName="@IsPrimary" ColumnTitle="Primary" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@SundayValid" ColumnTitle="Sun" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@MondayValid" ColumnTitle="Mon" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@TuesdayValid" ColumnTitle="Tue" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@WednesdayValid" ColumnTitle="Wed" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@ThursdayValid" ColumnTitle="Thu" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@FridayValid" ColumnTitle="Fri" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@SaturdayValid" ColumnTitle="Sat" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+		        <CreateNew DisplayForm="YCP00072" DisplayMode="Dialog">
+		        	<DynamicAttributes ResourcePoolKey="@ResourcePoolKey" RegionSchemaKey="@RegionSchemaKey"/>
+		        </CreateNew>
+		        <Modify ActionResourceId="YIN040A01"/>
+		        <Delete/>
+		     </ListInfo>         
+		     <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="getResourcePoolRegionsServiced" Message="Message_Retrieving_Regions">
+               <StaticAttributes ByRegionAndSlot="N"/>
+           </API>
+		  </YIN040>
+		  <YIN045 Title="Regions" ScreenType="List" >
+		     <ListInfo NamePrefix="/" ChildTag="RegionServiced"  AllowResize="Y">
+                <List AttributeName="/Region@RegionName" ColumnTitle="Region" DataType="Text-40" EditableAddRow="N"/>
+                <List AttributeName="@ServiceSlotDesc" ColumnTitle="Slot" DataType="Text-40"/>
+                <List AttributeName="@StartTime" ColumnTitle="Start_Time" DataType="Text-40"/>
+                <List AttributeName="@EndTime" ColumnTitle="End_Time" DataType="Text-40"/>
+                <List AttributeName="@IsPrimary" ColumnTitle="Primary" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@SundayValid" ColumnTitle="Sun" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@MondayValid" ColumnTitle="Mon" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@TuesdayValid" ColumnTitle="Tue" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@WednesdayValid" ColumnTitle="Wed" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@ThursdayValid" ColumnTitle="Thu" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@FridayValid" ColumnTitle="Fri" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+                <List AttributeName="@SaturdayValid" ColumnTitle="Sat" DataType="Boolean" EditableAddRow="N" Editable="Y" EditableComponent="checkbox"/>
+		        <CreateNew DisplayForm="YCP00072" DisplayMode="Dialog">
+		        	<DynamicAttributes ResourcePoolKey="@ResourcePoolKey" RegionSchemaKey="@RegionSchemaKey"/>
+		        </CreateNew>
+		        <Modify ActionResourceId="YIN045A01"/>
+		        <Delete/>
+		     </ListInfo>         
+		     <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="getResourcePoolRegionsAndSlotsServiced" Message="Message_Retrieving_Regions">
+               <StaticAttributes ByRegionAndSlot="Y"/>
+           </API>
+		  </YIN045>
+	</Entity>
+	<Entity EntityTitle="Service_Slot_Group" EntityName="ServiceSlotGroup" PrimaryKeyAttributeName="ServiceSlotGroupKey">
+		<ConfigurationAttributes  TableName="YFS_SERVICE_SLOT_GROUP">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV003" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		  <YIN095 Title="Service_Slot_Groups" ScreenType="List">
+		     <ListInfo NamePrefix="/" ChildTag="ServiceSlotGroup">
+		        <List AttributeName="@ServiceSlotGroupId" ColumnTitle="Slot_Group_Id" DataType="Text-24"/>
+		        <List AttributeName="@ServiceSlotGroupDesc" ColumnTitle="Description" DataType="Text-100"/>
+		        <CreateNew DisplayForm="YIN096" DisplayMode="Dialog">
+		        	<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+		        </CreateNew>
+		        <Modify DisplayForm="YIN096" DisplayMode="Dialog"/>
+		        <SaveAs DisplayForm="YIN096" DisplayMode="Dialog">
+					<StaticAttributes ActionSaveAs="Y"/>
+				</SaveAs>
+		        <Delete>
+		           <API Servlet="/yantra/entities/ServiceSlotGroup/delete" APIName="" Message="Message_Deleting_Service_Slot_Group"/>
+		        </Delete>
+		     </ListInfo>         
+		     <API Servlet="/yantra/entities/ServiceSlotGroup/list" APIName="" Message="Message_Retrieving_Service_Slot_Groups">
+				<StaticAttributes MeantForInternal="Y" MeantForInternalQryType="NE" ItemGroupCode="" ItemGroupCodeQryType="VOID"/>
+		     </API>
+		  </YIN095>
+		  <YIN096 Title="Service_Slot_Group_Details" ScreenType="Detail">
+		     <DetailInfo>
+		        <Get>
+		           <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Service_Slot_Group_Details"/>
+		           <InnerPanels>
+		           		<ListPanel FormName="YIN097" ListPanel="pnlServiceSlots" >
+	               			<DynamicAttributes ServiceSlotGroupKey="@ServiceSlotGroupKey"        ServiceSlotGroupDesc="@ServiceSlotGroupDesc" ServiceSlotGroupId="@ServiceSlotGroupId"/>
+			    		</ListPanel>
+		           </InnerPanels>
+		        </Get>
+		        <Modify>
+		           <API Servlet="/yantra/entities/ServiceSlotGroup/modify" APIName="" Message="Message_Saving_Service_Slot_Group"/>
+		        </Modify>
+		        <CreateNew>
+		           <API Servlet="/yantra/entities/ServiceSlotGroup/create" APIName="" Message="Message_Creating_Service_Slot_Group">
+		           		<DynamicAttributes OrganizationKey="@CallingOrganizationCode"/>
+		           </API>
+		        </CreateNew>
+                <LogicalKeys>
+                  <LogicalKey ComponentType="JTextField" ComponentName="txtServiceSlotGroupId"/>
+                </LogicalKeys>
+		     </DetailInfo>
+		     <MasterData>
+		 	</MasterData>
+	  	</YIN096>
+	</Entity>
+	<Entity EntityTitle="Service_Slot" EntityName="ServiceSlot" PrimaryKeyAttributeName="ServiceSlotKey">
+		<ConfigurationAttributes  TableName="YFS_SERVICE_SLOT">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV003" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+	  <YIN097 Title="Service_Slots" ScreenType="Tree" >
+	     <TreeInfo RelationshipAttribute="ParentSlotKey">
+		 <NodeDescriptorList>
+			<NodeDescriptor NodeName="ServiceSlotList" LabelAttribute="ServiceSlotGroupDesc"/>
+			<NodeDescriptor NodeName="ServiceSlot" LabelAttribute="ServiceSlotDescWithTime" Icon="com/yantra/ycp/ui/icons/slot.gif"/>
+		 </NodeDescriptorList>
+		 <FilterNodeList> 
+			<FilterNode NodeName="ChildServiceSlotList"/>  
+		 </FilterNodeList>
+			<Get>
+				<API Servlet="/yantra/entities/ServiceSlot/list" APIName="" Message="Message_Retrieving_Service_Slots">
+				<StaticAttributes ParentSlotKeyQryType="ISNULL" />
+				</API>
+			</Get>
+			<CreateNew DisplayForm="YIN098" DisplayMode="Dialog">
+				<DynamicAttributes ParentSlotKey="@ServiceSlotKey" ServiceSlotGroupKey="@ServiceSlotGroupKey">
+				</DynamicAttributes>
+				<StaticAttributes CanUseForAppointment="Y"/>
+			</CreateNew>
+			<Modify DisplayForm="YIN098" DisplayMode="Dialog"/>
+			<Delete>
+				<API Servlet="/yantra/entities/ServiceSlot/delete" APIName="" Message="Message_Deleting_Service_Slot"/>
+			</Delete>
+	     </TreeInfo>         	     
+	  </YIN097>	
+	  <YIN098 Title="Service_Slot_Details" ScreenType="Detail">
+		     <DetailInfo>
+		        <Get>
+		           <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Service_Slot_Details"/>
+		        </Get>
+		        <Modify>
+		           <API Servlet="/yantra/entities/ServiceSlot/modify" APIName="" Message="Message_Saving_Service_Slot"/>
+		        </Modify>
+		        <CreateNew>
+		           <API Servlet="/yantra/entities/ServiceSlot/create" APIName="" Message="Message_Creating_Service_Slot">
+		           		<DynamicAttributes OrganizationKey="@CallingOrganizationCode"/>
+		           </API>
+		        </CreateNew>
+                <LogicalKeys>
+                  <LogicalKey ComponentType="JTextField" ComponentName="txtStartTime"/>
+                  <LogicalKey ComponentType="JTextField" ComponentName="txtEndTime"/>
+                </LogicalKeys>
+			 </DetailInfo>
+	  	</YIN098>
+	  </Entity>
+      <Entity EntityTitle="Item" EntityName="Item" PrimaryKeyAttributeName="ItemKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV004" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+         <YIN035 Title="Provided_Service_Item_Search" ScreenType="Search">
+            <SearchInfo ListFormName="YIN037" ListPanel="pnlItemList">
+               <Search/>
+           </SearchInfo>
+            <MasterData>
+               <Table Name="ItemUOMMaster" XMLName="UOM">
+                   <StaticAttributes ItemGroupCode="PS"/>
+               </Table>
+               <Table Name="CommonCode" XMLName="KitCode">
+                  <StaticAttributes CodeType="KIT_CODE"/>
+               </Table>
+               <Table Name="QryType" XMLName="QryType"/>
+            </MasterData>
+            <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+               <StaticAttributes IsForResourcePool="Y" ItemGroupCode="PS" />
+           </API>
+         </YIN035>
+         <YIN036 Title="Delivery_Service_Item_Search" ScreenType="Search">
+            <SearchInfo ListFormName="YIN037" ListPanel="pnlItemList">
+               <Search/>
+           </SearchInfo>
+            <MasterData>
+               <Table Name="ItemUOMMaster" XMLName="UOM">
+                   <StaticAttributes ItemGroupCode="DS"/>
+               </Table>
+               <Table Name="CommonCode" XMLName="KitCode">
+                  <StaticAttributes CodeType="KIT_CODE"/>
+               </Table>
+               <Table Name="QryType" XMLName="QryType"/>
+            </MasterData>
+            <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+               <StaticAttributes IsForResourcePool="Y" ItemGroupCode="DS"/>
+           </API>
+         </YIN036>
+         <YIN037 Title="Service_Item_List" ScreenType="List">
+            <ListInfo NamePrefix="/" ChildTag="Item" MultiSelection="Y">
+               <List AttributeName="@OrganizationCode" ColumnTitle="Organization_Code" DataType="OrgCode"/>
+               <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+               <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+               <List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+                <AddToRelationship RelationshipEntityName="ResPoolItem">
+                    <API Servlet="/yantra/entities/ResPoolItem/create" APIName="" Message="Message_Adding_Service_To_Resource_Pool"/>
+                    <DynamicAttributes ResourcePoolKey="@ResourcePoolKey" ItemID="@ItemID"/>
+                </AddToRelationship>
+            </ListInfo>
+            <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">      
+            </API>
+         </YIN037>
+    </Entity>
+	<Entity EntityTitle="Region_Usage" EntityName="RegionUsage" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="RegionUsageKey">
+        <ConfigurationAttributes  TableName="YFS_REGION_USAGE" SectionName="RESOURCE_POOL">
+            <ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV006" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+      <YIN060 Title="Region_Usage_For_Resource_Pools" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPRegionAPI" APIName="getRegionUsageList" Message="Message_Loading_Region_Usage_Details">
+                    <StaticAttributes Purpose="RESOURCE_POOL" FormId="YIN060"/>
+                    <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+               </API>
+            </Get>
+            <CreateNew>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPRegionAPI" APIName="saveRegionUsage" Message="Message_Saving_Region_Usage_Details"/>
+            </CreateNew>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="RegionSchema" RemoveCallingOrgCode="Y"/>
+			<Table Name="ResourcePool" XMLName="DSResourcePool">
+        		<StaticAttributes ItemGroupCode="DS">
+						<RegionsServiced>
+							<RegionServiced />
+						</RegionsServiced>
+				</StaticAttributes>
+        	</Table>
+			<Table Name="ResourcePool" XMLName="PSResourcePool">
+        		<StaticAttributes ItemGroupCode="PS">
+						<RegionsServiced>
+							<RegionServiced />
+						</RegionsServiced>
+				</StaticAttributes>
+        	</Table>
+        </MasterData>
+      </YIN060>
+	  <YIN060 Title="Region_Usage_For_Resource_Pools" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPRegionAPI" APIName="getRegionUsageList" Message="Message_Loading_Region_Usage_Details">
+                    <StaticAttributes Purpose="RESOURCE_POOL" FormId="YIN060"/>
+                    <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+               </API>
+            </Get>
+            <CreateNew>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPRegionAPI" APIName="saveRegionUsage" Message="Message_Saving_Region_Usage_Details"/>
+            </CreateNew>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="RegionSchema" RemoveCallingOrgCode="Y"/>
+			<Table Name="ResourcePool" XMLName="DSResourcePool">
+        		<StaticAttributes ItemGroupCode="DS">
+						<RegionsServiced>
+							<RegionServiced />
+						</RegionsServiced>
+				</StaticAttributes>
+        	</Table>
+			<Table Name="ResourcePool" XMLName="PSResourcePool">
+        		<StaticAttributes ItemGroupCode="PS">
+						<RegionsServiced>
+							<RegionServiced />
+						</RegionsServiced>
+				</StaticAttributes>
+        	</Table>
+        </MasterData>
+      </YIN060>
+    </Entity>
+	<Entity EntityTitle="Activity_List" EntityName="Activity" PrimaryKeyAttributeName="ActivityKey">
+		<ConfigurationAttributes  TableName="YFS_ACTIVITY">
+				<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV008" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<PermanentRecordAttributes SystemDefined="Y"/>
+		<YIN061 Title="Activities" ScreenType="List">
+			  <ListInfo NamePrefix="/" ChildTag="Activity">
+				<List AttributeName="@ActivityCode" ColumnTitle="Activity_Code" DataType="Activity" Editable="N"
+					EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-200" Editable="Y"
+				EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create" ActivityGroupId="VAS" SystemDefined="N"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete>
+					<API Servlet="/yantra/entities/Activity/delete" APIName="" Message="Deleting_Activity"/>
+				</Delete>
+				 <Save>
+					<API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiUpdateAPI" Message="Saving_Activity">
+					</API>
+				</Save>
+			 </ListInfo>
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+							Message="Retrieving_Activity_List">
+				<StaticAttributes ActivityGroupId="VAS"/>
+			</API>
+		</YIN061>
+	</Entity>
+   <Entity EntityTitle="Rules" EntityName="Rules" PrimaryKeyAttributeName="CallingOrganizationCode"> 
+	  <YIN7701 Title="VAS_Rules" ScreenType="Detail">
+        <ConfigurationAttributes RuleName="PRE_CALL_REQUIRED_FOR_SERVICE">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV019" IsPrimary="Y"/>
+			<ApplicationSpecificAttributes ApplicationCode="omd" PermissionId="YSOMD062" />
+		</ConfigurationAttributes>
+         <DetailInfo>
+            <Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_VAS_Rules">
+					<StaticAttributes Documenttype="7001"/>
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey"/>
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_VAS_Rules"/>
+			</Modify>
+			<CreateNew>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_VAS_Rules"/>
+			</CreateNew>
+         </DetailInfo>
+		 <MasterData>
+			<Table Name="Condition" XMLName="Condition">
+			   <DynamicAttributes ProcessTypeKey="@ProcessTypeKey"/>
+			   <StaticAttributes  ConditionType="PROCESS_MODELLING"/>
+			</Table>
+		 </MasterData>
+	  </YIN7701>
+   </Entity>
+    <Entity EntityTitle="CostFactorGroup" EntityName="CostFactorGroup" OrganizationAttribute="EnterpriseCode" PrimaryKeyAttributeName="CostFactorGroupKey"> 
+      <YCPPM650 Title="Cost_Factor_Groups" ScreenType="List" >
+         <API Servlet="/yantra/entities/CostFactorGroup/list" APIName="" Message="Message_Retrieving_Cost_Factor_Groups">
+         </API>
+         <ListInfo NamePrefix="/" ChildTag="CostFactorGroup"> 
+            <List AttributeName="@EnterpriseCode" ColumnTitle="Enterprise_Code" DataType="Key"/>
+            <List AttributeName="@CostFactorGroupName" ColumnTitle="Cost_Factor_Group_Name" DataType="Text-40"/>
+            <List AttributeName="@CostFactorGroupDescription" ColumnTitle="Cost_Factor_Group_Description" DataType="Text-100"/>
+            <Modify DisplayForm="YCPPM651" DisplayMode="Dialog">
+                <DynamicAttributes CostFactorGroupKey="@CostFactorGroupKey"/>
+            </Modify>
+            <CreateNew DisplayForm="YCPPM651" DisplayMode="Dialog">
+                <DynamicAttributes EnterpriseCode="@CallingOrganizationCode"/>
+            </CreateNew>
+            <Delete>
+               <API Servlet="com.yantra.inv.uibackend.INVMasterData" APIName="getExposedAPI" Message="Message_Saving_Region_Details">
+                    <StaticAttributes ExternalAPIName="deleteCostFactorGroup"/>
+                </API>
+			</Delete> 
+            <SaveAs DisplayForm="YCPPM651" DisplayMode="Dialog">
+                <DynamicAttributes EnterpriseCode="@CallingOrganizationCode" CostFactorGroupKey="@CostFactorGroupKey"/>
+            </SaveAs>
+          </ListInfo>
+      </YCPPM650>
+      <YCPPM651 Title="Cost_Factor_Group_Details" ScreenType="Detail" > 
+         <DetailInfo>
+            <Get>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Cost_Factor_Group_Details"/>
+                <InnerPanels>
+                    <ListPanel FormName="YCPPM652" ListPanel="pnlCostFactorDetailList" >
+                        <DynamicAttributes  CostFactorGroupKey="@CostFactorGroupKey"/>
+                    </ListPanel>
+                </InnerPanels>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/CostFactorGroup/modify" APIName="" Message="Message_Saving_Cost_Factor_Group_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/CostFactorGroup/create" APIName="" Message="Message_Saving_Cost_Factor_Group_Details"/>
+            </CreateNew>
+            <LogicalKeys>
+                <LogicalKey ComponentType="JTextField" ComponentName="txtCostFactorGrpName"/>
+            </LogicalKeys>
+        </DetailInfo>
+        <MasterData>
+            <Table Name="Enterprise" XMLName="Enterprise"/>
+        </MasterData>
+      </YCPPM651>
+     </Entity>
+     <Entity EntityTitle="CostFactorGroupDetail" EntityName="CostFactorGroupDetail" OrganizationAttribute="EnterpriseCode" PrimaryKeyAttributeName="CostFactorGroupDtlKey">
+      <YCPPM652 Title="Cost_Factors" ScreenType="List">
+         <API Servlet="/yantra/entities/CostFactorGroupDetail/list" APIName="" Message="Message_Retrieving_Cost_Factor_Group_Details">
+         </API>
+         <ListInfo NamePrefix="/" ChildTag="CostFactorGroupDetail">
+            <List AttributeName="@CostFactorName" ColumnTitle="Cost_Factor_Name" DataType="Text-40"/>
+            <List AttributeName="@CostFactorDescription" ColumnTitle="Cost_Factor_Desc" DataType="Text-100"/>
+            <List AttributeName="@CostCalculationMethodDesc" ColumnTitle="Cost_Calculation_Method" DataType="Text-2"/>
+            <List AttributeName="@CostApplicationMethod" ColumnTitle="Cost_Application_Method" DataType="Text-40"/>
+            <Modify DisplayForm="YCPPM653" DisplayMode="Dialog"/>
+            <CreateNew DisplayForm="YCPPM653" DisplayMode="Dialog">
+                <DynamicAttributes  CostFactorGroupKey="@CostFactorGroupKey" >
+                </DynamicAttributes>
+                <StaticAttributes />
+            </CreateNew>
+            <Delete>
+                <API Servlet="/yantra/entities/CostFactorGroupDetail/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete> 
+            <SaveAs DisplayForm="YCPPM653" DisplayMode="Dialog"/>
+         </ListInfo>
+      </YCPPM652>
+      <YCPPM653 Title="Cost_Factor_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Distribution_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/CostFactorGroupDetail/modify" APIName="" Message="Message_Saving_Distribution_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/CostFactorGroupDetail/create" APIName="" Message="Message_Creating_New_Distribution"/>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/CostFactorGroupDetail/delete" APIName="" Message="Message_Deleting_Distribution"/>
+            </Delete>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtCostFactorGrpName"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="Uom" XMLName="UOMVolume">
+               <StaticAttributes UomType="VOLUME"/>
+            </Table>
+            <Table Name="Uom" XMLName="UOMWeight">
+               <StaticAttributes UomType="WEIGHT"/>
+            </Table>
+            <Table Name="Uom" XMLName="UOMQuantity">
+               <StaticAttributes UomType="QUANTITY"/>
+            </Table>
+            <Table Name="Uom" XMLName="UOM">
+               <!--StaticAttributes UomType="WEIGHT"/-->
+            </Table>
+         </MasterData>
+      </YCPPM653>
+   </Entity>
+   <Entity EntityTitle="Service_Resource" EntityName="ServiceResource" PrimaryKeyAttributeName="ServiceResourceKey">
+		<ConfigurationAttributes  TableName="YFS_SERVICE_RESOURCE">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV003" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		  <YIN71001 Title="Service_Resources" ScreenType="List">
+		     <ListInfo NamePrefix="/" ChildTag="ServiceResource">
+		        <List AttributeName="@ServiceResourceId" ColumnTitle="Resource_Id" DataType="Text-24"/>
+		        <List AttributeName="/ServiceResourceCalendar@CalendarId" ColumnTitle="Calendar_Id" DataType="Text-24"/>
+		        <List AttributeName="@Notes" ColumnTitle="Notes" DataType="Text-4000"/>
+		        <CreateNew DisplayForm="YIN71002" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes ResourcePoolKey="@ResourcePoolKey" CapacityOrganizationCode="@CapacityOrganizationCode" CallingOrganizationCode="@CallingOrganizationCode" Node="@Node"/>
+		        </CreateNew>
+		        <Modify DisplayForm="YIN71002" DisplayMode="Dialog"> 
+					<DynamicAttributes CapacityOrganizationCode="@CapacityOrganizationCode" CallingOrganizationCode="@CallingOrganizationCode" Node="@Node"/>
+				</Modify>
+		        <SaveAs DisplayForm="YIN71002" DisplayMode="Dialog">
+					<DynamicAttributes CapacityOrganizationCode="@CapacityOrganizationCode"  CallingOrganizationCode="@CallingOrganizationCode" Node="@Node"/>
+				</SaveAs>
+		        <Delete>
+		           <API Servlet="/yantra/entities/ServiceResource/delete" APIName="" Message="Message_Deleting_Service_Resources"/>
+		        </Delete>
+		     </ListInfo>         
+		     <API Servlet="/yantra/entities/ServiceResource/list" APIName="" Message="Message_Retrieving_Service_Resources"/>
+		  </YIN71001>
+		  <YIN71002 Title="Resource_Details" ScreenType="Detail">
+		     <DetailInfo>
+		        <Get>
+		           <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Service_Resource_Details"/>
+		           <InnerPanels>
+						<AddressPanel FormName="YIN71004" ListPanel="pnlAddress" AddressElement="ServiceResourceContactAddress"/>
+						<ListPanel FormName="YIN71005" ListPanel="pnlTeamMembers">
+							 <DynamicAttributes Node="/MasterData/ShipNodes/ShipNode/@ShipNode" ModifyFlag="@ModifyFlag" ServiceResourceKey="@ServiceResourceKey"/>
+						</ListPanel>
+		           </InnerPanels>
+		        </Get>
+		        <Modify>
+		           <API Servlet="/yantra/entities/ServiceResource/modify" APIName="" Message="Message_Saving_Service_Resource"/>
+		        </Modify>
+		        <CreateNew>
+		           <API Servlet="/yantra/entities/ServiceResource/create" APIName="" Message="Message_Creating_Service_Resource">
+		           </API>
+		        </CreateNew>
+                <LogicalKeys>
+                  <LogicalKey ComponentType="JTextField" ComponentName="txtResourceId"/>
+                </LogicalKeys>
+		     </DetailInfo>
+		     <MasterData>
+				<Table Name="Calendar">
+	               <DynamicAttributes CallingOrganizationCode="@OrganizationKey"/>
+				   <StaticAttributes MeantForInternal="Y" MeantForInternalQryType="NE"/>
+				</Table>
+
+				<Table Name="ShipNode" RemoveCallingOrgCode="Y">
+					<DynamicAttributes ShipNode="@Node"/>
+				</Table>
+		 	</MasterData>
+	  	</YIN71002>
+	</Entity>
+
+   <Entity EntityTitle="Service_Resource_User" EntityName="ServiceResourceUser" PrimaryKeyAttributeName="ServiceResourceUserKey">
+		<ConfigurationAttributes  TableName="YFS_SERVICE_RESOURCE">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV003" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YIN71005 Title="Team_Members" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ServiceResourceUser" ShowFooter="N">
+            <List AttributeName="@UserId" ColumnTitle="User_ID" DataType="Text-50"/>
+			<List AttributeName="@Username" ColumnTitle="User_Name" DataType="Text-50"/>
+            <CreateNew DisplayForm="YCPPM177" DisplayMode="Dialog">
+               <DynamicAttributes HiddenServiceResourceKey="@ServiceResourceKey" CallingOrganizationCode="@Node"/>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/ServiceResourceUser/delete" APIName="" Message="Message_Removing_User_From_Team"/>
+            </Delete>
+         </ListInfo>
+		<API Servlet="/yantra/entities/ServiceResourceUser/list" APIName="" Message="Message_Retrieving_Search_Results">
+			<StaticAttributes>
+				<OrderBy>
+					<Clause Name="ServiceResourceUserKey"/>
+				</OrderBy>
+			</StaticAttributes>
+		</API>
+      </YIN71005>
+
+	</Entity>
+
+	<Entity EntityTitle="Inventory_Node_Type_Rules" EntityName="InventoryNodeType" PrimaryKeyAttributeName="InventoryNodeTypeKey">
+		<ConfigurationAttributes  TableName="YFS_INV_NODE_TYPE">
+				<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV029" IsPrimary="Y"/>
+	    </ConfigurationAttributes>
+		<YIN71010 Title="Inventory_Node_Type_Rules" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="InventoryNodeType">
+				<List AttributeName="/NodeType@NodeTypeDescription" ColumnTitle="Node_Type" DataType="ID-40"/>
+				<List AttributeName="@ApplyOnhandSafetyFactor" ColumnTitle="Apply_Onhand_Safety_Factor_Header" DataType="Boolean"/>
+				<List AttributeName="@ApplyFutureSafetyFactor" ColumnTitle="Apply_Future_Safety_Factor_Header" DataType="Boolean"/>
+				<Modify DisplayForm="YIN71011" DisplayMode="Dialog" />
+				<Delete>
+					<API Servlet="/yantra/entities/InventoryNodeType/delete" APIName="" Message="Message_Deleting_Inventory_Node_Type_Rule"/>
+				</Delete>
+				<CreateNew DisplayForm="YIN71011" DisplayMode="Dialog">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/InventoryNodeType/list" APIName="" Message="Message_Retrieving_Inventory_Node_Type_Rule"/>
+		</YIN71010>
+		<YIN71011 Title="Inventory_Node_Type_Rule_Details" ScreenType="Detail">
+			<DetailInfo>
+				  <Get>
+					<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Loading_Inventory_Node_Type_Rule_Details"/>
+				  </Get>
+					<CreateNew>
+					   <API Servlet="/yantra/entities/InventoryNodeType/create" APIName="" Message="Saving_Inventory_Node_Type">
+							<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" OwnerKey="@CallingOrganizationCode"/>
+					   </API>
+					</CreateNew>
+					<Modify>
+					   <API Servlet="/yantra/entities/InventoryNodeType/modify" APIName="" Message="Saving_Inventory_Node_Type">
+					   </API>
+					</Modify>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="NodeType" XMLName="NodeType">
+				</Table>
+			</MasterData>
+		</YIN71011>
+	</Entity>
+    <Entity EntityTitle="IBASequenceHeader" EntityName="IBASequenceHeader" 
+   		PrimaryKeyAttributeName="IBASequenceHeaderKey"> 
+		<ConfigurationAttributes  TableName="YFS_IBA_SEQUENCE_HDR">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV000" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPPM551 Title="Order_Selection_Rules_For_Inventory_Allocation" ScreenType="List" >
+		<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument" Message="Message_Retrieving_Item_Based_Allocation_Sequence_Header_List"/>
+        <ListInfo NamePrefix="/" ChildTag="IBASequenceHeader"> 
+            <List AttributeName="/@SequenceNo" ColumnTitle="Sequence_No" DataType="Count"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+			<Modify DisplayForm="YCPPM552" DisplayMode="Dialog"/>
+			<CreateNew DisplayForm="YCPPM552" DisplayMode="Dialog"/>
+            <SaveAs DisplayForm="YCPPM552" DisplayMode="Dialog"/>
+			<Delete>
+				<API Servlet="/yantra/entities/IBASequenceHeader/delete" APIName="" Message="Message_Deleting_Item_Based_Allocation_Sequence_Header"/>
+			</Delete>
+		</ListInfo>
+	  </YCPPM551>
+		<YCPPM552 Title="IBA_Sequence_Header_Details" ScreenType="Detail">
+			<DetailInfo>
+				  <Get>
+					<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Based_Allocation_Sequence_Header_Details"/>
+				  </Get>
+					<CreateNew>
+					   <API Servlet="/yantra/entities/IBASequenceHeader/create" APIName="" Message="Saving_Item_Based_Allocation_Sequence_Header">
+							<DynamicAttributes OrganizationCode="@CallingOrganizationCode" OwnerKey="@CallingOrganizationCode"/>
+					   </API>
+					</CreateNew>
+					<Modify>
+					   <API Servlet="/yantra/entities/IBASequenceHeader/modify" APIName="" Message="Saving_Item_Based_Allocation_Sequence_Header">
+					   </API>
+					</Modify>
+            <LogicalKeys>
+                <LogicalKey ComponentType="JTextField" ComponentName="txtSequenceNo"/>
+            </LogicalKeys>
+			</DetailInfo>
+		</YCPPM552>
+    </Entity>
+    <Entity EntityTitle="IBASequenceDetail" EntityName="IBASequenceDetail" 
+   		PrimaryKeyAttributeName="IBASequenceDetailKey"> 
+		<ConfigurationAttributes  TableName="YFS_IBA_SEQUENCE_DTL">
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV000" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCPPM553 Title="IBA_Sequence_Detail_List" ScreenType="List" >
+		   <API Servlet="com.yantra.ycp.pm.ui.backend.YCPInventoryConsiderationsAPI" APIName="getListWithMasterData" Message="Message_Retrieving_Item_Based_Allocation_Sequence_Detail_List">
+			</API>
+        <ListInfo NamePrefix="/" ChildTag="IBASequenceDetail"> 
+			<List AttributeName="/Condition@ConditionID" ColumnTitle="Condition_ID" DataType="ID-40" Editable="N" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor" EditableAddRow="Y">
+				<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="ConditionKey"/>
+				<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="ConditionName"/>
+				<ComponentClientProperty Name="YFCXMLBinding.dataType" Value="Key"/>
+				<ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/Conditions@Condition"/>
+				<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YCPIF043"/>
+				<ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="true"/>
+				<ComponentClientProperty Name="YCPLookup.alwaysUseTextField" Value="false"/>
+				<ComponentClientProperty Name="YCPLookup.searchFormId" Value="YCPIF043"/>
+				<ComponentClientProperty Name="YCPLookup.lookupSearchElement" 
+				Value="&lt;SearchElement>&lt;StaticAttributes ProcessTypeKey=&quot;GENERAL&quot; ConditionType=&quot;IBA&quot;/>&lt;DynamicAttributes OwnerKey=&quot;@CallingOrganizationCode&quot;/>&lt;/SearchElement>"/>
+			</List>
+			<Modify/>
+			<CreateNew/>
+			<Delete>
+				<API Servlet="/yantra/entities/IBASequenceDetail/delete" APIName="" Message="Message_Deleting_Item_Based_Allocation_Sequence_Detail"/>
+			</Delete> 
+		</ListInfo>
+		<MasterData>
+			<Table Name="Condition" XMLName="Condition">
+				<DynamicAttributes OwnerKey="@CallingOrganizationCode"/>
+			   <StaticAttributes ProcessTypeKey="GENERAL" ConditionType="IBA"/>
+			</Table>
+		</MasterData>
+	  </YCPPM553>
+    </Entity>
+	<Entity EntityTitle="Common_Code" EntityName="CommonCode" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="CommonCodeKey">
+		<PermanentRecordAttributes SystemDefinedCode="Y"/>
+      <YIN100 Title="Monitor_Rule_Distribution_Groups" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.inv.uibackend.INVMasterData" APIName="getMonitorRuleDistributionGroupList" Message="Message_Loading_Monitor_Rule_Distribution_Groups"/>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.inv.uibackend.INVMasterData" APIName="manageMonitorRuleDistributionGroups" Message="Message_Saving_Monitor_Rule_Distribution_Groups"/>
+            </Modify>
+         </DetailInfo>
+         <MasterData>
+			<Table Name="DistributionRule" XMLName="GroupDistributionRule"  AllRecords="Y" RemoveCallingOrgCode="N">
+			</Table>
+			<Table Name="DistributionRule" XMLName="NodeDistributionRule"  AllRecords="Y" RemoveCallingOrgCode="N">
+			</Table>
+         </MasterData>
+      </YIN100>
+      <YIN110 Title="Group_Distribution_Rule_Subscriptions" ScreenType="Subscription">
+         <SubscriptionListInfo SubscriptionSubscribedNamePrefix="/GroupDistributionRuleList" SubscriptionSubscribedChildTag="CommonCode" SubscriptionFullListNamePrefix="/MasterData/GroupDistributionRules" SubscriptionFullListChildTag="DistributionRule">
+            <List AttributeName="@DistributionRuleId" ColumnTitle="Distribution_Rule_ID" DataType="DistributionRuleId"/>
+            <List AttributeName="@OwnerKey" ColumnTitle="Organization_Code" DataType="OrgCode"/>
+         </SubscriptionListInfo>
+      </YIN110>
+      <YIN120 Title="Node_Distribution_Rule_Subscriptions" ScreenType="Subscription">
+         <SubscriptionListInfo SubscriptionSubscribedNamePrefix="/NodeDistributionRuleList" SubscriptionSubscribedChildTag="CommonCode" SubscriptionFullListNamePrefix="/MasterData/NodeDistributionRules" SubscriptionFullListChildTag="DistributionRule">
+            <List AttributeName="@DistributionRuleId" ColumnTitle="Distribution_Rule_ID" DataType="DistributionRuleId"/>
+            <List AttributeName="@OwnerKey" ColumnTitle="Organization_Code" DataType="OrgCode"/>
+         </SubscriptionListInfo>
+      </YIN120>
+	</Entity>
+</Entities>

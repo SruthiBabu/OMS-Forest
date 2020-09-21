@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--getOrderLineStatusList output XML-->
+<OrderLineStatusList>
+    <OrderStatus>
+        <Schedule/>
+        <OrderRelease/>
+        <OrderLine>
+            <OrderLineTranQuantity/>
+            <Order/>
+            <Item/>
+            <Shipnode/>
+        </OrderLine>
+        <OrderStatusTranQuantity/>
+        <ShipNode/>
+    </OrderStatus>
+    <FilteredStatusList>
+        <OrderStatus>
+            <OrderStatusTranQuantity/>
+            <Schedule/>
+            <OrderRelease/>
+            <OrderLine>
+                <OrderLineTranQuantity/>
+                <Order/>
+                <Item/>
+                <Shipnode/>
+            </OrderLine>
+            <ShipNode/>
+        </OrderStatus>
+    </FilteredStatusList>
+    <!-- DropStatuses is a template-driven element but its attributes are not. If TransactionId is passed to the api, it will come in the output xml if this element comes. -->
+    <DropStatuses>
+        <DropStatus/>
+    </DropStatuses>
+</OrderLineStatusList>

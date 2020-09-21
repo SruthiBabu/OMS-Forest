@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DBSchema>
+  <!--This is a sample extension file to prevent the upgrade of the below columns to nullable.  See the Upgrade Guide for more information.-->
+  <Entities>
+    <Entity TableName="YFS_PAYMENT">
+      <Attributes>
+        <Attribute ColumnName="CREDIT_CARD_NO" Name="Credit_Card_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="CUSTOMER_ACCOUNT_NO" Name="Customer_Account_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="SVC_NO" Name="Svc_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+    <Entity TableName="YFS_CUSTOMER_PAYMENT_METHOD">
+      <Attributes>
+        <Attribute ColumnName="CREDIT_CARD_NO" Name="Credit_Card_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+        <Attribute ColumnName="CUSTOMER_ACCOUNT_NO" Name="Customer_Account_No" Nullable="false" DefaultValue="' '" VirtualDefaultValue="' '"/>
+      </Attributes>
+    </Entity>
+  </Entities>
+</DBSchema>

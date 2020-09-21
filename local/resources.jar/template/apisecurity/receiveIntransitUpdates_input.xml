@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- One of LoadNo or LoadKey must be passed -->
+<!-- For transport status updates, just LoadKey and TransportStatusCode or Location is sufficient.-->
+<!-- For stop updates, either LoadLeftOrigin or LoadReachedDestination must be Y, or (LoadStopKey/StopNode/StopAddressKey) or StopAddress element must be passed. -->
+<!-- If ConfirmAllShipmentsForStop is Y, then the user has to pass stop node information in the LoadStop element. -->
+<!-- Action Void against LoadLeftOrigin and LoadReachedDestination is treated same as 'N' -->
+<Load>
+    <LoadStop>
+        <StopAddress/>
+    </LoadStop>
+    <LoadStatusAudit/>
+    <ShipmentsPickedUp>
+        <!-- One of Shipment unique key or ShipmentKey must be passed -->
+        <Shipment/>
+    </ShipmentsPickedUp>
+    <ShipmentsDroppedOff>
+        <!-- One of Shipment unique key or ShipmentKey must be passed -->
+        <Shipment/>
+    </ShipmentsDroppedOff>
+</Load>

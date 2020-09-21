@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite - Foundation
+(C) Copyright IBM Corp 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+-->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains information about Region levels for which each region will be created."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Region_Level" Prefix="YFS_"
+            TableName="YFS_REGION_LEVEL" TableType="CONFIGURATION" XMLName="RegionLevel">
+            <Attributes>
+                <Attribute ColumnName="REGION_LEVEL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key for YFS_REGION_LEVEL table."
+                    Name="Region_Level_Key" Nullable="false" XMLName="RegionLevelKey"/>
+                <Attribute ColumnName="REGION_LEVEL_NAME"
+                    DataType="ID-40" DefaultValue="' ' "
+                    Description="Unique Name for the region level."
+                    Name="Region_Level_Name" Nullable="false" XMLName="RegionLevelName"/>
+                <Attribute CanTranslate="Y" ColumnName="REGION_LEVEL_DESCRIPTION"
+                    DataType="FreeText-100" DefaultValue="' ' "
+                    Description="Brief description about the region level."
+                    Name="Region_Level_Description" Nullable="false" XMLName="RegionLevelDescription"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="ADDRESS_FIELD_ALIAS" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="If applicable, this indicates what address field this region level corresponds to.  For example, Country or City."
+                    Name="Address_Field_Alias" Nullable="false" XMLName="AddressFieldAlias"/>
+                <Attribute ColumnName="CAN_AGGREGATE" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Flag indicates if this region level can be a parent of other regions."
+                    Name="Can_Aggregate" Nullable="false" XMLName="CanAggregate"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="REGION_LEVEL_PK">
+                <Attribute ColumnName="REGION_LEVEL_KEY" Name="Region_Level_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="REGION_LEVEL_I1"
+                    Name="YFS_REGION_LEVEL_I1" Unique="true">
+                    <Column Name="REGION_LEVEL_NAME"/>
+                </Index>
+            </Indices>
+            <OrderBy Value="REGION_LEVEL_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains information about Region Level Associations between each region level."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Region_Level_Assoc" Prefix="YFS_"
+            TableName="YFS_REGION_LEVEL_ASSOC" TableType="CONFIGURATION" XMLName="RegionLevelAssoc"
+            LockingEntity="Region_Level">
+            <Attributes>
+                <Attribute ColumnName="REGION_LEVEL_ASSOC_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for YFS_REGION_LEVEL_ASSOC table."
+                    Name="Region_Level_Assoc_Key" Nullable="false" XMLName="RegionLevelAssocKey"/>
+                <Attribute ColumnName="REGION_LEVEL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Unique key for YFS_REGION_LEVEL_ASSOC table."
+                    Name="Region_Level_Key" Nullable="false" XMLName="RegionLevelKey"/>
+                <Attribute ColumnName="PARENT_REGION_LEVEL_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Region Level Key under which this Level is being associated."
+                    Name="Parent_Region_Level_Key" Nullable="false" XMLName="ParentRegionLevelKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="REG_LVL_ASSOC_PK">
+                <Attribute ColumnName="REGION_LEVEL_ASSOC_KEY" Name="Region_Level_Assoc_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ParentRegionLevelAssocList"
+                    ChildName="ParentRegionLevelAssoc"
+                    DeleteCascade="true" ForeignEntity="Region_Level"
+                    Name="RegionLevel" Type="Bidirectional" XMLName="ParentRegionLevel">
+                    <Attribute Name="Region_Level_Key" ParentName="Region_Level_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChildRegionLevelAssocList"
+                    ChildName="ChildRegionLevelAssoc"
+                    DeleteCascade="true" ForeignEntity="Region_Level"
+                    Name="ChildRegionLevel" Type="Bidirectional" XMLName="ChildRegionLevel">
+                    <Attribute Name="Parent_Region_Level_Key" ParentName="Region_Level_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="REG_LVL_ASSOC_I1"
+                    Name="YFS_REGION_LEVEL_ASSOC_I1" Unique="true">
+                    <Column Name="REGION_LEVEL_KEY"/>
+                    <Column Name="PARENT_REGION_LEVEL_KEY"/>
+                </Index>
+            </Indices>
+            <OrderBy Value="REGION_LEVEL_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table contains information about Region Schema created for an organization."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Region_Schema" Prefix="YFS_"
+            TableName="YFS_REGION_SCHEMA" TableType="CONFIGURATION" XMLName="RegionSchema">
+            <Attributes>
+                <Attribute ColumnName="REGION_SCHEMA_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Primary key attribute of YFS_REGION_SCHEMA table."
+                    Name="Region_Schema_Key" Nullable="false" XMLName="RegionSchemaKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="Organization Key for which the region schema is created."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="REGION_SCHEMA_NAME"
+                    DataType="ID-40" DefaultValue="' ' "
+                    Description="Unique Name for the region schema."
+                    Name="Region_Schema_Name" Nullable="false" XMLName="RegionSchemaName"/>
+                <Attribute ColumnName="REGION_SCHEMA_DESCRIPTION"
+                    DataType="FreeText-100" DefaultValue="' ' "
+                    Description="Brief description about the region schema."
+                    Name="Region_Schema_Description" Nullable="false" XMLName="RegionSchemaDescription"/>
+                <Attribute ColumnName="COUNTRY" DataType="Country"
+                    DefaultValue="' ' "
+                    Description="Country for which region schema is created."
+                    Name="Country" Nullable="false" XMLName="Country"/>
+                <Attribute ColumnName="MATCH_MULTIPLE_REGIONS" DataType="Flag"                    
+                    Description="This flag indicates whether to allow matching of multiple regions for a zipcode."
+                    Name="Match_Multiple_Regions" Nullable="true" XMLName="MatchMultipleRegions"/>  
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="REGION_SCHEMA_PK">
+                <Attribute ColumnName="REGION_SCHEMA_KEY" Name="Region_Schema_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="REGION_SCHEMA_I1"
+                    Name="YFS_REGION_SCHEMA_I1" Unique="true">
+                    <Column Name="REGION_SCHEMA_NAME"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteValidationError="YDB10070" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="Y"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="REGION_SCHEMA_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores information for region definitions. A region schema key has to be given to indicate the schema to which the region is associated."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Region" Prefix="YFS_" TableName="YFS_REGION"
+            TableType="CONFIGURATION" XMLName="Region" LockingEntity="Region_Schema">
+            <Attributes>
+                <Attribute ColumnName="REGION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_REGION table."
+                    Name="Region_Key" Nullable="false" XMLName="RegionKey" FactName="false"/>
+                <Attribute ColumnName="REGION_SCHEMA_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The region schema associated with this region."
+                    Name="Region_Schema_Key" Nullable="false" XMLName="RegionSchemaKey"/>
+                <Attribute ColumnName="REGION_NAME" DataType="ID-40"
+                    DefaultValue="' ' "
+                    Description="The unique name of this region."
+                    Name="Region_Name" Nullable="false" XMLName="RegionName"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="REGION_DESCRIPTION" DataType="FreeText-100"
+                    DefaultValue="' ' "
+                    Description="The description of this region."
+                    Name="Region_Description" Nullable="false" XMLName="RegionDescription"/>
+                <Attribute ColumnName="PARENT_REGION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The parent region associated with this region."
+                    Name="Parent_Region_Key" Nullable="false" XMLName="ParentRegionKey"/>
+                <Attribute ColumnName="REGION_LEVEL_NAME"
+                    DataType="ID-40" DefaultValue="' ' "
+                    Description="The name of the region level associated with this region."
+                    Name="Region_Level_Name" Nullable="false" XMLName="RegionLevelName"/>
+                <Attribute ColumnName="CAN_AGGREGATE" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether this region can be a parent of other regions."
+                    Name="Can_Aggregate" Nullable="false" XMLName="CanAggregate"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="REGION_KEY" Name="Region_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" ChildName="Region"
+                    DeleteCascade="true" ForeignEntity="Region_Schema"
+                    Name="RegionSchema" Type="Bidirectional"
+                    XMLName="RegionSchema">
+                    <Attribute Name="Region_Schema_Key" ParentName="Region_Schema_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChildRegions"
+                    ChildName="Child_Region" ChildXMLName="ChildRegion"
+                    DeleteCascade="true" ForeignEntity="Region"
+                    Name="Parent_Region" Type="Bidirectional" XMLName="ParentRegion">
+                    <Attribute Name="Parent_Region_Key" ParentName="Region_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" ChildName="Region"
+                    DeleteValidationError="YDB10012"
+                    ForeignEntity="Region_Level" Name="RegionLevel"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="RegionLevel">
+                    <Attribute Name="Region_Level_Name" ParentName="Region_Level_Name"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index Name="YFS_REGION_I1" Unique="true">
+                    <Column Name="REGION_SCHEMA_KEY"/>
+                    <Column Name="REGION_NAME"/>
+                    <Column Name="PARENT_REGION_KEY"/>
+                </Index>
+            </Indices>
+            <OrderBy Value="REGION_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores information about region details for the region. This entry will be available only for the lowest region level."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Region_Detail" Prefix="YFS_"
+            TableName="YFS_REGION_DETAIL" TableType="CONFIGURATION" XMLName="RegionDetail"
+            LockingEntity="Region">
+            <Attributes>
+                <Attribute ColumnName="REGION_DETAIL_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_REGION_DETAIL table."
+                    Name="Region_Detail_Key" Nullable="false" XMLName="RegionDetailKey"/>
+                <Attribute ColumnName="REGION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The region associated with these region details."
+                    Name="Region_Key" Nullable="false" XMLName="RegionKey"/>
+                <Attribute ColumnName="COUNTRY" DataType="Country"
+                    DefaultValue="' ' "
+                    Description="The country of the region."
+                    Name="Country" Nullable="false" XMLName="Country"/>
+                <Attribute ColumnName="FROM_ZIP" DataType="ZipCode"
+                    DefaultValue="' ' "
+                    Description="The zip code from which the range starts."
+                    Name="From_Zip" Nullable="false" XMLName="FromZip"/>
+                <Attribute ColumnName="TO_ZIP" DataType="ZipCode"
+                    DefaultValue="' ' "
+                    Description="The zip code where the range ends."
+                    Name="To_Zip" Nullable="false" XMLName="ToZip"/>
+                <Attribute ColumnName="ZIPCODE_LENGTH" DataType="Count"
+                    DefaultValue="0" Description="The zip code Length."
+                    Name="Zipcode_Length" Nullable="false" XMLName="ZipcodeLength"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="REGION_DETAIL_PK">
+                <Attribute ColumnName="REGION_DETAIL_KEY" Name="Region_Detail_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="REGION_DETAIL_I1"
+                    Name="YFS_REGION_DETAIL_I1" Unique="true">
+                    <Column Name="REGION_KEY"/>
+                    <Column Name="COUNTRY"/>
+                    <Column Name="FROM_ZIP"/>
+                    <Column Name="TO_ZIP"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ZipCodeRanges"
+                    ChildName="ZipCodeRange" ChildXMLName="ZipCodeRange"
+                    DeleteCascade="true" ForeignEntity="Region"
+                    Name="Region" Type="Bidirectional" XMLName="Region">
+                    <Attribute Name="Region_Key" ParentName="Region_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="REGION_DETAIL_KEY"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores information about region match preferences."
+            EntityType="CONFIGURATION" Extensible="N" Module="ysc"
+            Name="Region_Match_Pref" Prefix="YFS_"
+            TableName="YFS_REGION_MATCH_PREF" TableType="CONFIGURATION" XMLName="RegionMatchPref">
+            <Attributes>
+                <Attribute ColumnName="REGION_MATCH_PREF_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for YFS_REGION_MATCH_PREF table."
+                    Name="Region_Match_Pref_Key" Nullable="false" XMLName="RegionMatchPrefKey"/>
+                <Attribute ColumnName="COUNTRY" DataType="Country"
+                    DefaultValue="' ' "
+                    Description="Country for which region schema is created."
+                    Name="Country" Nullable="false" XMLName="Country"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="ADDRESS_FIELD_ALIAS" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The address field to use when locating regions for addresses in this country.  If not defined, the default behavior is to match by ZipCode."
+                    Name="Address_Field_Alias" Nullable="false" XMLName="AddressFieldAlias"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="REGION_MATCH_P_PK">
+                <Attribute ColumnName="REGION_MATCH_PREF_KEY" Name="Region_Match_Pref_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="REGION_MATCH_P_I1"
+                    Name="YFS_REGION_MATCH_PREF_I1" Unique="true">
+                    <Column Name="COUNTRY"/>
+                </Index>
+            </Indices>
+        </Entity>
+    </Entities>
+</DBSchema>

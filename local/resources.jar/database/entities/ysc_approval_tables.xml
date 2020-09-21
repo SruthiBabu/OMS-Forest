@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores order approval rules"
+            EntityType="MASTER" Module="ysc"
+            Name="Order_Approval_Rule" Prefix="YFS_"
+            TableName="YFS_ORDER_APPROVAL_RULE" TableType="MASTER" XMLName="OrderApprovalRule">
+            <Attributes>
+				<Attribute ColumnName="VALIDATION_KEY"
+                    DataType="Key" 
+                    Description="This is the reference to the validation identifier corresponding to base business rules."
+                    Name="Validation_Key" Nullable="true" XMLName="ValidationKey"/>
+                <Attribute ColumnName="ORDER_APPROVAL_RULE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_ORDER_APPROVAL_RULE table."
+                    Name="Order_Approval_Rule_Key" Nullable="false" XMLName="OrderApprovalRuleKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization that is associated with this approval rule."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+               	<Attribute ColumnName="DOCUMENT_TYPE" DataType="DocumentType"
+                    Description="Document type to which this approval rule belongs."
+                    Name="Document_Type" Nullable="true" XMLName="DocumentType"/>
+				<Attribute ColumnName="RULE_ID"
+                    DataType="OrderApprovalRuleRuleID" 
+                    Description="Approval rule identifier." Name="Rule_ID" Nullable="true" XMLName="RuleID"/>
+				<Attribute ColumnName="TYPE"
+                    DataType="OrderApprovalRuleType"
+                    Description="Indicates whether approval limit is defined for header level or line level." 
+                    Name="Type" Nullable="true" XMLName="Type"/>
+                <Attribute ColumnName="GREEX_RULE"
+                    DataType="CLOB" 
+                    Description="The Greex format advanced XML condition associated with this approval limit."
+                    Name="Greex_Rule"
+                    Nullable="true" XMLName="GreexRule"/>
+                <Attribute ColumnName="IS_OVERRIDE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="Indicates when the approval overrides other applicable rules of the same Type" 
+                    Name="Is_Override" Nullable="false" XMLName="IsOverride"/>
+                <Attribute ColumnName="IS_ACTIVE"
+                    DataType="Flag" DefaultValue="'Y'"
+                    Description="Indicates when the approval rule is active." 
+                    Name="Is_Active" Nullable="false" XMLName="IsActive"/>
+                <Attribute ColumnName="EFFECTIVE_START_DATE" DataType="Date"
+					Description="Defines the time after which the rule is effective."
+                    Name="Effective_Start_Date" Nullable="true"
+                    XMLName="EffectiveStartDate"/>
+                <Attribute ColumnName="EFFECTIVE_END_DATE" DataType="Date"
+					Description="Defines the time before which the rule is effective."
+                    Name="Effective_End_Date" Nullable="true"
+                    XMLName="EffectiveEndDate"/>
+				<Attribute ColumnName="MESSAGE" CanTranslate="Y"
+                    DataType="OrderApprovalRuleMessage" 
+                    Description="Message to be displayed when approval rule is violated." 
+                    Name="Message" Nullable="true" XMLName="Message"/>
+				<Attribute ColumnName="MESSAGE_CODE"
+                    DataType="OrderApprovalRuleMessageCode" 
+                    Description="Message code to be displayed when approval rule is violated." 
+                    Name="Message_Code" Nullable="true" XMLName="MessageCode"/>  
+				<Attribute ColumnName="CHANNEL"
+                    DataType="Text-20"
+                    Description="The channel for which this rule applies." 
+                    Name="Channel" Nullable="true" XMLName="Channel"/>
+				<Attribute ColumnName="LANE_TYPE"
+                    DataType="Text-20"
+                    Description="The Lane for which this rule applies." 
+                    Name="Lane_Type" Nullable="true" XMLName="LaneType"/>
+				<Attribute ColumnName="STORE_TYPE"
+                    DataType="Text-20"
+                    Description="The Store for which this rule applies." 
+                    Name="Store_Type" Nullable="true" XMLName="StoreType"/>
+				<Attribute ColumnName="REGION_KEY"
+                    DataType="Key"
+                    Description="The region for which this rule applies." 
+                    Name="Region_Key" Nullable="true" XMLName="RegionKey"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="ORD_APPR_RUL_I1"
+                    Name="YFS_ORDER_APPROVAL_RULE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="RULE_ID"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="ORD_APPR_RUL_PK" Name="YFS_ORDER_APPROVAL_RULE_PK">
+                <Attribute ColumnName="ORDER_APPROVAL_RULE_KEY" Name="Order_Approval_Rule_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Document_Params" Name="Document"
+                    Type="Bidirectional">
+                    <Attribute Name="Document_Type" ParentName="Document_Params_Key"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Validation"
+                    Name="Validation" Type="Bidirectional" XMLName="Validation">
+                   <Attribute Name="Validation_Key" ParentName="Validation_Key"/>
+                </RelationShip>
+			</RelationShips>
+    	</Entity>
+		<Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores order approval plans"
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Approval_Plan" Prefix="YFS_"
+            TableName="YFS_APPROVAL_PLAN" TableType="CONFIGURATION" XMLName="ApprovalPlan">
+            <Attributes>
+                <Attribute ColumnName="APPROVAL_PLAN_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_APPROVAL_PLAN table."
+                    Name="Approval_Plan_Key" Nullable="false" XMLName="ApprovalPlanKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization that is associated with this approval plan."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+               	<Attribute ColumnName="SEQUENCE" DataType="LongSequence"
+                    Description="Indicates the sequence of the approval."
+                    Name="Sequence" Nullable="true" XMLName="Sequence"/>
+				<Attribute ColumnName="TEAM_CODE"
+                    DataType="DataSecurityGroupId" 
+                    Description="Team which has to approve the document." Name="Team_Code" 
+                    Nullable="true" XMLName="TeamCode"/>
+				<Attribute ColumnName="USER_GROUP_ID"
+                    DataType="UserGroup"
+                    Description="User group which has to approve the document." Name="User_Group_ID" 
+                    Nullable="true" XMLName="UserGroupID"/>
+                <Attribute ColumnName="APPROVAL_GROUP_KEY"
+                    DataType="Key"
+                    Description="The approval group to which this approval plan belongs to."
+                    Name="Approval_Group_Key" Nullable="true" XMLName="ApprovalGroupKey"/>
+                <Attribute ColumnName="PREDECESSOR_SEQ"
+                    DataType="ApprovalPlanPredecessorSeq" Description="Indicates the predecessor sequences which needs to provide approval first before this team/user group can approve.  Multiple predecessors can be stored by specifying comma separated sequences."
+                    Name="Predecessor_Seq" Nullable="true" XMLName="PredecessorSeq"/>
+				<Attribute ColumnName="IS_MANDATORY"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="Indicates if the approval is mandatory and is required regardless of the hierarchy." 
+                    Name="Is_Mandatory" Nullable="false" XMLName="IsMandatory"/>
+				<Attribute ColumnName="APPROVAL_NAME"
+                    DataType="ApprovalPlanApprovalName" 
+                    Description="This attribute indicates a name for this approval plan." Name="Approval_Name" 
+                    Nullable="true" XMLName="ApprovalName"/> 
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="APPR_PLAN_I1"
+                    Name="YFS_APPROVAL_PLAN_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEAM_CODE"/>
+                    <Column Name="USER_GROUP_ID"/>
+                    <Column Name="APPROVAL_GROUP_KEY"/>
+                </Index>
+				<Index DB2Name="APPR_PLAN_I2"
+                    Name="YFS_APPROVAL_PLAN_I2" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="SEQUENCE"/>
+                    <Column Name="APPROVAL_GROUP_KEY"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="APPR_PLAN_PK" Name="YFS_APPROVAL_PLAN_PK">
+                <Attribute ColumnName="APPROVAL_PLAN_KEY" Name="Approval_Plan_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="User_Group" Name="User_Group"
+                    Type="Bidirectional" XMLName="UserGroup">
+                    <Attribute Name="User_Group_ID" ParentName="Usergroup_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Data_Security_Group" Name="Data_Security_Group"
+                    Type="Bidirectional" XMLName="DataSecurityGroup">
+                    <Attribute Name="Team_Code" ParentName="Data_Security_Group_Id"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ApprovalPlanList" ChildName="ApprovalPlan"
+                    ChildXMLName="ApprovalPlan" DeleteCascade="true"
+                    ForeignEntity="Approval_Group" Name="ApprovalGroup"
+                    Type="Bidirectional" XMLName="ApprovalGroup">
+                    <Attribute Name="Approval_Group_Key" ParentName="Approval_Group_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="SEQUENCE"/>
+    	</Entity>
+		<Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="The approval group table defines the approval group plans to be used for order approval"
+            EntityType="CONFIGURATION" Extensible="N" HasHistory="N" Module="ysc"
+            Name="Approval_Group" Prefix="YFS_"
+            TableName="YFS_APPROVAL_GROUP" TableType="CONFIGURATION" XMLName="ApprovalGroup">
+            <Attributes>
+                <Attribute ColumnName="APPROVAL_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_APPROVAL_GROUP table."
+                    Name="Approval_Group_Key" Nullable="false" XMLName="ApprovalGroupKey" FactName="false"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization that is associated with this approval group."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+               	<Attribute ColumnName="DOCUMENT_TYPE" DataType="DocumentType"
+                    Description="Document type to which this approval group belongs."
+                    Name="Document_Type" Nullable="true" XMLName="DocumentType"/>
+				<Attribute ColumnName="APPROVAL_GROUP_ID"
+                    DataType="ApprovalGroupId"
+                    Description="Identifier for this approval group." Name="Approval_Group_Id" 
+                    Nullable="true" XMLName="ApprovalGroupId"  FactName="false"/>
+				<Attribute ColumnName="APPROVAL_GROUP_NAME"
+                    DataType="ApprovalGroupName" 
+                    Description="The name of this approval group." Name="Approval_Group_Name" 
+                    Nullable="true" XMLName="ApprovalGroupName"/> 
+				<Attribute ColumnName="IS_DEFAULT"
+                    DataType="Flag"
+                    Description="Indicates if this approval group is the default approval group for order approval." 
+                    Name="Is_Default" Nullable="true" XMLName="IsDefault"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="APPR_GROUP_I1"
+                    Name="YFS_APPROVAL_GROUP_I1" Unique="true">
+                    <Column Name="APPROVAL_GROUP_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="APPR_GROUP_PK" Name="YFS_APPROVAL_GROUP_PK">
+                <Attribute ColumnName="APPROVAL_GROUP_KEY" Name="Approval_Group_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Document_Params" Name="Document"
+                    Type="Bidirectional">
+                    <Attribute Name="Document_Type" ParentName="Document_Params_Key"/>
+                </RelationShip>
+            </RelationShips>
+    	</Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This tables stores the relationship between approval rules and approval groups."
+            EntityType="MASTER" Module="ysc"
+            Name="Approval_Rule_Assoc" Prefix="YFS_"
+            TableName="YFS_APPROVAL_RULE_ASSOC" TableType="MASTER" XMLName="ApprovalRuleAssoc">
+            <Attributes>
+                <Attribute ColumnName="APPROVAL_RULE_ASSOC_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_APPROVAL_RULE_ASSOC table."
+                    Name="Approval_Rule_Assoc_Key" Nullable="false" XMLName="ApprovalRuleAssocKey"/>
+				<Attribute ColumnName="ORDER_APPROVAL_RULE_KEY"
+                    DataType="Key"
+					Description="The foreign key of the order approval rule associated with."
+                    Name="Order_Approval_Rule_Key" Nullable="true" XMLName="OrderApprovalRuleKey"/>
+				<Attribute ColumnName="APPROVAL_GROUP_KEY" 
+					DataType="Key"              
+                    Description="The foreign key of the approval group associated to."
+                    Name="Approval_Group_Key" Nullable="true" XMLName="ApprovalGroupKey" />
+				<Attribute ColumnName="MIN_APPROVER" 
+					DataType="LongSequence"              
+                    Description="Indicates the lowest approver in the approval plan sequence that can approve the exception."
+                    Name="Min_Approver" Nullable="true" XMLName="MinApprover" />
+				<Attribute ColumnName="MAX_APPROVER" 
+					DataType="LongSequence"              
+                    Description="Indicates the highest approver in the approval plan sequence that can approve the exception."
+                    Name="Max_Approver" Nullable="true" XMLName="MaxApprover" />
+				<Attribute ColumnName="IS_SIGNATURE_MANDATORY" 
+					DataType="Flag"            
+                    Description="Indicates in case exception is caused by a person higher or equal to Min Approver role, the system will enforce minimum of self signature as approval mechanism."
+                    Name="Is_Signature_Mandatory" Nullable="true" XMLName="IsSignatureMandatory" />
+				<Attribute ColumnName="SIGNATURE_POLICY" 
+					DataType="Text-20"            
+                    Description="Indicates if approval signature is required by every one in the approval plan sequence or approval by any one in the approval plan sequence."
+                    Name="Signature_Policy" Nullable="true" XMLName="SignaturePolicy" />
+				
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="APPR_RULE_ASSOC_I1"
+                    Name="YFS_APPROVAL_RULE_ASSOC_I1" Unique="true">
+                    <Column Name="ORDER_APPROVAL_RULE_KEY"/>
+					<Column Name="APPROVAL_GROUP_KEY"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="APPR_RULE_ASSOC_PK" Name="YFS_APPROVAL_RULE_ASSOC_PK">
+                <Attribute ColumnName="APPROVAL_RULE_ASSOC_KEY" Name="Approval_Rule_Assoc_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                 <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ApprovalRuleAssocList" ChildName="ApprovalRuleAssoc"
+                    ChildXMLName="ApprovalRuleAssoc" DeleteCascade="false"
+                    ForeignEntity="Order_Approval_Rule" Name="OrderApprovalRule"
+                    Type="Bidirectional" XMLName="OrderApprovalRule">
+                    <Attribute Name="Order_Approval_Rule_Key" ParentName="Order_Approval_Rule_Key"/>
+				 </RelationShip>
+				 <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ApprovalRuleAssocList" ChildName="ApprovalRuleAssoc"
+                    ChildXMLName="ApprovalRuleAssoc" DeleteCascade="true"
+                    ForeignEntity="Approval_Group" Name="ApprovalGroup"
+                    Type="Bidirectional" XMLName="ApprovalGroup">
+                    <Attribute Name="Approval_Group_Key" ParentName="Approval_Group_Key"/>
+				</RelationShip>
+            </RelationShips>
+    	</Entity>
+
+		<!--Manager Overrides-->
+		<Entity AuditRequired="Y" Cacheable="false"
+            Description="Table for storing violations that occur during a transaction." EntityType="TRANSACTION"
+            Module="ysc" Name="Transaction_Violation" Prefix="YFS_"
+            TableName="YFS_TRANSACTION_VIOLATION" TableType="TRANSACTION" XMLName="TransactionViolation" GenerateIndexedListMethods="true">
+            <Attributes>			
+                <Attribute ColumnName="TRANSACTION_VIOLATION_KEY" DataType="Key"
+                    DefaultValue="' '" Description="Primary Key attribute of YFS_TRANSACTION_VIOLATION."
+                    Name="Transaction_Violation_Key" Nullable="false" XMLName="TransactionViolationKey"/>					
+                <Attribute ColumnName="APPROVAL_RULE_ID" DataType="VARCHAR2-40"
+                    Description="ID of Approval Rule that caused violation."
+                    Name="Approval_Rule_ID" Nullable="true" XMLName="ApprovalRuleID"/>					
+				<Attribute ColumnName="ORGANIZATION_CODE" DataType="CHAR-24"
+                    Description="Organization Code of org that owns the rule."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>					
+				<Attribute ColumnName="DOCUMENT_TYPE" DataType="VARCHAR2-40"
+                    Description="Document Type of the rule."
+                    Name="Document_Type" Nullable="true" XMLName="DocumentType"/>					
+				<Attribute ColumnName="VALIDATION_ID" DataType="VARCHAR2-40"
+                    Description="The Validation that this the rule belongs to."
+                    Name="Validation_ID" Nullable="true" XMLName="ValidationID"/>					
+				<Attribute ColumnName="DOMAIN" DataType="VARCHAR2-100"
+                    Description="Domain of the corresponding Validation."
+                    Name="Domain" Nullable="true" XMLName="Domain"/>					
+				<Attribute ColumnName="MESSAGE_CODE" DataType="VARCHAR2-100"
+                    Description="Message code to be displayed when approval rule is violated."
+                    Name="Message_Code" Nullable="true" XMLName="MessageCode"/>					
+				<Attribute ColumnName="TRANSACTION_INFO_ID" DataType="VARCHAR2-10"
+                    Description="The Reference to the transaction that resulted in a violation."
+                    Name="Transaction_Info_ID" Nullable="true" XMLName="TransactionInfoID"/>					
+				<Attribute ColumnName="SEQUENCE_NUMBER" DataType="NUMBER-4"
+                    Description="Number to identify the violation sequence within a transaction."
+                    Name="Sequence_Number" Nullable="true" XMLName="SequenceNumber"/>					
+				<Attribute ColumnName="STATUS" DataType="ViolationStatus"
+                    Description="The status of the violation."
+                    Name="Status" Nullable="true" XMLName="Status"/>                    
+               	<Attribute ColumnName="REFRESH_REFERENCES" Virtual="true"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This field is used internally by the system to signal that a Violation's References need to be updated to reflect changes."
+                    Name="Refresh_References" Nullable="false" XMLName="RefreshReferences"/>			
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TRANS_VIO_KEY_PK" Name="TRANSACTION_VIOLATION_KEY">
+                <Attribute ColumnName="TRANSACTION_VIOLATION_KEY" Name="Transaction_Violation_Key"/>
+            </PrimaryKey>
+			<Indices>
+				<Index DB2Name="TRANS_VIO_UK" Name="YFS_TRANS_VIO_UK" Unique="true">
+					<Column Name="TRANSACTION_INFO_ID"/>
+					<Column Name="SEQUENCE_NUMBER"/>
+				</Index>
+			</Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+				    ChildName="Transaction_Violation" ChildXMLName="TransactionViolation"
+					ChildListXMLName="TransactionViolationList"
+                    DeleteCascade="true" ForeignEntity="Transaction_Info"
+                    Name="Transaction_Info" Type="Bidirectional" XMLName="TransactionInfo">
+					<Attribute Name="Transaction_Info_ID" ParentName="Transaction_Info_ID"/>
+				</RelationShip>
+			</RelationShips>
+			<OrderBy Value="TRANSACTION_VIOLATION_KEY"/>
+        </Entity>
+		<Entity AuditRequired="N" Cacheable="false"
+            Description="Table for storing transaction information that resulted in violations." EntityType="TRANSACTION" 
+			IsAbstract ="Y" Module="ysc" Name="Transaction_Info" Prefix="YFS_"
+            TableName="YFS_TRANSACTION_INFO" TableType="TRANSACTION" XMLName="TransactionInfo">
+            <Attributes>			
+                <Attribute ColumnName="TRANSACTION_INFO_KEY" DataType="Key"
+                    DefaultValue="' '" Description="Primary Key attribute of YFS_TRANSACTION_INFO."
+                    Name="Transaction_Info_Key" Nullable="false" XMLName="TransactionInfoKey"/>					
+                <Attribute ColumnName="PERFORMED_BY" DataType="VARCHAR2-50"
+                    Description="UserID of  the initiator of the transaction."
+                    Name="Performed_By" Nullable="true" XMLName="PerformedBy"/>					
+				<Attribute ColumnName="SERVICE_NAME" DataType="VARCHAR2-200"
+                    Description="API/Service call that resulted in the violations."
+                    Name="Service_Name" Nullable="true" XMLName="ServiceName"/>					
+				<Attribute ColumnName="INPUT_XML" DataType="CLOB"
+                    Description="The Input_XML of the API Call."
+                    Name="Input_XML" Nullable="true" XMLName="InputXML"/>					
+				<Attribute ColumnName="TRANSACTION_INFO_ID" DataType="VARCHAR2-10"
+                    Description="Unique ID of Transaction."
+                    Name="Transaction_Info_ID" Nullable="true" XMLName="TransactionInfoID"/>					
+				<Attribute ColumnName="STATUS" DataType="VARCHAR2-40"
+                    Description="The status of the violation."
+                    Name="Status" Nullable="true" XMLName="Status"/>						
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TRANS_INFO_KEY_PK" Name="TRANS_INFO_PK">
+                <Attribute ColumnName="TRANSACTION_INFO_KEY" Name="Transaction_Info_Key"/>
+            </PrimaryKey>
+			<Indices>
+				<Index DB2Name="TRANS_INFO_ID_UK" Name="TRANS_INFO_ID_UK" Unique="true">
+					<Column Name="TRANSACTION_INFO_ID"/>
+				</Index>
+			</Indices>
+            <OrderBy Value="TRANSACTION_INFO_KEY"/>
+        </Entity>
+		<Entity AuditRequired="Y" Cacheable="false"
+            Description="Table for storing additional reference information for identifying violations." EntityType="TRANSACTION"
+            Module="ysc" Name="Transaction_Violation_Reference" Prefix="YFS_"
+            TableName="YFS_TRANS_VIOLATION_REFERENCE" TableType="TRANSACTION" XMLName="TransactionViolationReference" GenerateIndexedListMethods="true">
+            <Attributes>			
+                <Attribute ColumnName="TRANS_VIOLATION_REFERENCE_KEY" DataType="Key"
+                    DefaultValue="' '" Description="Primary Key attribute of YFS_TRANSACTION_VIOLATION_REFERENCE."
+                    Name="Transaction_Violation_Reference_Key" Nullable="false" XMLName="TransactionViolationReferenceKey"/>	
+                <Attribute ColumnName="REFERENCE_NAME" DataType="VARCHAR2-40"
+                    Description="The identifier for the additional reference value."
+                    Name="Reference_Name" Nullable="true" XMLName="ReferenceName"/>					
+				<Attribute ColumnName="REFERENCE_VALUE" DataType="VARCHAR2-40"
+                    Description="Value of the additional reference."
+                    Name="Reference_Value" Nullable="true" XMLName="ReferenceValue"/>					
+				<Attribute ColumnName="TRANS_VIOLATION_KEY" DataType="Key"
+                    Description="The reference to the rule that was violated."
+                    Name="Transaction_Violation_Key" Nullable="true" XMLName="TransactionViolationKey"/>					
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>					
+            </Attributes>
+            <AuditReferences/>
+             <Indices>
+                <Index DB2Name="TRANS_VIO_REF_UK" Name="YFS_TRANS_VIO_REF_UK" Unique="false">
+                    <Column Name="TRANS_VIOLATION_KEY"/>					
+                </Index>
+            </Indices>
+            <PrimaryKey DB2Name="TRANS_VIO_REF_PK" Name="TRANS_VIOLATION_REFERENCE_KEY">
+                <Attribute ColumnName="TRANS_VIOLATION_REFERENCE_KEY" Name="Transaction_Violation_Reference_Key"/>
+            </PrimaryKey>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+					ChildName="Transaction_Violation_Reference" ChildXMLName="TransactionViolationReference"
+					ChildListXMLName="TransactionViolationReferenceList"
+                    DeleteCascade="true" ForeignEntity="Transaction_Violation"
+                    Name="Transaction_Violation" Type="Bidirectional" XMLName="TransactionViolation">
+					<Attribute Name="Transaction_Violation_Key" ParentName="Transaction_Violation_Key"/>
+				</RelationShip>
+			</RelationShips>
+            <OrderBy Value="TRANS_VIOLATION_REFERENCE_KEY"/>
+        </Entity>	
+		<Entity AuditRequired="Y" Cacheable="false"
+            Description="Table for storing approver information for the violation." EntityType="TRANSACTION"
+            Module="ysc" Name="Transaction_Approver" Prefix="YFS_"
+            TableName="YFS_TRANSACTION_APPROVER" TableType="TRANSACTION" XMLName="TransactionApprover">
+            <Attributes>			
+                <Attribute ColumnName="TRANSACTION_APPROVER_KEY" DataType="Key"
+                    DefaultValue="' '" Description="Primary Key attribute of YFS_TRANSACTION_APPROVER."
+                    Name="Transaction_Approver_Key" Nullable="false" XMLName="TransactionApproverKey"/>
+					
+                <Attribute ColumnName="TRANSACTION_INFO_ID" DataType="VARCHAR2-10"
+                    Description="The reference to the transaction that resulted in a violation"
+                    Name="Transaction_Info_ID" Nullable="true" XMLName="TransactionInfoID"/>					
+				<Attribute ColumnName="ORGANIZATION_CODE" DataType="CHAR-24"
+                    Description="Organization that is associated with the approval group."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>					
+				<Attribute ColumnName="APPROVER_USER_GROUP_ID" DataType="CHAR-25"
+                    Description="The User Group that can approve the violation."
+                    Name="Approver_User_Group_ID" Nullable="true" XMLName="ApproverUserGroupID"/>
+				<Attribute ColumnName="APPROVER_USER_TEAM" DataType="VARCHAR2-40"
+                    Description="The Team that can approve the violation."
+                    Name="Approver_User_Team" Nullable="true" XMLName="ApproverUserTeam"/>					
+				<Attribute ColumnName="USER_ID" DataType="VARCHAR2-50"
+                    Description="The UserID of the user that can approve the violation."
+                    Name="User_ID" Nullable="true" XMLName="UserID"/>					
+				<Attribute ColumnName="DELEGATE_USER_ID" DataType="VARCHAR2-50"
+                    Description="The UserID of the delegate that has been assigned to approve the violation on behalf on the main UserID."
+                    Name="Delegate_User_ID" Nullable="true" XMLName="DelegateUserID"/>						
+				<Attribute ColumnName="APPROVER_GROUP_KEY" DataType="CHAR-24"
+                    Description="The reference to the Approval Group configuration."
+                    Name="Approver_Group_Key" Nullable="true" XMLName="ApproverGroupKey"/>					
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>					
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TRANS_APROV_KEY_PK" Name="TRANSACTION_APPROVER_KEY">
+                <Attribute ColumnName="TRANSACTION_APPROVER_KEY" Name="Transaction_Approver_Key"/>
+            </PrimaryKey>
+			<Indices>
+				<Index DB2Name="TRANS_APPRVR_UK" Name="YFS_TRANS_APPRVR_UK" Unique="true">
+					<Column Name="TRANSACTION_INFO_ID"/>
+					<Column Name="ORGANIZATION_CODE"/>
+					<Column Name="APPROVER_GROUP_KEY"/>
+					<Column Name="APPROVER_USER_GROUP_ID"/>
+					<Column Name="APPROVER_USER_TEAM"/>
+					<Column Name="USER_ID"/>
+					<Column Name="DELEGATE_USER_ID"/>
+				</Index>
+			</Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"				    
+					ChildName="Transaction_Approver" ChildXMLName="TransactionApprover"
+					ChildListXMLName="TransactionApproverList"
+                    DeleteCascade="true" ForeignEntity="Transaction_Info"
+                    Name="Transaction_Info" Type="Bidirectional" XMLName="TransactionInfo">
+					<Attribute Name="Transaction_Info_ID" ParentName="Transaction_Info_ID"/>
+				</RelationShip>
+			</RelationShips>
+            <OrderBy Value="TRANSACTION_APPROVER_KEY"/>
+		</Entity>				
+		<Entity AuditRequired="Y" Cacheable="false"
+            Description="Table for storing approver information for the violation." EntityType="TRANSACTION"
+            Module="ysc" Name="Transaction_Approval_Status" Prefix="YFS_"
+            TableName="YFS_TRANS_APPROVAL_STATUS" TableType="TRANSACTION" XMLName="TransactionApprovalStatus">
+            <Attributes>			
+                <Attribute ColumnName="APPROVAL_STATUS_KEY" DataType="Key"
+                    DefaultValue="' '" Description="Primary Key attribute of YFS_TRANS_APPROVAL_STATUS."
+                    Name="Approval_Status_Key" Nullable="false" XMLName="ApprovalStatusKey"/>					
+                <Attribute ColumnName="TRANSACTION_VIO_KEY" DataType="Key"
+                    Description="The reference to the transaction violation."
+                    Name="Transaction_Violation_Key" Nullable="true" XMLName="TransactionViolationKey"/>					
+				<Attribute ColumnName="TRANS_APPROVER_KEY" DataType="Key"
+                    Description="The reference to the transaction approver."
+                    Name="Transaction_Approver_Key" Nullable="true" XMLName="TransactionApproverKey"/>					
+				<Attribute ColumnName="APPROVER_SEQUENCE" DataType="NUMBER-10"
+                    Description="The sequence of the approver."
+                    Name="Approver_Sequence" Nullable="true" XMLName="ApproverSequence"/>
+				<Attribute ColumnName="APPROVER_USER_ID" DataType="VARCHAR2-50"
+                    Description="The UserID of the user who has approved or rejected the violation."
+                    Name="Approver_User_ID" Nullable="true" XMLName="ApproverUserID"/>					
+				<Attribute ColumnName="APPROVER_COMMENTS" DataType="VARCHAR2-2000"
+                    Description="Place Holder to capture comments entered by the approver."
+                    Name="Approver_Comments" Nullable="true" XMLName="ApproverComments"/>					
+				<Attribute ColumnName="STATUS" DataType="ViolationStatus"
+                    Description="The status of the approval."
+                    Name="Status" Nullable="true" XMLName="Status"/>					
+				<Attribute ColumnName="PREVIOUS_APPROVER_SEQ" DataType="ApprovalPlanPredecessorSeq"
+                    Description="The sequence of the previous approver."
+                    Name="Previous_Approver_Sequence" Nullable="true" XMLName="PreviousApproverSequence"/>					
+				<Attribute ColumnName="IS_MANDATORY" DataType="CHAR-1"
+                    Description="Indicator to determine if approval is mandatory based on the signature policy of the validation definition."
+                    Name="Is_Mandatory" Nullable="true" XMLName="IsMandatory"/>							
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>					
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="APROV_STAT_KEY_PK" Name="APPROVAL_STATUS_KEY">
+                <Attribute ColumnName="APPROVAL_STATUS_KEY" Name="Approval_Status_Key"/>
+            </PrimaryKey>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+				    ChildName="Transaction_Approval_Status" ChildXMLName="TransactionApprovalStatus"
+					ChildListXMLName="TransactionApprovalStatusList"
+                    DeleteCascade="true" ForeignEntity="Transaction_Violation"
+                    Name="Transaction_Violation" Type="Bidirectional" XMLName="TransactionViolation">
+					<Attribute Name="Transaction_Violation_Key" ParentName="Transaction_Violation_Key"/>
+				</RelationShip>
+                <RelationShip Cardinality="OneToMany"
+				    ChildName="Transaction_Approval_Status" ChildXMLName="TransactionApprovalStatus"
+					ChildListXMLName="TransactionApprovalStatusList"
+                    DeleteCascade="true" ForeignEntity="Transaction_Approver"
+                    Name="Transaction_Approver" Type="Bidirectional" XMLName="TransactionApprover">
+					<Attribute Name="Transaction_Approver_Key" ParentName="Transaction_Approver_Key"/>
+				</RelationShip>
+			</RelationShips>
+            <OrderBy Value="APPROVAL_STATUS_KEY"/>
+        </Entity>	
+        <!--End Manager Overrides-->			
+	</Entities>
+</DBSchema>

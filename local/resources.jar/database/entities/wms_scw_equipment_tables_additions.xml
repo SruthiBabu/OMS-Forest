@@ -1,0 +1,72 @@
+<DBSchema>
+	<Entities>
+		<Entity TableName="YFS_EQUIPMENT_TYPE">
+			<Attributes>
+				<Attribute ColumnName="IS_STATION" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether the equipment type is modeled as a station."
+                    Name="Is_Station" Nullable="false" XMLName="IsStation"/>
+				<Attribute ColumnName="EQUIPMENT_LOCATION_TYPE"
+                    DataType="EnumLocationType" DefaultValue="' '"
+                    Description="This field is a system defined classification of location to aid association of certain types locations for certain other operations with WMS. The supported types are: INTRANSIT (Mobile locations), STAGING, VIRTUAL, REGULAR, DOCK. For example, all mobile equipment locations should be of type INTRANSIT. All Cart locations should be of type DROP-OFF or REGULAR, based on whether the location is the final drop location for the picking operation or not."
+                    Name="Equipment_Location_Type" Nullable="false" XMLName="EquipmentLocationType"/>
+			</Attributes>
+			<CustomInterface Name="WMSEquipmentTypeCustomDBUtil"
+				Impl="com.yantra.wms.customutil.WMSEquipmentTypeCustomDBUtilImpl"
+				IsSingleton="false" ModuleCode="wms">
+				<Method Name="getLargestLocationCapacity" Return="YCPCapacity" />
+				<Import Class="com.yantra.shared.ycp.YCPCapacity" />
+			</CustomInterface>
+		</Entity>
+		<Entity TableName="YFS_EQUIPMENT_TYPE_DETAIL">
+			<Attributes>
+				<Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This field indicates the unique key attribute of YFS_LOCATION_SIZE_CODE table assocaited with the NODE_KEY."
+                    Name="Location_Size_Code" Nullable="false"/>
+			</Attributes>
+			<Indices>
+                <Index DB2Name="EQUP_TYPE_DTL_I1"
+                    Name="YFS_EQUIPMENT_TYPE_DETAIL_I1" Unique="true">
+                    <Column Name="EQUIPMENT_TYPE"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_SIZE_CODE"/>
+                    <Column Name="LOCATION_LOGICAL_NAME"/>
+                </Index>
+            </Indices>
+		</Entity>
+		<Entity TableName="YFS_EQUIPMENT_DETAIL">
+			<Attributes>
+				<Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This field identifies the unique key attribute of YFS_LOCATION_SIZE_CODE table associated with the NODE_KEY."
+                    Name="Location_Size_Code" Nullable="false"/>
+			</Attributes>
+			<Indices>
+                <Index DB2Name="EQUP_DETAIL_I1"
+                    Name="YFS_EQUIPMENT_DETAIL_I1" Unique="true">
+                    <Column Name="EQUIPMENT_ID"/>
+                    <Column Name="EQUIPMENT_TYPE"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_SIZE_CODE"/>
+                    <Column Name="LOCATION_LOGICAL_NAME"/>
+                </Index>
+            </Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToOne"
+                    DeleteCascade="true" ForeignEntity="Location"
+                    Name="Location" Type="Unidirectional" XMLName="Location">
+					<Attribute Name="Location_Id" ParentName="Location_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+			</RelationShips>
+		</Entity>
+	<!-- 	<Entity TableName="YFS_EQUIPMENT">
+			<Attributes>
+				<Attribute ColumnName="CHECK_DIGIT" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="Non Unique Numeric representation of the Equipment."                            Name="Check_Digit" Nullable="false" XMLName="CheckDigit"/>
+			</Attributes>
+		</Entity> -->
+	</Entities>
+</DBSchema>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DocumentParamsDescriptor> 
+	<ControlAttributes> 
+		<Attribute Name="DocumentType" ComponentType="JTextField" LogicalKey="Y"
+			GridX="0" GridY="0">
+			<ClientProperties> 
+				<ClientProperty 
+					Name="YFCXMLBinding.dataType" 
+					Value="ID-40" />
+				<ClientProperty 
+					Name="YFCXMLBinding.isMandatory" 
+					Value="true" />
+			</ClientProperties>
+		</Attribute>
+		<Attribute Name="IsReturnDocument" ComponentType="JCheckBox" 
+			GridX="3" GridY="0"/>
+		<Attribute Name="Description" ComponentType="JTextField" 
+			GridX="0" GridY="1" GridW="3">
+			<ClientProperties> 
+				<ClientProperty 
+					Name="YFCXMLBinding.dataType" 
+					Value="Text-50" />
+				<ClientProperty 
+					Name="YFCXMLBinding.isMandatory" 
+					Value="true" />
+			</ClientProperties>
+		</Attribute>
+		<Attribute Name="TemplateOrderDocumentType" ComponentType="JComboBox"  
+			GridX="0" GridY="2" >
+			<ClientProperties> 
+				<ClientProperty 
+				Name="YFCXMLBinding.listName" 
+				Value="xml:/DocumentParams/MasterData/DocumentParamss@DocumentParams" />
+				<ClientProperty 
+					Name="YFCXMLBinding.codeAttribute" 
+					Value="DocumentType" />
+				<ClientProperty 
+					Name="YFCXMLBinding.descriptionAttribute" 
+					Value="Description" />
+				<ClientProperty 
+					Name="YFCXMLBinding.dataType" 
+					Value="ID-40" />
+			</ClientProperties>
+		</Attribute>
+	</ControlAttributes>
+	<ORDER_FULFILLMENT> 
+		<ControlAttributes>
+			<Attribute Name="ProcessType" ComponentType="JTextField" 
+				LogicalKey="Y" GridX="0" GridY="0" >
+				<ClientProperties> 
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="ID-40" />
+					<ClientProperty 
+						Name="YFCXMLBinding.isMandatory" 
+						Value="true" />
+				</ClientProperties>
+			</Attribute>
+			<Attribute Name="ProcessTypeName" ComponentType="JTextField" 
+				GridX="0" GridY="1" GridW="2">
+				<ClientProperties> 
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="ID-40" />
+					<ClientProperty 
+						Name="YFCXMLBinding.isMandatory" 
+						Value="true" />
+				</ClientProperties>
+			</Attribute>
+			<Attribute Name="Invoice" ComponentType="JCheckBox"
+				GridX="0" GridY="2" />
+			<Attribute Name="SplitInvoiceByDerivedParent" ComponentType="JCheckBox" 
+				GridX="1" GridY="2" />
+			<Attribute Name="Payment" ComponentType="JCheckBox" 
+				GridX="2" GridY="2" />
+			<Attribute Name="PriceActualOrder" ComponentType="JCheckBox" 
+				GridX="0" GridY="3" />
+			<Attribute Name="PriceDraftOrder" ComponentType="JCheckBox"
+				GridX="1" GridY="3" />
+			<Attribute Name="ValidateItem" ComponentType="JCheckBox"
+				GridX="0" GridY="4" />
+			<Attribute Name="IsSourcingRequired" ComponentType="JCheckBox" 
+				GridX="1" GridY="4" />
+			<Attribute Name="POCreate" ComponentType="JCheckBox" 
+				GridX="2" GridY="4" />
+			<Attribute Name="Reservation" ComponentType="JCheckBox" 
+				GridX="0" GridY="5" />
+			<Attribute Name="ConsolidateToRelease" ComponentType="JCheckBox" 
+				GridX="1" GridY="5" />
+			<Attribute Name="InventoryRead" ComponentType="JCheckBox" 
+				GridX="2" GridY="5" />
+			<Attribute Name="InventoryInterfaces" ComponentType="JComboBox" 
+				GridX="0" GridY="6">
+				<ClientProperties> 
+					<ClientProperty 
+					Name="YFCXMLBinding.listName" 
+					Value="xml:/DocumentParams/MasterData/InventoryInterfaces@InventoryInterface" />
+					<ClientProperty 
+						Name="YFCXMLBinding.codeAttribute" 
+						Value="Type" />
+					<ClientProperty 
+						Name="YFCXMLBinding.descriptionAttribute" 
+						Value="Description" />
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="Text-4" />
+				</ClientProperties>
+			</Attribute>
+		</ControlAttributes>
+	</ORDER_FULFILLMENT>
+	<ORDER_NEGOTIATION>
+		<ControlAttributes>
+			<Attribute Name="ProcessType" ComponentType="JTextField" 
+				LogicalKey="Y" GridX="0" GridY="0" >
+				<ClientProperties> 
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="ID-40" />
+					<ClientProperty 
+						Name="YFCXMLBinding.isMandatory" 
+						Value="true" />
+				</ClientProperties>
+			</Attribute>
+			<Attribute Name="NegotiationRule" ComponentType="JComboBox" 
+				GridX="2" GridY="0" >
+				<ClientProperties> 
+					<ClientProperty 
+					Name="YFCXMLBinding.listName" 
+					Value="xml:/DocumentParams/MasterData/NegotiationRules@NegotiationRule" />
+					<ClientProperty 
+						Name="YFCXMLBinding.codeAttribute" 
+						Value="NegotiationRuleId" />
+					<ClientProperty 
+						Name="YFCXMLBinding.descriptionAttribute" 
+						Value="NegotiationRuleId" />
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="ID-24" />
+				</ClientProperties>
+			</Attribute>
+			<Attribute Name="ProcessTypeName" ComponentType="JTextField" 
+				GridX="0" GridY="1" GridW="2">
+				<ClientProperties> 
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="ID-40" />
+					<ClientProperty 
+						Name="YFCXMLBinding.isMandatory" 
+						Value="true" />
+				</ClientProperties>
+			</Attribute>
+		</ControlAttributes>
+	</ORDER_NEGOTIATION>
+	<ORDER_DELIVERY> 
+		<ControlAttributes>	
+			<Attribute Name="ProcessType" ComponentType="JTextField"
+				LogicalKey="Y" GridX="0" GridY="0" >
+				<ClientProperties> 
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="ID-40" />
+					<ClientProperty 
+						Name="YFCXMLBinding.isMandatory" 
+						Value="true" />
+				</ClientProperties>
+			</Attribute>
+			<Attribute Name="ProcessTypeName" ComponentType="JTextField"
+				GridX="0" GridY="1" GridW="2">
+				<ClientProperties> 
+					<ClientProperty 
+						Name="YFCXMLBinding.dataType" 
+						Value="ID-40" />
+					<ClientProperty 
+						Name="YFCXMLBinding.isMandatory" 
+						Value="true" />
+				</ClientProperties>
+			</Attribute>
+		</ControlAttributes>	
+	</ORDER_DELIVERY>
+</DocumentParamsDescriptor>

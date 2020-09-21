@@ -1,0 +1,1335 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2010, 2018 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+    <Entities>
+		<Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table stores customer definitions as defined by an organization for a buyer organization, a receiving node, or a consumer."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Customer" Prefix="YFS_" TableName="YFS_CUSTOMER"
+            TableType="MASTER" XMLName="Customer">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_CUSTOMER table."
+                    Name="Customer_Key" Nullable="false" XMLName="CustomerKey"/>
+                <Attribute ColumnName="CUSTOMER_ID"
+                    DataType="CustomerId" DefaultValue="' ' "
+                    Description="The identifier for the customer."
+                    Name="Customer_ID" Nullable="false" XMLName="CustomerID"/>
+                <Attribute ColumnName="CUSTOMER_TYPE"
+                    DataType="EnumCustomerType" DefaultValue="' '"
+                    Description="This field indicates the type of customer. Default value is Consumer."
+                    Name="Customer_Type" XMLName="CustomerType"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"  
+                    DataType="OrgCode" DefaultValue="' ' "
+                    Description="The organization code of organization that defines this customer."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="BUYER_ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' ' "
+                    Description="The organization code of buyer."
+                    Name="Buyer_Organization_Code" Nullable="false" XMLName="BuyerOrganizationCode"/>
+                <Attribute ColumnName="CUSTOMER_CLASSIFICATION_CODE"
+                    DataType="Text-40"
+                    Description="The classification code of customer."
+                    Name="Customer_Classification_Code" Nullable="true" XMLName="CustomerClassificationCode"/>
+                <Attribute ColumnName="CUSTOMER_ASSIGNED_VENDOR_ID"
+                    DataType="Text-40"
+                    Description="This is the ID issued by Customer to the vendor."
+                    Name="Customer_Assigned_Vendor_ID" Nullable="true" XMLName="CustomerAssignedVendorID"/>
+                <Attribute ColumnName="CUSTOMER_REWARDS_NO"
+                    DataType="Text-40" Description="The identifier of the customer's rewards number"
+                    Name="Customer_Rewards_No" Nullable="true" XMLName="CustomerRewardsNo"/>
+                <Attribute ColumnName="CAN_CONSUME_SUPPL_CAPACITY"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the customer can be scheduled against the supplemental capacity.  Default value is N."
+                    Name="Can_Consume_Suppl_Capacity" Nullable="false" XMLName="CanConsumeSupplementalCapacity"/>
+                <Attribute ColumnName="SLOT_PREFERENCE_TYPE"
+                    DataType="EnumSlotPreferenceType" DefaultValue="' '"
+                    Description="This field indicates the slot preference type of the customer. Default value is NONE."
+                    Name="Slot_Preference_Type" XMLName="SlotPreferenceType"/>
+                <Attribute ColumnName="PARENT_CUSTOMER_KEY"
+                    DataType="Key"
+                    Description="The primary key of the parent customer."
+                    Name="Parent_Customer_Key" Nullable="true" XMLName="ParentCustomerKey"/>
+                <Attribute ColumnName="EXTERNAL_CUSTOMER_ID"
+                    DataType="CustomerId" DefaultValue="' ' "
+                    Description="The external identifier for the customer."
+                    Name="External_Customer_ID" Nullable="false" XMLName="ExternalCustomerID"/>
+                <Attribute ColumnName="SENDS_FUNC_ACK" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="Indicates whether the customer  has to be sent functional acknowledgment."
+                    Name="Sends_Func_Ack" Nullable="true" XMLName="SendsFuncAck"/>
+                <Attribute ColumnName="FUNC_ACK_TIME"
+                    DataType="NumberOfHours"
+                    Description="Hours taken to send functional acknowledgement to the customer."
+                    Name="Func_Ack_Time" Nullable="true" XMLName="FuncAckTime"/>
+                <Attribute ColumnName="SENDS_COMMITMENT" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="Indicates whether the  customer has to be sent commitment against a purchase order."
+                    Name="Sends_Commitment" Nullable="true" XMLName="SendsCommitment"/>
+                <Attribute ColumnName="COMMITMENT_TIME"
+                    DataType="NumberOfHours"
+                    Description="Hours taken to send commitment to the customer."
+                    Name="Commitment_Time" Nullable="true" XMLName="CommitmentTime"/>
+                <Attribute ColumnName="SENDS_ASN" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="Indicates whether the  customer has to be sent an advance ship notice."
+                    Name="Sends_Asn" Nullable="true" XMLName="SendsAsn"/>
+                <Attribute ColumnName="MAX_ASSIGN_REPS_OR_TEAMS"
+                    DataType="NumberOfAssignment" DefaultValue="0"
+                    Description="Indicates maximum number of users or teams that can be assigned to manage this customer."
+                    Name="Max_Assign_Reps_Or_Teams" Nullable="false" XMLName="MaxAssignRepsOrTeams"/>
+                <Attribute ColumnName="REGISTERED_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The date and time when the user was registered or when registration goes into effect. Default: current timestamp."
+                    Name="Registered_Date" Nullable="false" XMLName="RegisteredDate"/>
+                <Attribute ColumnName="MAX_MODIFYTS"
+                    DataType="TimeStamp"
+                    Description="The timestamp for the last update to this customer entity. Hangoff tables included."
+                    Name="Max_Modifyts" Nullable="true" XMLName="MaxModifyTS"/>
+                <Attribute ColumnName="REMOTE_MODIFYTS"
+                    DataType="TimeStamp"
+                    Description="The timestamp of the last modification performed on a remote system."
+                    Name="Remote_Modifyts" Nullable="true" XMLName="RemoteModifyTS"/>
+                <Attribute ColumnName="SYNCTS" DataType="TimeStamp"
+                    Description="The timestamp for the last synchronization of this record."
+                    Name="Syncts" Nullable="true" XMLName="SyncTS"/>
+                <Attribute ColumnName="ASSIGNED_REPS"
+                    DataType="NumberOfAssignment" DefaultValue="0"
+	     Description="Indicates number of users currently assigned to this customer."
+                    Name="Assigned_Reps" Nullable="false" XMLName="AssignedReps"/>
+                <Attribute ColumnName="VERTICAL" DataType="Text-40"
+                    Description="Indicates a vertical of a customer."
+                    Name="Vertical" Nullable="true" XMLName="Vertical"/>
+                <Attribute ColumnName="CUSTOMER_LEVEL"
+                    DataType="Text-40"
+                    Description="Indicates a level a customer has achieved."
+                    Name="Customer_Level" Nullable="true" XMLName="CustomerLevel"/>
+                <Attribute ColumnName="RELATIONSHIP_TYPE"
+                    DataType="Text-40"
+                    Description="Indicates the type of a customer."
+                    Name="Relationship_Type" Nullable="true" XMLName="RelationshipType"/>
+                <Attribute ColumnName="STATUS"
+                    DataType="EnumCustomerStatus"
+                    Description="Indicates a status on a customer."
+                    Name="Status" Nullable="true" XMLName="Status"/>
+                <Attribute ColumnName="ROOT_CUSTOMER_KEY"
+                    DataType="Key"
+                    Description="The root customer in a customer's hierarchy."
+                    Name="Root_Customer_Key" Nullable="true" XMLName="RootCustomerKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_CUSTOMER_PK">
+                <Attribute ColumnName="CUSTOMER_KEY" Name="Customer_Key" XmlName="CustomerKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_CUSTOMER_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="CUSTOMER_ID"/>
+                </Index>
+				<Index Name="YFS_CUSTOMER_I2" Unique="false">
+                    <Column Name="ROOT_CUSTOMER_KEY"/>
+                </Index>
+				<Index Name="YFS_CUSTOMER_I3" Unique="false">
+                    <Column Name="PARENT_CUSTOMER_KEY"/>
+                </Index>
+				<Index Name="YFS_CUSTOMER_I4" Unique="false">
+                    <Column  Name="BUYER_ORGANIZATION_CODE"/>
+                </Index>
+                <Index Name="YFS_CUSTOMER_I5" Unique="false">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="CUSTOMER_REWARDS_NO"/>
+                </Index>
+                 <Index Name="YFS_CUSTOMER_I6" Unique="false">
+                    <Column Name="CUSTOMER_TYPE"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>
+                <Index Name="YFS_CUSTOMER_I7" Unique="false">
+                	<Column Name="CUSTOMER_ID" />
+                </Index>
+			</Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildName="Customer" ChildXMLName="Customer"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="BuyerOrganization" Type="Bidirectional" XMLName="BuyerOrganization">
+                    <Attribute Name="Buyer_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListName="MasterCustomerList"
+                    ChildListXMLName="MasterCustomerList"
+                    ChildName="MasterCustomer" DeleteCascade="true"
+                    DeleteValidationError="YDB10053"
+                    ForeignEntity="Organization"
+                    Name="DefinedByOrganization" Type="Bidirectional"
+                    ValidateDelete="true" Virtual="false" XMLName="DefinedByOrganization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChildCustomerList"
+                    ChildName="ChildCustomer" DeleteCascade="true"
+                    ForeignEntity="Customer" Name="ParentCustomer"
+                    Type="Bidirectional" XMLName="ParentCustomer">
+                    <Attribute Name="Parent_Customer_Key" ParentName="Customer_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="ORGANIZATION_CODE, BUYER_ORGANIZATION_CODE"/>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores contact information of a customer."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Customer_Contact" Prefix="YFS_"
+            SupportHangOffEntity="Y" TableName="YFS_CUSTOMER_CONTACT"
+            TableType="MASTER" XMLName="CustomerContact" LockingEntity="Customer">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_CONTACT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_CUSTOMER_CONTACT table."
+                    Name="Customer_Contact_Key" Nullable="false" XMLName="CustomerContactKey"/>
+                <Attribute ColumnName="CUSTOMER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_CUSTOMER table."
+                    Name="Customer_Key" Nullable="false" XMLName="CustomerKey"/>
+                <Attribute ColumnName="USER_ID" DataType="ContactUserId"
+                    DefaultValue=" ' ' "
+                    Description="Indicates that this customer has a user contact."
+                    Name="User_Id" Nullable="false" XMLName="UserID"/>
+                <Attribute ColumnName="CUSTOMER_CONTACT_ID"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The identifier for the contact person."
+                    Name="Customer_Contact_ID" Nullable="false" XMLName="CustomerContactID"/>
+                <Attribute ColumnName="TITLE" DataType="Text-10"
+                    DefaultValue="' ' "
+                    Description="The title for the contact person."
+                    Name="Title" Nullable="true" XMLName="Title"/>
+                <Attribute ColumnName="FIRST_NAME" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The first name of the contact person."
+                    ResizeForMultibyte="true"
+                    Name="First_Name" Nullable="true" XMLName="FirstName"/>
+                <Attribute ColumnName="MIDDLE_NAME" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The middle name of the contact person."
+                    ResizeForMultibyte="true"
+                    Name="Middle_Name" Nullable="true" XMLName="MiddleName"/>
+                <Attribute ColumnName="LAST_NAME" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The last name of the contact person."
+                    ResizeForMultibyte="true"
+                    Name="Last_Name" Nullable="true" XMLName="LastName"/>
+                <Attribute ColumnName="EMAILID" DataType="EMailID"
+                    DefaultValue="' ' "
+                    Description="The email address of the contact person."
+                    Name="EmailID" Nullable="true" XMLName="EmailID"/>
+                <Attribute ColumnName="COMPANY" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The company of the contact person."
+                    Name="Company" Nullable="true" XMLName="Company"/>
+                <Attribute ColumnName="DAY_PHONE" DataType="PhoneNo"
+                    DefaultValue="' ' "
+                    Description="The day time phone of the contact person."
+                    Name="Day_Phone" Nullable="true" XMLName="DayPhone"/>
+                <Attribute ColumnName="EVENING_PHONE" DataType="PhoneNo"
+                    DefaultValue="' ' "
+                    Description="The evening phone of the contact person."
+                    Name="Evening_Phone" Nullable="true" XMLName="EveningPhone"/>
+                <Attribute ColumnName="MOBILE_PHONE" DataType="PhoneNo"
+                    DefaultValue="' ' "
+                    Description="The mobile phone of the contact person."
+                    Name="Mobile_Phone" Nullable="true" XMLName="MobilePhone"/>
+                <Attribute ColumnName="DAY_FAX_NO" DataType="PhoneNo"
+                    DefaultValue="' ' "
+                    Description="The day time fax of the contact person."
+                    Name="Day_Fax_No" Nullable="true" XMLName="DayFaxNo"/>
+                <Attribute ColumnName="EVENING_FAX_N0"
+                    DataType="PhoneNo" DefaultValue="' ' "
+                    Description="The evening fax of the contact person."
+                    Name="Evening_Fax_No" Nullable="true" XMLName="EveningFaxNo"/>
+                <Attribute ColumnName="DOB" DataType="Date"
+                    Description="The date of birth of the contact person."
+                    Name="Dob" Nullable="true" XMLName="DateOfBirth"/>
+                <Attribute ColumnName="SPOUSE_DOB" DataType="Date"
+                    Description="The date of birth of the contact person's spouse."
+                    Name="Spouse_Dob" Nullable="true" XMLName="SpouseDateOfBirth"/>
+                <Attribute ColumnName="WEDDING_ANNIVERSARY"
+                    DataType="Date"
+                    Description="The wedding anniversary date."
+                    Name="Wedding_Aniversary" Nullable="true" XMLName="WeddingAnniversaryDate"/>
+                <Attribute ColumnName="SPENDING_LIMIT_CURRENCY"
+                    DataType="Currency"
+                    Description="This is the currency for spending limit. If not passed, for a Business customer, it will be defaulted to the customer's Buyer Organization's Locale Currency."
+                    Name="Spending_Limit_Currency" Nullable="true" XMLName="SpendingLimitCurrency"/>
+                <Attribute ColumnName="SPENDING_LIMIT" DataType="Money"
+                    Description="The maximum total order amount that can be placed by this customer contact in the role of a buyer."
+                    Name="Spending_Limit" Nullable="true" XMLName="SpendingLimit"/>
+                <Attribute ColumnName="APPROVER_USER_ID"
+                    DataType="ContactUserId"
+                    Description="This is the user who can approve/reject hold when order is beyond the buyer user's spending limit. This user must be a valid customer contact."
+                    Name="Approver_User_Id" Nullable="true" XMLName="ApproverUserId"/>
+                <Attribute ColumnName="APPROVER_PROXY_USER_ID"
+                    DataType="ContactUserId"
+                    Description="This is the user who can approve/reject hold when the user is unavailable. This user must be a valid customer contact."
+                    Name="Approver_Proxy_User_Id" Nullable="true" XMLName="ApproverProxyUserId"/>
+                <Attribute ColumnName="DEPARTMENT" DataType="Text-40"
+                    Description="Indicates a department which customer contact belongs to."
+                    Name="Department" Nullable="true" XMLName="Department"/>
+                <Attribute ColumnName="JOB_TITLE" DataType="Text-40"
+                    Description="Indicates a contact's job title."
+                    Name="Job_Title" Nullable="true" XMLName="JobTitle"/>
+                <Attribute ColumnName="STATUS"
+                    DataType="EnumCustomerStatus"
+                    Description="Indicates a status on a customer contact."
+                    Name="Status" Nullable="true" XMLName="Status"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="YFS_CST_CONTACT_PK" Name="YFS_CUSTOMER_CONTACT_PK">
+                <Attribute ColumnName="CUSTOMER_CONTACT_KEY"
+                    Name="Customer_Contact_Key" XmlName="CustomerContactKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CUST_CONTACT_I1"
+                    Name="YFS_CUSTOMER_CONTACT_I1" Unique="true">
+                    <Column Name="CUSTOMER_CONTACT_ID"/>
+                    <Column Name="CUSTOMER_KEY"/>
+                </Index>
+                <Index DB2Name="CUST_CONTACT_I2"
+                    Name="YFS_CUSTOMER_CONTACT_I2" Unique="false">
+                    <Column Name="USER_ID"/>
+                </Index>
+				<Index DB2Name="CUST_CONTACT_I3"
+                    Name="YFS_CUSTOMER_CONTACT_I3" Unique="false">
+                    <Column Name="CUSTOMER_KEY"/>
+                </Index>
+				<Index DB2Name="CUST_CONTACT_I4"
+                    Name="YFS_CUSTOMER_CONTACT_I4" Unique="false">
+                    <Column Name="FIRST_NAME"/>
+					<Column Name="LAST_NAME"/>
+                </Index>
+                <Index DB2Name="CUST_CONTACT_I5"
+                    Name="YFS_CUSTOMER_CONTACT_I5" Unique="false">
+                    <Column Name="EMAILID"/>
+					<Column Name="CUSTOMER_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CustomerContactList"
+                    ChildName="CustomerContact" DeleteCascade="true"
+                    ForeignEntity="Customer" Name="Customer"
+                    Type="Bidirectional" XMLName="Customer" >
+                    <Attribute Name="Customer_Key" ParentName="Customer_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    DeleteValidationError="YDB100170"
+                    ForeignEntity="Currency" Name="Currency"
+                    Type="Unidirectional" ValidateDelete="true" Virtual="true">
+                    <Attribute Name="Spending_Limit_Currency" ParentName="Currency"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    ForeignEntity="User" Name="User" DeleteCascade="true"
+                    Type="Unidirectional" XMLName="User">
+                    <Attribute Name="User_Id" ParentName="Loginid"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores additional addresses of a customer."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Customer_Additional_Address" Prefix="YFS_"
+            SupportHangOffEntity="Y"
+            TableName="YFS_CUSTOMER_ADDNL_ADDRESS" TableType="MASTER" XMLName="CustomerAdditionalAddress"
+            LockingEntity="Customer">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_ADDNL_ADDRESS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_CUSTOMER_ADDNL_ADDRESS table."
+                    Name="Customer_Additional_Address_Key"
+                    Nullable="false" XMLName="CustomerAdditionalAddressKey"/>
+                <Attribute ColumnName="CUSTOMER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The customer that the additional address belongs to."
+                    Name="Customer_Key" Nullable="false" XMLName="CustomerKey"/>
+                <Attribute ColumnName="CUSTOMER_ADDNL_ADDRESS_ID"
+                    DataType="Text-24" DefaultValue="' ' "
+                    Description="The unique identifier for a customer additional address."
+                    Name="Customer_Additional_Address_ID"
+                    Nullable="false" XMLName="CustomerAdditionalAddressID"/>
+                <Attribute ColumnName="ADDRESS_TYPE" DataType="Text-24"
+                    DefaultValue="' ' "
+                    Description="The type of address."
+                    Name="Address_Type" Nullable="false" XMLName="AddressType"/>
+                <Attribute ColumnName="PERSON_INFO_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Link to the YFS_PERSON_INFO table that stores the actual address information."
+                    Name="Person_Info_Key" Nullable="false" XMLName="PersonInfoKey"/>
+                <Attribute ColumnName="IS_SHIP_TO" DataType="Flag"
+                    Description="Indicates if an address is used as a shipping address."
+                    Name="Is_Ship_To" Nullable="true" XMLName="IsShipTo"/>
+                <Attribute ColumnName="IS_BILL_TO" DataType="Flag"
+                    Description="Indicates if an address is used as a billing address."
+                    Name="Is_Bill_To" Nullable="true" XMLName="IsBillTo"/>
+                <Attribute ColumnName="IS_SOLD_TO" DataType="Flag"
+                    Description="Indicates if an address is used as a Sold To address."
+                    Name="Is_Sold_To" Nullable="true" XMLName="IsSoldTo"/>
+                <Attribute ColumnName="IS_DEFAULT_SHIP_TO"
+                    DataType="Flag"
+                    Description="Indicates if an address is a default shipping address."
+                    Name="Is_Default_Ship_To" Nullable="true" XMLName="IsDefaultShipTo"/>
+                <Attribute ColumnName="IS_DEFAULT_BILL_TO"
+                    DataType="Flag"
+                    Description="Indicates if an address is a default billing address."
+                    Name="Is_Default_Bill_To" Nullable="true" XMLName="IsDefaultBillTo"/>
+                <Attribute ColumnName="IS_DEFAULT_SOLD_TO"
+                    DataType="Flag"
+                    Description="Indicates if an address is a default Sold To address."
+                    Name="Is_Default_Sold_To" Nullable="true" XMLName="IsDefaultSoldTo"/>
+                <Attribute ColumnName="CUSTOMER_CONTACT_KEY"
+                    DataType="Key" DefaultValue=" ' ' "
+                    Description="Indicates that this address belongs to a specific customer contact who is associated with this customer."
+                    Name="Customer_Contact_Key" Nullable="false" XMLName="CustomerContactKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="YFS_CST_ADL_ADR_PK" Name="YFS_CUSTOMER_ADDNL_ADDR_PK">
+                <Attribute ColumnName="CUSTOMER_ADDNL_ADDRESS_KEY"
+                    Name="Customer_Additional_Address_Key" XmlName="CustomerAdditionalAddressKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CUST_ADD_ADDR_I1"
+                    Name="YFS_CUSTOMER_ADDNL_ADDR_I1" Unique="true">
+                    <Column Name="CUSTOMER_KEY"/>
+                    <Column Name="CUSTOMER_ADDNL_ADDRESS_ID"/>
+                    <Column Name="CUSTOMER_CONTACT_KEY"/>
+                    <!--Column Name="ADDRESS_TYPE"/-->
+                </Index>
+                <Index DB2Name="CUST_ADD_ADDR_I2" Name="YFS_CUSTOMER_ADDNL_ADDR_I2">
+                    <Column Name="PERSON_INFO_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CustomerAdditionalAddressList"
+                    ChildName="CustomerAdditionalAddress"
+                    DeleteCascade="true" ForeignEntity="Customer"
+                    Name="Customer" Type="Bidirectional" XMLName="Customer" >
+                    <Attribute Name="Customer_Key" ParentName="Customer_Key"/>
+                    <Attribute Name="Customer_Contact_Key" ParentName=" "/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Person_Info" Name="PersonInfo"
+                    Type="Unidirectional" XMLName="PersonInfo">
+                    <Attribute Name="Person_Info_Key" ParentName="Person_Info_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CustomerAdditionalAddressList"
+                    ChildName="CustomerAdditionalAddress"
+                    DeleteCascade="true"
+                    ForeignEntity="Customer_Contact"
+                    Name="CustomerContact" Type="Bidirectional" >
+                    <Attribute Name="Customer_Key" ParentName="Customer_Key"/>
+                    <Attribute Name="Customer_Contact_Key" ParentName="Customer_Contact_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores preferred day-of-week and time slots preference for customers."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Customer_Slot_Preference" Prefix="YFS_"
+            TableName="YFS_CUSTOMER_SLOT_PREFERENCE" TableType="MASTER" XMLName="CustomerSlotPreference"
+            LockingEntity="Customer">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_SLOT_PREFERENCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_CUSTOMER_SLOT_PREFERENCE table."
+                    Name="Customer_Slot_Preference_Key" Nullable="false" XMLName="CustomerSlotPreferenceKey"/>
+                <Attribute ColumnName="CUSTOMER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The customer who defined this slot preference."
+                    Name="Customer_Key" Nullable="false" XMLName="CustomerKey"/>
+                <Attribute ColumnName="START_TIME" DataType="Time"
+                    DefaultValue="sysdate "
+                    Description="The start time of the preferred slot."
+                    Name="Start_Time" Nullable="false" XMLName="StartTime"/>
+                <Attribute ColumnName="END_TIME" DataType="Time"
+                    DefaultValue="sysdate "
+                    Description="The end time of the preferred slot."
+                    Name="End_Time" Nullable="false" XMLName="EndTime"/>
+                <Attribute ColumnName="SUNDAY_PREFERRED" DataType="Flag"
+                    DefaultValue="'N' "
+                    Description="The flag indicates that the specified time slot is preferred on Sunday."
+                    Name="Sunday_Preferred" Nullable="false" XMLName="SundayPreferred"/>
+                <Attribute ColumnName="MONDAY_PREFERRED" DataType="Flag"
+                    DefaultValue="'N' "
+                    Description="The flag indicates that the specified time slot is preferred on Monday."
+                    Name="Monday_Preferred" Nullable="false" XMLName="MondayPreferred"/>
+                <Attribute ColumnName="TUESDAY_PREFERRED"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="The flag indicates that the specified time slot is preferred on Tuesday."
+                    Name="Tuesday_Preferred" Nullable="false" XMLName="TuesdayPreferred"/>
+                <Attribute ColumnName="WEDNESDAY_PREFERRED"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="The flag indicates that the specified time slot is preferred on Wednesday."
+                    Name="Wednesday_Preferred" Nullable="false" XMLName="WednesdayPreferred"/>
+                <Attribute ColumnName="THURSDAY_PREFERRED"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="The flag indicates that the specified time slot is preferred on Thursday."
+                    Name="Thursday_Preferred" Nullable="false" XMLName="ThursdayPreferred"/>
+                <Attribute ColumnName="FRIDAY_PREFERRED" DataType="Flag"
+                    DefaultValue="'N' "
+                    Description="The flag indicates that the specified time slot is preferred on Friday."
+                    Name="Friday_Preferred" Nullable="false" XMLName="FridayPreferred"/>
+                <Attribute ColumnName="SATURDAY_PREFERRED"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="The flag indicates that the specified time slot is preferred on Saturday."
+                    Name="Saturday_Preferred" Nullable="false" XMLName="SaturdayPreferred"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CUST_SLOT_PREF_PK" Name="YFS_CUST_SLOT_PREF_PK">
+                <Attribute ColumnName="CUSTOMER_SLOT_PREFERENCE_KEY"
+                    Name="Customer_Slot_Preference_Key" XmlName="CustomerSlotPreferenceKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CUST_SLOT_PREF_I1"
+                    Name="YFS_CUST_SLOT_PREF_I1" Unique="true">
+                    <Column Name="CUSTOMER_KEY"/>
+                    <Column Name="START_TIME"/>
+                    <Column Name="END_TIME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CustomerSlotPreferenceList"
+                    ChildName="CustomerSlotPreference"
+                    DeleteCascade="true" ForeignEntity="Customer"
+                    Name="Customer" Type="Bidirectional" XMLName="Customer" >
+                    <Attribute Name="Customer_Key" ParentName="Customer_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores customer preferences for scheduling orders."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Customer_Sch_Preference" Prefix="YFS_"
+            TableName="YFS_CUSTOMER_SCH_PREFERENCE" TableType="MASTER" XMLName="CustomerSchedulingPreferences"
+            LockingEntity="Customer">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_SCH_PREFERENCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_CUSTOMER_SCH_PREFERENCE table."
+                    Name="Customer_Sch_Preference_Key" Nullable="false" XMLName="CustomerSchPreferenceKey"/>
+                <Attribute ColumnName="CUSTOMER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The customer who defined scheduling preferences."
+                    Name="Customer_Key" Nullable="false" XMLName="CustomerKey"/>
+                <Attribute ColumnName="IS_SHIP_COMPLETE" DataType="Flag"
+                    DefaultValue="'N' "
+                    Description="This flag indicates whether the complete order needs to be shipped."
+                    Name="Is_Ship_Complete" Nullable="false" XMLName="IsShipComplete"/>
+                <Attribute ColumnName="IS_LINE_SHIP_COMPLETE"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the complete line needs to be shipped."
+                    Name="Is_Line_Ship_Complete" Nullable="false" XMLName="IsLineShipComplete"/>
+                <Attribute ColumnName="IS_SHIP_SINGLE_NODE"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the order needs to be shipped from a single ship node."
+                    Name="Is_Ship_Single_Node" Nullable="false" XMLName="IsShipSingleNode"/>
+                <Attribute ColumnName="IS_LINE_SHIP_SINGLE_NODE"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the order line needs to be shipped from a single ship node."
+                    Name="Is_Line_Ship_Single_Node" Nullable="false" XMLName="IsLineShipSingleNode"/>
+                <Attribute ColumnName="CANCEL_ORDER_ON_EXCP_FLAG"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether the order needs to be cancelled in case of inventory shortage."
+                    Name="Cancel_Order_On_Excp_Flag" Nullable="false" XMLName="CancelOrderOnBackorder"/>
+                <Attribute ColumnName="IS_SUBSTITUTION_ALLOWED"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether an item can be substituted if inventory is not available."
+                    Name="Is_Substitution_Allowed" Nullable="false" XMLName="IsSubstitutionAllowed"/>
+                <Attribute ColumnName="IS_DROP_SHIP_ALLOWED"
+                    DataType="Flag" DefaultValue="'Y' "
+                    Description="This flag indicates whether it is allowed to schedule against the node that requires drop ship chained order creation."
+                    Name="Is_Drop_Ship_Allowed" Nullable="false" XMLName="IsDropShipAllowed"/>
+                <Attribute ColumnName="OPTIMIZATION_TYPE"
+                    DataType="EnumOptimizationType" 
+                    Description="This value indicates whether customer wants to optimize on date or minimize number of shipments."
+                    Name="Optimization_Type" Nullable="true" XMLName="OptimizationType"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CUST_SCH_PREF_PK" Name="YFS_CUST_SCH_PREF_PK">
+                <Attribute ColumnName="CUSTOMER_SCH_PREFERENCE_KEY"
+                    Name="Customer_Sch_Preference_Key" XmlName="CustomerSchPreferenceKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CUST_SCH_PREF_I1"
+                    Name="YFS_CUST_SCH_PREF_I1" Unique="true">
+                    <Column Name="CUSTOMER_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildName="CustomerSchedulingPreferences"
+                    DeleteCascade="true" ForeignEntity="Customer"
+                    Name="Customer" Type="Bidirectional" XMLName="Customer" >
+                    <Attribute Name="Customer_Key" ParentName="Customer_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores payment methods of a customer."
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Customer_Payment_Method" Prefix="YFS_"
+            TableName="YFS_CUSTOMER_PAYMENT_METHOD" TableType="MASTER" XMLName="CustomerPaymentMethod">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_PAYMENT_METHOD_KEY"
+                    DB2Name="CUST_PAY_METH_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the CUSTOMER_PAYMENT_METHOD table."
+                    Name="Customer_Payment_Method_Key" Nullable="false" XMLName="CustomerPaymentMethodKey"/>
+                <Attribute ColumnName="CUSTOMER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The customer, who maintains this payment method."
+                    Name="Customer_Key" Nullable="false" XMLName="CustomerKey"/>
+                <Attribute ColumnName="CUSTOMER_CONTACT_KEY"
+                    DataType="Key" DefaultValue=" ' ' "
+                    Description="Indicates that this payment method belongs to a specific customer contact who is associated with this customer."
+                    Name="Customer_Contact_Key" Nullable="false" XMLName="CustomerContactKey"/>
+                <Attribute ColumnName="PAYMENT_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The payment type of this payment method."
+                    Name="Payment_Type" Nullable="false" XMLName="PaymentType"/>
+                <Attribute ColumnName="CUSTOMER_ACCOUNT_NO"
+                    DataType="Text-40"
+                    Description="The account number of the customer."
+                    Name="Customer_Account_No" Nullable="true" XMLName="CustomerAccountNo"/>
+                <Attribute ColumnName="DISPLAY_CUST_ACCT_NO"
+                    DataType="Text-4" DefaultValue="' ' "
+                    Description="The four digits of the customer account number that should be displayed. If not passed, it is defaulted to be the last four digits of the customer account number."
+                    Name="Display_Customer_Account_No" Nullable="true" XMLName="DisplayCustomerAccountNo"/>
+                <Attribute ColumnName="CREDIT_CARD_TYPE"
+                    DataType="Text-32" DefaultValue="' ' "
+                    Description="The credit card type."
+                    Name="Credit_Card_Type" Nullable="true" XMLName="CreditCardType"/>
+                <Attribute ColumnName="CREDIT_CARD_NAME"
+                    DataType="Text-300" DefaultValue="' ' "
+                    Description="The credit card name."
+                    Name="Credit_Card_Name" Nullable="true" XMLName="CreditCardName"/>
+                <Attribute ColumnName="FIRST_NAME" DataType="Text-300"
+                    DefaultValue="' ' "
+                    Description="The first name of the credit card holder."
+                    ResizeForMultibyte="true"
+                    Name="First_Name" Nullable="true" XMLName="FirstName"/>
+                <Attribute ColumnName="MIDDLE_NAME" DataType="Text-300"
+                    DefaultValue="' ' "
+                    Description="The middle name of the credit card holder."
+                    ResizeForMultibyte="true"
+                    Name="Middle_Name" Nullable="true" XMLName="MiddleName"/>
+                <Attribute ColumnName="LAST_NAME" DataType="Text-300"
+                    DefaultValue="' ' "
+                    Description="The last name of the credit card holder."
+                    ResizeForMultibyte="true"
+                    Name="Last_Name" Nullable="true" XMLName="LastName"/>
+                <Attribute ColumnName="CREDIT_CARD_NO"
+                    DataType="Text-1000"
+                    Description="The credit card number."
+                    Name="Credit_Card_No" Nullable="true" XMLName="CreditCardNo"/>
+                <Attribute ColumnName="DISPLAY_CREDIT_CARD_NO"
+                    DataType="Text-4" DefaultValue="' ' "
+                    Description="The four digits of the credit card number that should be displayed. If not passed, it is defaulted to be the last four digits of the credit card number."
+                    Name="Display_Credit_Card_No" Nullable="true" XMLName="DisplayCreditCardNo"/>
+                <Attribute ColumnName="CREDIT_CARD_EXP_DATE"
+                    DataType="CreditCardExpDate" DefaultValue="' ' "
+                    Description="The expiration date of the credit card."
+                    Name="Credit_Card_Exp_Date" Nullable="true" XMLName="CreditCardExpDate"/>
+                <Attribute ColumnName="DEBIT_CARD_NO" DataType="Text-1000" Description="This will store the primary account number of the debit card payment type." Name="Debit_Card_No" Nullable="true"/>
+                <Attribute ColumnName="DISPLAY_DEBIT_CARD_NO" DataType="Text-4" Description="The four digits of the debit card number that should be displayed.  If not passed, it is defaulted to be the last four digits of the debit card number." Name="Display_Debit_Card_No" Nullable="true"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE1"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="The payment reference 1."
+                    Name="Payment_Reference_1" Nullable="true" XMLName="PaymentReference1"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE2"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="The payment reference 2."
+                    Name="Payment_Reference_2" Nullable="true" XMLName="PaymentReference2"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE3"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="The payment reference 3."
+                    Name="Payment_Reference_3" Nullable="true" XMLName="PaymentReference3"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE4"
+                    DataType="Text-100"
+                    Description="The payment reference 4."
+                    Name="Payment_Reference_4" Nullable="true" XMLName="PaymentReference4"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE5"
+                    DataType="Text-100"
+                    Description="The payment reference 5."
+                    Name="Payment_Reference_5" Nullable="true" XMLName="PaymentReference5"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE6"
+                    DataType="Text-100"
+                    Description="The payment reference 6."
+                    Name="Payment_Reference_6" Nullable="true" XMLName="PaymentReference6"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE7"
+                    DataType="Text-100"
+                    Description="The payment reference 7."
+                    Name="Payment_Reference_7" Nullable="true" XMLName="PaymentReference7"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE8"
+                    DataType="Text-100"
+                    Description="The payment reference 8."
+                    Name="Payment_Reference_8" Nullable="true" XMLName="PaymentReference8"/>
+                <Attribute ColumnName="PAYMENT_REFERENCE9"
+                    DataType="Text-100"
+                    Description="The payment reference 9."
+                    Name="Payment_Reference_9" Nullable="true" XMLName="PaymentReference9"/>
+                <Attribute ColumnName="DISPLAY_PAYMENT_REF1"
+                    DataType="Text-4" DefaultValue="' ' "
+                    Description="The four digits of the payment reference 1 that should be displayed. If not passed, it is defaulted to be the last four digits of the payment reference 1."
+                    Name="Display_Payment_Ref_1" Nullable="true" XMLName="DisplayPaymentReference1"/>
+                <Attribute ColumnName="ACCOUNT_LIMIT" DataType="Money"
+                    Description="The amount a customer can spend before they have to settle their account  This is only valid for PaymentType Customer Account, and is only used when the Payment Rule used specifies Customer Accoutns are tracked internally.  Orders will be placed on hold if the order total is more than the available account balance.  An AccountLimit specified for a CustomerContact is not used by the Order Fulfillment system."
+                    Name="Account_Limit" Nullable="true"/>
+                <Attribute ColumnName="ACCOUNT_LIMIT_CURRENCY"
+                    DataType="Currency"
+                    Description="Currency in which account limit for customer account is specified."
+                    Name="Account_Limit_Currency" Nullable="true" XMLName="AccountLimitCurrency"/>
+                <Attribute ColumnName="IS_DEFAULT_PAYMENT"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="Determines if this payment is the default for the customer or customer contact."
+                    Name="Is_Default_Payment" Nullable="false" XMLName="IsDefaultMethod"/>
+               <Attribute ColumnName="PERSON_INFO_KEY" DataType="Key"
+                    Description="Link to the YFS_PERSON_INFO table that stores the actual address information."
+                    Name="Person_Info_Key" Nullable="true" XMLName="PersonInfoKey"/>
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that last modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CUST_PAY_METH_PK" Name="CUSTOMER_PAYMENT_METHOD_PK">
+                <Attribute ColumnName="CUSTOMER_PAYMENT_METHOD_KEY"
+                    Name="Customer_Payment_Method_Key" XmlName="CustomerPaymentMethodKey"/>
+            </PrimaryKey>
+            <Indices>
+				<Index DB2Name="CUST_PAY_METH_I1"
+                    Name="CUST_PAY_METH_I1" Unique="false">
+                    <Column Name="CUSTOMER_KEY"/>
+					<Column Name="CUSTOMER_CONTACT_KEY"/>
+                </Index>
+			</Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CustomerPaymentMethodList"
+                    ChildName="CustomerPaymentMethod"
+                    DeleteCascade="true" ForeignEntity="Customer"
+                    Name="Customer" Type="Bidirectional" XMLName="Customer" >
+                    <Attribute Name="Customer_Key" ParentName="Customer_Key"/>
+                    <Attribute Name="Customer_Contact_Key" ParentName=" "/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CustomerPaymentMethodList"
+                    DeleteCascade="true"
+                    ForeignEntity="Customer_Contact"
+                    Name="Customer_Contact" Type="Bidirectional" >
+                    <Attribute Name="Customer_Key" ParentName="Customer_Key"/>
+                    <Attribute Name="Customer_Contact_Key" ParentName="Customer_Contact_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    DeleteValidationError="YDB800104"
+                    ForeignEntity="Currency" Name="Currency"
+                    Type="Unidirectional" ValidateDelete="true" Virtual="true">
+                    <Attribute Name="Account_Limit_Currency" ParentName="Currency"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Person_Info" Name="PersonInfoBillTo"
+                    Type="Unidirectional" XMLName="PersonInfoBillTo">
+                    <Attribute Name="Person_Info_Key" ParentName="Person_Info_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table contains customer grade assignments for a range of customer rating."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Customer_Grade" Prefix="YFS_"
+            TableName="YFS_CUSTOMER_GRADE" TableType="CONFIGURATION" XMLName="CustomerGrade">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_GRADE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_CUSTOMER_GRADE table."
+                    Name="Customer_Grade_Key" Nullable="false" XMLName="CustomerGradeKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization code that owns the grade."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+               	<Attribute ColumnName="MINIMUM_RATING" DataType="CustomerRating"
+                    Description="The minimum rating value for the grade."
+                    Name="Minimum_Rating" Nullable="true" XMLName="MinimumRating"/>
+				<Attribute ColumnName="MAXIMUM_RATING" DataType="CustomerRating"
+                    Description="The maximum rating value for the grade."
+                    Name="Maximum_Rating" Nullable="true" XMLName="MaximumRating"/> 
+				<Attribute ColumnName="GRADE_CODE" DataType="GradeCode"
+                    Description="The grade code assigned for the range values between MINIMUM_RATING and MAXIMUM_RATING."
+                    Name="Grade_Code" Nullable="true" XMLName="GradeCode"/>
+				<Attribute CanTranslate="Y" ColumnName="GRADE_DESCRIPTION" DataType="Description"
+                    Description="The description for the grade code."
+                    Name="Grade_Description" Nullable="true" XMLName="GradeDescription"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="CUST_GRADE_I1"
+                    Name="YFS_CUSTOMER_GRADE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="GRADE_CODE"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="CUST_GRADE_PK" Name="YFS_CUSTOMER_GRADE_PK">
+                <Attribute ColumnName="CUSTOMER_GRADE_KEY"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+    	</Entity>
+		<Entity Cacheable="true" AuditRequired="Y"
+            ConfigurableByOrgOrNode="Y"
+            Description="The table stores the customer information like customer grade information for a customer, from an external BI system. This table is meant for either direct data upload through custom BI system or can also be updated using the managecustomer api. If this table is inserted or updated through direct db update (ETL), no events will be raised."
+            EntityType="MASTER" Module="ysc"
+            Name="Customer_Analytics" Prefix="YFS_"
+            TableName="YFS_CUSTOMER_ANALYTICS" TableType="MASTER" XMLName="CustomerAnalytics"
+            LockingEntity="Customer">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_ANALYTICS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_CUSTOMER_ANALYTICS table."
+                    Name="Customer_Analytics_Key" Nullable="false" XMLName="CustomerAnalyticsKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization code that owns the grade."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+               	<Attribute ColumnName="CUSTOMER_ID"
+                    DataType="CustomerId"
+                    Description="The identifier for the customer."
+                    Name="Customer_ID" Nullable="true" XMLName="CustomerID"/>
+				<Attribute ColumnName="GRADE_CODE" DataType="GradeCode"
+                    Description="The grade code assigned for the range values between MINIMUM_RATING and MAXIMUM_RATING."
+                    Name="Grade_Code" Nullable="true" XMLName="GradeCode"/>
+				<Attribute CanTranslate="Y" ColumnName="GRADE_DESCRIPTION" DataType="Description"
+                    Description="The description for the grade code."
+                    Name="Grade_Description" Nullable="true" XMLName="GradeDescription"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="CUST_ANALYTICS_I1"
+                    Name="YFS_CUSTOMER_ANALYTICS_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="CUSTOMER_ID"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="CUST_ANALYTICS_PK" Name="YFS_CUSTOMER_ANALYTICS_PK">
+                <Attribute ColumnName="CUSTOMER_ANALYTICS_KEY"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    DeleteCascade="true"
+                    ForeignEntity="Customer" Name="Customer"
+                    Type="Bidirectional" XMLName="Customer">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+					<Attribute Name="Customer_ID" ParentName="Customer_ID"/>
+                </RelationShip>
+            </RelationShips>
+    	</Entity>
+    	<Entity Description="This table stores all customer subscriptions in the system."
+            EntityType="CONFIGURATION" Extensible="Y" Cacheable="false"
+            Module="ysc" Name="Customer_Subscription" Prefix="YFS_"
+            TableName="YFS_CUSTOMER_SUBSCRIPTION"
+            TableType="MASTER" XMLName="CustomerSubscription">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_SUBSCRIPTION_KEY" DataType="Key"
+                    Description="The primary key for the YFS_CUSTOMER_SUBSCRIPTION table."
+                    Name="Customer_Subscription_Key" Nullable="false" XMLName="CustomerSubscriptionKey"/>
+				<Attribute ColumnName="CUSTOMER_ID"
+                    DataType="CustomerId"
+                    Description="The identifier for the customer."
+                    Name="Customer_ID" Nullable="true" XMLName="CustomerID"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"  
+                    DataType="OrgCode"
+                    Description="The organization code of organization that defines this customer."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+				<Attribute ColumnName="SUBSCRIPTION_NO" DataType="VarcharDocumentNo"
+                    Description="The number of the subscription."
+                    Name="Subscription_No" Nullable="true" XMLName="SubscriptionNo">
+				</Attribute>
+				<Attribute ColumnName="CUSTOMER_EMAILID"
+                    DataType="EMailID"
+                    Description="The E-mail ID of the customer."
+                    Name="Customer_Emailid" Nullable="true" XMLName="CustomerEMailID"/>
+				<Attribute ColumnName="CUSTOMER_CONTACT_ID"
+                    DataSecurityUsageType="CONTACTID" DataType="Text-40"
+                    Description="This is the customer contact ID for the subscription. This field maps to contact ID field of YFS_Customer_Contact."
+                    Name="Customer_Contact_ID" Nullable="true" XMLName="CustomerContactID">
+				</Attribute>
+                <Attribute ColumnName="SELLER_ORGANIZATION_CODE"
+                    DataSecurityUsageType="SELLER" DataType="OrgCode" FactName="Store"
+                    Description="The seller organization that is associated with this subscription. This must be a valid organization defined in the system."
+                    Name="Seller_Organization_Code" Nullable="true" XMLName="SellerOrganizationCode">
+				</Attribute>
+				<Attribute ColumnName="SUBSCRIPTION_NAME"
+                    DataType="Text-100" Description="The name given to the subscription. "
+                    Name="Subscription_Name" Nullable="true" XMLName="SubscriptionName"/>
+				<Attribute ColumnName="SUBSCRIPTION_DATE"
+                    DataType="TimeStamp"
+                    Description="The date that the subscription was created."
+                    Name="Subscription_Date" Nullable="true" XMLName="SubscriptionDate"/>
+				<Attribute ColumnName="START_DATE"
+                    DataType="TimeStamp"
+                    Description="The date on which the subscription period started."
+                    Name="Start_Date" Nullable="true" XMLName="StartDate"/>
+				<Attribute ColumnName="END_DATE"
+                    DataType="TimeStamp"
+                    Description="The end date of the subscription."
+                    Name="End_Date" Nullable="true" XMLName="EndDate"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    Description="The identifier for the item."
+                    Name="Item_Id" Nullable="true" XMLName="ItemID">
+				</Attribute>
+				<Attribute ColumnName="ITEM_DESCRIPTION"
+                    DataType="Text-500"
+                    Description="The description of the item."
+                    Name="Item_Description" Nullable="true"
+                    XMLName="ItemDesc"/>
+                <Attribute ColumnName="ITEM_SHORT_DESCRIPTION"
+                    DataType="Text-200"
+                    Description="The short description of the item."
+                    Name="Item_Short_Description" Nullable="true"
+                    XMLName="ItemShortDesc"/>
+                <Attribute ColumnName="ITEM_GROUP_CODE"
+                    DataType="EnumItemGroupCode"
+                    Description="This field indicates what kind of item is on the order line."
+                    Name="Item_Group_Code" Nullable="true" XMLName="ItemGroupCode"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    Description="The unit of measure." Name="Uom"
+                    Nullable="true" XMLName="UnitOfMeasure"/>
+				<Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    Description="The quantity of the line item that has been subscribed."
+                    Name="Quantity" Nullable="true" XMLName="Quantity"/>
+				<Attribute ColumnName="STATUS"
+                    DataType="EnumCustomerSubscriptionStatus"
+                    Description="The status of the subscription." Nullable="true"
+                    Name="Status" XMLName="Status"/>
+				<Attribute ColumnName="SUBSCRIPTION_TYPE"
+                    DataType="EnumCustomerSubscriptionType"
+                    Description="The type of the subscription." Nullable="true"
+                    Name="Subscription_Type" XMLName="SubscriptionType"/>
+				<Attribute ColumnName="ASSOCIATED_SUBSCRIPTION_KEY" DataType="Key"
+                    Description="Subscription key of the new subscription created from this subscription."
+                    Name="Associated_Subscription_Key" Nullable="true" XMLName="AssociatedSubscriptionKey"/>
+				<Attribute ColumnName="KIT_CODE" DataType="EnumKitCode"
+                    Description="The collection of items that form a unit. For example, a home theatre system is a unit consisting of kit components, such as a DVD player, TV, CD player, etc."
+                    Name="Kit_Code" Nullable="true" XMLName="KitCode"/>
+				<Attribute ColumnName="BUNDLE_PARENT_SUBSCRIPTION_KEY"
+                    DataType="Key"
+                    Description="The Bundle parent's subscription key. If this line is a bundle component, this key will point to the parent subscription."
+                    HasSkewedData="true"
+                    Name="Bundle_Parent_Subscription_Key" Nullable="true" XMLName="BundleParentSubscriptionKey"/>
+				<Attribute ColumnName="KIT_QTY" DataType="Quantity"
+                    Description="The quantity that is used to compute ordered quantity for bundle component line. It can be specified only for bundle components. If specified ordered quantity will be set to KitQty*OrderedQty of the bundle parent."
+                    Name="Kit_Qty" Nullable="true" XMLName="KitQty"/>
+				<Attribute ColumnName="BOM_CONFIG_KEY"
+                    DataType="Key" Nullable="true"
+                    Description="This field is used by Sterling Multi-Channel Selling Solution so that Visual Modeler can be opened with existing options."
+                    Name="Bom_Config_Key" XMLName="ConfigurationKey" />
+                <Attribute ColumnName="UNIT_PRICE" DataType="UnitPrice"
+                    Description="The unit price for the order line."
+                    Name="Unit_Price" Nullable="true"
+                    XMLName="UnitPrice"/>
+				<Attribute ColumnName="LIST_PRICE" DataType="UnitPrice"
+                    Description="the list price of the item. This is an informational field."
+                    Name="List_Price" Nullable="true"
+                    XMLName="ListPrice"/>
+				<Attribute ColumnName="TOTAL_AMOUNT" DataType="Money"
+                    Description="The grand total for the subscription."
+                    Name="Total_Amount" Nullable="true"
+                    XMLName="TotalAmount"/>
+                <Attribute ColumnName="CURRENCY" DataType="Currency"
+                    Description="The currency code in which this subscription is processed. All price fields are assumed to be in this currency."
+                    Name="Currency" Nullable="true"
+                    XMLName="Currency"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+			</Attributes>
+            <PrimaryKey DB2Name="CUST_SUBSCR_PK" Name="YFS_CUST_SUBSCR_PK">
+                <Attribute ColumnName="CUSTOMER_SUBSCRIPTION_KEY" Name="Customer_Subscription_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CUST_SUBSCR_I1" Name="YFS_CUST_SUBSCR_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="CUSTOMER_ID"/>
+                    <Column Name="SUBSCRIPTION_NO"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BundleComponents"
+                    ChildName="BundleComponent"
+                    ChildXMLName="BundleComponent"
+                    ForeignEntity="Customer_Subscription" Name="BundleParent"
+                    Type="Bidirectional" XMLName="BundleParent">
+                    <Attribute Name="Bundle_Parent_Subscription_Key" ParentName="Customer_Subscription_Key"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Customer" Name="Customer"
+                    Type="Unidirectional" XMLName="Customer" >
+                    <Attribute Name="Customer_ID" ParentName="Customer_ID"/>
+					<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+		<Entity Cacheable="false" Description="Maintains details of various Price Types applicable to a subscription"
+            EntityType="CONFIGURATION" Extensible="Y" Module="ysc"
+            Name="Customer_Subscription_Price" Prefix="YFS_"
+            TableName="YFS_CUSTOMER_SUB_PRICE"
+            TableType="MASTER" XMLName="CustomerSubscriptionPrice">
+            <Attributes>
+                <Attribute ColumnName="CUSTOMER_SUB_PRICE_KEY"
+                    DataType="Key"
+                    Description="Primary key attribute of the YFS_CUSTOMER_SUB_PRICE table."
+                    Name="Customer_Subscription_Price_Key"
+                    Nullable="false" XMLName="CustomerSubscriptionPriceKey"/>
+				<Attribute ColumnName="CUSTOMER_SUBSCRIPTION_KEY"
+                    DataType="Key"
+                    Description="Primary key attribute of the YFS_CUSTOMER_SUBSCRIPTION table."
+                    Name="Customer_Subscription_Key"
+                    Nullable="true" XMLName="CustomerSubscriptionKey"/>
+				<Attribute ColumnName="PRICE_TYPE_NAME"
+                    DataType="PriceTypeName"
+                    Description="Price Type associated with this record."
+                    Name="Price_Type_Name"
+                    Nullable="true" XMLName="PriceTypeName"/>
+				<Attribute ColumnName="RECURRING_TYPE"
+                    DataType="CommonCode"
+                    Description="Recurring Interval for Price Type; if null, then Price Type is non-recurring."
+                    Name="Recurring_Type"
+                    Nullable="true" XMLName="RecurringType"/>
+				<Attribute ColumnName="PRICE_TYPE_INFO_ONLY"
+                    DataType="Flag"
+                    Description="Flag to indicate that his Price Type is for informational use only."
+                    Name="Is_Price_Type_For_Information_Only"
+                    Nullable="true" XMLName="IsPriceTypeForInformationOnly"/>
+				<Attribute ColumnName="PRICE"
+                    DataType="Price"
+                    Description="Price value of the corresponding Price Type."
+                    Name="Price"
+                    Nullable="true" XMLName="Price"/>
+				<Attribute ColumnName="PRICE_START_DATE"
+                    DataType="TimeStamp"
+                    Description="The date from which the price type is applicable."
+                    Name="Price_Start_Date" Nullable="true" XMLName="PriceStartDate"/>
+				<Attribute ColumnName="PRICE_END_DATE"
+                    DataType="TimeStamp"
+                    Description="The end date of this price type."
+                    Name="Price_End_Date" Nullable="true" XMLName="PriceEndDate"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SUBSCR_PRICE_PK" Name="YPM_SUBSCR_PRICE_PK">
+                <Attribute ColumnName="CUSTOMER_SUB_PRICE_KEY" Name="Customer_Subscription_Price_Key"/>
+            </PrimaryKey>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="CustomerSubscriptionPrices" ChildName="CustomerSubscriptionPrice"
+                    ChildXMLName="CustomerSubscriptionPrice"
+                    ForeignEntity="Customer_Subscription" Name="CustomerSubscription" 
+					Type="Bidirectional" XMLName="CustomerSubscription">
+                    <Attribute Name="Customer_Subscription_Key" ParentName="Customer_Subscription_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <Indices>
+                <Index DB2Name="SUBSCR_PRICE_I1"
+                    Name="YPM_SUBSCR_PRICE_I1" Unique="true">
+                    <Column Name="CUSTOMER_SUBSCRIPTION_KEY"/>
+                    <Column Name="PRICE_TYPE_NAME"/>
+                </Index>
+            </Indices>
+        </Entity>
+    </Entities>
+</DBSchema>

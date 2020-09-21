@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity TableName="YFS_USER_GROUP_LIST">
+            <Attributes>
+                <Attribute ColumnName="IS_PRIMARY" DataType="Flag"
+                    Description="Indicates primary user group of the user"
+                    Name="Is_Primary" Nullable="true" XMLName="IsPrimary"/>
+            </Attributes>
+		</Entity>
+		<Entity TableName="PLT_FILE_ATTACHMENT" TableType="TRANSACTION">
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany" DeleteCascade="true"
+                    ChildListXMLName="FileAttachments"
+                    ChildXMLName="FileAttachment" ChildName="FileAttachment"
+                    ForeignEntity="Order_Header" Name="Order"
+                    Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Table_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_ORDER_HEADER"/>
+				</RelationShip>
+            </RelationShips>
+		</Entity>
+		
+		<Entity TableName="YFS_INSTRUCTION_DETAIL" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="OrderInstruction"
+                    ForeignEntity="Order_Header" Name="OrderHeader"
+                    Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Reference_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_ORDER_HEADER"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="OrderLineInstruction"
+                    ForeignEntity="Order_Line" Name="OrderLine"
+                    Type="Bidirectional" XMLName="OrderLine">
+                    <Attribute Name="Reference_Key" ParentName="Order_Line_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_ORDER_LINE"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="ReceiptHeaderInstruction"
+                    ForeignEntity="Receipt_Header" Name="ReceiptHeader"
+                    Type="Bidirectional" XMLName="ReceiptHeader">
+                    <Attribute Name="Reference_Key" ParentName="Receipt_Header_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_RECEIPT_HEADER"/>
+                </RelationShip>           
+			</RelationShips>			
+		</Entity>
+		<Entity TableName="YFS_ENTITY_ADDRESS" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdditionalAddresses"
+                    ChildName="OrderAdditionalAddress"
+                    ForeignEntity="Order_Header" Name="Order"
+                    Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Entity_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Entity_Type" ParentName="YFS_ORDER_HEADER"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdditionalAddresses"
+                    ChildName="OrderLineAdditionalAddress"
+                    ForeignEntity="Order_Line" Name="OrderLine"
+                    Type="Bidirectional" XMLName="OrderLine">
+                    <Attribute Name="Entity_Key" ParentName="Order_Line_Key"/>
+                    <Attribute Name="Entity_Parent_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Entity_Type" ParentName="YFS_ORDER_LINE"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+		<Entity TableName="YFS_ANSWER_SET_TRAN" TableType="TRANSACTION">
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AnswerSets" ChildName="AnswerSet"
+                    ChildXMLName="AnswerSet" DeleteCascade="true"
+                    ForeignEntity="Order_Header" Name="Order"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="Order">
+                    <Attribute Name="Primary_Table_Ref_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Primary_Table_Name" ParentName="YFS_ORDER_HEADER"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+		<Entity TableName="YFS_INBOX">
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany" ForeignEntity="Order_Header" 
+					Name="OrderHeader" Type="Unidirectional" XMLName="Order">
+					<Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+				</RelationShip>
+			</RelationShips>
+		</Entity>
+		<Entity TableName="YFS_NOTES" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+           <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Notes" ChildName="Note"
+                    ChildXMLName="Note" ForeignEntity="Order_Header"
+                    Name="Order" Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Table_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_ORDER_HEADER"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Notes" ChildName="Note"
+                    ChildXMLName="Note" ForeignEntity="Order_Line"
+                    Name="OrderLine" Type="Bidirectional" XMLName="OrderLine">
+                    <Attribute Name="Table_Key" ParentName="Order_Line_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_ORDER_LINE"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Notes" ChildName="Note"
+                    ChildXMLName="Note" ForeignEntity="Order_Release"
+                    Name="OrderRelease" Type="Bidirectional" XMLName="OrderRelease">
+                    <Attribute Name="Table_Key" ParentName="Order_Release_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_ORDER_RELEASE"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Notes" ChildName="Note"
+                    ChildXMLName="Note" ForeignEntity="Opportunity"
+                    Name="Opportunity" Type="Bidirectional" XMLName="Opportunity">
+                    <Attribute Name="Table_Key" ParentName="Opportunity_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_OPPORTUNITY"/>
+                </RelationShip>
+            </RelationShips>			
+		</Entity>
+		<Entity TableName="YFS_ORGANIZATION">           
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildName="UsingOrganization"
+                    DeleteValidationError="YDB10078" Enforce="true"
+                    ForeignEntity="Price_Program" Name="PriceProgram"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="PriceProgram">
+                    <Attribute Name="Organization_Key" ParentName="Enterprise_Key"/>
+                    <Attribute Name="Default_Price_Program_Key" ParentName="Price_Program_Key"/>
+                </RelationShip>
+			</RelationShips>			
+		</Entity>
+		<!--Manager Overrides-->
+		<Entity AuditRequired="N" Cacheable="false"
+				Description="Table for storing order-related transaction information that resulted in violations." EntityType="TRANSACTION" 
+				Module="omp" Name="Order_Transaction_Info" Prefix="YFS_" Superclass="Transaction_Info"
+				TableType="TRANSACTION" XMLName="OrderTransactionInfo">
+				<Attributes>
+					<Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+						Description="Primary key for YFS_ORDER_HEADER"
+						Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey"/>	
+				</Attributes>
+				<AuditReferences/>
+				<Indices>
+					<Index DB2Name="TRANS_INFO_I1" Name="YFS_TRANSACTION_INFO_I1" Unique="false">
+						<Column Name="ENTITY_NAME"/>
+						<Column Name="ORDER_HEADER_KEY"/>
+					</Index>
+				</Indices>
+		</Entity>
+		<!--End Manager Overrides-->
+	</Entities>
+</DBSchema>

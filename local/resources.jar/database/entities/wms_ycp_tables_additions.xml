@@ -1,0 +1,73 @@
+<DBSchema>
+	<Entities>
+		<Entity TableName="YFS_SHIP_NODE">
+			<Attributes>
+				<Attribute ColumnName="RECEIVE_ADJ_RSN_CODE"
+                    DataType="ReasonCode" 
+                    Description="The adjustment reason code used for the inventory transaction as part of receiving."
+                    Name="Receive_Adj_Rsn_Code" Nullable="true" XMLName="ReceiveAdjRsnCode">
+			        <CustomOverride Name="WMSShipNodeCustomDBUtil" Type="get"/>
+				</Attribute>
+				<Attribute ColumnName="PACK_ADJ_RSN_CODE"
+                    DataType="ReasonCode" 
+                    Description="The adjustment reason code used for the inventory transaction as part of packing process."
+                    Name="Pack_Adj_Rsn_Code" Nullable="true" XMLName="PackAdjRsnCode">
+			        <CustomOverride Name="WMSShipNodeCustomDBUtil" Type="get"/>
+				</Attribute>
+				<Attribute ColumnName="SHIP_ADJ_RSN_CODE"
+                    DataType="ReasonCode" 
+                    Description="The adjustment reason code used for the inventory transaction as part of shipping process."
+                    Name="Ship_Adj_Rsn_Code" Nullable="true" XMLName="ShipAdjRsnCode">
+			        <CustomOverride Name="WMSShipNodeCustomDBUtil" Type="get"/>
+				</Attribute>
+				<Attribute ColumnName="OVER_ALLOC_ADJ_RSN_CODE"
+                    DataType="ReasonCode" 
+                    Description="The adjustment reason code used for the inventory transaction as part of task completion for adjusting unavailable system inventory."
+                    Name="Over_Alloc_Adj_Rsn_Code" Nullable="true" XMLName="OverAllocateAdjustReasonCode">			        
+				</Attribute>
+				<Attribute ColumnName="MAX_CONCURRENT_WAVES"
+                    DataType="Count" DefaultValue="0"
+                    Description="The maximum number of waves that are picked together."
+                    Name="Max_Concurrent_Waves" Nullable="false" XMLName="MaxConcurrentWaves"/>
+				<Attribute ColumnName="ALLOW_INV_OPS_WHILE_PHY_CNT"
+                    DataType="Flag" 
+                    Description="This flag indicates whether inventory operations are allowed while Physical Count."
+                    Name="Allow_Inv_Ops_While_Phy_Cnt" Nullable="true" XMLName="AllowInventoryOperationsWhilePhysicalCount"/>
+				<Attribute ColumnName="WAVE_SHORTAGE_HANDLING_TYPE"
+                    DataType="Text-40" 
+                    Description="inventory shortages in shipments will be handled by this property."
+                    Name="Wave_Shortage_Handling_Type" Nullable="true" XMLName="WaveShortageHandlingType"/>
+				<Attribute ColumnName="VOICE_APPL_INSTANCE_KEY"
+                    DataType="Key" 
+                    Description="Associated External Voice Application Instance to enable Voice Based Picking for the Ship Node."
+                    Name="Voice_Application_Instance_Key" Nullable="true" XMLName="VoiceApplicationInstanceKey"/>
+			</Attributes>
+			<CustomInterface Name="WMSShipNodeCustomDBUtil" Impl="com.yantra.wms.customutil.WMSShipNodeCustomDBUtilImpl" ModuleCode="wms"/>
+		</Entity>
+		<Entity TableName="YFS_INBOX">
+			<Attributes>
+				<Attribute ColumnName="COUNT_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The count request associated with this exception."
+                    HasSkewedData="true" Name="Count_Request_Key"
+                    Nullable="false" XMLName="CountRequestKey"/>
+				<Attribute ColumnName="COUNT_PROGRAM_NAME" DataType="Text-24"
+                    DefaultValue="' ' " Description="The count program name."
+                    Name="Count_Program_Name" Nullable="false" XMLName="CountProgramName"/>
+                <Attribute ColumnName="WAVE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The wave associated with the exception."
+                    Name="Wave_Key" Nullable="false"/>
+                <Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The wave number that uniquely identifies the wave within the context of a node.  This is system generated."
+                    Name="Wave_No" Nullable="false"/>
+			</Attributes>
+			<Indices>
+                <Index Name="YFS_INBOX_I9">
+                    <Column Name="WAVE_KEY"/>
+                </Index>
+			</Indices>
+		</Entity>
+	</Entities>
+</DBSchema>

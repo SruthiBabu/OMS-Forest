@@ -1,0 +1,19 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+# Copyright IBM Corp. 2017 All Rights Reserved.  
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: log.properties_quartz_ext
+## PROPERTY_IN_FILE_NAME: log.properties_quartz_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## 
+## PROPERTY_FILE_DETAIL_END
+
+## DATABASE_SUPPORT: N
+
+#---------------------------------------------------------------------------
+# Appending to the main log4j configuration 
+# Adding the Quartz package appender to the log4j system
+#---------------------------------------------------------------------------
+log4j.configuration.fragment.quartz=/resources/log4jconfig_quartz_ext.xml

@@ -1,0 +1,145 @@
+<html>
+    <body>
+        <form name="frmSKUReceivingInstructions" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@OrganizationCode"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Receipt/@OrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@OrganizationCode"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    mandatory="false"
+                                    name="DoNotVerifyCaseContent"
+                                    outputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@CaseId"
+                                    mandatory="false"
+                                    name="txtCaseId"
+                                    outputbinding="xml:/Receipt/@CaseId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@CaseId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    mandatory="false"
+                                    name="ParentPalletId"
+                                    outputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ParentLPN/@PalletId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Receipt/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemID"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemID"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/PrimaryInformation/@ShortDescription"
+                                    mandatory="false" name="txtDesc"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblInstr" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblInstr"
+                                    type="text" validate="false" value="Mobile_Instructions"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table binding="/List/@Instruction"
+                                    col="1" gridcols="2"
+                                    gridrows="4" id="Instruction"
+                                    mandatory="false"
+                                    name="grdItemInstructionList"
+                                    namespace="List" size="20"
+                                    tag="binding=grdItemInstructionList" validate="false">
+                                    <tr>
+                                    <td>
+                                    <input colno="0" colName=" "
+                                    size="0"
+                                    type="hidden" value=""/>
+                                    <input colno="1" colName="Instruction"
+                                    inputbinding="xml:/Instruction/@InstructionText"
+                                    size="20" type="text"/>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="5" subtype="Command"
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmReceiveUpdateCheckForTag"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

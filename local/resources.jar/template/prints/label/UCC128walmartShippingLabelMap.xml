@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+    <LabelField Binding="/Container/Shipment/FromAddress/@AddressLine1" LabelFieldName="FromAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/FromAddress/@AddressLine2" LabelFieldName="FromAddressLine2" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/FromAddress/@City" LabelFieldName="FromCity" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/FromAddress/@State" LabelFieldName="FromState" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/@ProNo" LabelFieldName="PRONo" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/@BolNo" LabelFieldName="BolNo" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/MarkForAddress/@Company" LabelFieldName="MarkFor" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/ToAddress/@AddressLine1" LabelFieldName="ToAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/ToAddress/@City" LabelFieldName="ToCity" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerDetails/ContainerDetail/ShipmentLine/OrderLine/@CustomerPONo" LabelFieldName="CustomerPONo" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerDetails/ContainerDetail/ShipmentLine/OrderLine/@PrimeLineNo" LabelFieldName="LINE" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/ToAddress/@ZipCode" LabelFieldName="ShipToZip" RepeatingElement=""/>
+    <LabelField Binding="/Container/Shipment/ToAddress/@State" LabelFieldName="ToState" RepeatingElement=""/>
+    <LabelField Binding="/Container/@ContainerScm" LabelFieldName="ContainerScm" RepeatingElement=""/>
+    <LabelField Binding="/Container/ContainerDetails/ContainerDetail/@ItemID" LabelFieldName="ItemId" RepeatingElement="ContainerDetail"/>
+    <LabelField Binding="/Container/ContainerDetails/ContainerDetail/@Quantity" LabelFieldName="Quantity" RepeatingElement="ContainerDetail"/>
+    <LabelField Binding="/Container/ContainerDetails/ContainerDetail/ShipmentLine/OrderLine/@CustomerItem" LabelFieldName="CustItemId" RepeatingElement="ContainerDetail"/>
+    <LabelField Binding="/Container/Shipment/FromAddress/@ZipCode" LabelFieldName="FromZip" RepeatingElement=""/>
+    <RepeatingFields>
+        <RepeatingField LabelFieldName="ItemId" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="Quantity" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="CustItemId" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+    </RepeatingFields>
+</LabelFieldMap>

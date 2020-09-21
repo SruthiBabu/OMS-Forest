@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template match="/">
+		<Chart yAxisName='SAADiscountPercentage' >
+			<categories>
+				<xsl:call-template name="categories" >
+					<xsl:with-param name="sequenceNo" select="'2'" />
+				</xsl:call-template>
+			</categories>
+			<dataset>
+				<xsl:attribute name="seriesName">
+					<xsl:value-of select="/CognosData/ColumnList/Column[@Sequence='3']/@Name" />
+				</xsl:attribute>
+				<xsl:call-template name="data" >
+					<xsl:with-param name="sequenceNo" select="'3'" />
+				</xsl:call-template>
+			</dataset>
+			<dataset>
+				<xsl:attribute name="seriesName">
+					<xsl:value-of select="/CognosData/ColumnList/Column[@Sequence='5']/@Name" />
+				</xsl:attribute>
+				<xsl:call-template name="data" >
+					<xsl:with-param name="sequenceNo" select="'5'" />
+				</xsl:call-template>
+			</dataset>
+			<dataset>
+				<xsl:attribute name="seriesName">
+					<xsl:value-of select="/CognosData/ColumnList/Column[@Sequence='4']/@Name" />
+				</xsl:attribute>
+				<xsl:call-template name="data" >
+					<xsl:with-param name="sequenceNo" select="'4'" />
+				</xsl:call-template>
+			</dataset>
+		</Chart>
+	</xsl:template>
+
+	<xsl:template name="categories" >
+		<xsl:param name="sequenceNo" />
+		<xsl:for-each select="/CognosData/RowList/Row/Data">
+			<xsl:if test="@Sequence = $sequenceNo">
+				<category > 
+					<xsl:attribute name="label">
+						<xsl:value-of select="@Value" />
+					</xsl:attribute>
+				</category>
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="data">
+		<xsl:param name="sequenceNo" />
+		<xsl:for-each select="/CognosData/RowList/Row/Data">
+			<xsl:if test="@Sequence = $sequenceNo">
+				<set>
+					<xsl:attribute name="value">
+						<xsl:value-of select="@Value" />
+					</xsl:attribute>
+					<xsl:attribute name="toolText">
+						<xsl:value-of select="@HeaderName" />
+					</xsl:attribute>
+				</set>
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:template>
+</xsl:stylesheet>

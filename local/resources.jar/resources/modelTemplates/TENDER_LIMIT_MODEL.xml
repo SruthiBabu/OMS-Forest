@@ -1,0 +1,1698 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed Materials - Property of IBM IBM Sterling Business Center (C) 
+	Copyright IBM Corp. 2012, 2013 All Rights Reserved. US Government Users Restricted 
+	Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract 
+	with IBM Corp. -->
+
+<ApprovalConfig>
+	<DomainList>
+		<Domain Name="Payments" DisplayName="b_Payments">
+			<Attributes>
+				<Attribute Name="TenderTotal" DataCaptureName="TenderLimit" DisplayName="b_Tender_Limit"
+					XPath="PaymentTypeAggregation" CompareAny="true"
+					DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="false"   />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									mandatory="true" allowDecimals="true" maxValue="9999999999999" decimalPrecision="4" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="Currency" DataCaptureName="Currency" DisplayName="b_Currency" XPath="PaymentTypeAggregation" DefaultQueryType="EQUALS">
+						<QueryTypes>
+							<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+								<GreexFunction Name="equals" />
+								<Configuration ActionURL="/sbc/pricing/getCurrencyListForSearch.do">
+									<UIControlConfiguration xtype="xapprovalcombocontrol"
+										displayField="CurrencyDescription" valueField="Currency"
+										mandatory="true"  optionsBinding="CurrencyList/Currency"/>
+								</Configuration>
+							</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="PaymentType" DataCaptureName="PaymentType" DisplayName="b_Payment_Type"
+					XPath="PaymentTypeAggregation" CompareAny="true">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration  mandatory="false" xtype="xapprovaltriggercontrol"
+									valueBinding="PaymentTypeList/PaymentType" entity="paymenttypesearch" singleSelect="true" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+
+				<Attribute Name="PaymentCardType" DataCaptureName="PaymentCardType" DisplayName="b_Payment_Card_Type"
+					XPath="PaymentTypeAggregation" CompareAny="true">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration  mandatory="false" xtype="xapprovaltriggercontrol"
+									valueBinding="PaymentCardTypeList/PaymentCardType" entity="paymentcardtypesearch" singleSelect="true" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="GrandCharges" DisplayName="b_GrandCharges"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                </Attribute>
+				<Attribute Name="GrandDiscount" DisplayName="b_GrandDiscount"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+             </Attribute>
+			 <Attribute Name="GrandShippingBaseCharge" DisplayName="b_GrandShippingBaseCharge"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="GrandShippingCharges" DisplayName="b_GrandShippingCharges"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="GrandShippingDiscount" DisplayName="b_GrandShippingDiscount"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="GrandShippingTotal" DisplayName="b_GrandShippingTotal"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="GrandTax" DisplayName="b_GrandTax"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="GrandTotal" DisplayName="b_GrandTotal"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrCharges" DisplayName="b_HdrCharges"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrDiscount" DisplayName="b_HdrDiscount"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrShippingBaseCharge" DisplayName="b_HdrShippingBaseCharge"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrShippingCharges" DisplayName="b_HdrShippingCharges"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrShippingDiscount" DisplayName="b_HdrShippingDiscount"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrShippingTotal" DisplayName="b_HdrShippingTotal"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrTax" DisplayName="b_HdrTax"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="HdrTotal" DisplayName="b_HdrTotal"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="LineSubTotal" DisplayName="b_LineSubTotal"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="ManualDiscountPercentage" DisplayName="b_ManualDiscountPercentage"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="100" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="PercentProfitMargin" DisplayName="b_PercentProfitMargin"
+					XPath="PaymentTypeAggregation/Order/OverallTotals" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="100" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="100" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+			</Attributes>
+		</Domain>
+		<Domain Name="OverallChargeTotal" DisplayName="b_OverallChargeTotal" >
+		   <Attributes>
+		      <Attribute Name="GrandCharges" DisplayName="b_GrandCharges"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                </Attribute>
+				<Attribute Name="GrandDiscount" DisplayName="b_GrandDiscount"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="IsBillable" DisplayName="b_IsBillable"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				<Attribute Name="IsDiscount" DisplayName="b_IsDiscount"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				<Attribute Name="IsManual" DisplayName="b_IsManual"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getIsManualBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				 <Attribute Name="IsRefundable" DisplayName="b_IsRefundable"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				 <Attribute Name="IsShippingCharge" DisplayName="b_IsShippingCharge"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				<Attribute Name="Reference" DisplayName="Reference"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration maxLength="50" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALSIGNORECASE" QueryTypeDesc="b_approval_equalsIgnoreCase">
+							<GreexFunction Name="equalsIgnoreCase" />
+							<Configuration>
+								<UIControlConfiguration maxLength="50" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="ChargeName" DisplayName="b_ChargeName" DataCaptureName="ChargeName"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getChargeName.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="ChargeCategoryAndName" valueField="ChargeName"
+									optionsBinding="ChargeNameList/ChargeName" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="ChargeCategory" DisplayName="b_ChargeCategory" DataCaptureName="ChargeCategory"
+					XPath="PaymentTypeAggregation/Order/OverallTotals/OverallChargeTotals/OverallChargeTotal" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getChargeCategory.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="Description" valueField="ChargeCategory"
+									optionsBinding="ChargeCategoryList/ChargeCategory" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+		   </Attributes>
+		</Domain>
+		<Domain Name="Customer" DisplayName="b_Customer">
+		  <Attributes>
+		    <Attribute Name="CustomerClassificationCode" DisplayName="b_CustomerClassificationCode"
+					XPath="PaymentTypeAggregation/Customer" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALSIGNORECASE" QueryTypeDesc="b_approval_equalsIgnoreCase">
+							<GreexFunction Name="equalsIgnoreCase" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="CustomerLevel" DisplayName="b_CustomerLevel"
+					XPath="PaymentTypeAggregation/Customer" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getCustomerLevel.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="CodeShortDescription" valueField="CodeValue"
+									optionsBinding="CommonCodeList/CommonCode" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="Vertical" DisplayName="b_Vertical"
+					XPath="PaymentTypeAggregation/Customer" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration ActionURL="/sbc/systemadmin/getCustomerVertical.do">
+								<UIControlConfiguration xtype="xapprovalcombocontrol"
+									displayField="CodeShortDescription" valueField="CodeValue"
+									optionsBinding="CommonCodeList/CommonCode" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+		  </Attributes>
+		</Domain>
+		<Domain Name="PaymentMethodRelated" DisplayName="b_PaymentMethodRelated">
+		  <Attributes>
+		     <Attribute Name="AwaitingAuthInterfaceAmount" DisplayName="b_AwaitingAuthInterfaceAmount"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="AwaitingChargeInterfaceAmount" DisplayName="b_AwaitingChargeInterfaceAmount"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="ChargeSequence" DisplayName="b_ChargeSequence"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="99999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="99999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="99999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="99999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="99999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="CheckReference" DisplayName="b_CheckReference"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALSIGNORECASE" QueryTypeDesc="b_approval_equalsIgnoreCase">
+							<GreexFunction Name="equalsIgnoreCase" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="CreditCardExpDate"  DisplayName="b_CreditCardExpDate"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="GREATERTHANEQUAL">
+					<QueryTypes>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="dateGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovaldatecontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="dateGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovaldatecontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovaldatecontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="CreditCardType" DisplayName="b_CreditCardType"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration maxLength="32" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALSIGNORECASE" QueryTypeDesc="b_approval_equalsIgnoreCase">
+							<GreexFunction Name="equalsIgnoreCase" />
+							<Configuration>
+								<UIControlConfiguration maxLength="32" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="FundsAvailable" DisplayName="b_FundsAvailable"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				  <Attribute Name="GetFundsAvailableUserExitInvoked" DisplayName="b_GetFundsAvailableUserExitInvoked"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				<Attribute Name="IncompletePaymentType" DisplayName="b_IncompletePaymentType"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				<Attribute Name="MaxChargeLimit" DisplayName="b_MaxChargeLimit"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="PaymentReference1" DisplayName="b_PaymentReference1"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALSIGNORECASE" QueryTypeDesc="b_approval_equalsIgnoreCase">
+							<GreexFunction Name="equalsIgnoreCase" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="PaymentReference2" DisplayName="b_PaymentReference2"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALSIGNORECASE" QueryTypeDesc="b_approval_equalsIgnoreCase">
+							<GreexFunction Name="equalsIgnoreCase" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="PaymentReference3" DisplayName="b_PaymentReference3"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="EQUALSIGNORECASE" QueryTypeDesc="b_approval_equalsIgnoreCase">
+							<GreexFunction Name="equalsIgnoreCase" />
+							<Configuration>
+								<UIControlConfiguration maxLength="100" xtype="xapprovaltextcontrol"/>
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="PaymentType" DataCaptureName="PaymentType" DisplayName="b_Payment_Type"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" CompareAny="true">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_is">
+							<GreexFunction Name="equals" />
+							<Configuration>
+								<UIControlConfiguration  mandatory="false" xtype="xapprovaltriggercontrol"
+									valueBinding="PaymentTypeList/PaymentType" entity="paymenttypesearch" singleSelect="true" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+				</Attribute>
+				<Attribute Name="RequestedAuthAmount" DisplayName="b_RequestedAuthAmount"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="RequestedChargeAmount" DisplayName="b_RequestedChargeAmount"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="SuspendAnyMoreCharges" DisplayName="b_SuspendAnyMoreCharges"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+				<Attribute Name="TotalAuthorized" DisplayName="b_TotalAuthorized"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="TotalCharged" DisplayName="b_TotalCharged"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="TotalRefundedAmount" DisplayName="b_TotalRefundedAmount"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="PlannedRefundAmount" DisplayName="b_PlannedRefundAmount"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod" DefaultQueryType="EQUALS">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+							<GreexFunction Name="doubleEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHAN" QueryTypeDesc="b_approval_greaterThan">
+							<GreexFunction Name="doubleGreater" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="GREATERTHANEQUAL" QueryTypeDesc="b_approval_greaterThanEq">
+							<GreexFunction Name="doubleGreaterOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHAN" QueryTypeDesc="b_approval_lessThan">
+							<GreexFunction Name="doubleLesser" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									allowDecimals="true"  maxValue="9999999999999" decimalPrecision="2" allowNegative="false"  />
+							</Configuration>
+						</QueryType>
+						<QueryType QueryType="LESSERTHANEQUAL" QueryTypeDesc="b_approval_lessThanEq">
+							<GreexFunction Name="doubleLesserOrEqual" />
+							<Configuration>
+								<UIControlConfiguration xtype="xapprovalnumbercontrol"
+									 allowDecimals="true" maxValue="9999999999999" decimalPrecision="2" allowNegative="false" />
+							</Configuration>
+						</QueryType>
+					</QueryTypes>
+                 </Attribute>
+				 <Attribute Name="UnlimitedCharges" DisplayName="b_UnlimitedCharges"
+					XPath="PaymentTypeAggregation/AggregatedPaymentMethods/PaymentMethod">
+					<QueryTypes>
+						<QueryType QueryType="EQUALS" QueryTypeDesc="b_approval_equals">
+						  <GreexFunction Name="equals" />
+						  <Configuration>
+							<UIControlConfiguration xtype="xapprovalradiocontrol" ActionURL="/sbc/pricing/getYesNoBooleanValues.do"
+							  displayField="CodeShortDescription" valueField="CodeValue" optionsBinding="CommonCodeList/CommonCode"/>
+						  </Configuration>
+						</QueryType>
+					  </QueryTypes>
+				</Attribute>
+		  </Attributes>
+		</Domain>
+	</DomainList>
+</ApprovalConfig>

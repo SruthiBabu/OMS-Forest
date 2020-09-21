@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  IBM Sterling Order Management  (5725-D10)
+
+  (C) Copyright IBM Corp. 2011,2015 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+
+<!-- Maps JDA values to SSFS values -->
+<mm:ValueMaps
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mm="http://WCToSSFSMediationModule"
+	xsi:schemaLocation="http://WCToSSFSMediationModule ValueMaps.xsd ">
+	
+	<!-- Maps JDA to IBM organization codes -->
+	<mm:Map name="jdaToIBMOrganizationCode">
+		<mm:Entry key="DEFAULT-JDA">DEFAULT</mm:Entry>
+	</mm:Map>
+
+	<!-- Maps JDA to IBM ship node -->
+	<mm:Map name="jdaToIBMShipNode">
+		<mm:Entry key="NODE1-JDA">NODE1</mm:Entry>
+		<mm:Entry key="NODE2-JDA">NODE2</mm:Entry>
+	</mm:Map>
+
+	<!-- Maps JDA to IBM Carrier -->
+	<mm:Map name="jdaToIBMCarrier">
+		<mm:Entry key="JDA Carrier">USPS</mm:Entry>
+	</mm:Map>
+
+	<!-- Maps JDA to IBM CarrierServiceCode  -->
+	<mm:Map name="jdaToIBMCarrierServiceCode">
+		<mm:Entry key="JDA Regular Delivery">International Regular</mm:Entry>
+	</mm:Map>
+	<!-- Maps JDA to IBM Unit of Measures -->
+	<mm:Map name="jdaToIBMUOM">
+		<mm:Entry key="FTQ">CUFEET</mm:Entry>
+		<mm:Entry key="KGM">KG</mm:Entry>
+		<mm:Entry key="KMT">KM</mm:Entry>
+		<mm:Entry key="LBR">LBS</mm:Entry>
+		<mm:Entry key="LTR">LITER</mm:Entry>
+		<mm:Entry key="MTQ">CUMETER</mm:Entry>
+		<mm:Entry key="MTR">METER</mm:Entry>
+		<mm:Entry key="SMI">MILE</mm:Entry>
+	</mm:Map>
+	<!-- Maps JDA to IBM Disposition Codes -->	
+	<mm:Map name="jdaToIBMDispositionCode">
+		<mm:Entry key="CONDITION-CODE1">SCRAPPED</mm:Entry>
+		<mm:Entry key="CONDITION-CODE2">RESTOCKED</mm:Entry>		
+	</mm:Map>
+	
+	<!-- Maps JDA to IBM Return Reason Codes -->	
+	<mm:Map name="jdaToIBMReturnReasonCode">
+		<mm:Entry key="RETURN-REASON-CODE1">WRONG_ITEM</mm:Entry>
+		<mm:Entry key="RETURN-REASON-CODE2">WRONG_COLOR</mm:Entry>		
+	</mm:Map>
+	
+	<!-- Maps JDA to IBM Delivery Method Codes -->	
+	<mm:Map name="jdaToIBMDeliveryMethodCode">
+		<mm:Entry key="Ship">SHP</mm:Entry>
+		<mm:Entry key="Pickup">PICK</mm:Entry>
+	</mm:Map>
+	
+	<!-- Maps JDA to IBM EntryType -->
+	<mm:Map name="jdaToIBMEntryType">
+		<mm:Entry key="Application Console"></mm:Entry>
+		<mm:Entry key="Call Center">Call Center</mm:Entry>
+		<mm:Entry key="POS">Store</mm:Entry>
+		<mm:Entry key="Online">WCS</mm:Entry>
+	</mm:Map> 
+	
+</mm:ValueMaps>

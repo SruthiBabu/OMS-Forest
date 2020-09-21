@@ -1,0 +1,16 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2006, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Config Name="IBM Sterling Call Center and Store Configuration" >
+	<Group Name="Organization Driven Configurations">
+		<Driver Name="YFS_ORGANIZATION" FilterType="ColonyId" ColonyIdAttr="AssignedColonyId">
+			<Group Name="Association Relationship">
+				  <Table Name="YFS_ASSC_RELATIONSHIP"/>
+			</Group>
+			<Table Name="YFS_EVENT_AUDITOR"/>
+		</Driver>
+	</Group>
+</Config>

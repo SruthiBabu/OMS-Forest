@@ -1,0 +1,138 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2001, 2018 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: logMessageCodes.properties_afcdoc_ext
+## PROPERTY_IN_FILE_NAME: logMessageCodes.properties_afcdoc_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## Message codes for:
+## * Scope WORKFLOW and subsystems DOCUMENT and WORKFLOW
+## * Scope UTIL and subsystem UTIL
+## Extends logMessageCodes.properties.
+## PROPERTY_FILE_DETAIL_END
+
+## DATABASE_SUPPORT: N
+
+## PROPERTY_START
+## PROPERTY_NAME: WORKFLOW.DOCUMENT.[message code]
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## Message codes for scope WORKFLOW and subsystem DOCUMENT. 
+WORKFLOW.DOCUMENT.ERR_Document_updateMetaDataOnly=No doc id {0} to be updated
+WORKFLOW.DOCUMENT.ERR_Document_updateMetaDataOnly1=there should not be more than one doc id= {0} with meta data : {1} got updated in doc table
+WORKFLOW.DOCUMENT.ERR_Document_updateMetaDataOnly2=sql error for update doc metadata id {0} with meta data {1}
+WORKFLOW.DOCUMENT.DEB_Document_updateMetaDataOnly=update doc with matadata {0} for doc id {1}
+WORKFLOW.DOCUMENT.DEB_retry_load=retry at {0} to load doc for doc id= {1}
+WORKFLOW.DOCUMENT.DEB_retry_load1=cannot found doc at retry {0} for doc id= {1}
+WORKFLOW.DOCUMENT.ERR_Document_assignDocId=Document.assignDocId() doc metadata update {0} has been called ,but new doc obj with id {1} will be created
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: WORKFLOW.WORKFLOW.[message code]
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## Message codes for scope WORKFLOW and subsystem WORKFLOW.
+WORKFLOW.WORKFLOW.DEB_workflowid=Document resetting doc flag workflowid {0} docid= {1}
+WORKFLOW.WORKFLOW.ERR_myClassName={0} caught Exception.
+WORKFLOW.WORKFLOW.ERR_Document_setBody2=Document.setBody()
+WORKFLOW.WORKFLOW.ERR_Document_setBody1=Document.setBody()
+WORKFLOW.WORKFLOW.ERR_Exception5=Exception:
+WORKFLOW.WORKFLOW.ERR_Exception4=Exception:
+WORKFLOW.WORKFLOW.ERR_Document_setUserLifeSpan2=[Document].setUserLifeSpan() close and free
+WORKFLOW.WORKFLOW.ERR_Document_setUserLifeSpan1=[Document].setUserLifeSpan() attempt to update DOCUMENT_LIFESPANs LIFE_SPAN
+WORKFLOW.WORKFLOW.DEB_Document_setUserLifeSpan=[Document].setUserLifeSpan(): wf_id = {0}
+WORKFLOW.WORKFLOW.ERR_Document_readUserLifeSpans=[Document].readUserLifeSpans(), modified document, but no previous doc id... using current doc id
+WORKFLOW.WORKFLOW.ERR_IOException=IOException
+WORKFLOW.WORKFLOW.DEB_Document_persist=Document.persist() the document (ID# {0} ) existed and did need to be saved.
+WORKFLOW.WORKFLOW.ERR_Document_readUserLifeSpans1=[Document].readUserLifeSpans()
+WORKFLOW.WORKFLOW.DEB_defaultDocumentStorageType1=[Document] The defaultDocumentStorageType is DB
+WORKFLOW.WORKFLOW.DEB_workflowID=Document inserting to table = {0} docid= {1}
+WORKFLOW.WORKFLOW.DEB_Document_setUserLifeSpan1=[Document].setUserLifeSpan() insert to doc_lifespan for sub wf {0} with docid {1}
+WORKFLOW.WORKFLOW.DEB_worfklowid=Document persist worfklowid = {0} docid= {1}
+WORKFLOW.WORKFLOW.ERR_myClassName1={0} caught Exception in clean up.
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP9=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP8=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_Document_getUserLifeSpan1=[Document].getUserLifeSpan()
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP6=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP5=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP4=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP3=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP2=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP1=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_document_dir1=[Document] Could not create directory {0}
+WORKFLOW.WORKFLOW.ERR_documentInlineSerializationThreshold=[Document].setMaxInlineBodySize() documentInlineSerializationThreshold is not numerical use default
+WORKFLOW.WORKFLOW.ERR_DEFAULT_KEY1=NO_MESSAGE
+WORKFLOW.WORKFLOW.ERR_Document_doUserLifeSpans1=[Document].doUserLifeSpans()
+WORKFLOW.WORKFLOW.ERR_DEFAULT_KEY=NO_MESSAGE
+WORKFLOW.WORKFLOW.ERR_document_dir11=[Document] Could not create directory {0} .
+WORKFLOW.WORKFLOW.ERR_Document_setBody=Document.setBody()
+WORKFLOW.WORKFLOW.ERR_deleteUnpersisted=[Document] deleteUnpersisted- workflowid {0} docid= {1} : Failed to delete the document! File name = {2}
+WORKFLOW.WORKFLOW.INFO_Document1=[Document] Attempting to modify a read-only Document object
+WORKFLOW.WORKFLOW.DEB_deleteUnpersisted2=[Document] deleteUnpersisted- workflowid {0} docid= {1} : No storage info for document.
+WORKFLOW.WORKFLOW.DEB_deleteUnpersisted1=[Document] deleteUnpersisted- workflowid {0} docid= {1} : File is null or does not exist. File name = {2}
+WORKFLOW.WORKFLOW.ERR_Document_setUserLifeSpan=[Document].setUserLifeSpan() Unable to insert/update document user lifespan
+WORKFLOW.WORKFLOW.ERR_document_dir=[Document] The document_dir is null.
+WORKFLOW.WORKFLOW.DEB_documentId=Document: big body(id= {0} ) dropped ( {1} ) dropped ouputstreeam
+WORKFLOW.WORKFLOW.ERR_Document_updateAfterAppend=[Document.updateAfterAppend()]
+WORKFLOW.WORKFLOW.ERR_IOException1=IOException n
+WORKFLOW.WORKFLOW.DEB_doc_getDocumentId=Document(doc): (ID# {0} ) unable to get body bytes from id = {1}
+WORKFLOW.WORKFLOW.DEB_Document_assignDocId=Document.assignDocId() <<< NEW >>>> ID= {0}
+WORKFLOW.WORKFLOW.DEB_Document_persist1=Document.persist() (ID# {0} ) no mod. {1} {2}
+WORKFLOW.WORKFLOW.ERR_SQLException9={0} caught SQLException.
+WORKFLOW.WORKFLOW.ERR_iDocument_registerWFWithDoc11=iDocument.registerWFWithDoc caught SQLException while closing resource
+WORKFLOW.WORKFLOW.ERR_Document_delete=[Document.delete()]
+WORKFLOW.WORKFLOW.DEB_deleteUnpersisted=[Document] deleteUnpersisted- in workflowid {0} docid= {1} : No File to delete. File name was NULL.
+WORKFLOW.WORKFLOW.ERR_Exception=Exception:
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP12=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_NO_MSG_EXCEP10=NO_MSG_EXCEP
+WORKFLOW.WORKFLOW.ERR_Document_getUserLifeSpan=[Document].getUserLifeSpan() attempt to load DOCUMENT_LIFESPANs LIFE_SPAN
+WORKFLOW.WORKFLOW.ERR_readUserLifeSpans=[Document] readUserLifeSpans(): Caught SQLException while trying to clean up.
+WORKFLOW.WORKFLOW.ERR_Document_persist1=Document.persist() caught SQLException.
+WORKFLOW.WORKFLOW.ERR_Document_persist=[Document.persist()]
+WORKFLOW.WORKFLOW.DEB_DocumentOutputStream=[DocumentOutputStream] stream_threshold_bytes: {0}
+WORKFLOW.WORKFLOW.DEB_Document_assignDocId1=Document.assignDocId() ID = {0}
+WORKFLOW.WORKFLOW.DEB_do_not_cache_stream_data=[DocumentOutputStream] do_not_cache_stream_data: {0}
+WORKFLOW.WORKFLOW.ERR_IOException12=IOException n
+WORKFLOW.WORKFLOW.ERR_IOException11=IOException n
+WORKFLOW.WORKFLOW.ERR_Document_getAllUserLifeSpans=[Document].getAllUserLifeSpans() attempt to load DOCUMENT_LIFESPANs LIFE_SPAN
+WORKFLOW.WORKFLOW.INFO_Document=Bad Document = {0}
+WORKFLOW.WORKFLOW.DEB_defaultDocumentStorageType=[Document] The defaultDocumentStorageType is FS
+WORKFLOW.WORKFLOW.ERR_Document_SQLException1={0}
+WORKFLOW.WORKFLOW.ERR_Document_SQLException2={0}
+WORKFLOW.WORKFLOW.ERR_Document_SQLException3={0}
+WORKFLOW.WORKFLOW.ERR_Document_SQLException8={0}
+WORKFLOW.WORKFLOW.ERR_Document_SQLException9={0}
+WORKFLOW.WORKFLOW.ERR_Document_IOException14_str3=FS is not allowed in this engine mode switch to DB
+WORKFLOW.WORKFLOW.ERR_Document_IOException15_str4=Error: Document.deleteUnpersisted called on an unmodified document!
+WORKFLOW.WORKFLOW.ERR_Document_SQLException17={0}
+WORKFLOW.WORKFLOW.ERR_Document_SQLException18={0}
+WORKFLOW.WORKFLOW.ERR_Document_SQLException19_str5=Not support for doc.persist in none generic mode
+WORKFLOW.WORKFLOW.ERR_Document_DocumentNotFoundException22=Initial document for DocId {0} not found. It may have been archived.
+WORKFLOW.WORKFLOW.ERR_Document_SQLException23_str6=output stream for FS storage is not supported
+WORKFLOW.WORKFLOW.ERR_Document_SQLException24_str7=output stream for FS storage is not supported
+WORKFLOW.WORKFLOW.ERR_Document_SQLException25_str8=Can not append to a stream associated with a modified Document object
+WORKFLOW.WORKFLOW.ERR_Document_IOException28=Could not create directory {0}.
+WORKFLOW.WORKFLOW.ERR_DocumentInputStream_IOException1={0}
+WORKFLOW.WORKFLOW.ERR_DocumentInputStream_IOException2={0}
+WORKFLOW.WORKFLOW.ERR_DocumentInputStream_IOException3={0}
+WORKFLOW.WORKFLOW.ERR_DocumentInputStream_IOException4={0}
+WORKFLOW.WORKFLOW.ERR_DocumentInputStream_IOException5={0}
+WORKFLOW.WORKFLOW.ERR_DocumentInputStream_IOException6={0}
+WORKFLOW.WORKFLOW.ERR_DocumentOutputStream_IOException1_str1=integer out of range
+WORKFLOW.WORKFLOW.ERR_DocumentOutputStream_IOException2_str2=FS is not supported in embedded mode
+WORKFLOW.WORKFLOW.ERR_DocumentOutputStream_IOException3=output stream size={0} >max_stream_chunk_size_bytes:{1} is not supported
+WORKFLOW.WORKFLOW.ERR_DocumentOutputStream_IOException4={0}
+WORKFLOW.WORKFLOW.ERR_DocumentOutputStream_IOException5={0}
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: UTIL.UTIL.[message code]
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## Message codes for scope UTIL and subsystem UTIL.
+UTIL.UTIL.ERR_failedDeleteLogPath=ERROR: Using /tmp for failedDeleteLogPath!
+UTIL.UTIL.ERR_filename=ERROR: Util unable to log failed delete file {0}
+WORKFLOW.WORKFLOW.ERR_BlobTrack_Delete=Exception while deleting blob track record. workflowid {0} docid= {1}
+## PROPERTY_END

@@ -1,0 +1,1026 @@
+<?xml version="1.0"?>
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2001, 2020  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="entity framework support"
+         basedir="."
+         default="all">
+    <!--properties-->
+    <property name="dir.src"
+              value="src" />
+    <property name="dir.bin"
+              value="classes" />
+    <property name="dir.datatypes.new"
+              value="etc" />
+	<property name="dir.hotspotexcludes.new"
+              value="hotspotexcludes" />
+    <property name="dir.scripts"
+              value="${dir.install}/repository/scripts" />
+    <property name="dir.entity.new"
+              value="entity" />
+    <property name="dir.entitybuild.new"
+              value="entitybuild" />
+    <property name="dir.repository"
+              value="${dir.install}${file.separator}repository" />
+    <property name="dir.repository.entity"
+              value="${dir.repository}${file.separator}entity" />
+    <property name="dir.repository.entitybuild"
+              value="${dir.repository}${file.separator}entitybuild" />
+    <property name="dir.repository.entitybuild.src"
+              value="${dir.repository.entitybuild}${file.separator}src" />
+    <property name="dir.repository.entitybuild.classes"
+              value="${dir.repository.entitybuild}${file.separator}classes" />
+    <property name="dir.repository.datatype"
+              value="${dir.repository}${file.separator}datatypes" />
+    <property name="file.repository.datatype"
+              value="${dir.repository.datatype}${file.separator}datatypes.xml" />
+	<property name="dir.repository.hotspotexcludes"
+              value="${dir.repository}${file.separator}hotspotexcludes" />
+    <property name="file.repository.hotspotexcludes"
+              value="${dir.repository.hotspotexcludes}${file.separator}hotspotexcludes.xml" />
+    <property file="${dir.properties}${file.separator}sandbox.cfg" 
+              prefix="sandbox"/>
+
+	<import file="AFCTasks.xml" />
+	<import file="afcutils.xml" />
+
+	 <condition property="ignore.3rdparty.tables" value="N" else="Y">
+		<and>
+			<isset property="sandbox.DBVERIFY_IGNORE_3RD_PARTY_TABLES"/>
+			<equals arg1="${sandbox.DBVERIFY_IGNORE_3RD_PARTY_TABLES}" arg2="N" casesensitive="false" trim="true"/>
+		</and>
+    </condition>
+              
+    <condition property="javac.fork.flag"
+                value="false">
+          <isset property="sandbox.OS400" />
+     </condition>
+	
+	<condition property="suppressCharToNCharAlterations" value="${sandbox.SUPPRESS_CHAR_TO_NCHAR_ALTERATIONS}" else="false" >
+            <and>
+               <isset property="sandbox.SUPPRESS_CHAR_TO_NCHAR_ALTERATIONS"/>
+               <equals arg1="${sandbox.SUPPRESS_CHAR_TO_NCHAR_ALTERATIONS}" arg2="true" />
+            </and>
+	</condition>
+	
+	<condition property="useOldIndexChangeHandler" value="${sandbox.USE_OLD_INDEX_CHANGE_HANDLER}" else="true" >
+            <and>
+               <isset property="sandbox.USE_OLD_INDEX_CHANGE_HANDLER"/>
+               <equals arg1="${sandbox.USE_OLD_INDEX_CHANGE_HANDLER}" arg2="false" casesensitive="false" trim="true"/>
+            </and>
+	</condition>
+
+    <condition property="suppressIndexDrops" value="${sandbox.SUPPRESS_INDEX_DROPS}" else="false" >
+            <and>
+               <isset property="sandbox.SUPPRESS_INDEX_DROPS"/>
+               <equals arg1="${sandbox.SUPPRESS_INDEX_DROPS}" arg2="true" casesensitive="false" trim="true"/>
+            </and>
+	</condition>
+
+     <condition property="javac.fork.flag"
+                value="true">
+          <not>
+          <isset property="sandbox.OS400" />
+          </not>
+     </condition>
+
+	<condition property="mssqlEmitPageLocksStatement" value="${sandbox.MSSQL_EMIT_PAGE_LOCKS_STATEMENT}" else="N" >
+			<and>
+				<isset property="sandbox.MSSQL_EMIT_PAGE_LOCKS_STATEMENT"/>
+				<equals arg1="${sandbox.MSSQL_EMIT_PAGE_LOCKS_STATEMENT}" arg2="Y" casesensitive="false" trim="true"/>
+			</and>
+	</condition>
+
+	<condition property="nodbverify" value="true" >
+		<and>	
+			<or>
+				<and>
+					<isset property="sandbox.NO_DBVERIFY"/>
+					<equals arg1="${sandbox.NO_DBVERIFY}" arg2="true" casesensitive="false" trim="true"/>
+				</and>
+				<and>
+					<isset property="db.no_dbverify"/>
+					<equals arg1="${db.no_dbverify}" arg2="true" casesensitive="false" trim="true"/>
+				</and>
+			</or>
+			<not>
+				<equals arg1="${DBVERIFY_INVOKED_FROM_SCRIPT}" arg2="true" casesensitive="false" trim="true"/>
+			</not>
+		</and>
+	</condition>
+
+	<condition property="applyddl" value="true">
+		<or>
+			<istrue value="${APPLYDDL}"/>
+			<and>
+				<not>
+					<istrue value="${DBVERIFY_INVOKED_FROM_SCRIPT}"/>
+				</not>
+				<and>
+					<istrue value="${multischema.enabled}"/>
+					<istrue value="${multischema.applyddl}"/>
+				</and>
+			</and>
+		</or>
+	</condition>
+	<!-- entitydeployer or installer single schema with apply ddl set - then applyddl is true -->
+	<condition property="applyddl" value="true">
+		<and>
+			<not>
+				<istrue value="${DBVERIFY_INVOKED_FROM_SCRIPT}"/>
+			</not>
+			<and>
+				<isfalse value="${multischema.enabled}"/>
+				<isfalse value="${sandbox.NO_DBVERIFY}"/>
+			</and>
+		</and>
+	</condition>
+	<!-- invoked from script, multischema, and there's no flags to turn off the applyddl -->
+	<condition property="applyddl" value="true">
+		<and>
+			<istrue value="${DBVERIFY_INVOKED_FROM_SCRIPT}"/>
+			<istrue value="${multischema.enabled}"/>
+			<istrue value="${multischema.applyddl}"/>
+		</and>
+	</condition>
+			
+	<condition property="nodbclassgen" value="true" >
+		<or>
+			<and>
+				<isset property="sandbox.SKIP_DBCLASSGEN"/>
+				<equals arg1="${sandbox.SKIP_DBCLASSGEN}" arg2="true" casesensitive="false" trim="true"/>
+			</and>
+			<and>
+				<isset property="db.no_dbclassgen"/>
+				<equals arg1="${db.no_dbclassgen}" arg2="true" casesensitive="false" trim="true"/>
+			</and>
+			<and>
+				<isset property="DBVERIFY_INVOKED_FROM_SCRIPT"/>
+				<equals arg1="${DBVERIFY_INVOKED_FROM_SCRIPT}" arg2="true" casesensitive="false" trim="true"/>
+			</and>
+		</or>
+	</condition>
+
+	<condition property="dbverify.logddl" value="true" else="false">
+		<and>
+			<isset property="sandbox.DBVERIFY_LOG_DDL"/>
+			<istrue value="${sandbox.DBVERIFY_LOG_DDL}" />
+		</and>
+	</condition>
+
+	<condition property="maxMemoryToFork" value="${MAX_MEMORY}" else="1024m" >
+		<isset property="MAX_MEMORY"/>
+	</condition>
+
+
+	<condition property="text.search" value="${sandbox.TEXT_SEARCH_ENABLED}" else="false" >
+		<isset property="sandbox.TEXT_SEARCH_ENABLED"/>
+	</condition>
+
+    
+	<condition property="additionalAntJavaTaskArgs" value="${sandbox.ADDITIONAL_ANT_JAVA_TASK_ARGS}" else="-Xms128m -Xmx1024m" >
+        <isset property="sandbox.ADDITIONAL_ANT_JAVA_TASK_ARGS"/>
+    </condition>
+
+	<condition property="additionalAntCompilerTaskArgs" value=" " >
+		<equals arg1="${javac.fork.flag}" arg2="false" />
+    </condition>
+
+    <condition property="additionalAntCompilerTaskArgs" value="${sandbox.ADDITIONAL_ANT_COMPILER_TASK_ARGS}" else="-J-Xms128m -J-Xmx1024m" >
+        <isset property="sandbox.ADDITIONAL_ANT_COMPILER_TASK_ARGS"/>
+    </condition>
+	
+	<condition property="colony.xml" value="${sandbox.multischema.file}" >
+		<isset property="sandbox.multischema.file"/>
+	</condition>
+	<condition property="colony.xml" value="${colonyxml}" else="UNDEF_VALUE">
+			<isset property="colonyxml"/>
+	</condition>
+
+	<condition property="colony.version" value="${colonyversion}" >
+		<isset property="colonyversion"/>
+	</condition>
+	<condition property="colony.version" value="${sandbox.multischema.version}" else="UNDEF_VALUE" >
+		<isset property="sandbox.multischema.version"/>
+	</condition>
+
+	<condition property="colony.multischema.enabled" value="true" >
+		<and>
+			<isset property="sandbox.multischema.enabled"/>
+			<istrue value="${sandbox.multischema.enabled}" />
+		</and>
+	</condition>
+	
+	<condition property="colony.versionsetup.failure" value="true">
+		<and>
+			<isset property="sandbox.multischema.enabled"/>
+			<istrue value="${sandbox.multischema.enabled}" />
+			<not>
+				<isset property="colony.version"/>
+			</not>
+		</and>
+	</condition>
+
+	<AFCfail if="${colony.versionsetup.failure}" message="Multischema version is required for multischema setup to continue."/>
+
+              
+	<target name="init-afc-version">
+		<condition property="preinstall-versions-exists" value="true" else="false">
+			<available file="${dir.install}/installed_data/platform_afc/preinstallfiles/properties/app.versions"/>
+		</condition>
+
+		<property file="${dir.install}/installed_data/platform_afc/preinstallfiles/properties/app.versions" prefix="afcversion"/>
+
+		<condition property="afc-version" value="${afcversion.LIC_PROD_VERSION}" else="${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}">
+			<equals arg1="${preinstall-versions-exists}" arg2="true" casesensitive="false" trim="true"/>
+		</condition>
+      </target>
+
+	<!--project.class.path-->
+     <path id="class.path">
+         <fileset dir="${dir.install}/dbjar">
+             <include name="**/*.jar" />
+             <include name="**/*.zip" />
+         </fileset>
+         <fileset dir="${dir.lib}">
+             <include name="**/*.jar" />
+             <include name="**/*.zip" />
+         </fileset>
+     </path>
+     
+    <!--taskdefs-->
+    <taskdef name="xform"
+             classname="com.sterlingcommerce.woodstock.install.AntTransformTask"
+             />
+    <taskdef name="saneSqlExec"
+             classname="com.sterlingcommerce.woodstock.install.PLTSaneSQLExec"
+             />
+	<target name="entityjaravailable">
+		<condition property="entity.jar.available">
+				<and>
+					<available file="${dir.entitybuild.new}${file.separator}entities.jar"/>
+					<available file="${dir.entitybuild.new}${file.separator}entitysrc.jar"/>
+				</and>
+		</condition>
+	</target>
+	
+    <target name="explodeEntities" depends="entityjaravailable" if="entity.jar.available">
+        <mkdir dir="${dir.repository.entitybuild.classes}" />
+        <mkdir dir="${dir.repository.entitybuild.src}" />
+		<mkdir dir="${dir.repository.entitybuild}${file.separator}entity" />
+		<mkdir dir="${dir.repository.entitybuild}${file.separator}etc" />
+		<unzip src="${dir.entitybuild.new}${file.separator}entitysrc.jar" dest="${dir.repository.entitybuild.src}" overwrite="false"/>
+		<unzip src="${dir.entitybuild.new}${file.separator}entities.jar" dest="${dir.repository.entitybuild.classes}" overwrite="false"/>
+
+		
+	</target>
+
+    <!--repository: entities-->
+    <target name="mergeEntities">
+
+    	<mkdir dir="${dir.repository.entity}" />
+    	<mkdir dir="${dir.entity.new}" />
+        <copy todir="${dir.repository.entity}">
+            <fileset dir="${dir.entity.new}">
+                <include name="**/*.xml" />
+            </fileset>
+        </copy>
+        <mkdir dir="${dir.repository.entity}/extensions/"/>
+		<mkdir dir="${dir.repository.entity}/upgradeextensions/"/> <!-- TD 161736 -->
+        <mkdir dir="${dir.install}/extensions/"/>
+
+		<ant target="deleteUpgradeExtensions" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+
+        <copy todir="${dir.repository.entity}/upgradeextensions" flatten="true" >
+            <fileset dir="${dir.install}/extensions/">
+                <include name="**/entities/*.xml"/>
+				<include name="**/entity/*.xml"/>
+            </fileset>
+        </copy>
+		<createfilelist fileset.location="${dir.repository.entity}" listfile.name="entities.txt" />
+    </target>
+    <!--repository: datatypes-->
+    <target name="checkDatatypesExists">
+        <condition property="file.repository.datatype.exists">
+            <available file="${file.repository.datatype}" />
+        </condition>
+    </target>
+    <target name="createDatatypeRepository"
+            unless="file.repository.datatype.exists">
+        <echo file="${file.repository.datatype}"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><Datatypes/>]]></echo>
+    </target>
+    <target name="mergeDatatypes"
+            depends="checkDatatypesExists, createDatatypeRepository">
+
+			<mkdir dir="${dir.repository}/datatypes/metadata"/>
+
+			<copy todir="${dir.repository}/datatypes/metadata/" failonerror="false">
+				<fileset dir="${dir.install}/installed_data/" casesensitive="false">
+					<include name="**/etc/**/*datatypes.xml"/>
+				</fileset>
+			</copy>
+
+			<taskdef name="mergedatatypes" classname="com.yantra.tools.ant.MergeDataTypes" />
+			<mergedatatypes datatypessourcelocation="${dir.repository}/datatypes/metadata"
+							datatypesfile="${file.repository.datatype}"/>
+    </target>
+
+
+	<target name="checkHotspotExcludesExists">
+        <condition property="file.repository.hotspotexcludes.exists">
+            <available file="${file.repository.hotspotexcludes}" />
+        </condition>
+    </target>
+    <target name="createHotspotExcludesRepository"
+            unless="file.repository.hotspotexcludes.exists">
+        <echo file="${file.repository.hotspotexcludes}"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><ExcludeList/>]]></echo>
+    </target>
+    <target name="mergeHotspotExcludes"
+            depends="checkHotspotExcludesExists, createHotspotExcludesRepository, doMergeHotspotExcludes">
+			<taskdef name="createhotspotexcludes" classname="com.yantra.tools.ant.CreateHotspotExcludes" />
+			<createhotspotexcludes hotspotexcludestextfile="${dir.repository}/hotspotexcludes/hotspotexcludes.txt" hotspotexcludesdebugtextfile="${dir.repository}/hotspotexcludes/hotspotexcludes_debug.txt"
+							hotspotexcludesfile="${file.repository.hotspotexcludes}"/>
+
+	</target>
+	<target name="doMergeHotspotExcludes">
+		<mkdir dir="${dir.repository}/hotspotexcludes/metadata"/>
+
+			<copy todir="${dir.repository}/hotspotexcludes/metadata/" failonerror="false">
+				<fileset dir="${dir.install}/installed_data/" casesensitive="false">
+					<include name="**/${dir.hotspotexcludes.new}/**/*.xml"/>
+				</fileset>
+			</copy>
+
+			<taskdef name="mergehotspotexcludes" classname="com.yantra.tools.ant.MergeHotspotExcludes" />
+			<mergehotspotexcludes hotspotexcludessourcelocation="${dir.repository}/hotspotexcludes/metadata"
+							hotspotexcludesfile="${file.repository.hotspotexcludes}"/>
+	</target>
+
+	
+
+	<!-- target used to make an external dbverify tool for use by dba -->
+	<target name="make-external-dbverify" >
+		<mkdir dir="${dbverify.tmp}"/>
+		<mkdir dir="${dbverify.tmp}/properties"/>
+		<copy todir="${dbverify.tmp}/repository" >
+			<fileset dir="${dir.repository}">
+				<include name="entity/**/*.xml" />
+				<include name="datatypes/**/*.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dbverify.tmp}/properties" >
+			<fileset dir="${dir.install}/properties" >
+				<include name="sandbox.cfg"/>
+				<include name="jdbc.properties"/>
+				<include name="performance.properties"/>
+			</fileset>
+		</copy>
+		<copy todir="${dbverify.tmp}/bin" >
+			<fileset dir="${dir.install}/bin" >
+				<include name="dbverify.*"/>
+				<include name="tmp.*"/>
+				<include name="dynamic_os.*"/>
+				<include name="java_wrapper.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dbverify.tmp}/dbjar" >
+			<fileset dir="${dir.install}/dbjar">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="${dbverify.tmp}/jar" flatten="false">
+			<fileset dir="${dir.install}/dbjar" >
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${dir.install}/jar" >
+				<include name="jetspeed/**/log4j*.jar"/>
+				<include name="platform/**/*.jar"/>
+				<include name="woodstock.jar"/>
+				<include name="bootstrapper.jar"/>
+				<include name="translator/**/*.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="${dbverify.tmp}/jdk">
+			<fileset dir="${dir.install}/jdk" >
+				<exclude name="sample/**"/>
+				<exclude name="demo/**"/>
+				<exclude name="src.zip"/>
+			</fileset>
+		</copy>
+
+        <replace file="${dbverify.tmp}/bin/dbverify.sh" token="${app.dir}" value="."/>
+        <replace file="${dbverify.tmp}/bin/tmp.sh" token="${app.dir}" value="."/>
+        <replace file="${dbverify.tmp}/bin/java_wrapper.sh" token="${app.dir}" value="."/>
+        <replace file="${dbverify.tmp}/bin/dynamic_os.sh" token="${app.dir}" value="."/>
+        <replace file="${dbverify.tmp}/properties/sandbox.cfg" token="${app.dir}" value="."/>
+        <replace file="${dbverify.tmp}/properties/jdbc.properties" token="${app.dir}" value="."/>
+        <replace file="${dbverify.tmp}/properties/performance.properties" token="${app.dir}" value="."/>
+	
+		<zip destfile="${dir.install}/dbverify.zip" basedir="${dbverify.tmp}" />
+	</target>
+
+	<target name="dbverify" unless="nodbverify" depends="override-sql-delimiter, makedirs, mergeEntities, mergeDatatypes, mergeHotspotExcludes,override-schema,override-oracle-useblob, multibyte-support,oracle-textsearch-context, oracle-nls-length-semantics, suppressed-indexes">
+
+		<AFCdebug property="dir.properties" />
+		<AFCdebug property="dir.install" />
+		<AFCdebug property="sandbox.OS400" />
+		<AFCdebug property="sandbox.INSTALL_DIR" />	
+		<AFCdebug property="sysproperty.key1" />
+		<AFCdebug property="sysproperty.key2" />
+		<AFCdebug property="sysproperty.key3" />
+		<AFCdebug property="sysproperty.key4" />
+		<AFCdebug property="sysproperty.key5" />
+		<AFCdebug property="sysproperty.value1" />
+		<AFCdebug property="sysproperty.value2" />
+		<AFCdebug property="sysproperty.value3" />
+		<AFCdebug property="sysproperty.value4" />
+		<AFCdebug property="sysproperty.value5" />
+		<AFCdebug property="multibyte" />
+		<AFCdebug property="log.ddl" />
+
+		<condition property="backup.scripts">
+			<and>
+				<available file="${dir.scripts}"/>	
+				<or>
+					<available file="${dir.scripts}/reverse.xml"/>	
+					<available file="${dir.scripts}/EFrame_Reverse_${sandbox.DB_POOL}.xml"/>	
+				</or>
+			</and>
+		</condition>
+
+		<ant target="backup-scripts" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+		<ant target="schema-synchronizer" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+
+		<ant target="deleteUpgradeExtensions" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+	</target>
+
+	<target name="deleteUpgradeExtensions">
+		<!-- We shouldn't copy customer extensions to the repository.  But since we need to do so to 
+			 pick up the extensions.xml they add,  we need to delete the copies after we're done with them.
+			 This target takes care of deleting all the files from <INSTALL>/repository/entity/upgradeextensions.
+		-->
+		
+		<delete failonerror="false">
+			<fileset dir="${dir.repository.entity}/upgradeextensions/" includes="**/*"/>
+		</delete>
+	</target>
+
+	<target name="backup-scripts" if="backup.scripts">
+
+		<tstamp>
+            <format property="backup.time" pattern="yyyyMMddHHmm" unit="hour"/>
+        </tstamp>
+        <mkdir dir="${dir.scripts}/backups"/>
+        <zip destfile="${dir.scripts}/backups/EFrameSql_${backup.time}.zip">
+            <fileset dir="${dir.scripts}" >
+                <include name="**/*.sql" />
+                <include name="**/*.lst" />
+                <include name="**/*.xml" />
+            </fileset>
+        </zip>
+		<delete >
+            <fileset dir="${dir.scripts}" >
+                <include name="**/*.sql" />
+                <include name="**/*.lst" />
+                <include name="**/*.xml" />
+            </fileset>
+		</delete>
+	</target>
+	
+    <target name="schema-synchronizer"
+            description="Compare entities with your schema" unless="nodbverify"
+            depends="makedirs, mergeEntities, mergeDatatypes, mergeHotspotExcludes,override-schema,override-oracle-useblob, multibyte-support,oracle-textsearch-context, oracle-nls-length-semantics">
+
+        <condition property="DB2_MAX_INDEX_LENGTH" value="${sandbox.DB2_MAX_INDEX_LENGTH}" else="128"  >
+			<isset property="sandbox.DB2_MAX_INDEX_LENGTH"/>
+		</condition>        	
+
+        <java fork="true" failonerror="true" maxmemory="512m"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" >
+				<classpath>
+					<pathelement location="${sandbox.JAR_DIR}/bootstrapper.jar"/>
+					<fileset dir="${sandbox.JAR_DIR}/platform">
+						<include name="**/*.jar"/>
+					</fileset>
+				</classpath>
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.dbverify.SchemaSynchronizer" />
+            <arg value="-invokeargs" />
+			<arg line="-TSIT ${sandbox.ORA_TS_CONTEXT}"/>
+			<sysproperty key="USE_OLD_INDEX_CHANGE_HANDLER" value="${useOldIndexChangeHandler}"/>
+			<sysproperty key="SUPPRESS_INDEX_DROPS" value="${suppressIndexDrops}"/>
+			<sysproperty key="COLONY_VERSION" value="${colony.version}"/>
+            <sysproperty key="COLONY_XML" value="${colony.xml}" />
+            <sysproperty key="USE_CONNECTION_SERVICE_FOR_DBVERIFY" value="true" />
+			<sysproperty key="Ignore3rdPartyTables" value="${ignore.3rdparty.tables}" />
+            <sysproperty key="IgnoreTablespace" value="Y" />
+			<sysproperty key="log.ddl" value="${dbverify.logddl}" />
+	        <sysproperty key="sql.delimiter" value="${sql.delimiter}" />
+	        <sysproperty key="INDEXES_NOT_CREATED" value="${indexes.not.created}" />
+	        <sysproperty key="ORACLE_USE_BLOB" value="${oracle.useblob}" />
+	        <sysproperty key="MULTIBYTE" value="${multibyte}" />
+	        <sysproperty key="TEXT_INDEX_TYPE" value="${orcltscontext}" />
+	        <sysproperty key="TEXT_SEARCH_ENABLED" value="${text.search}" />
+	        <sysproperty key="ORACLE_NLS_LENGTH_SEMANTICS" value="${orclnlssmntc}" />
+            <sysproperty key="EMIT_PAGE_LOCKS_STATEMENT" value="${mssqlEmitPageLocksStatement}"/>
+            <sysproperty key="SUPPRESS_CHAR_TO_NCHAR_ALTERATIONS" value="${suppressCharToNCharAlterations}"/>
+            <sysproperty key="DB_VENDOR" value="${sandbox.DB_VENDOR}" />        	
+            <sysproperty key="DB2_ALLOW_REORG_STMTS" value="${sandbox.DB2_ALLOW_REORG_STMTS}" />        	
+            <sysproperty key="DB2_ALLOW_REQUIRE_REORG_STMTS" value="${sandbox.DB2_ALLOW_REQUIRE_REORG_STMTS}" />        	
+            <sysproperty key="DB2_MAX_INDEX_LENGTH" value="${DB2_MAX_INDEX_LENGTH}" />        	
+            <sysproperty key="INSTALL_DIR" value="${sandbox.INSTALL_DIR}" />        	
+			<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+			<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+			<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+			<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+			<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+        </java>
+    	<antcall target="populate-colony-pool-tables" />
+		<antcall target="deleteUpgradeExtensions"/>
+    </target>
+	
+    <target name="populate-colony-pool-tables"
+            description="Compare entities with your schemas" if="colony.multischema.enabled" unless="nodbverify"> 
+    	<AFCecho message="Processing colony pool tables" />
+        <java fork="true" failonerror="true" maxmemory="512m"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar">
+			<sysproperty key="vendor" value="shell"/>
+            <sysproperty key="vendorFile" value="${dir.properties}${file.separator}servers.properties"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.sterlingcommerce.woodstock.install.ColonyPoolPopulator" />
+            <arg value="-invokeargs" />
+		</java>
+	</target>
+	
+    <!--schemagen-->
+    <target name="schemagen"
+            description="Generate DDLs."
+            depends="makedirs, mergeEntities, mergeDatatypes, mergeHotspotExcludes">
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.entityguru.generator.SterliteEntityGenerator" />
+            <arg value="-invokeargs" />
+            <arg value="-DBNAME" />
+            <arg value="${db.name}" />
+            <arg value="-ED" />
+            <arg value="${dir.repository.entity}" />
+            <arg value="-AC" />
+            <arg value="${dir.scripts}" />
+            <arg value="-OF" />
+            <arg value="${dir.scripts}${file.separator}yfs_tables.sql" />
+            <!--arg value="-T" />
+            <arg value="YFS" /-->
+            <arg value="-DR" />
+            <arg value="${dir.scripts}${file.separator}yfs_tables_drop.sql" />
+            <arg value="-SQ" />
+            <arg value="${dir.scripts}${file.separator}yfs_seq.sql" />
+            <arg value="-DT" />
+            <arg value="${file.repository.datatype}" />
+            <arg value="-DB" />
+            <arg value="${db.vendor}" />
+            <arg value="-COPYRIGHT" />
+            <arg value="true" />
+        <sysproperty key="sql.delimiter" value="${sql.delimiter}" /> 
+        <sysproperty key="DB_VENDOR" value="${sandbox.DB_VENDOR}" />
+	<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+	<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+	<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+	<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+	<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+        </java>
+		<ant target="deleteUpgradeExtensions" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+    </target>
+    
+	<!--dbclassgen--> 
+    <target name="dbclassgen" unless="nodbclassgen"
+            depends="makedirs, dbclassgen.install, dbclassgen.build, handleentitybeans"
+            >
+    </target>
+    
+	<!--dbclassgen.install-->
+    <target name="dbclassgen.install" unless="ed.build">
+			<ant target="mergeEntities" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+	    <AFCecho message="Generating install classes, please wait..."/>              
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+
+			<jvmarg line="${additionalAntJavaTaskArgs}"/>
+
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.entityguru.generator.SterliteEntityGenerator" />
+            <arg value="-invokeargs" />
+            <arg value="-DBNAME" />
+            <arg value="${db.name}" />
+            <arg value="-ED" />
+            <arg value="${dir.repository.entity}" />
+            <arg value="-ES" />
+            <arg value="com.yantra.yfc.dblayer.YFCEntity" />
+            <arg value="-HS" />
+            <arg value="com.yantra.yfc.dblayer.YFCEntityDBHome" />
+            <arg value="-O" />
+            <arg value="${dir.src}" />
+            <arg value="-C" />
+            <arg value="com.yantra.shared.dbi.*" />
+            <arg value="-P" />
+            <arg value="com.yantra.shared.dbclasses" />
+            <arg value="-DT" />
+            <arg value="${file.repository.datatype}" />
+            <arg value="-HISTORY" />
+            <arg value="false" />
+            <arg value="-DBI" />
+            <arg value="${src}" />
+        <arg value="-LL" />
+            <arg value="${sandbox.ENTITY_GEN_LOGLEVEL}" />
+        <sysproperty key="sql.delimiter" value="${sql.delimiter}" /> 
+        <sysproperty key="DB_VENDOR" value="${sandbox.DB_VENDOR}" /> 
+	<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+	<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+	<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+	<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+	<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+        </java>
+		<ant target="deleteUpgradeExtensions" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+    </target>
+    
+	<!--dbclassgen.build-->
+    <target name="dbclassgen.build" if="ed.build">
+	<ant target="mergeEntities" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+        <AFCecho message="Generating build classes, please wait..."/>              
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+
+			<jvmarg line="${additionalAntJavaTaskArgs}"/>
+
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.entityguru.generator.SterliteEntityGenerator" />
+            <arg value="-invokeargs" />
+            <arg value="-DBNAME" />
+            <arg value="${db.name}" />
+            <arg value="-ED" />
+            <arg value="${dir.repository.entity}" />
+            <arg value="-ES" />
+            <arg value="com.yantra.yfc.dblayer.YFCEntity" />
+            <arg value="-HS" />
+            <arg value="com.yantra.yfc.dblayer.YFCEntityDBHome" />
+            <arg value="-O" />
+            <arg value="${dir.src}" />
+            <arg value="-C" />
+            <arg value="com.yantra.shared.dbi.*" />
+            <arg value="-P" />
+            <arg value="com.yantra.shared.dbclasses" />
+            <arg value="-DT" />
+            <arg value="${file.repository.datatype}" />
+            <arg value="-DBI" />
+            <arg value="${src}" />
+        <sysproperty key="sql.delimiter" value="${sql.delimiter}" />
+        <sysproperty key="DB_VENDOR" value="${sandbox.DB_VENDOR}" />
+	<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+	<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+	<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+	<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+	<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+	
+        </java>
+		<ant target="deleteUpgradeExtensions" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+    </target>
+	
+	<target name="checkentitybeans">
+		<condition property="hasentitybeans">
+			<available file="${dir.src}/com/sterlingcommerce/api/entity/bean"/>
+		</condition>
+	</target>
+	<target name="handleentitybeans" depends="checkentitybeans" if="hasentitybeans">
+		<mkdir dir="${dir.install}/repository/xapi/documentation/source/entitybean/api_javadocs" />
+		<copy todir="${dir.install}/repository/xapi/documentation/source/entitybean/api_javadocs">
+			<fileset dir="${dir.src}">
+				<include name="com/sterlingcommerce/api/entity/bean/**/*" />
+			</fileset>
+		</copy>
+		<echo file="${dir.install}/repository/xapi/documentation/source/entitybean/api_javadocs/com/sterlingcommerce/api/entity/bean/package.html">&lt;BODY>
+Provides entity beans for bean based APIs.
+&lt;/BODY>
+</echo>
+	</target>
+	
+    <!--makedirs-->
+    <target name="makedirs">
+        <mkdir dir="${dir.bin}" />
+        <mkdir dir="${dir.src}" />
+        <mkdir dir="${dir.scripts}" />
+        <mkdir dir="${dir.repository}" />
+        <mkdir dir="${dir.repository.entity}" />
+        <mkdir dir="${dir.repository.datatype}" />
+		<mkdir dir="${dir.repository.hotspotexcludes}" />
+        <mkdir dir="${dir.src}${file.separator}com${file.separator}yantra${file.separator}shared${file.separator}dbclasses"/>
+        <mkdir dir="${dir.src}${file.separator}com${file.separator}yantra${file.separator}shared${file.separator}dbbean"/>
+        <mkdir dir="${dir.src}${file.separator}com${file.separator}yantra${file.separator}custom${file.separator}api" />
+        <mkdir dir="${dir.src}${file.separator}com${file.separator}yantra${file.separator}ycp${file.separator}customEntity" />
+    </target>
+    <!--build-->
+    <target name="build" unless="nodbclassgen"
+            depends="dbclassgen">
+
+        <javac srcdir="${dir.src}"
+               destdir="${dir.bin}"
+               classpathref="class.path"
+               includes="com/yantra/shared/dbbean/**"
+               debug="on"
+               optimize="off"
+               deprecation="off"
+
+			   fork="${javac.fork.flag}" >
+			<compilerarg line="${additionalAntCompilerTaskArgs}"/>
+		</javac>
+
+
+
+        <javac srcdir="${dir.src}"
+               destdir="${dir.bin}"
+               classpathref="class.path"
+               debug="on"
+               optimize="off"
+               deprecation="off"
+
+			   fork="${javac.fork.flag}" >
+			<compilerarg line="${additionalAntCompilerTaskArgs}"/>
+		</javac>
+
+    </target>
+    <!--applySql-->
+    <target name="override-sql-delimiter" >
+        <condition property="sql.delimiter" value="GO"  >
+				<or>
+            		<equals arg1="${db.vendor}" arg2="mssql" casesensitive="false" trim="true"/>
+            		<equals arg1="${db.vendor}" arg2="mssql2005" casesensitive="false" trim="true"/>
+				</or>
+        </condition>
+        <condition property="sql.delimiter" value="/"  >
+			<or>
+            	<equals arg1="${db.vendor}" arg2="oracle" casesensitive="false" trim="true"/>
+            	<equals arg1="${db.vendor}" arg2="soliddb" casesensitive="false" trim="true"/>
+			</or>
+        </condition>
+        <condition property="sql.delimiter" value=";"  >
+            <and>
+                <not>
+                     <equals arg1="${db.vendor}" arg2="oracle" casesensitive="false" trim="true"/>
+                </not>
+                <not>
+                     <equals arg1="${db.vendor}" arg2="mssql" casesensitive="false" trim="true"/>
+                </not>
+                <not>
+                     <equals arg1="${db.vendor}" arg2="mssql2005" casesensitive="false" trim="true"/>
+                </not>
+            </and>
+        </condition>
+    </target>
+
+    <target name="override-schema" >
+        <condition property="sql.schema" value="${sandbox.DB_SCHEMA_OWNER}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.DB_SCHEMA_OWNER" />
+        </condition>
+    </target>
+    
+	<target name="override-oracle-useblob" >   
+         <condition property="oracle.useblob" value="${sandbox.ORACLE_USE_BLOB}" else="true"  >   
+             <isset property="sandbox.ORACLE_USE_BLOB" />   
+         </condition>   
+     </target> 
+
+	 <target name="multibyte-support" >
+        <condition property="multibyte" value="${sandbox.SUPPORT_MULTIBYTE}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.SUPPORT_MULTIBYTE" />
+        </condition>
+    </target>
+
+	<target name="oracle-textsearch-context" >
+        <condition property="orcltscontext" value="${sandbox.ORA_TS_CONTEXT}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.ORA_TS_CONTEXT" />
+        </condition>
+    </target>
+
+	<target name="oracle-nls-length-semantics" >
+        <condition property="orclnlssmntc" value="${sandbox.ORACLE_NLS_LENGTH_SEMANTICS}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.ORACLE_NLS_LENGTH_SEMANTICS" />
+        </condition>
+    </target>
+	
+	<target name="suppressed-indexes" >
+	        <condition property="indexes.not.created" value="${sandbox.INDEXES_NOT_CREATED}" else="${dir.install}/extensions/schemagenerator/indexes_not_created.txt"  >
+	            <isset property="sandbox.INDEXES_NOT_CREATED" />
+	        </condition>
+	</target>
+	
+    <macrodef name="applySql">
+        <attribute name="file" />
+		<attribute name="basedir"/>
+		<attribute name="db2reorg" default="true"/>
+		<attribute name="validateinsertfortables" default=""/>
+        <element name="files" optional="true"/>
+        <sequential>
+            <local name="srcFileExec"/>
+            <condition property="srcFileExec" value="" else="@{basedir}${file.separator}@{file}"  >   
+                <and>
+                    <equals arg1="@{file}" arg2="" trim="true"/>
+                    <equals arg1="@{basedir}" arg2="" trim="true"/>
+                </and>
+            </condition>
+			<saneSqlExec driver="${db.driver}"
+                         url="${db.url}"
+                         userid="${db.userid}"
+                         password="${db.password}"
+                         delimiter="${sql.delimiter}"
+                         db2reorg="@{db2reorg}" 
+                         validateinsertfortables="@{validateinsertfortables}"
+                         src="${srcFileExec}"
+                         shouldexec="${sandbox.REINIT_DB}" 
+						 autocommit="true"
+                         onerror="${default.sql.errorlevel}"
+						 useConnectionService="true"
+			 DbVendor="${db.vendor}"
+			 JavaVersion="${sysproperty.value5}"
+			 OS400JitNoCompileClass="${sysproperty.value4}"
+			 JavaEndorsedDirs="${sysproperty.value3}"
+			 JavaExtDirs="${sysproperty.value2}"
+			 OS400SecurityProperties="${sysproperty.value1}" >
+                <files/>
+            </saneSqlExec>
+        </sequential>
+    </macrodef>
+
+    <target name="overrideErrorLevelCheck">
+        <condition property="is.mysql">
+            <equals arg1="mysql" arg2="${db.vendor}" casesensitive="false" trim="true"/>
+        </condition>
+    </target>
+    <target name="overrideErrorLevelMySQL" if="is.mysql">
+        <property name="default.sql.errorlevel" value="abort"/>
+    </target>
+    <target name="overrideErrorLevel" unless="is.mysql">
+        <property name="default.sql.errorlevel" value="abort"/>
+    </target>
+    <target name="applySqlFiles" if="applyddl"
+            depends="override-sql-delimiter, dbverify, overrideErrorLevelCheck, overrideErrorLevel, overrideErrorLevelMySQL" >
+        <AFCdebug property="default.sql.errorlevel"/>
+        <applySql file="EFrame_TextIndexDrops.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_IndexDrops.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_TableChanges.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_IndexAdds.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_TextIndexAdds.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_Sequence.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_TextIndexModify.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_TextIndexUpdates.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_TextIndexUpgrade.sql" basedir="${dir.scripts}" />
+        <applySql file="EFrame_Static.sql" basedir="${dir.scripts}" />
+    </target>
+    
+    <target name="setOptionalSqlProps">
+        <property name="default.sql.errorlevel" value="continue"/>
+        <property name="validateinsertfortables" value="YFS_REGION_SCHEMA,YFS_REGION_LEVEL,YFS_REGION_LEVEL_ASSOC,YFS_REGION,YFS_REGION_DETAIL,YFS_ZIP_CODE_LOCATION"/>
+    </target>
+    <target name="applyOptionalSqlFiles" depends="applyOptionalOOBSqlFiles,applyOptionalCustomSqlFiles"/>
+    <target name="applyOptionalOOBSqlFiles" depends="override-sql-delimiter, overrideErrorLevelCheck, setOptionalSqlProps" >
+        <AFCdebug property="default.sql.errorlevel"/>
+        <applySql file="" basedir="" db2reorg="false" validateinsertfortables="${validateinsertfortables}" >
+            <files>
+                <fileset dir="${dir.install}" casesensitive="yes">
+                    <include name="database/FactorySetup/Optional/${db.vendor}/**/*"/>
+                </fileset>
+            </files>
+        </applySql>
+    </target>
+    <target name="applyOptionalCustomSqlFiles" depends="override-sql-delimiter, overrideErrorLevelCheck, setOptionalSqlProps" >
+        <AFCdebug property="default.sql.errorlevel"/>
+        <applySql file="" basedir="" db2reorg="false" validateinsertfortables="${validateinsertfortables}" >
+            <files>
+                <fileset dir="${dir.install}" casesensitive="yes">
+                    <include name="extensions/global/database/FactorySetup/Optional/${db.vendor}/**/*"/>
+                </fileset>
+            </files>
+        </applySql>
+    </target>
+    <!--jar-->
+    <target name="jar" unless="nodbclassgen"
+            depends="build">
+        <copy todir="${dir.bin}${file.separator}com${file.separator}yantra${file.separator}shared${file.separator}dbclasses" flatten="true">
+            <fileset dir="${dir.src}">
+            <include name="**/*.ser"/>
+            </fileset>
+        </copy>
+
+		<copy todir="${sandbox.INSTALL_DIR}${file.separator}xapidocs">
+            <fileset dir="${dir.src}">
+            <include name="sampleXML/*.xml"/>
+            </fileset>
+        </copy>
+
+        <jar destfile="${jar.file}">
+            <fileset dir="${dir.bin}">
+                <include name="**/*.class" />
+                <include name="**/*.ser" />
+				<exclude name="**/dbi/**/*.class"/>
+				<exclude name="**/customdb/**/*Impl.class"/>
+			 </fileset>
+			 <fileset dir="${dir.bin}">
+				 <include name="com/yantra/custom/dbi/**/*" />
+				 <include name="com/yantra/custom/customdb/**/*" />
+		     </fileset>
+			 <fileset dir="${dir.src}">
+                <include name="com/yantra/ycp/customEntity/*.xml" />
+				<include name="com/yantra/shared/index/*.xml" />
+             </fileset>
+        </jar>
+    </target>
+    <target name="copyJar"
+            depends="jar">
+        <copy file="${jar.file}"
+              toDir="${dir.jarTarget}" />
+    </target>
+
+    <target name="-add3dparty" depends="init-afc-version" unless="nodbclassgen" >                  
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.sterlingcommerce.woodstock.install.utils.Install3rdParty" />            
+            <sysproperty key="vendor" value="shell"/>
+            <sysproperty key="vendorFile" value="${dir.properties}${file.separator}servers.properties"/>
+            <arg value="-invokeargs" />
+            <arg value="${dir.properties}${file.separator}sandbox.cfg"/>
+            <arg value="platform"/>
+            <arg value="${afc-version}"/>
+            <arg value="-j"/>
+            <arg value="${jar.file}"/>            
+	<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+	<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+	<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+	<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+	<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>	
+	<sysproperty key="user.dir" value="${sandbox.INSTALL_DIR}"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+        </java>
+    </target>
+    <target name="all" depends="clean, applySqlFiles, jar, -add3dparty">
+		
+	</target>
+
+
+    <target name="all_noApplySQL" depends="makedirs, mergeEntities, mergeDatatypes, mergeHotspotExcludes, jar, -add3dparty, clean" >
+		<ant target="deleteUpgradeExtensions" antfile="${sandbox.PROP_DIR}/entityDeployer.xml"/>
+	</target>
+
+	<target name="regenerateall">
+		<condition property="regenerateall.all.dbclass">
+			<and>
+				<isset property="sandbox.GENERATE_ALL_DBCLASSES"/>
+				<equals arg1="${sandbox.GENERATE_ALL_DBCLASSES}" arg2="true" casesensitive="false" trim="true"/>
+			</and>
+		</condition>		
+	</target>
+
+	<target name="clean" depends="regenerateall" if="regenerateall.all.dbclass" >
+	    <AFCecho message="Cleaning All DBClasses"/>
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${dir.src}" includes="**/*"/>
+			<fileset dir="${dir.bin}" includes="**/*"/>
+		</delete>
+		<delete file="${jar.file}" failonerror="false"/>
+	</target>
+
+	<target name="cleanup-dcl" >
+		<taskdef name="cleanDCL" classname="com.yantra.tools.ant.taskdefs.CleanupDCL" />
+		<cleanDCL installDir="${basedir}/.."/>
+
+		
+	</target>
+</project>
+
+

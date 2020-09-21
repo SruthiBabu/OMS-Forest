@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:lxslt="http://xml.apache.org/xslt"
+                version="1.0">
+
+<xsl:template name="getDocLinkPrefix">
+	<xsl:param name="DocumentType">0001</xsl:param>
+
+	<xsl:choose>
+		<xsl:when test="$DocumentType = '0001'">
+			<xsl:text>order.detail</xsl:text>
+		</xsl:when>
+		<xsl:when test="$DocumentType = '0003'">
+			<xsl:text>return.detail</xsl:text>
+		</xsl:when>
+		<xsl:when test="$DocumentType = '0005'">
+			<xsl:text>po.detail</xsl:text>
+		</xsl:when>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template name="getLineLinkPrefix">
+	<xsl:param name="DocumentType">0001</xsl:param>
+
+	<xsl:choose>
+		<xsl:when test="$DocumentType = '0001'">
+			<xsl:text>orderline.detail</xsl:text>
+		</xsl:when>
+		<xsl:when test="$DocumentType = '0003'">
+			<xsl:text>returnline.detail</xsl:text>
+		</xsl:when>
+		<xsl:when test="$DocumentType = '0005'">
+			<xsl:text>poline.detail</xsl:text>
+		</xsl:when>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template name="makeOrderLink">
+	<xsl:param name="Prefix" />
+	<xsl:param name="Key" />
+	<xsl:param name="Text" />
+	<xsl:element name="a">
+		<xsl:attribute name="href">javascript:openAlertLink('<xsl:value-of select="$Prefix" />','Order','OrderHeaderKey','<xsl:value-of select="$Key" />');</xsl:attribute>
+		<xsl:value-of select="$Text" />
+	</xsl:element>
+</xsl:template>
+
+<xsl:template name="makeLineLink">
+	<xsl:param name="Prefix" />
+	<xsl:param name="Key" />
+	<xsl:param name="Text" />
+	<xsl:element name="a">
+		<xsl:attribute name="href">javascript:openAlertLink('<xsl:value-of select="$Prefix" />','OrderLineDetail','OrderLineKey','<xsl:value-of select="$Key" />');</xsl:attribute>
+		<xsl:value-of select="$Text" />
+	</xsl:element>
+</xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,1415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity EntityTitle="Application_Tree" EntityName="ApplicationTree" PrimaryKeyAttributeName="ApplicationName">
+     <YWMC001 Title="Application_Tree" ScreenType="Tree">
+         <TreeInfo RelationshipAttribute="ApplicationTree">
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPApplicationTreeAPI" APIName="getApplicationTree" Message="Loading_Warehouse_Management_Rules">
+				<StaticAttributes ApplicationName="WarehouseManagementSystem"/>
+			  </API>
+            </Get>
+          </TreeInfo>
+      </YWMC001>
+    </Entity>
+   <Entity EntityTitle="Application_Tree" EntityName="ApplicationTree" PrimaryKeyAttributeName="OrganizationCode">
+    <YWMC080 Title="WM_Rules" ScreenType="Tree" TitleSuffixAttr="">
+         <TreeInfo RelationshipAttribute="ApplicationTree">
+            <FilterNodeList>
+                 <FilterNode NodeName="Tables"/>
+                 <FilterNode NodeName="MasterData"/>
+            </FilterNodeList>
+            <Get>
+               <API Servlet="com.yantra.scw.ui.backend.SCWConfigurationRulesAPI" APIName="getConfigRulesWithNodeMasterData" Message="Loading_Warehouse_Management_Rules">
+                   <StaticAttributes ApplicationCode="wms"/>
+                </API>
+            </Get>
+            <DeleteDocumentType>
+                    <API Servlet="/yantra/entities/ModuleDocumentType/delete" APIName="" Message="Message_Deleting_Module_Document_Type"/>
+            </DeleteDocumentType>
+         </TreeInfo>
+      </YWMC080>
+
+      <YWMC000 Title="Node" ScreenType="Detail">
+            <DetailInfo>
+                <Get>
+                    <API Servlet="com.yantra.scw.ui.backend.SCWConfigurationRulesAPI" APIName="getEnterpriseNodeList"  Message="Loading_Context_Dialog">
+                    </API>
+                </Get>
+                <RefreshMasterData>
+                   <API Servlet="com.yantra.scw.ui.backend.SCWConfigurationRulesAPI" APIName="updateEnterpriseMasterData" Message="Message_Loading"/>
+                </RefreshMasterData>
+            </DetailInfo>
+        </YWMC000>
+
+        <YWMC090 Title="Load_Enterprises_For_Configuration" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Loading_Organization"/>
+            </Get>
+            <LogicalKeys>
+               <LogicalKey ComponentName="lkpOrganization"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="NodeEnterprise" XMLName="NodeEnterprise">
+               <DynamicAttributes NodeKey="@NodeKey" Node="@Node"/>
+               <CodeAttributes>
+                  <CodeAttribute OrganizationCode="@EnterpriseCode"/>
+               </CodeAttributes>
+            </Table>
+         </MasterData>
+      </YWMC090>
+      <YWMC358 Title="Copy_Node" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Organization"/>
+            </Get>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="OrgEnterprise" XMLName="OrgEnterprise">
+               <DynamicAttributes OrganizationKey="@ClonedOrganizationCode"/>
+            </Table>
+         </MasterData>
+      </YWMC358>
+      <YWMC357 Title="Onboard_New_Enterprise" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Organization"/>
+            </Get>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="OrgEnterprise" XMLName="OrgEnterprise">
+               <DynamicAttributes OrganizationKey="@OrganizationKey"/>
+            </Table>
+            <Table Name="Enterprise" XMLName="Enterprise" AllRecords="Y">
+            </Table>
+         </MasterData>
+	</YWMC357>
+      <YWMC356 Title="Off_Board_An_Enterprise" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Organization"/>
+            </Get>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="OrgEnterprise" XMLName="OrgEnterprise">
+               <DynamicAttributes OrganizationKey="@OrganizationKey"/>
+            </Table>
+            <Table Name="Organization" XMLName="Organization">
+               <DynamicAttributes OrganizationKey="@OrganizationKey"/>
+            </Table>
+         </MasterData>
+	</YWMC356>
+
+</Entity>
+ 
+ <Entity EntityTitle="Filter_Rules" EntityName="FilterRules" PrimaryKeyAttributeName="Filter_Rules">
+ <YWMCFR01 Title="Filter_Rules" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Loading_Filter_Rules_Dialog"/>
+            </Get>
+       </DetailInfo>
+         <MasterData>
+            <StaticData>
+                <GroupLevels>
+				    <GroupLevel GroupLevel=" " Description=" "/>
+					<GroupLevel GroupLevel="CatalogOrg" Description="Catalog_Organization"/>
+                    <GroupLevel GroupLevel="Enterprise" Description="Enterprise"/>
+					<GroupLevel GroupLevel="Hub" Description="Hub" />
+                    <GroupLevel GroupLevel="InventoryOrg" Description="Inventory_Organization"/>
+					<GroupLevel GroupLevel="Node" Description="Node"/>
+					<GroupLevel GroupLevel="Organization" Description="Organization"/>
+                </GroupLevels>
+			</StaticData>
+         </MasterData>
+      </YWMCFR01>
+</Entity>
+
+<Entity EntityTitle="Equipment_Type" EntityName="EquipmentType" PrimaryKeyAttributeName="EquipmentTypeKey">
+    <ConfigurationAttributes  TableName="YFS_EQUIPMENT_TYPE">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS006" IsPrimary="Y"/>
+    </ConfigurationAttributes>
+     <YWMC008 Title="Equipment_Types" ScreenType="List" >
+          <ListInfo NamePrefix="/" ChildTag="EquipmentType">
+            <List AttributeName="@EquipmentType" ColumnTitle="Equipment_Type" DataType="EquipmentType"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-200"/>
+            <CreateNew DisplayForm="YWMC009">
+                <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+            </CreateNew>
+            <Modify DisplayForm="YWMC009">
+                <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+            </Modify>
+            <Delete>
+            <API Servlet="/yantra/entities/EquipmentType/delete" APIName="" Message="Deleting_Equipment_Type"/>
+            </Delete>
+        </ListInfo>
+        <API Servlet="/yantra/entities/EquipmentType/list" APIName="" Message="Retrieving_Equipment_Type_List">
+
+		</API>
+      </YWMC008>
+
+     <YWMC009 Title="Equipment_Type_Details" ScreenType="Detail">
+         <DetailInfo>
+          <Get>
+            <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+             Message="Loading_Equipment_Type_Details"/>
+            <InnerPanels>
+            <ListPanel FormName="YWMC010" ListPanel="pnlEquipmentList"
+                InsertUnderElement="xml:/EquipmentType">
+                <DynamicAttributes EquipmentTypeKey="@EquipmentTypeKey" Node="@Node" NodeKey="@NodeKey"/>
+            </ListPanel>
+            </InnerPanels>
+            </Get>
+            <CreateNew>
+               <API Servlet="/yantra/entities/EquipmentType/create" APIName="" Message="Saving_Equipment_Type"/>
+            </CreateNew>
+            <Modify>
+               <API Servlet="/yantra/entities/EquipmentType/modify" APIName="" Message="Saving_Equipment_Type"/>
+            </Modify>
+            <LogicalKeys>
+                <LogicalKey ComponentType="JTextField" ComponentName="txtEquipmentType"/>
+            </LogicalKeys>
+          </DetailInfo>
+    </YWMC009>
+</Entity>
+
+<Entity EntityTitle="Equipment" EntityName="Equipment" PrimaryKeyAttributeName="EquipmentKey">
+    <ConfigurationAttributes  TableName="YFS_EQUIPMENT">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS006" IsPrimary="Y"/>
+    </ConfigurationAttributes>
+        <YWMC010 Title="Equipment" ScreenType="List">
+          <ListInfo NamePrefix="/" ChildTag="Equipment">
+                <List AttributeName="@EquipmentId" ColumnTitle="Equipment_ID" DataType="EquipmentId" Editable="N" EditableComponent="textbox" EditableAddRow="Y">
+                        <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+                </List>
+                <List AttributeName="@IntransitLocationId" ColumnTitle="In-transit_Location" DataType="LocationId" Editable="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor" EditableAddRow="Y">
+                    <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="LocationId"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="LocationId"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.dataType" Value="LocationId"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/Locations@Location"/>
+                    <ComponentClientProperty Name="YCPLookup.searchActionId" Value="YWMC002"/>
+                    <ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="false"/>
+                    <ComponentClientProperty Name="YCPLookup.searchFormId" Value="YWMC002"/>
+					<ComponentClientProperty Name="YCPLookup.lookupSearchElement" 
+					Value="&lt;SearchElement>&lt;StaticAttributes LocationType=&quot;INTRANSIT&quot;/>&lt;DynamicAttributes Node=&quot;@Node&quot;/>&lt;/SearchElement>"/>
+                </List>
+                <CreateNew ActionResourceID = "YWMC010A01">
+                    <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+                </CreateNew>
+                <Modify ActionResourceID = "YWMC010A02">
+                    <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+                </Modify>
+                <Delete>
+                <API Servlet="/yantra/entities/Equipment/delete" APIName="" Message="Deleting_Equipment"/>
+                </Delete>
+                </ListInfo>
+                <MasterData>
+                    <Table Name="Location" XMLName="Location" AllRecords="Y">
+                        <StaticAttributes LocationType="INTRANSIT">
+							<Template>
+								<Location LocationId=" " LocationKey=" " LocationType=" " Node=" " />
+							</Template>
+					   </StaticAttributes>
+                        <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+                    </Table>
+                </MasterData>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+                            Message="Retrieving_Equipment_List">
+                <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+
+            </API>
+        </YWMC010>
+</Entity>
+
+<!-- DEFINITION OF YFS_PUTAWAY_STRATEGY TABLE -->
+
+<Entity EntityTitle="Activity_List" EntityName="Activity" PrimaryKeyAttributeName="ActivityKey">
+    <ConfigurationAttributes  TableName="YFS_ACTIVITY">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS027" IsPrimary="Y"/>
+            <ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV008"/>
+	</ConfigurationAttributes>
+    <YSCWMC035 Title="Activities" ScreenType="Search">
+        <SearchInfo ListFormName="YSCWMC022" ListPanel="pnlActivityList">
+                <DynamicAttributes Node="@Node" NodeKey="@NodeKey" ActivityGroupId="@ActivityGroupId"/>
+        </SearchInfo>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Loading_Activity_Details">
+            <DynamicAttributes ActivityGroupId="@ActivityGroupId"/>
+         </API>
+    </YSCWMC035>
+    <YSCWMC022 Title="Activity_List" ScreenType="List">
+          <ListInfo NamePrefix="/" ChildTag="Activity">
+                <List AttributeName="@ActivityCode" ColumnTitle="Activity_Code" DataType="Activity" Editable="N"
+                    EditableComponent="textbox" EditableAddRow="Y">
+                    <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+                </List>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-200" Editable="Y"
+                EditableComponent="textbox" EditableAddRow="Y">
+                    <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+                </List>
+                <CreateNew ActionResourceID = "YWMC022A01">
+                    <DynamicAttributes ActivityGroupId="@ActivityGroupId" Node="@Node" NodeKey="@NodeKey" />
+					<StaticAttributes SystemDefined="N" />
+                </CreateNew>
+                <Modify ActionResourceID = "YWMC022A02">
+                    <DynamicAttributes ActivityGroupId="@ActivityGroupId" Node="@Node" NodeKey="@NodeKey"/>
+                </Modify>
+                <Delete>
+                    <API Servlet="/yantra/entities/Activity/delete" APIName="" Message="Deleting_Activity"/>
+                </Delete>
+                <Save>
+                    <API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiUpdateAPI" Message="Saving_Activity">
+                    </API>
+                </Save>
+             </ListInfo>
+            <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+                            Message="Retrieving_Activity_List">
+                <DynamicAttributes Node="@Node" NodeKey="@NodeKey" ActivityGroup="@ActivityGroup"/>
+
+            </API>
+    </YSCWMC022>
+
+ </Entity>
+
+ <Entity EntityTitle="Rules" EntityName="Rules" PrimaryKeyAttributeName="CallingOrganizationCode">
+	<YWMC287 Title="Dock_Scheduling_Rule" ScreenType="Detail">
+		<ConfigurationAttributes  RuleName="DOCK_APPOINTMENT_MAX_NO_OF_DAYS">
+				<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS004" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+			<Get>
+				 <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Dock_Appointment_Rule">
+					<DynamicAttributes OrganizationCode="@OwnerOrganizationCode"/>
+				 </API>
+			</Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Dock_Appointment_Rule"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Dock_Appointment_Rule">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+		</DetailInfo>
+	</YWMC287>
+ </Entity>
+
+ <Entity EntityTitle="Task_Type" EntityName="TaskType" PrimaryKeyAttributeName="TaskTypeKey">
+    <ConfigurationAttributes  TableName="YFS_TASK_TYPE">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS066" IsPrimary="Y"/>
+			<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS086"/>
+    </ConfigurationAttributes>
+    <YWMC048 Title="Task_Type" ScreenType="List">
+          <ListInfo NamePrefix="/" ChildTag="TaskType">
+            <List AttributeName="@TaskType" ColumnTitle="Task_Type" DataType="TaskType"/>
+            <List AttributeName="@TaskTypeName" ColumnTitle="Task_Type_Name" DataType="Text-40"/>
+			<CreateNew DisplayForm="YSCWMC050">
+				 <DynamicAttributes Node="@Node" ActivityGroupId="@ActivityGroupId"/>
+			</CreateNew>
+             <Modify DisplayForm="YSCWMC050" >
+                 <DynamicAttributes Node="@Node" NodeKey="@NodeKey" ActivityGroupId="@ActivityGroupId" Localecode="@Localecode"/>
+            </Modify>
+          </ListInfo>
+			<API Servlet="/yantra/entities/TaskType/list" APIName=""  Message="Retrieving_Task_Types">
+				<DynamicAttributes Node="@Node" ActivityGroupId="@ActivityGroupId"/>
+
+			</API>
+    </YWMC048>
+    <YSCWMC050 Title="Task_Type_Details" ScreenType="Detail">
+         <DetailInfo>
+          <Get>
+            <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+              Message="Loading_Task_Type_Details">
+              <DynamicAttributes Node="@Node"/>
+            </API>
+          </Get>
+            <Modify>
+                <API Servlet ="com.yantra.scw.ui.backend.TaskTypeServlet" APIName="saveTaskType" Message="Message_Saving_Task_Type">
+                    <DynamicAttributes Node="@Node"/>
+                </API>
+            </Modify>
+            <CreateNew>
+                <API Servlet ="/yantra/entities/TaskType/create" APIName="" Message="Message_Creating_Task_Type">
+                    <DynamicAttributes Node="@Node" />
+                    <StaticAttributes StandardRateUom="01"/>
+                </API>
+            </CreateNew>
+           <LogicalKeys>
+               <LogicalKey ComponentName="lkpActivityGroup"/>
+               <LogicalKey ComponentName="txtTaskType"/>
+            </LogicalKeys>
+        </DetailInfo>
+        <MasterData>
+            <Table Name="BaseActivityGroup" XMLName="BaseActivityGroup">
+            </Table>
+            <Table Name="TaskReference" XMLName="TaskReference">
+                <DynamicAttributes ActivityGroupId="@ActivityGroupId" />
+            </Table>
+             <Table Name="EquipmentType" XMLName="EquipmentType">
+                <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+            </Table>
+			<Table Name="Activity">
+                <DynamicAttributes ActivityGroupId="@ActivityGroupId"/>
+            </Table>
+            <StaticData>
+                <RateUoms>
+                    <RateUom Uom="01" Description="Standard_Rate_UOM_01"/>
+                    <RateUom Uom="02" Description="Standard_Rate_UOM_02"/>
+                </RateUoms>
+            </StaticData>
+     </MasterData>
+    </YSCWMC050>
+    <YSCWMC051 Title="Task_Types" ScreenType="Tree" TitleSuffixAttr="">
+		  <TreeInfo RelationshipAttribute="">
+            <NodeDescriptorList>
+                <NodeDescriptor NodeName="BaseActivityGroupList" LabelAttribute="Description" Icon="/com/yantra/scw/ui/icons/activitygrouplist.gif" TooltipAttribute="ActivityGroupList"/>
+                <NodeDescriptor NodeName="BaseActivityGroup" LabelAttribute="ActivityGroupName" Icon="/com/yantra/scw/ui/icons/activitygroup.gif" TooltipAttribute="ActivityGroupId"/>
+                <NodeDescriptor NodeName="TaskType" LabelAttribute="TaskTypeName" Icon="/com/yantra/scw/ui/icons/tasktype.gif" TooltipAttribute="TaskType"/>
+				<NodeDescriptor NodeName="TaskType" LabelAttribute="TaskTypeName" Icon="/com/yantra/scw/ui/icons/tasktype.gif" TooltipAttribute="TaskType"/>
+            </NodeDescriptorList>
+            <FilterNodeList>
+                <FilterNode NodeName="TaskReferences"/>
+                <FilterNode NodeName="BatchRule"/>
+				<FilterNode NodeName="TaskTypeResourcePools"/>
+				<FilterNode NodeName="Count"/>
+            </FilterNodeList>
+            <Get>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"  Message="Retrieving_Task_Types">
+                    <DynamicAttributes Node="@Node"/>
+
+                </API>
+            </Get>
+            <Modify DisplayForm="YSCWMC0491"/>
+            <SaveAs DisplayForm="YSCWMC0500" DisplayMode="Dialog" NextAction="Modify">
+				<StaticAttributes IsSaveAs="Y"/>
+			</SaveAs>
+			<CreateNew DisplayForm="YSCWMC0500" DisplayMode="Dialog" NextAction="Modify">
+				<!-- <API Servlet="/yantra/entities/TaskType/create" APIName="" Message="Message_Create_Task_Type"/> -->
+				<DynamicAttributes Node="@Node" NodeKey="@NodeKey" OrganizationCode="@CallingOrganizationCode" ActivityGroupId="@ActivityGroupId"/>
+				<StaticAttributes StandardRateUom="01"/>
+			</CreateNew>
+            <Delete>
+               <API Servlet="com.yantra.scw.ui.backend.TaskTypeServlet" APIName="deleteTaskType" Message="Message_Deleting_Task_Type"/>
+            </Delete>
+         </TreeInfo>
+         <MasterData>
+            <Table Name="TaskType" XMLName="TaskType" AllRecords="Y">
+                <DynamicAttributes OrganizationCode="@Node"/>
+            </Table>
+         </MasterData>
+     </YSCWMC051>
+	<YSCWMC0491 Title="Task_Type_Details" ScreenType="Detail">
+         <DetailInfo>
+          <Get>
+            <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+              Message="Loading_Task_Type_Details">
+              <DynamicAttributes Node="@Node"/>
+            </API>
+          </Get>
+            <Modify DisplayForm="YSCWMC0500" DisplayMode="Dialog">
+                <API Servlet ="com.yantra.scw.ui.backend.TaskTypeServlet" APIName="saveTaskType" Message="Message_Saving_Task_Type">
+                    <DynamicAttributes Node="@Node"/>
+                </API>
+            </Modify>
+           <LogicalKeys>
+               <LogicalKey ComponentName="lkpActivityGroup"/>
+               <LogicalKey ComponentName="txtTaskType"/>
+            </LogicalKeys>
+        </DetailInfo>
+        <MasterData>
+            <Table Name="BaseActivityGroup" XMLName="BaseActivityGroup">
+            </Table>
+     </MasterData>
+    </YSCWMC0491>
+	 <YSCWMC0500 Title="Task_Type_Wizard" ScreenType="Detail">
+		<Wizard firstScreen="YSCWMC0503" title="Task_Type_Wizard" WizardSummary="Y">	
+			<YSCWMC0503 resourceId="YSCWMC0503" next="true" finish="true">
+				<OnNext>
+					<Condition nextScreen="YSCWMC0513">
+						<Expression lhs="xml:/TaskType/@ActivityGroupGroup" rhs="OTHER" op="EQ"/>
+					</Condition>
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Activity_Code_to_be_displayed_is" SummaryPlaceHolder="xml:/TaskType/@ActivityCode"/>
+				</WizardSummary>
+			</YSCWMC0503>
+			<YSCWMC0513 resourceId="YSCWMC0513" back="true" finish="true" >
+				<WizardSummary>
+					<Condition Summary="Productivity_Type_is" SummaryPlaceHolder="xml:/TaskType/@ProductivityType"/>
+				</WizardSummary>
+			</YSCWMC0513>
+		</Wizard>
+         <DetailInfo>			
+			<Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+				  Message="Loading_Task_Type_Details">
+				  <DynamicAttributes Node="@Node"/>
+				</API>				
+			</Get>
+			<Modify>
+				<API Servlet ="/yantra/entities/TaskType/modify" APIName="" Message="Message_Saving_Task_Type">
+					<DynamicAttributes Node="@Node"/>
+				</API>
+			</Modify>
+            <CreateNew>
+                <API Servlet ="/yantra/entities/TaskType/create" APIName="" Message="Message_Creating_Task_Type">
+                    <DynamicAttributes Node="@Node" />
+                    <StaticAttributes StandardRateUom="01"/>
+                </API>
+            </CreateNew>
+        </DetailInfo>
+        <MasterData>
+			<Table Name="TaskType" XMLName="TaskType">
+                <DynamicAttributes OrganizationCode="@Node"/>
+				<StaticAttributes ActivityGroupId="PUTAWAY" IsAdHocMoveQryType="NE" IsAdHocMove="Y"/>
+            </Table>
+			<Table Name="ProductivityType" XMLName="ProductivityType">
+                <DynamicAttributes CallingOrganizationCode="@Node" />
+				<StaticAttributes  EquipmentTypeQryType="VOID" /> 
+            </Table>
+            <Table Name="BaseActivityGroup" XMLName="BaseActivityGroup">
+            </Table>
+            <Table Name="TaskReference" XMLName="TaskReference">
+                <DynamicAttributes ActivityGroupId="@ActivityGroupId" />
+            </Table>
+             <!-- <Table Name="EquipmentType" XMLName="EquipmentType">
+                <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+				 <StaticAttributes IsStation="N"/>
+            </Table> -->
+			<Table Name="Activity">
+                <DynamicAttributes ActivityGroupId="@ActivityGroupId"/>
+            </Table>
+            <StaticData>
+                <RateUoms>
+                    <RateUom Uom="01" Description="Standard_Rate_UOM_01"/>
+                    <RateUom Uom="02" Description="Standard_Rate_UOM_02"/>
+                </RateUoms>
+            </StaticData>
+     </MasterData>
+    </YSCWMC0500>
+	 <YWMC106 Title="Task_Type_Subscriptions" ScreenType="Subscription">
+         	<SubscriptionListInfo 
+				SubscriptionSubscribedNamePrefix="/EquipTypeTaskTypes" 
+				SubscriptionSubscribedChildTag="EquipTypeTaskType" 
+				SubscriptionFullListNamePrefix="/MasterData/TaskTypes" 
+				SubscriptionFullListChildTag="TaskType">
+            	<List AttributeName="@TaskTypeName" ColumnTitle="Task_Types" 
+						DataType="Text-200"/>
+         	</SubscriptionListInfo>
+      	</YWMC106>
+		<YWMC097 Title="Associate_Resource_Pools_with_Task_Type" ScreenType="Detail">
+			 <DetailInfo>
+			 <Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message=""/>
+			 </Get>
+	        <CreateNew>
+        		<API Servlet="/yantra/entities/TaskType/modify" APIName="" Message="Saving_Planning_Attributes"/>
+					<DynamicAttributes OrganizationCode="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey" Node="@Node"/>
+			</CreateNew>
+			 <Modify>
+				<API Servlet="/yantra/entities/TaskType/modify" APIName="" Message="Modifying_Planning_Attributes"/>
+					<DynamicAttributes OrganizationCode="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey" Node="@Node"/>
+			</Modify>
+			<LogicalKeys>
+               <LogicalKey ComponentType="JComboBox" ComponentName="cmbTaskType"/>
+            </LogicalKeys>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="TaskType" XMLName="TaskType">
+					<DynamicAttributes OrganizationCode="@Node"/>
+					<StaticAttributes  ProductivityTypeQryType="NOTVOID" />
+				</Table>
+				<Table Name="ResourcePool" XMLName="ResourcePool">
+					<DynamicAttributes Node="@Node"/>
+					<StaticAttributes Purpose="WMS-RP"/>
+				</Table>
+			</MasterData>
+		</YWMC097>
+	 	<YWMC091 Title="Task_Type_Resource_Pool_Association" ScreenType="List">
+			 <ListInfo NamePrefix="/" ChildTag="TaskType">
+				<List AttributeName="@TaskTypeName" ColumnTitle="Task_Type" DataType="TaskType"/>
+				<List AttributeName="@ResourcePoolIDs" ColumnTitle="Resource_Pool" DataType="Text-1000"/>
+				<CreateNew DisplayForm="YWMC097" DisplayMode="Dialog">
+					<DynamicAttributes NodeKey="@Node" Node="@Node"/>
+				</CreateNew>
+				<Modify DisplayForm="YWMC097" DisplayMode="Dialog">
+					<DynamicAttributes TaskTypeKey="@TaskTypeKey" NodeKey="@Node" Node="@Node"/>
+				</Modify>
+				<Delete>
+				    <API Servlet ="com.yantra.scw.ui.backend.TaskTypeServlet" APIName="modifyResourcePoolTaskTypeList" Message="Message_Removing_User_From_Group"/> 
+				</Delete> 
+     		 </ListInfo>
+			  <API Servlet ="com.yantra.scw.ui.backend.TaskTypeServlet" APIName="populateResourcePoolTaskTypeList" Message="Message_Saving_Task_Type">
+					<DynamicAttributes Node="@Node"/>
+			  </API> 
+		</YWMC091>
+		<YWMC195 Title="Task_Type_Associations" ScreenType="Detail">
+			<DetailInfo>
+				<Get>
+				   <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Resource_Details"/>
+	            </Get>
+			</DetailInfo>
+		</YWMC195>
+  </Entity>
+    
+	<Entity EntityTitle="Equipment" EntityName="Equipment" PrimaryKeyAttributeName="EquipmentKey">
+        <ConfigurationAttributes  TableName="YFS_EQUIPMENT">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS006" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+            <YSCWMC100 Title="Equipment" ScreenType="Tree" TitleSuffixAttr="">
+                <TreeInfo RelationshipAttribute="Equipment">
+                    <NodeDescriptorList>
+                        <NodeDescriptor NodeName="EquipmentTypes" LabelAttribute="Description" Icon="com/yantra/scw/ui/icons/location.gif" TooltipAttribute="Description"/>
+                        <NodeDescriptor NodeName="EquipmentType" LabelAttribute="Description" Icon="com/yantra/scw/ui/icons/tasktypedetermination.gif" TooltipAttribute="EquipmentType"/>
+                        <NodeDescriptor NodeName="Equipment" LabelAttribute="EquipmentId" Icon="com/yantra/scw/ui/icons/equipment.gif" TooltipAttribute="EquipmentId"/>
+                    </NodeDescriptorList>
+                    <Get>
+                        <API Servlet="com.yantra.scw.wl.ui.backend.SCWModelingEquipmentAPI" APIName="getEquipmentTreeMetaData" Message="Loading_Equipment_Tree">
+                        <DynamicAttributes NodeKey="@NodeKey" Node="@Node" IsStation="@IsStation"/>
+                        </API>
+                    </Get>
+					<CreateNew DisplayForm="YSCWMC103" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" EquipmentType="@EquipmentType" ScreenMode="@ScreenMode" ModeledAs="@ModeledAs"/>
+					</CreateNew>
+					<SaveAs DisplayForm="YSCWMC103" DisplayMode="Dialog">						
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" EquipmentType="@EquipmentType" EquipmentKey="@EquipmentKey" ScreenMode="@ScreenMode"/>
+					</SaveAs>
+					<Modify DisplayForm="YSCWMC103" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" EquipmentType="@EquipmentType" EquipmentKey="@EquipmentKey" ScreenMode="@ScreenMode"/>
+					</Modify>
+					<CreateNewEquipmentType DisplayForm="YSCWMC101" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" ScreenMode="@ScreenMode" IsStation="@IsStation"/>
+						<StaticAttributes ModeledAs="Location"/>
+					</CreateNewEquipmentType>
+					<ModifyEquipType DisplayForm="YSCWMC101" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" EquipmentType="@EquipmentType" EquipmentTypeKey="@EquipmentTypeKey" ScreenMode="@ScreenMode" IsStation="@IsStation" ModeledAs="@ModeledAs"/>
+					</ModifyEquipType>
+                </TreeInfo>
+            </YSCWMC100>
+    </Entity>
+
+    <Entity EntityTitle="Equipment_Type" EntityName="EquipmentType" PrimaryKeyAttributeName="EquipmentTypeKey">
+        <ConfigurationAttributes  TableName="YFS_EQUIPMENT_TYPE">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS006" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+            <YSCWMC101 Title="Equipment_Type" ScreenType="Detail">
+                <DetailInfo>
+                    <Get>
+                        <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+                        Message="Loading_Equipment_Type"/>
+                        <InnerPanels>
+                            <ListPanel FormName="YSCWMC102" ListPanel="pnlEquipmentTypeDetailsList" InsertUnderElement="xml:/EquipmentType">
+                                <DynamicAttributes EquipmentType="@EquipmentType" EquipmentTypeKey="@EquipmentTypeKey" CallingOrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" ScreenMode="@ScreenMode"/>
+                            </ListPanel>
+                        </InnerPanels>
+                    </Get>
+                    <CreateNew>
+                        <API Servlet="/yantra/entities/EquipmentType/create" APIName="" Message="Saving_Equipment_Type">
+                            <DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>
+                        </API>
+                    </CreateNew>
+                    <Modify>
+                        <API Servlet="/yantra/entities/EquipmentType/modify" APIName="" Message="Saving_Equipment_Type">
+                            <DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>
+                        </API>
+                    </Modify>
+                    <LogicalKeys>
+                        <LogicalKey ComponentType="JTextField" ComponentName="txtEquipmentType"/>
+                    </LogicalKeys>
+                </DetailInfo>
+                <MasterData>
+                    <Table Name="CommonCode" XMLName="LocationType">
+                        <StaticAttributes CodeType="LOCATION_TYPE"/>
+                        <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+                    </Table>
+                </MasterData>
+            </YSCWMC101>
+			<YSCWMC105 Title="Task_Type_Association" ScreenType="Detail">
+                <DetailInfo>
+                    <Get>
+                        <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+                        Message="Loading_Equipment"/>
+                    </Get>                   
+					<CreateNew>
+                        <API Servlet="/yantra/entities/EquipmentType/create" APIName="" Message="Saving_Equipment"/>
+							<DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>
+                    </CreateNew>
+                    <Modify>
+                        <API Servlet="/yantra/entities/EquipmentType/modify" APIName="" Message="Saving_Equipment"/>
+							<DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>
+					</Modify>					
+                </DetailInfo>
+				<MasterData>
+					<Table Name="TaskType" XMLName="TaskType">
+						<DynamicAttributes OrganizationCode="@Node">
+							<BaseActivityGroup />
+						</DynamicAttributes>
+					</Table>
+				</MasterData>                
+            </YSCWMC105>
+    </Entity>
+
+    <Entity EntityTitle="Equipment_Type_Detail" EntityName="EquipmentTypeDetail" PrimaryKeyAttributeName="EquipmentTypeDetailKey">
+        <ConfigurationAttributes  TableName="YFS_EQUIPMENT_TYPE_DETAIL">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS006" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+            <YSCWMC102 Title="Equipment_Type_Details" ScreenType="List">
+                <ListInfo NamePrefix="/" ChildTag="EquipmentTypeDetail">
+                    <List AttributeName="@LocationLogicalName" ColumnTitle="Location_Name" DataType="Text-40" Editable="N"   EditableComponent="textbox" EditableAddRow="Y">
+                        <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+                    </List>
+
+                    <CreateNew ActionResourceID = "YSCWMC102A01">
+                        <DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>
+                    </CreateNew>
+                    <Modify ActionResourceID = "YSCWMC102A02">
+                        <DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>
+                    </Modify>
+
+                    <Delete>
+                        <API Servlet="/yantra/entities/EquipmentTypeDetail/delete" APIName="" Message="Deleting_Equipment_Detail"/>
+                    </Delete>
+                </ListInfo>
+                <!-- <MasterData>
+                    <Table Name="LocationSize" XMLName="LocationSize" AllRecords="Y">
+                        <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+                    </Table>
+                </MasterData> -->
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+                            Message="Retrieving_Equipment_List">
+                    <DynamicAttributes Node="@Node" NodeKey="@NodeKey" EquipmentType="@EquipmentType"/>
+
+                </API>
+            </YSCWMC102>
+    </Entity>
+
+    <Entity EntityTitle="Equipment" EntityName="Equipment" PrimaryKeyAttributeName="EquipmentKey">
+        <ConfigurationAttributes  TableName="YFS_EQUIPMENT">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS006" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+            <YSCWMC103 Title="Equipment" ScreenType="Detail">
+                <DetailInfo>
+                    <Get>
+                        <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+                        Message="Loading_Equipment"/>
+                        <InnerPanels>
+                            <ListPanel FormName="YSCWMC104" ListPanel="pnlEquipmentDetailsList" InsertUnderElement="xml:/Equipment">
+                                <DynamicAttributes EquipmentKey="@EquipmentKey" EquipmentId="@EquipmentId"    EquipmentLocationType="/EquipmentType@EquipmentLocationType" EquipmentType="@EquipmentType" Node="@Node" NodeKey="@NodeKey" CallingOrganizationCode="@Node" ScreenMode="@ScreenMode"/>
+                            </ListPanel>
+                        </InnerPanels>
+                    </Get>
+                    <CreateNew>
+                        <API Servlet="/yantra/entities/Equipment/create" APIName="" Message="Saving_Equipment"/>
+                    </CreateNew>
+                    <Modify>
+                        <API Servlet="/yantra/entities/Equipment/modify" APIName="" Message="Saving_Equipment"/>
+                    </Modify>
+                    <LogicalKeys>
+                        <LogicalKey ComponentType="JTextField" ComponentName="txtEquipmentId"/>
+						<LogicalKey ComponentType="JComboBox" ComponentName="cmbEquipmentType"/>
+                    </LogicalKeys>
+                </DetailInfo>
+                <MasterData>
+                    <Table Name="EquipmentType" XMLName="EquipmentType">
+                        <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+                    </Table>
+                </MasterData>
+            </YSCWMC103>
+			<YSCWMC109 Title="Equipment_Device_Association" ScreenType="Detail">
+				<DetailInfo>
+					<Get>
+						<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" 
+						Message="Loading_Equipment_Device_Association"/>
+						<InnerPanels>
+							<ListPanel FormName="YSCWMC110" ListPanel="pnlDeviceAssoc" InsertUnderElement="xml:/Equipment">
+								<DynamicAttributes EquipmentKey="@EquipmentKey" Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>
+							</ListPanel>
+						</InnerPanels>
+					</Get>
+					<CreateNew>
+						<API Servlet="/yantra/entities/Equipment/create" APIName="" Message="Saving_Equipment_Device_Association"/>
+					</CreateNew>
+					<Modify>
+						<API Servlet="/yantra/entities/Equipment/modify" APIName="" Message="Saving_Equipment_Device_Association"/>
+					</Modify>
+					<LogicalKeys>
+						<LogicalKey ComponentType="JTextField" ComponentName="txtEquipmentId"/>
+					</LogicalKeys>
+				</DetailInfo>
+			</YSCWMC109>
+    </Entity>
+
+    <Entity EntityTitle="Equipment_Detail" EntityName="EquipmentDetail" PrimaryKeyAttributeName="EquipmentDetailKey">
+        <ConfigurationAttributes  TableName="YFS_EQUIPMENT_DETAIL">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS006" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+            <YSCWMC104 Title="Equipment_Details" ScreenType="List">
+                <ListInfo NamePrefix="/" ChildTag="EquipmentDetail">					
+                    <List AttributeName="@LocationLogicalName" ColumnTitle="Location_Name" DataType="Text-40" />
+                    <List AttributeName="@LocationId" ColumnTitle="Location" DataType="Text-40" Editable="Y"   EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor"  EditableAddRow="N">
+                        <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+                        <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="LocationId"/>
+                        <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="LocationId"/>
+                        <ComponentClientProperty Name="YFCXMLBinding.dataType" Value="Key"/>
+                        <ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/Locations@Location"/>
+                        <ComponentClientProperty Name="YCPLookup.supressValidations" Value="true"/>
+						<ComponentClientProperty Name="YCPLookup.alwaysUseTextField" Value="true"/>
+                    </List>             
+                </ListInfo>
+                <MasterData>                   
+                    <Table Name="EquipmentTypeDetail" XMLName="EquipmentTypeDetail" AllRecords="Y">
+                        <DynamicAttributes Node="@Node" NodeKey="@NodeKey" EquipmentType="@EquipmentType"/>
+                    </Table>
+                </MasterData>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+                            Message="Retrieving_Equipment_List">
+                    <DynamicAttributes Node="@Node" NodeKey="@NodeKey" EquipmentType="@EquipmentType" EquipmentId="@EquipmentId" ScreenMode="@ScreenMode"/>
+
+                </API>
+            </YSCWMC104>
+    </Entity>
+
+   <Entity EntityTitle="EquipmentDevice" EntityName="EquipmentDevice" PrimaryKeyAttributeName="EquipmentDeviceKey">
+		<ConfigurationAttributes  TableName="YFS_EQUIPMENT_DEVICE">
+			<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMSE034" IsPrimary="Y"/>
+		</ConfigurationAttributes>			
+			<YSCWMC110 Title="Device_Association" ScreenType="List">
+				<ListInfo NamePrefix="/" ChildTag="EquipmentDevice">
+					<List AttributeName="@DeviceType" ColumnTitle="Device_Type" DataType="Text-40" Editable="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor" EditableAddRow="Y">
+                        <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+						<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="DeviceType"/>
+						<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="Description"/>
+						<ComponentClientProperty Name="YFCXMLBinding.dataType" Value="Text-40"/>
+						<ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/DeviceTypes@DeviceType"/>
+					</List>
+					<List AttributeName="@DeviceKey" ColumnTitle="Device_ID" DataType="Key" Editable="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor" EditableAddRow="Y">
+                        <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+						<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="DeviceKey"/>
+						<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="DeviceId"/>
+						<ComponentClientProperty Name="YFCXMLBinding.dataType" Value="Key"/>
+						<ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/Devices@Device"/>
+						<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YWMCDL110"/>
+						<ComponentClientProperty Name="YCPLookup.searchFormId" Value="YWMCDL110"/>
+						<ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="true"/>
+						<ComponentClientProperty Name="YCPLookup.lookupSearchElement" 
+						Value="&lt;SearchElement>&lt;DynamicAttributes Node=&quot;@Node&quot;/>
+							&lt;/SearchElement>"/>
+					</List>
+					
+					<CreateNew ActionResourceID = "YWMC110A01">
+						<DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>   
+					</CreateNew>
+					<Modify ActionResourceID = "YWMC110A02">
+						<DynamicAttributes Node="@Node" CallingOrganizationCode="@Node" NodeKey="@NodeKey"/>   
+					</Modify>
+					
+					<Delete>
+						<API Servlet="/yantra/entities/EquipmentDevice/delete" APIName="" Message="Deleting_Equipment_Device_Association"/>
+					</Delete>      
+                </ListInfo>
+                <MasterData>
+                    <Table Name="Device" XMLName="Device" AllRecords="Y">
+                        <DynamicAttributes Node="@Node" NodeKey="@NodeKey" DeviceType="@DeviceType" OrganizationCode="@Node"/>
+                    </Table>
+					<Table Name="DeviceType" XMLName="DeviceType" AllRecords="Y">                    
+                    </Table>
+                </MasterData>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"  
+                            Message="Retrieving_Equipment_List">
+
+					<DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>   
+				</API>
+			</YSCWMC110>
+	</Entity>
+
+        <Entity EntityTitle="Productivity_Types" EntityName="ProductivityType" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="ProductivityTypeKey">
+        <ConfigurationAttributes  TableName="YFS_PRODUCTIVITY_TYPE">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS068" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+        <YWMCPT01 Title="Productivity_Types" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ProductivityType">
+            <List AttributeName="@ProductivityType" ColumnTitle="Productivity_Type" DataType="ProductivityType"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+			<List AttributeName="@ComputedSamDate" ColumnTitle="Computed_SAM_Date" DataType="TimeStamp"/>
+            <CreateNew DisplayForm="YCP00101">
+                <DynamicAttributes OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey"/>
+                <StaticAttributes Mode="CreateNew" CaptureTripLevelMetrics="Y">
+               </StaticAttributes>
+            </CreateNew>
+            <Modify DisplayForm="YCP00101">
+                <DynamicAttributes OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey"/>
+                <StaticAttributes Mode="Modify" />
+            </Modify>
+			<SaveAs DisplayForm="YCP00101">
+                <DynamicAttributes OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey"/>          <StaticAttributes ScreenMode="SaveAs" />
+            </SaveAs>
+            <Delete >
+                <API Servlet="com.yantra.ycp.productivity.ui.backend.ProductivityReferenceServlet" APIName="recursiveDelete" Message="Deleting_Productivity_Type">
+                    <DynamicAttributes OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey"/>
+                </API>
+            </Delete>
+        </ListInfo>
+            <API Servlet="/yantra/entities/ProductivityType/list" APIName="" Message="Retrieving_Productivity_Type_List">
+                 <DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" />
+                 <StaticAttributes  EquipmentTypeQryType="VOID" /> 
+            </API>
+    </YWMCPT01>
+    </Entity>
+	<Entity EntityTitle="Common_Code" EntityName="CommonCode" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="CommonCodeKey">
+      <PermanentRecordAttributes SystemDefinedCode="Y"/>
+
+	  <YVSC011 Title="Modification_Reasons" ScreenType="List">
+            <ConfigurationAttributes  CodeType="WORK_ORDER_MOD_RSN">
+                <ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV016"  IsPrimary="Y"/>
+                <ApplicationSpecificAttributes ApplicationCode="omd" PermissionId="YSOMD070"/>
+            </ConfigurationAttributes>
+             <ListInfo NamePrefix="/" ChildTag="CommonCode">
+                <List AttributeName="@CodeValue" ColumnTitle="Modification_Reason" DataType="Text-100"/>
+                <List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-40"/>
+                   <Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+                   <SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+                <StaticAttributes CodeType="WORK_ORDER_MOD_RSN" SystemDefinedCode="N"/>
+               </SaveAs>
+                   <Delete>
+                      <API Servlet="/yantra/entities/CommonCode/delete" APIName="" Message="Message_Deleting_Modification_Reason"/>
+                   </Delete>
+                   <CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+                <StaticAttributes CodeType="WORK_ORDER_MOD_RSN" SystemDefinedCode="N"/>
+                  <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+               </CreateNew>
+             </ListInfo>
+             <API Servlet="/yantra/entities/CommonCode/list" APIName="" Message="Message_Retrieving_Search_Results">
+                <StaticAttributes CodeType="WORK_ORDER_MOD_RSN" />
+                 <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+             </API>
+       </YVSC011>
+
+	  <YWMC111 Title="Request_Type_List" ScreenType="List">
+        <ConfigurationAttributes  CodeType="REQUEST_TYPE">
+			<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMSE052" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+         <ListInfo NamePrefix="/" ChildTag="CommonCode">
+            <List AttributeName="@CodeValue" ColumnTitle="Request_Types" DataType="Text-100"/>
+            <List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-40"/>
+               <Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+               <SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+            <StaticAttributes CodeType="REQUEST_TYPE" SystemDefinedCode="N"/>
+           </SaveAs>
+               <Delete>
+                  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" Message="Message_Deleting_Count_Request_Type"/>
+               </Delete>
+           <CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+            <StaticAttributes CodeType="REQUEST_TYPE" SystemDefinedCode="N"/>
+             <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+           </CreateNew>
+         </ListInfo>
+         <API Servlet="/yantra/entities/CommonCode/list" APIName="" Message="Message_Retrieving_Search_Results">
+            <StaticAttributes CodeType="REQUEST_TYPE" />
+		</API>
+      </YWMC111>
+
+	 </Entity>
+
+	 <Entity EntityTitle="Device" EntityName="Device" PrimaryKeyAttributeName="DeviceKey">
+		<ConfigurationAttributes  TableName="YFS_DEVICE">
+			<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS073" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YWMCD01 Title="DeviceSetup" ScreenType="Tree" TitleSuffixAttr="">
+			<TreeInfo RelationshipAttribute="Device">
+				<NodeDescriptorList>
+					<NodeDescriptor NodeName="DeviceTypes" LabelAttribute="Description" Icon="com/yantra/ycp/ui/icons/location.gif" TooltipAttribute="Description"/>
+					<NodeDescriptor NodeName="DeviceType" LabelAttribute="Description" Icon="com/yantra/ycp/ui/icons/status.gif" TooltipAttribute="Description"/>
+					<NodeDescriptor NodeName="DeviceSubType" LabelAttribute="Description" Icon="com/yantra/ycp/ui/icons/location.gif" TooltipAttribute="Description"/>
+					<NodeDescriptor NodeName="Device" LabelAttribute="DeviceId" Icon="com/yantra/ycp/ui/icons/milestone.gif" TooltipAttribute="DeviceId"/>
+				</NodeDescriptorList>			
+				<Get>
+					<API Servlet="com.yantra.ycp.device.ui.backend.YCPModelingDeviceAPI" APIName="getDeviceTreeMetaData" Message="Loading_Device_Tree">
+						<DynamicAttributes OrganizationCode="@Node" CallingOrganizationCode="@Node"/>
+					</API>    
+				</Get>
+				<CreateNew DisplayForm="YCPDV106" DisplayMode="Dialog">
+					<DynamicAttributes OrganizationCode="@Node" CallingOrganizationCode="@Node"  DeviceType="@DeviceType" DeviceSubType="@DeviceSubType"/>
+				</CreateNew>
+				<Modify DisplayForm="YCPDV106" DisplayMode="Dialog"/>
+				<CreateNewDeviceType DisplayForm="YCPDV105" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@Node" CallingOrganizationCode="@Node" />
+				</CreateNewDeviceType>
+				<CreateNewDeviceSubType DisplayForm="YCPDV108" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@Node" CallingOrganizationCode="@Node" DeviceType="@DeviceType"/>
+				</CreateNewDeviceSubType>
+				<SaveAs DisplayForm="YCPDV106" DisplayMode="Dialog">
+					<DynamicAttributes OrganizationCode="@Node" CallingOrganizationCode="@Node" DeviceType="@DeviceType" DeviceSubType="@DeviceSubType"/>
+				</SaveAs>
+			</TreeInfo>
+		</YWMCD01>
+		<YWMCDL110 Title="DeviceSetup" ScreenType="List" TitleSuffixAttr="">
+				<ListInfo NamePrefix="/" ChildTag="Device">
+					<List AttributeName="@DeviceType" ColumnTitle="Device_Type" DataType="Text-40" />
+					<List AttributeName="@DeviceId" ColumnTitle="Device_ID" DataType="Text-40" />           		
+				</ListInfo>
+				<API Servlet="/yantra/entities/Device/list" APIName="" Message="Retrieving_Device_List">
+				</API>
+		</YWMCDL110>
+	</Entity>
+<Entity EntityTitle="Calendar" EntityName="Calendar" PrimaryKeyAttributeName="CalendarKey">
+    <ConfigurationAttributes  TableName="YFS_CALENDAR">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMSM013" IsPrimary="Y"/>
+    </ConfigurationAttributes>
+		<YWMC098 Title="Resource_Calendar_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Resource_Details"/>
+			</Get>
+            <CreateNew>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPCalendarAPI" APIName="createCalendar" Message="Message_Creating_Calendar">
+			   <DynamicAttributes Node="@Node"/>
+			   </API>
+            </CreateNew>
+			<Modify>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPCalendarAPI" APIName="changeCalendarDetail" Message="Message_Creating_Calendar">
+					<DynamicAttributes Node="@Node"/>
+				</API>
+			</Modify>
+			<!-- <Save>
+				<API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiUpdateAPI" Message="Saving_Service_Resource_Calendar">
+					<DynamicAttributes CalendarKey="@CalendarKey" ServiceResourceKey="@ServiceResourceKey" />
+				</API>
+            </Save> -->
+         </DetailInfo>
+         <MasterData>			
+			<Table Name="EffectivePeriod" XMLName="EffectivePeriod"> 
+				<DynamicAttributes CalendarKey="@ParentCalendarKey"/>
+            </Table>
+         </MasterData>
+		</YWMC098> 
+		 <YWMC270 Title="Calendar_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Calendar">
+			<List AttributeName="@CalendarId" ColumnTitle="Calendar_Id" DataType="Text-40"/>
+            <List AttributeName="@CalendarDescription" ColumnTitle="Calendar_Description" DataType="Text-100"/>
+         </ListInfo>
+         <API Servlet="/yantra/entities/Calendar/list" APIName="" Message="Message_Retrieving_Search_Results">
+            <StaticAttributes MeantForInternal="N"/>
+		</API>
+      </YWMC270>
+	  <YWMC271 Title="Calendar_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Calendar">
+			<List AttributeName="@CalendarId" ColumnTitle="Calendar_Id" DataType="Text-40"/>
+            <List AttributeName="@CalendarDescription" ColumnTitle="Calendar_Description" DataType="Text-100"/>
+			<CreateNew DisplayForm="YCPPM602" DisplayMode="Dialog">
+					<DynamicAttributes OrganizationCode="@OrganizationCode" Node="@Node"/>
+				</CreateNew>
+         </ListInfo>
+         <API Servlet="/yantra/entities/Calendar/list" APIName="" Message="Message_Retrieving_Search_Results">
+		</API>
+      </YWMC271>
+</Entity>
+
+<Entity  EntityTitle="Shift" EntityName="Shift" PrimaryKeyAttributeName="ShiftKey">
+		<YWMC099 Title="Shifts" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Shift">
+				<List AttributeName="@ShiftName" ColumnTitle="Shift_Name" DataType="Text-100" Editable="N" EditableAddRow="N"
+				 EditableComponent="textbox">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@ShiftStartTime" ColumnTitle="Shift_Start_Time" DataType="HourMinuteTime" Editable="N"  EditableAddRow="N"
+				 EditableComponent="textbox">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@ShiftEndTime" ColumnTitle="Shift_End_Time" DataType="HourMinuteTime" Editable="N"  EditableAddRow="N"
+				 EditableComponent="textbox">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@SundayValid" ColumnTitle="Sunday_Valid" DataType="Boolean" Editable="Y"  EditableAddRow="N"
+				 EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@MondayValid" ColumnTitle="Monday_Valid" DataType="Boolean" Editable="Y"  EditableAddRow="N"
+				 EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@TuesdayValid" ColumnTitle="Tuesday_Valid" DataType="Boolean" Editable="Y"  EditableAddRow="N"
+				 EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@WednesdayValid" ColumnTitle="Wednesday_Valid" DataType="Boolean" Editable="Y"  EditableAddRow="N"
+				 EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@ThursdayValid" ColumnTitle="Thursday_Valid" DataType="Boolean" Editable="Y"  EditableAddRow="N"
+				 EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@FridayValid" ColumnTitle="Friday_Valid" DataType="Boolean" Editable="Y"  EditableAddRow="N"
+				 EditableComponent="checkbox">
+				</List>
+				<List AttributeName="@SaturdayValid" ColumnTitle="Saturday_Valid" DataType="Boolean" Editable="Y"  EditableAddRow="N"
+				 EditableComponent="checkbox">
+				</List>
+				<Delete>
+				   <API Servlet="/yantra/entities/Shift/delete" APIName="" Message="Message_Deleting_Shift"/>
+				</Delete>
+				<Modify>
+					<API Servlet="/yantra/entities/Shift/modify" APIName="" 	Message="Message_Saving_Shift"/>
+				</Modify>				
+				<CreateNew ActionResourceID="YWMC099A01">
+					<DynamicAttributes ShiftEffectivePeriodKey="@ShiftEffectivePeriodKey"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/Shift/list" APIName="" Message="Message_Retrieving_Search_Results">
+                <DynamicAttributes ShiftEffectivePeriodKey="@ShiftEffectivePeriodKey"/>
+			</API>
+        </YWMC099>
+	</Entity>
+	<Entity EntityTitle="Res_Pool" EntityName="ResourcePool" PrimaryKeyAttributeName="ResourcePoolKey">
+    <ConfigurationAttributes  TableName="YFS_RES_POOL" SectionName="RESOURCE_PLANNING">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMSM013" IsPrimary="Y"/>
+    </ConfigurationAttributes>
+	<YWMC081 Title="Resource_Pool_Search" ScreenType="Search">
+		<SearchInfo ListFormName="YWMC082" ListPanel="pnlResourcePoolList">
+		<DynamicAttributes ProviderOrganizationCode="@Node" CallingOrganizationCode="@Node"/>
+		<StaticAttributes Purpose="WMS-RP" ItemGroupCode="PS" />
+		</SearchInfo>
+		<MasterData>
+				<Table Name="QryType" XMLName="QryType"/>
+		 </MasterData>
+		 <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Loading_Resource_Pool_Search">
+		 </API>
+	 </YWMC081>
+	 <YWMC082 Title="Resource_Pools" ScreenType="List">
+		<ListInfo NamePrefix="/" ChildTag="ResourcePool">
+				<List AttributeName="@ResourcePoolId" ColumnTitle="Resource_Pool_Id" DataType="ID-24"/>
+				<List AttributeName="@ResourcePoolDescription" ColumnTitle="Resource_Pool_Description" DataType="Text-100"/>
+				<List AttributeName="@ServiceSupervisorId" ColumnTitle="Supervisor_ID" DataType="UserId"/>
+			 <CreateNew DisplayForm="YWMC083">
+				<DynamicAttributes ProviderOrganizationCode="@Node" NodeKey="@NodeKey" Node="@Node"/>
+					<StaticAttributes ItemGroupCode="PS" Purpose="WMS-RP" CapacityInfoAvailable="Y"/>
+			</CreateNew>
+		  <SaveAs DisplayForm="YWMC083" DisplayMode="Dialog" NextAction="Modify">
+				 <DynamicAttributes ProviderOrganizationCode="@Node" NodeKey="@Node" Node="@Node" ResourcePoolId="@ResourcePoolId" ServiceSlotGroupId="@ServiceSlotGroupId" CapacityOrganizationCode="@CapacityOrganizationCode" ItemGroupCode="@ItemGroupCode" Purpose="@Purpose" CapacityInfoAvailable="@CapacityInfoAvailable"/>
+		  </SaveAs>
+		  <Modify DisplayForm="YWMC083" />
+				<DynamicAttributes ProviderOrganizationCode="@Node" NodeKey="@NodeKey" Node="@Node" ResourcePoolId="@ResourcePoolId" ServiceSlotGroupId="@ServiceSlotGroupId" CapacityOrganizationCode="@CapacityOrganizationCode" ItemGroupCode="@ItemGroupCode" Purpose="@Purpose" CapacityInfoAvailable="@CapacityInfoAvailable"/>
+		  <Delete>
+			 <API Servlet="/yantra/entities/ResourcePool/delete" APIName="" Message="Deleting_Resource_Pool"/>
+		  </Delete>
+		 </ListInfo>
+		<API Servlet="/yantra/entities/ResourcePool/list" APIName="" Message="Retrieving_Resource_Pools"/>
+	</YWMC082>
+	<YWMC083 Title="Resource_Pool_Details" ScreenType="Detail">
+		 <DetailInfo>
+			 <Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"
+				  Message="Loading_Resource_Pool_Details"/>
+				<InnerPanels>
+				   <ListPanel FormName="YWMC084" ListPanel="pnlResources"  InsertUnderElement="xml:/ResourcePool" >
+						<DynamicAttributes Node="@Node" CallingNodeKey="@Node" NodeKey="@NodeKey" ResourcePoolKey="@ResourcePoolKey"/> 
+				   </ListPanel>
+				</InnerPanels> 
+			  </Get>
+			     <CreateNew>
+               <API Servlet="/yantra/entities/ResourcePool/create" APIName="" Message="Message_Creating_Resource_Pool"/>
+          </CreateNew>
+          <Modify>
+               <API Servlet="/yantra/entities/ResourcePool/modify" APIName="" Message="Modify_Resource_Pool"/>
+          </Modify>
+			<LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtResourcePoolID"/>
+            </LogicalKeys>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="User" XMLName="User">
+					<DynamicAttributes OrganizationKey="@Node"/>
+				</Table>
+			</MasterData>
+	 </YWMC083>
+	<YWMC096 Title="Resource_Pool_Subscriptions" ScreenType="Subscription">
+         <SubscriptionListInfo SubscriptionSubscribedNamePrefix="/TaskTypeResourcePools" SubscriptionSubscribedChildTag="TaskTypeResourcePool" SubscriptionFullListNamePrefix="/MasterData/ResourcePools" SubscriptionFullListChildTag="ResourcePool">
+            <List AttributeName="@ResourcePoolId" ColumnTitle="Resource_Pool_Id" DataType="ID-24"/>
+            <List AttributeName="@ResourcePoolDescription" ColumnTitle="Resource_Pool_Description" DataType="FreeText-100"/>
+          </SubscriptionListInfo>
+      </YWMC096>
+	</Entity>
+		<Entity EntityTitle="Service_Resource" EntityName="ServiceResource"
+			PrimaryKeyAttributeName="ServiceResourceKey ">
+			<ConfigurationAttributes  TableName="YFS_SERVICE_RESOURCE" SectionName="RESOURCE_PLANNING">
+				<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS084" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+		<YWMC084 Title="Resources" ScreenType="List">
+			 <ListInfo NamePrefix="/" ChildTag="ServiceResource">
+				<List AttributeName="@ServiceResourceId" ColumnTitle="Resource_Id" DataType="ID-24"/>
+				<List AttributeName="@Notes" ColumnTitle="Resource_Name" DataType="Text-4000"/>
+					 <CreateNew DisplayForm="YWMC194" DisplayMode="Dialog">
+						 <DynamicAttributes OrganizationKey="@Node" ResourcePoolKey="@ResourcePoolKey"/>
+					</CreateNew>
+					<Modify DisplayForm="YWMC196" DisplayMode="Dialog">
+					    <DynamicAttributes OrganizationKey="@Node" NodeKey="@Node" ResourcePoolKey="@ResourcePoolKey"/>
+					</Modify>
+					<Delete>
+					   <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="deleteServiceResource"  Message="Message_Removing_Resource_From_Pool"/>
+					</Delete> 
+     		 </ListInfo>
+			  <API Servlet="/yantra/entities/ServiceResource/list" APIName="" Message="Listing_All_Resources">
+			  </API>            
+		</YWMC084>
+		<YWMC196 Title="Resource_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Resource_Details"/>
+            </Get>
+         </DetailInfo>
+		</YWMC196> 
+	</Entity>
+	<Entity EntityTitle="Ship_Node" EntityName="ShipNode"
+			PrimaryKeyAttributeName="ShipnodeKey ">
+			<ConfigurationAttributes  TableName="YFS_SHIP_NODE" SectionName="RESOURCE_PLANNING">
+				<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS085" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+		<YWMC085 Title="Node_Attributes_for_Planning" ScreenType="Detail">
+		 <DetailInfo>
+			 <Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="">
+					<DynamicAttributes ShipnodeKey="@Node" ShipNode="@Node"/>
+				</API>
+				<InnerPanels>
+				   <ListPanel FormName="YWMC086" ListPanel="pnlServiceSlot"  InsertUnderElement="xml:/ShipNode" >
+						<DynamicAttributes Node="@Node" CallingNodeKey="@Node" NodeKey="@NodeKey" ParentSlotKey="/ServiceSlotGroup/ServiceSlotList/ServiceSlot/@ServiceSlotKey"/>
+ 				   </ListPanel>
+				 </InnerPanels>
+			  </Get>
+	         <Modify>
+				<API Servlet="/yantra/entities/ShipNode/modify" APIName="" Message="Modifying_Planning_Attributes"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="/yantra/entities/ShipNode/modify" APIName="" Message="Saving_Planning_Attributes"/>
+			</CreateNew>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="CommonCode" XMLName="UOM">
+						<StaticAttributes CodeType="PLANNING_UOM_TYPE"/>
+				</Table>
+				<Table Name="Calendar" XMLName="Calendar">
+				   <DynamicAttributes OrganizationCode="@NodeKey"/>
+				   <StaticAttributes MeantForInternal="N"/>
+					<Template>
+						 <Calendar/>
+					 </Template>            
+				</Table>	
+			 </MasterData>
+	 </YWMC085>
+	 </Entity>
+	<Entity EntityTitle="Service_Slot" EntityName="ServiceSlot"
+			PrimaryKeyAttributeName="ServicceSlotKey ">
+			<ConfigurationAttributes  TableName="YFS_SERVICE_SLOT" SectionName="RESOURCE_PLANNING">
+				<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS085" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+		<YWMC086 Title="Service_Slots" ScreenType="List">
+			 <ListInfo NamePrefix="/" ChildTag="ServiceSlot">
+				<List AttributeName="@ServiceSlotDesc" ColumnTitle="Service_Slot_Description" DataType="Text-100" Editable="N" EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@StartTime" ColumnTitle="Start_Time" DataType="HourMinuteTime" Editable="Y" EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@EndTime" ColumnTitle="End_Time" DataType="HourMinuteTime" Editable="Y" EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<Delete>
+                    <API Servlet="/yantra/entities/ServiceSlot/delete" APIName=""
+                        Message="Deleting_Service_Slot"/>
+                </Delete>
+                <CreateNew ActionResourceID = "YWMC086A01">
+                    <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+					<StaticAttributes ParentSlotKey="AllDaySlot"/>
+                </CreateNew>
+                <Modify ActionResourceID = "YWMC086A02">
+                    <DynamicAttributes Node="@Node" NodeKey="@NodeKey"/>
+                </Modify>
+                <Save>
+                <API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiUpdateAPI" Message="Saving_Service_Slot"/>
+                </Save>
+			 </ListInfo>
+			  <API Servlet="/yantra/entities/ServiceSlot/list" APIName="" Message="Retrieving_Service_Resource_List">
+			  </API> 
+			  <MasterData>
+				<Table Name="User" XMLName="User">
+					<DynamicAttributes OrganizationKey="@Node"/>
+				</Table>	
+			 </MasterData> 
+		</YWMC086>
+	</Entity>
+<Entity EntityTitle="Planned_Task_Cond_Set" EntityName="PlannedTaskConditionSet" PrimaryKeyAttributeName="PlannedTaskConditionSetKey">
+        <ConfigurationAttributes  TableName="YFS_PLANNED_TASK_COND_SET">
+            <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS086" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+            <YWMC088 Title="Condition_Task_Type_Association" ScreenType="Tree" TitleSuffixAttr="">
+                <TreeInfo RelationshipAttribute="ConditionSetName">
+                    <NodeDescriptorList>
+                        <NodeDescriptor NodeName="PlannedTaskConditionSets" LabelAttribute="Description" Icon="com/yantra/wms/ui/icons/location.gif" />
+                        <NodeDescriptor NodeName="PlannedTaskConditionSet" LabelAttribute="ConditionSetName" Icon="com/yantra/ycp/ui/icons/conditiongroup.gif" />
+                        <NodeDescriptor NodeName="PlannedTaskCondition" LabelAttribute="ConditionName" Icon="com/yantra/ycp/ui/icons/condition.gif" TooltipAttribute=""/>
+                    </NodeDescriptorList>
+					 <FilterNodeList>
+						<FilterNode NodeName="PlannedTaskConditions"/>
+						<FilterNode NodeName="Condition"/>
+						<FilterNode NodeName="PlannedTaskConditionResults"/>
+					 </FilterNodeList> 
+                    <Get>
+						<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"  Message="">
+                    <DynamicAttributes Node="@Node"/>
+				  </API>
+				</Get>
+					<CreateNew DisplayForm="YWMC089" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey"/>
+					</CreateNew>
+					<SaveAs DisplayForm="YWMC198" DisplayMode="Dialog">						
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" PlannedTaskConditionSetKey="@PlannedTaskConditionSetKey" PlannedTaskConditionKey="@PlannedTaskConditionKey"/>
+						<StaticAttributes ProcessTypeKey="RESOURCE_PLANNING" Type="STATIC" ConditionType="WMS-RP"/>
+					</SaveAs>
+					<Modify DisplayForm="YWMC198" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" PlannedTaskConditionSetKey="@PlannedTaskConditionSetKey" PlannedTaskConditionKey="@PlannedTaskConditionKey"/>
+						<StaticAttributes ProcessTypeKey="RESOURCE_PLANNING" Type="STATIC" ConditionType="WMS-RP"/>
+					</Modify>
+					<ModifyConditionSet DisplayForm="YWMC089" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" PlannedTaskConditionSetKey="@PlannedTaskConditionSetKey"/>
+					</ModifyConditionSet>
+					<CreateNewCondition DisplayForm="YWMC198" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" PlannedTaskConditionSetKey="@PlannedTaskConditionSetKey" OwnerKey="@Node"/>
+						<StaticAttributes ProcessTypeKey="RESOURCE_PLANNING" />
+					</CreateNewCondition>
+					<ModifyNewCondition DisplayForm="YWMC089" DisplayMode="Dialog">
+						<DynamicAttributes CallingOrganizationCode="@Node" OrganizationCode="@Node" Node="@Node" NodeKey="@NodeKey" PlannedTaskConditionSetKey="@PlannedTaskConditionSetKey"/>
+					</ModifyNewCondition>
+					<DeleteConditionSet>
+						 <API Servlet="/yantra/entities/PlannedTaskConditionSet/delete" APIName="" Message="Deleting_Planned_Task_Condition_Set"/>
+					</DeleteConditionSet>
+					<Delete>
+						 <API Servlet="/yantra/entities/PlannedTaskCondition/delete" APIName="" Message="Deleting_Planned_Task_Condition"/>
+					</Delete>
+                </TreeInfo>
+            </YWMC088>
+			<YWMC089 Title="Condition_Set" ScreenType="Detail">
+				 <DetailInfo>
+					 <Get>
+						<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message=""/>
+					 </Get>
+					 <Modify>
+						<API Servlet="/yantra/entities/PlannedTaskConditionSet/modify" APIName="" Message="Modifying_Planning_Task_Condition_Set"/>
+					</Modify>
+					<CreateNew>
+						<API Servlet="/yantra/entities/PlannedTaskConditionSet/create" APIName="" Message="Creating_Planning_Task_Condition_Set"/>
+					</CreateNew>
+				</DetailInfo>
+			</YWMC089>
+		</Entity>
+		<Entity EntityTitle="Planned_Task_Cond" EntityName="PlannedTaskCondition" PrimaryKeyAttributeName="PlannedTaskConditionKey">
+			<ConfigurationAttributes  TableName="YFS_PLANNED_TASK_COND">
+			    <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS086" IsPrimary="Y"/>
+			 </ConfigurationAttributes>
+			<YWMC198 Title="Planned_Task_Condition" ScreenType="Detail">
+				 <DetailInfo>
+					 <Get>
+						<InnerPanels>
+							<ListPanel FormName="YWMC193" ListPanel="pnlTaskType" InsertUnderElement="xml:/PlannedTaskCondition" NeverDisable="Y">
+								<DynamicAttributes CallingNodeKey="@Node" NodeKey="@Node" Node="@Node" PlannedTaskCondition="@PlannedTaskCondition" PlannedTaskConditionKey="@PlannedTaskConditionKey" />		
+							</ListPanel>
+						</InnerPanels>
+						<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message=""/>
+					 </Get>
+					 <Modify>
+						<API Servlet="/yantra/entities/PlannedTaskCondition/modify" APIName="" Message="Modifying_Planning_Task_Condition"/>
+					</Modify>
+					<CreateNew>
+						<API Servlet="/yantra/entities/PlannedTaskCondition/create" APIName="" Message="Creating_Planning_Task_Condition"/>
+					</CreateNew>
+				</DetailInfo>
+			</YWMC198> 
+		</Entity>
+		<Entity EntityTitle="User" EntityName="User" PrimaryKeyAttributeName="UserKey">
+		<ConfigurationAttributes  TableName="YFS_USER">
+			<ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS084" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <PermanentRecordAttributes UserKey="SYSTEM_USER"/>
+	  <YWMC194 Title="Find_User_To_Add_To_Resource_Pool" ScreenType="Search">
+      <SearchInfo ListFormName="YWMC199" ListPanel="pnlUserSearchList">
+	    <Search>
+            <RemoveEmptyNodes >
+                <RemoveEmptyNode NodeToBeRemoved="/UserGroupLists"/>
+                <RemoveEmptyNode NodeToBeRemoved="/QueueSubscriptionList"/> 
+            </RemoveEmptyNodes>
+        </Search>
+     </SearchInfo>
+         <API Servlet="com.yantra.ycp.sm.ui.backend.YCPUserAPI" APIName="getUserSearchCriteriaXML" Message="Message_Loading_Search_Criteria"/>
+      </YWMC194>
+	  <YWMC199 Title="Search_Results" ScreenType="List">
+		<DynamicAttributes OrganizationKey="@OrganizationKey"/>
+         <ListInfo NamePrefix="/" ChildTag="User" MultiSelection="Y">
+            <List AttributeName="@Loginid" ColumnTitle="User_ID" DataType="Text-50"/>
+            <List AttributeName="@Username" ColumnTitle="User_Name" DataType="Text-50"/>
+        <AddToRelationship RelationshipEntityName="ServiceResource">
+           <API Servlet="com.yantra.inv.uibackend.INVResPoolAPI" APIName="createServiceResource" Message="Message_Adding_User_To_Resource_Pool"/>
+           <DynamicAttributes ResourcePoolKey="@ResourcePoolKey" ServiceResourceId="@Loginid" Notes="@Username" NodeKey="@OrganizationKey" Node="@OrganizationKey"/>
+        </AddToRelationship>
+        </ListInfo>
+        <API Servlet="/yantra/entities/User/list" APIName="" Message="Message_Retrieving_Search_Results">
+          <DynamicAttributes OrganizationKey="@OrganizationKey"/>
+	    </API>
+      </YWMC199>
+	  <YWMC266 Title="Search_Results" ScreenType="List">
+		<DynamicAttributes OrganizationKey="@OrganizationKey"/>
+         <ListInfo NamePrefix="/" ChildTag="User" MultiSelection="Y">
+            <List AttributeName="@Loginid" ColumnTitle="User_ID" DataType="Text-50"/>
+            <List AttributeName="@Username" ColumnTitle="User_Name" DataType="Text-50"/>       
+        </ListInfo>
+        <API Servlet="/yantra/entities/User/list" APIName="" Message="Message_Retrieving_Search_Results">
+          <DynamicAttributes OrganizationKey="@OrganizationKey"/>
+	    </API>
+      </YWMC266>
+	  </Entity>
+	  <Entity EntityTitle="Planned_Task_Cond_Rslt" EntityName="PlannedTaskConditionResult" PrimaryKeyAttributeName="PlannedTaskConditionResultKey">
+			<ConfigurationAttributes  TableName="YFS_PLANNED_TASK_COND_RSLT">
+			    <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMS086" IsPrimary="Y"/>
+			 </ConfigurationAttributes>
+
+			<YWMC193 Title="Task_Types" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="PlannedTaskConditionResult">
+             <List AttributeName="@TaskType" ColumnTitle="Task_Type" DataType="TaskType" Editable="N" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor" EditableAddRow="Y">
+                    <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="TaskType"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="TaskTypeName"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.dataType" Value="TaskType"/>
+                    <ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/TaskTypes@TaskType"/>
+             </List>
+			 <List AttributeName="@PlannedDateType" ColumnTitle="Date_on_which_task_is_expected_to_be_completed" DataType="ID-40" Editable="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor" EditableAddRow="Y">
+				<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CodeValue"/>
+				 <ComponentClientProperty Name="YFCXMLBinding.dataType" Value="CommonCode"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CodeShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/ExpectedDates@CommonCode"/>
+             </List>
+            <CreateNew ActionResourceID = "YWMC193A01">
+                <DynamicAttributes NodeKey="@Node" Node="@Node"/>   
+            </CreateNew>
+            <Modify ActionResourceID = "YWMC193A02">
+                 <DynamicAttributes NodeKey="@Node" Node="@Node"/>   
+            </Modify>
+			<Delete >
+				<API Servlet="/yantra/entities/PlannedTaskConditionResult/delete" APIName="" Message="removing_planned_task_condition_result"/>
+            </Delete>
+		</ListInfo>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"  
+                Message="Retrieving_Task_Type_List">	
+				<DynamicAttributes NodeKey="@Node" Node="@Node" PlannedTaskConditionKey="@PlannedTaskConditionKey"/>
+         </API>
+        <MasterData>
+                <Table Name="TaskType" XMLName="TaskType">                    
+					<DynamicAttributes OrganizationCode="@Node" />
+                </Table>
+				<Table Name="CommonCode" XMLName="ExpectedDate">
+						<StaticAttributes CodeType="PLANNING_DATE_TYPE"/>
+					</Table>
+        </MasterData>
+      </YWMC193>
+	 </Entity>
+</Entities>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table stores Service Skill information."
+            EntityType="CATALOG_MASTER" Extensible="Y" Module="ycm"
+            Name="Service_Skill" Prefix="YFS_"
+            TableName="YFS_SERVICE_SKILL" TableType="MASTER" XMLName="ServiceSkill">
+            <Attributes>
+                <Attribute ColumnName="SERVICE_SKILL_KEY" DataType="Key"
+                    DefaultValue="' '  "
+                    Description="Primary key attribute of YFS_SERVICE_SKILL."
+                    Name="Service_Skill_Key" Nullable="false" XMLName="ServiceSkillKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="Organization code for which a Service Skill is defined."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SERVICE_SKILL_ID"
+                    DataType="ID-40" DefaultValue="' '  "
+                    Description="Identifier of a Service Skill."
+                    Name="Service_Skill_Id" Nullable="false" XMLName="ServiceSkillId"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="FreeText-100"
+                    DefaultValue="' '  "
+                    Description="Description of the Service Skill."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SERVICE_SKILL_PK">
+                <Attribute Name="Service_Skill_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SERVICE_SKILL_I1"
+                    Name="YFS_SERVICE_SKILL_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="SERVICE_SKILL_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ServiceSkills"
+                    ChildXMLName="ServiceSkill" DeleteCascade="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="ORGANIZATION_CODE, SERVICE_SKILL_ID"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table stores Service Skill information for the service item."
+            EntityType="CATALOG_MASTER" Extensible="Y" Module="ycm"
+            Name="Item_Service_Skill" Prefix="YFS_"
+            TableName="YFS_ITEM_SERVICE_SKILL" TableType="MASTER" XMLName="ItemServiceSkill"
+            LockingEntity="Item">
+            <Attributes>
+                <Attribute ColumnName="ITEM_SERVICE_SKILL_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="Primary key attribute of YFS_ITEM_SERVICE_SKILL."
+                    Name="Item_Service_Skill_Key" Nullable="false" XMLName="ItemServiceSkillKey"/>
+                <Attribute ColumnName="ITEM_KEY" DataType="Key"
+                    DefaultValue="' '  "
+                    Description="Primary key attribute of the Service Item entry in YFS_ITEM table."
+                    Name="Item_Key" Nullable="false" XMLName="ItemKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="Organization code for which a Service Skill is defined."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SERVICE_SKILL_ID"
+                    DataType="ID-40" DefaultValue="' '  "
+                    Description="Identifier of a Service Skill."
+                    Name="Service_Skill_Id" Nullable="false" XMLName="ServiceSkillId"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ITEM_SERV_SKILL_PK">
+                <Attribute Name="Item_Service_Skill_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ITEM_SERV_SKILL_I1"
+                    Name="YFS_ITEM_SERVICE_SKILL_I1" Unique="true">
+                    <Column Name="ITEM_KEY"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="SERVICE_SKILL_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ItemServiceSkills"
+                    ChildXMLName="ItemServiceSkill"
+                    DeleteValidationError="YDB100111_55SP2"
+                    ForeignEntity="Service_Skill" Name="Service_Skill"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="ServiceSkill">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Service_Skill_Id" ParentName="Service_Skill_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ItemServiceSkillList"
+                    ChildXMLName="ItemServiceSkill" DeleteCascade="true"
+                    ForeignEntity="Item" Name="Item"
+                    Type="Bidirectional" XMLName="Item">
+                    <Attribute Name="Item_Key" ParentName="Item_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="ITEM_KEY,ORGANIZATION_CODE, SERVICE_SKILL_ID"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="Y"
+            Description="This table stores Service Skill information for the service item association."
+            EntityType="CATALOG_MASTER" Extensible="Y" Module="ycm"
+            Name="Item_Service_Assoc_Skill" Prefix="YFS_"
+            TableName="YFS_ITEM_SERVICE_ASSC_SKILL" TableType="MASTER" XMLName="ItemServiceAssocSkill"
+            LockingEntity="Item_Service_Assoc">
+            <Attributes>
+                <Attribute ColumnName="ITEM_SERVICE_ASSC_SKILL_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="Primary key attribute of YFS_ITEM_SERVICE_ASSC_SKILL."
+                    Name="Item_Service_Assoc_Skill_Key" Nullable="false" XMLName="ItemServiceAssocSkillKey"/>
+                <Attribute ColumnName="ITEM_SERVICE_ASSOC_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="Primary key attribute of the Service Association in YFS_ITEM_SERVICE_ASSOC table."
+                    Name="Item_Service_Assoc_Key" Nullable="false" XMLName="ItemServiceAssocKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="Organization code for which a Service Skill is defined."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SERVICE_SKILL_ID"
+                    DataType="ID-40" DefaultValue="' '  "
+                    Description="Identifier of a Service Skill."
+                    Name="Service_Skill_Id" Nullable="false" XMLName="ServiceSkillId"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="ITM_ASS_SER_SKL_PK">
+                <Attribute Name="Item_Service_Assoc_Skill_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ITM_ASS_SER_SKL_I1"
+                    Name="YFS_ITEM_SERVICE_ASSC_SKILL_I1" Unique="true">
+                    <Column Name="ITEM_SERVICE_ASSOC_KEY"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="SERVICE_SKILL_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ItemServiceAssocSkills"
+                    ChildXMLName="ItemServiceAssocSkill"
+                    DeleteValidationError="YDB100112_55SP2"
+                    ForeignEntity="Service_Skill" Name="Service_Skill"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="ServiceSkill">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Service_Skill_Id" ParentName="Service_Skill_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ItemServiceAssocSkillList"
+                    ChildXMLName="ItemServiceAssocSkill"
+                    DeleteCascade="true"
+                    ForeignEntity="Item_Service_Assoc"
+                    Name="Item_Service_Assoc" Type="Bidirectional" XMLName="ItemServiceAssoc">
+                    <Attribute Name="Item_Service_Assoc_Key" ParentName="Item_Service_Assoc_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="ITEM_SERVICE_ASSOC_KEY,ORGANIZATION_CODE, SERVICE_SKILL_ID"/>
+        </Entity>
+    </Entities>
+</DBSchema>

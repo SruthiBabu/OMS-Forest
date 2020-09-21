@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2010, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Resource ServiceName="SAA_GenerateQuoteProposal_9.0">
+
+            <Group Name="ProposalHeader" DisplayName="Quote Header">
+				<Attribute Name="ProposalDate" DisplayName="Proposal Date" Value="Y"/>
+				<Attribute Name="Status" DisplayName="Status" Value="Y"/>
+				<Attribute Name="ExpirationDate" DisplayName="Expiration Date" Value="Y"/>
+				<Attribute Name="ProposalTitle" DisplayName="Proposal Title" Value="Y"/>
+				<Attribute Name="ProposalID" DisplayName="Proposal ID" Value="Y"/>
+			</Group>			
+
+            <Group Name="Address" DisplayName="Address">
+				<Attribute Name="BillTo" DisplayName="Bill To Address" Value="Y"/>
+				<Attribute Name="ShipTo" DisplayName="Ship To Address" Value="Y"/>
+			</Group>
+			
+			<Group Name="OrderLines" DisplayName="Lines">
+				<Attribute Name="QuoteLines" DisplayName="Quote Lines" Value="Y"/>
+				<Attribute Name="RecommendedLines" DisplayName="Recommended Lines" Value="Y"/>
+			</Group>
+
+            <Group Name="PricingInformation" DisplayName="Quote Totals">
+				<Attribute Name="SubTotal" DisplayName="Line Sub Total" Value="Y"/>
+				<Attribute Name="Discounts" DisplayName="Adjustments" Value="Y"/>
+				<Attribute Name="ShippingCharges" DisplayName="Shipping" Value="Y"/>
+				<Attribute Name="Taxes" DisplayName="Taxes" Value="Y"/>
+				<Attribute Name="GrandTotal" DisplayName="Total" Value="Y"/>				
+			</Group>	
+			
+			  <Group Name="Terms" DisplayName="Terms">
+				<Attribute Name="PaymentTerms" DisplayName="Payment Terms" Value="Y"/>
+				<Attribute Name="ShippngTerms" DisplayName="Carrier" Value="Y"/>
+				<Attribute Name="LevelOfService" DisplayName="Level of Service" Value="Y"/>
+				<Attribute Name="DeliveryDate" DisplayName="Requested Delivery Date" Value="Y"/>
+				<Attribute Name="InstructionText" DisplayName="Shipping Instructions" Value="Y"/>
+			</Group>	                                   
+
+</Resource>

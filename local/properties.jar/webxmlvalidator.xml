@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite, IBM Order Management (5737-D18)
+     (C) Copyright IBM Corp. 2001, 2019 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Validations>
+<web-app packagename="smcfs,sma,sbc,wsc,isccs,sfs,isf">
+	<security-constraint delete="true"/>
+	<security-role delete="true"/>
+</web-app>
+<web-app packagename="sma">
+	 <context-param>
+		<param-name>request.validation.bypass.uri.regex.sma.1</param-name>
+		<param-value>/.*includeMenu/includeMenu.*js</param-value>
+	</context-param>
+</web-app>
+<!-- added for db query tool v2 -->
+<web-app packagename="smcfs">
+	<context-param>
+		<param-name>sc.csrf.bypass.uri.endswith-10</param-name>
+		<param-value>.svg</param-value>
+	</context-param>
+	<context-param>
+		<param-name>sc.csrf.bypass.uri.dbqueryclientv2.1</param-name>
+		<param-value>/yfshttpdbi/sterlingdbqueryclientV2.jsp</param-value>
+	</context-param>
+	<context-param>
+		<param-name>bypass.uri.dbqueryclientv2.1</param-name>
+		<param-value>/yfshttpdbi/sterlingdbqueryclientV2.jsp</param-value>
+	</context-param>
+	<context-param>
+		<param-name>bypass.uri.dbqueryclientv2.2</param-name>
+		<param-value>/yfshttpdbi/sterlingdbqueryclientV2.js</param-value>
+	</context-param>
+	<context-param>
+		<param-name>bypass.uri.dbqueryclientv2.3</param-name>
+		<param-value>/interop/DBSelectQueryServletExt</param-value>
+	</context-param>
+	<context-param>
+		<param-name>request.validation.bypass.uri.dbqueryclientv2.1</param-name>
+		<param-value>/interop/DBSelectQueryServletExt</param-value>
+	</context-param>
+	<context-param>
+		<param-name>bypass.uri.endswith.1</param-name>
+		<param-value>.svg</param-value>
+	</context-param>
+	<context-param>
+		<param-name>sc.csrf.bypass.uri.dbqueryclientv2.2</param-name>
+		<param-value>/yfshttpdbi/sterlingdbqueryclient_old.jsp</param-value>
+	</context-param>
+	<context-param>
+		<param-name>bypass.uri.dbqueryclientv2.4</param-name>
+		<param-value>/yfshttpdbi/sterlingdbqueryclient_old.jsp</param-value>
+	</context-param>	
+	<servlet id="Servlet_DBQueryClientV2">
+		<servlet-name>DBSelectQueryServletExt</servlet-name>
+		<servlet-class>com.yantra.interop.client.DBSelectQueryServletExt</servlet-class>
+	</servlet>
+	<servlet-mapping id="ServletMapping_DBQueryClientV2">
+		<servlet-name>DBSelectQueryServletExt</servlet-name>
+		<url-pattern>/interop/DBSelectQueryServletExt</url-pattern>
+	</servlet-mapping>
+</web-app>
+</Validations>

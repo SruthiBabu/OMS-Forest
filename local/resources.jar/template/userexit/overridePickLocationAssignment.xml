@@ -1,0 +1,41 @@
+<overridePickLocationAssignment EnterpriseCode="" Node="" ActivityGroup="" Activity="">
+    <Target CaseId="" LocationId="" PalletId="">
+        <Inventory CountryOfOrigin=" " FifoNo=" " InventoryItemKey=" "
+            InventoryStatus="" InventoryTagKey=" " Quantity="REQUIRED"
+            ReceiptHeaderKey=" " Segment=" " SegmentType=" " ShipByDate=" ">
+            <Receipt ReceiptNo=" "/>
+            <InventoryItem ItemID="REQUIRED" ProductClass="REQUIRED" UnitOfMeasure="REQUIRED"/>
+            <TagDetail BatchNo=" " LotAttribute1=" " LotAttribute2=" "
+                LotAttribute3=" " LotExpirationDate=" "
+                LotKeyReference=" " LotNumber=" " ManufacturingDate=" "
+                RevisionNo=" "/>
+        </Inventory>
+    </Target>
+<Suggestion >
+	<SourceList>
+    <Source PickQuantity="" LocationId="" DedicatedLocation="" ZoneId="" TaskType="">
+        <Inventory CountryOfOrigin=" " FifoNo=" " InventoryItemKey=" "
+            InventoryStatus="" InventoryTagKey=" " Quantity="REQUIRED"
+            ReceiptHeaderKey=" " Segment=" " SegmentType=" " ShipByDate=" ">
+            <Receipt ReceiptNo=" "/>
+            <InventoryItem ItemID="" ProductClass="" UnitOfMeasure=""/>
+            <TagDetail BatchNo=" " LotAttribute1=" " LotAttribute2=" "
+                LotAttribute3=" " LotExpirationDate=" "
+                LotKeyReference=" " LotNumber=" " ManufacturingDate=" "
+                RevisionNo=" "/>
+        </Inventory>
+    </Source>
+	</SourceList>
+        <ActivityDemandList>
+            <ActivityDemand CaseId=" " DemandLocationId=" "
+                DemandQty=" " EnterpriseCode="" ForActivityCode=""
+                FromActivityGroup="" InventoryStatus=" " ItemId=" "
+                Node="" PalletId=" " ProductClass=" " Segment=" "
+                SegmentType=" " ShipmentKey=" " UnitOfMeasure=" " WorkOrderKey=" ">
+                <WorkOrder EnterpriseCode=" " NodeKey=" " WorkOrderNo=" "/>
+                <Shipment SellerOrganizationCode=" " ShipNode=" " ShipmentNo=" "/>
+            </ActivityDemand>
+        </ActivityDemandList>
+</Suggestion>
+</overridePickLocationAssignment>
+

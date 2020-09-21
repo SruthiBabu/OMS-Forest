@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<WorkflowConditionBuilderInput>
+    <VAS> 
+      <ApptStatus Type="Leaf" Id="ApptStatus" DisplayName="ApptStatus" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ApptStatus" IsReqd="" OverRidingClass=""/>
+      </ApptStatus>
+	  <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" 
+            DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>
+      <HasComponents Type="Leaf" Id="HasComponents" DisplayName="HasComponents" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+	   <MasterData MasterDataId="HasComponents" IsReqd="" IsStatic="true" OverRidingClass="">
+               <HasComponents Code="Y" Desc="Yes"/>
+               <HasComponents Code="N" Desc="No"/>
+         </MasterData>        
+      </HasComponents>
+	  <LastExecutionSuccess Type="Leaf" Id="LastExecutionSuccess" DisplayName="LastExecutionSuccess" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="LastExecutionSuccess" IsReqd="" IsStatic="true" OverRidingClass="">
+               <LastExecutionSuccess Code="Y" Desc="Yes"/>
+               <LastExecutionSuccess Code="N" Desc="No"/>
+         </MasterData>
+      </LastExecutionSuccess>
+	  <NodeKey Type="Leaf" Id="NodeKey" DisplayName="NodeKey" 
+            DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NodeKey" IsReqd="" OverRidingClass=""/>
+      </NodeKey>
+      <NumOfAttempts Type="Leaf" Id="NumOfAttempts" DisplayName="NumOfAttempts" DataType="Integer" ControlType="Text">
+		 <QryTypes DefaultQryTypeId="=">
+			<QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+			<QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+			<QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+			<QryType QryTypeName="Equal To" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+		 </QryTypes>
+         <MasterData MasterDataId="NumOfAttempts" IsReqd="" OverRidingClass=""/>
+      </NumOfAttempts>
+	  <NumOfHoursAfterAppointment Type="Leaf" Id="NumOfHoursAfterAppointment" DisplayName="NumOfHoursAfterAppointment" DataType="NumberOfHours" ControlType="Text">
+		 <QryTypes DefaultQryTypeId="=">
+			<QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+			<QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+			<QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+			<QryType QryTypeName="Equal To" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+		 </QryTypes>
+         <MasterData MasterDataId="NumOfHoursAfterAppointment" IsReqd="" OverRidingClass=""/>
+      </NumOfHoursAfterAppointment>
+	  <NumOfHoursAfterLastExecution Type="Leaf" Id="NumOfHoursAfterLastExecution" DisplayName="NumOfHoursAfterLastExecution" DataType="NumberOfHours" ControlType="Text">
+		 <QryTypes DefaultQryTypeId="=">
+			<QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+			<QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+			<QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+			<QryType QryTypeName="Equal To" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+		 </QryTypes>
+         <MasterData MasterDataId="NumOfHoursAfterLastExecution" IsReqd="" OverRidingClass=""/>
+      </NumOfHoursAfterLastExecution>
+	  <NumOfHoursTillAppointment Type="Leaf" Id="NumOfHoursTillAppointment" DisplayName="NumOfHoursTillAppointment" DataType="NumberOfHours" ControlType="Text">
+		 <QryTypes DefaultQryTypeId="=">
+			<QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+			<QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+			<QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+			<QryType QryTypeName="Equal To" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+		 </QryTypes>
+         <MasterData MasterDataId="NumOfHoursTillAppointment" IsReqd="" OverRidingClass=""/>
+      </NumOfHoursTillAppointment>
+	  <OpenWorkOrderFlag Type="Leaf" Id="OpenWorkOrderFlag" DisplayName="OpenWorkOrderFlag" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+         <MasterData MasterDataId="OpenWorkOrderFlag" IsReqd="" IsStatic="true" OverRidingClass="">
+               <OpenWorkOrderFlag Code="Y" Desc="Yes"/>
+               <OpenWorkOrderFlag Code="N" Desc="No"/>
+         </MasterData>
+      </OpenWorkOrderFlag>
+	  <PreCallStatus Type="Leaf" Id="PreCallStatus" DisplayName="PreCallStatus" DataType="Text-40" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="PreCallStatus" IsReqd="" IsStatic="true" OverRidingClass="">
+			<PreCallStatus Code="NOT_APPLICABLE" Desc="Not Applicable"/>
+			<PreCallStatus Code="NOT_REQUIRED" Desc="Not Required"/>
+            <PreCallStatus Code="PENDING" Desc="Pending"/>
+            <PreCallStatus Code="SUCCESS" Desc="Success"/>
+            <PreCallStatus Code="FAILURE" Desc="Failure"/>
+		 </MasterData>
+      </PreCallStatus>
+	  <ProviderOrganizationCode Type="Leaf" Id="ProviderOrganizationCode" DisplayName="ProviderOrganizationCode" 
+            DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ProviderOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </ProviderOrganizationCode>
+      <Purpose Type="Leaf" Id="Purpose" DisplayName="Purpose" 
+            DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="Purpose" IsReqd="" OverRidingClass=""/>
+      </Purpose>
+      <Segment Type="Leaf" Id="Segment" DisplayName="Segment" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="Segment" IsReqd="" OverRidingClass=""/>
+      </Segment>
+	  <SegmentType Type="Leaf" Id="SegmentType" DisplayName="SegmentType" DataType="tEXT-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="SegmentType" IsReqd="" OverRidingClass=""/>
+      </SegmentType>
+      <ServiceItemGroupCode Type="Leaf" Id="ServiceItemGroupCode" DisplayName="ServiceItemGroupCode" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ServiceItemGroupCode" IsReqd="" OverRidingClass=""/>
+      </ServiceItemGroupCode>
+      <ServiceItemID Type="Leaf" Id="ServiceItemID" DisplayName="ServiceItemID" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ServiceItemID" IsReqd="" OverRidingClass=""/>
+      </ServiceItemID>
+      <Status Type="Leaf" Id="Status" DisplayName="Status" DataType="Status" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="Status" IsReqd="" OverRidingClass=""/>
+      </Status>
+	  <IsWorkOrderContainerFlag Type="Leaf" Id="IsWorkOrderContainerFlag" DisplayName="IsWorkOrderContainerFlag" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+         </QryTypes>
+         <MasterData MasterDataId="IsWorkOrderContainerFlag" IsReqd="" IsStatic="true" OverRidingClass="">
+               <IsWorkOrderContainerFlag Code="Y" Desc="Yes"/>
+               <IsWorkOrderContainerFlag Code="N" Desc="No"/>
+         </MasterData>
+      </IsWorkOrderContainerFlag>
+	</VAS>
+</WorkflowConditionBuilderInput>

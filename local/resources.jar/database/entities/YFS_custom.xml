@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Tables>
+    <Table Name="YFS_ACTION_H">
+        <Method Name="ActionCode" OrderBy="" Type="select">
+            <Param ColumnName="ACTIONCODE" Name="anActionCode" Type=""/>
+            <WhereClause> WHERE (ACTIONCODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ACTION">
+        <Method Name="ActionCode" OrderBy="" Type="select">
+            <Param ColumnName="ACTIONCODE" Name="anActionCode" Type=""/>
+            <WhereClause> WHERE (ACTIONCODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_CURRENCY_CONVERSION">
+        <Method Name="WithConversionRate" OrderBy="" Type="select">
+            <Param ColumnName="BASE_CURRENCY" Name="aBaseCurrency" Type=""/>
+            <Param ColumnName="OTHER_CURRENCY" Name="aOtherCurrency" Type=""/>
+            <Param ColumnName="EFFECTIVE_FROM" Name="aDate" Type=""/>
+            <WhereClause> WHERE (BASE_CURRENCY = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_ENTERPRISE">
+        <Method Name="EnterpriseCode" OrderBy="" Type="select">
+            <Param ColumnName="ENTERPRISECODE" Name="anEnterpriseCode" Type=""/>
+            <WhereClause> WHERE (ENTERPRISECODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_EVENT">
+        <Method Name="TransactionAndEvent" OrderBy="" Type="select">
+            <Param ColumnName="TRANSACTION_KEY" Name="aTransactionKey" Type=""/>
+            <Param ColumnName="EVENTID" Name="anEventID" Type=""/>
+            <WhereClause> WHERE  ( (TRANSACTION_KEY = {0} ) AND (EVENTID = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_INSTRUCTION_DETAIL_H">
+        <Method Name="ReferenceKeyAndTableName" OrderBy="" Type="list">
+            <Param ColumnName="REFERENCE_KEY" Name="aReferenceKey" Type=""/>
+            <Param ColumnName="TABLE_NAME" Name="aTableName" Type=""/>
+            <WhereClause> WHERE  ( (REFERENCE_KEY = {0} ) AND (TABLE_NAME = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_INSTRUCTION_DETAIL">
+        <Method Name="ReferenceKeyAndTableName" OrderBy="" Type="list">
+            <Param ColumnName="REFERENCE_KEY" Name="aReferenceKey" Type=""/>
+            <Param ColumnName="TABLE_NAME" Name="aTableName" Type=""/>
+            <WhereClause> WHERE  ( (REFERENCE_KEY = {0} ) AND (TABLE_NAME = {1} ) ) </WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_LOCALE">
+        <Method Name="LocaleCode" OrderBy="" Type="select">
+            <Param ColumnName="LOCALECODE" Name="anLocaleCode" Type=""/>
+            <WhereClause> WHERE (LOCALECODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_PURGE_CRITERIA">
+        <Method Name="Purge_Code" OrderBy="" Type="select">
+            <Param ColumnName="PURGE_CODE" Name="aPurgeCode" Type=""/>
+            <WhereClause> WHERE (PURGE_CODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_SHIP_NODE">
+        <Method Name="ShipNode" OrderBy="" Type="select">
+            <Param ColumnName="SHIP_NODE" Name="aShipNode" Type=""/>
+            <WhereClause> WHERE (SHIP_NODE = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_TRANSACTION_H">
+        <Method Name="TranID" OrderBy="" Type="select">
+            <Param ColumnName="TRANID" Name="aTranID" Type=""/>
+            <WhereClause> WHERE (TRANID = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_TRANSACTION">
+        <Method Name="TranID" OrderBy="" Type="select">
+            <Param ColumnName="TRANID" Name="aTranID" Type=""/>
+            <WhereClause> WHERE (TRANID = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_USER_GROUP">
+        <Method Name="UserGroupID" OrderBy="" Type="select">
+            <Param ColumnName="USERGROUP_ID" Name="aUserGroupId" Type=""/>
+            <WhereClause> WHERE (USERGROUP_ID = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_USER_H">
+        <Method Name="LoginID" OrderBy="" Type="select">
+            <Param ColumnName="LOGINID" Name="aLoginID" Type=""/>
+            <WhereClause> WHERE (LOGINID = {0} )</WhereClause>
+        </Method>
+    </Table>
+    <Table Name="YFS_USER">
+        <Method Name="LoginID" OrderBy="" Type="select">
+            <Param ColumnName="LOGINID" Name="aLoginID" Type=""/>
+            <WhereClause> WHERE (LOGINID = {0} )</WhereClause>
+        </Method>
+    </Table>
+</Tables>

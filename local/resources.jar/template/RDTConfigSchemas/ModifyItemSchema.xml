@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults DefaultRecordDelimiter="Newline" DefaultFieldDelimiter="," DefaultPadCharacter="#" RecordIdStartPosition="1">
+    </ParserDefaults>
+
+	<Root Name="ItemList">
+   		  <Header Name="ITEMHEDR" RecordName="ITEMHEDR" MinOccurence="1" MaxOccurence="1"/>
+	</Root>
+
+	<RecordDefinitions>
+		<Record RecordId="ITEMHEDR" Name="ITEMHEDR" XMLName="Item">
+			<Field Name="ItemID" FieldPosition="2" XMLName="ItemID"/>
+			<Field Name="OrganizationCode" FieldPosition="3" XMLName="OrganizationCode"/>
+			<Field Name="UnitOfMeasure" FieldPosition="4" XMLName="UnitOfMeasure"/>
+			<Field Name="GlobalItemID" FieldPosition="5" XMLName="GlobalItemID"/>
+			<Field Name="Description" FieldPosition="6" XMLName="Description"/>
+			<Field Name="ProductLine" FieldPosition="7" XMLName="ProductLine"/>
+			<Field Name="KitCode" FieldPosition="8" XMLName="KitCode"/>
+			<Field Name="ItemGroupCode" FieldPosition="9" XMLName="ItemGroupCode"/>
+			<Field Name="UnitCost" FieldPosition="10" XMLName="UnitCost"/>
+			<Field Name="CostCurrency" FieldPosition="11" XMLName="CostCurrency"/>
+			<Field Name="CountryOfOrigin" FieldPosition="12" XMLName="CountryOfOrigin"/>
+			<Field Name="ItemType" FieldPosition="13" XMLName="ItemType"/>
+			<Field Name="UnitWeight" FieldPosition="14" XMLName="UnitWeight"/>
+			<Field Name="WeightUOM" FieldPosition="15" XMLName="WeightUOM"/>
+			<Field Name="UnitHeight" FieldPosition="16" XMLName="UnitHeight"/>
+			<Field Name="UnitLength" FieldPosition="17" XMLName="UnitLength"/>
+			<Field Name="UnitWidth" FieldPosition="18" XMLName="UnitWidth"/>
+			<Field Name="SerializedFlag" FieldPosition="19" XMLName="SerializedFlag"/>
+			<Field Name="TagControlFlag" FieldPosition="20" XMLName="TagControlFlag"/>
+			<Field Name="TimeSensitive" FieldPosition="21" XMLName="TimeSensitive"/>  
+			<Field Name="IsFifoTracked" FieldPosition="22" XMLName="IsFifoTracked"/>
+			<Field Name="IsSerialTracked" FieldPosition="23" XMLName="IsSerialTracked"/>
+			<Field Name="HarmonizedCode" FieldPosition="24" XMLName="HarmonizedCode"/>
+			<Field Name="NMFCCode" FieldPosition="25" XMLName="NMFCCode"/>
+			<Field Name="VelocityCode" FieldPosition="26" XMLName="VelocityCode"/>
+			<Field Name="ECCNNo" FieldPosition="27" XMLName="ECCNNo"/>
+			<Field Name="HazmatClass" FieldPosition="28" XMLName="HazmatClass"/>
+			<Field Name="CommodityCode" FieldPosition="29" XMLName="CommodityCode"/>
+			<Field Name="StorageType" FieldPosition="30" XMLName="StorageType"/>
+			<Field Name="AddName1" FieldPosition="31" XMLName="AddName1"/>
+			<Field Name="AddValue1" FieldPosition="32" XMLName="AddValue1"/>
+			<Field Name="AddName2" FieldPosition="33" XMLName="AddName2"/>
+			<Field Name="AddValue2" FieldPosition="34" XMLName="AddValue2"/>
+			<Field Name="LotNumber" FieldPosition="35" XMLName="LotNumber"/>
+			<Field Name="LotAttribute1" FieldPosition="36" XMLName="LotAttribute1"/>
+			<Field Name="LotAttribute2" FieldPosition="37" XMLName="LotAttribute2"/>
+			<Field Name="CaseQuantity" FieldPosition="38" XMLName="CaseQuantity"/>
+			<Field Name="CaseWeight" FieldPosition="39" XMLName="CaseWeight"/>
+			<Field Name="CaseLength" FieldPosition="40" XMLName="CaseLength"/>
+			<Field Name="CaseWidth" FieldPosition="41" XMLName="CaseWidth"/>
+			<Field Name="CaseHeight" FieldPosition="42" XMLName="CaseHeight"/>
+			<Field Name="PalletQuantity" FieldPosition="43" XMLName="PalletQuantity"/>
+			<Field Name="PalletWeight" FieldPosition="44" XMLName="PalletWeight"/>
+			<Field Name="PalletLength" FieldPosition="45" XMLName="PalletLength"/>
+			<Field Name="PalletWidth" FieldPosition="46" XMLName="PalletWidth"/>
+			<Field Name="PalletHeight" FieldPosition="47" XMLName="PalletHeight"/>
+			<Field Name="DimensionUOM" FieldPosition="48" XMLName="DimensionUOM"/>
+		</Record>
+	</RecordDefinitions>
+</FlatfileDelimitedSchema>
+
+  

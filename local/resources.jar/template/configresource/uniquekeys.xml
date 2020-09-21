@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity Name="AcknowledgementDetail">
+      <PrimaryKey>
+         <Attribute Name="AcknowledgeDetailKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="AcknowledgementDetailH">
+      <PrimaryKey>
+         <Attribute Name="AcknowledgeDetailKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="AcknowledgementHeader">
+      <PrimaryKey>
+         <Attribute Name="AcknowledgeHeaderKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="AcknowledgementHeaderH">
+      <PrimaryKey>
+         <Attribute Name="AcknowledgeHeaderKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="AdditionalAddress">
+      <PrimaryKey>
+         <Attribute Name="EntityAddressKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Api">
+      <PrimaryKey>
+         <Attribute Name="ApiKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ApiConfig">
+      <PrimaryKey>
+         <Attribute Name="ApiConfigKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Audit">
+      <PrimaryKey>
+         <Attribute Name="AuditKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="CartonType">
+      <PrimaryKey>
+         <Attribute Name="CartonTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ExpInterfaceData">
+      <PrimaryKey>
+         <Attribute Name="InterfaceDataKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="DataId"/>
+         <Attribute Name="SeqNo"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ExpInterfaceSystem">
+      <PrimaryKey>
+         <Attribute Name="InterfaceSystemKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ExportStatus"/>
+         <Attribute Name="ExportSystemId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Function">
+      <PrimaryKey>
+         <Attribute Name="FunctionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ImpInterface">
+      <PrimaryKey>
+         <Attribute Name="TransactionKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="TransactionId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="MsgSys">
+      <PrimaryKey>
+         <Attribute Name="MsgSysKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="MsgSysConfig">
+      <PrimaryKey>
+         <Attribute Name="MsgSysConfigKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Permission">
+      <PrimaryKey>
+         <Attribute Name="PermissionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Print">
+      <PrimaryKey>
+         <Attribute Name="PrintKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="PrintEvent">
+      <PrimaryKey>
+         <Attribute Name="PrintEventKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="RTCarrierZone">
+      <PrimaryKey>
+         <Attribute Name="CarrierzoneKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="RTFreightCharge">
+      <PrimaryKey>
+         <Attribute Name="FreightchargeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="RTRatingCarrier">
+      <PrimaryKey>
+         <Attribute Name="RatingcarrierKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="RTSpecialService">
+      <PrimaryKey>
+         <Attribute Name="SpecialserviceKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="Recurrence">
+      <PrimaryKey>
+         <Attribute Name="RecurrenceKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="RecurrenceH">
+      <PrimaryKey>
+         <Attribute Name="RecurrenceKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="RecurrenceList">
+      <PrimaryKey>
+         <Attribute Name="RecurrenceListKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="RecurrenceListH">
+      <PrimaryKey>
+         <Attribute Name="RecurrenceListKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReprocessError">
+      <PrimaryKey>
+         <Attribute Name="ErrorTxnId"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnContainer">
+      <PrimaryKey>
+         <Attribute Name="ReturnContainerKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnContainerH">
+      <PrimaryKey>
+         <Attribute Name="ReturnContainerKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnContainerItems">
+      <PrimaryKey>
+         <Attribute Name="ReturnContainerItemsKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnContainerItemsH">
+      <PrimaryKey>
+         <Attribute Name="ReturnContainerItemsKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnInspection">
+      <PrimaryKey>
+         <Attribute Name="ReturnInspectionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnInspectionH">
+      <PrimaryKey>
+         <Attribute Name="ReturnInspectionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnLineStatus">
+      <PrimaryKey>
+         <Attribute Name="ReturnLineStatusKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ReturnReleaseLineKey"/>
+         <Attribute Name="ReturnLineStatus"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ReturnLineStatusH">
+      <PrimaryKey>
+         <Attribute Name="ReturnLineStatusKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnRelease">
+      <PrimaryKey>
+         <Attribute Name="ReturnReleaseKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnReleaseH">
+      <PrimaryKey>
+         <Attribute Name="ReturnReleaseKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnReleaseLine">
+      <PrimaryKey>
+         <Attribute Name="ReturnReleaseLineKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ReturnReleaseLineH">
+      <PrimaryKey>
+         <Attribute Name="ReturnReleaseLineKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="System">
+      <PrimaryKey>
+         <Attribute Name="SystemKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="UpsRoutingCode">
+      <PrimaryKey>
+         <Attribute Name="UpsRoutingCodeKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ZipCode"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="DataSecurityGroup">
+      <PrimaryKey>
+         <Attribute Name="DataSecurityGroupKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="DataSecurityEnterprise">
+      <PrimaryKey>
+         <Attribute Name="DataSecurityEnterpriseKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="DataSecurityDocType">
+      <PrimaryKey>
+         <Attribute Name="DataSecurityDocTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemTag">
+      <PrimaryKey>
+         <Attribute Name="ItemTagKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemInstruction">
+      <PrimaryKey>
+         <Attribute Name="ItemInstructionKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemUOM">
+      <PrimaryKey>
+         <Attribute Name="ItemUOMKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HoldType">
+      <PrimaryKey>
+         <Attribute Name="HoldTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HoldTypeTran">
+      <PrimaryKey>
+         <Attribute Name="HoldTypeTranKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="HoldTypeModType">
+      <PrimaryKey>
+         <Attribute Name="HoldTypeModTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+</Entities>

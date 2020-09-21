@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2001, 2020  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+	<Entities>
+		<Entity AuditRequired="Y" Cacheable="true" Description="Stores Coc Data Extract tool configurations" EntityType="CONFIGURATION" Extensible="N" Module="ycp" Name="Data_Extract_Config" Prefix="YFS_" TableName="YFS_DATA_EXTR_CFG" TableType="CONFIGURATION" XMLName="DataExtractConfig">
+			<Attributes>
+				<Attribute ColumnName="DATA_EXTR_CFG_KEY" DataType="Key" Description="Primary key of YFS_DATA_EXTR_CFG" Name="Data_Extract_Config_Key" XMLName="DataExtractConfigKey" Nullable="false" DefaultValue="' '"/>
+				<Attribute ColumnName="TASK_ID" DataType="Text-50" Description="Name of task for which extract is done" Name="Task_Id" XMLName="TaskId" Nullable="true" />
+				<Attribute ColumnName="TABLE_NAME" DataType="TableName" Description="Name of table for which this extract is required" Name="Table_Name" XMLName="TableName" Nullable="true" />
+				<Attribute ColumnName="NEXT_RUN" DataType="TimeStamp" Description="Time of Next Run of this config" Name="Next_Run" XMLName="NextRun" Nullable="true" />
+				<Attribute ColumnName="NEXT_STARTTS" DataType="TimeStamp" Description="ModifyTs to query from" Name="Next_Startts" XMLName="NextStartts" Nullable="true" />
+				<Attribute ColumnName="RUNNING_STATUS" DataType="Text-20" Description="Current run status" Name="Running_Status" XMLName="RunningStatus" Nullable="true" />
+				<Attribute ColumnName="FREQUENCY_HRS" DataType="NumberOfDays" Description="Frequency of this task's extract in hours" Name="Frequency_In_Hours" XMLName="FrequencyInHours" Nullable="true" />
+				<Attribute ColumnName="FREQUENCY_MINS" DataType="NumberOfDays" Description="Frequency of this task's extract in minutes" Name="Frequency_In_Minutes" XMLName="FrequencyInMinutes" Nullable="true" />
+				<Attribute ColumnName="FIRST_RUN_EXT_DAYS" DataType="NumberOfDays" Description="No. of days of older data to be extracted when this extract is taken up first time" Name="First_Run_Extract_In_Days" XMLName="FirstRunExtractInDays" Nullable="true" />
+				<Attribute ColumnName="IS_INACTIVE" DataType="Flag" Description="Indicates if inactive or not." Name="Is_Inactive" XMLName="IsInactive" Nullable="true"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+			</Attributes>
+			<PrimaryKey Name="DATA_EXTR_CFG_PK">
+				<Attribute ColumnName="DATA_EXTR_CFG_KEY" Name="Data_Extract_Config_Key" XMLName="DataExtractConfigKey"/>
+			</PrimaryKey>
+			<Indices>
+				<Index Name="DATA_EXTR_CFG_I1" Unique="true">
+					<Column Name="TASK_ID"/>
+					<Column Name="TABLE_NAME"/>
+				</Index>
+			</Indices>
+		</Entity>
+		<Entity AuditRequired="Y" Cacheable="true" Description="Hangoff table storing columns for Coc Data Extract tool configurations" EntityType="CONFIGURATION" Extensible="N" Module="ycp" Name="Data_Extract_Column" Prefix="YFS_" TableName="YFS_DATA_EXTR_CLM" TableType="CONFIGURATION" XMLName="DataExtractColumn">
+			<Attributes>
+				<Attribute ColumnName="DATA_EXTR_CLM_KEY" DataType="Key" Description="Primary key of YFS_DATA_EXTR_CLM" Name="Data_Extract_Column_Key" XMLName="DataExtractColumnKey" Nullable="false" DefaultValue="' '"/>
+				<Attribute ColumnName="DATA_EXTR_CFG_KEY" DataType="Key" Description="Primary key of the config of which this is a column" Name="Data_Extract_Config_Key" XMLName="DataExtractConfigKey" Nullable="true"/>
+				<Attribute ColumnName="COLUMN_NAME" DataType="ColumnName" Description="Name of column" Name="Column_Name" XMLName="ColumnName" Nullable="true" />
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+			</Attributes>
+			<PrimaryKey Name="DATA_EXTR_CLM_PK">
+				<Attribute ColumnName="DATA_EXTR_CLM_KEY" Name="Data_Extract_Column_Key" XMLName="DataExtractColumnKey"/>
+			</PrimaryKey>
+			<Indices>
+				<Index Name="DATA_EXTR_CLM_I1" Unique="true">
+					<Column Name="DATA_EXTR_CFG_KEY"/>
+					<Column Name="COLUMN_NAME"/>
+				</Index>
+			</Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany" ChildListXMLName="DataExtractColumns" ChildName="Data_Extract_Column" ChildXMLName="DataExtractColumn" ForeignEntity="Data_Extract_Config" Name="DataExtractConfig" Type="Bidirectional" XMLName="DataExtractConfig">
+                    <Attribute Name="Data_Extract_Config_Key" ParentName="Data_Extract_Config_Key"/>
+                </RelationShip>
+			</RelationShips>
+		</Entity>
+		<Entity Cacheable="false" Description="Stores information on Data Extraction Query Jobs Details raised by the customer." EntityType="TRANSACTION" Extensible="N" HasHistory="N" IsAbstract="N" Module="ycp" Name="Data_Extract_Job" Prefix="YFS_" TableName="YFS_DATA_EXTR_JOB" TableType="TRANSACTION" XMLName="DataExtractJob">
+			<Attributes>
+				<Attribute ColumnName="DATA_EXTR_JOB_KEY" DataType="Key" Description="Primary key of YFS_DATA_EXTR_JOB" Name="Data_Extract_Job_Key" XMLName="DataExtractJobKey" Nullable="false" DefaultValue="' '"/>
+				<Attribute ColumnName="DATA_EXTR_CFG_KEY" DataType="Key" Description="Primary key of the config of which this is a job" Name="Data_Extract_Config_Key" XMLName="DataExtractConfigKey" Nullable="true"/>
+				<Attribute ColumnName="STATUS" DataType="Text-20" Description="Status of this job" Name="Status" XMLName="Status" Nullable="true" />
+				<Attribute ColumnName="STARTTS" DataType="TimeStamp" Description="ModifyTs queried from" Name="Startts" XMLName="Startts" Nullable="true" />
+				<Attribute ColumnName="ENDTS" DataType="TimeStamp" Description="ModifyTs queried to" Name="Endts" XMLName="Endts" Nullable="true" />
+				<Attribute ColumnName="RUN_AT" DataType="TimeStamp" Description="Time when the extract of this job was initiated" Name="Run_At" XMLName="RunAt" Nullable="true" />
+				<Attribute ColumnName="JOB_SL_NO" DataType="Integer" Description="Sl. no of this job in the whole extract" Name="Job_Sl_No" XMLName="JobSlNo" Nullable="true" />
+				<Attribute ColumnName="TOTAL_JOBS" DataType="Integer" Description="Total no. of jobs in this extract" Name="Total_Jobs" XMLName="TotalJobs" Nullable="true" />
+				<Attribute ColumnName="ROWS_EXTRACTED" DataType="Integer" Description="Rows extracted by this job" Name="Rows_Extracted" XMLName="RowsExtracted" Nullable="true" />
+				<Attribute ColumnName="AVG_ROW_LENGTH" DataType="Integer" Description="Average row length of data extracted by this job" Name="Average_Row_Length" XMLName="AverageRowLength" Nullable="true" />
+				<Attribute ColumnName="FILE_XFR_SIZE" DataType="Integer" Description="Size of the file transferred" Name="File_Transfer_Size" XMLName="FileTransferSize" Nullable="true" />
+				<Attribute ColumnName="FILE_XFR_TIME" DataType="Integer" Description="Time taken to transfer file in millis" Name="File_Transfer_Time" XMLName="FileTransferTime" Nullable="true" />
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+			</Attributes>
+			<PrimaryKey Name="DATA_EXTR_JOB_PK">
+				<Attribute ColumnName="DATA_EXTR_JOB_KEY" Name="Data_Extract_Job_Key" XMLName="DataExtractJobKey"/>
+			</PrimaryKey>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany" ChildListXMLName="DataExtractJobs" ChildName="Data_Extract_Job" ChildXMLName="DataExtractJob" ForeignEntity="Data_Extract_Config" Name="DataExtractConfig" Type="Bidirectional" XMLName="DataExtractConfig">
+                    <Attribute Name="Data_Extract_Config_Key" ParentName="Data_Extract_Config_Key"/>
+                </RelationShip>
+			</RelationShips>
+		</Entity>
+	</Entities>
+</DBSchema>

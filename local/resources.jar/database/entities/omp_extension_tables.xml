@@ -1,0 +1,1604 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity
+            Description="This table stores dynamic extension attributes of order line option entity."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="omp" Name="Order_Line_Option_Extension" Prefix="YFS_"
+            SupportHangOffEntity="Y" TableName="YFS_ORDER_LINE_OPTION_EXTN"
+            TableType="TRANSACTION" XMLName="OrderLineOptionExtension">
+            <Attributes>
+                <Attribute ColumnName="ORDER_LINE_OPTION_EXTN_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the ORDER_LINE_OPTION_EXTN table."
+                    Name="Order_Line_Option_Extn_Key" Nullable="false" XMLName="OrderLineOptionExtnKey" />
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    Description="The enterprise that is associated with this order."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="The primary key for the YFS_ORDER_HEADER table."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey" />
+                <Attribute ColumnName="ORDER_LINE_OPTION_KEY" DataType="Key"
+                    Description="Primary key for YFS_ORDER_LINE_OPTION table."
+                    Name="Order_Line_Option_Key" Nullable="true" XMLName="OrderLineOptionKey"/>
+                <Attribute ColumnName="TEXT_1" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_1" Nullable="true" XMLName="Text1"/>
+                <Attribute ColumnName="TEXT_2" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_2" Nullable="true" XMLName="Text2"/>
+                <Attribute ColumnName="TEXT_3" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_3" Nullable="true" XMLName="Text3"/>
+                <Attribute ColumnName="TEXT_4" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_4" Nullable="true" XMLName="Text4"/>
+                <Attribute ColumnName="TEXT_5" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_5" Nullable="true" XMLName="Text5"/>
+                <Attribute ColumnName="TEXT_6" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_6" Nullable="true" XMLName="Text6"/>
+                <Attribute ColumnName="TEXT_7" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_7" Nullable="true" XMLName="Text7"/>
+                <Attribute ColumnName="TEXT_8" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_8" Nullable="true" XMLName="Text8"/>
+                <Attribute ColumnName="TEXT_9" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_9" Nullable="true" XMLName="Text9"/>
+                <Attribute ColumnName="TEXT_10" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_10" Nullable="true" XMLName="Text10"/>
+                <Attribute ColumnName="TEXT_11" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_11" Nullable="true" XMLName="Text11"/>
+                <Attribute ColumnName="TEXT_12" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_12" Nullable="true" XMLName="Text12"/>
+                <Attribute ColumnName="TEXT_13" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_13" Nullable="true" XMLName="Text13"/>
+                <Attribute ColumnName="TEXT_14" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_14" Nullable="true" XMLName="Text14"/>
+                <Attribute ColumnName="TEXT_15" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_15" Nullable="true" XMLName="Text15"/>
+                <Attribute ColumnName="TEXT_16" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_16" Nullable="true" XMLName="Text16"/>
+                <Attribute ColumnName="TEXT_17" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_17" Nullable="true" XMLName="Text17"/>
+                <Attribute ColumnName="TEXT_18" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_18" Nullable="true" XMLName="Text18"/>
+                <Attribute ColumnName="TEXT_19" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_19" Nullable="true" XMLName="Text19"/>
+                <Attribute ColumnName="TEXT_20" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_20" Nullable="true" XMLName="Text20"/>
+                <Attribute ColumnName="BOOLEAN_1" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_1" Nullable="true" XMLName="Boolean1"/>
+                <Attribute ColumnName="BOOLEAN_2" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_2" Nullable="true" XMLName="Boolean2"/>
+                <Attribute ColumnName="BOOLEAN_3" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_3" Nullable="true" XMLName="Boolean3"/>
+                <Attribute ColumnName="BOOLEAN_4" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_4" Nullable="true" XMLName="Boolean4"/>
+                <Attribute ColumnName="BOOLEAN_5" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_5" Nullable="true" XMLName="Boolean5"/>
+                <Attribute ColumnName="BOOLEAN_6" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_6" Nullable="true" XMLName="Boolean6"/>
+                <Attribute ColumnName="BOOLEAN_7" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_7" Nullable="true" XMLName="Boolean7"/>
+                <Attribute ColumnName="BOOLEAN_8" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_8" Nullable="true" XMLName="Boolean8"/>
+                <Attribute ColumnName="BOOLEAN_9" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_9" Nullable="true" XMLName="Boolean9"/>
+                <Attribute ColumnName="BOOLEAN_10" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_10" Nullable="true" XMLName="Boolean10"/>
+                <Attribute ColumnName="INTEGER_1" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_1" Nullable="true" XMLName="Integer1"/>
+                <Attribute ColumnName="INTEGER_2" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_2" Nullable="true" XMLName="Integer2"/>
+                <Attribute ColumnName="INTEGER_3" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_3" Nullable="true" XMLName="Integer3"/>
+                <Attribute ColumnName="INTEGER_4" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_4" Nullable="true" XMLName="Integer4"/>
+                <Attribute ColumnName="INTEGER_5" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_5" Nullable="true" XMLName="Integer5"/>
+                <Attribute ColumnName="INTEGER_6" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_6" Nullable="true" XMLName="Integer6"/>
+                <Attribute ColumnName="INTEGER_7" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_7" Nullable="true" XMLName="Integer7"/>
+                <Attribute ColumnName="INTEGER_8" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_8" Nullable="true" XMLName="Integer8"/>
+                <Attribute ColumnName="INTEGER_9" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_9" Nullable="true" XMLName="Integer9"/>
+                <Attribute ColumnName="INTEGER_10" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_10" Nullable="true" XMLName="Integer10"/>
+                <Attribute ColumnName="DECIMAL_1" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_1" Nullable="true" XMLName="Decimal1"/>
+                <Attribute ColumnName="DECIMAL_2" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_2" Nullable="true" XMLName="Decimal2"/>
+                <Attribute ColumnName="DECIMAL_3" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_3" Nullable="true" XMLName="Decimal3"/>
+                <Attribute ColumnName="DECIMAL_4" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_4" Nullable="true" XMLName="Decimal4"/>
+                <Attribute ColumnName="DECIMAL_5" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_5" Nullable="true" XMLName="Decimal5"/>
+                <Attribute ColumnName="DECIMAL_6" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_6" Nullable="true" XMLName="Decimal6"/>
+                <Attribute ColumnName="DECIMAL_7" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_7" Nullable="true" XMLName="Decimal7"/>
+                <Attribute ColumnName="DECIMAL_8" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_8" Nullable="true" XMLName="Decimal8"/>
+                <Attribute ColumnName="DECIMAL_9" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_9" Nullable="true" XMLName="Decimal9"/>
+                <Attribute ColumnName="DECIMAL_10" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_10" Nullable="true" XMLName="Decimal10"/>
+                <Attribute ColumnName="DATE_1" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_1" Nullable="true" XMLName="Date1"/>
+                <Attribute ColumnName="DATE_2" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_2" Nullable="true" XMLName="Date2"/>
+                <Attribute ColumnName="DATE_3" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_3" Nullable="true" XMLName="Date3"/>
+                <Attribute ColumnName="DATE_4" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_4" Nullable="true" XMLName="Date4"/>
+                <Attribute ColumnName="DATE_5" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_5" Nullable="true" XMLName="Date5"/>
+                <Attribute ColumnName="DATE_6" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_6" Nullable="true" XMLName="Date6"/>
+                <Attribute ColumnName="DATE_7" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_7" Nullable="true" XMLName="Date7"/>
+                <Attribute ColumnName="DATE_8" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_8" Nullable="true" XMLName="Date8"/>
+                <Attribute ColumnName="DATE_9" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_9" Nullable="true" XMLName="Date9"/>
+                <Attribute ColumnName="DATE_10" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_10" Nullable="true" XMLName="Date10"/>
+				<Attribute ColumnName="LONGTEXT_1" DataType="Text-400"
+                    Description="The extended column for long TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="LongText_1" Nullable="true" XMLName="LongText1"/>
+                <Attribute ColumnName="LONGTEXT_2" DataType="Text-400"
+                    Description="The extended column for long TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="LongText_2" Nullable="true" XMLName="LongText2"/>
+                <Attribute ColumnName="LONGTEXT_3" DataType="Text-400"
+                    Description="The extended column for long TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="LongText_3" Nullable="true" XMLName="LongText3"/>
+                <Attribute ColumnName="LONGTEXT_4" DataType="Text-400"
+                    Description="The extended column for long TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="LongText_4" Nullable="true" XMLName="LongText4"/>
+                <Attribute ColumnName="LONGTEXT_5" DataType="Text-400"
+                    Description="The extended column for long TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="LongText_5" Nullable="true" XMLName="LongText5"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="OL_OPTION_EXTN_PK" Name="YFS_OL_OPTION_EXTN_PK">
+				<Attribute ColumnName="ORDER_LINE_OPTION_EXTN_KEY" 
+                    Name="Order_Line_Option_Extn_Key" />
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="OL_OPTION_EXTN_I1"
+                    Name="YFS_OL_OPTION_EXTN_I1" Unique="true" Version="9.3.0">
+                    <Column Name="ORDER_LINE_OPTION_KEY"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I2"
+                    Name="YFS_OL_OPTION_EXTN_I2" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="TEXT_1"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I3"
+                    Name="YFS_OL_OPTION_EXTN_I3" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="TEXT_2"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I4"
+                    Name="YFS_OL_OPTION_EXTN_I4" Version="9.3.0">
+                    <Column Name="TEXT_3"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I5"
+                    Name="YFS_OL_OPTION_EXTN_I5" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="TEXT_4"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I6"
+                    Name="YFS_OL_OPTION_EXTN_I6" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="TEXT_5"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I7"
+                    Name="YFS_OL_OPTION_EXTN_I7" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="BOOLEAN_1"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I8"
+                    Name="YFS_OL_OPTION_EXTN_I8" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="BOOLEAN_2"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I9"
+                    Name="YFS_OL_OPTION_EXTN_I9" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="BOOLEAN_3"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I10"
+                    Name="YFS_OL_OPTION_EXTN_I10" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="BOOLEAN_4"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I11"
+                    Name="YFS_OL_OPTION_EXTN_I11" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="BOOLEAN_5"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I12"
+                    Name="YFS_OL_OPTION_EXTN_I12" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="INTEGER_1"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I13"
+                    Name="YFS_OL_OPTION_EXTN_I13" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="INTEGER_2"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I14"
+                    Name="YFS_OL_OPTION_EXTN_I14" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="INTEGER_3"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I15"
+                    Name="YFS_OL_OPTION_EXTN_I15" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="INTEGER_4"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I16"
+                    Name="YFS_OL_OPTION_EXTN_I16" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="INTEGER_5"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I17"
+                    Name="YFS_OL_OPTION_EXTN_I17" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DECIMAL_1"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I18"
+                    Name="YFS_OL_OPTION_EXTN_I18" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DECIMAL_2"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I19"
+                    Name="YFS_OL_OPTION_EXTN_I19" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DECIMAL_3"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I20"
+                    Name="YFS_OL_OPTION_EXTN_I20" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DECIMAL_4"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I21"
+                    Name="YFS_OL_OPTION_EXTN_I21" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DECIMAL_5"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I22"
+                    Name="YFS_OL_OPTION_EXTN_I22" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DATE_1"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I23"
+                    Name="YFS_OL_OPTION_EXTN_I23" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DATE_2"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I24"
+                    Name="YFS_OL_OPTION_EXTN_I24" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DATE_3"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I25"
+                    Name="YFS_OL_OPTION_EXTN_I25" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DATE_4"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I26"
+                    Name="YFS_OL_OPTION_EXTN_I26" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="DATE_5"/>
+                </Index>
+                <Index DB2Name="OL_OPTION_EXTN_I27"
+                    Name="YFS_OL_OPTION_EXTN_I27" Version="9.3.0">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ORDER_HEADER_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildName="CustomAttributes"
+                    ChildXMLName="CustomAttributes"
+                    ForeignEntity="Order_Line_Option" Name="OrderLineOption"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="OrderLineOption">
+                    <Attribute Name="Order_Line_Option_Key" ParentName="Order_Line_Option_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    ChildName="OrderHeader"
+                    ChildXMLName="OrderHeader"
+                    ForeignEntity="Order_Header" Name="OrderHeader"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+        <Entity
+            Description="This table stores dynamic extension attributes of order header entity."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            Module="omp" Name="Order_Header_Extension" Prefix="YFS_"
+            SupportHangOffEntity="N" TableName="YFS_ORDER_HEADER_EXTENSION"
+            TableType="TRANSACTION" XMLName="OrderHeaderExtension">
+            <Attributes>
+                <Attribute ColumnName="ORDER_HEADER_EXTENSION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_ORDER_HEADER_EXTENSION table."
+                    Name="Order_Header_Extension_Key" Nullable="false" XMLName="OrderHeaderExtensionKey" />
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The enterprise that is associated with this order."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_ORDER_HEADER table."
+                    Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey" />
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The document type that is associated with this order."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="TEXT_1" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_1" Nullable="true" XMLName="Text1"/>
+                <Attribute ColumnName="TEXT_2" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_2" Nullable="true" XMLName="Text2"/>
+                <Attribute ColumnName="TEXT_3" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_3" Nullable="true" XMLName="Text3"/>
+                <Attribute ColumnName="TEXT_4" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_4" Nullable="true" XMLName="Text4"/>
+                <Attribute ColumnName="TEXT_5" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_5" Nullable="true" XMLName="Text5"/>
+                <Attribute ColumnName="TEXT_6" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_6" Nullable="true" XMLName="Text6"/>
+                <Attribute ColumnName="TEXT_7" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_7" Nullable="true" XMLName="Text7"/>
+                <Attribute ColumnName="TEXT_8" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_8" Nullable="true" XMLName="Text8"/>
+                <Attribute ColumnName="TEXT_9" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_9" Nullable="true" XMLName="Text9"/>
+                <Attribute ColumnName="TEXT_10" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_10" Nullable="true" XMLName="Text10"/>
+                <Attribute ColumnName="TEXT_11" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_11" Nullable="true" XMLName="Text11"/>
+                <Attribute ColumnName="TEXT_12" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_12" Nullable="true" XMLName="Text12"/>
+                <Attribute ColumnName="TEXT_13" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_13" Nullable="true" XMLName="Text13"/>
+                <Attribute ColumnName="TEXT_14" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_14" Nullable="true" XMLName="Text14"/>
+                <Attribute ColumnName="TEXT_15" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_15" Nullable="true" XMLName="Text15"/>
+                <Attribute ColumnName="TEXT_16" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_16" Nullable="true" XMLName="Text16"/>
+                <Attribute ColumnName="TEXT_17" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_17" Nullable="true" XMLName="Text17"/>
+                <Attribute ColumnName="TEXT_18" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_18" Nullable="true" XMLName="Text18"/>
+                <Attribute ColumnName="TEXT_19" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_19" Nullable="true" XMLName="Text19"/>
+                <Attribute ColumnName="TEXT_20" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_20" Nullable="true" XMLName="Text20"/>
+                <Attribute ColumnName="BOOLEAN_1" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_1" Nullable="true" XMLName="Boolean1"/>
+                <Attribute ColumnName="BOOLEAN_2" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_2" Nullable="true" XMLName="Boolean2"/>
+                <Attribute ColumnName="BOOLEAN_3" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_3" Nullable="true" XMLName="Boolean3"/>
+                <Attribute ColumnName="BOOLEAN_4" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_4" Nullable="true" XMLName="Boolean4"/>
+                <Attribute ColumnName="BOOLEAN_5" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_5" Nullable="true" XMLName="Boolean5"/>
+                <Attribute ColumnName="BOOLEAN_6" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_6" Nullable="true" XMLName="Boolean6"/>
+                <Attribute ColumnName="BOOLEAN_7" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_7" Nullable="true" XMLName="Boolean7"/>
+                <Attribute ColumnName="BOOLEAN_8" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_8" Nullable="true" XMLName="Boolean8"/>
+                <Attribute ColumnName="BOOLEAN_9" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_9" Nullable="true" XMLName="Boolean9"/>
+                <Attribute ColumnName="BOOLEAN_10" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_10" Nullable="true" XMLName="Boolean10"/>
+                <Attribute ColumnName="INTEGER_1" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_1" Nullable="true" XMLName="Integer1"/>
+                <Attribute ColumnName="INTEGER_2" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_2" Nullable="true" XMLName="Integer2"/>
+                <Attribute ColumnName="INTEGER_3" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_3" Nullable="true" XMLName="Integer3"/>
+                <Attribute ColumnName="INTEGER_4" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_4" Nullable="true" XMLName="Integer4"/>
+                <Attribute ColumnName="INTEGER_5" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_5" Nullable="true" XMLName="Integer5"/>
+                <Attribute ColumnName="INTEGER_6" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_6" Nullable="true" XMLName="Integer6"/>
+                <Attribute ColumnName="INTEGER_7" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_7" Nullable="true" XMLName="Integer7"/>
+                <Attribute ColumnName="INTEGER_8" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_8" Nullable="true" XMLName="Integer8"/>
+                <Attribute ColumnName="INTEGER_9" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_9" Nullable="true" XMLName="Integer9"/>
+                <Attribute ColumnName="INTEGER_10" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_10" Nullable="true" XMLName="Integer10"/>
+                <Attribute ColumnName="DECIMAL_1" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_1" Nullable="true" XMLName="Decimal1"/>
+                <Attribute ColumnName="DECIMAL_2" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_2" Nullable="true" XMLName="Decimal2"/>
+                <Attribute ColumnName="DECIMAL_3" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_3" Nullable="true" XMLName="Decimal3"/>
+                <Attribute ColumnName="DECIMAL_4" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_4" Nullable="true" XMLName="Decimal4"/>
+                <Attribute ColumnName="DECIMAL_5" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_5" Nullable="true" XMLName="Decimal5"/>
+                <Attribute ColumnName="DECIMAL_6" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_6" Nullable="true" XMLName="Decimal6"/>
+                <Attribute ColumnName="DECIMAL_7" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_7" Nullable="true" XMLName="Decimal7"/>
+                <Attribute ColumnName="DECIMAL_8" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_8" Nullable="true" XMLName="Decimal8"/>
+                <Attribute ColumnName="DECIMAL_9" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_9" Nullable="true" XMLName="Decimal9"/>
+                <Attribute ColumnName="DECIMAL_10" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_10" Nullable="true" XMLName="Decimal10"/>
+                <Attribute ColumnName="DATE_1" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_1" Nullable="true" XMLName="Date1"/>
+                <Attribute ColumnName="DATE_2" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_2" Nullable="true" XMLName="Date2"/>
+                <Attribute ColumnName="DATE_3" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_3" Nullable="true" XMLName="Date3"/>
+                <Attribute ColumnName="DATE_4" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_4" Nullable="true" XMLName="Date4"/>
+                <Attribute ColumnName="DATE_5" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_5" Nullable="true" XMLName="Date5"/>
+                <Attribute ColumnName="DATE_6" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_6" Nullable="true" XMLName="Date6"/>
+                <Attribute ColumnName="DATE_7" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_7" Nullable="true" XMLName="Date7"/>
+                <Attribute ColumnName="DATE_8" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_8" Nullable="true" XMLName="Date8"/>
+                <Attribute ColumnName="DATE_9" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_9" Nullable="true" XMLName="Date9"/>
+                <Attribute ColumnName="DATE_10" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_10" Nullable="true" XMLName="Date10"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ORD_HEADER_EXT_PK" Name="YFS_ORDER_HEADER_EXT_PK">
+                <Attribute ColumnName="ORDER_HEADER_EXTENSION_KEY" Name="Order_Header_Extension_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ORD_HEADER_EXT_I1"
+                    Name="YFS_ORDER_HEADER_EXT_I1" Unique="true">
+                    <Column Name="ORDER_HEADER_KEY"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I2"
+                    Name="YFS_ORDER_HEADER_EXT_I2">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="TEXT_1"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I3"
+                    Name="YFS_ORDER_HEADER_EXT_I3">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="TEXT_2"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I4"
+                    Name="YFS_ORDER_HEADER_EXT_I4">
+                    <Column Name="TEXT_3"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I5"
+                    Name="YFS_ORDER_HEADER_EXT_I5">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="TEXT_4"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I6"
+                    Name="YFS_ORDER_HEADER_EXT_I6">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="TEXT_5"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I7"
+                    Name="YFS_ORDER_HEADER_EXT_I7">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="BOOLEAN_1"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I8"
+                    Name="YFS_ORDER_HEADER_EXT_I8">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="BOOLEAN_2"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I9"
+                    Name="YFS_ORDER_HEADER_EXT_I9">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="BOOLEAN_3"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I10"
+                    Name="YFS_ORDER_HEADER_EXT_I10">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="BOOLEAN_4"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I11"
+                    Name="YFS_ORDER_HEADER_EXT_I11">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="BOOLEAN_5"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I12"
+                    Name="YFS_ORDER_HEADER_EXT_I12">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="INTEGER_1"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I13"
+                    Name="YFS_ORDER_HEADER_EXT_I13">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="INTEGER_2"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I14"
+                    Name="YFS_ORDER_HEADER_EXT_I14">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="INTEGER_3"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I15"
+                    Name="YFS_ORDER_HEADER_EXT_I15">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="INTEGER_4"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I16"
+                    Name="YFS_ORDER_HEADER_EXT_I16">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="INTEGER_5"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I17"
+                    Name="YFS_ORDER_HEADER_EXT_I17">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DECIMAL_1"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I18"
+                    Name="YFS_ORDER_HEADER_EXT_I18">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DECIMAL_2"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I19"
+                    Name="YFS_ORDER_HEADER_EXT_I19">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DECIMAL_3"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I20"
+                    Name="YFS_ORDER_HEADER_EXT_I20">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DECIMAL_4"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I21"
+                    Name="YFS_ORDER_HEADER_EXT_I21">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DECIMAL_5"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I22"
+                    Name="YFS_ORDER_HEADER_EXT_I22">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DATE_1"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I23"
+                    Name="YFS_ORDER_HEADER_EXT_I23">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DATE_2"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I24"
+                    Name="YFS_ORDER_HEADER_EXT_I24">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DATE_3"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I25"
+                    Name="YFS_ORDER_HEADER_EXT_I25">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DATE_4"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I26"
+                    Name="YFS_ORDER_HEADER_EXT_I26">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DATE_5"/>
+                </Index>
+                <Index DB2Name="ORD_HEADER_EXT_I27"
+                    Name="YFS_ORDER_HEADER_EXT_I27">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildName="CustomAttributes"
+                    ChildXMLName="CustomAttributes"
+                    ForeignEntity="Order_Header" Name="OrderHeader"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+        <Entity
+            Description="This table stores dynamic extension attributes of order line entity."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            Module="omp" Name="Order_Line_Extension" Prefix="YFS_"
+            SupportHangOffEntity="N" TableName="YFS_ORDER_LINE_EXTENSION"
+            TableType="TRANSACTION" XMLName="OrderLineExtension">
+            <Attributes>
+                <Attribute ColumnName="ORDER_LINE_EXTENSION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_ORDER_LINE_EXTENSION table."
+                    Name="Order_Line_Extension_Key" Nullable="false" XMLName="OrderLineExtensionKey" />
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The enterprise that is associated with this order."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order header that this order line is associated with."
+                    Name="Order_Header_Key" Nullable="false"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_ORDER_LINE table."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey" />
+                <Attribute ColumnName="TEXT_1" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_1" Nullable="true" XMLName="Text1"/>
+                <Attribute ColumnName="TEXT_2" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_2" Nullable="true" XMLName="Text2"/>
+                <Attribute ColumnName="TEXT_3" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_3" Nullable="true" XMLName="Text3"/>
+                <Attribute ColumnName="TEXT_4" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_4" Nullable="true" XMLName="Text4"/>
+                <Attribute ColumnName="TEXT_5" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_5" Nullable="true" XMLName="Text5"/>
+                <Attribute ColumnName="TEXT_6" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_6" Nullable="true" XMLName="Text6"/>
+                <Attribute ColumnName="TEXT_7" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_7" Nullable="true" XMLName="Text7"/>
+                <Attribute ColumnName="TEXT_8" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_8" Nullable="true" XMLName="Text8"/>
+                <Attribute ColumnName="TEXT_9" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_9" Nullable="true" XMLName="Text9"/>
+                <Attribute ColumnName="TEXT_10" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_10" Nullable="true" XMLName="Text10"/>
+                <Attribute ColumnName="TEXT_11" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_11" Nullable="true" XMLName="Text11"/>
+                <Attribute ColumnName="TEXT_12" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_12" Nullable="true" XMLName="Text12"/>
+                <Attribute ColumnName="TEXT_13" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_13" Nullable="true" XMLName="Text13"/>
+                <Attribute ColumnName="TEXT_14" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_14" Nullable="true" XMLName="Text14"/>
+                <Attribute ColumnName="TEXT_15" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_15" Nullable="true" XMLName="Text15"/>
+                <Attribute ColumnName="TEXT_16" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_16" Nullable="true" XMLName="Text16"/>
+                <Attribute ColumnName="TEXT_17" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_17" Nullable="true" XMLName="Text17"/>
+                <Attribute ColumnName="TEXT_18" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_18" Nullable="true" XMLName="Text18"/>
+                <Attribute ColumnName="TEXT_19" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_19" Nullable="true" XMLName="Text19"/>
+                <Attribute ColumnName="TEXT_20" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_20" Nullable="true" XMLName="Text20"/>
+                <Attribute ColumnName="BOOLEAN_1" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_1" Nullable="true" XMLName="Boolean1"/>
+                <Attribute ColumnName="BOOLEAN_2" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_2" Nullable="true" XMLName="Boolean2"/>
+                <Attribute ColumnName="BOOLEAN_3" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_3" Nullable="true" XMLName="Boolean3"/>
+                <Attribute ColumnName="BOOLEAN_4" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_4" Nullable="true" XMLName="Boolean4"/>
+                <Attribute ColumnName="BOOLEAN_5" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_5" Nullable="true" XMLName="Boolean5"/>
+                <Attribute ColumnName="BOOLEAN_6" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_6" Nullable="true" XMLName="Boolean6"/>
+                <Attribute ColumnName="BOOLEAN_7" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_7" Nullable="true" XMLName="Boolean7"/>
+                <Attribute ColumnName="BOOLEAN_8" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_8" Nullable="true" XMLName="Boolean8"/>
+                <Attribute ColumnName="BOOLEAN_9" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_9" Nullable="true" XMLName="Boolean9"/>
+                <Attribute ColumnName="BOOLEAN_10" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_10" Nullable="true" XMLName="Boolean10"/>
+                <Attribute ColumnName="INTEGER_1" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_1" Nullable="true" XMLName="Integer1"/>
+                <Attribute ColumnName="INTEGER_2" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_2" Nullable="true" XMLName="Integer2"/>
+                <Attribute ColumnName="INTEGER_3" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_3" Nullable="true" XMLName="Integer3"/>
+                <Attribute ColumnName="INTEGER_4" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_4" Nullable="true" XMLName="Integer4"/>
+                <Attribute ColumnName="INTEGER_5" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_5" Nullable="true" XMLName="Integer5"/>
+                <Attribute ColumnName="INTEGER_6" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_6" Nullable="true" XMLName="Integer6"/>
+                <Attribute ColumnName="INTEGER_7" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_7" Nullable="true" XMLName="Integer7"/>
+                <Attribute ColumnName="INTEGER_8" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_8" Nullable="true" XMLName="Integer8"/>
+                <Attribute ColumnName="INTEGER_9" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_9" Nullable="true" XMLName="Integer9"/>
+                <Attribute ColumnName="INTEGER_10" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_10" Nullable="true" XMLName="Integer10"/>
+                <Attribute ColumnName="DECIMAL_1" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_1" Nullable="true" XMLName="Decimal1"/>
+                <Attribute ColumnName="DECIMAL_2" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_2" Nullable="true" XMLName="Decimal2"/>
+                <Attribute ColumnName="DECIMAL_3" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_3" Nullable="true" XMLName="Decimal3"/>
+                <Attribute ColumnName="DECIMAL_4" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_4" Nullable="true" XMLName="Decimal4"/>
+                <Attribute ColumnName="DECIMAL_5" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_5" Nullable="true" XMLName="Decimal5"/>
+                <Attribute ColumnName="DECIMAL_6" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_6" Nullable="true" XMLName="Decimal6"/>
+                <Attribute ColumnName="DECIMAL_7" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_7" Nullable="true" XMLName="Decimal7"/>
+                <Attribute ColumnName="DECIMAL_8" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_8" Nullable="true" XMLName="Decimal8"/>
+                <Attribute ColumnName="DECIMAL_9" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_9" Nullable="true" XMLName="Decimal9"/>
+                <Attribute ColumnName="DECIMAL_10" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_10" Nullable="true" XMLName="Decimal10"/>
+                <Attribute ColumnName="DATE_1" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_1" Nullable="true" XMLName="Date1"/>
+                <Attribute ColumnName="DATE_2" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_2" Nullable="true" XMLName="Date2"/>
+                <Attribute ColumnName="DATE_3" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_3" Nullable="true" XMLName="Date3"/>
+                <Attribute ColumnName="DATE_4" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_4" Nullable="true" XMLName="Date4"/>
+                <Attribute ColumnName="DATE_5" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_5" Nullable="true" XMLName="Date5"/>
+                <Attribute ColumnName="DATE_6" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_6" Nullable="true" XMLName="Date6"/>
+                <Attribute ColumnName="DATE_7" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_7" Nullable="true" XMLName="Date7"/>
+                <Attribute ColumnName="DATE_8" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_8" Nullable="true" XMLName="Date8"/>
+                <Attribute ColumnName="DATE_9" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_9" Nullable="true" XMLName="Date9"/>
+                <Attribute ColumnName="DATE_10" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_10" Nullable="true" XMLName="Date10"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ORD_LINE_EXT_PK" Name="YFS_ORDER_LINE_EXT_PK">
+                <Attribute ColumnName="ORDER_LINE_EXTENSION_KEY" Name="Order_Line_Extension_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ORD_LINE_EXT_I1"
+                    Name="YFS_ORDER_LINE_EXT_I1" Unique="true">
+                    <Column Name="ORDER_LINE_KEY"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I2"
+                    Name="YFS_ORDER_LINE_EXT_I2">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_1"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I3"
+                    Name="YFS_ORDER_LINE_EXT_I3">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_2"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I4"
+                    Name="YFS_ORDER_LINE_EXT_I4">
+                    <Column Name="TEXT_3"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I5"
+                    Name="YFS_ORDER_LINE_EXT_I5">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_4"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I6"
+                    Name="YFS_ORDER_LINE_EXT_I6">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_5"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I7"
+                    Name="YFS_ORDER_LINE_EXT_I7">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_1"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I8"
+                    Name="YFS_ORDER_LINE_EXT_I8">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_2"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I9"
+                    Name="YFS_ORDER_LINE_EXT_I9">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_3"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I10"
+                    Name="YFS_ORDER_LINE_EXT_I10">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_4"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I11"
+                    Name="YFS_ORDER_LINE_EXT_I11">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_5"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I12"
+                    Name="YFS_ORDER_LINE_EXT_I12">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_1"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I13"
+                    Name="YFS_ORDER_LINE_EXT_I13">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_2"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I14"
+                    Name="YFS_ORDER_LINE_EXT_I14">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_3"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I15"
+                    Name="YFS_ORDER_LINE_EXT_I15">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_4"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I16"
+                    Name="YFS_ORDER_LINE_EXT_I16">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_5"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I17"
+                    Name="YFS_ORDER_LINE_EXT_I17">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_1"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I18"
+                    Name="YFS_ORDER_LINE_EXT_I18">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_2"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I19"
+                    Name="YFS_ORDER_LINE_EXT_I19">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_3"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I20"
+                    Name="YFS_ORDER_LINE_EXT_I20">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_4"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I21"
+                    Name="YFS_ORDER_LINE_EXT_I21">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_5"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I22"
+                    Name="YFS_ORDER_LINE_EXT_I22">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_1"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I23"
+                    Name="YFS_ORDER_LINE_EXT_I23">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_2"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I24"
+                    Name="YFS_ORDER_LINE_EXT_I24">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_3"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I25"
+                    Name="YFS_ORDER_LINE_EXT_I25">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_4"/>
+                </Index>
+                <Index DB2Name="ORD_LINE_EXT_I26"
+                    Name="YFS_ORDER_LINE_EXT_I26">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_5"/>
+                </Index>
+                <Index DB2Name="ORDER_LINE_EXT_I27" Name="YFS_ORDER_LINE_EXT_I27" Unique="true">
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="ORDER_LINE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="OrderLines" ChildName="OrderLine"
+                    ForeignEntity="Order_Header" Name="OrderHeader"
+                    Type="Unidirectional" UsedForDataSecurity="true" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne" 
+                    ChildName="CustomAttributes"
+                    ChildXMLName="CustomAttributes"
+                    ForeignEntity="Order_Line" Name="OrderLine"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="OrderLine">
+                    <Attribute Name="Order_Line_Key" ParentName="Order_Line_Key"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+        <Entity  AuditRequired="Y" 
+            Description="This table stores dynamic extension attributes of opportunity entity."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            Module="omp" Name="Opportunity_Extension" Prefix="YFS_"
+            SupportHangOffEntity="N" TableName="YFS_OPPORTUNITY_EXTENSION"
+            TableType="TRANSACTION" XMLName="OpportunityExtension">
+            <Attributes>
+                <Attribute ColumnName="OPPORTUNITY_EXTENSION_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_OPPORTUNITY_EXTENSION table."
+                    Name="Opportunity_Extension_Key" Nullable="false" XMLName="OpportunityExtensionKey" />
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The enterprise that is associated with this opportunity."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="OPPORTUNITY_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The The primary key of the YFS_OPPORTUNITY table."
+                    Name="Opportunity_Key" Nullable="false"/>
+                <Attribute ColumnName="TEXT_1" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_1" Nullable="true" XMLName="Text1"/>
+                <Attribute ColumnName="TEXT_2" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_2" Nullable="true" XMLName="Text2"/>
+                <Attribute ColumnName="TEXT_3" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_3" Nullable="true" XMLName="Text3"/>
+                <Attribute ColumnName="TEXT_4" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_4" Nullable="true" XMLName="Text4"/>
+                <Attribute ColumnName="TEXT_5" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_5" Nullable="true" XMLName="Text5"/>
+                <Attribute ColumnName="TEXT_6" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_6" Nullable="true" XMLName="Text6"/>
+                <Attribute ColumnName="TEXT_7" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_7" Nullable="true" XMLName="Text7"/>
+                <Attribute ColumnName="TEXT_8" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_8" Nullable="true" XMLName="Text8"/>
+                <Attribute ColumnName="TEXT_9" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_9" Nullable="true" XMLName="Text9"/>
+                <Attribute ColumnName="TEXT_10" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_10" Nullable="true" XMLName="Text10"/>
+                <Attribute ColumnName="TEXT_11" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_11" Nullable="true" XMLName="Text11"/>
+                <Attribute ColumnName="TEXT_12" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_12" Nullable="true" XMLName="Text12"/>
+                <Attribute ColumnName="TEXT_13" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_13" Nullable="true" XMLName="Text13"/>
+                <Attribute ColumnName="TEXT_14" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_14" Nullable="true" XMLName="Text14"/>
+                <Attribute ColumnName="TEXT_15" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_15" Nullable="true" XMLName="Text15"/>
+                <Attribute ColumnName="TEXT_16" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_16" Nullable="true" XMLName="Text16"/>
+                <Attribute ColumnName="TEXT_17" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_17" Nullable="true" XMLName="Text17"/>
+                <Attribute ColumnName="TEXT_18" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_18" Nullable="true" XMLName="Text18"/>
+                <Attribute ColumnName="TEXT_19" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_19" Nullable="true" XMLName="Text19"/>
+                <Attribute ColumnName="TEXT_20" DataType="Text-200"
+                    Description="The extended column for TEXT data type. This column stores value for the TEXT Entity Attribute to which it is mapped."
+                    Name="Text_20" Nullable="true" XMLName="Text20"/>
+                <Attribute ColumnName="BOOLEAN_1" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_1" Nullable="true" XMLName="Boolean1"/>
+                <Attribute ColumnName="BOOLEAN_2" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_2" Nullable="true" XMLName="Boolean2"/>
+                <Attribute ColumnName="BOOLEAN_3" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_3" Nullable="true" XMLName="Boolean3"/>
+                <Attribute ColumnName="BOOLEAN_4" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_4" Nullable="true" XMLName="Boolean4"/>
+                <Attribute ColumnName="BOOLEAN_5" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_5" Nullable="true" XMLName="Boolean5"/>
+                <Attribute ColumnName="BOOLEAN_6" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_6" Nullable="true" XMLName="Boolean6"/>
+                <Attribute ColumnName="BOOLEAN_7" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_7" Nullable="true" XMLName="Boolean7"/>
+                <Attribute ColumnName="BOOLEAN_8" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_8" Nullable="true" XMLName="Boolean8"/>
+                <Attribute ColumnName="BOOLEAN_9" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_9" Nullable="true" XMLName="Boolean9"/>
+                <Attribute ColumnName="BOOLEAN_10" DataType="Flag"
+                    Description="The extended column for BOOLEAN data type. This column stores value for the BOOLEAN Entity Attribute to which it is mapped."
+                    Name="Boolean_10" Nullable="true" XMLName="Boolean10"/>
+                <Attribute ColumnName="INTEGER_1" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_1" Nullable="true" XMLName="Integer1"/>
+                <Attribute ColumnName="INTEGER_2" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_2" Nullable="true" XMLName="Integer2"/>
+                <Attribute ColumnName="INTEGER_3" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_3" Nullable="true" XMLName="Integer3"/>
+                <Attribute ColumnName="INTEGER_4" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_4" Nullable="true" XMLName="Integer4"/>
+                <Attribute ColumnName="INTEGER_5" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_5" Nullable="true" XMLName="Integer5"/>
+                <Attribute ColumnName="INTEGER_6" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_6" Nullable="true" XMLName="Integer6"/>
+                <Attribute ColumnName="INTEGER_7" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_7" Nullable="true" XMLName="Integer7"/>
+                <Attribute ColumnName="INTEGER_8" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_8" Nullable="true" XMLName="Integer8"/>
+                <Attribute ColumnName="INTEGER_9" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_9" Nullable="true" XMLName="Integer9"/>
+                <Attribute ColumnName="INTEGER_10" DataType="Number20"
+                    Description="The extended column for INTEGER data type. This column stores value for the INTEGER Entity Attribute to which it is mapped."
+                    Name="Integer_10" Nullable="true" XMLName="Integer10"/>
+                <Attribute ColumnName="DECIMAL_1" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_1" Nullable="true" XMLName="Decimal1"/>
+                <Attribute ColumnName="DECIMAL_2" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_2" Nullable="true" XMLName="Decimal2"/>
+                <Attribute ColumnName="DECIMAL_3" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_3" Nullable="true" XMLName="Decimal3"/>
+                <Attribute ColumnName="DECIMAL_4" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_4" Nullable="true" XMLName="Decimal4"/>
+                <Attribute ColumnName="DECIMAL_5" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_5" Nullable="true" XMLName="Decimal5"/>
+                <Attribute ColumnName="DECIMAL_6" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_6" Nullable="true" XMLName="Decimal6"/>
+                <Attribute ColumnName="DECIMAL_7" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_7" Nullable="true" XMLName="Decimal7"/>
+                <Attribute ColumnName="DECIMAL_8" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_8" Nullable="true" XMLName="Decimal8"/>
+                <Attribute ColumnName="DECIMAL_9" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_9" Nullable="true" XMLName="Decimal9"/>
+                <Attribute ColumnName="DECIMAL_10" DataType="UnitPrice"
+                    Description="The extended column for DECIMAL data type. This column stores value for the DECIMAL Entity Attribute to which it is mapped."
+                    Name="Decimal_10" Nullable="true" XMLName="Decimal10"/>
+                <Attribute ColumnName="DATE_1" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_1" Nullable="true" XMLName="Date1"/>
+                <Attribute ColumnName="DATE_2" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_2" Nullable="true" XMLName="Date2"/>
+                <Attribute ColumnName="DATE_3" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_3" Nullable="true" XMLName="Date3"/>
+                <Attribute ColumnName="DATE_4" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_4" Nullable="true" XMLName="Date4"/>
+                <Attribute ColumnName="DATE_5" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_5" Nullable="true" XMLName="Date5"/>
+                <Attribute ColumnName="DATE_6" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_6" Nullable="true" XMLName="Date6"/>
+                <Attribute ColumnName="DATE_7" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_7" Nullable="true" XMLName="Date7"/>
+                <Attribute ColumnName="DATE_8" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_8" Nullable="true" XMLName="Date8"/>
+                <Attribute ColumnName="DATE_9" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_9" Nullable="true" XMLName="Date9"/>
+                <Attribute ColumnName="DATE_10" DataType="TimeStamp"
+                    Description="The extended column for DATE data type. This column stores value for the DATE Entity Attribute to which it is mapped."
+                    Name="Date_10" Nullable="true" XMLName="Date10"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="OPPOR_EXT_PK" Name="YFS_OPPORTUNITY_EXT_PK">
+                <Attribute ColumnName="OPPORTUNITY_EXTENSION_KEY" Name="Opportunity_Extension_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="OPPOR_EXT_I1"
+                    Name="YFS_OPPORTUNITY_EXT_I1" Unique="true">
+                    <Column Name="OPPORTUNITY_KEY"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I2"
+                    Name="YFS_OPPORTUNITY_EXT_I2">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_1"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I3"
+                    Name="YFS_OPPORTUNITY_EXT_I3">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_2"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I4"
+                    Name="YFS_OPPORTUNITY_EXT_I4">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_3"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I5"
+                    Name="YFS_OPPORTUNITY_EXT_I5">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_4"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I6"
+                    Name="YFS_OPPORTUNITY_EXT_I6">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="TEXT_5"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I7"
+                    Name="YFS_OPPORTUNITY_EXT_I7">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_1"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I8"
+                    Name="YFS_OPPORTUNITY_EXT_I8">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_2"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I9"
+                    Name="YFS_OPPORTUNITY_EXT_I9">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_3"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I10"
+                    Name="YFS_OPPORTUNITY_EXT_I10">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_4"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I11"
+                    Name="YFS_OPPORTUNITY_EXT_I11">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="BOOLEAN_5"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I12"
+                    Name="YFS_OPPORTUNITY_EXT_I12">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_1"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I13"
+                    Name="YFS_OPPORTUNITY_EXT_I13">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_2"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I14"
+                    Name="YFS_OPPORTUNITY_EXT_I14">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_3"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I15"
+                    Name="YFS_OPPORTUNITY_EXT_I15">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_4"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I16"
+                    Name="YFS_OPPORTUNITY_EXT_I16">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INTEGER_5"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I17"
+                    Name="YFS_OPPORTUNITY_EXT_I17">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_1"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I18"
+                    Name="YFS_OPPORTUNITY_EXT_I18">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_2"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I19"
+                    Name="YFS_OPPORTUNITY_EXT_I19">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_3"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I20"
+                    Name="YFS_OPPORTUNITY_EXT_I20">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_4"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I21"
+                    Name="YFS_OPPORTUNITY_EXT_I21">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DECIMAL_5"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I22"
+                    Name="YFS_OPPORTUNITY_EXT_I22">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_1"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I23"
+                    Name="YFS_OPPORTUNITY_EXT_I23">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_2"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I24"
+                    Name="YFS_OPPORTUNITY_EXT_I24">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_3"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I25"
+                    Name="YFS_OPPORTUNITY_EXT_I25">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_4"/>
+                </Index>
+                <Index DB2Name="OPPOR_EXT_I26"
+                    Name="YFS_OPPORTUNITY_EXT_I26">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DATE_5"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne" 
+                    ChildName="CustomAttributes"
+                    ChildXMLName="CustomAttributes"
+					ForeignEntity="Opportunity" Name="Opportunity"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="Opportunity">
+                    <Attribute Name="Opportunity_Key" ParentName="Opportunity_Key"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+	</Entities>
+</DBSchema>

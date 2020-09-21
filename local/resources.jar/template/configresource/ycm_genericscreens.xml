@@ -1,0 +1,3004 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity EntityTitle="Master_Catalog" EntityName="MasterCatalog" PrimaryKeyAttributeName="MasterCatalogKey">
+		<ConfigurationAttributes  TableName="YFS_MASTER_CATALOG">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM005" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00001 Title="Master_Catalog_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00020" ListPanel="pnlMstrCatalogList">
+			<Search/>
+         </SearchInfo>
+         <MasterData>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Master_Catalog_Search"/>
+      </YCM00001>
+      <YCM00020 Title="Search_Results" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="MasterCatalog">
+            <List AttributeName="@MasterCatalogID" ColumnTitle="Master_Catalog_ID" DataType="Text-40"/>
+            <List AttributeName="@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+           <CreateNew DisplayForm="YCM00013" DisplayMode="Dialog">
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+		   </CreateNew>
+           <Modify DisplayForm="YCM00013" DisplayMode="Dialog"/>
+           <Delete>
+               <API Servlet="/yantra/entities/MasterCatalog/delete" APIName="" Message="Message_Deleting_Master_Catalog"/>
+			</Delete>
+           <SaveAs DisplayForm="YCM00013" DisplayMode="Dialog"/>
+         </ListInfo>
+         <API Servlet="/yantra/entities/MasterCatalog/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+      </YCM00020>
+      <YCM00013 Title="Master_Catalog_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+             <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Master_Catalog_Details"/>
+            </Get>
+            <Modify>
+           <API Servlet="/yantra/entities/MasterCatalog/modify" APIName="" Message="Message_Saving_Master_Catalog"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/MasterCatalog/create" APIName="" Message="Message_Creating_Master_Catalog"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentName="txtMstrCatalogId"/>
+            </LogicalKeys>
+         </DetailInfo>
+      </YCM00013>
+   </Entity>
+   <Entity EntityTitle="Category Domain" EntityName="CategoryDomain" PrimaryKeyAttributeName="CategoryDomainKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY_DOMAIN">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM006" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00012 Title="Category_Domain_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Category_Domain_Details"/> 
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/CategoryDomain/modify" APIName="" Message="Message_Saving_Category_Domain_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/CategoryDomain/create" APIName="" Message="Message_Creating_New_Category_Domain">
+					<StaticAttributes IsClassification="N"/>
+				</API>
+            </CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/CategoryDomain/delete" APIName="" Message="Message_Deleting_Category_Domain"/>
+            </Delete>
+            <LogicalKeys>
+               <LogicalKey ComponentName="txtCategoryDomain"/>
+            </LogicalKeys>
+         </DetailInfo>
+      </YCM00012>
+   </Entity>
+   <Entity EntityTitle="Categories" EntityName="Categories" PrimaryKeyAttributeName="CategoryKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM006" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00003 Title="Categories" ScreenType="Tree">
+         <TreeInfo RelationshipAttribute="">
+            <NodeDescriptorList>
+				<NodeDescriptor NodeName="All_Categories" LabelAttribute="ShortDescription" Icon="/com/yantra/ycm/ui/icons/allcategories.gif"  TooltipAttribute="CategoryDomain"/>
+				<NodeDescriptor NodeName="CategoryDomain" LabelAttribute="ShortDescription" Icon="/com/yantra/ycm/ui/icons/categorydomain.gif"  TooltipAttribute="CategoryDomain"/>
+				<NodeDescriptor NodeName="Category" LabelAttribute="ShortDescription" Icon="/com/yantra/ycm/ui/icons/category.gif"  TooltipAttribute="CategoryID"/>
+            </NodeDescriptorList>
+            <FilterNodeList/>
+         </TreeInfo>
+      </YCM00003>
+   </Entity>
+   <Entity EntityTitle="Category" EntityName="Category" PrimaryKeyAttributeName="CategoryKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM006" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00019 Title="Category_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCategoryDtlAPI" APIName="getCategoryDetails" Message="Message_Loading_Category_Details"/>
+				<TabPanes>
+					<TabPane TabPaneName="tbpCategoryDetails" >
+						<Tab FormName="YCM00021" TabIndex="1" ListPanel="pnlItemList" LoadOnClick="N">
+							<DynamicAttributes CategoryKey="/Category@CategoryKey" CallingOrganizationCode="@CallingOrganizationCode"/>
+						</Tab>
+					</TabPane>
+				</TabPanes>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCategoryDtlAPI" APIName="setCategoryXML" Message="Message_Saving_Category_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCategoryDtlAPI" APIName="setCategoryXML" Message="Message_Creating_New_Category"/>
+            </CreateNew>
+            <Delete/>
+            <LogicalKeys>
+               <LogicalKey ComponentName="txtCategory"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="CommonCode" XMLName="Status">
+                <StaticAttributes CodeType="CATEGORY_STATUS"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" />
+            </Table>
+            <Table Name="CommonCode" XMLName="CategoryAdditionalAttribute">
+               <StaticAttributes CodeType="CATEGORY_ADDNL_ATTR"/>
+            </Table>
+         </MasterData>
+      </YCM00019>
+   </Entity>
+   <Entity EntityTitle="Category-Item Relation" EntityName="CategoryItem" PrimaryKeyAttributeName="CategoryItemKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM006" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00021 Title="Category_Item_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="CategoryItem">
+            <List AttributeName="/Item@OrganizationCode" ColumnTitle="Organization_Code" DataType="OrgCode"/>
+            <List AttributeName="/Item@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="/Item@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+            <List AttributeName="/Item/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+            <CreateNew DisplayForm="YCM00023" DisplayMode="Dialog" >
+               <DynamicAttributes CategoryKey="@CategoryKey" CallingOrganizationCode="@CallingOrganizationCode"/>
+			</CreateNew>
+            <Delete>
+               <API Servlet="/yantra/entities/CategoryItem/delete" APIName="" Message="Message_Removing_Category_Item"/>
+            </Delete>
+         </ListInfo>
+         <API Servlet="/yantra/entities/CategoryItem/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+      </YCM00021>
+   </Entity>
+   <Entity EntityTitle="Item" EntityName="Item" PrimaryKeyAttributeName="ItemKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM002" IsPrimary="Y"/>
+			<ApplicationSpecificAttributes ApplicationCode="inv" PermissionId="YSINV000"/>
+		</ConfigurationAttributes>
+      <YCM00002 Title="Product_Item_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00022" ListPanel="pnlItemList">
+		 <Search/>
+		 </SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <StaticAttributes ItemGroupCode="PROD" IsInventoryUOM="Y"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE" OrganizationCode="DEFAULT"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@KitCode"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycm.ui.backend.YCMSearchItemAPI" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+			<StaticAttributes ItemGroupCode="PROD" />
+		</API>
+      </YCM00002>
+      <YCM00022 Title="Item_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@OrganizationCode" ColumnTitle="Organization_Code" DataType="OrgCode"/>
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00014" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+					<StaticAttributes ItemGroupCode="PROD">
+						<PrimaryInformation	PricingQuantityStrategy="IQTY"/>
+					</StaticAttributes>
+				</CreateNew>
+               <Modify DisplayForm="YCM00004"/>
+               <SaveAs DisplayForm="YCM00014" DisplayMode="Dialog" NextAction="Modify"/>
+               <Default DisplayForm="" DisplayMode=""/>
+               <Delete>
+                  <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="deleteItem" Message="Message_Deleting_Item">
+		               <StaticAttributes Action="Delete"/>
+			       	   <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+				  </API>
+               </Delete>
+         </ListInfo>
+         <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList"  Message="Message_Retrieving_Search_Results">
+            <StaticAttributes ItemGroupCode="PROD"/>
+		 </API>
+      </YCM00022>
+      <YCM00023 Title="Find_Items_To_Add_To_Category" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00024" ListPanel="pnlItemList">
+			<Search/>
+         </SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+                <StaticAttributes ItemGroupCode="PROD"/>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search"/>
+      </YCM00023>
+      <YCM00024 Title="Category_Item_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item" MultiSelection="Y">
+            <List AttributeName="@OrganizationCode" ColumnTitle="Organization_Code" DataType="OrgCode"/>
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+            <List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+            <AddToRelationship RelationshipEntityName="CategoryItem">
+               <API Servlet="/yantra/entities/CategoryItem/create" APIName="" Message="Message_Adding_Item_To_Category"/>
+               <DynamicAttributes CategoryKey="@CategoryKey" ItemKey="@ItemKey" />
+            </AddToRelationship>
+         </ListInfo>
+         <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results"/>
+      </YCM00024>
+      <YCM00004 Title="Item_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getModifyItemDetails" Message="Message_Getting_Item_Details">
+					<StaticAttributes InheritAttributesFromClassification="N" />
+			   </API>
+				<InnerPanels>
+					<ListPanel FormName="YCM00045" ListPanel="pnlTagIdentifiers" InsertUnderElement="xml:/Item">
+	           			<DynamicAttributes ItemKey="@ItemKey"/>
+	           		</ListPanel>
+					<ListPanel FormName="YCM00046" ListPanel="pnlTagDescriptors" InsertUnderElement="xml:/Item">
+	           			<DynamicAttributes ItemKey="@ItemKey"/>
+	           		</ListPanel>
+					<ListPanel FormName="YCM00047" ListPanel="pnlAlternateUOM">
+	           			<DynamicAttributes ItemKey="@ItemKey" ItemsPrimaryUOM="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode"/>
+			       </ListPanel>
+					<ListPanel FormName="YCM00049" ListPanel="pnlNodeItems">
+	           			<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode"/>
+	           		</ListPanel>
+					<ListPanel FormName="YCM00058" ListPanel="pnlListProvidedService" >
+						<DynamicAttributes ItemKey="@ItemKey" CategoryKey="@CategoryKey" CallingOrganizationCode="@CallingOrganizationCode"/>
+						<StaticAttributes ServiceItemGroupCode="PS">
+						</StaticAttributes>
+					</ListPanel> 
+					<ListPanel FormName="YCM00058" ListPanel="pnlListDeliveryService" >
+						<DynamicAttributes ItemKey="@ItemKey" CategoryKey="@CategoryKey" CallingOrganizationCode="@CallingOrganizationCode"/>
+						<StaticAttributes ServiceItemGroupCode="DS">
+						</StaticAttributes>
+					</ListPanel>
+				            <ListPanel FormName="YCM00080" ListPanel="pnlItemInstruction" NeverDisable="Y">
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+				</InnerPanels>
+				<TabPanes>
+					<TabPane TabPaneName="tabbedPaneModifyItem" >
+						<Tab FormName="YCM00099" TabIndex="6" ListPanel="pnlContainerList" LoadOnClick="Y">
+							<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" OrganizationCode="@OrganizationCode" ItemKey="@ItemKey"/>
+						</Tab>
+					</TabPane>
+				</TabPanes>
+            </Get>
+            <Modify> 
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Getting_Item_Details" />
+            </Modify>
+            <!--Validations>
+               <FromTo LesserComponent="txtMinimum" LesserLabel="Minimum_Order_Quantity" GreaterComponent="txtMaximum" GreaterLabel="Maximum_Order_Quantity" DataType="Quantity"/>
+            </Validations-->
+         </DetailInfo>
+         <MasterData>
+            <Table Name="MasterCatalog" XMLName="MasterCatalog">
+               	<CodeAttributes>
+                  	<CodeAttribute MasterCatalogID="/PrimaryInformation@MasterCatalogID" />
+               	</CodeAttributes>
+			</Table>
+			<Table Name="AdditionalAttribute" XMLName="Attribute_Domain_ID">
+				<StaticAttributes ParentTable="YFS_ITEM"/>
+			 	<DynamicAttributes ParentKey="@ItemKey"/>	
+               	<CodeAttributes>
+                  	<CodeAttribute AttributeDomainID="/AdditionalAttributeList/AdditionalAttribute@AttributeDomainID" />
+               	</CodeAttributes>
+			</Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE" OrganizationCode="DEFAULT"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@KitCode"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="CommonCode" XMLName="Country" AllRecords="Y">
+               <StaticAttributes CodeType="COUNTRY"/>
+               <!--<CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@CountryOfOrigin" />
+               </CodeAttributes>-->
+            </Table>
+            
+			<StaticData>
+        		<CheckboxValues>
+            		<CheckboxValue CheckboxValue="Y" />
+            		<CheckboxValue CheckboxValue="N" />
+        		</CheckboxValues>
+        		<ComboBoxDelivery>
+            		<ComboBoxValue ComboBoxValue="Y" Description="COMBO_YES"/>
+            		<ComboBoxValue ComboBoxValue="N" Description="COMBO_NO"/>
+            		<ComboBoxValue ComboBoxValue="M" Description="COMBO_MAYBE_DELIVERY"/>
+        		</ComboBoxDelivery>
+        		<ComboBoxShipping>
+            		<ComboBoxValue ComboBoxValue="Y" Description="COMBO_YES"/>
+            		<ComboBoxValue ComboBoxValue="N" Description="COMBO_NO"/>
+            		<ComboBoxValue ComboBoxValue="M" Description="COMBO_MAYBE_SHIPPING"/>
+        		</ComboBoxShipping>
+            </StaticData>
+
+            <Table Name="CommonCode" XMLName="ProductClass">
+                <StaticAttributes CodeType="PRODUCT_CLASS"/>
+               	<CodeAttributes>
+                	<CodeAttribute CodeValue="/PrimaryInformation@DefaultProductClass" />
+            	</CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="WeightUom">
+                <StaticAttributes UomType="WEIGHT"/>
+				<CodeAttributes>
+					<CodeAttribute UOM="/PrimaryInformation@UnitWeightUOM" />
+                </CodeAttributes>
+            </Table>
+			<Table Name="Uom" XMLName="VolumeUom">
+                <StaticAttributes UomType="VOLUME"/>
+				<CodeAttributes>
+					<CodeAttribute UOM="/PrimaryInformation@UnitVolumeUOM" />
+                </CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="HeightUom">
+                <StaticAttributes UomType="DIMENSION"/>
+               <CodeAttributes>
+                  <CodeAttribute Uom="/PrimaryInformation@UnitHeightUOM" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="WidthUom">
+                <StaticAttributes UomType="DIMENSION"/>
+               <CodeAttributes>
+                  <CodeAttribute Uom="/PrimaryInformation@UnitWidthUOM" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="LengthUom">
+				   <StaticAttributes UomType="DIMENSION"/>
+               <CodeAttributes>
+                  <CodeAttribute Uom="/PrimaryInformation@UnitLengthUOM" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="AtpRules" XMLName="AtpRules">
+               <CodeAttributes>
+                  <CodeAttribute AtpRule="/InventoryParameters@ATPRule" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="InventoryMonitorRules" XMLName="InventoryMonitorRules">
+               <CodeAttributes>
+                  <CodeAttribute InventoryMonitorRule="/InventoryParameters@InventoryMonitorRule" />
+               </CodeAttributes>
+			</Table>
+			<Table Name="InventoryMonitorRules" XMLName="NodeLevelInventoryMonitorRules">
+               <CodeAttributes>
+                  <CodeAttribute InventoryMonitorRule="/InventoryParameters@NodeLevelInventoryMonitorRule" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="CommonCode" XMLName="Alias" AllRecords="Y">
+                   <StaticAttributes CodeType="ITEM_ALIAS_TYPE"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="ItemAddlAttribute" AllRecords="Y">
+                   <StaticAttributes CodeType="ITEM_ADDNL_ATTR"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="ItemStatus">
+               <StaticAttributes CodeType="ITEM_STATUS"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@Status" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="CommonCode" XMLName="Exclusion" AllRecords="Y">
+                <StaticAttributes CodeType="ITEM_EXCL_CODE"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="AssociationType" AllRecords="Y">
+                   <StaticAttributes CodeType="ITEM_ASSOCN_TYPE"/>
+            </Table>
+            <Table Name="ItemUOMMaster" XMLName="Uom">
+				<StaticAttributes UOMType="QUANTITY" />
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+               	<CodeAttributes>
+                  	<CodeAttribute CodeValue="xml:/Item@UnitOfMeasure" />
+               	</CodeAttributes>
+            </Table>
+			<Table Name="ItemUOMMaster" XMLName="PricingUOM">
+                <StaticAttributes UOMTypeQryType="EQ" UOMType="WEIGHT"/>
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+            </Table>
+            <Table Name="ExtendedAttributes" XMLName="ExtendedAttributes"/>
+			<Table Name="ClassificationPurpose" XMLName="ContainerizationCategory">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+				<StaticAttributes AcceptMultipleElements="Y">
+						<ComplexQuery Operator="AND">
+							<Or>
+								<Exp Name="ClassificationPurposeCode" QryType="EQ" Value="CONTAINERIZATION"/>
+								<Exp Name="ClassificationPurposeCode" QryType="EQ" Value="CONTAINERIZATION1"/>
+								<Exp Name="ClassificationPurposeCode" QryType="EQ" Value="CONTAINERIZATION2"/>
+								<Exp Name="ClassificationPurposeCode" QryType="EQ" Value="CONTAINERIZATION3"/>
+								<Exp Name="ClassificationPurposeCode" QryType="EQ" Value="CONTAINERIZATION4"/>
+							</Or>
+						</ComplexQuery>
+				</StaticAttributes>
+			</Table>
+            <Table Name="Item" XMLName="KittingService">
+			   <StaticAttributes ItemGroupCode="KIT"/>
+			   <CodeAttributes>
+                  <CodeAttribute ItemID="/ItemServiceAssocList@KittingItemId" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="Item" XMLName="DekittingService">
+			   <StaticAttributes ItemGroupCode="DKIT"/>
+			   <CodeAttributes>
+                  <CodeAttribute ItemID="/ItemServiceAssocList@DekittingItemId" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="Currency" XMLName="Currency" AllRecords="Y"/>
+			<Table Name="CommonCode" XMLName="VelocityCode">
+               <StaticAttributes CodeType="VELOCITY_CODE" OrganizationCode="DEFAULT"/> 
+			   <!--DynamicAttributes OrganizationCode="@CallingOrganizationCode"/-->
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/ClassificationCodes@VelocityCode"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="CommonCode" XMLName="CostPostingClassification">
+                <StaticAttributes CodeType="COST_POSTING_CLASS"/>
+                <CodeAttributes>
+                    <CodeAttribute CodeValue="xml:/Item/ClassificationCodes@PostingClassification" />
+                </CodeAttributes>
+            </Table>
+            <Table Name="Organization" XMLName="SellerOrganization">
+               <StaticAttributes>
+                  <OrgRoleList>
+                     <OrgRole RoleKey="SELLER" />
+                  </OrgRoleList>
+               </StaticAttributes>
+               <CodeAttributes>
+                  <CodeAttribute OrganizationKey="xml:/Item/PrimaryInformation@PrimarySupplier"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="CostFactorGroup" XMLName="CostFactorGroup"/>
+            <Table Name="Association" XMLName="ItemAssociation">
+                <DynamicAttributes ParentKey="@ItemKey"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="LPNType">
+               <StaticAttributes CodeType="LPN_TYPE" OrganizationCode="DEFAULT"/>
+			   <CodeAttributes>
+					<CodeAttribute CodeValue="/ContainerInformation@ContainerType" />
+                </CodeAttributes>
+            </Table>
+         </MasterData>
+      </YCM00004>
+      <YCM00014 Title="Create_Item" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getCreateItemDetails" Message="Message_Loading_Create_Item_Details"/>
+            </Get>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="setCreateItemDetails" Message="Message_Creating_Item"/>
+            </CreateNew>
+            <RefreshMasterData>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getCreateItemMasterData" Message="Message_Loading"/>
+            </RefreshMasterData>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="MasterCatalog" XMLName="MasterCatalog">
+               	<CodeAttributes>
+                  	<CodeAttribute MasterCatalogID="/PrimaryInformation@MasterCatalogID" />
+               	</CodeAttributes>
+			</Table>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+                <DynamicAttributes ItemGroupCode="@ItemGroupCode" />
+				<StaticAttributes IsInventoryUOM="Y"/>
+            </Table>
+         </MasterData>
+      </YCM00014>
+
+		<YCM000107 Title="Model_Children_Items" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+            <CreateNew DisplayForm="YCM000108" DisplayMode="Dialog" >
+				<DynamicAttributes ParentItemID="/ClassificationCodes@Model" ParentUOM="/PrimaryInformation@ModelItemUnitOfMeasure" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+			</CreateNew>
+            <Delete>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Getting_Item_Details" >
+					<StaticAttributes>
+						<ClassificationCodes Model=""/>
+						<PrimaryInformation ModelItemUnitOfMeasure=""/>
+					</StaticAttributes>
+			   </API>
+            </Delete>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results"/>
+      </YCM000107>
+	  <YCM000108 Title="Product_Item_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM000109" ListPanel="pnlItemList">
+				<DynamicAttributes ParentItemID="@ParentItemID" ParentUOM="@ParentUOM"/>
+			<Search/>
+		</SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <StaticAttributes ItemGroupCode="PROD" IsInventoryUOM="Y"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE" OrganizationCode="DEFAULT"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@KitCode"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search"/>
+      </YCM000108>
+      <YCM000109 Title="Product_Items" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item" MultiSelection="Y">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+            <AddToRelationship RelationshipEntityName="Item">
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Getting_Item_Details" >
+			   </API>
+				<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode">
+					<PrimaryInformation ModelItemUnitOfMeasure="@ParentUOM" YCMIsPricingUOMInventoryUOMDifferent="@YCMIsPricingUOMInventoryUOMDifferent"/>
+					<ClassificationCodes Model="@ParentItemID"/>
+				</DynamicAttributes>
+            </AddToRelationship>
+         </ListInfo>
+         <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+			   <StaticAttributes ItemGroupCode="PROD">
+				  <ComplexQuery Operator="AND">
+						<And>
+							<Exp Name="Model" QryType="ISNULL"  Value="" />
+							<Or>
+								<Exp Name="IsModelItem" Value="N"/>
+								<Or>
+									<Exp Name="IsModelItem" QryType="ISNULL" Value="" />
+								</Or>
+							</Or>
+						</And>
+					 </ComplexQuery>
+				</StaticAttributes>
+		 </API>
+      </YCM000109>
+      <YCM00970 Title="Classification_Values" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+				<!-- we have to call get api again.. do not use data from previous call -->
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getModifyItemDetails" Message="Message_Getting_Item_Details">
+					<StaticAttributes InheritAttributesFromClassification="N" />
+               </API>
+			
+            </Get>
+         </DetailInfo>
+         <MasterData />
+      </YCM00970>
+
+      <YCM00971 Title="INHERITABLE_ATTRIBUTES" ScreenType="List">
+          <API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/>
+		  <ListInfo NamePrefix="/" ChildTag="InheritedAttribute" ShowFooter="N" >
+			  <List AttributeName="@DisplayName" ColumnTitle="Name" DataType="Text-24" ComponentType="JTextArea"/>
+			  <List AttributeName="@Value" ColumnTitle="Value" DataType="Text-40"/>
+			  <List AttributeName="@InheritedFrom" ColumnTitle="Classification_Path" DataType="Text-1000"/>
+			  <List AttributeName="@IsInherited" ColumnTitle="Is_Inherited" DataType="Text-1000"/>
+		  </ListInfo>		
+      </YCM00971>
+
+      <YCM00008 Title="Advanced_Item_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00022" ListPanel="pnlItemList">
+        <Search/>
+    </SearchInfo>
+         <MasterData>
+            <Table Name="Organization" XMLName="Organization">
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+            </Table>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+                <StaticAttributes ItemGroupCode="@ItemGroupCode"/>
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search"/>
+      </YCM00008>
+	  <YCM404 Title="Buyer_Restriction" ScreenType="List">
+		<ListInfo NamePrefix="/" ChildTag="ContainerBuyerAssociation" ShowFooter="N" ShowOkCancelPanel="Y">
+			<List AttributeName="@BuyerOrganizationCode" ColumnTitle="Buyer_Organization_Code" DataType="OrgCode" EditableAddRow="Y" Editable="N" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor">
+			    <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+			    <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="OrganizationCode"/>
+			    <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="OrganizationCode"/>
+			    <ComponentClientProperty Name="YFCXMLBinding.dataType" Value="OrgCode"/>
+			    <ComponentClientProperty Name="YFCXMLBinding.listName" Value= "/MasterData/Organizations@Organization"/>
+				<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YCPPM933"/>
+				<ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="false"/>
+				<ComponentClientProperty Name="YCPLookup.searchFormId" Value="YCPPM933"/>  
+				<ComponentClientProperty Name="YCPLookup.alwaysUseTextField" Value="true"/>
+				<ComponentClientProperty Name="YCPLookup.supressValidations" Value="false"/>
+				<ComponentClientProperty Name="YCPLookup.disableCreateNew" Value="true"/>
+				<ComponentClientProperty Name="YCPLookup.alwaysUseCombobox" Value="false"/>
+				<ComponentClientProperty Name="YCPLookup.lookupSearchElement" 
+				Value="&lt;SearchElement>&lt;StaticAttributes>&lt;OrgRoleList>&lt;OrgRole RoleKey=&quot;BUYER&quot;/>&lt;/OrgRoleList>&lt;/StaticAttributes>&lt;/SearchElement>"/>
+			</List>
+			<CreateNew>
+				<StaticAttributes Action="Create"/>
+			</CreateNew>
+			<Modify>
+				<StaticAttributes Action="Modify"/>
+			</Modify>
+			<Delete/>
+		</ListInfo>
+		<MasterData>
+			<Table Name="Organization" XMLName="Organization">
+			    <StaticAttributes >
+				<OrgRoleList>
+				    <OrgRole RoleKey="BUYER"/>
+				</OrgRoleList>
+			    </StaticAttributes>
+			</Table>
+		</MasterData>
+		<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Retrieving_Zones"/>
+	</YCM404>
+	<YCM405 Title="Containerization_Category_Restriction" ScreenType="List" >
+		<ListInfo NamePrefix="/" ChildTag="ContainerItemAssociation" ShowFooter="N" ShowOkCancelPanel="Y">
+			<List AttributeName="@ContainerCategory" ColumnTitle="Containerization_Category" DataType="Text-40" Editable="N" EditableAddRow="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor">
+				<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/ContainerItemAssociationList/MasterData/Categories@Category"/>
+				<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CategoryID"/>
+				<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CategoryID"/>
+				<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YCM00037"/>
+				<ComponentClientProperty Name="YCPLookup.searchFormId" Value="YCM00037"/>
+				<ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="false"/>
+				<ComponentClientProperty Name="YCPLookup.alwaysUseTextField" Value="true"/>
+				<ComponentClientProperty Name="YCPLookup.supressValidations" Value="true"/>
+				<ComponentClientProperty Name="YCPLookup.suppressInitialDefaulting" Value="Y"/>
+				<ComponentClientProperty Name="YCPLookup.disableCreateNew" Value="true"/>
+				<ComponentClientProperty Name="YCPLookup.lookupSearchElement" Value="&lt;SearchElement>&lt;DynamicAttributes CallingOrganizationCode=&quot;@CallingOrganizationCode&quot; AttributeName=&quot;@ContainerizationCategoryAttribute&quot;/>&lt;/SearchElement>"/>
+			</List>
+			<CreateNew>
+				<StaticAttributes Action="Create"/>
+			</CreateNew>
+			<Modify>
+				<StaticAttributes Action="Modify"/>
+			</Modify>
+			<Delete/>
+		</ListInfo>
+		<MasterData>
+		</MasterData>
+		<API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/>
+	</YCM405>
+   </Entity>
+   <Entity EntityTitle="Container_Capacity_Defn" EntityName="CntrCapacityDefn" PrimaryKeyAttributeName="CntrCapacityDefnKey">
+	  <YCM00099 Title="Container_SKU_Capacity" ScreenType="List">
+	      <API Servlet="/yantra/entities/CntrCapacityDefn/list" APIName=""
+		  Message="Message_Loading_Container_List" />
+		  <ListInfo NamePrefix="/" ChildTag="CntrCapacityDefn">
+			  <List AttributeName="@SkuUnitSizeCode" ColumnTitle="SKU_Unit_Size_Code" DataType="Text-24"/>
+			  <List AttributeName="@Quantity" ColumnTitle="Quantity" DataType="Quantity"/>
+			  <Modify DisplayForm="YCM406" DisplayMode="Dialog">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+			  </Modify>
+			  <CreateNew DisplayForm="YCM406" DisplayMode="Dialog">
+				 <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" OrganizationCode="@OrganizationCode" ItemKey="@ItemKey"/>
+			  </CreateNew>
+			  <SaveAs DisplayForm="YCM406" DisplayMode="Dialog"/>
+			  <Delete>
+				 <API Servlet="/yantra/entities/CntrCapacityDefn/delete" APIName="" Message="Message_Deleting_Component"/>
+			  </Delete> 
+          </ListInfo>
+      </YCM00099>
+       <YCM406 Title="SKU_Capacity_Code_Details" ScreenType="Detail">
+	    <DetailInfo>
+            <Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/CntrCapacityDefn/modify" APIName=""/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/CntrCapacityDefn/create" APIName=""/>
+            </CreateNew>
+         </DetailInfo>
+		 <MasterData>
+            <Table Name="ClassificationPurpose" XMLName="ItemClassification">
+					<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+					<StaticAttributes ClassificationPurposeCode="SKU_UNIT_SIZE_CODE_CLASS"/>
+			</Table>
+		 </MasterData>
+	   </YCM406>
+   </Entity>
+   <Entity EntityTitle="Exclusion_Code" EntityName="ItemExclusion" PrimaryKeyAttributeName="ExclusionCode">
+		<ConfigurationAttributes  TableName="YFS_ITEM_EXCLUSION">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM002" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00025 Title="Exclusion_Code_List" ScreenType="Subscription">
+         <SubscriptionListInfo SubscriptionSubscribedNamePrefix="/ItemExclusionList" SubscriptionSubscribedChildTag="ItemExclusion" SubscriptionFullListNamePrefix="/MasterData/Exclusions" SubscriptionFullListChildTag="CommonCode">
+            <List AttributeName="@ExclusionCode" ColumnTitle="Exclusion_Code" DataType="Text-40"/>
+         </SubscriptionListInfo>
+      </YCM00025>
+   </Entity>
+   <Entity EntityTitle="KitItem" EntityName="KitItem" 
+            PrimaryKeyAttributeName="KitItemKey">
+		<ConfigurationAttributes  TableName="YFS_KIT_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM002" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00030 Title="Components" ScreenType="List"> 
+         <API Servlet="/yantra/entities/KitItem/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+         <ListInfo NamePrefix="/" ChildTag="KitItem">
+            <List AttributeName="@ComponentItemID" ColumnTitle="ItemID" 
+                DataType="ItemID"/>
+			<List AttributeName="@ComponentShortDescription" ColumnTitle="Short_Description" 
+				DataType="Text-100"/>            
+            <List AttributeName="@ComponentOrganizationCode" ColumnTitle="Organization_Code" 
+                DataType="OrgCode"/>
+            <List AttributeName="@ComponentUnitOfMeasure" ColumnTitle="UOM" 
+                DataType="UOM"/>
+            <List AttributeName="@KitQuantity" ColumnTitle="Quantity" 
+                DataType="Quantity"/>
+            <List AttributeName="@ComponentItemGroupCode" ColumnTitle="Item_Group_Code" 
+                DataType="ItemGroupCode"/>
+            <List AttributeName="@ComponentKitCode" ColumnTitle="Kit_Code" 
+                DataType="KitCode"/>
+            <Modify DisplayForm="YCM00031" DisplayMode="Dialog">
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode" KitCode="@KitCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+			</Modify>
+            <CreateNew DisplayForm="YCM00031" DisplayMode="Dialog">
+                <DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" KitCode="@KitCode"/>
+            </CreateNew>
+            <SaveAs DisplayForm="YCM00031" DisplayMode="Dialog">
+                <DynamicAttributes OrganizationCode="@OrganizationCode" ItemGroupCode="@ItemGroupCode" KitCode="@KitCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+            </SaveAs>
+            <Delete>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyKitItemDetails" Message="Message_Deleting_Component">
+                  <StaticAttributes DeleteFlag="Y"/>
+               </API>
+            </Delete>
+         </ListInfo>
+      </YCM00030>
+      <!-- FormClass=YCMAddComponent BehaviorClass="YCPDetailsBehavior" -->
+      <YCM00031 Title="Component_Details" ScreenType="Detail"> 
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Component_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyKitItemDetails" Message="Message_Saving_Component_Details">
+	               <StaticAttributes AddFlag="N"/>
+				</API>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyKitItemDetails" Message="Message_Creating_New_Component_Details">
+	               <StaticAttributes AddFlag="Y"/>
+				</API>
+            </CreateNew>
+            <LogicalKeys>
+                <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpItemIdProd"/>
+                <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpUOMProd"/>
+                <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpItemIdPS"/>
+                <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpUOMPS"/>
+                <LogicalKey ComponentType="JRadioButton" ComponentName="radProduct"/>
+                <LogicalKey ComponentType="JRadioButton" ComponentName="radProvidedService"/>
+            </LogicalKeys>
+        </DetailInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+				<DynamicAttributes  OrganizationCode="@CallingOrganizationCode"/>
+				<StaticAttributes ItemGroupCode="PROD" />
+				<CodeAttributes> 
+                  	<CodeAttribute CodeValue="@ComponentUnitOfMeasure" />
+                </CodeAttributes>
+            </Table>
+			<Table Name="ItemUOMMaster" XMLName="PSUOM">
+				<DynamicAttributes  OrganizationCode="@CallingOrganizationCode"/>
+				<StaticAttributes ItemGroupCode="PS" />
+               <CodeAttributes>
+                  	<CodeAttribute CodeValue="@ComponentUnitOfMeasure" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="Item" XMLName="Item">               
+               <StaticAttributes AcceptMultipleElements="Y" ItemGroupCode="PROD" >
+                   <ComplexQuery Operator="AND">
+                      <Or>
+                         <Exp Name="KitCode" QryType="VOID" Value=""/>
+                         <Exp Name="KitCode" Value="PK"/>
+                         <Exp Name="KitCode" Value="BUNDLE"/>
+                      </Or>
+                   </ComplexQuery>
+               </StaticAttributes>
+               <CodeAttributes>
+                  <CodeAttribute ItemID="@ComponentItemID"/>
+               </CodeAttributes>
+               <DynamicAttributes OrganizationCode="@OrganizationCode" />
+            </Table>
+			<Table Name="Item" XMLName="PSItem">               
+               <StaticAttributes ItemGroupCode="PS" />
+               <DynamicAttributes OrganizationCode="@OrganizationCode" />
+            </Table>
+         </MasterData>
+      </YCM00031>
+   </Entity>
+   	<Entity EntityTitle="Language Description" EntityName="LanguageDescription" 
+   		PrimaryKeyAttributeName="LanguageDescriptionKey">
+		<ConfigurationAttributes  TableName="YFS_LANGUAGE_DESCRIPTION">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM002" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      	<YCPLISTEDITOR Title="Localized_Description" ScreenType="ListEditor"/>
+	</Entity>
+    <Entity EntityTitle="Product_Management_Rules" EntityName="ProductManagement" PrimaryKeyAttributeName="OrganizationCode">
+       <YCPPM352 Title="PM_Rules" ScreenType="Tree">
+         <TreeInfo RelationshipAttribute="">
+            <FilterNodeList>
+               <FilterNode NodeName="Tables"/>
+            </FilterNodeList>
+            <Get>
+               <API Servlet="com.yantra.ycp.pm.ui.backend.YCPRuleSetAPI" APIName="getConfigRulesXML" Message="Message_Loading_Product_Management_Rules">
+                   <StaticAttributes ApplicationCode="ycm"/>
+                </API>    
+            </Get>
+            <DeleteDocumentType>
+                    <API Servlet="/yantra/entities/ModuleDocumentType/delete" APIName="" Message="Message_Deleting_Module_Document_Type"/>
+            </DeleteDocumentType>
+         </TreeInfo>
+      </YCPPM352>
+	</Entity>
+    <Entity EntityTitle="Item_Classification" EntityName="ItemClassifications" PrimaryKeyAttributeName="OrganizationCode">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM009" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+       <YCM00036 Title="Classification_Hierarchy" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getClassificationAttributesToShow" Message="Message_Getting_Classification_Details"/>
+            </Get>
+            <CreateNew>
+               <API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/>
+            </CreateNew>
+			<Modify>
+               <API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/>
+            </Modify>
+         </DetailInfo>
+      </YCM00036>
+	</Entity>
+	<Entity EntityTitle="Item_Values" EntityName="Category" PrimaryKeyAttributeName="CategoryKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM009" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00037 Title="Item_Values" ScreenType="Tree">
+			 <TreeInfo RelationshipAttribute="ParentCategoryKey" TitleSuffixAttr="OrganizationCode">
+				<NodeDescriptorList>
+				   <NodeDescriptor NodeName="CategoryDomain" LabelAttribute="ShortDescription" Icon="/com/yantra/ycm/ui/icons/classifications.gif" TooltipAttribute="Description"/>
+				   <NodeDescriptor NodeName="Category" LabelAttribute="ShortDescription" Icon="/com/yantra/ycm/ui/icons/classificationvalues.gif" TooltipAttribute="CategoryID"/>
+				</NodeDescriptorList>
+				<FilterNodeList>
+				   <FilterNode NodeName="ClassificationItemAttribute"/>
+				   <FilterNode NodeName="ItemAttributeGroupTypeList"/>
+				   <FilterNode NodeName="ItemAttributeGroupList"/>
+				   <FilterNode NodeName="ItemAttributeGroupSequenceList"/>
+				   <FilterNode NodeName="AdditionalAttributeList"/>
+				   <FilterNode NodeName="ItemServiceAssocList"/>
+				</FilterNodeList>
+				<Get>
+				   <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getClassificationValues" Message="Loading_Classification_Tree"/>
+				</Get>
+				<Modify DisplayForm="YCM00038" DisplayMode="Dialog"/>
+				<Delete>
+				   <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="deleteClassificationValue" Message="Message_Deleting_Classification_Value">
+						<StaticAttributes Action="Delete"/>
+					</API>
+				</Delete>
+			 </TreeInfo>
+		</YCM00037>
+		<YCM00090 Title="Item_Values" ScreenType="Tree">
+			 <TreeInfo RelationshipAttribute="ParentCategoryKey" TitleSuffixAttr="OrganizationCode">
+				<NodeDescriptorList>
+				   <NodeDescriptor NodeName="CategoryDomain" LabelAttribute="ShortDescription" Icon="/com/yantra/ycm/ui/icons/classifications.gif" TooltipAttribute="Description"/>
+				   <NodeDescriptor NodeName="Category" LabelAttribute="ShortDescription" Icon="/com/yantra/ycm/ui/icons/classificationvalues.gif" TooltipAttribute="CategoryID"/>
+				</NodeDescriptorList>
+				<Get>
+				   <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getClassificationValues" Message="Loading_Classification_Tree"/>
+				</Get>
+			 </TreeInfo>
+		</YCM00090>
+	</Entity>
+	
+	<Entity EntityTitle="Class_Item_Attr" EntityName="Class_Item_Attr" PrimaryKeyAttributeName="ClassificationItemAttributeKey">
+		<ConfigurationAttributes  TableName="YFS_CLASS_ITEM_ATTR">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM009" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00093 Title="Common_Item_Attributes" ScreenType="Detail" TitleSuffixAttr="CategoryPath">
+         <DetailInfo>
+            <Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Classification_Details"/>
+			</Get>
+         </DetailInfo>
+
+         <MasterData>
+			<StaticData>
+        		<CheckboxValues>
+            		<CheckboxValue CheckboxValue="Y" />
+            		<CheckboxValue CheckboxValue="N" />
+        		</CheckboxValues>
+        		<ComboBoxDelivery>
+            		<ComboBoxValue ComboBoxValue="Y" Description="COMBO_YES"/>
+            		<ComboBoxValue ComboBoxValue="N" Description="COMBO_NO"/>
+            		<ComboBoxValue ComboBoxValue="M" Description="COMBO_MAYBE_DELIVERY"/>
+        		</ComboBoxDelivery>
+        		<ComboBoxShipping>
+            		<ComboBoxValue ComboBoxValue="Y" Description="COMBO_YES"/>
+            		<ComboBoxValue ComboBoxValue="N" Description="COMBO_NO"/>
+            		<ComboBoxValue ComboBoxValue="M" Description="COMBO_MAYBE_SHIPPING"/>
+        		</ComboBoxShipping>
+            </StaticData>
+
+            <Table Name="CommonCode" XMLName="ProductClass">
+                <StaticAttributes CodeType="PRODUCT_CLASS"/>
+               	<CodeAttributes>
+                	<CodeAttribute CodeValue="/PrimaryInformation@DefaultProductClass" />
+            	</CodeAttributes>
+            </Table>
+            <Table Name="AtpRules" XMLName="AtpRules">
+               <CodeAttributes>
+                  <CodeAttribute AtpRule="/InventoryParameters@ATPRule" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="InventoryMonitorRules" XMLName="InventoryMonitorRules">
+               <CodeAttributes>
+                  <CodeAttribute InventoryMonitorRule="/InventoryParameters@InventoryMonitorRule" />
+               </CodeAttributes>
+			</Table>
+			<Table Name="InventoryMonitorRules" XMLName="NodeLevelInventoryMonitorRules">
+               <CodeAttributes>
+                  <CodeAttribute InventoryMonitorRule="/InventoryParameters@NodeLevelInventoryMonitorRule" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="ExtendedAttributes" XMLName="ExtendedAttributes" />
+         </MasterData>
+		</YCM00093>
+	</Entity>
+
+	<Entity EntityTitle="ClassificationValueDetails" EntityName="Category" PrimaryKeyAttributeName="CategoryKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM009" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00038 Title="Classification_Value_Details" ScreenType="Detail" TitleSuffixAttr="CategoryPath">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getModelForSingleClassificationValue" Message="Message_Loading_Classification_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="createClassificationValue" Message="Message_Saving_Classification_Details"/>
+            </Modify>
+            <CreateNew >
+               <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="createClassificationValue" Message="Message_Creating_New_Classification"/>
+            </CreateNew>
+            <DefineGroupsLocally>
+              <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="manageItemAttributeGroupsForCategory" Message="Message_Deleting_Locally_Defined_Item_Attribute_Groups"/>
+            </DefineGroupsLocally>
+            <CreateGroup>
+              <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="createSingleGroup" Message=""/>
+            </CreateGroup>
+			<LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtClassificationValue"/>
+            </LogicalKeys>
+         </DetailInfo>
+
+         <MasterData/>
+      </YCM00038>
+
+      <YCM00039 Title="Product_Items" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <!--List AttributeName="@OrganizationCode" ColumnTitle="Organization_Code" DataType="OrgCode"/-->
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+            <CreateNew DisplayForm="YCM00040" DisplayMode="Dialog" >
+               <DynamicAttributes CategoryKey="@CategoryKey" CategoryDomainKey="@CategoryDomainKey" />
+			   <StaticAttributes ItemGroupCode="PROD" />
+			</CreateNew>
+            <Delete>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="delinkItemForClassificationValue" Message="Message_Removing_Category_Item"/>
+            </Delete>
+         </ListInfo>
+         <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="listItemForClassificationValue" Message="Message_Retrieving_Search_Results"/>
+      </YCM00039>
+   </Entity>
+
+   <Entity EntityTitle="Item" EntityName="Item" PrimaryKeyAttributeName="ItemKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM009" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+	  <YCM00040 Title="Product_Item_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00041" ListPanel="pnlItemList">
+			<Search/>
+		</SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <StaticAttributes ItemGroupCode="PROD" IsInventoryUOM="Y"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE" OrganizationCode="DEFAULT"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@KitCode"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search"/>
+      </YCM00040>
+      <YCM00041 Title="Product_Items" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item" MultiSelection="Y">
+            <!--List AttributeName="@OrganizationCode" ColumnTitle="Organization_Code" DataType="OrgCode"/-->
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+            <AddToRelationship RelationshipEntityName="Category">
+               <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="saveItemForClassificationValue" Message="Message_Adding_Item_To_Category"/>
+               <DynamicAttributes CategoryKey="@CategoryKey" ItemKey="@ItemKey" CategoryDomainKey="@CategoryDomainKey" />
+            </AddToRelationship>
+         </ListInfo>
+         <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+				<StaticAttributes>
+			          <ComplexQuery Operator="AND">
+						 <Or>
+							<Exp Name="Model" QryType="ISNULL"  Value="" />
+						</Or>
+					 </ComplexQuery>
+				</StaticAttributes>
+		</API>
+      </YCM00041>
+   </Entity>
+   <Entity EntityTitle="Classification_Attribute" EntityName="CategoryDomain" PrimaryKeyAttributeName="CategoryDomainKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY_DOMAIN">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM008" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00042 Title="Classification_List" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="CategoryDomain">
+				<List AttributeName="@CategoryDomain" ColumnTitle="Classification_Id" DataType="Text-40"/>
+				<List AttributeName="@ShortDescription" ColumnTitle="Description" DataType="Text-100"/>
+				<List AttributeName="@LocalizedAttributeName" ColumnTitle="Associated_Item_Attribute" DataType="Text-128"/>
+				<!--List AttributeName="@CategoryUniqueInDomain" ColumnTitle="Classification_Values_Unique_In_Domain" DataType="Boolean"/>
+				<List AttributeName="@CategroyHierarchySeparator" ColumnTitle="Separator" DataType="Text-2"/-->
+			   <CreateNew DisplayForm="YCM00043" DisplayMode="Dialog" >
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" />
+			   </CreateNew>
+			   <Modify DisplayForm="YCM00043" DisplayMode="Dialog" />
+			   <Delete>
+				   <API Servlet="/yantra/entities/CategoryDomain/delete" APIName="" Message="Message_Deleting_Classification"/>
+				</Delete>
+			   <SaveAs DisplayForm="YCM00043" DisplayMode="Dialog" NextAction="Modify">
+			   </SaveAs>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CategoryDomain/list" APIName="" Message="Message_Retrieving_Search_Results">
+				<StaticAttributes AttributeNameQryType="NOTVOID" />
+			</API>
+		</YCM00042>
+		<YCM00043 Title="Classification_Details" ScreenType="Detail" >
+         <DetailInfo>
+            <Get>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getCatDomainDtlsWithMaster" Message="Message_Loading_Classification_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/CategoryDomain/modify" APIName="" Message="Message_Saving_Classification_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/CategoryDomain/create" APIName="" Message="Message_Saving_Classification_Details"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtClassificationAttr"/>
+			   <LogicalKey ComponentType="JComboBox" ComponentName="cmbItemAttribute"/>
+            </LogicalKeys>
+         </DetailInfo>
+      </YCM00043> 
+	  <YCM00051 Title="Classification_Definition" ScreenType="Detail" >
+         <DetailInfo>
+		    <!--InnerPanels>
+				<ListPanel FormName="YCM00042" ListPanel="pnlClassDomainList" >
+				</ListPanel>
+			</InnerPanels-->
+            <Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Classification_Details"/>
+            </Get>
+         </DetailInfo>
+      </YCM00051> 
+    </Entity>
+	<Entity EntityTitle="Classification_Pupose" EntityName="ClassificationPurpose" PrimaryKeyAttributeName="ClassificationPurposeKey">
+		<ConfigurationAttributes  TableName="YFS_CLASSIFICATION_PURPOSE">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM008" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00050 Title="Classification_Purpose_List" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="ClassificationPurpose">
+				<List AttributeName="@ClassificationPurposeDesc" ColumnTitle="Classification_Purpose_Desc" DataType="Text-512"/>
+				<List AttributeName="@AttributeName" ColumnTitle="Associated_Item_Attribute" DataType="Text-128"/>
+			   <CreateNew DisplayForm="YCM00052" DisplayMode="Dialog" >
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" />
+			   </CreateNew>
+			   <Modify DisplayForm="YCM00052" DisplayMode="Dialog" />
+			   <Delete>
+				   <API Servlet="/yantra/entities/ClassificationPurpose/delete" APIName="" Message="Message_Deleting_Classification"/>
+				</Delete>
+			</ListInfo>
+			<API Servlet="/yantra/entities/ClassificationPurpose/list" APIName="" Message="Message_Retrieving_Search_Results">
+			   <StaticAttributes>
+				  <ComplexQuery Operator="AND">
+						<And>
+							<Exp Name="ClassificationPurposeCode" QryType="NE"  Value="SellingCatalog" />
+							<And>
+								<Exp Name="ClassificationPurposeCode" QryType="NE"  Value="MasterCatalog" />
+							</And>
+						</And>
+					 </ComplexQuery>
+				</StaticAttributes>
+			</API>
+		</YCM00050>
+		<YCM00052 Title="Classification_Purpose_Details" ScreenType="Detail" >
+         <DetailInfo>
+            <Get>
+				<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Classification_Purpose_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ClassificationPurpose/modify" APIName="" Message="Message_Saving_Classification_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ClassificationPurpose/create" APIName="" Message="Message_Saving_Classification_Details"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JComboBox" ComponentName="cmbPurpose"/>
+            </LogicalKeys>
+         </DetailInfo>
+		 <MasterData>
+            <Table Name="CommonCode" XMLName="CatalogPurpose">
+               <StaticAttributes CodeType="CATALOG_PURPOSE">
+					<OrderBy>
+						<Attr Name="CodeShortDescription"/>
+					</OrderBy>
+			   </StaticAttributes>
+            </Table>
+			<Table Name="CategoryDomain" XMLName="CategoryDomain">
+               <StaticAttributes IsClassification="Y" AttributeNameQryType="NOTVOID"/>
+            </Table>
+		</MasterData>
+      </YCM00052>
+	</Entity>
+	<Entity EntityTitle="Item_Tag_Attributes" EntityName="ItemTag" PrimaryKeyAttributeName="ItemTagKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM_TAG">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM002" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+	  <YCM00045 Title="Tag_Identifiers" ScreenType="List">
+	     <ListInfo NamePrefix="/" ChildTag="TagAttribute" ShowFooter="N">
+	        <List AttributeName="@Description" ColumnTitle="Attribute" DataType="Text-40" />
+	        <List AttributeName="@Identifier" ColumnTitle="Tag_Identifier" DataType="Boolean" Editable="Y" EditableComponent="checkbox"/>
+	        <Modify ActionResourceId="YCM00045A01"/>	        
+	     </ListInfo>
+	     <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getTagIdentifiers" Message="Message_Retrieving_Item_Tag_Attributes"/>
+	  </YCM00045>
+	  <YCM00046 Title="Tag_Attributes" ScreenType="List">
+	     <ListInfo NamePrefix="/" ChildTag="TagAttribute" ShowFooter="N">
+	        <List AttributeName="@Description" ColumnTitle="Attribute" DataType="Text-40" />
+			<List AttributeName="@Descriptor" ColumnTitle="Tag_Descriptor" DataType="Boolean" Editable="Y" EditableComponent="checkbox"/>
+	        <Modify ActionResourceId="YCM00046A01"/>	        
+	     </ListInfo>
+	     <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getTagDescriptors" Message="Message_Retrieving_Item_Tag_Attributes"/>
+	  </YCM00046>
+	</Entity>
+	<Entity EntityTitle="ItemUOM" EntityName="ItemUOM" PrimaryKeyAttributeName="ItemUOMKey">
+       <ConfigurationAttributes  TableName="YFS_ITEM_UOM">
+          <ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM004" IsPrimary="Y"/>
+       </ConfigurationAttributes>
+       <YCM00047 Title="Alternate_UOMs" ScreenType="List"> 
+          <API Servlet="/yantra/entities/ItemUOM/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+          <ListInfo NamePrefix="/" ChildTag="ItemUOM">
+             <List AttributeName="@UnitOfMeasure" ColumnTitle="UOM" DataType="UOM"/>
+             <List AttributeName="@Quantity" ColumnTitle="Quantity" DataType="Quantity"/>
+             <List AttributeName="@IsOrderingUOM" ColumnTitle="Ordering_UOM" DataType="Boolean"/>
+             <Modify DisplayForm="YCM00048" DisplayMode="Dialog">
+			    <DynamicAttributes ItemGroupCode="@ItemGroupCode" ItemsPrimaryUOM="@ItemsPrimaryUOM" OrganizationCode="@OrganizationCode"/>
+             </Modify>
+             <CreateNew DisplayForm="YCM00048" DisplayMode="Dialog">
+                <DynamicAttributes ItemKey="@ItemKey" ItemGroupCode="@ItemGroupCode" ItemsPrimaryUOM="@ItemsPrimaryUOM" OrganizationCode="@OrganizationCode"/>
+             </CreateNew>
+             <SaveAs DisplayForm="YCM00048" DisplayMode="Dialog">
+                <DynamicAttributes ItemGroupCode="@ItemGroupCode" ItemsPrimaryUOM="@ItemsPrimaryUOM" OrganizationCode="@OrganizationCode"/>
+             </SaveAs>
+             <Delete>
+                <API Servlet="/yantra/entities/ItemUOM/delete" APIName="" Message="Message_Deleting_Component"/>
+             </Delete>
+          </ListInfo>
+       </YCM00047>
+	<YCM00048 Title="Alternate_UOM_Details" ScreenType="Detail"> 
+         <DetailInfo>
+            <Get>
+                <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Alternate_UOM_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemUOM/modify" APIName="" Message="Message_Saving_Alternate_UOM_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemUOM/create" APIName="" Message="Message_Creating_New_Alternate_UOM_Details"/>
+            </CreateNew>
+            <LogicalKeys>
+                <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpUOM"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+			 <Table Name="Uom" XMLName="WeightUOM">
+                <StaticAttributes UomType="WEIGHT"/>
+				<CodeAttributes>
+					<CodeAttribute Uom="@WeightUOM" />
+                </CodeAttributes>
+            </Table>
+			<Table Name="Uom" XMLName="HeightUOM">
+                <StaticAttributes UomType="DIMENSION"/>
+				<CodeAttributes>
+					<CodeAttribute Uom="@HeightUOM" />
+                </CodeAttributes>
+            </Table>
+			<Table Name="Uom" XMLName="WidthUOM">
+                <StaticAttributes UomType="DIMENSION"/>
+				<CodeAttributes>
+					<CodeAttribute Uom="@WidthUOM" />
+				</CodeAttributes>
+            </Table>
+			<Table Name="Uom" XMLName="LengthUOM">
+               <StaticAttributes UomType="DIMENSION"/>
+               <CodeAttributes>
+                  <CodeAttribute Uom="@LengthUOM" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="ItemUOMMaster" XMLName="UOM" AllRecords="Y">
+				<StaticAttributes UnitOfMeasureQryType="NE" UOMType="QUANTITY"/>
+				<DynamicAttributes UnitOfMeasure="@ItemsPrimaryUOM" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode"/>
+               	<CodeAttributes>
+                  	<CodeAttribute UnitOfMeasure="@UnitOfMeasure" />
+               	</CodeAttributes>
+            </Table>
+         </MasterData>
+      </YCM00048>
+	</Entity>
+<!-- Item UOM Master -->
+	<Entity EntityTitle="ItemUOMMaster" EntityName="ItemUOMMaster" PrimaryKeyAttributeName="ItemUOMMasterKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM_UOM_MASTER">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM004" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+        <YCM00053 Title="Quantity_Unit_Of_Measures" ScreenType="List"> 
+           <API Servlet="/yantra/entities/ItemUOMMaster/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+           <ListInfo NamePrefix="/" ChildTag="ItemUOMMaster">
+              <List AttributeName="@UnitOfMeasure" ColumnTitle="UOM" DataType="UOM"/>
+              <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-50"/>
+              <List AttributeName="@IsInventoryUOM" ColumnTitle="Inventory_UOM" DataType="Boolean"/>
+              <List AttributeName="@IsOrderingUOM" ColumnTitle="Ordering_UOM" DataType="Boolean"/>
+              <Modify DisplayForm="YCM00054" DisplayMode="Dialog"/>
+              <CreateNew DisplayForm="YCM00054" DisplayMode="Dialog">
+                 <StaticAttributes ItemGroupCode="PROD" UOMType="QUANTITY"/>
+                 <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+              </CreateNew>
+              <SaveAs DisplayForm="YCM00054" DisplayMode="Dialog"/>
+              <Delete>
+                 <API Servlet="/yantra/entities/ItemUOMMaster/delete" APIName="" Message="Message_Deleting_Item_Quantity_UOM"/>
+              </Delete>
+           </ListInfo>
+		</YCM00053>
+        <YCM00075 Title="Pricing_Unit_Of_Measures" ScreenType="List"> 
+           <API Servlet="/yantra/entities/ItemUOMMaster/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+           <ListInfo NamePrefix="/" ChildTag="ItemUOMMaster">
+              <List AttributeName="@UnitOfMeasure" ColumnTitle="UOM" DataType="UOM"/>
+              <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-50"/>
+              <Modify DisplayForm="YCM00076" DisplayMode="Dialog"/>
+              <CreateNew DisplayForm="YCM00076" DisplayMode="Dialog">
+                 <StaticAttributes ItemGroupCode="PROD" IsInventoryUOM="N" IsOrderingUOM="N" UOMType="WEIGHT"/>
+                 <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+              </CreateNew>
+              <SaveAs DisplayForm="YCM00076" DisplayMode="Dialog"/>
+              <Delete>
+                 <API Servlet="/yantra/entities/ItemUOMMaster/delete" APIName="" Message="Message_Deleting_Item_Pricing_UOM"/>
+              </Delete>
+           </ListInfo>
+		</YCM00075>
+        <YCM00054 Title="UOM_Details" ScreenType="Detail"> 
+           <DetailInfo>
+              <Get>
+                  <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_UOM_Details"/>
+              </Get>
+              <Modify>
+                 <API Servlet="/yantra/entities/ItemUOMMaster/modify" APIName="" Message="Message_Saving_UOM_Details"/>
+              </Modify>
+              <CreateNew>
+                 <API Servlet="/yantra/entities/ItemUOMMaster/create" APIName="" Message="Message_Creating_New_UOM_Details">
+                    <DynamicAttributes ItemGroupCode="@ItemGroupCode" OrganizationCode="@CallingOrganizationCode"/>
+                 </API>
+              </CreateNew>
+              <LogicalKeys>
+                 <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpUomCode"/>
+              </LogicalKeys>
+           </DetailInfo>
+           <MasterData>
+              <Table Name="CommonCode" XMLName="LPNType">
+                 <StaticAttributes CodeType="LPN_TYPE" />
+                 <CodeAttributes>
+                    <CodeAttribute CodeValue="@LPNType"/>
+                 </CodeAttributes>
+              </Table>
+              <Table Name="Uom" XMLName="Uom">
+                 <StaticAttributes UomType="QUANTITY" />
+                 <CodeAttributes>
+                    <CodeAttribute CodeValue="@UnitOfMeasure"/>
+                 </CodeAttributes>
+              </Table>
+           </MasterData>
+        </YCM00054>
+      <YCM00076 Title="UOM_Details" ScreenType="Detail"> 
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_UOM_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemUOMMaster/modify" APIName="" Message="Message_Saving_UOM_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemUOMMaster/create" APIName="" Message="Message_Creating_New_UOM_Details">
+                  <DynamicAttributes ItemGroupCode="@ItemGroupCode" OrganizationCode="@CallingOrganizationCode"/>
+			   </API>
+            </CreateNew>
+			<LogicalKeys>
+               <LogicalKey ComponentType="JComboBox" ComponentName="cmbUOMType"/>
+               <LogicalKey ComponentType="YFCLookupField" ComponentName="lkpUomCode"/>
+            </LogicalKeys>	
+        </DetailInfo>
+         <MasterData>
+			<Table Name="CommonCode" XMLName="UOMType">
+				<StaticAttributes CodeType="UOM_TYPE"/>
+			</Table>
+              <Table Name="Uom" XMLName="Uom">
+                 <DynamicAttributes UomType="@UOMType" />
+                 <CodeAttributes>
+                    <CodeAttribute CodeValue="@UnitOfMeasure"/>
+                 </CodeAttributes>
+              </Table>
+         </MasterData>
+      </YCM00076>
+      <YCM00055 Title="Provide_Services_Unit_Of_Measures" ScreenType="List"> 
+         <API Servlet="/yantra/entities/ItemUOMMaster/list" APIName="" Message="Message_Retrieving_Search_Results" >
+			  <StaticAttributes ItemGroupCode="PS"/>
+		 </API>
+         <ListInfo NamePrefix="/" ChildTag="ItemUOMMaster">
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="UOM" DataType="UOM"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-50"/>
+            <Modify DisplayForm="YCM00076" DisplayMode="Dialog"/>
+            <CreateNew DisplayForm="YCM00076" DisplayMode="Dialog">
+				<StaticAttributes ItemGroupCode="PS" IsInventoryUOM="Y" IsOrderingUOM="Y"/>
+                <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+            </CreateNew>
+			<SaveAs DisplayForm="YCM00076" DisplayMode="Dialog"/>
+            <Delete>
+               <API Servlet="/yantra/entities/ItemUOMMaster/delete" APIName="" Message="Message_Deleting_Item_UOM"/>
+            </Delete>
+         </ListInfo>
+	  </YCM00055>
+	  <YCM00056 Title="Delivery_Service_Unit_Of_Measures" ScreenType="List"> 
+         <API Servlet="/yantra/entities/ItemUOMMaster/list" APIName="" Message="Message_Retrieving_Search_Results" >
+			  <StaticAttributes ItemGroupCode="DS"/>
+		 </API>
+         <ListInfo NamePrefix="/" ChildTag="ItemUOMMaster">
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="UOM" DataType="UOM"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-50"/>
+            <Modify DisplayForm="YCM00076" DisplayMode="Dialog"/>
+            <CreateNew DisplayForm="YCM00076" DisplayMode="Dialog">
+				<StaticAttributes ItemGroupCode="DS" IsInventoryUOM="Y" IsOrderingUOM="Y"/>
+                <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+            </CreateNew>
+			<SaveAs DisplayForm="YCM00076" DisplayMode="Dialog"/>
+            <Delete>
+               <API Servlet="/yantra/entities/ItemUOMMaster/delete" APIName="" Message="Message_Deleting_Item_UOM"/>
+            </Delete>
+         </ListInfo>
+	   </YCM00056>
+	   <YCM00079 Title="Service_Unit_Of_Measures" ScreenType="List"> 
+         <API Servlet="/yantra/entities/ItemUOMMaster/list" APIName="" Message="Message_Retrieving_Search_Results" >
+			  <DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+		 </API>
+         <ListInfo NamePrefix="/" ChildTag="ItemUOMMaster">
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="UOM" DataType="UOM"/>
+            <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-50"/>
+            <Modify DisplayForm="YCM00076" DisplayMode="Dialog"/>
+            <CreateNew DisplayForm="YCM00076" DisplayMode="Dialog">
+				<StaticAttributes  IsInventoryUOM="Y" IsOrderingUOM="Y"/>
+                <DynamicAttributes ItemGroupCode="@ItemGroupCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+            </CreateNew>
+			<SaveAs DisplayForm="YCM00076" DisplayMode="Dialog"/>
+            <Delete>
+               <API Servlet="/yantra/entities/ItemUOMMaster/delete" APIName="" Message="Message_Deleting_Item_UOM"/>
+            </Delete>
+         </ListInfo>
+	   </YCM00079>
+	</Entity>
+	<!-- My new entries start from below this  -->
+	<Entity EntityTitle="Available_Services" EntityName="Category" PrimaryKeyAttributeName="CategoryKey">
+		<ConfigurationAttributes  TableName="YFS_CATEGORY">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM009" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00057 Title="Available_Services" ScreenType="Detail">
+            <DetailInfo>
+                <Get>
+                    <!--API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/-->
+					<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message=""/>
+					<InnerPanels>
+						<ListPanel FormName="YCM00058" ListPanel="pnlListProvidedService" >
+							<DynamicAttributes ItemKey="@ItemKey" CategoryKey="@CategoryKey" CallingOrganizationCode="@CallingOrganizationCode" />
+							<StaticAttributes ServiceItemGroupCode="PS" />
+						</ListPanel>
+						<ListPanel FormName="YCM00058" ListPanel="pnlListDeliveryService" >
+							<DynamicAttributes ItemKey="@ItemKey" CategoryKey="@CategoryKey" CallingOrganizationCode="@CallingOrganizationCode"/>
+							<StaticAttributes ServiceItemGroupCode="DS" />
+						</ListPanel>
+					</InnerPanels>
+                </Get>
+            </DetailInfo>
+        </YCM00057>
+   </Entity>
+   <Entity  EntityTitle="AvailableServices" EntityName="ItemServiceAssoc" PrimaryKeyAttributeName="ItemServiceAssocKey">
+		<YCM00058 Title="Available_Services" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemServiceAssoc">
+            <List AttributeName="@ServiceItemId" ColumnTitle="Service_Item_ID" DataType="Text-40"/>
+			<List AttributeName="@ServiceItemDesc" ColumnTitle="Service_Item_Desc" DataType="Text-40"/>
+            <List AttributeName="@ServiceUOM" ColumnTitle="UOM" DataType="Text-40"/>
+               <Modify DisplayForm="YCM00059" DisplayMode="Dialog" >
+					<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode">
+					</DynamicAttributes>
+			   </Modify>
+               <SaveAs DisplayForm="YCM00059" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode">
+					</DynamicAttributes>
+			   </SaveAs>
+               <Delete>
+                  <API Servlet="/yantra/entities/ItemServiceAssoc/delete" APIName="" Message="Message_Deleting_Available_Service"/>
+               </Delete>
+               <CreateNew DisplayForm="YCM00059" DisplayMode="Dialog" NextAction="Modify">
+                  <DynamicAttributes ItemKey="@ItemKey" CategoryKey="@CategoryKey" ServiceItemGroupCode="@ServiceItemGroupCode" IsStandaloneService="@IsStandaloneService" CallingOrganizationCode="@CallingOrganizationCode" IsStandaloneServiceQryType="@IsStandaloneServiceQryType" >
+				  </DynamicAttributes>
+				</CreateNew>
+         </ListInfo>
+         <API Servlet="/yantra/entities/ItemServiceAssoc/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+      </YCM00058>
+	  <YCM00059 Title="Item_Service_Association" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Details"/>
+                <InnerPanels>
+                    <ListPanel FormName="YCM00086" ListPanel="pnlItemServiceAssocSkill" >
+                        <DynamicAttributes ItemServiceAssocKey="@ItemServiceAssocKey" OrganizationCode="@ServiceOrganizationCode"/>
+                    </ListPanel>
+                </InnerPanels>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemServiceAssoc/modify" APIName="" Message="Message_Saving_Item_Association"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemServiceAssoc/create" APIName="" Message="Message_Creating_Item_Association"/>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentType="YCPLookupField" ComponentName="lkpItemID"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+			<Table Name="Item" XMLName="Item" >
+			   <DynamicAttributes ItemGroupCode="@ServiceItemGroupCode" CallingOrganizationCode="@CallingOrganizationCode">
+				</DynamicAttributes>
+			</Table>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+				<DynamicAttributes OrganizationCode="@OrganizationCode" ItemGroupCode="@ServiceItemGroupCode"/>
+			</Table>
+        </MasterData>
+      </YCM00059>
+    </Entity>
+	<!-- Service Item resources go below -->
+	<Entity EntityTitle="Item" EntityName="Item" PrimaryKeyAttributeName="ItemKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM014" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00060 Title="Provided_Service_Item_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00061" ListPanel="pnlItemList">
+			<Search/>
+		</SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <StaticAttributes ItemGroupCode="PS"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE"/>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+			<StaticAttributes ItemGroupCode="PS" UomItemGroupCode="PS" />
+		</API>
+      </YCM00060>
+	  <YCM00067 Title="Delivery_Service_Item_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00061" ListPanel="pnlItemList">
+			<Search/>
+		</SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <StaticAttributes ItemGroupCode="DS"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE"/>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+			<StaticAttributes ItemGroupCode="DS" UomItemGroupCode="DS"/>
+		</API>
+      </YCM00067>
+	  <YCM00072 Title="Provided_Service_Option_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00077" ListPanel="pnlItemList">
+			<Search/>
+		</SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <StaticAttributes ItemGroupCode="PS"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE"/>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+			<StaticAttributes UomItemGroupCode="PS" ItemGroupCode="PSOPT"/>
+		</API>
+      </YCM00072>
+	  <YCM00073 Title="Delivery_Service_Item_Option_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00077" ListPanel="pnlItemList">
+			<Search/>
+		</SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <StaticAttributes ItemGroupCode="DS"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE"/>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+			<StaticAttributes UomItemGroupCode="DS" ItemGroupCode="DSOPT"/>
+		</API>
+      </YCM00073>
+      <YCM00061 Title="Service_Items" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00062" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" UomItemGroupCode="@UomItemGroupCode"/>
+                    <StaticAttributes>
+                        <PrimaryInformation PricingUOMStrategy="INV" InvoiceBasedOnActuals="N"/>
+                    </StaticAttributes>
+				</CreateNew>
+               <Modify DisplayForm="YCM00066">
+					<DynamicAttributes UomItemGroupCode="@UomItemGroupCode"/>
+			   </Modify>
+               <SaveAs DisplayForm="YCM00062" DisplayMode="Dialog" NextAction="Modify" >
+					<DynamicAttributes UomItemGroupCode="@UomItemGroupCode"/>
+               </SaveAs>
+               <Delete>
+                  <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="deleteItem" Message="Message_Deleting_Item">
+		               <StaticAttributes Action="Delete"/>
+				  </API>
+               </Delete>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+		 <!--API Servlet="/yantra/entities/Item/list" APIName=""  Message="Message_Retrieving_Search_Results"-->
+		    <!--DynamicAttributes ItemGroupCode="@ItemGroupCode/>-->
+		 </API>
+      </YCM00061>
+      <YCM00077 Title="Options" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00078" DisplayMode="Dialog">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode" UomItemGroupCode="@UomItemGroupCode"/>
+				</CreateNew>
+               <Modify DisplayForm="YCM00078" DisplayMode="Dialog">
+                  <DynamicAttributes UomItemGroupCode="@UomItemGroupCode"/>
+               </Modify>
+               <SaveAs DisplayForm="YCM00078" DisplayMode="Dialog">
+                  <DynamicAttributes UomItemGroupCode="@UomItemGroupCode"/>
+               </SaveAs>
+               <Delete>
+                  <API Servlet="/yantra/entities/Item/delete" APIName="" Message="Message_Deleting_Item"/>
+               </Delete>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+		 </API>
+      </YCM00077>
+      <YCM00078 Title="Option_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getItemOptionDetails" Message="Message_Loading_Option_Details"/>
+            </Get>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="setCreateItemDetails" Message="Message_Creating_Option">
+					<StaticAttributes>
+                        <PrimaryInformation Status="3000"/>
+                    </StaticAttributes>
+				</API>
+            </CreateNew>
+            <Modify> 
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Saving_Option_Details"/>
+            </Modify>
+            <LogicalKeys>
+               <LogicalKey ComponentName="txtItemID"/>
+               <LogicalKey ComponentName="lkpUOM"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+                <DynamicAttributes ItemGroupCode="@UomItemGroupCode"/>
+            </Table>
+            <Table Name="ItemUOMMaster" XMLName="PricingUOM">
+                <DynamicAttributes ItemGroupCode="@UomItemGroupCode"/>
+            </Table>
+         </MasterData>
+      </YCM00078>
+      <YCM00062 Title="Create_Service_Item" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getCreateItemDetails" Message="Message_Loading_Create_Item_Details"/>
+            </Get>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="setCreateItemDetails" Message="Message_Creating_Item"/>
+            </CreateNew>
+            <RefreshMasterData>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getCreateItemMasterData" Message="Message_Loading"/>
+            </RefreshMasterData>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="MasterCatalog" XMLName="MasterCatalog">
+               	<CodeAttributes>
+                  	<CodeAttribute MasterCatalogID="/PrimaryInformation@MasterCatalogID" />
+               	</CodeAttributes>
+			</Table>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+                <DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+            </Table>
+            <Table Name="ItemUOMMaster" XMLName="CapacityUOM">
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+               	<CodeAttributes>
+                  	<CodeAttribute CodeValue="xml:/Item/PrimaryInformation@CapacityUOM" />
+               	</CodeAttributes>
+            </Table>
+			<Table Name="ServiceType" XMLName="ServiceType">
+                <DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+            </Table>
+         </MasterData>
+      </YCM00062>
+      <YCM00066 Title="Service_Item_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getModifyItemDetails" Message="Message_Getting_Item_Details"/>
+				<InnerPanels>
+					<!--ListPanel FormName="YCM00030" ListPanel="pnlOptionList" >
+						<DynamicAttributes ItemKey="@ItemKey"
+						 OrganizationCode="@OrganizationCode"/>
+					</ListPanel-->
+					<ListPanel FormName="YCM00080" ListPanel="pnlItemInstruction" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode" />
+					</ListPanel>
+                    <ListPanel FormName="YCM00084" ListPanel="pnlItemServiceSkill" >
+                        <DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode"/>
+                    </ListPanel>
+				</InnerPanels>
+            </Get>
+            <Modify> 
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Getting_Item_Details"/>
+            </Modify>
+         </DetailInfo>
+         <MasterData>
+		    <Table Name="MasterCatalog" XMLName="MasterCatalog">
+               	<CodeAttributes>
+                  	<CodeAttribute MasterCatalogID="/PrimaryInformation@MasterCatalogID" />
+               	</CodeAttributes>
+			</Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE" OrganizationCode="DEFAULT"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@KitCode"/>
+               </CodeAttributes>
+            </Table>
+            <Table Name="CommonCode" XMLName="Country" AllRecords="Y">
+               <StaticAttributes CodeType="COUNTRY"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@CountryOfOrigin" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="CommonCode" XMLName="ProductClass">
+                <StaticAttributes CodeType="PRODUCT_CLASS"/>
+               	<CodeAttributes>
+                	<CodeAttribute CodeValue="/PrimaryInformation@DefaultProductClass" />
+            	</CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="WeightUom">
+                <StaticAttributes UomType="WEIGHT"/>
+				<CodeAttributes>
+					<CodeAttribute UOM="/PrimaryInformation@UnitWeightUOM" />
+                </CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="HeightUom">
+                <StaticAttributes UomType="DIMENSION"/>
+               <CodeAttributes>
+                  <CodeAttribute Uom="/PrimaryInformation@UnitHeightUOM" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="WidthUom">
+                <StaticAttributes UomType="DIMENSION"/>
+               <CodeAttributes>
+                  <CodeAttribute Uom="/PrimaryInformation@UnitWidthUOM" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="Uom" XMLName="LengthUom">
+				   <StaticAttributes UomType="DIMENSION"/>
+               <CodeAttributes>
+                  <CodeAttribute Uom="/PrimaryInformation@UnitLengthUOM" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="AtpRules" XMLName="AtpRules">
+               <CodeAttributes>
+                  <CodeAttribute AtpRule="/InventoryParameters@ATPRule" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="InventoryMonitorRules" XMLName="InventoryMonitorRules">
+               <CodeAttributes>
+                  <CodeAttribute InventoryMonitorRule="/InventoryParameters@InventoryMonitorRule" />
+               </CodeAttributes>
+			</Table>
+            <Table Name="CommonCode" XMLName="Alias" AllRecords="Y">
+                   <StaticAttributes CodeType="ITEM_ALIAS_TYPE"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="ItemAddlAttribute" AllRecords="Y">
+                   <StaticAttributes CodeType="ITEM_ADDNL_ATTR"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="ItemStatus">
+               <StaticAttributes CodeType="ITEM_STATUS"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@Status" />
+               </CodeAttributes>
+            </Table>
+            <Table Name="CommonCode" XMLName="Exclusion" AllRecords="Y">
+                <StaticAttributes CodeType="ITEM_EXCL_CODE"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="AssociationType" AllRecords="Y">
+                   <StaticAttributes CodeType="ITEM_ASSOCN_TYPE"/>
+            </Table>
+            <Table Name="Item" XMLName="Item">
+			   <CodeAttributes>
+                  <CodeAttribute ItemID="/AssociationTypesUI/RowDetails@ItemID" />
+               </CodeAttributes>
+			</Table>
+			<Table Name="ItemUOMMaster" XMLName="PricingUOM">
+                <StaticAttributes UnitOfMeasureQryType="NE"/>
+                <DynamicAttributes ItemGroupCode="@ItemGroupCode" UnitOfMeasure="@UnitOfMeasure"/>
+            </Table>
+            <Table Name="ItemUOMMaster" XMLName="CapacityUOM">
+				<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+               	<CodeAttributes>
+                  	<CodeAttribute CodeValue="xml:/Item/PrimaryInformation@CapacityUOM" />
+               	</CodeAttributes>
+            </Table>
+			<Table Name="ServiceType" XMLName="ServiceType">
+                <DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+            </Table>
+            <Table Name="ExtendedAttributes" XMLName="ExtendedAttributes"/>
+            <Table Name="Association" XMLName="ItemAssociation">
+                <DynamicAttributes ParentKey="@ItemKey"/>
+            </Table>
+         </MasterData>
+      </YCM00066>
+
+	<!-- New Services for VAS  begins 
+			<StaticAttributes ItemGroupCode="KIT"/>
+			<StaticAttributes ItemGroupCode="DKIT"/>
+			<StaticAttributes ItemGroupCode="COMPL"/>
+			<StaticAttributes ItemGroupCode="INVC"/>
+-->
+	<YCM00110 Title="Kitting_Services" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00114">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode"/>
+				</CreateNew>
+               <Modify DisplayForm="YCM00114"/>
+               <SaveAs DisplayForm="YCM00114"/>
+               <Delete>
+                  <API Servlet="/yantra/entities/Item/delete" APIName="" Message="Message_Deleting_Item"/>
+               </Delete>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+			<StaticAttributes ItemGroupCode="KIT"/>
+		 </API>
+      </YCM00110>
+	<YCM00111 Title="Dekitting_Services" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00120">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode"/>
+				</CreateNew>
+               <Modify DisplayForm="YCM00120"/>
+               <SaveAs DisplayForm="YCM00120"/>
+               <Delete>
+                  <API Servlet="/yantra/entities/Item/delete" APIName="" Message="Message_Deleting_Item"/>
+               </Delete>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+			<StaticAttributes ItemGroupCode="DKIT"/>
+		 </API>
+      </YCM00111>
+	<YCM00112 Title="Compliance_Services" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00121">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode"/>
+				</CreateNew>
+               <Modify DisplayForm="YCM00121"/>
+               <SaveAs DisplayForm="YCM00121"/>
+               <Delete>
+                  <API Servlet="/yantra/entities/Item/delete" APIName="" Message="Message_Deleting_Item"/>
+               </Delete>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+			<StaticAttributes ItemGroupCode="COMPL"/>
+		 </API>
+      </YCM00112>
+	<YCM00113 Title="Inventory_Change_Services" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00122">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ItemGroupCode="@ItemGroupCode"/>
+				</CreateNew>
+               <Modify DisplayForm="YCM00122"/>
+               <SaveAs DisplayForm="YCM00122"/>
+               <Delete>
+                  <API Servlet="/yantra/entities/Item/delete" APIName="" Message="Message_Deleting_Item"/>
+               </Delete>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+			<StaticAttributes ItemGroupCode="INVC"/>
+		 </API>
+      </YCM00113>
+      <YCM00114 Title="Service_Item_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getItemOptionDetails" Message="Message_Loading_Option_Details"/>
+				<InnerPanels>
+					<ListPanel FormName="YCM00080" ListPanel="pnlItemInstruction" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+					<ListPanel FormName="YCM00115" ListPanel="pnlServiceActivity" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+				</InnerPanels>
+            </Get>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="setCreateItemDetails" Message="Message_Creating_Option">
+					<StaticAttributes>
+                        <PrimaryInformation Status="3000"/>
+                    </StaticAttributes>
+				</API>
+            </CreateNew>
+            <Modify> 
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Saving_Option_Details"/>
+            </Modify>
+            <LogicalKeys>
+               <LogicalKey ComponentName="txtItemID"/>
+            </LogicalKeys>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="CommonCode" XMLName="ItemStatus">
+               <StaticAttributes CodeType="ITEM_STATUS"/>
+               <CodeAttributes>
+                  <CodeAttribute CodeValue="/PrimaryInformation@Status" />
+               </CodeAttributes>
+            </Table>
+         </MasterData>
+      </YCM00114>
+	<YCM00120 Title="Service_Item_Details" ScreenType="Detail">
+		<DetailInfo>
+			<Get>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getItemOptionDetails" Message="Message_Loading_Option_Details"/>
+				<InnerPanels>
+					<ListPanel FormName="YCM00080" ListPanel="pnlItemInstruction" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+					<ListPanel FormName="YCM00115" ListPanel="pnlServiceActivity" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+				</InnerPanels>
+			</Get>
+			<CreateNew>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="setCreateItemDetails" Message="Message_Creating_Option">
+					<StaticAttributes>
+						<PrimaryInformation Status="3000"/>
+					</StaticAttributes>
+				</API>
+			</CreateNew>
+			<Modify> 
+				<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Saving_Option_Details"/>
+			</Modify>
+			<LogicalKeys>
+				<LogicalKey ComponentName="txtItemID"/>
+			</LogicalKeys>
+		</DetailInfo>
+		<MasterData>
+			<Table Name="CommonCode" XMLName="ItemStatus">
+				<StaticAttributes CodeType="ITEM_STATUS"/>
+				<CodeAttributes>
+					<CodeAttribute CodeValue="/PrimaryInformation@Status" />
+				</CodeAttributes>
+			</Table>
+		</MasterData>
+	</YCM00120>
+	<YCM00121 Title="Service_Item_Details" ScreenType="Detail">
+		<DetailInfo>
+			<Get>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getItemOptionDetails" Message="Message_Loading_Option_Details"/>
+				<InnerPanels>
+					<ListPanel FormName="YCM00080" ListPanel="pnlItemInstruction" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+					<ListPanel FormName="YCM00115" ListPanel="pnlServiceActivity" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+				</InnerPanels>
+			</Get>
+			<CreateNew>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="setCreateItemDetails" Message="Message_Creating_Option">
+					<StaticAttributes>
+						<PrimaryInformation Status="3000"/>
+					</StaticAttributes>
+				</API>
+			</CreateNew>
+			<Modify> 
+				<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Saving_Option_Details"/>
+			</Modify>
+			<LogicalKeys>
+				<LogicalKey ComponentName="txtItemID"/>
+			</LogicalKeys>
+		</DetailInfo>
+		<MasterData>
+			<Table Name="CommonCode" XMLName="ItemStatus">
+				<StaticAttributes CodeType="ITEM_STATUS"/>
+				<CodeAttributes>
+					<CodeAttribute CodeValue="/PrimaryInformation@Status" />
+				</CodeAttributes>
+			</Table>
+		</MasterData>
+	</YCM00121>
+	<YCM00122 Title="Service_Item_Details" ScreenType="Detail">
+		<DetailInfo>
+			<Get>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="getItemOptionDetails" Message="Message_Loading_Option_Details"/>
+				<InnerPanels>
+					<ListPanel FormName="YCM00080" ListPanel="pnlItemInstruction" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+					<ListPanel FormName="YCM00115" ListPanel="pnlServiceActivity" >
+						<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+				</InnerPanels>
+			</Get>
+			<CreateNew>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMCreateItemAPI" APIName="setCreateItemDetails" Message="Message_Creating_Option">
+					<StaticAttributes>
+						<PrimaryInformation Status="3000"/>
+					</StaticAttributes>
+				</API>
+			</CreateNew>
+			<Modify> 
+				<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="setModifyItemDetails" Message="Message_Saving_Option_Details"/>
+			</Modify>
+			<LogicalKeys>
+				<LogicalKey ComponentName="txtItemID"/>
+			</LogicalKeys>
+		</DetailInfo>
+		<MasterData>
+			<Table Name="CommonCode" XMLName="ItemStatus">
+				<StaticAttributes CodeType="ITEM_STATUS"/>
+				<CodeAttributes>
+					<CodeAttribute CodeValue="/PrimaryInformation@Status" />
+				</CodeAttributes>
+			</Table>
+		</MasterData>
+	</YCM00122>
+
+	  
+	  
+	<!-- new services for VAS ends -->
+
+    </Entity>
+	<Entity EntityTitle="Item_Service_Options" EntityName="ItemOption" PrimaryKeyAttributeName="ItemOptionKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM_OPTION">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM014" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+	  <YCM00069 Title="Item_Service_Options" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemOption">
+            <List AttributeName="@OptionItemId" ColumnTitle="Option_Item_ID" DataType="ItemID"/>
+            <List AttributeName="@OptionUOM" ColumnTitle="UOM" DataType="Text-40"/>
+			<List AttributeName="@OptionItemShortDesc" ColumnTitle="Short_Description" DataType="Text-100"/>
+		    <CreateNew DisplayForm="YCM00070" DisplayMode="Dialog" >
+				<DynamicAttributes OrganizationCode="@OrganizationCode" ItemGroupCode="@ItemGroupCode" CallingOrganizationCode="@CallingOrganizationCode" HiddenItemKey="@ItemKey" UomItemGroupCode="@UomItemGroupCode" UnitOfMeasure="@UnitOfMeasure" />
+			</CreateNew>
+		   <Delete>
+			  <API Servlet="/yantra/entities/ItemOption/delete" APIName="" Message="Message_Deleting_Item"/>
+		   </Delete>
+         </ListInfo>
+		 <API Servlet="/yantra/entities/ItemOption/list" APIName="" Message="Message_Retrieving_Search_Results">
+		 <!--API Servlet="/yantra/entities/Item/list" APIName=""  Message="Message_Retrieving_Search_Results"-->
+		    <!--DynamicAttributes>
+				<PrimaryInformation	ItemGroupCode="@ItemGroupCode"/>
+			</DynamicAttributes-->		 
+		 </API>
+      </YCM00069>
+    </Entity>
+	<Entity EntityTitle="ItemOptions" EntityName="Item" PrimaryKeyAttributeName="ItemKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM014" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+	  <YCM00070 Title="Service_Options_Item_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00071" ListPanel="pnlItemList">
+			<Search/>
+		 </SearchInfo>
+         <MasterData>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+			    <DynamicAttributes ItemGroupCode="@UomItemGroupCode"/>
+            </Table>
+            <Table Name="CommonCode" XMLName="KitCode">
+               <StaticAttributes CodeType="KIT_CODE"/>
+            </Table>
+            <Table Name="QryType" XMLName="QryType"/>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Search">
+			<DynamicAttributes OrganizationCode="@OrganizationCode" ItemGroupCode="@ItemGroupCode" CallingOrganizationCode="@CallingOrganizationCode" HiddenItemKey="@HiddenItemKey"/>
+		</API>
+      </YCM00070>
+	  <YCM00071 Title="Service_Option_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="Item">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+			<List AttributeName="/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <!--CreateNew DisplayForm="YCM00062" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+				</CreateNew>
+               <Modify DisplayForm="YCM00066"/>
+               <SaveAs DisplayForm="YCM00062" DisplayMode="Dialog"/>
+               <Delete>
+                  <API Servlet="/yantra/entities/Item/delete" APIName="" Message="Message_Deleting_Item"/>
+               </Delete-->
+			   <AddToRelationship RelationshipEntityName="ItemOption">
+					<API Servlet="/yantra/entities/ItemOption/create" APIName="" Message="Message_Adding_Option_To_Item"/>
+					<DynamicAttributes ItemKey="@HiddenItemKey" OptionItemId="@ItemID" OptionUOM="@UnitOfMeasure"/>
+				</AddToRelationship>
+         </ListInfo>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMItemListAPI" APIName="getItemList" Message="Message_Retrieving_Search_Results">
+		 <!--API Servlet="/yantra/entities/Item/list" APIName=""  Message="Message_Retrieving_Search_Results"-->
+		    <!--DynamicAttributes>
+				<PrimaryInformation	ItemGroupCode="@ItemGroupCode"/>
+			</DynamicAttributes-->		 
+		 </API>
+      </YCM00071>
+    </Entity>
+	<!-- Additions for Node Item Defn table -->
+	<Entity EntityTitle="Item_Node_Defn" EntityName="ItemNodeDefn" PrimaryKeyAttributeName="ItemNodeDefnKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM_NODE_DEFN">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM003" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      <YCM00063 Title="Item_Node_Defn_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCM00064" ListPanel="pnlItemNodeDefnList">
+			<Search/>
+		</SearchInfo>
+         <MasterData>
+            <Table Name="QryType" XMLName="QryType"/>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+				<StaticAttributes ItemGroupCode="PROD"  UOMType="QUANTITY"/>
+            </Table>
+			<Table Name="ShipNode" XMLName="Node" RemoveCallingOrgCode="Y" >
+				<!--DynamicAttributes OrganizationCode="@CallingOrganizationCode" /-->
+            </Table>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Node_Defn_Search"/>
+      </YCM00063>
+	  <YCM00049 Title="Item_Node_Defn_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemNodeDefn">
+            <List AttributeName="@Node" ColumnTitle="Node" DataType="ShipNode"/>
+			<List AttributeName="@OperationalConfigurationComplete" ColumnTitle="Operational_Configuration_Complete" DataType="Boolean"/>
+               <CreateNew DisplayForm="YCM00068" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@OrganizationCode" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure"/>
+					<StaticAttributes ItemGroupCode="PROD" />
+				</CreateNew>
+               <Modify DisplayForm="YCM00065"/>
+               <SaveAs DisplayForm="YCM00068" DisplayMode="Dialog" NextAction="Modify">
+				   	<DynamicAttributes OrganizationCode="@OrganizationCode" ItemGroupCode="@ItemGroupCode"/>
+				</SaveAs>
+               <Delete>
+				   <API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Deleting_Item_Node_Defn">
+						<StaticAttributes ExternalAPIName="deleteItemNodeDefn"/>
+					</API>
+               </Delete>
+         </ListInfo>
+	     <API Servlet="/yantra/entities/ItemNodeDefn/list" APIName="" Message="Message_Retrieving_Search_Results" >
+		 </API>
+      </YCM00049>
+      <YCM00064 Title="Item_Node_Defn_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemNodeDefn">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+			<List AttributeName="/Item/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCM00068" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+					<StaticAttributes ItemGroupCode="PROD" />
+				</CreateNew>
+               <Modify DisplayForm="YCM00065"/>
+               <SaveAs DisplayForm="YCM00068" DisplayMode="Dialog" NextAction="Modify">
+                  <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+                  <StaticAttributes ItemGroupCode="PROD"/>
+               </SaveAs>
+               <Delete>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Deleting_Item_Node_Defn">
+						<StaticAttributes ExternalAPIName="deleteItemNodeDefn"/>
+					</API>
+               </Delete>
+         </ListInfo>
+	     <API Servlet="/yantra/entities/ItemNodeDefn/list" APIName="" Message="Message_Retrieving_Search_Results" >
+		 </API>
+      </YCM00064>
+      <YCM00065 Title="Item_Node_Defn_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+             <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Node_Defn_Details"/>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Saving_Item_Node_Defn">
+					<StaticAttributes ExternalAPIName="modifyItemNodeDefn"/>
+				</API>
+            </Modify>
+			<CreateNew>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Creating_Item_Node_Defn">
+					<StaticAttributes ExternalAPIName="createItemNodeDefn"/>
+				</API>
+            </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentName="lkpItemID"/>
+			   <LogicalKey ComponentName="lkpUOM"/>
+			   <LogicalKey ComponentName="lkpNode"/>
+            </LogicalKeys>
+         </DetailInfo>
+      </YCM00065>
+	  <YCM00068 Title="Create_Item_Node_Defn" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+             <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Node_Defn_Details"/>
+            </Get>
+            <CreateNew>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Creating_Item_Node_Defn">
+					<StaticAttributes ExternalAPIName="createItemNodeDefn"/>
+				</API>
+            </CreateNew>
+         </DetailInfo>
+		 <MasterData>
+		 	<Table Name="Item" XMLName="Item">
+				<DynamicAttributes OrganizationCode="@OrganizationCode" />
+				<StaticAttributes ItemGroupCode="PROD"/>
+            </Table>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+				<DynamicAttributes OrganizationCode="@OrganizationCode" />
+				<StaticAttributes ItemGroupCode="PROD" UOMType="QUANTITY"/>
+            </Table>
+			<Table Name="ShipNode" XMLName="Node" RemoveCallingOrgCode="Y" >
+				<!--DynamicAttributes OrganizationCode="@CallingOrganizationCode" /-->
+            </Table>
+		</MasterData>
+      </YCM00068>
+      <!-- Node Item definition resource exposed in wms app tree.-->
+      <YCMWMS00063 Title="Item_Node_Defn_Search" ScreenType="Search">
+         <SearchInfo ListFormName="YCMWMS00064" ListPanel="pnlItemNodeDefnList">
+			<StaticAttributes IsExposedInWMS="Y"/>
+			<DynamicAttributes NodeKey="@NodeKey" Node="@Node"/>
+		</SearchInfo>
+         <MasterData>
+            <Table Name="QryType" XMLName="QryType"/>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+				<StaticAttributes ItemGroupCode="PROD"  UOMType="QUANTITY"/>
+            </Table>
+         </MasterData>
+         <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Node_Defn_Search"/>
+      </YCMWMS00063>
+	   <YCMWMS00064 Title="Item_Node_Defn_List" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemNodeDefn">
+            <List AttributeName="@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+            <List AttributeName="@UnitOfMeasure" ColumnTitle="Unit_Of_Measure" DataType="UOM"/>
+			<List AttributeName="/Item/PrimaryInformation@ShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+               <CreateNew DisplayForm="YCMWMS00068" DisplayMode="Dialog" NextAction="Modify">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode" NodeKey="@NodeKey" Node="@Node"/>
+					<StaticAttributes ItemGroupCode="PROD" IsExposedInWMS="Y"/>
+				</CreateNew>
+               <Modify DisplayForm="YCMWMS00065">
+			   <StaticAttributes IsExposedInWMS="Y"/>
+			   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" NodeKey="@NodeKey" Node="@Node"/>
+			   </Modify>
+               <Delete>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Deleting_Item_Node_Defn">
+						<StaticAttributes ExternalAPIName="deleteItemNodeDefn"/>
+					</API>
+               </Delete>
+         </ListInfo>
+	     <API Servlet="/yantra/entities/ItemNodeDefn/list" APIName="" Message="Message_Retrieving_Search_Results" >
+		 </API>
+      </YCMWMS00064>
+	  <YCMWMS00068 Title="Create_Item_Node_Defn" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+             <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Node_Defn_Details"/>
+            </Get>
+            <CreateNew>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Creating_Item_Node_Defn">
+					<StaticAttributes ExternalAPIName="createItemNodeDefn"/>
+				</API>
+            </CreateNew>
+         </DetailInfo>
+		 <MasterData>
+		 	<Table Name="Item" XMLName="Item">
+				<DynamicAttributes OrganizationCode="@OrganizationCode" />
+				<StaticAttributes ItemGroupCode="PROD"/>
+            </Table>
+			<Table Name="ItemUOMMaster" XMLName="UOM">
+				<DynamicAttributes OrganizationCode="@OrganizationCode" />
+				<StaticAttributes ItemGroupCode="PROD" UOMType="QUANTITY"/>
+            </Table>
+ 		</MasterData>
+        </YCMWMS00068>
+        <YCMWMS00065 Title="Item_Node_Defn_Details" ScreenType="Detail">
+         <DetailInfo>
+		   <Get>
+             <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Node_Defn_Details"/>
+			</Get>
+            <Modify>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Saving_Item_Node_Defn">
+					<StaticAttributes IsExposedInWMS="Y" ExternalAPIName="modifyItemNodeDefn"/>
+				</API>
+		    </Modify>
+			<CreateNew>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMMasterData" APIName="getExposedAPI" Message="Message_Creating_Item_Node_Defn">
+					<StaticAttributes IsExposedInWMS="Y" ExternalAPIName="createItemNodeDefn"/>
+				</API>
+			  </CreateNew>
+            <LogicalKeys>
+               <LogicalKey ComponentName="lkpItemID"/>
+			   <LogicalKey ComponentName="lkpUOM"/>
+			 </LogicalKeys>
+         </DetailInfo>
+      </YCMWMS00065>
+   </Entity>
+
+   <Entity EntityTitle="Item_Instruction_Code" EntityName="ItemInstructionCode" PrimaryKeyAttributeName="ItemInstructionCodeKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM_INSTRUCTION_CODE">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM021" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00033 Title="Item_Instruction_Codes" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemInstructionCode">
+            <List AttributeName="@InstructionCode" ColumnTitle="Item_Instruction_Code" DataType="Text-40"/>
+            <List AttributeName="@InstructionType" ColumnTitle="Item_Instruction_Type" DataType="Text-20"/>
+			<List AttributeName="@InstructionText" ColumnTitle="Item_Instruction_Text" DataType="Text-255"/>
+           <CreateNew DisplayForm="YCM00034" DisplayMode="Dialog">
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+		   </CreateNew>
+           <Modify DisplayForm="YCM00034" DisplayMode="Dialog"/>
+           <Delete>
+               <API Servlet="/yantra/entities/ItemInstructionCode/delete" APIName="" Message="Message_Deleting_Item_Instruction_Codes"/>
+			</Delete>
+           <SaveAs DisplayForm="YCM00034" DisplayMode="Dialog"/>
+         </ListInfo>
+         <API Servlet="/yantra/entities/ItemInstructionCode/list" APIName="" Message="Message_Retrieving_Item_Instruction_Codes"/>
+      </YCM00033>
+	  <YCM00034 Title="Item_Instruction_Codes" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Instruction_Code_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemInstructionCode/modify" APIName="" Message="Message_Saving_Item_Instruction_Code"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemInstructionCode/create" APIName="" Message="Message_Creating_New_Item_Instruction_Code"/>
+            </CreateNew>
+			<LogicalKeys>
+               <LogicalKey ComponentName="txtItemInstructionCode"/>
+            </LogicalKeys>
+         </DetailInfo>
+		 <MasterData>
+			<Table Name="CommonCode" XMLName="ItemInstructionType">
+                <StaticAttributes CodeType="ITEM_INSTR_TYPE"/>
+            </Table>
+		 </MasterData>
+      </YCM00034>
+	</Entity>
+	<Entity EntityTitle="Item_Instruction" EntityName="ItemInstruction" PrimaryKeyAttributeName="ItemInstructionKey">
+		<ConfigurationAttributes  TableName="YFS_ITEM_INSTRUCTION">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM021" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00080 Title="Item_Instructions" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemInstruction">
+			<List AttributeName="@InstructionType" ColumnTitle="Item_Instruction_Type" DataType="Text-20"/>
+			<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-40"/>
+            <List AttributeName="@InstructionCode" ColumnTitle="Item_Instruction_Code" DataType="Text-40"/> 
+			<List AttributeName="@SeqNo" ColumnTitle="Sequence_No" DataType="Text-40"/> 
+           <CreateNew DisplayForm="YCM00081" DisplayMode="Dialog">
+				<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+		   </CreateNew>
+           <Modify DisplayForm="YCM00081" DisplayMode="Dialog">
+				<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+           </Modify>
+		   <Delete>
+               <API Servlet="/yantra/entities/ItemInstruction/delete" APIName="" Message="Message_Deleting_Item_Instructions"/>
+			</Delete>
+           <SaveAs DisplayForm="YCM00081" DisplayMode="Dialog">
+				<DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode" CallingOrganizationCode="@CallingOrganizationCode"/>
+		   </SaveAs> 
+		 </ListInfo>
+  		 <MasterData>
+			<Table Name="CommonCode" XMLName="ItemInstructionType">
+                <StaticAttributes CodeType="ITEM_INSTR_TYPE" /> 
+            </Table>
+		 </MasterData>
+		 <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getItemInstructionList" Message="Message_Retrieving_Item_Instructions"/>
+    </YCM00080>
+	  <YCM00081 Title="Item_Instruction_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Item_Instruction_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="modifyItemInstruction" Message="Message_Saving_Item_Instruction_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="modifyItemInstruction" Message="Message_Saving_Item_Instruction_Details"/>
+            </CreateNew>
+			<LogicalKeys>
+               <LogicalKey ComponentName="lkpItemInstructionType"/>
+			   <LogicalKey ComponentName="txtSeqNo"/>
+            </LogicalKeys>
+         </DetailInfo>
+		 <MasterData>
+			<Table Name="CommonCode" XMLName="ItemInstructionType">
+                <StaticAttributes CodeType="ITEM_INSTR_TYPE" /> 
+            </Table>
+			<Table Name="ItemInstructionCode">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+            </Table>
+		 </MasterData>
+      </YCM00081>
+	</Entity>
+	<!-- End of Additions for Node Item Defn table -->
+    <Entity EntityTitle="Service_Skill" EntityName="ServiceSkill" PrimaryKeyAttributeName="ServiceSkillKey">
+        <ConfigurationAttributes  TableName="YFS_SERVICE_SKILL">
+            <ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM017" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+        <YCM00082 Title="Service_Skills" ScreenType="List"> 
+            <API Servlet="com.yantra.ycm.ui.backend.YCMServiceSkillAPI" APIName="getServiceSkillList"  Message="Message_Retrieving_Service_Skills"/>
+            <ListInfo NamePrefix="/" ChildTag="ServiceSkill">
+                <List AttributeName="@ServiceSkillId" ColumnTitle="Service_Skill_ID" DataType="Text-40"/>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+                <CreateNew DisplayForm="YCM00083" DisplayMode="Dialog">
+                    <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+                </CreateNew>
+                <Modify DisplayForm="YCM00083" DisplayMode="Dialog"/>
+                <SaveAs DisplayForm="YCM00083" DisplayMode="Dialog"/>
+                <Delete>
+                    <API Servlet="com.yantra.ycm.ui.backend.YCMServiceSkillAPI" APIName="manageServiceSkill" Message="Message_Deleting_Service_Skill">
+                      <StaticAttributes Operation="Delete"/>
+                    </API>
+                </Delete>
+            </ListInfo>
+        </YCM00082>
+        <YCM00083 Title="Service_Skill_Details" ScreenType="Detail"> 
+            <DetailInfo>
+                <Get>
+                   <API Servlet="com.yantra.ycm.ui.backend.YCMServiceSkillAPI" APIName="getServiceSkillDetails" Message="Message_Getting_Service_Skill_Details"/>
+                </Get>
+                <CreateNew>
+                    <API Servlet="com.yantra.ycm.ui.backend.YCMServiceSkillAPI" APIName="manageServiceSkill" Message="Message_Creating_New_Service_Skill">
+                        <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+                    </API>
+                </CreateNew>
+                <Modify> 
+                   <API Servlet="com.yantra.ycm.ui.backend.YCMServiceSkillAPI" APIName="manageServiceSkill" Message="Message_Saving_Service_Skill"/>
+                </Modify>
+                <LogicalKeys>
+                    <LogicalKey ComponentType="JTextField" ComponentName="txtServiceSkillId"/>
+                </LogicalKeys>  
+            </DetailInfo>
+        </YCM00083>
+        <YCM00084 Title="Service_Skills_For_This_Item" ScreenType="List">
+            <ListInfo NamePrefix="/" ChildTag="ItemServiceSkill">
+                <List AttributeName="@ServiceSkillId" ColumnTitle="Service_Skill_ID" DataType="Text-40"/>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+                <CreateNew DisplayForm="YCM00085" DisplayMode="Dialog">
+                    <DynamicAttributes ItemKey="@ItemKey" OrganizationCode="@OrganizationCode"/>
+                </CreateNew>
+                <Delete>
+                    <API Servlet="/yantra/entities/ItemServiceSkill/delete" APIName="" Message="Message_Removing_Service_Skill_From_Item"/>
+                </Delete>
+            </ListInfo>
+            <API Servlet="/yantra/entities/ItemServiceSkill/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+        </YCM00084>
+        <YCM00085 Title="Service_Skills" ScreenType="List">
+            <ListInfo NamePrefix="/" ChildTag="ServiceSkill" MultiSelection="Y" ShowFooter="Y">
+                <List AttributeName="@ServiceSkillId" ColumnTitle="Service_Skill_ID" DataType="Text-40"/>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+                <AddToRelationship RelationshipEntityName="ItemServiceSkill">
+                    <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="modifyItemServiceSkill" Message="Message_Adding_Service_Skill_To_Item"/>
+                   <DynamicAttributes OrganizationCode="@OrganizationCode" ServiceSkillId="@ServiceSkillId" ItemKey="@ItemKey"/>
+                 </AddToRelationship>
+            </ListInfo>
+            <API Servlet="/yantra/entities/ServiceSkill/list" APIName="" Message="Message_Retrieving_Service_Skills"/>
+        </YCM00085>
+        <YCM00086 Title="Service_Skills_For_This_Service_Association" ScreenType="List">
+            <ListInfo NamePrefix="/" ChildTag="ItemServiceAssocSkill">
+                <List AttributeName="@ServiceSkillId" ColumnTitle="Service_Skill_ID" DataType="Text-40"/>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+                <CreateNew DisplayForm="YCM00087" DisplayMode="Dialog">
+                    <DynamicAttributes ItemServiceAssocKey="@ItemServiceAssocKey" OrganizationCode="@OrganizationCode"/>
+                </CreateNew>
+                <Delete>
+                    <API Servlet="/yantra/entities/ItemServiceAssocSkill/delete" APIName="" Message="Message_Removing_Service_Skill_From_Service_Association"/>
+                </Delete>
+            </ListInfo>
+            <API Servlet="/yantra/entities/ItemServiceAssocSkill/list" APIName="" Message="Message_Retrieving_Search_Results"/>
+        </YCM00086>
+        <YCM00087 Title="Service_Skills" ScreenType="List">
+            <ListInfo NamePrefix="/" ChildTag="ServiceSkill" MultiSelection="Y" ShowFooter="Y">
+                <List AttributeName="@ServiceSkillId" ColumnTitle="Service_Skill_ID" DataType="Text-40"/>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+                <AddToRelationship RelationshipEntityName="ItemServiceAssocSkill">
+                    <API Servlet="/yantra/entities/ItemServiceAssocSkill/create" APIName="" Message="Message_Adding_Service_Skill_To_Service_Association"/>
+                    <DynamicAttributes OrganizationCode="@OrganizationCode" ServiceSkillId="@ServiceSkillId" ItemServiceAssocKey="@ItemServiceAssocKey"/>
+                 </AddToRelationship>
+            </ListInfo>
+            <API Servlet="/yantra/entities/ServiceSkill/list" APIName="" Message="Message_Retrieving_Service_Skills"/>
+        </YCM00087>
+        <YCM00088 Title="Service_Skills" ScreenType="List">
+            <ListInfo NamePrefix="/" ChildTag="ServiceSkill" MultiSelection="Y" ShowFooter="Y">
+                <List AttributeName="@ServiceSkillId" ColumnTitle="Service_Skill_ID" DataType="Text-40"/>
+                <List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+                <AddToRelationship RelationshipEntityName="ResPoolServiceSkill">
+                    <API Servlet="/yantra/entities/ResPoolServiceSkill/create" APIName="" Message="Message_Adding_Service_Skill_To_Resource_Pool"/>
+                    <DynamicAttributes OrganizationCode="@OrganizationCode" ServiceSkillId="@ServiceSkillId" ResourcePoolKey="@ResourcePoolKey"/>
+                 </AddToRelationship>
+            </ListInfo>
+            <API Servlet="/yantra/entities/ServiceSkill/list" APIName="" Message="Message_Retrieving_Service_Skills"/>
+        </YCM00088>
+    </Entity>
+	<Entity EntityTitle="Service_Activity" EntityName="ServiceActivity" PrimaryKeyAttributeName="ServiceActivityKey">
+		<ConfigurationAttributes  TableName="YFS_SERVICE_ACTIVITY">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM014" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00115 Title="Service_Activities" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ServiceActivity">
+			<List AttributeName="@ActivityCode" ColumnTitle="Activity_Code" DataType="Text-40"/>
+            <List AttributeName="@ActivitySeqNo" ColumnTitle="Sequence_No" DataType="Count"/> 
+           <CreateNew DisplayForm="YCM00116" DisplayMode="Dialog">
+				<DynamicAttributes ItemKey="@ItemKey"/>
+				<StaticAttributes Operation="Create"/>
+		   </CreateNew>
+           <Modify DisplayForm="YCM00116" DisplayMode="Dialog">
+				<StaticAttributes Operation="Modify"/>
+		   </Modify>
+           <SaveAs DisplayForm="YCM00116" DisplayMode="Dialog">
+				<StaticAttributes Operation="Create"/>
+		   </SaveAs>
+		   <Delete>
+               <API Servlet="/yantra/entities/ServiceActivity/delete" APIName="" Message="Message_Deleting_Service_Activity"/>
+			</Delete>
+         </ListInfo>
+         <API Servlet="/yantra/entities/ServiceActivity/list" APIName="" Message="Message_Retrieving_Service_Activity"/>
+      </YCM00115>
+	  <YCM00116 Title="Service_Activity_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Service_Activity_Details"/>
+				<InnerPanels>
+					<ListPanel FormName="YCM00117" ListPanel="pnlList" >
+						<DynamicAttributes ItemKey="@ItemKey" ServiceActivityKey="@ServiceActivityKey"/>
+					</ListPanel>
+				</InnerPanels>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="modifyServiceActivity" Message="Message_Saving_Service_Activity_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="modifyServiceActivity" Message="Message_Saving_Service_Activity_Details"/>
+            </CreateNew>
+			<LogicalKeys>
+               <LogicalKey ComponentName="lkpActivityCode"/>
+			   <LogicalKey ComponentName="txtSequenceNo"/>
+            </LogicalKeys>
+         </DetailInfo>
+		 <MasterData>
+			<Table Name="Activity">
+				<StaticAttributes ActivityGroupId="VAS"/>
+			</Table>
+		 </MasterData>
+      </YCM00116>
+	</Entity>
+   <Entity EntityTitle="Activity_Instructions" EntityName="ServiceActivityInstruction" PrimaryKeyAttributeName="ServiceActivityInstructionKey">
+		<ConfigurationAttributes  TableName="YFS_SERVICE_ACTIVITY_INSTR">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM014" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00117 Title="Service_Activity_Instructions" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ServiceActivityInstruction">
+            <List AttributeName="@InstructionText" ColumnTitle="Instruction_Text" DataType="Text-4000"/>
+			<List AttributeName="@SequenceNo" ColumnTitle="Instruction_Sequence_No" DataType="Count"/>
+           <CreateNew DisplayForm="YCM00118" DisplayMode="Dialog">
+				<StaticAttributes Operation="Create"/>			
+				<DynamicAttributes ItemKey="@ItemKey" ServiceActivityKey="@ServiceActivityKey"/>
+		   </CreateNew>
+           <Modify DisplayForm="YCM00118" DisplayMode="Dialog">
+			   <DynamicAttributes ItemKey="@ItemKey"/>
+		   </Modify>
+           <Delete>
+               <API Servlet="/yantra/entities/ServiceActivityInstruction/delete" APIName="" Message="Message_Deleting_Activity_Instruction"/>
+			</Delete>
+           <SaveAs DisplayForm="YCM00118" DisplayMode="Dialog">
+				<StaticAttributes Operation="Create"/>			
+			   <DynamicAttributes ItemKey="@ItemKey"/>
+		   </SaveAs>
+         </ListInfo>
+         <API Servlet="/yantra/entities/ServiceActivityInstruction/list" APIName="" Message="Message_Retrieving_Activity_Instructions"/>
+      </YCM00117>
+	  <YCM00118 Title="Service_Activity_Instruction_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Activity_Instruction_Details"/>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="modifyServiceActivityInstruction" Message="Message_Saving_Activity_Instruction"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="modifyServiceActivityInstruction" Message="Message_Creating_New_Activity_Instruction"/>
+            </CreateNew>
+			<LogicalKeys>
+               <LogicalKey ComponentName="txtSeqNo"/>
+            </LogicalKeys>
+         </DetailInfo>
+      </YCM00118>
+	</Entity>
+	<Entity EntityTitle="Activity_List" EntityName="Activity" PrimaryKeyAttributeName="ActivityKey">
+		<ConfigurationAttributes  TableName="YFS_ACTIVITY">
+				<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM017" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<PermanentRecordAttributes SystemDefined="Y"/>
+		<YCM00119 Title="Activities" ScreenType="List">
+			  <ListInfo NamePrefix="/" ChildTag="Activity">
+				<List AttributeName="@ActivityCode" ColumnTitle="Activity_Code" DataType="Activity" Editable="N"
+					EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-200" Editable="Y"
+				EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create" ActivityGroupId="VAS" SystemDefined="N"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete>
+					<API Servlet="/yantra/entities/Activity/delete" APIName="" Message="Deleting_Activity"/>
+				</Delete>
+				 <Save>
+					<API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiUpdateAPI" Message="Saving_Activity">
+					</API>
+				</Save>
+			 </ListInfo>
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+							Message="Retrieving_Activity_List">
+				<StaticAttributes ActivityGroupId="VAS"/>
+			</API>
+		</YCM00119>
+	</Entity>
+	<Entity EntityTitle="Service_Types" EntityName="ServiceType" PrimaryKeyAttributeName="ServiceTypeKey">
+		<ConfigurationAttributes  TableName="YFS_SERVICE_TYPE">
+			<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM026" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCM00094 Title="Provided_Service_Types" ScreenType="List"> 
+			<API Servlet="/yantra/entities/ServiceType/list" APIName="" Message="Message_Retrieving_Search_Results">
+				<StaticAttributes ItemGroupCode="PS"/>
+			</API>
+			<ListInfo NamePrefix="/" ChildTag="ServiceType">
+				<List AttributeName="@ServiceTypeID" ColumnTitle="Service_Type_ID" DataType="Text-24"/>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCM00096" DisplayMode="Dialog"/>
+				<CreateNew DisplayForm="YCM00096" DisplayMode="Dialog">
+					<StaticAttributes ItemGroupCode="PS"/>
+					<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+				</CreateNew>
+				<SaveAs DisplayForm="YCM00096" DisplayMode="Dialog"/>
+				<Delete>
+					<API Servlet="/yantra/entities/ServiceType/manage" APIName="" Message="Message_Deleting_Service_Type">
+						<StaticAttributes Operation="Delete"/>
+					</API>
+				</Delete>
+			</ListInfo>
+		</YCM00094>
+		<YCM00095 Title="Delivery_Service_Types" ScreenType="List"> 
+			<API Servlet="/yantra/entities/ServiceType/list" APIName="" Message="Message_Retrieving_Search_Results" >
+				<StaticAttributes ItemGroupCode="DS"/>
+			</API>
+			<ListInfo NamePrefix="/" ChildTag="ServiceType">
+				<List AttributeName="@ServiceTypeID" ColumnTitle="Service_Type_ID" DataType="Text-24"/>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCM00096" DisplayMode="Dialog"/>
+				<CreateNew DisplayForm="YCM00096" DisplayMode="Dialog">
+					<StaticAttributes ItemGroupCode="DS"/>
+					<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+				</CreateNew>
+				<SaveAs DisplayForm="YCM00096" DisplayMode="Dialog"/>
+				<Delete>
+					<API Servlet="/yantra/entities/ServiceType/manage" APIName="" Message="Message_Deleting_Service_Type">
+						<StaticAttributes Operation="Delete"/>
+					</API>
+				</Delete>
+			</ListInfo>
+		</YCM00095>
+		<YCM00096 Title="Service_Type_Details" ScreenType="Detail"> 
+			<DetailInfo>
+				<Get>
+					<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_UOM_Details"/>
+				</Get>
+				<Modify>
+					<API Servlet="/yantra/entities/ServiceType/manage" APIName="" Message="Message_Saving_Service_Type_Details">
+						<StaticAttributes Operation="Modify"/>
+					</API>
+				</Modify>
+				<CreateNew>
+					<API Servlet="/yantra/entities/ServiceType/manage" APIName="" Message="Message_Creating_Service_Type_Details">
+						<StaticAttributes Operation="Create"/>
+						<DynamicAttributes ItemGroupCode="@ItemGroupCode" OrganizationCode="@CallingOrganizationCode"/>
+					</API>
+				</CreateNew>
+				<LogicalKeys>
+					<LogicalKey ComponentType="JTextField" ComponentName="txtServiceTypeID"/>
+					<LogicalKey ComponentType="YCPLookupField" ComponentName="lkpCapacityUOM"/>
+				</LogicalKeys>	
+			</DetailInfo>
+			<MasterData>
+				<Table Name="CommonCode" XMLName="ServiceComplexityLevel">
+					<StaticAttributes CodeType="SERV_COMPLEXITY_LVL"/>
+				</Table>
+				<Table Name="ItemUOMMaster" XMLName="Uom">
+					<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+					<CodeAttributes>
+						<CodeAttribute CodeValue="xml:/ServiceType@CapacityUOM" />
+					</CodeAttributes>
+				</Table>
+				<Table Name="Item">
+					<DynamicAttributes ItemGroupCode="@ItemGroupCode">
+						<PrimaryInformation ServiceTypeID="@ServiceTypeID"/>
+					</DynamicAttributes>
+				</Table>
+				<Table Name="ItemUOMMaster">
+					<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+				</Table>
+			</MasterData>
+		</YCM00096>
+	</Entity>
+	<Entity EntityTitle="Additional_Capacity" EntityName="RegionUsage" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="RegionUsageKey">   
+        <ConfigurationAttributes  TableName="YFS_REGION_USAGE" SectionName="ADDNL_CAPACITY">
+            <ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM024" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+	  <YCM00091 Title="Additional_Capacity" ScreenType="Detail">
+         <DetailInfo>
+            <Get> 
+               <API Servlet="com.yantra.ycm.ui.backend.YCMAdditionalCapacityAPI" APIName="getRegionUsageDetails" Message="Message_Loading_Additional_Capacity_Details">
+                    <StaticAttributes Purpose="ADDNL_CAPACITY" ItemGroupCode="DS"/>
+                    <DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+               </API>
+			   <InnerPanels>
+					<ListPanel FormName="YCM00092" ListPanel="pnlAdditionalCapacityList" InsertUnderElement="xml:/RegionUsage">
+	                    <StaticAttributes Purpose="ADDNL_CAPACITY" ItemGroupCode="DS"/>
+						<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+					</ListPanel>
+			   </InnerPanels>
+            </Get>
+            <Modify>
+               <API Servlet="com.yantra.ycm.ui.backend.YCMAdditionalCapacityAPI" APIName="saveRegionUsage" Message="Message_Saving_Additional_Capacity_Details">
+                    <DynamicAttributes Purpose="@Purpose" ItemGroupCode="@ItemGroupCode"/>
+               </API>
+            </Modify>
+         </DetailInfo>
+         <MasterData>
+            <Table Name="RegionSchema" RemoveCallingOrgCode="Y"/>
+        </MasterData>
+      </YCM00091>
+	</Entity>
+	<Entity EntityTitle="Region_Additional_Capacity" EntityName="RegionAdditionalCapacity" PrimaryKeyAttributeName="RegionAddnlCapacityKey">
+        <ConfigurationAttributes  TableName="YFS_REGION_ADDNL_CAPACITY">
+            <ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM024" IsPrimary="Y"/>
+        </ConfigurationAttributes>
+		  <YCM00092 Title="Additional_Capacity_List" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="RegionAdditionalCapacity">
+				<List AttributeName="@ServiceTypeID" ColumnTitle="Service_Type" DataType="Text-2000" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+					<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/RegionAdditionalCapacityList/MasterData/ServiceTypes@ServiceType"/>
+					<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="Description"/>
+					<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="ServiceTypeID"/>
+	                <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@RegionLevelName" ColumnTitle="Region_Level" DataType="Text-100" EditableAddRow="Y" Editable="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor">
+					<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/RegionAdditionalCapacityList/MasterData/RegionLevels@RegionLevel"/>
+					<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="RegionLevelDescription"/>
+					<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="RegionLevelName"/>
+	                <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YCP00090"/>
+                    <ComponentClientProperty Name="YCPLookup.searchFormId" Value="YCP00090"/>
+                    <ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="true"/>
+				</List>
+				<List AttributeName="@AdditionalCapacity" ColumnTitle="Additional_Capacity" DataType="AdditionalCapacity" Editable="Y" EditableComponent="textbox">
+				</List>
+                <List AttributeName="@UOMDescription" ColumnTitle="UOM" DataType="UOM"/>
+				<CreateNew ActionResourceId="YCM00092A01"/>
+				<Modify ActionResourceId="YCM00092A02"/>
+		        <Delete>
+		           <API Servlet="/yantra/entities/RegionAdditionalCapacity/delete" APIName="" Message="Message_Deleting_Region_Additional_Capacity">
+						<StaticAttributes Operation="Delete"/>
+					</API>
+		    	</Delete>		    	
+		     </ListInfo>         
+			 <MasterData>
+				<Table Name="RegionLevel"/>
+				<Table Name="ServiceType" XMLName="ServiceType">
+					<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+				</Table>
+				<Table Name="ItemUOMMaster" XMLName="CapacityUOM">
+					<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+				</Table>
+			</MasterData>
+			<API Servlet="com.yantra.ycm.ui.backend.YCMAdditionalCapacityAPI" APIName="getRegionAdditionalCapacityList" Message="Message_Loading_Additional_Capacity_List">
+			</API>
+		  </YCM00092>
+	</Entity>
+   <Entity EntityTitle="Associations" EntityName="Association" PrimaryKeyAttributeName="AssociatedKey">
+		<YCM00097 Title="Associations" ScreenType="Tree">
+			<TreeInfo>
+				<NodeDescriptorList>
+					<NodeDescriptor NodeName="Associations" LabelAttribute="Description" TooltipAttribute="Description" Icon="/com/yantra/ycm/ui/icons/itemassociations.gif"/>
+					<NodeDescriptor NodeName="AssociationType" LabelAttribute="Description" TooltipAttribute="Description" Icon="/com/yantra/ycp/ui/icons/associations.gif"/>
+					<NodeDescriptor NodeName="Items" LabelAttribute="Description" TooltipAttribute="Description" Icon="/com/yantra/ycm/ui/icons/item.gif"/>
+					<NodeDescriptor NodeName="Queries" LabelAttribute="Description" TooltipAttribute="Description" Icon="/com/yantra/ycm/ui/icons/query.gif"/>
+				</NodeDescriptorList>
+				<FilterNodeList>
+				   <FilterNode NodeName="CommonCodeAttributeList"/>
+				</FilterNodeList>
+				<ModifyItem DisplayForm="YCM00101"/>
+				<ModifyQuery DisplayForm="YCM00102"/>
+				<Get>
+		          <API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/>
+				</Get>
+			</TreeInfo>
+		</YCM00097>
+		<YCM00101 Title="Associated_Items" ScreenType="List"> 
+            <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getItemAssociations" Message="Message_Getting_Associated_Items"/>
+			<ListInfo NamePrefix="/" ChildTag="Association">
+				<List AttributeName="/Item@ItemID" ColumnTitle="Item_ID" DataType="ItemID"/>
+				<List AttributeName="/Item@UnitOfMeasure" ColumnTitle="UOM" DataType="UOM"/>
+				<List AttributeName="@EffectiveFrom" ColumnTitle="Effective_From" DataType="Date"/>
+				<List AttributeName="@EffectiveTo" ColumnTitle="Effective_To" DataType="Date"/>
+				<List AttributeName="@AssociatedQuantity" ColumnTitle="Quantity" DataType="Price"/>
+				<List AttributeName="@Priority" ColumnTitle="Priority" DataType="PriorityWithDecimal"/>
+				<CreateNew DisplayForm="YCM00010" DisplayMode="Dialog">
+	           			<DynamicAttributes ItemKey="@ItemKey" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode" AssociationType="@AssociationType"/>
+				</CreateNew>
+				<Modify DisplayForm="YCM00010" DisplayMode="Dialog">
+	           			<DynamicAttributes ItemKey="@ItemKey" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode" AssociationType="@AssociationType"/>
+				</Modify>
+				<Delete>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="updateAssociatedItem" Message="Message_Deleting_Associated_Item">
+						<StaticAttributes Operation="Remove"/>
+	           			<DynamicAttributes ItemKey="@ItemKey" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode" AssociationType="@AssociationType"/>
+					</API>
+				</Delete>
+			</ListInfo>
+		</YCM00101>
+		<YCM00102 Title="Associated_Queries" ScreenType="List"> 
+            <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getQueryAssociations" Message="Message_Getting_Associated_Queries"/>
+			<ListInfo NamePrefix="/" ChildTag="Association">
+				<List AttributeName="/Query@QueryName" ColumnTitle="Query_Name" DataType="ItemID"/>
+				<List AttributeName="@EffectiveFrom" ColumnTitle="Effective_From" DataType="Date"/>
+				<List AttributeName="@EffectiveTo" ColumnTitle="Effective_To" DataType="Date"/>
+				<CreateNew DisplayForm="YCM00011" DisplayMode="Dialog">
+	           			<DynamicAttributes ItemKey="@ItemKey" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode" AssociationType="@AssociationType"/>
+				</CreateNew>
+				<Modify DisplayForm="YCM00011" DisplayMode="Dialog">
+	           			<DynamicAttributes ItemKey="@ItemKey" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode" AssociationType="@AssociationType"/>
+				</Modify>
+				<Delete>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="updateAssociatedQuery" Message="Message_Deleting_Associated_Query">
+						<StaticAttributes Operation="Remove"/>
+	           			<DynamicAttributes ItemKey="@ItemKey" ItemID="@ItemID" UnitOfMeasure="@UnitOfMeasure" ItemGroupCode="@ItemGroupCode" OrganizationCode="@OrganizationCode" AssociationType="@AssociationType"/>
+					</API>
+				</Delete>
+			</ListInfo>
+		</YCM00102>
+		  <YCM00010 Title="Associated_Item_Details" ScreenType="Detail">
+			<DetailInfo>
+				<Get>
+				  <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getAssociation" Message="Message_Getting_Associated_Item_Details"/>
+				</Get>
+				<Modify>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="updateAssociatedItem" Message="Message_Saving_Associated_Item">
+						<StaticAttributes Operation="Modify"/>
+					</API>
+				</Modify>
+				<CreateNew>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="updateAssociatedItem" Message="Message_Creating_Associated_Item">
+						<StaticAttributes Operation="Create"/>
+						<DynamicAttributes ItemGroupCode="@ItemGroupCode" OrganizationCode="@CallingOrganizationCode"/>
+					</API>
+				</CreateNew>
+				<LogicalKeys>
+				   <LogicalKey ComponentName="lkpItemId"/>
+				   <LogicalKey ComponentName="lkpUOM"/>
+				   <LogicalKey ComponentName="lkpFromDate"/>
+				   <LogicalKey ComponentName="lkpToDate"/>
+				</LogicalKeys>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="Item" XMLName="Item">
+				   <DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+				   <CodeAttributes>
+					  <CodeAttribute ItemID="@ItemID" />
+				   </CodeAttributes>
+				  <StaticAttributes AcceptMultipleElements="Y">
+			          <ComplexQuery Operator="AND">
+						 <Or>
+							<Exp Name="KitCode" QryType="VOID" Value=""/>
+							<Exp Name="KitCode" Value="PK"/>
+						</Or>
+					 </ComplexQuery>
+				  </StaticAttributes>
+				</Table>
+				<Table Name="ItemUOMMaster">
+					<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+				</Table>
+			</MasterData>
+		  </YCM00010>
+		  <YCM00011 Title="Associated_Query_Details" ScreenType="Detail">
+			<DetailInfo>
+				<Get>
+				  <API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="getAssociation" Message="Message_Getting_Associated_Query_Details"/>
+				</Get>
+				<Modify>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="updateAssociatedQuery" Message="Message_Saving_Associated_Query">
+						<StaticAttributes Operation="Modify"/>
+					</API>
+				</Modify>
+				<CreateNew>
+					<API Servlet="com.yantra.ycm.ui.backend.YCMModifyItemAPI" APIName="updateAssociatedQuery" Message="Message_Creating_Associated_Query">
+						<StaticAttributes Operation="Create"/>
+						<DynamicAttributes ItemGroupCode="@ItemGroupCode" OrganizationCode="@CallingOrganizationCode"/>
+					</API>
+				</CreateNew>
+				<LogicalKeys>
+				   <LogicalKey ComponentName="txtQueryName"/>
+				   <LogicalKey ComponentName="lkpStartDate"/>
+				   <LogicalKey ComponentName="lkpEndDate"/>
+				</LogicalKeys>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="Item" XMLName="Item">
+				   <DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+				   <CodeAttributes>
+					  <CodeAttribute ItemID="@ItemID" />
+				   </CodeAttributes>
+				</Table>
+				<Table Name="ItemUOMMaster">
+					<DynamicAttributes ItemGroupCode="@ItemGroupCode"/>
+				</Table>
+			</MasterData>
+		  </YCM00011>
+	</Entity>
+	<Entity EntityTitle="ItemAttributeGroup" EntityName="ItemAttributeGroup" PrimaryKeyAttributeName="ItemAttributeGroupKey">
+      <YCM00105 Title="" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="ItemAttributeGroup">
+            <List AttributeName="@ItemAttributeGroupID" ColumnTitle="Group_ID" DataType="Text-100"/>
+            <List AttributeName="@IsInherited" ColumnTitle="Is_Inherited" DataType="Text-100"/>
+            <List AttributeName="@IsOverridden" ColumnTitle="Is_Overridden" DataType="Text-100"/>
+            <List AttributeName="@IsIncluded" ColumnTitle="Is_Included" DataType="Boolean" Editable="Y" EditableAddRow="N" EditableComponent="checkbox"/>
+		    <Modify DisplayForm="YCM00100" DisplayMode="Dialog">
+				<DynamicAttributes CategoryKey="@CategoryKey" OrganizationCode="@OrganizationCode" IsInherited="@IsInherited" IsAdditionalAttributeAllowed="@IsAdditionalAttributeAllowed" ItemAttributeGroupID="@ItemAttributeGroupID" IsOverridden="@IsOverridden" ItemAttributeGroupDescription="@ItemAttributeGroupDescription"  ItemAttributeGroupType="@ItemAttributeGroupType" IsInheritingAll="@IsInheritingAll"/>
+		    </Modify>
+			<Delete>
+				<API Servlet="/yantra/entities/ItemAttributeGroup/modify" APIName="" Message="Message_Deleting_Item_Attribute_Group">
+					<StaticAttributes Operation="Delete"/>
+					<DynamicAttributes ItemAttributeGroupType="@ItemAttributeGroupType"/>
+				</API>
+			</Delete>
+		    <CreateNew DisplayForm="YCM00100" DisplayMode="Dialog" NextAction="Modify">
+				<DynamicAttributes CategoryKey="@CategoryKey" OrganizationCode="@OrganizationCode"  IsAdditionalAttributeAllowed="@IsAdditionalAttributeAllowed" ItemAttributeGroupType="@ItemAttributeGroupType" MaxSequenceNo="@MaxSequenceNo" />
+				<StaticAttributes IsInherited="N" IsIncluded="Y" IsOverridden="N"/>
+			</CreateNew>
+         </ListInfo>
+         <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getItemAttrGroupList" Message="Message_Retrieving_Search_Results"/>
+      </YCM00105>
+		<YCM00100 Title="Item_Attribute_Group_Details" ScreenType="Detail" >
+         <DetailInfo>
+            <Get>
+          <API Servlet="com.yantra.interop.ui.backend.YIFUIManager" APIName="doNothing" Message=""/>
+            </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/ItemAttributeGroup/modify" APIName="" Message="Message_Saving_Item_Attribute_Group_Details"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/ItemAttributeGroup/create" APIName="" Message="Message_Creating_Item_Attribute_Group_Details"/>
+            </CreateNew>
+            <UndoOverride>
+              <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="manageItemAttributeSingleGroup" Message="Message_Loading_Inherited_Item_Attribute_Group"/>
+            </UndoOverride>
+            <Override>
+              <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="manageItemAttributeSingleGroup" Message="Message_Overriding_Inherited_Item_Attribute_Group"/>
+            </Override>
+            <LogicalKeys>
+			   <LogicalKey ComponentType="JTextField" ComponentName="txtSpecGroupID"/>
+            </LogicalKeys>
+         </DetailInfo>
+      </YCM00100> 
+	</Entity>
+	<Entity EntityTitle="ItemAttribute" EntityName="ItemAttribute" PrimaryKeyAttributeName="ItemAttributeKey">
+		<YCM00098 Title="" ScreenType="List" >
+          <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getItemAttrList" Message=""/>
+			<ListInfo NamePrefix="/" ChildTag="ItemAttribute">
+				<List AttributeName="@ItemAttributeName" ColumnTitle="Item_Attribute" DataType="Text-24"/>
+				<List AttributeName="@ItemAttributeDescription" ColumnTitle="Description" DataType="Text-100" Editable="Y" EditableAddRow="N" EditableComponent="textbox"/>
+				<List AttributeName="@IsKeyAttribute" ColumnTitle="Is_Key_Attribute" DataType="Boolean" Editable="Y" EditableAddRow="N" EditableComponent="checkbox"/>
+				<Modify/>
+				<Delete/>
+			</ListInfo>
+      </YCM00098> 
+		<YCM000106 Title="" ScreenType="List" >
+          <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getItemAttrList" Message=""/>
+			<ListInfo NamePrefix="/" ChildTag="ItemAttribute">
+				<List AttributeName="@ItemAttributeName" ColumnTitle="Item_Attribute" DataType="Text-24"/>
+				<List AttributeName="@ItemAttributeDescription" ColumnTitle="Description" DataType="Text-100" Editable="Y" EditableAddRow="N" EditableComponent="textbox"/>
+				<List AttributeName="@IsKeyAttribute" ColumnTitle="Is_Key_Attribute" DataType="Boolean" Editable="Y" EditableAddRow="N" EditableComponent="checkbox"/>
+				<Modify/>
+				<Delete/>
+            <UndoOverride>
+              <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="manageItemAttributeSingleGroup" Message="Message_Loading_Inherited_Item_Attributes"/>
+            </UndoOverride>
+            <Override>
+              <API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="manageItemAttributeSingleGroup" Message="Message_Overriding_Inherited_Item_Attributes"/>
+            </Override>
+			</ListInfo>
+      </YCM000106> 
+	  <YCM00104 Title="Item_Attribute_List" ScreenType="Subscription">
+         <SubscriptionListInfo SubscriptionSubscribedNamePrefix="/" SubscriptionSubscribedChildTag="ItemAttribute" SubscriptionFullListNamePrefix="/MasterData/ItemAttributes" SubscriptionFullListChildTag="ItemAttribute">
+            <List AttributeName="@ItemAttributeName" ColumnTitle="Item_Attribute" DataType="Text-24"/>
+            <List AttributeName="@ItemAttributeDescription" ColumnTitle="Description" DataType="Text-100"/>
+         </SubscriptionListInfo>
+      </YCM00104>
+	<YCM00103 Title="Item_Attribute_List" ScreenType="Detail">
+		<DetailInfo>
+			<Get>
+				<API Servlet="com.yantra.ycm.ui.backend.YCMClassificationDtlAPI" APIName="getSpecAttribDtlsWithMaster" Message="Message_Loading_Subscription_Panel" >
+				</API>
+			</Get>
+		</DetailInfo>
+	</YCM00103>
+	</Entity>
+   <Entity EntityTitle="Rules" EntityName="Rules" PrimaryKeyAttributeName="CallingOrganizationCode">
+		<YCM000110 Title="Catalog_Rules" ScreenType="Detail">
+			<ConfigurationAttributes  RuleName="REDEFINE_ATTRIBUTE_GROUP">
+				<ApplicationSpecificAttributes ApplicationCode="ycm" PermissionId="YSYCM028" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+				<Get>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Catalog_Rules">
+					</API>
+				</Get>
+				<Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Catalog_Rules">
+					</API>
+				</Modify>
+				<CreateNew/>
+			</DetailInfo>
+		</YCM000110>
+	</Entity>
+</Entities>

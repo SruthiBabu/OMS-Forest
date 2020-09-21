@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+    <Entity Cacheable="true"
+            Description="This table stores a list of the available filter attributes included in a given index.  This table will be populated during the index building process."
+            EntityType="CATALOG_MASTER" TableType="MASTER" Extensible="N" Module="ycm"
+            Name="Search_Index_Facet" Prefix="YFS_" TableName="YFS_SEARCH_INDEX_FACET" XMLName="SearchIndexFacet"
+            LockingEntity="Search_Index_Trigger">
+            <Attributes>
+                <Attribute ColumnName="SEARCH_INDEX_FACET_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The unique key for the YFS_SEARCH_INDEX_FACET table."
+                    Name="Search_Index_Facet_Key" Nullable="false" XMLName="SearchIndexFacetKey"/>
+				<Attribute ColumnName="SEARCH_INDEX_TRIGGER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The unique key for the YFS_SEARCH_INDEX_TRIGGER table."
+                    Name="Search_Index_Trigger_Key" Nullable="false" XMLName="SearchIndexTriggerKey"/>
+				<Attribute ColumnName="ATTRIBUTE_ID" DataType="Text-40"
+					Description="The attribute name of the attribute that represents the entitlement rule detail."
+					Name="Attribute_Id" Nullable="true" XMLName="AttributeID" XMLGroup="AttributeValue"/>
+				<Attribute ColumnName="ATTRIBUTE_GROUP_ID" DataType="GroupName"
+					Description="The attribute name of the attribute that represents the entitlement rule detail."
+					Name="Attribute_Group_ID" Nullable="true" XMLName="AttributeGroupID" XMLGroup="AttributeValue"/>
+				<Attribute ColumnName="ATTRIBUTE_DOMAIN_ID" DataType="Text-40"
+					Description="The unique identification of the attribute group."
+					Name="Attribute_Domain_Id" Nullable="true"
+					XMLName="AttributeDomainID" XMLGroup="AttributeValue"/>
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SRCH_IDX_FACET_PK">
+                <Attribute Name="Search_Index_Facet_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SRCH_IDX_FACET_I1" Name="YFS_SEARCH_INDEX_FACET_I1" Unique="true">
+                    <Column Name="SEARCH_INDEX_TRIGGER_KEY"/>
+                    <Column Name="ATTRIBUTE_ID"/>
+                    <Column Name="ATTRIBUTE_GROUP_ID"/>
+                    <Column Name="ATTRIBUTE_DOMAIN_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany" ForeignEntity="Search_Index_Trigger" Name="Search_Index_Trigger" DeleteCascade="true" Type="Bidirectional">
+					<Attribute Name="Search_Index_Trigger_Key" ParentName="Search_Index_Trigger_Key"/>
+				</RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity ConfigurableByOrgOrNode="Y" Cacheable="true"
+            Description="This table stores information for search indexes that are scheduled to be built, have already been built or are in the process of being built."
+            EntityType="CATALOG_MASTER" TableType="MASTER" Extensible="N" Module="ycm"
+            Name="Search_Index_Trigger" Prefix="YFS_" TableName="YFS_SEARCH_INDEX_TRIGGER" XMLName="SearchIndexTrigger">
+            <Attributes>
+                <Attribute ColumnName="SEARCH_INDEX_TRIGGER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The unique key for the YFS_SEARCH_INDEX_TRIGGER table."
+                    Name="Search_Index_Trigger_Key" Nullable="false" XMLName="SearchIndexTriggerKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '"
+                    Description="The Organization Code of the Organization maintaining the search index trigger."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SEARCH_INDEX_TRIGGER_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The unique identifier of the search index trigger."
+                    IsOrgColumn="Y" Name="Search_Index_Trigger_ID"
+                    Nullable="false" XMLName="SearchIndexTriggerID"/>
+                <Attribute ColumnName="CATEGORY_DOMAIN"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The Selling Category Domain that the items in the index belong to."
+                    Name="Category_Domain" Nullable="false" XMLName="CategoryDomain"/>
+                <Attribute ColumnName="TRIGGER_TIMESTAMP" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp of when the index build should be triggered."
+                    Name="Trigger_Timestamp" Nullable="false" XMLName="TriggerTimestamp"/>
+                <Attribute ColumnName="INC_BUILD_FROM_TRIGGER_ID" DataType="Text-40"
+                    DefaultValue="' '  "
+                    Description="The unique identifier of an existing search index trigger that was re-built incrementally."
+                    Name="Inc_Build_From_Trigger_ID" Nullable="true" XMLName="IncrementalBuildFromTriggerID"/>
+                <Attribute ColumnName="STATUS" DataType="Text-2"
+                    DefaultValue="' '  "
+                    Description="The status of a Trigger indicating if the index build is: 01 (Scheduled), 02 (In Process), 03 (Completed), 04 (Active), 05 (Error), 06 (Failure)."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="INDEX_PATH" DataType="Text-250"
+                    DefaultValue="' '  "
+                    Description="The path to the index file on the file system."
+                    Name="Index_Path" Nullable="false" XMLName="IndexPath"/>
+                <Attribute ColumnName="NUMBER_OF_ERRORS" DataType="Digit"
+                    DefaultValue="0"
+                    Description="The max number of errors that can occur during the build process before ending the process in failure."
+                    Name="" Nullable="false" XMLName=""/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SRCH_IDX_TRIG_PK">
+                <Attribute Name="Search_Index_Trigger_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SRCH_IDX_TRIG_I1"  Name="YFS_SEARCH_INDEX_TRIGGER_I1" Unique="true">
+                    <Column Name="SEARCH_INDEX_TRIGGER_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ForeignEntity="Organization" Name="Organization"
+					Type="Unidirectional" XMLName="Organization">
+					<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+				</RelationShip>
+			</RelationShips>
+        </Entity>
+        <Entity Cacheable="false"
+            Description="This table stores information for search indexes that are in the process of being built.  One record will exist in this table for each thread that is used during the build process."
+            EntityType="CATALOG_MASTER" TableType="MASTER" Extensible="N" Module="ycm"
+            Name="Search_Index_Process" Prefix="YFS_" TableName="YFS_SEARCH_INDEX_PROCESS" XMLName="SearchIndexProcess"
+            LockingEntity="Search_Index_Trigger">
+            <Attributes>
+                <Attribute ColumnName="SEARCH_INDEX_PROCESS_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The unique key for the YFS_SEARCH_INDEX_PROCESS table."
+                    Name="Search_Index_Process_Key" Nullable="false" XMLName="SearchIndexProcessKey"/>
+                <Attribute ColumnName="SEARCH_INDEX_TRIGGER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The unique key for the YFS_SEARCH_INDEX_TRIGGER table."
+                    Name="Search_Index_Trigger_Key" Nullable="false" XMLName="SearchIndexTriggerKey"/>
+                <Attribute ColumnName="MESSAGE_ID" DataType="Text-20"
+                    DefaultValue="' '  "
+                    Description="The identifier of the message added to the queue to build a portion of the Search Index."
+                    Name="Message_Id" Nullable="false" XMLName="MessageID"/>
+                <Attribute ColumnName="STATUS" DataType="Text-2"
+                    DefaultValue="' '  "
+                    Description="The status of the process indicating if it is: 01 (Open), 02 (Completed), 03 (Error)."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="INDEX_SET_PATH" DataType="Text-250"
+                    DefaultValue="' '  "
+                    Description="The path to the piece of the Search Index built by this process / thread."
+                    Name="Index_Set_Path" Nullable="false" XMLName="IndexSetPath"/>
+                <Attribute ColumnName="MIN_ITEM_KEY" DataType="Key"
+                    DefaultValue="' '  "
+                    Description="The minimum Item Key value of the items that will be processed in this message."
+                    Name="Min_Item_Key" Nullable="false" XMLName="MinItemKey"/>
+                <Attribute ColumnName="MAX_ITEM_KEY" DataType="Key"
+                    DefaultValue="' '  "
+                    Description="The maximum Item Key value of the items that will be processed in this message."
+                    Name="Max_Item_Key" Nullable="false" XMLName="MaxItemKey"/>
+                <Attribute ColumnName="NUMBER_OF_ERRORS" DataType="Digit"
+                    DefaultValue="0"
+                    Description="The number of errors that have occurred during the process."
+                    Name="" Nullable="false" XMLName=""/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SRCH_IDX_PROC_PK">
+                <Attribute Name="Search_Index_Process_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SRCH_IDX_PROC_I1" Name="YFS_SEARCH_INDEX_PROCESS_I1" Unique="true">
+                    <Column Name="SEARCH_INDEX_TRIGGER_KEY"/>
+                    <Column Name="MESSAGE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="SearchIndexProcessList"
+                    ChildXMLName="SearchIndexProcess" DeleteCascade="true"
+                    ForeignEntity="Search_Index_Trigger" Name="SearchIndexTrigger"
+                    Type="Bidirectional" XMLName="SearchIndexTrigger">
+                    <Attribute Name="Search_Index_Trigger_Key" ParentName="Search_Index_Trigger_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores information about completed search indices."
+            EntityType="CATALOG_MASTER"  TableType="MASTER" Extensible="N" Module="ycm"
+            Name="Search_Index" Prefix="YFS_" TableName="YFS_SEARCH_INDEX" XMLName="SearchIndex"
+            LockingEntity="Search_Index_Trigger">
+            <Attributes>
+                <Attribute ColumnName="SEARCH_INDEX_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The unique key for the YFS_SEARCH_INDEX table."
+                    Name="Search_Index_Key" Nullable="false" XMLName="SearchIndexKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '"
+                    Description="The Organization Code of the Catalog Organization maintaining the Selling Category Domain."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="CATEGORY_DOMAIN"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The Selling Category Domain that the items in the index belong to."
+                    Name="Category_Domain" Nullable="false" XMLName="CategoryDomain"/>
+                <Attribute ColumnName="SEARCH_INDEX_TRIGGER_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The unique identifier of the search index trigger."
+                    IsOrgColumn="Y" Name="Search_Index_Trigger_ID"
+                    Nullable="false" XMLName="SearchIndexTriggerID"/>
+                <Attribute ColumnName="START_TIMESTAMP" DataType="TimeStamp"
+                    DefaultValue=""
+                    Description="The timestamp of when the build process started."
+                    Name="Start_Timestamp" Nullable="false" XMLName="StartTimestamp"/>
+				<Attribute ColumnName="END_TIMESTAMP" DataType="TimeStamp"
+                    DefaultValue=""
+                    Description="The timestamp of when the build process ended."
+                    Name="End_Timestamp" Nullable="false" XMLName="EndTimestamp"/>
+                <Attribute ColumnName="INDEX_PATH" DataType="Text-250"
+                    DefaultValue="' '  "
+                    Description="The path to the index file on the file system."
+                    Name="Index_Path" Nullable="false" XMLName="IndexPath"/>
+                <Attribute ColumnName="ACTIVE_FLAG" DataType="Flag"
+                    DefaultValue="0"
+                    Description="The flag indicating if the Index is active and should be used for search.  Only one Index per Catalog Org / Category Domain may be active at one time."
+                    Name="" Nullable="false" XMLName=""/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="SEARCH_INDEX_PK">
+                <Attribute Name="Search_Index_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SEARCH_INDEX_I1" Name="YFS_SEARCH_INDEX_I1" Unique="true">
+                    <Column Name="SEARCH_INDEX_TRIGGER_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+				<RelationShip Cardinality="OneToOne" ForeignEntity="Search_Index_Trigger" Name="Search_Index_Trigger" Type="Bidirectional" DeleteCascade="true">
+					<Attribute Name="Search_Index_Trigger_ID" ParentName="Search_Index_Trigger_ID"/>
+					<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+				</RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

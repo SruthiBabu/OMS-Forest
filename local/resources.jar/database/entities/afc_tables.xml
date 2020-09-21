@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema Name="afc_tables">
+    <Entities>
+        <Entity Cacheable="true"
+            Description="This table stores DEPRECATED_RES info for an entity. The Deprecated element provides specific information about how the resources become out dated, and it can be replaced with the new implementation." 
+            EntityType="CONFIGURATION" Extensible="Y" Module="ycp"
+            Name="Deprecated" Prefix="SCI_" TableName="DEPRECATED_RES" TableType="CONFIGURATION" XMLName="Deprecated">
+            <Attributes>
+                <Attribute ColumnName="DEPRECATED_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the DEPRECATED_RESOURCE table."
+                    Name="Deprecated_Key" Nullable="false" XMLName="DeprecatedKey"/>
+                <Attribute ColumnName="DEPRECATED_TYPE" DataType="ResourceType-255"
+                    DefaultValue="' ' "
+                    Description="The type of the resource object."
+                    Name="Deprecated_Type" Nullable="false" XMLName="DeprecatedType"/>
+		<Attribute ColumnName="DEPRECATED_NAME" DataType="ResourceName"
+                    DefaultValue="' ' "
+                    Description="Name of the resource object."
+                    Name="Deprecated_Name" Nullable="false" XMLName="DeprecatedName"/>
+		<Attribute ColumnName="DEPRECATED_DESC" DataType="ResourceDescription"
+                    DefaultValue="' ' "
+                    Description="Description of the resource object."
+                    Name="Deprecated_Desc" Nullable="true" XMLName="DeprecatedDesc"/>
+                <Attribute ColumnName="CLUMP_INFO" DataType="ClumpInfo"
+                    DefaultValue="' ' "
+                    Description="Which clump this is deprecated."
+                    Name="Clump_Info" Nullable="false" XMLName="ClumpInfo"/>
+                <Attribute ColumnName="VERSION_INFO" DataType="VersionInfo"
+                    DefaultValue="' ' "
+                    Description="Which release or patch this is deprecated."
+                    Name="Version_Info" Nullable="false" XMLName="VersionInfo"/>
+                <Attribute ColumnName="DEPRECATED_TIME" DataType="NUM-19"
+                    DefaultValue="-1 "
+                    Description="A long timestamp value to track when the resource was deprecated."
+                    Name="Deprecated_Time" Nullable="false" XMLName="DeprecatedTime"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="DEPRECATED_PK">
+		<Attribute ColumnName="DEPRECATED_KEY" Name="Deprecated_Key" XmlName="DeprecatedKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="DEPRECATED_NT" Unique="true">
+                    <Column Name="DEPRECATED_NAME"/>
+                    <Column Name="DEPRECATED_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="DEPRECATED_NAME"/>
+        </Entity>
+    </Entities>
+</DBSchema>

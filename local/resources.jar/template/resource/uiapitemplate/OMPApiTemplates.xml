@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2018, 2020 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<UIApplication Id="OMP" Description="OMP UI Application" ModuleCode="omp">   	
+	<!-- 
+		Api templates are defined in template\resource\uiapitemplate directory of every module.
+		Any number of templates can be defined for an API depending on the usage but the 
+		TemplateId has to be unique across modules so that it can be retrieved uniquely.
+
+		All the Api Templates given in a XML are defined under a ModuleCode (set at the top node).
+		Besides this api templates can be grouped under a View identified by a ViewId. 
+		In order to make TemplateId unique, every TemplateId given below is prefixed with 
+		<ModuleCode>_<ViewId> and inserted into PLT_API_TEMPLATE.Template_Id. 	
+		
+		eg: For TemplateId="getOrderList_1" in the sample given below the PLT_API_TEMPLATE.Template_Id 
+		will be populated as omp_ordergetOrderList_1 where omp is the ModuleCode and order is the ViewId.
+
+		IMPORTANT:	The maximum length allowed for TemplateId (including it's prefix) is 40.
+		IMPORTANT:	The columns in 'OrganizationCode' and 'TemplateType' in PLT_API_TEMPLATE 
+					are inserted as 'DEFAULT' and '00' respectively.
+	-->
+	<!-- 
+		<View ViewId="order" Description="Order">
+			<APIList>
+				<API ApiName="getOrderList">
+					<TemplateList>
+						<Template TemplateKey="omp_ui_api_template_01" TemplateId="getOrderList_1" 
+						Description="To publish Order info">
+							<OrderList TotalNumberOfRecords="" >
+								<Order EntepriseCode="" DocumentType="" OrderNo=""/>
+							</OrderList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	-->
+	<Views>
+		<View ViewId="buc_orderline" Description="Business User Controls Order Line">
+			<APIList>
+				<API ApiName="getCompleteOrderLineList">
+					<TemplateList>
+						<Template TemplateKey="omp_ui_api_buc_tpl_01" TemplateId="getCOLList_1" 
+						Description="To publish Order Lines with the necessary info">
+							<OrderLineList TotalNumberOfRecords="" >
+								<OrderLine DeliveryMethod="" MaxLineStatus="" MaxLineStatusDesc="" MultipleStatusesExist="" OrderHeaderKey="" OrderLineKey="" OrderedQty="" Status="">
+									<Item ItemDesc="" ItemID=""/>
+									<OrderDates>
+										<OrderDate DateTypeId="" ActualDate="" ExpectedDate=""/>
+									</OrderDates>
+								</OrderLine>
+							</OrderLineList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_orderdetails" Description="Business User Controls Complete Order Details">
+			<APIList>
+				<API ApiName="getCompleteOrderDetails">
+					<TemplateList>
+						<Template TemplateKey="omp_ui_api_buc_tpl_02" TemplateId="getCODetails_1" 
+						Description="To display Complete Order Details with the necessary info">
+							<Order BillToKey="" DocumentType="" EnterpriseCode="" EntryType="" HasChainedLines="" HasDeliveryLines="" MaxOrderStatus="" MaxOrderStatusDesc="" MinOrderStatus="" MinOrderStatusDesc="" MultipleStatusesExist="" OrderComplete="" OrderDate="" OrderHeaderKey="" OrderName="" OrderNo="" OrderType="" PaymentStatus="" SellerOrganizationCode="" ShipNode="" ShipToKey="" Status="">
+							    <OrderLines TotalLineList="" TotalNumberOfRecords="">
+							        <OrderLine DeliveryCode="" DeliveryMethod="" DepartmentCode="" HasChainedLines="" HasDeliveryLines="" HasDerivedChild="" HasServiceLines="" ItemGroupCode="" LineSeqNo="" LineType="" MaxLineStatus="" MaxLineStatusDesc="" MinLineStatus="" MinLineStatusDesc="" MultipleStatusesExist="" OpenQty="" OrderHeaderKey="" OrderLineKey="" OrderedQty="" ReceivingNode="" RemainingQty="" ShipNode="" SplitQty="" Status="" StatusQuantity="" SubLineNo="" Timezone="" >
+							            <ItemDetails ItemGroupCode="" ItemID="" ItemKey="" OrganizationCode="" UnitOfMeasure="">
+							                <PrimaryInformation CostCurrency="" Description="" DisplayItemDescription="" ExtendedDescription="" ExtendedDisplayDescription="" ImageID="" ImageLabel="" ImageLocation="" Keywords="" ShortDescription="" Status="" />
+							            </ItemDetails>
+							            <OrderDates>
+							                <OrderDate DateTypeId="" ExpectedDate="" OrderHeaderKey="" OrderLineKey="" OrderReleaseKey="" />
+							            </OrderDates>
+							            <Schedules>
+							                <Schedule ExpectedDeliveryDate="" ExpectedShipmentDate="" OrderHeaderKey="" OrderLineKey="" OrderLineScheduleKey="" ProductAvailabilityDate="" Quantity="" ScheduleNo="" ShipNode="" >
+							                    <ScheduleTranQuantity Quantity="" TransactionalUOM=""/>
+							                </Schedule>
+							            </Schedules>
+							            <ShipmentLines>
+							                <ShipmentLine IsChainedLine="" ShipmentKey="" ShipmentLineKey=""/>
+							            </ShipmentLines>
+							        </OrderLine>
+							    </OrderLines>
+							    <OverallTotals GrandTotal="" />
+							    <PersonInfoBillTo AddressID="" AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" IsAddressVerified="" IsCommercialAddress="" JobTitle="" LastName="" Latitude="" Longitude="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" State="" Suffix="" TaxGeoCode="" Title="" ZipCode="" />
+							    <PriceInfo Currency="" TotalAmount="" />
+							    <Shipments>
+							        <Shipment ActualShipmentDate="" BackroomPickRequired="" BillToAddressKey="" Currency="" DeliveryMethod="" DocumentType="" EnterpriseCode="" EspCheckRequired="" ExpectedDeliveryDate="" ExpectedShipmentDate="" FromAddressKey="" IsSingleOrder="" LinesEntered="" NumOfCartons="" ReceivingNode="" ReleaseNo="" RequestedDeliveryDate="" RequestedShipmentDate="" ShipDate="" ShipmentKey="" ShipmentNo="" ShipmentType="" StatusDate="" WorkOrderApptKey="" WorkOrderKey="" >
+							            <ShipmentLines TotalNumberOfRecords="">
+							                <ShipmentLine ActualQuantity="" ChainedFromOrderHeaderKey="" ChainedFromOrderLineKey="" DocumentType="" ItemDesc="" ItemID="" OrderHeaderKey="" OrderLineKey="" OrderNo="" OrderReleaseKey="" Quantity="" ReleaseNo="" ShipmentKey="" ShipmentLineKey="" ShipmentLineNo="" ShipmentSubLineNo="" UnitOfMeasure="" >
+							                    <ShipmentTagSerials TotalNumberOfRecords="" />
+							                    <OrderRelease CustReqDeliveryDate="" CustReqShipDate="" DeliveryMethod="" DocumentType="" EnterpriseCode="" OrderDate="" OrderHeaderKey="" OrderName="" OrderReleaseKey="" OrderType="" ReleaseNo="" ReleaseSeqNo="" ReqCancelDate="" ReqDeliveryDate="" ReqShipDate="" SalesOrderNo="" SellerOrganizationCode="" ShipAdviceNo="" ShipLineComplete="" ShipNode="" ShipToKey="" Status="" />
+							                </ShipmentLine>
+							            </ShipmentLines>
+							            <Status Description="" OwnerKey="" ProcessTypeKey="" Status="" StatusKey="" StatusName="" StatusType=""/>
+							            <ShipNode Description="" IdentifiedByParentAs="" OwnerKey=""/>
+							        </Shipment>
+							    </Shipments>
+							</Order>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_nodecapacity" Description="Business User Controls Node Capacity">
+			<APIList>
+				<API ApiName="getResourcePoolCapacity">
+					<TemplateList>
+						<Template TemplateKey="omp_ui_api_buc_tpl_03" TemplateId="getRPCap_1" 
+						Description="To display Resource Pool Capacity with the necessary info">
+							<Node EndDate="" Node="" StartDate="" TransactInWorkDay="">
+							    <ResourcePools>
+							        <ResourcePool AllRegionsServiced="" CalendarKey=""
+							            CapacityInfoAvailable="" CapacityMaintainAtResourceLevel=""
+							            CapacityOrganizationCode="" CapacityUnitOfMeasure=""
+							            ItemGroupCode="" Node="" ProviderContactAddressKey=""
+							            ProviderOrganizationCode="" ProvidesAllServices=""
+							            RegionSchemaKey="" ResourcePoolDescription=""
+							            ResourcePoolId="" ResourcePoolKey="" ServiceSlotGroupId="" ServiceSupervisorId="">
+							            <ResourcePoolAttributeList>
+							                <ResourcePoolAttribute DeliveryMethod=""
+							                    ResourcePoolAttributeKey="" ResourcePoolKey=""/>
+							            </ResourcePoolAttributeList>
+							            <ServiceSlots>
+							                <ServiceSlot CanUseForAppointment="" EndTime=""
+							                    ParentSlotKey="" ServiceSlotDesc=""
+							                    ServiceSlotGroupKey="" ServiceSlotKey="" StartTime="">
+							                    <Dates>
+							                        <Date AllocatedConsumption="" Availability=""
+							                            Capacity="" CapacityUnitOfMeasure=""
+							                            ComputedCapacityFromResources="" Date=""
+							                            DayOfWeek="" IsCapacityOverridden=""
+							                            IsEffectiveDateRangeConfigured=""
+							                            IsWorkingDay="" OverrideReason=""
+							                            StandardCapacity=""
+							                            StandardSupplementalCapacity="" SupplementalCapacity=""/>
+							                    </Dates>
+							                </ServiceSlot>
+							            </ServiceSlots>
+							        </ResourcePool>
+							    </ResourcePools>
+							</Node>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_general" Description="Business User Controls Organization Hierarchy and Inventory Org code">
+			<APIList>
+				<API ApiName="getOrganizationHierarchy">
+					<TemplateList>
+						<Template TemplateKey="omp_ui_api_buc_tpl_04" TemplateId="getOrgH_1" 
+						Description="To get Organization Hierarchy and Inventory Org code for current org">
+							<Organization CapacityOrganizationCode="" CatalogOrganizationCode="" CreatorOrganizationKey=""
+								CustomerMasterOrganizationCode="" InventoryOrganizationCode="" IsHubOrganization=""
+								OrganizationCode="" OrganizationKey="" OrganizationName="" ParentOrganizationCode=""
+								PrimaryEnterpriseKey="" StoreConfigOrganizationCode="" >
+							</Organization>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc_srcrule" Description="Business User Controls Sourcing Rule List">
+			<APIList>
+				<API ApiName="getSourcingRuleList">
+					<TemplateList>
+						<Template TemplateKey="omp_ui_api_buc_tpl_11" TemplateId="getSrcRuleLst_2001" 
+						Description="API template for BUC fulfillment Sourcing rules">
+							<SourcingRuleHeaders TotalNumberOfRecords="">
+								<SourcingRuleHeader FulfillmentType="" ItemClassification="" ItemClassification2="" ItemClassification3="" ItemClassification4="" ItemClassification5="" ItemClassification6="" ItemClassification7="" ItemGroupCode="" ItemID="" NodeTypeID="" OrderSourcingClassification="" OrganizationCode="" ProductClass="" Purpose="" RegionKey="" SellerOrganizationCode="" SourcingRuleHeaderKey="" ToNodeKey="">
+									<SourcingRuleDetails>
+										<SourcingRuleDetail DistributionRuleId="" FromNodeKey="" FutureInventoryWindow="" ProcureToShipAllowed="" SeqNo="" SourcingRuleDetailKey="" SubstitutionAllowed="" TemplateType="" WorkOrderCreationAllowed="">
+											<SourcingTemplate>
+												<AdditionalData ExpandToMinimizeNumOfShipments="" IdleAsset="" Radius="" RadiusUOM=""/>
+												<RelationshipType ArgID="" Direction="" RelationshipTypeValue=""/>
+												<NodeTypes ArgID="">
+													<NodeType NodeTypeValue=""/>
+												</NodeTypes>
+											</SourcingTemplate>
+										</SourcingRuleDetail>
+									</SourcingRuleDetails>
+								</SourcingRuleHeader>
+							</SourcingRuleHeaders>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	</Views>
+</UIApplication>

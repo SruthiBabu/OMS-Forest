@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity Description="The view is a subset of YFS_ITEM table."
+            EntityType="VIEW" Extensible="Y" ListXMLName="ItemList"
+            Module="ypm" Name="Item_Vw" Prefix="YPM_"
+            TableName="YPM_ITEM_VW" TableType="MASTER" View="true" XMLName="ItemVw">
+            <Attributes>
+                <Attribute ColumnName="ITEM_VW_KEY" DataType="Key"
+                    DefaultValue="' '  "
+                    Description="The primary key for the YPM_ITEM_VW view."
+                    Name="Item_Vw_Key" Nullable="false" XMLName="ItemVwKey"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' ' "
+                    Description="The unique identifier for the item."
+                    Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="SHORT_DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' '  "
+                    Description="The short description of the item."
+                    Name="Short_Description" Nullable="false"
+                    XMLGroup="PrimaryInformation" XMLName="ShortDescription"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '  "
+                    Description="The unit of measure for item quantity."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="The organization code whose product information is being stored."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SUB_CAT_ORG_CODE"
+                    DataType="OrgCode" 
+                    Description="The sub-catalog organization that maintains the item definition."
+                    Name="Sub_Cat_Org_Code" Nullable="true" XMLName="SubCatalogOrganizationCode"/>
+				<Attribute ColumnName="ITEM_GROUP_CODE"
+                    DataType="ItemGroupCode" DefaultValue="'PROD'"
+                    Description="The item group code. Used to identify if the item is a Product, Provided Service, Provided Service Option, Delivery Service or Delivery Service Option."
+                    Name="Item_Group_Code" Nullable="false" XMLGroup="" XMLName="ItemGroupCode"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="ITEM_VW_KEY" Name="Item_Vw_Key"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity
+            Description="The view is a subset formed by joining YFS_CATEGORY and YFS_CATEGORY_ITEM."
+            EntityType="VIEW" Extensible="N"
+            ListXMLName="CategoryItemList" Module="ypm"
+            Name="Category_Item_Vw" Prefix="YPM_"
+            TableName="YPM_CATEGORY_ITEM_VW" TableType="MASTER"
+            View="true" XMLName="CategoryItemVw">
+            <Attributes>
+                <Attribute ColumnName="CATEGORY_ITEM_VW_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="Primary key attribute of YPM_CATEGORY_ITEM_VW."
+                    Name="Category_Item_Vw_Key" Nullable="false" XMLName="CategoryItemVwKey"/>
+                <Attribute ColumnName="ITEM_VW_KEY" DataType="Key"
+                    DefaultValue="' '  "
+                    Description="The primary key for the YFS_ITEM_VW table."
+                    Name="Item_Vw_Key" Nullable="false" XMLName="ItemVwKey"/>
+                <Attribute ColumnName="CATEGORY_PATH"
+                    DataType="Text-800" DefaultValue="' ' "
+                    Description="The path for the category."
+                    Name="Category_Path" Nullable="false" XMLName="CategoryPath"/>
+                <Attribute ColumnName="SUB_CAT_ORG_CODE"
+                    DataType="OrgCode" 
+                    Description="The sub-catalog organization that maintains the category definition."
+                    Name="Sub_Cat_Org_Code" Nullable="true" XMLName="SubCatalogOrganizationCode"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="CATEGORY_ITEM_VW_KEY" Name="Category_Item_Vw_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CategoryItemList"
+                    ChildName="CategoryItem" DeleteCascade="true"
+                    ForeignEntity="Item_Vw" Name="Item"
+                    Type="Bidirectional" XMLName="Item">
+                    <Attribute Name="Item_Vw_Key" ParentName="Item_Vw_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

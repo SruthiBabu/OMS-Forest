@@ -1,0 +1,150 @@
+<html>
+    <body>
+        <form name="frmInductToteCriteria" target="/console/rfinducttote.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+									<input col="8" 
+                                    name="lblTitle"
+                                    size="12" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Induct_Tote"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblToteId"
+                                    type="text" validate="false" value="Mobile_Tote_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/InductTote/@ToteId"
+                                    name="txtToteId"
+                                    outputbinding="xml:/InductTote/@ToteId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/InductTote/@ToteId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblReferenceNo"
+                                    type="text" validate="false" value="Mobile_Task_Reference_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/InductTote/@ReferenceValue"
+                                    name="txtReferenceValue"
+                                    outputbinding="xml:/InductTote/@ReferenceValue"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/InductTote/@ReferenceValue"
+                                    type="text" validate="true"/>
+									<input col="1" inputbinding="xml:/InductTote/@MandateTaskReference"
+                                    name="txtMandateTaskReference"
+                                    outputbinding="xml:/InductTote/@MandateTaskReference"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/InductTote/@MandateTaskReference"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="12" subtype="Command"
+                                    type="button"
+                                    url="/console/rfinducttote.ppc?action=frmInductToteUpdGo"
+                                    validate="false" value="Mobile_Induct_Tote"/>
+                                    <input col="15" hotkey="F7"
+                                    mandatory="false" name="viewPrevToteInfo"
+                                    size="4"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Info"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+					<td>
+                        <table>
+                            <tr>
+                                <td>
+									<input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Last_Inducted_Tote"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblToteId" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblToteId"
+                                    type="text" validate="false" value="Mobile_Tote_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/InductTote/@PrevToteId"
+                                    mandatory="false"
+                                    name="txtPrevToteId" 
+                                    size="20"
+                                    subtype="ProtectedText" 
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/InductTote/@PrevReferenceName"
+                                    mandatory="false"
+                                    name="txtPrevRefName" 
+                                    size="20"
+                                    subtype="ProtectedText" 
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/InductTote/@PrevReferenceValue"
+                                    mandatory="false"
+                                    name="txtPrevRefValue" 
+                                    size="20"
+                                    subtype="ProtectedText" 
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="viewPrevToteInfo"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Prev_View"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

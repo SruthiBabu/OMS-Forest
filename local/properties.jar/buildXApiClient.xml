@@ -1,0 +1,98 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2016 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!-- @author amatevos 20121115 -->
+
+<project name="XApiClient Tool" default="make-client" basedir="..">
+	<property environment="env" />
+
+	<!-- set global properties for this build -->
+	<property file="properties/sandbox.cfg" prefix="sandbox" />
+	<property name="platform_afc.name" 		value="platform_afc" />
+	<property name="platform_afc.version" 	value="${sandbox.LIC_PROD_VERSION}" />
+	<property name="platform-afc-jar.dir"   location="${basedir}/jar/${platform_afc.name}/${platform_afc.version}" />
+	<property name="xapiclient.name" 	value="xapiclient" />
+	<property name="xapiclient.pkg" 	value="com/ibm/sterling/afc/${xapiclient.name}/" />
+	<property name="build.dir"  location="${basedir}/${xapiclient.name}/build"/>
+	<property name="dist.dir"  	location="${basedir}/${xapiclient.name}/dist"/>
+	<property name="jar.dir" 	location="${basedir}/jar"/>
+	<property name="zip.name" 	value="StandaloneAPIClient" />
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory-->
+		<mkdir dir="${build.dir}"/>
+	</target>
+
+	<target name="compile" depends="init" >
+	</target>
+	
+	<target name="make-client" depends="compile" >
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist.dir}"/>
+		
+		<!-- extract platform_afc.jar -->
+		<unzip src="${platform-afc-jar.dir}/${platform_afc.name}.jar" dest="${build.dir}">
+			<patternset>
+				<include name="${xapiclient.pkg}"/>
+			</patternset>
+		</unzip>
+		
+		<!-- make xapiclient.jar-->
+		<jar destfile="${dist.dir}/${xapiclient.name}.jar">
+			<fileset dir="${build.dir}/"> 
+			</fileset>
+			 <!--<fileset dir="${src.dir}">
+			  <include name="test/*.xml" /> 
+			  </fileset> --> 
+		</jar>
+
+		
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<zip destfile="${dist.dir}/${zip.name}.zip">
+			<fileset dir="${dist.dir}">
+				<!--include name="${xapiclient.name}.jar" /-->
+			</fileset>
+			<zipfileset dir="${jar.dir}/slf4j/1_7_12/" prefix="lib">
+				<include name="*.jar" />
+			</zipfileset>
+			<zipfileset dir="${jar.dir}/xml4j/4_5_16/" prefix="lib">
+				<include name="*.jar" />
+			</zipfileset>
+			<!--<zipfileset dir="${3rdpartyship.dir}/../3rdpartyinternal/drools/2_5/" prefix="lib">
+				<include name="junit-3.8.1.jar" />
+			</zipfileset>-->
+		</zip>
+	</target>
+
+	<target name="make-client-bak" depends="compile" >
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist.dir}"/>
+
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<zip destfile="${dist.dir}/${zip.name}.zip">
+			<fileset dir="${platform-afc-dist-extras.dir}">
+				<include name="${jar.name}.jar" />
+			</fileset>
+			<zipfileset dir="${3rdpartyship.dir}/slf4j/1_7_12/" prefix="lib">
+				<include name="*.jar" />
+			</zipfileset>
+			<zipfileset dir="${3rdpartyship.dir}/xml4j/4_5_16/" prefix="lib">
+				<include name="*.jar" />
+			</zipfileset>
+			<!--<zipfileset dir="${3rdpartyship.dir}/../3rdpartyinternal/drools/2_5/" prefix="lib">
+				<include name="junit-3.8.1.jar" />
+			</zipfileset>-->
+		</zip>
+	</target>
+
+	<target name="clean" >
+	<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build.dir}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+
+</project>

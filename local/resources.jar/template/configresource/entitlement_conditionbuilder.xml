@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<SYNCENTITLEMENT>
+  <EntitlementRuleKey Type="Leaf" Id="EntitlementRuleKey" DisplayName="EntitlementRuleKey" DataType="Text-40" ControlType="Text" ColumnName="ENTITLEMENT_RULE_HDR_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="EntitlementRuleKey" IsReqd="" OverRidingClass=""/>
+  </EntitlementRuleKey>
+  <OrganizationCode Type="Leaf" Id="OrganizationCode" DisplayName="OrganizationCode" DataType="Text-40" ControlType="Text" ColumnName="ORGANIZATION_CODE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="OrganizationCode" IsReqd="" OverRidingClass=""/>
+  </OrganizationCode>
+  <Purpose Type="Leaf" Id="Purpose" DisplayName="Purpose" DataType="Text-40" ControlType="Text" ColumnName="PURPOSE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Purpose" IsReqd="" OverRidingClass=""/>
+  </Purpose>
+  <EntitlementRuleID Type="Leaf" Id="EntitlementRuleID" DisplayName="EntitlementRuleID" DataType="Text-40" ControlType="Text" ColumnName="ENTITLEMENT_RULE_HDR_ID">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="EntitlementRuleID" IsReqd="" OverRidingClass=""/>
+  </EntitlementRuleID>
+  <Description Type="Leaf" Id="Description" DisplayName="Description" DataType="Text-40" ControlType="Text" ColumnName="DESCRIPTION">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Description" IsReqd="" OverRidingClass=""/>
+  </Description>
+  <EffectiveFromDate Type="Leaf" Id="EffectiveFromDate" DisplayName="EffectiveFromDate" DataType="Number" ControlType="Text" ColumnName="EFFECTIVE_FROM_DATE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="EffectiveFromDate" IsReqd="" OverRidingClass=""/>
+  </EffectiveFromDate>
+  <EffectiveToDate Type="Leaf" Id="EffectiveToDate" DisplayName="EffectiveToDate" DataType="Number" ControlType="Text" ColumnName="EFFECTIVE_TO_DATE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="EffectiveToDate" IsReqd="" OverRidingClass=""/>
+  </EffectiveToDate>
+  <StartWithAllCatalogItems Type="Leaf" Id="StartWithAllCatalogItems" DisplayName="StartWithAllCatalogItems" DataType="Flag" ControlType="Combo" ColumnName="START_WITH_ALL_CATALOG_ITEMS">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+    </QryTypes>
+    <MasterData MasterDataId="StartWithAllCatalogItems" IsReqd="" OverRidingClass="" IsStatic="true">
+      <StartWithAllCatalogItems Code="Y" Desc="Yes"/>
+      <StartWithAllCatalogItems Code="N" Desc="No"/>
+    </MasterData>
+  </StartWithAllCatalogItems>
+</SYNCENTITLEMENT>

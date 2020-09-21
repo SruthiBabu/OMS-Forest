@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:emailformatters="com.yantra.pca.email.formatters"
+    xmlns:java="java"
+    exclude-result-prefixes="java emailformatters">
+
+	<xsl:include href="/template/email/ycd/common/YCD_brand.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_personalInfo.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_miscUtils.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_itemData.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_summaryOfCharges.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_paymentInfo.xsl.sample"/>
+
+	<xsl:variable name="Brand">
+		<xsl:call-template name="BrandName">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+	<xsl:variable name="BrandPhoneNumber">
+		<xsl:call-template name="BrandPhoneNumber">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+
+	<xsl:variable name="ShippedPreviously">
+		Items Previously Shipped
+	</xsl:variable>
+
+	<xsl:variable name="ShippedToday">
+		Items Shipped Today
+	</xsl:variable>
+
+	<xsl:template match="/">
+		<HTML >
+			<xsl:call-template name="applyStyle"/>
+			<BODY topmargin="0" leftmargin="0" STYLE="font:normal 10pt Tahoma">
+				<xsl:apply-templates select="Order"/>
+			</BODY>
+		</HTML >
+	</xsl:template>
+
+
+<xsl:template match="Order">
+
+<xsl:call-template name="Greeting"><xsl:with-param name="FirstName" select="/Order/PersonInfoBillTo/@FirstName"/><xsl:with-param name="LastName" select="/Order/PersonInfoBillTo/@LastName"/></xsl:call-template>
+	<p/>
+	Thank you for shopping at www.<xsl:value-of select="$Brand"/>.com.
+	<p/>
+	<xsl:call-template name="Shipment_ShippingDetails">
+		<xsl:with-param name="OrderNo" select="/Order/@OrderNo"/>
+		<xsl:with-param name="carrierServiceCode" select="/Order/@CarrierServiceCode"/>
+	</xsl:call-template>
+
+	<xsl:call-template name="OrderStatusMessage">
+		<xsl:with-param name="Brand" select="$Brand"/>
+	</xsl:call-template>
+	<p/>
+	<b>Shipping Address</b>
+	<xsl:apply-templates select="ShipmentList/Shipment[1]/ToAddress[1]"/>
+
+	<xsl:if test="ShipmentList/Shipment[@NotificationSent='N']//Container">
+	<p/>
+	<table class="table" >
+		<xsl:apply-templates select="ShipmentList/Shipment[@NotificationSent='N']//Container" >
+			<xsl:with-param name="Title" >
+				<xsl:value-of select="$ShippedToday" />
+			</xsl:with-param>
+		</xsl:apply-templates>
+	</table>
+	</xsl:if>
+	<xsl:if test="ShipmentList/Shipment[@NotificationSent='Y']//Container">
+	<p/>
+	<table class="table" >
+		<xsl:apply-templates select="ShipmentList/Shipment[@NotificationSent='Y']//Container" >
+			<xsl:with-param name="Title" >
+				<xsl:value-of select="$ShippedPreviously" />
+			</xsl:with-param>
+		</xsl:apply-templates>
+	</table>
+	</xsl:if>
+
+	<table class="table" >
+		<xsl:apply-templates select="ShipmentList/InvoiceList/InvoiceDetail/InvoiceHeader" />
+	</table>
+
+	<table class="table" >
+		<xsl:apply-templates select="ShipmentList/PendingItemList/PendingItem" />
+	</table>
+
+	<table class="table" >
+		<xsl:apply-templates select="ShipmentList/CancelledItemList/CancelledItem" />
+	</table>
+
+	<xsl:apply-templates select="PaymentMethods//PaymentMethod"/>
+	<p/>
+	<xsl:call-template name="StandardClosingMessage">
+		<xsl:with-param name="Brand" select="$Brand"/>
+		<xsl:with-param name="BrandPhoneNumber" select="$BrandPhoneNumber"/>
+	</xsl:call-template>
+
+</xsl:template>
+
+<xsl:template match="ToAddress">
+    <xsl:call-template name="FormatYantraAddress"/>
+</xsl:template>
+
+<xsl:template match="CancelledItem">
+    <p/>
+    <p/>
+    <xsl:if test="position()=1">
+	<b>Cancelled Quantity</b>
+	<xsl:call-template name="ItemDataHeader" />
+    </xsl:if>
+    <xsl:call-template name="ItemData">
+    	<xsl:with-param name="ItemDesc" select="@OrderLineItemDesc"/>
+    	<xsl:with-param name="UnitPrice" select="@OrderLineUnitPrice"/>
+    	<xsl:with-param name="Quantity" select="@OrderLineCancelledQty"/>
+    	<xsl:with-param name="TotalPrice" select="format-number(@OrderLineUnitPrice * @OrderLineCancelledQty, '.00')"/>
+    </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="InvoiceHeader">
+    <p/>
+    <p/>
+    <xsl:if test="position()=1">
+	<b>Invoice Summary</b>
+	<xsl:call-template name="InvoiceHeader" />
+    </xsl:if>
+
+    <xsl:call-template name="DisplayShipmentChargeSummary">
+    	<xsl:with-param name="InvoiceNo" select="@InvoiceNo"/>
+    	<xsl:with-param name="TotalCharges" select="@TotalCharges"/>
+    	<xsl:with-param name="TotalTax" select="@TotalTax"/>
+    	<xsl:with-param name="Discount" select="@TotalDiscount"/> 
+    	<xsl:with-param name="LineSubTotal" select="@LineSubTotal"/> 
+	<xsl:with-param name="OrderTotal" select="@TotalAmount"/>
+    </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="PendingItem">
+    <p/>
+    <xsl:if test="position()=1">
+	<br/>Please note that your total reflects only the item(s) shipped in this order.  As your other item(s) become available, they will be shipped separately.  You will receive another e-mail as each shipment leaves our warehouse and this will indicate your current item(s) shipped and your total.
+
+	<p/><b>Items Not Yet Shipped</b>
+	<xsl:call-template name="ItemDataHeader" />
+    </xsl:if>
+
+    <xsl:call-template name="ItemData">
+    	<xsl:with-param name="ItemDesc" select="@OrderLineItemDesc"/>
+    	<xsl:with-param name="UnitPrice" select="@OrderLineUnitPrice"/>
+    	<xsl:with-param name="Quantity" select="@OrderLineQtyNotShipped"/>
+    	<xsl:with-param name="TotalPrice" select="format-number(@OrderLineUnitPrice * @OrderLineQtyNotShipped, '.00')"/>
+    </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="Container">
+<xsl:param name="Title"></xsl:param>
+	
+	<xsl:variable name="TrackingNo" select="@TrackingNo" />
+
+	<xsl:if test="position()=1">
+		<b><xsl:value-of select="$Title"/></b>
+		<xsl:call-template name="ItemDataHeader">
+			<xsl:with-param name="additionalRows" select="1" />
+			<xsl:with-param name="param1" >
+				Tracking Number
+			</xsl:with-param>
+		</xsl:call-template>
+	</xsl:if>
+
+	<xsl:apply-templates select="ContainerDetails/ContainerDetail" >
+		<xsl:with-param name="TrackingNo" select="$TrackingNo"/>
+	</xsl:apply-templates>
+</xsl:template>
+
+<xsl:template match="ContainerDetail">
+    <xsl:param name="TrackingNo">../@TrackingNo</xsl:param>
+    <xsl:call-template name="ItemData">
+    	<xsl:with-param name="ItemDesc" select="ShipmentLine/@ItemDesc"/>
+    	<xsl:with-param name="UnitPrice" select="ShipmentLine/@OrderLineUnitPrice" />
+    	<xsl:with-param name="Quantity" select="@Quantity"/>
+    	<xsl:with-param name="TotalPrice" select="format-number(ShipmentLine/@OrderLineUnitPrice * @Quantity, '.00')"/>
+    	<xsl:with-param name="TrackingNo" select="$TrackingNo"/>
+    </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="PaymentMethod">
+    <p/>
+    <p/>
+    <xsl:if test="position()=1">
+	<b>Payment Information</b>
+    </xsl:if>
+<xsl:if test="./@PaymentType='CREDIT_CARD'">
+	<xsl:call-template name="PaymentTypeCreditCard">
+		<xsl:with-param name="PaymentAmount" select="format-number(./@TotalCharged, '.00')"/>
+		<xsl:with-param name="CreditCardType" select="./@CreditCardType"/>
+		<xsl:with-param name="DisplayCreditCardNo" select="./@DisplayCreditCardNo"/>
+	</xsl:call-template>
+</xsl:if>
+<xsl:if test="./@PaymentType='SVC'">
+	<xsl:call-template name="PaymentTypeSVC">
+		<xsl:with-param name="PaymentAmount" select="format-number(./@TotalCharged, '.00')"/>
+		<xsl:with-param name="DisplaySvcNo" select="./@DisplaySvcNo"/>
+	</xsl:call-template>
+</xsl:if>
+<xsl:if test="./@PaymentType='CHECK'">
+	<xsl:call-template name="PaymentTypeCheck">
+		<xsl:with-param name="PaymentAmount" select="format-number(./@TotalCharged, '.00')"/>
+		<xsl:with-param name="CheckNo" select="./@CheckNo"/>
+	</xsl:call-template>
+</xsl:if>
+</xsl:template>
+
+
+
+</xsl:stylesheet>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery  QueryType="Approval">
+   <OrderApprovalRule DisplayName="Order_Approval_Rule" TableName="YFS_ORDER_APPROVAL_RULE" IconFile="item.gif" ShowNotButtons="Y">
+	  <Channel Type="Leaf" Id="Channel" DisplayName="Channel" DataType="Text-20" ControlType="Text" ColumnName="CHANNEL">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="Channel" IsReqd="" OverRidingClass="" />
+	  </Channel>
+	  <DocumentType Type="Leaf" Id="DocumentType" DisplayName="DocumentType" DataType="Text-40" ControlType="Text" ColumnName="DOCUMENT_TYPE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="DocumentType" IsReqd="" OverRidingClass=""/>
+	  </DocumentType>
+	  <LaneType Type="Leaf" Id="LaneType" DisplayName="LaneType" DataType="Text-20" ControlType="Text" ColumnName="LANE_TYPE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="LaneType" IsReqd="" OverRidingClass=""/>
+	  </LaneType>
+	  <RegionKey Type="Leaf" Id="RegionKey" DisplayName="RegionKey" DataType="Key" ControlType="Text" ColumnName="REGION_KEY">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="RegionKey" IsReqd="" OverRidingClass=""/>
+	  </RegionKey>
+	  <RuleID Type="Leaf" Id="RuleID" DisplayName="RuleID" DataType="OrderApprovalRuleRuleID" ControlType="Text" ColumnName="RULE_ID">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="RuleID" IsReqd="" OverRidingClass=""/>
+	  </RuleID>
+	  <StoreType Type="Leaf" Id="StoreType" DisplayName="StoreType" DataType="Text-20" ControlType="Text" ColumnName="STORE_TYPE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="StoreType" IsReqd="" OverRidingClass=""/>
+	  </StoreType>
+	  <Type Type="Leaf" Id="Type" DisplayName="Type" DataType="OrderApprovalRuleType" ControlType="Combo" ColumnName="TYPE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="Type" IsReqd="" OverRidingClass="" IsStatic="true">
+			<Type Desc="Header" Code="01"/>
+			<Type Desc="Line" Code="02"/>
+		</MasterData>
+	  </Type>
+	  <EffectiveEndDate Type="Leaf" Id="EffectiveEndDate" DisplayName="EffectiveEndDate" DataType="Date" ControlType="Text" ColumnName="EFFECTIVE_END_DATE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+		  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+		</QryTypes>
+		<MasterData MasterDataId="EffectiveEndDate" IsReqd="" OverRidingClass=""/>
+	  </EffectiveEndDate>
+	  <EffectiveStartDate Type="Leaf" Id="EffectiveStartDate" DisplayName="EffectiveStartDate" DataType="Date" ControlType="Text" ColumnName="EFFECTIVE_START_DATE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+		  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+		</QryTypes>
+		<MasterData MasterDataId="EffectiveStartDate" IsReqd="" OverRidingClass=""/>
+	  </EffectiveStartDate>
+	  <IsActive Type="Leaf" Id="IsActive" DisplayName="IsActive" DataType="Flag" ControlType="Combo" ColumnName="IS_ACTIVE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="IsActive" IsReqd="" OverRidingClass="" IsStatic="true">
+		  <IsActive Code="Y" Desc="Yes"/>
+		  <IsActive Code="N" Desc="No"/>
+		</MasterData>
+	  </IsActive>
+	  <IsOverride Type="Leaf" Id="IsOverride" DisplayName="IsOverride" DataType="Flag" ControlType="Combo" ColumnName="IS_OVERRIDE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="IsOverride" IsReqd="" OverRidingClass="" IsStatic="true">
+		  <IsOverride Code="Y" Desc="Yes"/>
+		  <IsOverride Code="N" Desc="No"/>
+		</MasterData>
+	  </IsOverride>
+	</OrderApprovalRule>
+</AdvancedQuery>

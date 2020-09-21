@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<!-- 
+	If you have multiple enterprises configured, modify these templates to show appropriate phone number/website link.
+-->
+
+<xsl:template name="BrandName">
+    <xsl:param name="BrandCode"></xsl:param>
+    <xsl:choose>
+	<!-- This is used for website name.  For example, YCDYourWay becomes www.YCDYourWay.com -->
+        <xsl:when test="$BrandCode = 'YCD_YWE'">YCDYourWay</xsl:when>
+        <xsl:when test="$BrandCode = 'YCD_BC'">YCDBusinessChoice</xsl:when>
+	<xsl:otherwise><xsl:value-of select="$BrandCode"/></xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<xsl:template name="BrandPhoneNumber">
+    <xsl:param name="BrandCode"></xsl:param>
+    <xsl:choose>
+        <xsl:when test="$BrandCode = 'YCD_YWE'">1.800.YOURWAY (1.800.xxx.xxxx)</xsl:when>
+        <xsl:when test="$BrandCode = 'YCD_BC'">1.800.2CHOOSE (1.800.xxx.xxxx)</xsl:when>
+        <xsl:otherwise>1.800.<xsl:value-of select="$BrandCode"/> (1.800.xxx.xxxx)</xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+</xsl:stylesheet>

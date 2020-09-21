@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2014 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="colony support framework" basedir="." default="dbverify"> 
+
+	<import file="AFCTasks.xml"/>
+
+	<AFCfail unless="dir.install" message="The property dir.install is required. "/>
+
+	<property file="${dir.install}${file.separator}properties${file.separator}sandbox.cfg" prefix="sandbox"/>
+
+	<property file="${dir.properties}${file.separator}sandbox.cfg" prefix="sandbox"/>
+
+	<property name="dir.properties" value="${sandbox.PROP_DIR}"/>
+
+	<property name="dir.repository" value="${dir.install}${file.separator}repository" />
+
+	<property name="dir.repository.datatype" value="${dir.repository}${file.separator}datatypes" />
+
+	<property name="dir.repository.entity" value="${dir.repository}${file.separator}entity" />
+
+	<property name="file.repository.datatype" value="${dir.repository.datatype}${file.separator}datatypes.xml" />
+
+	<property name="dir.scripts" value="${dir.repository}${file.separator}scripts" />
+
+	<property name="DB_POOL" value="${sandbox.DB_POOL}"/>
+	
+
+	<AFCecho message="DB_POOL={1}">
+		<arg value="${sandbox.DB_POOL}"/>
+	</AFCecho>
+	<loadproperties srcFile="${dir.properties}/jdbc.properties">
+		<filterchain>
+        	<tokenfilter><containsstring contains="${DB_POOL}."/></tokenfilter>
+            <replacestring from="${DB_POOL}." to="DB_POOL." />
+            <prefixlines prefix="jdbc." />
+        </filterchain>
+	</loadproperties>
+
+	<condition property="dbverify.logddl" value="false" else="true">
+		<and>
+			<isset property="sandbox.DBVERIFY_LOG_DDL"/>
+			<isfalse value="${sandbox.DBVERIFY_LOG_DDL}" />
+		</and>
+	</condition>
+
+	<condition property="ignore.3rdparty.tables" value="N" else="Y">
+		<and>
+			<isset property="sandbox.DBVERIFY_IGNORE_3RD_PARTY_TABLES"/>
+			<equals arg1="${sandbox.DBVERIFY_IGNORE_3RD_PARTY_TABLES}" arg2="N" casesensitive="false" trim="true"/>
+		</and>
+    </condition>
+	
+	<target name="suppressed-indexes" >
+	        <condition property="indexes.not.created" value="${sandbox.INDEXES_NOT_CREATED}" else="${dir.install}/extensions/schemagenerator/indexes_not_created.txt"  >
+	            <isset property="sandbox.INDEXES_NOT_CREATED" />
+	        </condition>
+	</target>
+
+	<condition property="is.multischema.enabled" value="true">
+		<and>
+			<isset property="sandbox.multischema.enabled"/>
+			<istrue value="${sandbox.multischema.enabled}" />
+		</and>
+	</condition>
+
+	<AFCfail unless="is.multischema.enabled" message="This tool is for multi-schema configurations only.  It is not to be used for single schema configurations."/>
+
+    <condition property="colony.version" value="${sandbox.multischema.version}" >
+        <isset property="sandbox.multischema.version" />
+    </condition>
+
+    <condition property="colony.versionsetup.failure" value="true">
+    	<not>
+        	<isset property="colony.version" />
+		</not>
+    </condition>
+
+    <AFCfail if="colony.versionsetup.failure" message="The multischema capability is enabled,  but the colony version was not provided via the multischema.version sandbox property."/>
+
+	<condition property="colony.xml.file" value="${multischema.file}">
+		<isset property="multischema.file"/>
+	</condition>	
+
+	<condition property="colony.xml.file" value="${sandbox.multischema.file}" >
+		<isset property="sandbox.multischema.file"/>
+	</condition>
+
+	<AFCfail unless="colony.xml.file" message="Colony XML file must be provided either as -Dmultischema.file on the command line or via sandbox.cfg as multischema.file"/>
+
+	<target name="dbverify" unless="nodbverify" depends="override-schema,override-oracle-useblob, multibyte-support,oracle-textsearch-context, oracle-nls-length-semantics,populate-colony-pool-tables, suppressed-indexes">
+        <condition property="backup.scripts">
+            <and>
+                <available file="${dir.scripts}"/>
+                <or>
+                    <available file="${dir.scripts}/reverse.xml"/>
+                    <available file="${dir.scripts}/EFrame_Reverse_${sandbox.DB_POOL}.xml"/>
+                </or>
+            </and>
+        </condition>
+
+		<ant target="backup-scripts" antfile="${sandbox.PROP_DIR}/colonyDeployer.xml"/>
+		<ant target="colony-schema-synchronizer" antfile="${sandbox.PROP_DIR}/colonyDeployer.xml"/>
+	</target>
+
+    <target name="backup-scripts" if="backup.scripts">
+
+        <tstamp>
+            <format property="backup.time" pattern="yyyyMMddHHmm" unit="hour"/>
+        </tstamp>
+        <mkdir dir="${dir.scripts}/backups"/>
+        <zip destfile="${dir.scripts}/backups/EFrameSql_${backup.time}.zip">
+            <fileset dir="${dir.scripts}" >
+                <include name="**/*.sql" />
+                <include name="**/*.lst" />
+                <include name="**/*.xml" />
+            </fileset>
+        </zip>
+        <delete >
+            <fileset dir="${dir.scripts}" >
+                <include name="**/*.sql" />
+                <include name="**/*.lst" />
+                <include name="**/*.xml" />
+            </fileset>
+        </delete>
+    </target>
+
+	
+    <target name="colony-schema-synchronizer"
+            description="Compare entities with your schemas" unless="nodbverify"
+            depends="override-schema,override-oracle-useblob, multibyte-support,oracle-textsearch-context, oracle-nls-length-semantics">
+                 
+    	<!-- Set this to false to force sync of all colonies. The default of true only syncs those in the multischema xml. -->
+    	<property name="syncByXML" value="true"/>
+
+        <condition property="DB2_MAX_INDEX_LENGTH" value="${sandbox.DB2_MAX_INDEX_LENGTH}" else="128"  >
+			<isset property="sandbox.DB2_MAX_INDEX_LENGTH"/>
+		</condition>        	
+
+    	<java fork="true" failonerror="true" maxmemory="512m"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar">            
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.dbverify.SchemaSynchronizer" />
+            <arg value="-invokeargs" />         
+			<sysproperty key="Ignore3rdPartyTables" value="${ignore.3rdparty.tables}" />
+            <sysproperty key="EMIT_PAGE_LOCKS_STATEMENT" value="${mssqlEmitPageLocksStatement}"/>
+            <sysproperty key="IgnoreTablespace" value="Y" />
+			<sysproperty key="log.ddl" value="${dbverify.logddl}" />
+        	<sysproperty key="sql.delimiter" value="${sql.delimiter}" />    
+    		<sysproperty key="INDEXES_NOT_CREATED" value="${indexes.not.created}" />
+			<sysproperty key="OUTDIR" value="${dir.scripts}" />
+			<sysproperty key="COLONY_XML" value="${colony.xml.file}" />
+			<sysproperty key="DBNAME" value="${jdbc.DB_POOL.dbname}" />
+	        <sysproperty key="ORACLE_USE_BLOB" value="${oracle.useblob}" />
+	        <sysproperty key="MULTIBYTE" value="${multibyte}" />
+	        <sysproperty key="TEXT_INDEX_TYPE" value="${orcltscontext}" />	         
+	        <sysproperty key="ORACLE_NLS_LENGTH_SEMANTICS" value="${orclnlssmntc}" />                        
+            <sysproperty key="DB_VENDOR" value="${sandbox.DB_VENDOR}" />     
+			<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+    		<sysproperty key="SYNC_BY_XML" value="${syncByXML}" />
+			<sysproperty key="DB2_MAX_INDEX_LENGTH" value="${DB2_MAX_INDEX_LENGTH}" />
+			<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+			<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+			<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+			<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+			<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+        </java>
+    </target>
+
+    <target name="populate-colony-pool-tables"
+            description="Put multischema connection information into required database tables" unless="nodbverify"> 
+        <java fork="true" failonerror="true" maxmemory="512m"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar">
+            <sysproperty key="vendor" value="shell"/>
+            <sysproperty key="vendorFile" value="${dir.properties}${file.separator}servers.properties"/>
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.sterlingcommerce.woodstock.install.ColonyPoolPopulator" />
+            <arg value="-invokeargs" />            
+        	<arg value="-colonyxml"/>
+        	<arg value="${colony.xml.file}"/>
+			<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+		</java>
+	</target>
+	
+    <!--applySql-->
+    <target name="override-sql-delimiter" >
+        <condition property="sql.delimiter" value="GO"  >
+			<or>
+            	<equals arg1="${db.vendor}" arg2="mssql" casesensitive="false" trim="true"/>
+            	<equals arg1="${db.vendor}" arg2="mssql2005" casesensitive="false" trim="true"/>
+			</or>
+        </condition>
+        <condition property="sql.delimiter" value="/"  >
+            <equals arg1="${db.vendor}" arg2="oracle" casesensitive="false" trim="true"/>
+        </condition>
+        <condition property="sql.delimiter" value=";"  >
+            <and>
+                <not>
+                     <equals arg1="${db.vendor}" arg2="oracle" casesensitive="false" trim="true"/>
+                </not>
+                <not>
+                     <equals arg1="${db.vendor}" arg2="mssql" casesensitive="false" trim="true"/>
+                </not>
+                <not>
+                     <equals arg1="${db.vendor}" arg2="mssql2005" casesensitive="false" trim="true"/>
+                </not>
+            </and>
+        </condition>
+    </target>
+
+    <target name="override-schema" >
+        <condition property="sql.schema" value="${sandbox.DB_SCHEMA_OWNER}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.DB_SCHEMA_OWNER" />
+        </condition>
+    </target>
+    
+	<target name="override-oracle-useblob" >   
+         <condition property="oracle.useblob" value="${sandbox.ORACLE_USE_BLOB}" else="UNDEF_VALUE"  >   
+             <isset property="sandbox.ORACLE_USE_BLOB" />   
+         </condition>   
+     </target> 
+
+	 <target name="multibyte-support" >
+        <condition property="multibyte" value="${sandbox.SUPPORT_MULTIBYTE}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.SUPPORT_MULTIBYTE" />
+        </condition>
+    </target>
+
+	<target name="oracle-textsearch-context" >
+        <condition property="orcltscontext" value="${sandbox.ORA_TS_CONTEXT}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.ORA_TS_CONTEXT" />
+        </condition>
+    </target>
+
+	<target name="oracle-nls-length-semantics" >
+        <condition property="orclnlssmntc" value="${sandbox.ORACLE_NLS_LENGTH_SEMANTICS}" else="UNDEF_VALUE"  >
+            <isset property="sandbox.ORACLE_NLS_LENGTH_SEMANTICS" />
+        </condition>
+    </target>
+
+    <target name="overrideErrorLevelCheck">
+        <condition property="is.mysql">
+            <equals arg1="mysql" arg2="${db.vendor}" casesensitive="false" trim="true"/>
+        </condition>
+    </target>
+
+    <target name="overrideErrorLevelMySQL" if="is.mysql">
+        <property name="default.sql.errorlevel" value="abort"/>
+    </target>
+
+    <target name="overrideErrorLevel" unless="is.mysql">
+        <property name="default.sql.errorlevel" value="abort"/>
+    </target>
+
+</project>
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+
+<xsl:output method="xml" indent="yes"/>
+<xsl:template match="OrderHoldType">
+<Order>
+   <xsl:copy-of select="@OrderHeaderKey"/>
+   <Notes>
+      <Note>
+	<xsl:variable name="status">
+	    <xsl:choose>
+                <xsl:when test="@Status='1100'">
+		    <xsl:text> hold is applied on the Order</xsl:text>
+	        </xsl:when>
+		<xsl:when test="@Status='1200'">
+		    <xsl:text> hold is rejected</xsl:text>          
+	        </xsl:when>
+		<xsl:when test="@Status='1300'">
+		    <xsl:text> hold is resolved</xsl:text>          
+	        </xsl:when>
+	     </xsl:choose>
+	</xsl:variable>
+
+	<xsl:attribute name="NoteText">
+	    <xsl:value-of select="concat(./HoldTypeList/HoldType[./@HoldType=current()/@HoldType]/@HoldTypeDescription,$status)"/>
+	</xsl:attribute>
+	<xsl:attribute name="ReasonCode">
+	    <xsl:text>YCD_HOLD_INFO</xsl:text>
+	</xsl:attribute>
+	<xsl:attribute name="ContactUser">
+	    <xsl:text>SYSTEM</xsl:text>
+	</xsl:attribute>
+	<xsl:attribute name="Priority">
+	    <xsl:text>1</xsl:text>
+	</xsl:attribute>
+      </Note>
+   </Notes>
+</Order>
+</xsl:template>
+</xsl:stylesheet>

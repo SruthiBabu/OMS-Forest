@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--getOrderReleaseDetails output XML-->
+<OrderRelease>
+    <ServiceLine>
+        <Item/>
+    </ServiceLine>
+    <MergeNode>
+        <ShipNodePersonInfo/>
+    </MergeNode>
+    <Notes>
+        <Note/>
+    </Notes>
+    <Order/>
+    <PersonInfoShipTo/>
+    <!--Optional-->
+    <PersonInfoMarkFor/>
+    <!--Optional-->
+    <OrderLines>
+        <OrderLine>
+            <Item>
+                <LanguageDescriptionList>
+                    <LanguageDescription/>
+                </LanguageDescriptionList>
+            </Item>
+            <Notes>
+                <Note/>
+            </Notes>
+            <OrderLineTranQuantity/>
+            <OrderStatuses>
+                <OrderStatus>
+                    <OrderStatusTranQuantity/>
+                    <Details/>
+                </OrderStatus>
+            </OrderStatuses>
+            <LinePackListPriceInfo/>
+            <OrderLineInvAttRequest/>
+            <AllowedModifications>
+                <Modification/>
+            </AllowedModifications>
+            <!-- AllowedModifications is a template-driven element but its attributes and children elements are not. AllowedModifications element will be returned in the output only for non-history orders. For history orders no modifications allowed. If AllowedModifications is present in the template, then all it attributes and children elements will appear in the output.-->
+            <KitLines>
+                <!-- NumberOfKitLines is not a template driven attribute. -->
+                <KitLine>
+                    <KitLineTranQuantity/>
+                </KitLine>
+            </KitLines>
+            <Shipnode/>
+        </OrderLine>
+    </OrderLines>
+    <BundleParentOrderLines>
+        <BundleParentOrderLine>
+            <Item>
+                <LanguageDescriptionList>
+                    <LanguageDescription/>
+                </LanguageDescriptionList>
+            </Item>
+            <Notes>
+                <Note/>
+            </Notes>
+            <OrderLineTranQuantity/>
+            <LinePackListPriceInfo/>
+            <ShipNode/>
+        </BundleParentOrderLine>
+    </BundleParentOrderLines>
+    <PackListPriceInfo/>
+    <OrderDates>
+        <OrderDate/>
+    </OrderDates>
+    <ShipNode/>
+</OrderRelease>

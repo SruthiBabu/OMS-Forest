@@ -1,0 +1,233 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Selling and fulfillment Suite
+# Copyright IBM Corp. 1999,2012 All Rights Reserved.  
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+#----------------------------------------------------------------------------------------------
+# The number of solver iterations for Create Wave. 
+# Use this property to set the number of solver iterations through which the create wave Agent
+# will undergo to optimise wave creation.
+#----------------------------------------------------------------------------------------------
+yfs.solver.iterations.wavecreate=1
+
+#----------------------------------------------------------------------------------------------
+# Cancellation of wave happens in background depending upon the value of the property yfs.cancelwave.offline.taskcount.greaterthan. 
+# If the value of the property is for ex: 500 then cancellation of a wave, which has open tasks more than 
+# 500 included in it then the wave gets cancelled in offline mode. Waves that have open tasks equal to or less than 500 gets cancelled 
+# online.
+#----------------------------------------------------------------------------------------------
+yfs.cancelwave.offline.taskcount.greaterthan=-1
+
+#----------------------------------------------------------------------------------------------
+# Cancellation of wave happens in background depending upon the value of the property yfs.cancelwave.offline.shipmentcount.greaterthan. 
+# If the value of the property is for ex: 500 then cancellation of a wave, which has shipments more than 
+# 500 included in it then the wave gets cancelled in offline mode. Waves that have shipments equal to or less than 500 gets cancelled 
+# online.
+#----------------------------------------------------------------------------------------------
+yfs.cancelwave.offline.shipmentcount.greaterthan=-1
+
+#----------------------------------------------------------------------------------------------
+# Cancellation of move request happens in background depending upon the value of the property yfs.cancelmoverequest.offline.taskcount.greaterthan. 
+# If the value of the property is for ex: 500 then cancellation of a move request, which has open tasks more than 
+# 500 included in it then the move request gets cancelled in offline mode. Move requests that have open tasks equal to or less than 500 gets cancelled 
+# online.
+#----------------------------------------------------------------------------------------------
+yfs.cancelmove.offline.taskcount.greaterthan=-1
+
+##################################################################################
+# The containerizeWave API will use this property to select number of shipments  
+# to be considered for creating the outbound containers in one round.
+# API will consider default value as 75 if value is not specified for this property.
+##################################################################################
+yfs.containerization.maxshipmentsinoneround=
+##################################################################################
+
+#################################################################################
+# Set the following properties required for cancel wave agent
+# Sleep time properties are in seconds
+#################################################################################
+com.yantra.wms.agent.server.WMSCancelWaveAgent.sleepTimeBeforeGetJob=5
+com.yantra.wms.agent.server.WMSCancelWaveAgent.sleepTimeBetweenTwoTries=30
+com.yantra.wms.agent.server.WMSCancelWaveAgent.maxIterationWithNoProgress=10
+
+#################################################################################
+# Set the following properties required for cancel move agent
+# Sleep time properties are in seconds
+#################################################################################
+com.yantra.wms.agent.server.WMSCancelMoveAgent.sleepTimeBeforeGetJob=5
+com.yantra.wms.agent.server.WMSCancelMoveAgent.sleepTimeBetweenTwoTries=30
+com.yantra.wms.agent.server.WMSCancelMoveAgent.maxIterationWithNoProgress=10
+
+##################################################################################
+# The CREATE WAVE FOR SHIPMENT GROUP agent uses this property to increase the 
+# Available date (in hours) of YFS_Task_Q records with transaction key "CREATE_WAVE_TASK_Q.4001"
+# against which no waves could be created. Agent considers default value as 1 if value is 
+# not specified for this property. If set to -1, the YFS_Task_Q records with transaction key
+# "CREATE_WAVE_TASK_Q.4001" for which no waves are generated, will be deleted.
+##################################################################################
+yfs.install.createWave.delayhours=1
+
+##################################################################################
+# The CREATE WAVE agent uses this property to read maximum number of shipment lines
+# from database in a single query. 
+# Agent considers default value as 20000 if value is not specified for this property.
+##################################################################################
+yfs.createwave.dbRead.numShipmentLines=20000
+
+##################################################################################
+# The CREATE WAVE agent uses this property in order to determine the maximum number 
+# of shipment lines for optimal memory utilization during wave creation. 
+# Agent considers default value as 50000 if value is not specified for this property.
+##################################################################################
+yfs.createwave.process.numShipmentLines=50000
+# Set the following JMS properties to enable resource planning move.
+##################################################################################
+yfs.wms.resourceplanning.QueueName=DefaultAgentQueue
+yfs.wms.resourceplanning.ProviderURL=t3://localhost:7001
+yfs.wms.resourceplanning.QCFLookUp=AGENT_QCF
+
+
+#################################################################################
+# getZoneDetails API uses the below mentioned property to refresh the zone attributes
+# - available volume, available weight, pendin volume and pendin weight in the table
+# YFS_TRAN_ZONE_ATTRS. These zone attributes are aggregates of the location attributes. Zone attributes
+# are refreshed after specified time intervals which is defined by this property.
+# The default value of this property is 600 seconds.
+#################################################################################
+yfs.wms.zonetransattr.refreshrate=600
+
+#################################################################################
+# releaseWave uses the below mentioned property to select the algorithm to be used to determine
+# pick locations. This property is valid only when split constraints are defined.
+# ConstraintSolver: Constraint Solver Algorithm is used.
+# The default value of this property is set to blank. When set to blank, a simple iterative algorithm is used.
+#################################################################################
+yfs.releaseWave.pickalgorithm=
+
+##################################################################################
+# During Release wave, if shipments need to be allocated quantity based on 
+# Requested shipment dates, then set the property
+# yfs.releaseWave.SortShipmentsByDateAndKey to "Y"
+##################################################################################
+yfs.releaseWave.SortShipmentsByDateAndKey=N
+
+###################################################################################
+# In case of counting through mobile application if user counts new inventory, 
+# system currently displays first inventory status of the node as defaulted.
+# If this behavior needs to be overridden, then the below property needs to be set with 
+# valid inventory status which will be used as default inventory status for new inventory.
+# If this property is not set, system will retain the current behavior.
+###################################################################################
+yfs.default.inventorystatus.for.newinventory=
+
+###################################################################################
+# In case of picking through mobile application if user reports a short pick exception which involves
+# suggestion of alternate pick location, system moves the tasks to held status incase of failure
+# of alternate pick location suggestion. To allow user to cancel these held tasks for certain task types, the below
+# property needs to be set to a comma seperated values of task types. 
+# If this property is not set or task is not of the task type mentioned in the list, system will retain the current behavior.
+###################################################################################
+yfs.canceltask.onshortpick.tasktypelist=
+
+#######################################################################################################################
+# When dynamic slotting in configured, for second and subsequent wave releases, system would consider previously 
+# slotted locations to minimize number of locations. This property can be used to override current behaviour. 
+# If this property is set to N, system will not consider previous slotted locations for subsequent wave release.
+#######################################################################################################################
+yfs.allow.reuse.previouswave.slots=Y
+
+###################################################################################
+#If the below mentioned property is set to 'Y' the release task agent will ignore the wave sequence while releasing the Tasks.
+#Hence if there are two waves of the same priority but different sequence numbers, 
+#even though tasks for wave having a lower sequence number cannot be released the system will go ahead and release the tasks 
+#for the wave having a higher sequence number.
+###################################################################################
+yfs.releasetask.ignore.wavesequence=
+
+#######################################################################################################################
+# When the below mentioned property is set to Y (default value) system will assign shipment group to shipments during creation 
+# and will behave otherwise when set to N.
+#######################################################################################################################
+yfs.determine.shipmentgroup.for.shipment=Y
+
+##########################################################################################
+# If the below mentioned property is set to Y then system shows the lookup interface for # 
+# Select Node UI. If it is N (default value) system shows a combo box with list of nodes.#
+##########################################################################################
+yfs.wms.console.show.node.lookup=N
+
+#######################################################################################################################
+# This property can be set to Y to allow adhoc moves to be processed by system (without waiting for allocate task agent    
+# to come up) even when delayed allocation mode is configured for a node, draft tasks for the node having a regular  
+# location as a target location exist in the system and allocate task agent is not running due to some reason. 
+# The default value of this property is N and the default behavior is that the system will wait for allocate task agent
+# to come up and complete the pending allocation in the above mentioned scenario.
+######################################################################################################################
+yfs.override.pendingallocations.for.adhocmoves=N
+
+###################################################################################
+# To allow user to suggest tasks for certain task types, the below # property needs to be set to a comma seperated values 
+#of task types. When this property is turned on for task type (s), the system will not hold task even if there is no 
+#inventory to pick in getNextTask API.# If this property is not set or task is not of the task type mentioned in the list, 
+#system will retain the current behavior.
+###################################################################################
+yfs.suggesttask.onshortpick.tasktypelist=
+
+###################################################################################
+# During containerization, system creates Pallet labels if the item has an alternate UOM of LPN type = Pallet and containerization quantity matches the alternate UOM quantity. 
+# To prevent system from creating Pallet labels for parcel shipment, the below property needs to be set to a comma seperated values of task types.
+# If this property is not set or task is not of the task type mentioned in the list, system will retain the current behavior.
+###################################################################################
+yfs.prevent.palletlabel.for.parcelshipment.tasktypelist=
+
+###########################################################################################################################
+# During packing, system suggests containers that needs to packed while picking to be packed in Pack HSDE.
+# Set the below property to Y to prevent system from suggesting such container in Pack HSDE on scanning shipment.
+# If this property is not set or set to N, system will retain the current behavior.
+###########################################################################################################################
+yfs.prevent.packwhilepick.containers.during.packing=
+
+####################################################################################################
+# When this property is set to Y, system will warn user when he picks same reference (Shipment/Move request/Batch etc)
+# onto multiple totes/target LPN while picking through mobile application using cart pick functionality.
+# If this property is not set or set to N, system will retain the current behavior.
+###################################################################################
+yfs.split.reference.across.totes=N
+
+
+###################################################################################
+#Set this property to N to avoid Item_Id IN clause while doing createWave.This is given to SSI
+# as they have performance problem in createWave.By default this property is set to Y.
+###################################################################################
+yfs.createwave.lookforsimilarshipments=Y
+
+###################################################################################
+When Pick fencing is used with both dedicated and non dedicated location in the same zone,system
+crteates task until dedicated location is full and rest to non-dedicated location based on capacity,
+move in sequence ,etc.
+Set this property to Y to for replenishment to dynamically slot a location closer to the dedicated location.
+###################################################################################
+yfs.suggest.putaway.nearDedicatedLocation=
+
+###################################################################################
+This property is exposed for SSI.Once an Item is exhausted , we will start with the same container for containerization of
+next item in sequence(mixing happens only at the last container ) . This will continue for all the items coming in sequence . 
+Thus this will prevent spreading of items across multiple containers .By setting this property to Y SSI can achieve the new behavior. 
+By default this property will be set to N.
+###################################################################################
+yfs.containerization.optimizeLastContainer=Y
+
+###################################################################################
+Set this property to Y to redetermine Shipment grouop for selected Shipment group.
+By default this property is set to N. This property setting to Y will honor the Create 
+Wave for Shipment Group scenario before HF-39.
+###################################################################################
+yfs.createwave.redetermine.for.selected.shipmentgroup=Y
+
+
+###################################################################################
+#To allow user to skip tasks for certain task types, the below # property needs to be set to a comma seperated values 
+#of exception codes.If user enters any exception code of exception type SKIP configured in this property, then task should
+be skipped else location will be skipped..
+###################################################################################
+yfs.skip.task.for.exceptionlist=

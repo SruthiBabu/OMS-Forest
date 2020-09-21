@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores item entitlement rule header definition."
+            EntityType="CATALOG_MASTER" Extensible="Y" Module="ycm"
+            Name="Entitlement_Rule_Hdr" Prefix="YFS_"
+            TableName="YFS_ENTITLEMENT_RULE_HDR"
+            TableType="MASTER" XMLName="EntitlementRule">
+		<Attributes>
+                <Attribute ColumnName="ENTITLEMENT_RULE_HDR_KEY"
+                    DataType="Key" DefaultValue="' '"
+				Description="The primary key of the YFS_ENTITLEMENT_RULE_HDR table."
+                    Name="Entitlement_Rule_Hdr_Key" Nullable="false" XMLName="EntitlementRuleKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="CATALOG-PURPOSE"
+                    DataType="OrgCode" DefaultValue="' '"
+				Description="The organization that maintains the entitlement rule."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+			<Attribute ColumnName="PURPOSE" DataType="Text-10"
+				Description="This field indicates whether the entitlement rule is used for selling entitlement or buying entitlement."
+				Name="Purpose" Nullable="true" XMLName="Purpose"/>
+                <Attribute ColumnName="ENTITLEMENT_RULE_HDR_ID"
+                    DataType="ID-24" DefaultValue="' '"
+				Description="The unique identification of entitlement rule."
+                    Name="Entitlement_Rule_Hdr_Id" Nullable="false" XMLName="EntitlementRuleID"/>
+			<Attribute ColumnName="DESCRIPTION" DataType="Text-200"
+				Description="The description of the entitlement rule."
+				Name="Description" Nullable="true" XMLName="Description"/>
+                <Attribute ColumnName="EFFECTIVE_FROM_DATE"
+                    DataType="Date"
+				Description="The effective from date of the entitlement rule."
+                    Name="Effective_From_Date" Nullable="true" XMLName="EffectiveFromDate"/>
+                <Attribute ColumnName="EFFECTIVE_TO_DATE"
+                    DataType="Date"
+				Description="The effective to date of the entitlement rule."
+                    Name="Effective_To_Date" Nullable="true" XMLName="EffectiveToDate"/>
+                <Attribute ColumnName="START_WITH_ALL_CATALOG_ITEMS"
+                    DataType="Flag"
+				Description="This flag indicates whether entitlement rule starts by including or excluding all items in a catalog."
+				Name="Start_With_All_Catalog_Items" Nullable="true" XMLName="StartWithAllCatalogItems"/>			
+			<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the creation of this record."
+				Name="Createts" Nullable="false" XMLName="Createts"/>
+			<Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the last modification of this record."
+				Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+				Description="The user who created this record."
+				Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+				Description="The user who last modified this record."
+				Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that created this record."
+				Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that modified this record."
+				Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+				Description="An integer used to track and prevent concurrent modifications."
+				Name="Lockid" Nullable="false" XMLName="Lockid"/>
+		</Attributes>
+            <PrimaryKey DB2Name="ENT_RULE_HDR_PK" Name="YFS_ENTITLEMENT_RULE_HDR_PK">
+                <Attribute ColumnName="ENTITLEMENT_RULE_HDR_KEY" Name="Entitlement_Rule_Hdr_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ENTITL_RULE_HDR_I1"
+                    Name="YFS_ENTITLEMENT_RULE_HDR_I1" Unique="true">
+                    <Column Name="ENTITLEMENT_RULE_HDR_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ForeignEntity="Organization"
+					Name="Organization" Virtual="true"
+					Type="Unidirectional" XMLName="Organization">
+					<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+				</RelationShip>
+			</RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="N"
+            Description="This table stores details definition of an item entitlement rule."
+            EntityType="CATALOG_MASTER" Module="ycm"
+            Name="Entitlement_Rule_Dtl" Prefix="YFS_"
+            TableName="YFS_ENTITLEMENT_RULE_DTL"
+            TableType="MASTER" XMLName="EntitlementRuleDetail"
+            LockingEntity="Entitlement_Rule_Hdr">
+		<Attributes>
+                <Attribute ColumnName="ENTITLEMENT_RULE_DTL_KEY"
+                    DataType="Key" DefaultValue="' '"
+				Description="The primary key of the YFS_ENTITLEMENT_RULE_DTL table."
+                    Name="Entitlement_Rule_Dtl_Key" Nullable="false" XMLName="EntitlementRuleDetailKey"/>
+                <Attribute ColumnName="ENTITLEMENT_RULE_HDR_KEY"
+                    DataType="Key" DefaultValue="' '"
+				Description="The entitlement rule header of this entitlement rule detail."
+                    Name="Entitlement_Rule_Hdr_Key" Nullable="false" XMLName="EntitlementRuleKey"/>
+			<Attribute ColumnName="SEQUENCE_NO" DataType="Count"
+				DefaultValue="0"
+				Description="The sequence of the details within the entitlement rule header."
+				Name="Sequence_No" Nullable="false" XMLName="SequenceNo"/>
+			<Attribute ColumnName="INCLUSION_FLAG" DataType="Flag"
+				Description="This flag indicates whether this is an inclusive or exclusive rule."
+				Name="Inclusion_Flag" Nullable="true" XMLName="InclusionFlag"/>
+			<Attribute ColumnName="SOURCE_TYPE" DataType="Text-2"
+				Description="The source table for which the entitlement rule detail is based of."
+				Name="Source_Type" Nullable="true" XMLName="SourceType"/>
+			<Attribute ColumnName="CATEGORY_KEY" DataType="Key"
+				Description="The category that represents the entitlement rule detail."
+				Name="Category_Key" Nullable="true" XMLName="CategoryKey"/>
+                <Attribute ColumnName="ATTRIBUTE_GROUP_ID"
+                    DataType="GroupName"
+				Description="The attribute name of the attribute that represents the entitlement rule detail."
+                    Name="Attribute_Group_ID" Nullable="true"
+                    XMLGroup="AttributeValue" XMLName="AttributeGroupID"/>
+                <Attribute ColumnName="ATTRIBUTE_DOMAIN_ID"
+                    DataType="Text-40"
+				Description="The unique identification of the attribute group."
+				Name="Attribute_Domain_Id" Nullable="true"
+                    XMLGroup="AttributeValue" XMLName="AttributeDomainID"/>
+			<Attribute ColumnName="ATTRIBUTE_ID" DataType="Text-40"
+				Description="The attribute name of the attribute that represents the entitlement rule detail."
+                    Name="Attribute_Id" Nullable="true"
+                    XMLGroup="AttributeValue" XMLName="AttributeID"/>
+			<Attribute ColumnName="VALUE" DataType="Text-200" 
+				Description="The text value of the attribute that represents the entitlement rule detail."
+                    Name="Value" Nullable="true"
+                    XMLGroup="AttributeValue" XMLName="Value">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+			<Attribute ColumnName="DOUBLE_VALUE" DataType="Number"
+				Description="The double value of the attribute that represents the entitlement rule detail."
+                    Name="Double_Value" Nullable="true"
+                    XMLGroup="AttributeValue" XMLName="DoubleValue"/>
+                <Attribute ColumnName="INTEGER_VALUE"
+                    DataType="Number20"
+				Description="The integer value of the attribute that represents the entitlement rule detail."
+                    Name="Integer_Value" Nullable="true"
+                    XMLGroup="AttributeValue" XMLName="IntegerValue"/>
+			<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the creation of this record."
+				Name="Createts" Nullable="false" XMLName="Createts"/>
+			<Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the last modification of this record."
+				Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+				Description="The user who created this record."
+				Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+				Description="The user who last modified this record."
+				Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that created this record."
+				Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that modified this record."
+				Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+				Description="An integer used to track and prevent concurrent modifications."
+				Name="Lockid" Nullable="false" XMLName="Lockid"/>
+			</Attributes>
+			<PrimaryKey DB2Name="ENT_RULE_DTL_PK" Name="YFS_ENTITLEMENT_RULE_DTL_PK">
+                <Attribute ColumnName="ENTITLEMENT_RULE_DTL_KEY" Name="Entitlement_Rule_Dtl_Key"/>
+			</PrimaryKey>
+			<Indices>
+				<Index DB2Name="ENT_RULE_DTL_I1"
+					Name="YFS_ENTITLEMENT_RULE_DTL_I1" Unique="true">
+					<Column Name="ENTITLEMENT_RULE_HDR_KEY"/>
+					<Column Name="SEQUENCE_NO"/>
+				</Index>
+			</Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="EntitlementRuleDetailList"
+					ChildName="EntitlementRuleDetail"
+                    ChildXMLName="EntitlementRuleDetail"
+                    DeleteCascade="true"
+					ForeignEntity="Entitlement_Rule_Hdr"
+                    Name="EntitlementRule" Type="Bidirectional" XMLName="EntitlementRule">
+					<Attribute Name="Entitlement_Rule_Hdr_Key" ParentName="Entitlement_Rule_Hdr_Key"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ChildName="Category" ChildXMLName="Category"
+                    ForeignEntity="Category" Name="Category" Type="Bidirectional">
+					<Attribute Name="Category_Key" ParentName="Category_Key"/>
+				</RelationShip>
+			</RelationShips>
+		<OrderBy Value="SEQUENCE_NO"/>
+        </Entity>	
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="N"
+            Description="This table stores information of an item for an item entitlement rule detail that represents a set of items."
+            EntityType="CATALOG_MASTER" Module="ycm"
+            Name="Entitle_Rule_Dtl_Item" Prefix="YFS_"
+            TableName="YFS_ENTITLE_RULE_DTL_ITEM"
+            TableType="MASTER" XMLName="EntitlementRuleDetailItem"
+            LockingEntity="Entitlement_Rule_Dtl">
+		<Attributes>
+                <Attribute ColumnName="ENTITLE_RULE_DTL_ITEM_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_ENTITLE_RULE_DTL_ITEM table."
+                    Name="Entitle_Rule_Dtl_Item_Key" Nullable="false" XMLName="EntitlementRuleDetailItemKey"/>
+                <Attribute ColumnName="ENTITLEMENT_RULE_DTL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The entitlement rule detail that this set of items represent."
+                    Name="Entitlement_Rule_Dtl_Key" Nullable="false" XMLName="EntitlementRuleDetailKey"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+				DefaultValue="' '"
+                    Description="The identifier for the item."
+                    Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+				DefaultValue="' '"
+                    Description="The unit of measure of the item."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+						<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the creation of this record."
+				Name="Createts" Nullable="false" XMLName="Createts"/>
+			<Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the last modification of this record."
+				Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+				Description="The user who created this record."
+				Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+				Description="The user who last modified this record."
+				Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that created this record."
+				Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that modified this record."
+				Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+				Description="An integer used to track and prevent concurrent modifications."
+				Name="Lockid" Nullable="false" XMLName="Lockid"/>
+				</Attributes>
+            <PrimaryKey DB2Name="ENT_RUL_DTL_ITM_PK" Name="YFS_ENTITLE_RULE_DTL_ITEM_PK">
+                <Attribute ColumnName="ENTITLE_RULE_DTL_ITEM_KEY" Name="Entitle_Rule_Dtl_Item_Key"/>
+			</PrimaryKey>
+			<Indices>
+				<Index DB2Name="ENT_RUL_DTL_ITM_I1"
+					Name="YFS_ENTITLE_RULE_DTL_ITEM_I1" Unique="true">
+					<Column Name="ENTITLEMENT_RULE_DTL_KEY"/>
+					<Column Name="ITEM_ID"/>
+					<Column Name="UOM"/>
+				</Index>
+				<Index DB2Name="ENT_RUL_DTL_ITM_I2"
+					Name="YFS_ENTITLE_RULE_DTL_ITEM_I2" Unique="false">
+					<Column Name="ITEM_ID"/>
+					<Column Name="UOM"/>
+				</Index>
+			</Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="EntitlementRuleDetailItemList"
+					ChildName="EntitlementRuleDetailItem"
+                    ChildXMLName="EntitlementRuleDetailItem"
+                    DeleteCascade="true"
+                    ForeignEntity="Entitlement_Rule_Dtl"
+                    Name="EntitlementRuleDetail" Type="Bidirectional" XMLName="EntitlementRuleDetail">
+                    <Attribute Name="Entitlement_Rule_Dtl_Key" ParentName="Entitlement_Rule_Dtl_Key"/>
+				</RelationShip>
+			</RelationShips>
+    </Entity>	
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores information on the assignments of selling entitlement rules to organizations and the assignments of buying entitlement rules to customers."
+            EntityType="CATALOG_MASTER" Extensible="Y" Module="ycm"
+            Name="Entitle_Rule_Assignment" Prefix="YFS_"
+            TableName="YFS_ENTITLE_RULE_ASSIGNMENT"
+            TableType="MASTER" XMLName="EntitlementRuleAssignment"
+            LockingEntity="Entitlement_Rule_Hdr">
+		<Attributes>
+                <Attribute ColumnName="ENTITLE_RULE_ASSIGNMENT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_ENTITLE_RULE_ASSIGNMENT table."
+                    Name="Entitle_Rule_Assignment_Key" Nullable="false" XMLName="EntitlementRuleAssignmentKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '"
+					Description="It refers to either the organization that maintains the entitlement rule or a customer organization whose customers are assigned to this rule."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode" DataSecurityUsageType="CATALOG-PURPOSE"/>
+                <Attribute ColumnName="ENTITLEMENT_RULE_HDR_KEY"
+                    DataType="Key" DefaultValue="' '"
+				Description="The entitlement rule that is assigned to the customer."
+                    Name="Entitlement_Rule_Hdr_Key" Nullable="false" XMLName="EntitlementRuleKey"/>
+                <Attribute ColumnName="ASSIGN_TO_ORGANIZATION_CODE"
+                    DataType="OrgCode"
+				Description="This field indicates the organization for which the selling entitlement rule is assigned to."
+				Name="Assign_To_Organization_Code" Nullable="true" XMLName="AssignedToOrganizationCode"/>
+			<Attribute ColumnName="PURPOSE" DataType="Text-10"
+				Description="This field indicates whether the entitlement rule is used for selling entitlement or buying entitlement."
+				Name="Purpose" Nullable="true" XMLName="Purpose"/>
+                <Attribute ColumnName="CUSTOMER_ID"
+                    DataType="CustomerId"
+				Description="The identifier of the customer."
+				Name="Customer_Id" Nullable="true" XMLName="CustomerID"/>
+			<Attribute ColumnName="CUSTOMER_TYPE" DataType="Text-2"
+				Description="The type of customer."
+				Name="Customer_Type" Nullable="true" XMLName="CustomerType"/>
+                <Attribute ColumnName="RELATIONSHIP_TYPE"
+                    DataType="Text-40"
+				Description="The type of the relationship that exists between an organization and an enterprise (distributor, retailer, reseller, etc.)."
+                    Name="Relationship_Type" Nullable="true" XMLName="RelationshipType"/>
+                <Attribute ColumnName="CUSTOMER_LEVEL"
+                    DataType="Text-40"
+				Description="Level of customer membership (Gold, Tin, Platinum, etc.)."
+                    Name="Customer_Level" Nullable="true" XMLName="CustomerLevel"/>
+			<Attribute ColumnName="VERTICAL" DataType="Text-40"
+				Description="The vertical customer belongs to."
+				Name="Vertical" Nullable="true" XMLName="Vertical"/>
+			<Attribute ColumnName="REGION_KEY" DataType="Key" 
+				Description="Region to which entitlement rule is assigned."
+				Name="Region_Key" Nullable="true" XMLName="Region"/>
+			<Attribute ColumnName="SHARABLE" DataType="Flag" 
+				Description="This column is currently not being used. It was introduced to keep entitlement tables in sync with price list and may be used for future functionality."
+				Name="Sharable" Nullable="true" XMLName="Sharable"/> 
+			<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the creation of this record."
+				Name="Createts" Nullable="false" XMLName="Createts"/>
+			<Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+				DefaultValue="sysdate "
+				Description="The timestamp for the last modification of this record."
+				Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+				Description="The user who created this record."
+				Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+				Description="The user who last modified this record."
+				Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that created this record."
+				Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+				Description="The program that modified this record."
+				Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+				Description="An integer used to track and prevent concurrent modifications."
+				Name="Lockid" Nullable="false" XMLName="Lockid"/>
+				</Attributes>
+            <PrimaryKey DB2Name="ENT_RUL_ASSGN_PK" Name="YFS_ENTITLE_RULE_ASSIGNMENT_PK">
+                <Attribute ColumnName="ENTITLE_RULE_ASSIGNMENT_KEY" Name="Entitle_Rule_Assignment_Key"/>
+			</PrimaryKey>
+			<Indices>
+				<Index DB2Name="ENT_RUL_ASSGN_I1"
+					Name="YFS_ENTITLE_RULE_ASSIGNMENT_I1" Unique="false">
+					<Column Name="ENTITLEMENT_RULE_HDR_KEY"/>
+				</Index>
+				<Index DB2Name="ENT_RUL_ASSGN_I2"
+                    Name="YFS_ENTITLE_RULE_ASSIGNMENT_I2" Unique="true">
+                    <Column Name="ENTITLEMENT_RULE_HDR_KEY"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+					<Column Name="ASSIGN_TO_ORGANIZATION_CODE"/>
+                    <Column Name="CUSTOMER_ID"/>
+                    <Column Name="CUSTOMER_TYPE"/>
+                    <Column Name="CUSTOMER_LEVEL"/>
+                    <Column Name="RELATIONSHIP_TYPE"/>
+                    <Column Name="VERTICAL"/>
+                    <Column Name="REGION_KEY"/>
+                </Index>
+			</Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="EntitlementRuleAssignmentList"
+					ChildName="EntitlementRuleAssignment"
+                    ChildXMLName="EntitlementRuleAssignment"
+                    DeleteCascade="true"
+                    ForeignEntity="Entitlement_Rule_Hdr"
+                    Name="EntitlementRule" Type="Bidirectional" XMLName="EntitlementRule">
+                    <Attribute Name="Entitlement_Rule_Hdr_Key" ParentName="Entitlement_Rule_Hdr_Key"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					ForeignEntity="Organization"
+                    Name="Organization" Type="Unidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					ForeignEntity="Region"
+                    Name="Region" Type="Unidirectional" XMLName="Region">
+                    <Attribute Name="Region_Key" ParentName="Region_Key"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					ForeignEntity="Organization"
+                    Name="AssignedToOrganization" Type="Unidirectional" XMLName="AssignedToOrganization">
+                    <Attribute Name="Assign_To_Organization_Code" ParentName="Organization_Code"/>
+				</RelationShip>
+			</RelationShips>
+    </Entity>	
+	</Entities>
+</DBSchema>

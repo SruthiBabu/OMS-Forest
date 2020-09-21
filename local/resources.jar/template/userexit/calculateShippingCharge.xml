@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Order OrderReference="" OrganizationCode="" EnterpriseCode="" Currency="" PricingDate="" LinePriceTotal="" SuppressRuleExecution="" OrderAdjustment="" Subtotal="" CustomerID="">
+	<SelectionCriteria Vertical="" RelationshipType="" CustomerLevel="">
+		<PersonInfo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" IsCommercialAddress="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PreferredShipAddress="" State="" Suffix="" TaxGeoCode="" Title="" ZipCode=""/>
+	</SelectionCriteria>
+	<Adjustments>
+		<Adjustment AdjustmentID="" AdjustmentAvailable="" AdjustmentApplied="" RuleCategory="" IsCouponRule="" PricingRuleKey="" PricingRuleName="" Description=""	IsManualAdjustment="" ChargeCategory="" ChargeName=""/>
+	</Adjustments>
+	<Shipping CarrierServiceCode="" ShippingCharge="" MinimizeNumberOfShipments=""/>
+	<OrderLines>
+		<OrderLine IsPriceLocked="" LineID="" ItemID="" UnitOfMeasure="" Quantity="" ListPrice="" UnitPrice="" LineAdjustment="" LinePrice="" OrderAdjustment="" EligibleForShippingDiscount="" DeliveryMethod="" PricelistLineKey="" PercentAdjustment="" AbsoluteAdjustment="" StartDateActive="" EndDateActive="" FromQuantity="" ToQuantity="">
+			<LineAdjustments>
+				<Adjustment AdjustmentID="" AdjustmentPerUnit="" AdjustmentPerLine="" AdjustmentAvailable="" AdjustmentApplied="" RuleCategory="" IsCouponRule="" PricingRuleKey="" PricingRuleName="" Description="" IsManualAdjustment="">
+					<AdjustmentAction PricingRuleActionKey="" PricingRuleKey="" AdjustmentType="" WhenToApply="" OrderTotal="" Quantity="" Adjustment="" ChargeCategory="" ChargeName=""/>
+				</Adjustment>
+			</LineAdjustments>
+			<OrderAdjustments>
+				<Adjustment AdjustmentID="" AdjustmentAvailable="" AdjustmentApplied="" RuleCategory="" IsCouponRule="" PricingRuleKey="" PricingRuleName="" Description="" IsManualAdjustment="">
+					<AdjustmentAction PricingRuleActionKey="" PricingRuleKey="" AdjustmentType="" WhenToApply="" OrderTotal="" Quantity="" Adjustment="" ChargeCategory="" ChargeName=""/>
+				</Adjustment>
+			</OrderAdjustments>
+		</OrderLine>
+	</OrderLines>
+	<Coupons>
+		<Coupon CouponID="" Valid="" CouponStatusMsgCode="">
+			<CouponStatusAttribute Name="" Value=""/>
+		</Coupon>
+	</Coupons>
+</Order>

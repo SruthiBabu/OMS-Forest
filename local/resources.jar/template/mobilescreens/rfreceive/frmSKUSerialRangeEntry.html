@@ -1,0 +1,201 @@
+<html>
+    <body>
+        <form name="frmSKUSerialRangeEntry" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+					<td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@OrganizationCode"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Receipt/@OrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@OrganizationCode"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    mandatory="false"
+                                    name="DoNotVerifyCaseContent"
+                                    outputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@CaseId"
+                                    mandatory="false"
+                                    name="txtCaseId"
+                                    outputbinding="xml:/Receipt/@CaseId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@CaseId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    mandatory="false"
+                                    name="ParentPalletId"
+                                    outputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ParentLPN/@PalletId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    mandatory="false"
+                                    name="NumOfSecSerials"
+                                    outputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    type="hidden" validate="false" value=" "/>
+									<input col="1"
+                                    inputbinding="xml:/Receipt/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ShipmentKey"
+                                    type="hidden" validate="false" value=" "/>	
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Receipt/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+									<input col="1"
+                                    name="txtSerialEntryType1"
+                                    outputbinding="xml:/Receipt/@SerialEntryType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@SerialEntryType"
+                                    type="hidden" validate="false" value="SerialRange"/>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+									<input col="1"
+                                    inputbinding="xml:/Receipt1/ReceiptLines/ReceiptLine/@PickedRangeQuantity"
+                                    name="txtRangeQuantity"
+                                    outputbinding="xml:/Receipt1/ReceiptLines/ReceiptLine/@PickedRangeQuantity"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Receipt1/ReceiptLines/ReceiptLine/@PickedRangeQuantity"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemID"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+								    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Item/@DisplayItemId"
+									outputbinding="xml:/Item/@DisplayItemId"
+                                    mandatory="false"
+                                    name="txtDisplayItemId"
+                                    size="20"
+                                    subtype="ProtectedText"
+									tag="binding=xml:/Item/@DisplayItemId"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemID"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    size="20"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@UnitOfMeasure"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblQtyScanned" size="20"
+                                    subtype="Label" type="text" 
+									validate="false" value="Mobile_Scanned_Quantity"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Receipt1/ReceiptLines/ReceiptLine/@QtyScanned"
+                                    mandatory="false" name="txtQtyScanned" size="20" 
+									subtype="ProtectedText" type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblFromSerialNo" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblFromSerialNo"                                     type="text" validate="false" value="Mobile_From_Serial_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/SerialRangeList/SerialRange/@FromSerialNo"
+                                    mandatory="false"
+                                    name="txtFromSerialNo"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/SerialRangeList/SerialRange/@FromSerialNo"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/SerialRangeList/SerialRange/@FromSerialNo"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblToSerialNo" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblToSerialNo"                                     type="text" validate="false" value="Mobile_To_Serial_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/SerialRangeList/SerialRange/@ToSerialNo"
+                                    mandatory="false"
+                                    name="txtToSerialNo"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/SerialRangeList/SerialRange/@ToSerialNo"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/SerialRangeList/SerialRange/@ToSerialNo"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F8"
+                                    mandatory="false" name="Done"
+                                    size="5" subtype="Command"
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmDispCodeEntryForSerials"
+                                    validate="false" value="Mobile_Done"/>
+									<input col="7" hotkey="F7"
+                                    mandatory="false" name="ToggleEntry"
+                                    size="19" subtype="Command"
+                                    type="button" url="/console/rfreceive.ppc?action=frmReceiveToggleEntry"
+                                    validate="false" value="Mobile_Single_Serial_Entry"/>
+                                </td>
+							</tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

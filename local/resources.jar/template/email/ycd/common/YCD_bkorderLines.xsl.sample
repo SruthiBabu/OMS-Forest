@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:emailformatters="com.yantra.pca.email.formatters"
+    xmlns:java="java"
+    exclude-result-prefixes="java emailformatters">
+
+<xsl:template name="bkorderDataHeader">
+	<xsl:param name="isBackorderNotice">N</xsl:param>
+	<xsl:param name="isCancellationNotice">N</xsl:param>
+	<xsl:param name="showShipDate">Y</xsl:param>
+	<thead>
+		<tr>
+			<td class="tablecolumnheader">
+				Item Description
+			</td>
+
+			<xsl:if test="$showShipDate='Y'">
+			<td class="tablecolumnheader" style="text-align:right;">
+				Expected Ship Date
+			</td>
+			</xsl:if>
+
+			<td class="tablecolumnheader" style="text-align:right;">
+				Unit Price
+			</td>
+
+			<td class="tablecolumnheader" style="text-align:right;">
+				<xsl:choose>
+					<xsl:when test="$isBackorderNotice='Y'">
+						Backordered Quantity
+					</xsl:when>
+					<xsl:when test="$isCancellationNotice='Y'">
+						Cancelled Quantity
+					</xsl:when>
+					<xsl:otherwise>
+						Remaining Quantity
+					</xsl:otherwise>						
+				</xsl:choose>
+			</td>
+
+			<td class="tablecolumnheader" style="text-align:right;">
+				Total Price
+			</td>
+		</tr>
+	</thead>
+
+</xsl:template>
+
+
+<xsl:template name="bkorderData">
+	<xsl:param name="ItemDesc"></xsl:param>
+	<xsl:param name="ApplicableQty">0</xsl:param>
+	<xsl:param name="ExpectedShipDate"></xsl:param>
+	<xsl:param name="UnitPrice">0</xsl:param>
+	<xsl:param name="Quantity">0</xsl:param>
+	<xsl:param name="TotalPrice">0</xsl:param>
+	<xsl:param name="showShipDate">Y</xsl:param>
+
+	<tbody>
+		<tr>
+			<td class="tablecolumn">
+				<xsl:value-of select="$ItemDesc"/>
+			</td>
+
+			<xsl:if test="$showShipDate='Y'">
+			<td class="tablecolumn" style="text-align:right;">
+				<xsl:value-of select="emailformatters:TextEmailFormat.formatDate($ExpectedShipDate, 'MMM dd, yyyy')"/>
+			</td>
+			</xsl:if>
+
+			<td class="numerictablecolumn">
+				$<xsl:value-of select="format-number($UnitPrice, '.00')"/>
+			</td>
+			<td class="numerictablecolumn">
+				<xsl:value-of select="format-number($Quantity, '.00')"/>
+			</td>
+			<td class="numerictablecolumn">
+				$<xsl:value-of select="format-number($TotalPrice, '.00')"/>
+			</td>
+		</tr>
+	</tbody>
+
+</xsl:template>
+
+</xsl:stylesheet>

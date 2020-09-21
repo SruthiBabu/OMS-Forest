@@ -1,0 +1,166 @@
+<html>
+    <body>
+        <form name="frmDepositException" target="/console/rftask.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@TaskKey"
+                                    name="txtTaskKey"
+                                    outputbinding="xml:/Task/@TaskKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/@TaskType"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    name="txtExceptionType"
+                                    outputbinding="xml:/Task/@ExceptionType"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ExceptionType"
+                                    type="hidden" validate="false" value="Deposit"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@IsConsolidatedTask"
+                                    name="txtIsConsolidatedTask"
+                                    outputbinding="xml:/Task/@IsConsolidatedTask"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@IsConsolidatedTask"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" name="lblException"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblException"
+                                    type="text" validate="false" value="Mobile_Exception"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLocation"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@TargetLocationId"
+                                    name="txtTargetLocationId"
+                                    outputbinding="xml:/Task/@TargetLocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@TargetLocationId"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/Inventory/@Quantity"
+                                    name="txtQty"
+                                    outputbinding="xml:/Task/Inventory/@Quantity"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/Inventory/@Quantity"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblContext"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblContext"
+                                    type="text" validate="false" value=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding=""
+                                    name="txtContext"
+                                    outputbinding="" size="20"
+                                    subtype="ProtectedText" tag=""
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblTaskQty"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblTaskQty"
+                                    type="text" validate="false" value="Mobile_Task_Qty"/>
+                                    <input col="11" defaultoutput="false"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@TaskQuantity"
+                                    mandatory="false"
+                                    name="txtTaskQty"
+                                    outputbinding="xml:/Task/Inventory/@TaskQuantity"
+                                    size="10" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/Inventory/@TaskQuantity"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblReasonCode"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblReasonCode"
+                                    type="text" validate="false" value="Mobile_PPC_Reason_Code"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task/Exception/@ReasonCode"
+                                    name="txtReasonCode"
+                                    outputbinding="xml:/Task/@HoldReasonCode"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Task/@HoldReasonCode"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rftask.ppc?action=frmMandateReasonCodeEntry"
+                                    validate="false" value="Mobile_Go"/>
+                                    <input col="5" mandatory="false"
+                                    name="Back" size="5"
+                                    subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Back"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

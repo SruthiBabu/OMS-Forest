@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite 
+(C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.     
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. -->
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="AuthenticationLogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/Authentication.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="EDIINTLogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/EDIINT.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="PSLogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/Perimeter.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="SecurityLogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/Security.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="SyncEngineLogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/SyncEngine.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="aftroutinglogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/aftrouting.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="alerterlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/alerterlogger.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="approval_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/approval.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="archivelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/archive.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="bpdeadlinelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/bpdeadline.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="cdinteropcdjavalogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/cdinterop_cdjava.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="cdinteroplogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/cdinterop.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="cdsplogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/cdsp.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="ceulogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/ceuinterop.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="common3splogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/common3splogger.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="datastore_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/datastore.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="deletelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/delete.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="ebXMLlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/ebXML.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="edilogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/edi.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="embeddedEnginelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/embeddedEngine.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="event_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/event.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="ftplogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/ftp.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="httpclientlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/httpclient.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="httplogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/http.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="jettylogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/jetty.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="jmxlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/jmx.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="lifecycleLogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/lifecycle.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="mailboxlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/mailbox.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="neo_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/mgmtdash.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="noapplogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/noapp.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="oftplogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/oftp.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="pipelinelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/pipeline.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="psftpclientlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/ftpclient.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="purgelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/system.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="resourcemonitorlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/resourcemonitor.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="rnlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/rnif.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="saplogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/sap.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="schedulelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/schedule.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="schedulemonitorlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/schedulemonitor.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="sclogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/servicesctl.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="sftpclientlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/sftpclient.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="sftpserverlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/sftpserver.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="silogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/si_exe.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="sqllogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/sql.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="swiftnetlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/swiftnet.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="systemlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/system.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="tracking_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/tracking.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="txlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/tx.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="txtracelogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/txtrace.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="uilogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/ui.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="visibilitylogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/visibility.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="webdavlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/webdav.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="webxlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/webx.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="wfexception_logger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/wfexception.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="wflogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/wf.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="wfstatistics_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/wfstatistics.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="wsmqSuiteLogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/WebSphereMQSuite.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="wsrmlogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/wsrm.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <appender name="wsseclogger_appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/opt/SSFS_9.5/runtime/logs/wssec.log" />
+        <param name="MaxFileSize" value="1MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %m%n" />
+        </layout>
+    </appender>
+    <logger name="AuthenticationLogger">
+        <level value="ALL" />
+        <appender-ref ref="AuthenticationLogger_appender" />
+    </logger>
+    <logger name="EDIINTLogger">
+        <level value="ALL" />
+        <appender-ref ref="EDIINTLogger_appender" />
+    </logger>
+    <logger name="PSLogger">
+        <level value="ALL" />
+        <appender-ref ref="PSLogger_appender" />
+    </logger>
+    <logger name="SecurityLogger">
+        <level value="ALL" />
+        <appender-ref ref="SecurityLogger_appender" />
+    </logger>
+    <logger name="SyncEngineLogger">
+        <level value="ALL" />
+        <appender-ref ref="SyncEngineLogger_appender" />
+    </logger>
+    <logger name="aftroutinglogger">
+        <level value="ALL" />
+        <appender-ref ref="aftroutinglogger_appender" />
+    </logger>
+    <logger name="alerterlogger">
+        <level value="ALL" />
+        <appender-ref ref="alerterlogger_appender" />
+    </logger>
+    <logger name="approval">
+        <level value="ALL" />
+        <appender-ref ref="approval_appender" />
+    </logger>
+    <logger name="archivelogger">
+        <level value="ALL" />
+        <appender-ref ref="archivelogger_appender" />
+    </logger>
+    <logger name="bpdeadlinelogger">
+        <level value="ALL" />
+        <appender-ref ref="bpdeadlinelogger_appender" />
+    </logger>
+    <logger name="cdinteropcdjavalogger">
+        <level value="ALL" />
+        <appender-ref ref="cdinteropcdjavalogger_appender" />
+    </logger>
+    <logger name="cdinteroplogger">
+        <level value="ALL" />
+        <appender-ref ref="cdinteroplogger_appender" />
+    </logger>
+    <logger name="cdsplogger">
+        <level value="ALL" />
+        <appender-ref ref="cdsplogger_appender" />
+    </logger>
+    <logger name="ceulogger">
+        <level value="ALL" />
+        <appender-ref ref="ceulogger_appender" />
+    </logger>
+    <logger name="common3splogger">
+        <level value="ALL" />
+        <appender-ref ref="common3splogger_appender" />
+    </logger>
+    <logger name="datastore">
+        <level value="ALL" />
+        <appender-ref ref="datastore_appender" />
+    </logger>
+    <logger name="deletelogger">
+        <level value="ALL" />
+        <appender-ref ref="deletelogger_appender" />
+    </logger>
+    <logger name="ebXMLlogger">
+        <level value="ALL" />
+        <appender-ref ref="ebXMLlogger_appender" />
+    </logger>
+    <logger name="edilogger">
+        <level value="ALL" />
+        <appender-ref ref="edilogger_appender" />
+    </logger>
+    <logger name="embeddedEnginelogger">
+        <level value="ALL" />
+        <appender-ref ref="embeddedEnginelogger_appender" />
+    </logger>
+    <logger name="event">
+        <level value="ALL" />
+        <appender-ref ref="event_appender" />
+    </logger>
+    <logger name="ftplogger">
+        <level value="ALL" />
+        <appender-ref ref="ftplogger_appender" />
+    </logger>
+    <logger name="httpclientlogger">
+        <level value="ALL" />
+        <appender-ref ref="httpclientlogger_appender" />
+    </logger>
+    <logger name="httplogger">
+        <level value="ALL" />
+        <appender-ref ref="httplogger_appender" />
+    </logger>
+    <logger name="jettylogger">
+        <level value="ALL" />
+        <appender-ref ref="jettylogger_appender" />
+    </logger>
+    <logger name="jmxlogger">
+        <level value="ALL" />
+        <appender-ref ref="jmxlogger_appender" />
+    </logger>
+    <logger name="lifecycleLogger">
+        <level value="ALL" />
+        <appender-ref ref="lifecycleLogger_appender" />
+    </logger>
+    <logger name="mailboxlogger">
+        <level value="ALL" />
+        <appender-ref ref="mailboxlogger_appender" />
+    </logger>
+    <logger name="neo">
+        <level value="ALL" />
+        <appender-ref ref="neo_appender" />
+    </logger>
+    <logger name="noapplogger">
+        <level value="ALL" />
+        <appender-ref ref="noapplogger_appender" />
+    </logger>
+    <logger name="oftplogger">
+        <level value="ALL" />
+        <appender-ref ref="oftplogger_appender" />
+    </logger>
+    <logger name="pipelinelogger">
+        <level value="ALL" />
+        <appender-ref ref="pipelinelogger_appender" />
+    </logger>
+    <logger name="psftpclientlogger">
+        <level value="ALL" />
+        <appender-ref ref="psftpclientlogger_appender" />
+    </logger>
+    <logger name="purgelogger">
+        <level value="ALL" />
+        <appender-ref ref="purgelogger_appender" />
+    </logger>
+    <logger name="resourcemonitorlogger">
+        <level value="ALL" />
+        <appender-ref ref="resourcemonitorlogger_appender" />
+    </logger>
+    <logger name="rnlogger">
+        <level value="ALL" />
+        <appender-ref ref="rnlogger_appender" />
+    </logger>
+    <logger name="saplogger">
+        <level value="ALL" />
+        <appender-ref ref="saplogger_appender" />
+    </logger>
+    <logger name="schedulelogger">
+        <level value="ALL" />
+        <appender-ref ref="schedulelogger_appender" />
+    </logger>
+    <logger name="schedulemonitorlogger">
+        <level value="ALL" />
+        <appender-ref ref="schedulemonitorlogger_appender" />
+    </logger>
+    <logger name="sclogger">
+        <level value="ALL" />
+        <appender-ref ref="sclogger_appender" />
+    </logger>
+    <logger name="sftpclientlogger">
+        <level value="ALL" />
+        <appender-ref ref="sftpclientlogger_appender" />
+    </logger>
+    <logger name="sftpserverlogger">
+        <level value="ALL" />
+        <appender-ref ref="sftpserverlogger_appender" />
+    </logger>
+    <logger name="silogger">
+        <level value="ALL" />
+        <appender-ref ref="silogger_appender" />
+    </logger>
+    <logger name="sqllogger">
+        <level value="ALL" />
+        <appender-ref ref="sqllogger_appender" />
+    </logger>
+    <logger name="swiftnetlogger">
+        <level value="ALL" />
+        <appender-ref ref="swiftnetlogger_appender" />
+    </logger>
+    <logger name="systemlogger">
+        <level value="ALL" />
+        <appender-ref ref="systemlogger_appender" />
+    </logger>
+    <logger name="tracking">
+        <level value="ALL" />
+        <appender-ref ref="tracking_appender" />
+    </logger>
+    <logger name="txlogger">
+        <level value="ALL" />
+        <appender-ref ref="txlogger_appender" />
+    </logger>
+    <logger name="txtracelogger">
+        <level value="ALL" />
+        <appender-ref ref="txtracelogger_appender" />
+    </logger>
+    <logger name="uilogger">
+        <level value="ALL" />
+        <appender-ref ref="uilogger_appender" />
+    </logger>
+    <logger name="visibilitylogger">
+        <level value="ALL" />
+        <appender-ref ref="visibilitylogger_appender" />
+    </logger>
+    <logger name="webdavlogger">
+        <level value="ALL" />
+        <appender-ref ref="webdavlogger_appender" />
+    </logger>
+    <logger name="webxlogger">
+        <level value="ALL" />
+        <appender-ref ref="webxlogger_appender" />
+    </logger>
+    <logger name="wfexception_logger">
+        <level value="ALL" />
+        <appender-ref ref="wfexception_logger_appender" />
+    </logger>
+    <logger name="wflogger">
+        <level value="ALL" />
+        <appender-ref ref="wflogger_appender" />
+    </logger>
+    <logger name="wfstatistics">
+        <level value="ALL" />
+        <appender-ref ref="wfstatistics_appender" />
+    </logger>
+    <logger name="wsmqSuiteLogger">
+        <level value="ALL" />
+        <appender-ref ref="wsmqSuiteLogger_appender" />
+    </logger>
+    <logger name="wsrmlogger">
+        <level value="ALL" />
+        <appender-ref ref="wsrmlogger_appender" />
+    </logger>
+    <logger name="wsseclogger">
+        <level value="ALL" />
+        <appender-ref ref="wsseclogger_appender" />
+    </logger>
+    <root>
+        <priority value="ALL" />
+        <appender-ref ref="systemlogger_appender" />
+    </root>
+</log4j:configuration>

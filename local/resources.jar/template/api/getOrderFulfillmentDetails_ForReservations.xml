@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Order DocumentType="" DraftOrderFlag="" EnteredBy="" EnterpriseCode="" OrderDate="" OrderHeaderKey="" OrderNo="" SellerOrganizationCode="" ShipNode="" ShipToID="" ShipToKey="" >
+	<PriceInfo Currency=""/>
+	<OrderLines>
+		<OrderLine DeliveryMethod="" ShipNode="" ShipToKey="" MinLineStatus="" MaxLineStatus="" 
+		OrderLineKey="" ProductAvailDate="" EarliestProductShipDate="" ProductShipDate="" GiftFlag="" OrderedQty="" 
+		ReqShipDate="" AlternateItemID="" ItemGroupCode="" ItemID="" ItemIsInHand="" HasAnyUnavailableQty="" IsBundleParent="" 
+		ReqDeliveryDate="">
+			<Item ItemID="" UnitOfMeasure="" ProductClass="" />
+			<ItemDetails ItemID="">
+				<PrimaryInformation BundleFulfillmentMode="" DefaultProductClass="" ImageID="" ImageLabel="" ImageLocation="" /> 
+			</ItemDetails>
+			<BundleParentLine OrderLineKey=""/>
+			<PromiseLine RequiredQty="" OrderLineKey="" UnitOfMeasure="" ProductClass="" ItemID="" NewItemID="">
+				<Assignments>
+					<Assignment AvailableFromUnplannedInventory="" ProductAvailDate="" Quantity="" ReservedQty=""  ShipNode="" ShipDate="" SubstitutedQty="" EarliestShipDate ="">
+						<SubstituteItems>
+							<SubstituteItem ItemID="" ProcuredQty="" ProductClass="" Quantity="" ReservedQty="" UOM="">
+								<Procurements>
+									<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate=""/>
+								</Procurements>
+							</SubstituteItem>
+						</SubstituteItems>
+						<Procurements>
+							<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate="" SubstitutedQty=""/>
+						</Procurements>
+					</Assignment>
+				</Assignments>
+			</PromiseLine>
+			<OrderLineSourcingControls>
+				<OrderLineSourcingCntrl InventoryCheckCode="" Node="" />
+			</OrderLineSourcingControls>
+			<OrderLineTranQuantity OrderedQty="" TransactionalUOM=""/>
+			<OrderLineInvAttRequest>
+				<Extn/>
+			</OrderLineInvAttRequest>
+			<OrderLineReservations> 
+				<OrderLineReservation BatchNo="" DemandType="" ItemID="" LotNumber="" Node="" ProductAvailabilityDate="" ProductClass="" Quantity="" RequestedReservationDate="" RevisionNo="" TagNumber="" UnitOfMeasure="">
+					<Extn/> 
+				</OrderLineReservation> 
+			</OrderLineReservations> 
+			<UnavailableLines>
+				<UnavailableLine AssignedQty="" BundleParentOrderLineKey="" IsBundleParent="" ItemGroupCode="" ItemID="" NewItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" SubLineNo="" ToReleaseQty="" ToScheduleQty="" UnitOfMeasure="">
+					<Reasons>
+						<Reason Text=""/>
+					</Reasons>
+					<Messages>
+						<Message Text=""/>
+					</Messages>
+				</UnavailableLine>
+			</UnavailableLines>	
+		</OrderLine>
+	</OrderLines>
+</Order>

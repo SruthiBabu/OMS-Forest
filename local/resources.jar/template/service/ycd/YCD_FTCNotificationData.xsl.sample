@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:variable name="maxstatus">3200</xsl:variable>
+	<xsl:variable name="sts_bofn">1400</xsl:variable>
+	<xsl:variable name="sts_bo">1300</xsl:variable>
+	<xsl:variable name="sts_cncld">9000</xsl:variable>
+	<xsl:variable name="datetype_fpdd">YCD_FIRST_PDD</xsl:variable>
+	<xsl:variable name="datetype_spdd">YCD_SECOND_PDD</xsl:variable>
+
+	<xsl:template match="Order">
+		<Order>
+			<xsl:copy-of select="@*" />
+			<xsl:apply-templates select="OrderLines" />
+			<xsl:copy-of select="PersonInfoBillTo" />
+		</Order>
+	</xsl:template>
+	<xsl:template match="OrderLines">
+		<OrderLines>
+			<xsl:apply-templates />
+		</OrderLines>
+	</xsl:template>
+	<xsl:template match="OrderLine">
+		<OrderLine>
+			<xsl:copy-of select="@*" />
+			<xsl:attribute name="ApplicableQty">
+				<xsl:value-of select="sum(OrderStatuses/OrderStatus[number(substring(@Status,1,4))&lt;$maxstatus][substring(@Status,1,4)!=$sts_bofn]/@StatusQty)" />
+			</xsl:attribute>
+			<xsl:attribute name="TotalBackorderedQty">
+				<xsl:value-of select="sum(OrderStatuses/OrderStatus[substring(@Status,1,4)=$sts_bo]/@StatusQty)" />
+			</xsl:attribute>
+			<xsl:attribute name="TotalCancelledQty">
+				<xsl:value-of select="sum(OrderStatuses/OrderStatus[substring(@Status,1,4)=$sts_cncld]/@StatusQty)" />
+			</xsl:attribute>
+			<xsl:attribute name="FirstPromisedDeliveryDate">
+				<xsl:value-of select="OrderDates/OrderDate[@DateTypeId=$datetype_fpdd]/@ActualDate" />
+			</xsl:attribute>
+			<xsl:attribute name="SecondPromisedDeliveryDate">
+				<xsl:value-of select="OrderDates/OrderDate[@DateTypeId=$datetype_spdd]/@ActualDate" />
+			</xsl:attribute>
+			<xsl:copy-of select="Item" />
+			<xsl:copy-of select="LineOverallTotals" />
+		</OrderLine>
+	</xsl:template>
+</xsl:stylesheet>

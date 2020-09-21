@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- doOrderPricing UserExit Input XML-->
+<Order AllocationRuleID="" AuthorizationExpirationDate="" BillToID=""
+    BuyerOrganizationCode="" CarrierAccountNo="" CarrierServiceCode=""
+    ChargeActualFreightFlag="" CustomerEMailID="" CustomerPONo=""
+    DeliveryCode="" Division="" DocumentType="" DraftOrderFlag=""
+    EnteredBy="" EnterpriseCode="" EntryType="" 
+    FreightTerms="" HoldFlag="" HoldReasonCode="" MaxOrderStatus=""
+    MaxOrderStatusDesc="" MinOrderStatus="" MinOrderStatusDesc=""
+    NotificationReference="" NotificationType=""
+    NotifyAfterShipmentFlag="" OrderDate="" OrderHeaderKey=""
+    OrderName="" OrderNo="" OrderType="" OriginalTax=""
+    OriginalTotalAmount="" OtherCharges="" PaymentStatus=""
+    PersonalizeCode="" PriceProgramKey="" PriorityCode=""
+    PriorityNumber="" Purpose="" ReceivingNode="" ReqCancelDate="" ReqDeliveryDate=""
+    ReqShipDate="" SCAC="" ScacAndService="" ScacAndServiceKey=""
+    SearchCriteria1="" SearchCriteria2="" SellerOrganizationCode=""
+    ShipCompleteFlag="" ShipToID="" Status="" TaxExemptFlag=""
+    TaxExemptionCertificate="" TaxJurisdiction="" TaxPayerId=""
+    TermsCode="" TotalAdjustmentAmount="" isHistory="" AutoCancelDate="" SaleVoided="">
+    <OrderLines NumberOfOrderLines="">
+        <!--1 or more order
+        line-->
+        <OrderLine AllocationDate="" CarrierAccountNo=""
+            CarrierServiceCode="" CustomerLinePONo="" CustomerPONo=""
+            DeliveryCode="" DepartmentCode="" FreightTerms="" HoldFlag="" HoldReasonCode=""
+            ImportLicenseExpDate="" ImportLicenseNo="" InvoicedQty=""
+            KitCode="" LineSeqNo="" LineType="" MaxLineStatus=""
+            MaxLineStatusDesc="" MinLineStatus="" MinLineStatusDesc=""
+            OpenQty=""  OrderHeaderKey="" OrderLineKey=""
+            OrderedQty="" OrigOrderLineKey="" OriginalOrderedQty=""
+            OtherCharges="" 
+            PackListType="" PersonalizeCode=""
+            PersonalizeFlag="" PickableFlag="" PrimeLineNo="" Purpose=""
+            ReceivingNode="" RemainingQty="" ReqCancelDate=""
+            ReqDeliveryDate="" ReqShipDate="" ReservationID=""
+            ReservationPool="" SCAC="" ScacAndService=""
+            ScacAndServiceKey="" ShipNode="" ShipToID=""
+            ShipTogetherNo="" SplitQty="" Status="" StatusQuantity=""
+            SubLineNo="" isHistory="">
+            <Item CostCurrency="" CountryOfOrigin="" CustomerItem=""
+                CustomerItemDesc="" ECCNNo="" HarmonizedCode="" ISBN=""
+                ItemDesc="" ItemID="" ItemShortDesc="" ItemWeight=""
+                ItemWeightUOM="" ManufacturerItem=""
+                ManufacturerItemDesc="" ManufacturerName="" NMFCClass=""
+                NMFCCode="" NMFCDescription="" ProductClass=""
+                ProductLine="" ScheduleBCode="" SupplierItem=""
+                SupplierItemDesc="" TaxProductCode="" UPCCode=""
+                UnitCost="" UnitOfMeasure=""/>
+            <PersonInfoShipTo AddressLine1="" AddressLine2=""
+                AddressLine3="" AddressLine4="" AddressLine5=""
+                AddressLine6="" AlternateEmailID="" Beeper="" City=""
+                Company="" Country="" DayFaxNo="" DayPhone=""
+                Department="" EMailID="" EveningFaxNo="" EveningPhone=""
+                FirstName="" JobTitle="" LastName="" MiddleName=""
+                MobilePhone="" OtherPhone="" PersonID=""
+                PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+            <!--Optional-->
+            <PersonInfoMarkFor AddressLine1="" AddressLine2=""
+                AddressLine3="" AddressLine4="" AddressLine5=""
+                AddressLine6="" AlternateEmailID="" Beeper="" City=""
+                Company="" Country="" DayFaxNo="" DayPhone=""
+                Department="" EMailID="" EveningFaxNo="" EveningPhone=""
+                FirstName="" JobTitle="" LastName="" MiddleName=""
+                MobilePhone="" OtherPhone="" PersonID=""
+                PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+            <!--Optional-->
+            <LinePriceInfo DiscountPercentage="" LineTotal=""
+                ListPrice="" RetailPrice="" TaxableFlag="" UnitPrice=""/>
+            <Instructions NumberOfInstructions="">
+                <!-- NumberOfInstructions is not a template driven attribute. -->
+                <Instruction InstructionText="" InstructionType="" InstructionURL=""/>
+            </Instructions>
+            <References>
+                <Reference Name="" Value=""/>
+            </References>
+            <!--Optional-->
+            <KitLines NumberOfKitLines="">
+                <!-- NumberOfKitLines is not a template driven attribute. -->
+                <KitLine ComponentQty="" CustomerItem=""
+                    CustomerItemDesc="" DepartmentCode="" ItemDesc=""
+                    ItemID="" ItemShortDesc="" ItemWeight=""
+                    ItemWeightUOM="" KitQty="" ProductClass=""
+                    SupplierItem="" SupplierItemDesc="" UPCCode="" UnitOfMeasure=""/>
+            </KitLines>
+            <Schedules>
+                <Schedule ExpectedDeliveryDate=""
+                    ExpectedShipmentDate="" TagNumber=""
+                    OrderHeaderKey="" OrderLineKey=""
+                    OrderLineScheduleKey="" Quantity="" ScheduleNo="" ShipByDate=""/>
+            </Schedules>
+            <AdditionalAddresses NumberOfAdditionalAddresses="">
+                <!-- NumberOfAdditionalAddresses is not a template driven attribute. -->
+                <AdditionalAddress AddressType="" EntityAddressKey=""
+                    EntityKey="" EntityParentKey="" EntityType="" PersonInfoKey="">
+                    <PersonInfo AddressLine1="" AddressLine2=""
+                        AddressLine3="" AddressLine4="" AddressLine5=""
+                        AddressLine6="" AlternateEmailID="" Beeper=""
+                        City="" Company="" Country="" DayFaxNo=""
+                        DayPhone="" Department="" EMailID=""
+                        EveningFaxNo="" EveningPhone="" FirstName=""
+                        JobTitle="" LastName="" MiddleName=""
+                        MobilePhone="" OtherPhone="" PersonID=""
+                        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+                </AdditionalAddress>
+            </AdditionalAddresses>
+            <LineOverallTotals Charges="" Discount="" ExtendedPrice=""
+                LineTotal="" Tax="" UnitPrice=""/>
+            <!-- LineOverallTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineInvoicedTotals Charges="" Discount="" ExtendedPrice=""
+                LineTotal="" Tax="" UnitPrice=""/>
+            <!-- LineInvoicedTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineRemainingTotals Charges="" Discount="" ExtendedPrice=""
+                LineTotal="" Tax="" UnitPrice=""/>
+            <!-- LineRemainingTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineCharges>
+                <LineCharge ChargeCategory="" ChargeName=""
+                    ChargeNameKey="" InvoicedChargeAmount=""
+                    InvoicedChargePerLine="" InvoicedChargePerUnit=""
+                    OverallChargeAmount="" OverallChargePerLine=""
+                    OverallChargePerUnit="" Reference=""
+                    RemainingChargeAmount="" RemainingChargePerLine="" RemainingChargePerUnit=""/>
+            </LineCharges>
+            <!-- LineCharge is not a template driven element. If the template contains either of LineCharge or LineTax elements, both will appear in the output, alongwith all their attributes. -->
+            <LineTaxes>
+                <LineTax ChargeNameKey="" ChargeCategory="" ChargeName="" InvoicedTax=""
+                    OverallTax="" Reference_1="" Reference_2=""
+                    Reference_3="" RemainingTax="" Tax="" TaxName="" TaxPercentage=""/>
+                <TaxSummary>
+                    <TaxSummaryDetail InvoicedTax="" OverallTax=""
+                        RemainingTax="" TaxName=""/>
+                </TaxSummary>
+            </LineTaxes>
+            <!-- LineTax is not a template driven element. If the template contains either of LineCharge or LineTax elements, both will appear in the output, alongwith all their attributes. -->
+            <!--Optional-->
+            <OrderStatuses>
+                <OrderStatus 
+                    NextTransactionKey="" OrderHeaderKey=""
+                    OrderLineKey="" OrderLineScheduleKey=""
+                    OrderReleaseKey="" OrderReleaseStatusKey=""
+                    PipelineKey="" ReceivingNode="" ShipNode=""
+                    Status="" StatusDate="" StatusDescription=""
+                    StatusQty="" StatusReason="" TotalQuantity="">
+                    <Details ExpectedDeliveryDate=""
+                        ExpectedShipmentDate="" TagNumber="" ShipByDate=""/>
+                </OrderStatus>
+            </OrderStatuses>
+            <OrderDates>
+                <OrderDate ActualDate="" DateTypeId=""
+                    ExpectedDate="" RequestedDate=""/>
+            </OrderDates>
+        </OrderLine>
+    </OrderLines>
+    <Instructions NumberOfInstructions="">
+        <!-- NumberOfInstructions is not a template driven attribute. -->
+        <Instruction InstructionText="" InstructionType="" InstructionURL=""/>
+    </Instructions>
+    <!--Optional-->
+    <PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <!--Either at  line level or at header
+    level-->
+    <PersonInfoBillTo AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <PersonInfoMarkFor AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <PersonInfoContact AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <AdditionalAddresses NumberOfAdditionalAddresses="">
+        <!-- NumberOfAdditionalAddresses is not a template driven attribute. -->
+        <AdditionalAddress AddressType="" EntityAddressKey=""
+            EntityKey="" EntityParentKey="" EntityType="" PersonInfoKey="">
+            <PersonInfo AddressLine1="" AddressLine2="" AddressLine3=""
+                AddressLine4="" AddressLine5="" AddressLine6=""
+                AlternateEmailID="" Beeper="" City="" Company=""
+                Country="" DayFaxNo="" DayPhone="" Department=""
+                EMailID="" EveningFaxNo="" EveningPhone="" FirstName=""
+                JobTitle="" LastName="" MiddleName="" MobilePhone=""
+                OtherPhone="" PersonID="" PersonInfoKey="" State=""
+                Suffix="" Title="" ZipCode=""/>
+        </AdditionalAddress>
+    </AdditionalAddresses>
+    <PriceInfo Currency="" EnterpriseCurrency=""
+        ReportingConversionDate="" ReportingConversionRate="" TotalAmount=""/>
+    <OverallTotals GrandCharges="" GrandDiscount="" GrandTax=""
+        GrandTotal="" HdrCharges="" HdrDiscount="" HdrTax="" HdrTotal="" LineSubTotal=""/>
+    <!-- OverallTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+    <InvoicedTotals GrandCharges="" GrandDiscount="" GrandTax=""
+        GrandTotal="" HdrCharges="" HdrDiscount="" HdrTax="" HdrTotal="" LineSubTotal=""/>
+    <!-- InvoicedTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+    <RemainingTotals GrandCharges="" GrandDiscount="" GrandTax=""
+        GrandTotal="" HdrCharges="" HdrDiscount="" HdrTax="" HdrTotal="" LineSubTotal=""/>
+    <!-- RemainingTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+    <HeaderCharges>
+        <HeaderCharge ChargeCategory="" ChargeName="" ChargeNameKey=""
+            InvoicedChargeAmount="" OverallChargeAmount="" Reference="" RemainingChargeAmount=""/>
+    </HeaderCharges>
+    <!-- HeaderCharge is not a template driven element. If the template contains either of HeaderCharge or HeaderTax elements, both will appear in the output, alongwith all their attributes. -->
+    <HeaderTaxes>
+        <HeaderTax ChargeNameKey="" ChargeCategory="" ChargeName="" InvoicedTax=""
+            OverallTax="" Reference_1="" Reference_2="" Reference_3=""
+            RemainingTax="" TaxName="" TaxPercentage="" TaxableFlag=""/>
+        <TaxSummary>
+            <TaxSummaryDetail InvoicedTax="" OverallTax=""
+                RemainingTax="" TaxName=""/>
+        </TaxSummary>
+    </HeaderTaxes>
+    <!-- HeaderTax is not a template driven element. If the template contains either of HeaderCharge or HeaderTax elements, both will appear in the output, alongwith all their attributes. -->
+    <References>
+        <Reference Name="" Value=""/>
+    </References>
+    <!--Optional-->
+    <PaymentMethods>
+        <!--Only one payment info can be specified. In future releases multiple payment methods may be enabled.-->
+        <PaymentMethod CheckNo="" CheckReference="" CreditCardExpDate=""
+            CreditCardName="" CreditCardNo="" CreditCardType=""
+            CustCustPONo="" CustomerAccountNo="" PaymentReference1=""
+            PaymentReference2="" PaymentReference3="" PaymentType=""/>
+    </PaymentMethods>
+    <ChargeTransactionDetails TotalCredits="" TotalDebits=""
+        TotalOpenAuthorizations="" TotalOpenBookings="">
+        <!-- The attributes of ChargeTransactionDetails element are not template driven. If the element is present in the template, all the attributes will be output, regardless of their presence or absence in the template. -->
+        <ChargeTransactionDetail AuditTransactionID=""
+            AuthorizationExpirationDate="" AuthorizationID=""
+            BookAmount="" ChargeTransactionKey="" ChargeType=""
+            CreditAmount="" CreditCardExpDate="" CreditCardName=""
+            CreditCardNo="" CreditCardType="" CustomerAccountNo=""
+            CustomerPONo="" DebitAmount="" DistributedAmount=""
+            OpenAuthorizedAmount="" OrderHeaderKey="" OrderInvoiceKey=""
+            PaymentMethodReference1="" PaymentMethodReference2=""
+            PaymentMethodReference3="" PaymentType="" RequestAmount=""
+            Status="" StatusReason="" TransactionDate="" UserExitStatus="">
+            <CreditCardTransactions>
+                <CreditCardTransaction AuthAmount="" AuthAvs=""
+                    AuthCode="" AuthReturnCode="" AuthReturnFlag=""
+                    AuthReturnMessage="" AuthTime=""
+                    ChargeTransactionKey="" CreditCardTransactionKey=""
+                    InternalReturnCode="" InternalReturnFlag=""
+                    InternalReturnMessage="" ParentKey="" Reference1=""
+                    Reference2="" RequestId="" TranAmount=""
+                    TranRequestTime="" TranReturnCode=""
+                    TranReturnFlag="" TranReturnMessage="" TranType=""/>
+            </CreditCardTransactions>
+        </ChargeTransactionDetail>
+    </ChargeTransactionDetails>
+    <OrderStatuses>
+        <OrderStatus  NextTransactionKey=""
+            OrderHeaderKey="" OrderLineKey="" OrderLineScheduleKey=""
+            OrderReleaseKey="" OrderReleaseStatusKey="" PipelineKey=""
+            ReceivingNode="" ShipNode="" Status="" StatusDate=""
+            StatusDescription="" StatusQty="" StatusReason="" TotalQuantity="">
+            <Details ExpectedDeliveryDate="" ExpectedShipmentDate=""
+                TagNumber="" ShipByDate=""/>
+        </OrderStatus>
+    </OrderStatuses>
+            <OrderDates>
+                <OrderDate ActualDate="" DateTypeId=""
+                    ExpectedDate="" RequestedDate=""/>
+            </OrderDates>
+</Order>

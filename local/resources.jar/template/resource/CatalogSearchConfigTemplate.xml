@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<SearchConfigurations>
+	<SearchSystemConfigurations>
+		<MergeFactor />
+		<MaxMergeDocs />
+	</SearchSystemConfigurations>
+	<IndexSets>
+		<IndexSet Name="Key">
+			<Locales>
+				<Locale LocaleCode="Key"/>
+			</Locales>
+			<Entities>
+				<Entity Name="Key">
+					<Attributes>
+						<Attribute IndexFieldName="Key" Type="Key2"/>
+					</Attributes>
+					<Entity Name="Key">
+						<Attributes>
+							 <Attribute IndexFieldName="Key" />
+						</Attributes>
+						<Entity Name="Key">
+							 <Attributes>
+								   <Attribute IndexFieldName="Key" />
+							 </Attributes>
+							 <Entity Name="Key">
+								   <Attributes>
+										 <Attribute IndexFieldName="Key" />
+								   </Attributes>
+							 </Entity>
+						</Entity>
+					</Entity>
+				</Entity>
+			</Entities>
+		</IndexSet>
+	</IndexSets>
+</SearchConfigurations>
+

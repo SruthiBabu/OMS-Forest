@@ -1,0 +1,99 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<TransactionList>
+     <Transaction AgentJavaClass="" BaseProcessTypeListenedTo="" BaseTransactionKey="" ChainedDocumentType="" 
+         DerivedDocumentType="" DerivedFromAbstract="" DropStatusFilter="" ExternallyTriggerable=""
+         ExternallyTriggered="" IsManual="" ListenerType="" 
+		OwnerKey="" PickStatusFilter="" PreDefined="" ProcessTypeKey="" RequiresChainedDocType="" 
+		RequiresDerivedDocType="" SingleDropStatus="" SpawnedProcessTypeKey="" SpawnsPipeline="" TaskQKeyType="" TimeTriggerable="" 
+		TimeTriggered="" TranSequence="" Trangroup="" Tranid="" Tranname="" TransactionKey="" Trantype="" UserTaskFlowKey="" 
+		UserTriggerable="" WorksOffTaskQ="" SupportsOperationLevel="" OperationLevel="" >
+         <PipelineListenerList>
+		     <PipelineListener DropStatus="" ListenerType=""
+                ListeningToProcessTypeKey=""
+                ListeningToStatus=""
+                ListeningToStatusKey="" Lockid="0"
+                PipelineKey=""
+                PipelineListenerKey=""/>
+			</PipelineListenerList>
+         <AgentCriteriaList>
+             <AgentCriteria AgentCriteriaId="" AgentCriteriaKey=""  
+				 FlowKey="" MessageXml="" ServerKey="" TransactionKey="">
+                 <Flow FlowGroupName="" FlowKey="" FlowName="" 
+					 FlowType="" GraphUIKey="" IsOutGoing="" IsRealTime="" 
+                     OwnerKey="" ProcessTypeKey="" TransportTypeKey="">
+					 <UserExitImplList>
+						<UserExitImpl UserExitImplKey="" UserExitKey="" OrgKey=""  DocumentTypeKey="" UseFlow="" FlowKey="" JavaClassName="" Version="" ImplementationNotes="" CallsPerJvm="" WaitingCalls="" WaitTime="" />
+				    </UserExitImplList>
+                     <OrgDocumentList>
+						<OrgDocument OrgDocumentKey="" OrganizationKey="" RoleDocumentKey="" DocumentFormatKey="" VariantReference1="" VariantReference2="" VariantReference3="" VariantReference4="" VariantReference5="" ProtocolKey="" BackupProtocolKey="" FlowKey="" />
+					 </OrgDocumentList>
+                     <SubFlowList>
+                         <SubFlow ConfigXML=""  FlowKey=""  QueueKey="" SeqNo="" 
+							ServerKey="" SubFlowKey="" SubFlowName=""/>
+                     </SubFlowList>
+                     <InvokedFlowsList>
+						<InvokedFlows InvokedFlowsKey="" FlowName="" FlowKey="" />
+					</InvokedFlowsList>
+                 </Flow>
+                 <MessageXml>
+                     <Attributes>
+                         <Attribute DataType="" Modifiable="" Name="" Value=""/>
+                     </Attributes>
+                 </MessageXml>
+             </AgentCriteria>
+         </AgentCriteriaList>
+         <TranFlowList>
+			 <TranFlow TranFlowKey="" TransactionKey="" FlowKey="" />
+		 </TranFlowList>
+         <PipelinePickupTranList TotalNumberOfRecords="">
+			  <PipelinePickupTran PipelineKey=""
+					PipelinePickupTranKey=""
+					ProcessTypeKey="" Status=""
+					TransactionInstanceKey="" TransactionKey=""/>
+		 </PipelinePickupTranList>
+         <TransactionPickupStatusList>
+             <TransactionPickupStatus    
+				IsMandatory=""  
+				ProcessTypeKey="" Status="" 
+				TransactionKey="" TransactionPickStsKey=""/>
+         </TransactionPickupStatusList>
+         <PipelineDefinitionList >
+			<PipelineDefinition DropStatus="" 
+                PipelineDefinitionKey=""
+                PipelineKey="" TransactionInstanceKey="" TransactionKey=""/>
+		 </PipelineDefinitionList>
+         <TransactionDropStatusList>
+             <TransactionDropStatus
+				IsMandatory=""  
+				ProcessTypeKey="" Status="" 
+				TransactionDropStatusKey="" TransactionKey=""/>
+         </TransactionDropStatusList>
+         <EventList>
+             <Event ActionKey="" ActiveFlag=""  
+                 EnterpriseKey="" EventKey="" 
+				 EventName="" Eventid="" 
+				 ExceptionType="" ExtendEnterpriseFlag=""
+                 ExtendSupplierFlag=""  
+				 ShipnodeKey="" TransactionKey="" Version="">
+                <EventConditionList>
+					<EventCondition 
+					ConditionKey="" 
+                    EventConditionKey=""
+                    EventKey=""  MoreActionsFlag=""
+                    OwnerKey="" OwnerType="" Priority=""/>
+				 </EventConditionList>
+                 <GraphUIList>
+					<GraphUI GraphRefKey=""
+                    GraphType=""
+                    GraphUIKey=""
+                    GraphXml=""
+                    OwnerKey="" ProcessTypeKey=""/>
+				 </GraphUIList>
+             </Event>
+         </EventList>
+     </Transaction>
+ </TransactionList>

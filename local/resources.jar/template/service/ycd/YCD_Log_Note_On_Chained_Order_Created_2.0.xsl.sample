@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+
+<xsl:output method="xml" indent="yes"/>
+<xsl:template match="Order">
+<Order>
+   <xsl:copy-of select="@OrderHeaderKey"/>
+   <xsl:apply-templates select="ChainedOrderList"/>
+</Order>
+</xsl:template>
+
+<xsl:template match="ChainedOrderList">
+<Notes>
+    <Note>
+	<xsl:variable name="noteText">
+	    <xsl:for-each select="Order">
+		<xsl:variable name="itemWithQuantity">
+			<xsl:for-each select="OrderLines/OrderLine">
+				<xsl:value-of select="concat(./Item/@ItemID,'(',./@OrderedQty,'), ')"/>
+			</xsl:for-each>
+	        </xsl:variable>
+		<xsl:variable name="itemWithQuantity2"><xsl:value-of select="substring($itemWithQuantity,1,string-length($itemWithQuantity)-2)"/></xsl:variable>
+		<xsl:choose>
+		    <xsl:when test="@DocumentType = '0005' ">
+		        <xsl:value-of select="concat('Purchase Order ',@OrderNo,' was sent to ',@SellerOrganizationCode,' for Items ',$itemWithQuantity2,'. ')"/>
+		    </xsl:when>
+		    <xsl:when test="@DocumentType = '0006' ">
+		        <xsl:value-of select="concat('Transfer Order ',@OrderNo,' was sent to ',@SellerOrganizationCode,' for Items ',$itemWithQuantity2,'. ')"/>
+		    </xsl:when>
+		</xsl:choose>
+	    </xsl:for-each>
+	</xsl:variable>
+
+	<xsl:attribute name="ReasonCode">
+		<xsl:text>YCD_CHAINED_ORDER_INFO</xsl:text>
+	</xsl:attribute>   
+	<xsl:attribute name="ContactUser">
+		<xsl:text>SYSTEM</xsl:text>
+	</xsl:attribute>   
+	<xsl:attribute name="NoteText">
+		<xsl:value-of select="$noteText"/>
+	</xsl:attribute>
+	<xsl:attribute name="Priority">
+		<xsl:text>1</xsl:text>
+	</xsl:attribute>
+    </Note>
+</Notes>
+</xsl:template>
+</xsl:stylesheet>

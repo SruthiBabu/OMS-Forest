@@ -1,0 +1,71 @@
+<!-- Licensed Materials - Property of IBM IBM Sterling Selling and Fulfillment 
+	Suite - Foundation (C) Copyright IBM Corp. 2007, 2012 All Rights Reserved. 
+	US Government Users Restricted Rights - Use, duplication or disclosure restricted 
+	by GSA ADP Schedule Contract with IBM Corp. -->
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template match="Shipment">
+		<MultiApi>
+			<API Name="getSortedShipmentDetails">
+				<Input>
+					<Shipment>
+						<xsl:attribute name="ShipmentKey">
+								<xsl:value-of select="@ShipmentKey" />
+							</xsl:attribute>
+					</Shipment>
+				</Input>
+				<Template>
+					<Shipment OrderNo="" FreightTerms="" SCAC="" ShipmentNo="" DisplayOrderNo="">
+						<ShipNode Description="">
+							<ShipNodePersonInfo Company="" FirstName=""
+								LastName="" AddressLine1="" AddressLine2="" City="" State=""
+								ZipCode="" Country="" DayPhone="" EMailID="" />
+						</ShipNode>
+						<ToAddress Company="" FirstName="" LastName=""
+							AddressLine1="" AddressLine2="" City="" State="" ZipCode=""
+							Country="" DayPhone="" EMailID="" />
+						<BillToAddress Company="" FirstName="" LastName=""
+							AddressLine1="" AddressLine2="" City="" State="" ZipCode=""
+							Country="" DayPhone="" EMailID="" />
+						<Instructions>
+							<Instruction InstructionText="" InstructionType=""
+								SeqNo="" />
+						</Instructions>
+						<ShipmentLines>
+							<ShipmentLine ActualQuantity="" UnitOfMeasure=""
+								Quantity="" ShipmentLineNo="" ItemDesc="" ItemID=""> 
+								<OrderLine OrderLineKey="">
+									<ItemDetails ItemID="">
+										<PrimaryInformation
+											ExtendedDisplayDescription="" />
+									</ItemDetails>
+								</OrderLine>
+							</ShipmentLine>
+						</ShipmentLines>
+					</Shipment>
+				</Template>
+			</API>
+			<API Name="getItemUOMMasterList">
+				<Input>
+					<ItemUOMMaster>
+						<xsl:attribute name="EnterpriseCode">
+								<xsl:value-of select="@EnterpriseCode" />
+							</xsl:attribute>
+					</ItemUOMMaster>
+				</Input>
+			</API>
+			<API Name="getOrganizationHierarchy">
+				<Input>
+					<Organization>
+						<xsl:attribute name="OrganizationCode">
+								<xsl:value-of select="@ShipNode" />
+							</xsl:attribute>
+					</Organization>
+				</Input>
+				<Template>
+					<Organization LocaleCode="" />
+				</Template>
+			</API>
+		</MultiApi>
+	</xsl:template>
+</xsl:stylesheet>

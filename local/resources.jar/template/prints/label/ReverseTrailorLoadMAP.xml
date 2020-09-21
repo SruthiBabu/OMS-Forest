@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite
+(C) Copyright IBM Corp. 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+	<LabelField Binding="/Load/@OriginNode" LabelFieldName="Warehouse" RepeatingElement="" />
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/DropoffStop/@StopSequenceNo" LabelFieldName="Stop" RepeatingElement="LoadShipment"/>
+    <LabelField Binding="/Load/Manifest/@ShipperAccountNo" LabelFieldName="Shipper" RepeatingElement="Manifest" />
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/Shipment/@SCAC" LabelFieldName="Carrier" RepeatingElement="LoadShipment" />
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/Shipment/@Status" LabelFieldName="Status" RepeatingElement="LoadShipment" />
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/Shipment/ShipmentLines/ShipmentLine/@WaveNo" LabelFieldName="Wave" RepeatingElement="LoadShipment" />
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/Shipment/@RequestedShipmentDate" LabelFieldName="ReqShipDate" RepeatingElement="LoadShipment" />
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/Shipment/DockAppointment/@StartTime" LabelFieldName="PickUpDateTime" RepeatingElement="LoadShipment" />
+    <LabelField Binding="/Load/@LoadNo" LabelFieldName="LoadNo" RepeatingElement="" />
+	<RepeatingFields>
+        <RepeatingField LabelFieldName="Stop" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="Shipper" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="Carrier" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="Status" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="Wave" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="ReqShipDate" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+        <RepeatingField LabelFieldName="PickUpDateTime" MaxFirstPage="5"
+            MaxLastPage="0" MaxMidPage="0"/>
+    </RepeatingFields>
+</LabelFieldMap>

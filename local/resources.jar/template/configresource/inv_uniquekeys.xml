@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity Name="AtpRules">
+      <PrimaryKey>
+         <Attribute Name="AtpRuleKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryAlerts">
+      <PrimaryKey>
+         <Attribute Name="InventoryAlertKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryAudit">
+      <PrimaryKey>
+         <Attribute Name="InventoryAuditKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="Item"/>
+         <Attribute Name="Modifyts"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="InventoryAuditH">
+      <PrimaryKey>
+         <Attribute Name="InventoryAuditKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryConsiderations">
+      <PrimaryKey>
+         <Attribute Name="InventoryConsiderationsKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryDemand">
+      <PrimaryKey>
+         <Attribute Name="InventoryDemandKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="InventoryItemKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="InventoryDemandType">
+      <PrimaryKey>
+         <Attribute Name="InventoryDemandTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryItem">
+      <PrimaryKey>
+         <Attribute Name="InventoryItemKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryLot">
+      <PrimaryKey>
+         <Attribute Name="InventoryLotKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryMatch">
+      <PrimaryKey>
+         <Attribute Name="InventoryMatchKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryMonitorRules">
+      <PrimaryKey>
+         <Attribute Name="InventoryMonitorRulesKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryPendingAdj">
+      <PrimaryKey>
+         <Attribute Name="InventoryPendingAdjKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryReceipt">
+      <PrimaryKey>
+         <Attribute Name="InventoryReceiptKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryReservation">
+      <PrimaryKey>
+         <Attribute Name="InventoryReservationKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventorySegment">
+      <PrimaryKey>
+         <Attribute Name="InventorySegmentKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventoryShipment">
+      <PrimaryKey>
+         <Attribute Name="InventoryShipmentKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="InventorySupply">
+      <PrimaryKey>
+         <Attribute Name="InventorySupplyKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="InventoryItemKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="InventorySupplyType">
+      <PrimaryKey>
+         <Attribute Name="InventorySupplyTypeKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ItemShipNode">
+      <PrimaryKey>
+         <Attribute Name="ItemshipnodeKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemId"/>
+         <Attribute Name="ShipnodeKey"/>
+         <Attribute Name="OwnerKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="ItemStatusRules">
+      <PrimaryKey>
+         <Attribute Name="RuleKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="ItemId"/>
+         <Attribute Name="ShipnodeKey"/>
+         <Attribute Name="OwnerKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ItemId"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="StatusInventoryTypes">
+      <PrimaryKey>
+         <Attribute Name="StatusInventoryTypesKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ServiceSlotGroup">
+      <PrimaryKey>
+         <Attribute Name="ServiceSlotGroupKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ServiceSlot">
+      <PrimaryKey>
+         <Attribute Name="ServiceSlotKey"/>
+      </PrimaryKey>
+   </Entity>
+</Entities>

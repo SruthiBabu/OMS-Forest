@@ -1,0 +1,102 @@
+<!-- Licensed Materials - Property of IBM
+	 IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+	 (C) Copyright IBM Corp. 2017-18  All Rights Reserved.
+	 US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="runtime.utils" default="info">
+	<property name="rt" value=".."/>
+	<property name="newrt" value="${rt}/newrt"/>
+	<property name="file" value="rt.tar.gz"/>
+	
+	<mkdir dir="${rt}/external_deployments"/>
+	<property name="tar" value="${rt}/external_deployments/${file}"/>
+	
+	<target name="info">
+		<echo message="This is a utility script to perform some pruning or extraction on an OM runtime."/>
+		<echo message="Make sure that this script is run from the bin directory of the OM runtime"/>
+		<echo/>
+		<echo message="Usage: sci_ant.sh -f ../properties/buildRuntimeUtils.xml &lt;target&gt;"/>
+		<echo message="You should run this script with the ant target"/> 
+		<echo message="		'clean-min' to weed out unwanted and unnecessary files from the installed runtime."/>
+		<echo message="		'clean' to weed out unwanted and unnecessary files from the installed runtime wrt OMoC."/>
+		<echo message="		'agentruntime' to build a lighter OM runtime to run agent and integrations servers."/>
+		<echo/>
+	</target>
+
+	<target name="clean-min">
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${rt}">
+				<include name="installed_data/**/*"/>
+				<include name="middleware/**/*"/>
+				<include name="tmp/**/*"/>
+				<include name="repository/entitybuild/**/*"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="clean" depends="clean-min">
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${rt}">
+				<include name="database/FactorySetup/Optional/**/*"/>
+				<exclude name="database/FactorySetup/Optional/db2/**/*"/>
+				<include name="elasticsearch/**/*"/>
+				<include name="Migration/**/*"/>
+				<include name="platformrcp/**/*"/>
+				<include name="rcp/**/*"/>
+				<include name="referenceImplementation/RI.zip"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="agentruntime">
+		<delete dir="${newrt}" failonerror="false"/>
+		<mkdir dir="${newrt}" />
+		<antcall target="-copy-min" />
+		<antcall target="-copy-db" />
+		<delete file="${tar}" failonerror="false"/>
+		<tar destfile="${tar}" basedir="${newrt}" compression="gzip" longfile="gnu"/>
+		<delete dir="${newrt}"/>
+	</target>
+
+	<target name="-copy-min">
+		<copy todir="${newrt}" overwrite="true" preservelastmodified="true">
+			<fileset dir="${rt}">
+				<include name="bin/**/*" />
+				<include name="dbjar/**/*" />
+				<include name="docker-samples/**/*" />
+				<include name="jar/**/*" />
+				<include name="jdk/**/*" />
+				<include name="properties/**/*" />
+			</fileset>
+		</copy>
+		<delete failonerror="true">
+			<fileset dir="${newrt}">
+				<include name="**/backups/**/*"/>
+			</fileset>
+		</delete>
+		<chmod perm="ugo+x" type="file">
+			<fileset dir="${newrt}">
+				<include name="bin/*.sh"/>
+				<include name="jdk/bin/*"/>
+				<include name="jdk/jre/bin/*"/>
+			</fileset>
+		</chmod>
+		<mkdir dir="${newrt}/tmp" />
+		<mkdir dir="${newrt}/logs" />
+	</target>
+
+	<target name="-copy-db">
+		<copy todir="${newrt}" overwrite="true" preservelastmodified="true">
+			<fileset dir="${rt}">
+				<include name="database/**/*" />
+				<include name="repository/cdt/**/*" />
+				<include name="repository/datatypes/**/*" />
+				<include name="repository/entity/**/*" />
+				<include name="repository/factorysetup/**/*" />
+				<include name="resources/**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+</project>
+

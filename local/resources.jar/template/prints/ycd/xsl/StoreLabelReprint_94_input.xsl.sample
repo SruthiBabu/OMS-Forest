@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2007, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:template match="/">
+		<MultiApi>
+			<API Name="reprintCarrierLabel">
+				<Input>
+					<xsl:copy-of select="/Container" />
+				</Input>
+				<Template>
+					<reprintCarrierLabel>
+						<Container PierbridgeLabelURL="">
+							<ContainerReturnTrackingList>
+								<ContainerReturnTracking PierbridgeReturnLabelURL="" />
+							</ContainerReturnTrackingList>
+						</Container>
+					</reprintCarrierLabel>
+				</Template>
+			</API> 
+			<API Name="getProperty">
+				<Input>
+					<GetProperty PropertyName="ycs.pierbridge.server.url" />
+				</Input>
+				<Template>
+					<GetProperty PropertyValue="" />
+				</Template>
+			</API>
+		</MultiApi>
+	</xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" indent="yes"/>
+
+<xsl:template match="Order">
+<Order>
+	    <xsl:copy-of select="@OrderHeaderKey"/>
+	    <xsl:attribute name="Action">
+		<xsl:text>MODIFY</xsl:text>
+	    </xsl:attribute>
+    	    <xsl:attribute name="Override">
+		<xsl:text>Y</xsl:text>
+	    </xsl:attribute>
+	    <OrderLines>
+		<xsl:for-each select="/Order/OrderLines/OrderLine">
+			<xsl:if test="@BackorderNotificationQty > 0">
+				<xsl:variable name="NewQty"><xsl:value-of select="@BackorderNotificationQty + @ChangeInOrderedQty" /></xsl:variable>
+				<OrderLine OrderLineKey="{@OrderLineKey}" Action="MODIFY">
+					<xsl:attribute name="BackorderNotificationQty">
+						<xsl:choose>
+							<xsl:when test="$NewQty > 0"><xsl:value-of select="$NewQty" /></xsl:when>
+							<xsl:otherwise>0</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</OrderLine>
+			</xsl:if>
+		</xsl:for-each>
+	  </OrderLines>
+</Order>
+</xsl:template>
+</xsl:stylesheet>

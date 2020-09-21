@@ -1,0 +1,235 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<html>
+    <body>
+        <form name="frmSKUQtyEntry" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+								    <input col="1"
+                                    inputbinding="xml:/Receipt/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ShipmentKey"
+                                    type="hidden" validate="false" value=" "/>
+									<input col="1"
+                                    inputbinding="xml:/Shipment/@OrderNo"
+                                    mandatory="false" name="txtOrderNo"
+                                    outputbinding="xml:/Receipt/Shipment/@OrderNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@OrderNo"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@OrganizationCode"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Receipt/@OrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@OrganizationCode"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Receipt/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+									<input col="1"
+                                    inputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    mandatory="false"
+                                    name="DoNotVerifyCaseContent"
+                                    outputbinding="xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/Shipment/@DoNotVerifyCaseContent"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@CaseId"
+                                    mandatory="false"
+                                    name="txtCaseId"
+                                    outputbinding="xml:/Receipt/@CaseId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@CaseId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@LocationId"
+                                    mandatory="false"
+                                    name="ReceivingLocation"
+                                    outputbinding="xml:/Receipt/@LocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@LocationId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    mandatory="false"
+                                    name="ParentPalletId"
+                                    outputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ParentLPN/@PalletId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemID"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+								    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Item/@DisplayItemId"
+                                    mandatory="false"
+                                    name="txtDisplayItemId"
+									outputbinding="xml:/Item/@DisplayItemId"
+                                    size="20"
+                                    subtype="ProtectedText"
+									tag="binding=xml:/Item/@DisplayItemId"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemID"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    size="10"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@ItemID"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblUOM" size="10"
+                                    subtype="Label"
+                                    tag="binding=lblUOM" type="text"
+                                    validate="false" value="Mobile_UOM"/>
+                                    <input col="11" mandatory="false"
+                                    name="lblQty" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblQty" type="text"
+                                    validate="true" value="Mobile_Quantity"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/AlternateUOMList/AlternateUOM/@UnitOfMeasure"
+                                    mandatory="false" name="lblOUom"
+                                    outputbinding="xml:/Item/AlternateUOMList/AlternateUOM/@UnitOfMeasure"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Item/AlternateUOMList/AlternateUOM/@UnitOfMeasure"
+                                    type="hidden" validate="false" value="Op_UOM1"/>
+                                    <input col="11"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@TranQuantity"
+                                    mandatory="false" name="txtOUom"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@TranQuantity"
+                                    size="9" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@TranQuantity"
+                                    type="hidden" validate="true"/>
+                                    <input col="11"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@UOMQuantity"
+                                    mandatory="false"
+                                    name="txtOUomQty"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@UOMQuantity"
+                                    size="9" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@UOMQuantity"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/@UnitOfMeasure"
+                                    mandatory="false"
+                                    name="lblInvUom"
+                                    outputbinding="xml:/Item/@UnitOfMeasure"
+                                    size="20" subtype="Label"
+                                    tag="binding=xml:/Item/@UnitOfMeasure"
+                                    type="text" validate="false" value="Mobile_Inv_UOM"/>
+                                    <input col="11"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@Quantity"
+                                    mandatory="false" name="txtIUom"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@Quantity"
+                                    size="9" subtype="Text"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@Quantity"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblDispCode" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblDispCode"
+                                    type="text" validate="false" value="Mobile_Disposition_Code"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@DispositionCode"
+                                    mandatory="false"
+                                    name="txtDispositionCode"
+                                    outputbinding="xml:/Receipt/ReceiptLines/ReceiptLine/@DispositionCode"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Receipt/ReceiptLines/ReceiptLine/@DispositionCode"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmInputToReceiveUpdate"
+                                    validate="false" value="Mobile_Go"/>
+                                    <input col="4" hotkey="F9"
+                                    mandatory="false"
+                                    name="CloseCase" size="10"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmCloseCase"
+                                    validate="false" value="Mobile_Close_Case"/>
+									<input col="14" hotkey="F4" mandatory="false"
+                                    name="action1" size="6" subtype="Command"
+									url="/console/rfreceive.ppc?action=frmForwardToReceiveCaseOrSKU"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F6"
+                                    mandatory="false"
+                                    name="ClosePallet" size="9"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmClosePalletEmpty"
+                                    validate="false" value="Mobile_Close_Plt"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

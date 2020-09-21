@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!-- getSupplyDetails API template. -->
+<Item AvailableQty="" ConsiderAllNodes="" ConsiderAllSegments="" ConsiderUnassignedDemand="" Description="" DistributionRuleId="" ExtendedDescription="" ItemID="" ProductClass="" ShortDescription="" UnitOfMeasure="">
+	<LanguageDescriptionList>
+		<LanguageDescription Description="" ExtendedDescription="" LocaleCode="" ShortDescription="" /> 
+	</LanguageDescriptionList>
+	<ShipNodes>
+		<ShipNode AvailableQty="" Priority="" ShipNode="" Tracked="">
+			<Supplies>
+				<Supply AvailableQty="" SupplyType="" TotalQuantity="">
+					<SupplyDetails ETA="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotNumber="" LotReference="" ManufacturingDate="" Quantity="" Segment="" SegmentType="" ShipByDate="" SupplyReference="" SupplyReferenceType="" SupplyType="" Track="" TagNumber="">
+						<Tag BatchNo="" InventoryItemKey="" InventoryTagKey="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotKeyReference="" LotNumber="" ManufacturingDate="" RevisionNo="" TagNumber="" TotalDemand="" TotalOnhandSupply="" TotalOtherSupply="" /> 
+						<ExactMatchedDemands TotalQuantity="">
+							<DemandDetails DemandType="" OrganizationCode="" Quantity="" ShipDate="" ShipNode="" TagNumber="" /> 
+						</ExactMatchedDemands>
+						<SoftMatchedDemands TotalQuantity="">
+							<DemandDetails DemandType="" OrganizationCode="" Quantity="" ShipDate="" ShipNode="" TagNumber="" /> 
+						</SoftMatchedDemands>
+					</SupplyDetails>
+				</Supply>
+			</Supplies>
+			<UnmatchedDemands>
+				<Demand UnavailableQty="" DemandType="" TotalQuantity="">
+					<DemandDetails DemandType="" OrganizationCode="" Quantity="" ShipDate="" ShipNode="" TagNumber="">
+						<Tag BatchNo="" InventoryItemKey="" InventoryTagKey="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotKeyReference="" LotNumber="" ManufacturingDate="" RevisionNo="" TagNumber="" TotalDemand="" TotalOnhandSupply="" TotalOtherSupply="" />
+					</DemandDetails>
+				</Demand>
+			</UnmatchedDemands>
+		</ShipNode>
+	</ShipNodes>
+</Item>

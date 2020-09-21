@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template match="/">
+		<Chart showYAxisValues="0" showDivLineValues="0" showAlternateVGridColor="0" divLineColor="FFFFFF" showToolTip="0" >
+			<xsl:choose>
+				<!-- Lifetime Revenue -->
+				<xsl:when test="/CognosData/@BIReportPageListNo = '1'">
+					<xsl:attribute name="caption">
+						<xsl:value-of select="/CognosData/ColumnList/Column[@Sequence='3']/@Name" />
+					</xsl:attribute>
+				</xsl:when>
+				<!-- Last Years Revenue -->
+				<xsl:when test="/CognosData/@BIReportPageListNo = '2'">
+					<xsl:attribute name="caption">
+						<xsl:value-of select="/CognosData/ColumnList/Column[@Sequence='3']/@Name" />
+					</xsl:attribute>
+				</xsl:when>
+				<!-- Current Number of Holds -->
+				<xsl:when test="/CognosData/@BIReportPageListNo = '3'">
+					<xsl:attribute name="caption">
+						<xsl:value-of select="/CognosData/ColumnList/Column[@Sequence='3']/@Name" />
+					</xsl:attribute>
+					<xsl:attribute name="yAxisMaxValue">
+						<xsl:value-of select="'10'" />
+					</xsl:attribute>
+					<Properties DataType="STRING" />
+				</xsl:when>
+				<!-- Number Of Hold In Last Year -->
+				<xsl:when test="/CognosData/@BIReportPageListNo = '4'">
+					<xsl:attribute name="caption">
+						<xsl:value-of select="/CognosData/ColumnList/Column[@Sequence='3']/@Name" />
+					</xsl:attribute>
+					<xsl:attribute name="yAxisMaxValue">
+						<xsl:value-of select="'100'" />
+					</xsl:attribute>
+					<Properties DataType="STRING" />
+				</xsl:when>
+				<!-- Customer Rating -->
+				<xsl:when test="/CognosData/@BIReportPageListNo = '5'">
+					<xsl:attribute name="caption">
+						<xsl:value-of select="'Customer_Rating'" />
+					</xsl:attribute>
+					<xsl:attribute name="showValues">
+						<xsl:value-of select="'0'" />
+					</xsl:attribute>
+					<xsl:attribute name="yAxisMaxValue">
+						<xsl:value-of select="'2'" />
+					</xsl:attribute>
+					<Properties DataType="STRING" />
+				</xsl:when>
+				
+			</xsl:choose >
+			<xsl:choose>
+				<xsl:when test="/CognosData/@BIReportPageListNo = '5'">
+					<xsl:call-template name="data" >
+						<xsl:with-param name="sequenceNo" select="'3'" />
+						<xsl:with-param name="displayValueSeq" select="'4'" />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="data" >
+						<xsl:with-param name="sequenceNo" select="'3'" />
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose >
+		</Chart>
+	</xsl:template>
+	<xsl:template name="data">
+		<xsl:param name="sequenceNo" />
+		<xsl:param name="displayValueSeq" />
+		<xsl:for-each select="/CognosData/RowList/Row">
+			<set>
+				<xsl:attribute name="label">
+					<xsl:value-of select="Data[@Sequence=1]/@Value" />
+				</xsl:attribute>
+				<xsl:attribute name="value">
+					<xsl:value-of select="Data[@Sequence=$sequenceNo]/@Value" />
+				</xsl:attribute>
+				<xsl:if test="$displayValueSeq != ''">
+					<xsl:attribute name="displayValue">
+						<xsl:value-of select="Data[@Sequence=$displayValueSeq]/@Value" />
+					</xsl:attribute>
+				</xsl:if>
+			</set>
+		</xsl:for-each>
+	</xsl:template>
+</xsl:stylesheet>

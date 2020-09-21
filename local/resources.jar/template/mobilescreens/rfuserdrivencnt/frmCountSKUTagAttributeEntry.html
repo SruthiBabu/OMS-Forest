@@ -1,0 +1,111 @@
+<html>
+    <body>
+        <form name="frmCountSKUTagAttributeEntry" target="/console/rfuserdrivencnt.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    outputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@CountRequestKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@Node"
+                                    mandatory="false"
+                                    outputbinding="xml:/RecordCountResult/@Node"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@Node"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    mandatory="false"
+                                    outputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="7"
+                                    inputbinding="xml:/RecordCountResult/@TaskType"
+                                    outputbinding="xml:/RecordCountResult/@TaskType"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/RecordCountResult/@TaskType"
+                                    type="text" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    mandatory="false"
+                                    name="txtLastScannedLpn"
+                                    outputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecentLPN/@LastScannedLPN"
+                                    type="hidden" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemId"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemId"
+                                    outputbinding="xml:/Inventory/@ItemID"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Inventory/@ItemID"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Inventory/@UnitOfMeasure"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblTagAttr" size="20"
+                                    subtype="Hidden"
+                                    tag="binding=lblTagAttr"
+                                    type="hidden" validate="false" value=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtTagAttr"
+                                    outputbinding="" size="20"
+                                    subtype="Hidden" tag=""
+                                    type="hidden" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmCountSKUTagAttributeEntryValtxtTagAttr"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

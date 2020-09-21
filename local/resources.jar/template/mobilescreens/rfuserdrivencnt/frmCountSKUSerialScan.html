@@ -1,0 +1,124 @@
+<html>
+    <body>
+        <form name="frmCountSKUSerialScan" target="/console/rfuserdrivencnt.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    outputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@CountRequestKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@Node"
+                                    mandatory="false"
+                                    outputbinding="xml:/RecordCountResult/@Node"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@Node"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    mandatory="false"
+                                    outputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="7"
+                                    inputbinding="xml:/RecordCountResult/@TaskType"
+                                    outputbinding="xml:/RecordCountResult/@TaskType"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/RecordCountResult/@TaskType"
+                                    type="text" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    mandatory="false"
+                                    name="txtLastScannedLpn"
+                                    outputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecentLPN/@LastScannedLPN"
+                                    type="hidden" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    mandatory="false"
+                                    name="NumOfSecSerials"
+                                    outputbinding="xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Item/PrimaryInformation/@NumSecondarySerials"
+                                    type="hidden" validate="false" value=" "/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemID"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemID"
+                                    outputbinding="xml:/Inventory/@ItemID"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Inventory/@ItemID"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Inventory/@UnitOfMeasure"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSerialNo" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblSerialNo"
+                                    type="text" validate="false" value="Mobile_Serial_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/SerialDetail1/@SerialNo"
+                                    mandatory="false"
+                                    name="txtSerialNo"
+                                    outputbinding="xml:/SerialDetail/@SerialNo"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/SerialDetail/@SerialNo"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="5" subtype="Command"
+                                    type="button"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmCountSerialScanUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

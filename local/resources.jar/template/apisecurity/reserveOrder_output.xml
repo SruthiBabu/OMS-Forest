@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Call Center for Commerce
+(C) Copyright IBM Corp. 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!--changeOrder Output XML-->
+<Order>
+    <OrderAudit>
+        <Order/>
+        <OrderAuditLevels>
+            <OrderAuditLevel>
+                <OrderLine>
+                    <Item>
+                        <LanguageDescriptionList>
+                            <LanguageDescription/>
+                        </LanguageDescriptionList>
+                    </Item>
+                </OrderLine>
+                <ModificationTypes>
+                    <ModificationType/>
+                </ModificationTypes>
+                <OrderRelease/>
+                <OrderAuditDetails>
+                    <OrderAuditDetail>
+                        <IDs>
+                            <!-- ID is not a template-driven element. If the template contains OrderAuditDetail element, this element will come based on AuditType. For AuditTypes like Order, OrderLine this element does not come.-->
+                            <ID/>
+                        </IDs>
+                        <Attributes>
+                            <!-- Attribute is not a template-driven element. If the template contains OrderAuditDetail element, this element will appear in the output xml alongwith all its attributes.-->
+                            <Attribute/>
+                        </Attributes>
+                        <!-- CustomAuditDetails is not a template-driven element. If custom entity is modified, this element will appear in the output xml . -->
+                        <!-- Nested CustomAuditDetails element will be returned if custom table has a hangoff table. -->
+                        <CustomAuditDetails>
+                            <OrderAuditDetails>
+                                <OrderAuditDetail>
+                                    <IDs>
+                                    <!-- ID is not a template-driven element. If the template contains OrderAuditDetail element, this element will come based on AuditType. For AuditTypes like Order, OrderLine this element does not come.-->
+                                    <ID/>
+                                    </IDs>
+                                    <Attributes>
+                                    <!-- Attribute is not a template-driven element. If the template contains OrderAuditDetail element, this element will appear in the output xml alongwith all its attributes.-->
+                                    <Attribute/>
+                                    </Attributes>
+                                </OrderAuditDetail>
+                            </OrderAuditDetails>
+                        </CustomAuditDetails>
+                    </OrderAuditDetail>
+                </OrderAuditDetails>
+            </OrderAuditLevel>
+        </OrderAuditLevels>
+    </OrderAudit>
+    <UnprocessedLines>
+        <!-- The actual output xml will contain the Orderline element, its sub-elements and their attributes in exact same manner as were passed in the input xml.   -->
+        <OrderLine/>
+    </UnprocessedLines>
+    <PriceInfo/>
+    <OrderLines>
+        <!--1 or more order
+        line-->
+        <OrderLine>
+            <Item>
+                <LanguageDescriptionList>
+                    <LanguageDescription/>
+                </LanguageDescriptionList>
+            </Item>
+            <!--Optional-->
+            <LinePriceInfo/>
+            <Awards>
+                <Award/>
+            </Awards>
+            <OrderLineOptions>
+                <OrderLineOption/>
+            </OrderLineOptions>
+            <WorkOrders>
+                <WorkOrder/>
+            </WorkOrders>
+            <DerivedFromOrder/>
+            <PersonInfoShipTo/>
+            <!--Optional-->
+            <PersonInfoMarkFor/>
+            <Instructions>
+                <!-- NumberOfInstructions is not a template driven attribute. -->
+                <Instruction/>
+            </Instructions>
+            <References>
+                <Reference/>
+            </References>
+            <!--Optional-->
+            <KitLines>
+                <!-- NumberOfKitLines is not a template driven attribute. -->
+                <KitLine>
+                    <KitLineTranQuantity/>
+                </KitLine>
+            </KitLines>
+            <ProductItems>
+                <ProductItem/>
+            </ProductItems>
+            <AdditionalAddresses>
+                <!-- NumberOfAdditionalAddresses is not a template driven attribute. -->
+                <AdditionalAddress>
+                    <PersonInfo/>
+                </AdditionalAddress>
+            </AdditionalAddresses>
+            <OrderDates>
+                <OrderDate/>
+            </OrderDates>
+            <OrderLineInvAttRequest/>
+            <OrderLineSourcingControls>
+                <OrderLineSourcingCntrl/>
+            </OrderLineSourcingControls>
+            <Notes>
+                <Note/>
+            </Notes>
+            <OrderLineReservations>
+                <OrderLineReservation/>
+            </OrderLineReservations>
+            <BundleParentLine/>
+            <ServiceAssociations>
+                <ServiceAssociation>
+                    <ProductLine/>
+                    <ServiceLine/>
+                </ServiceAssociation>
+            </ServiceAssociations>
+            <ProductAssociations>
+                <ProductAssociation>
+                    <ProductLine/>
+                    <ServiceLine/>
+                </ProductAssociation>
+            </ProductAssociations>
+            <DeliveryAssociations>
+                <DeliveryAssociation>
+                    <ProductLine/>
+                    <ServiceLine/>
+                </DeliveryAssociation>
+            </DeliveryAssociations>
+            <ChildOrderLineRelationships>
+                <OrderLineRelationship>
+                    <ParentLine/>
+                    <ChildLine/>
+                </OrderLineRelationship>
+            </ChildOrderLineRelationships>
+            <ParentOrderLineRelationships>
+                <OrderLineRelationship>
+                    <ParentLine/>
+                    <ChildLine/>
+                </OrderLineRelationship>
+            </ParentOrderLineRelationships>
+            <Schedules>
+                <Schedule>
+                    <ScheduleTranQuantity/>
+                </Schedule>
+            </Schedules>
+            <LineOverallTotals/>
+            <!-- LineOverallTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineInvoicedTotals/>
+            <!-- LineInvoicedTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineRemainingTotals/>
+            <!-- LineRemainingTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineOverallTotalsInEnterpriseCurrency/>
+            <!-- LineOverallTotalsInEnterpriseCurrency is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if only the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineRemainingTotalsInEnterpriseCurrency/>
+            <!-- LineRemainingTotalsInEnterpriseCurrency is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if only the attributes are removed from the template, they will still be present in the output xml. -->
+            <LineCharges>
+                <LineCharge/>
+            </LineCharges>
+            <!-- LineCharge is not a template driven element. If the template contains either of LineCharge or LineTax elements, both will appear in the output, alongwith all their attributes. -->
+            <LineTaxes>
+                <LineTax/>
+                <TaxSummary>
+                    <TaxSummaryDetail/>
+                </TaxSummary>
+            </LineTaxes>
+            <!-- LineTax is not a template driven element. If the template contains either of LineCharge or LineTax elements, both will appear in the output, alongwith all their attributes. -->
+            <!--Optional-->
+            <OrderStatuses>
+                <OrderStatus>
+                    <Details>
+                        <KitDetails>
+                            <KitDetail>
+                                <KitDetailTranQuantity/>
+                            </KitDetail>
+                        </KitDetails>
+                    </Details>
+                    <OrderStatusTranQuantity/>
+                </OrderStatus>
+            </OrderStatuses>
+            <OrderLineTranQuantity/>
+            <DerivedFromOrderLine>
+                <Item/>
+            </DerivedFromOrderLine>
+            <BundleComponents>
+                <BundleComponent>
+                    <Item/>
+                </BundleComponent>
+            </BundleComponents>
+            <OrderHoldTypes>
+                <OrderHoldType>
+                    <OrderHoldTypeLogs>
+                        <OrderHoldTypeLog/>
+                    </OrderHoldTypeLogs>
+                </OrderHoldType>
+            </OrderHoldTypes>
+        </OrderLine>
+    </OrderLines>
+    <Instructions>
+        <!-- NumberOfInstructions is not a template driven attribute. -->
+        <Instruction/>
+    </Instructions>
+    <Notes>
+        <Note/>
+    </Notes>
+    <!--Optional-->
+    <PersonInfoShipTo/>
+    <!--Either at  line level or at header
+    level-->
+    <PersonInfoBillTo/>
+    <PersonInfoMarkFor/>
+    <PersonInfoContact/>
+    <AdditionalAddresses>
+        <AdditionalAddress>
+            <PersonInfo/>
+        </AdditionalAddress>
+    </AdditionalAddresses>
+    <PriceInfoInEnterpriseCurrency/>
+    <OverallTotalsInEnterpriseCurrency/>
+    <!-- OverallTotalsInEnterpriseCurrency is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if only the attributes are removed from the template, they will still be present in the output xml. -->
+    <RemainingTotalsInEnterpriseCurrency/>
+    <!-- RemainingTotalsInEnterpriseCurrency is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if only the attributes are removed from the template, they will still be present in the output xml. -->
+    <References>
+        <Reference/>
+    </References>
+    <!--Optional-->
+    <PaymentMethods>
+        <PaymentMethod>
+            <PersonInfoBillTo/>
+        </PaymentMethod>
+    </PaymentMethods>
+    <ChargeTransactionDetails>
+        <!-- The attributes of ChargeTransactionDetails element are not template driven. If the element is present in the template, all the attributes will be output, regardless of their presence or absence in the template. -->
+        <ChargeTransactionDetail>
+            <InvoiceCollectionDetails>
+                <InvoiceCollectionDetail/>
+            </InvoiceCollectionDetails>
+            <CreditCardTransactions>
+                <CreditCardTransaction/>
+            </CreditCardTransactions>
+            <PaymentMethod/>
+            <TransferToOrder/>
+            <TransferFromOrder/>
+        </ChargeTransactionDetail>
+    </ChargeTransactionDetails>
+    <OrderDates>
+        <OrderDate/>
+    </OrderDates>
+    <ProductServiceAssocs>
+        <ProductServiceAssoc>
+            <ProductLine/>
+            <ServiceLine/>
+        </ProductServiceAssoc>
+    </ProductServiceAssocs>
+    <OrderLineRelationships>
+        <OrderLineRelationship>
+            <ParentLine/>
+            <ChildLine/>
+        </OrderLineRelationship>
+    </OrderLineRelationships>
+    <Promotions>
+        <Promotion/>
+    </Promotions>
+    <Awards>
+        <Award/>
+    </Awards>
+    <SpecialServices>
+        <SpecialService/>
+    </SpecialServices>
+    <OrderHoldTypes>
+        <OrderHoldType>
+            <OrderHoldTypeLogs>
+                <OrderHoldTypeLog/>
+            </OrderHoldTypeLogs>
+        </OrderHoldType>
+    </OrderHoldTypes>
+    <AnswerSets>
+        <AnswerSet>
+            <Answers>
+                <Answer/>
+            </Answers>
+        </AnswerSet>
+    </AnswerSets>
+    <OverallTotals/>
+    <!-- OverallTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+    <InvoicedTotals/>
+    <!-- InvoicedTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+    <RemainingTotals/>
+    <!-- RemainingTotals is a template-driven element but its attributes are not. The element can be removed from the template, and prevented from appearing in the output. But if the attributes are removed from the template, they will still be present in the output xml. -->
+    <HeaderCharges>
+        <HeaderCharge/>
+    </HeaderCharges>
+    <!-- HeaderCharge is not a template driven element. If the template contains either of HeaderCharge or HeaderTax elements, both will appear in the output, alongwith all their attributes. -->
+    <HeaderTaxes>
+        <HeaderTax/>
+        <TaxSummary>
+            <TaxSummaryDetail/>
+        </TaxSummary>
+    </HeaderTaxes>
+    <OrderStatuses>
+        <OrderStatus>
+            <Details>
+                <KitDetails>
+                    <KitDetail>
+                        <KitDetailTranQuantity/>
+                    </KitDetail>
+                </KitDetails>
+            </Details>
+            <OrderStatusTranQuantity/>
+        </OrderStatus>
+    </OrderStatuses>
+    <ReturnOrdersForExchange>
+        <ReturnOrderForExchange/>
+    </ReturnOrdersForExchange>
+    <ExchangeOrders>
+        <ExchangeOrder/>
+    </ExchangeOrders>
+</Order>

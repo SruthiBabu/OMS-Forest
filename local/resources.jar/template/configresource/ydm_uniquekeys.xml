@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+   <Entity Name="Container">
+      <PrimaryKey>
+         <Attribute Name="ShipmentContainerKey"/>
+      </PrimaryKey>
+   </Entity>
+   <Entity Name="ContainerDetail">
+      <PrimaryKey>
+         <Attribute Name="ContainerDetailsKey"/>
+      </PrimaryKey>
+      <UniqueKey>
+         <Attribute Name="OrderHeaderKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="OrderLineKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="OrderReleaseKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ShipmentKey"/>
+      </UniqueKey>
+      <UniqueKey>
+         <Attribute Name="ShipmentContainerKey"/>
+         <Attribute Name="OrderLineKey"/>
+      </UniqueKey>
+   </Entity>
+   <Entity Name="Shipment">
+      <PrimaryKey>
+         <Attribute Name="ShipmentKey"/>
+      </PrimaryKey>
+   </Entity>
+</Entities>

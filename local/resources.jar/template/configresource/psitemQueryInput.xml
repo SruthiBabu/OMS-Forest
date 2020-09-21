@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery QueryType="ITEM">
+   <Item DisplayName="Item" TableName="YFS_ITEM" IconFile="item.gif" ShowNotButtons="Y">
+	 <ItemID Type="Leaf" Id="ItemID" DisplayName="ItemID" DataType="ItemID" ControlType="Text" ColumnName="ITEM_ID">
+		<QryTypes DefaultQryTypeId="EQ">
+		   <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		   <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		   <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="ItemID" IsReqd="" OverRidingClass=""/>
+	 </ItemID>
+	 <ItemUOMMaster Type="Leaf" Id="ItemUOMMaster" DisplayName="ItemUOMMaster" DataType="UOM" ControlType="Combo" ColumnName="UOM">
+		<QryTypes DefaultQryTypeId="EQ">
+		   <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="ItemUOMMaster" IsReqd="Y" OverRidingClass=""/>
+	 </ItemUOMMaster>
+	 <ShortDescription Type="Leaf" Id="ShortDescription" DisplayName="ShortDescription" DataType="Text-100" ControlType="Text" ColumnName="SHORT_DESCRIPTION">
+		<QryTypes DefaultQryTypeId="EQ">
+		   <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		   <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		   <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="ShortDescription" IsReqd="" OverRidingClass=""/>
+	 </ShortDescription>
+	 <Description Type="Leaf" Id="Description" DisplayName="Description" DataType="Text-2000" ControlType="Text" ColumnName="DESCRIPTION">
+		<QryTypes DefaultQryTypeId="EQ">
+		   <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		   <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		   <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="Description" IsReqd="" OverRidingClass=""/>
+	 </Description>
+	 <Status Type="Leaf" Id="Status" DisplayName="Status" DataType="Status" ControlType="Combo" ColumnName="STATUS">
+		<QryTypes DefaultQryTypeId="EQ">
+		   <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		   <QryType QryTypeName="Between" QryTypeId="BETWEEN"/>
+		</QryTypes>
+		<MasterData MasterDataId="Status" IsReqd="Y" OverRidingClass=""/>
+	 </Status>
+	 <IsStandaloneService Type="Leaf" Id="IsStandaloneService" DisplayName="Can_Stand_Alone_Service" DataType="Flag" ControlType="Combo" ColumnName="IS_STANDALONE_SERVICE">
+		<QryTypes DefaultQryTypeId="EQ">
+		   <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="IsStandaloneService" IsReqd="" IsStatic="true" OverRidingClass="">
+			<IsStandaloneService Code="Y" Desc="Yes"/>
+			<IsStandaloneService Code="N" Desc="No"/>
+		</MasterData>
+	 </IsStandaloneService>
+      <ServiceType Id="ServiceType" DisplayName="Service_Type" Type="Leaf" ControlType="Combo" ColumnName="SERVICE_TYPE_ID" DataType="Text-40">
+         <QryTypes DefaultQryTypeId="EQ">
+            <QryType QryTypeName="Is" QryTypeId="EQ"/>
+         </QryTypes>
+         <MasterData MasterDataId="ServiceType" IsReqd="Y" OverRidingClass=""/>
+      </ServiceType>
+	 <IsReturnService Type="Leaf" Id="IsReturnService" DisplayName="Is_Return_Service" DataType="Flag" ControlType="Combo" ColumnName="IS_RETURN_SERVICE">
+		<QryTypes DefaultQryTypeId="EQ">
+		   <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="IsReturnService" IsReqd="" IsStatic="true" OverRidingClass="">
+			<IsReturnService Code="Y" Desc="Yes"/>
+			<IsReturnService Code="N" Desc="No"/>
+		</MasterData>
+	 </IsReturnService>
+      <CapacityUOM Id="CapacityUOM" DisplayName="Capacity_UOM" Type="Leaf" ControlType="Combo" ColumnName="CAPACITY_UOM" DataType="Text-40">
+         <QryTypes DefaultQryTypeId="EQ">
+            <QryType QryTypeName="Is" QryTypeId="EQ"/>
+         </QryTypes>
+         <MasterData MasterDataId="CapacityUOM" IsReqd="Y" OverRidingClass=""/>
+      </CapacityUOM>
+      <ExtendedAttributes/>
+   </Item>
+   <ItemAlias DisplayName="Alias" TableName="YFS_ITEM_ALIAS" AllowDuplicateAttributes="N" IconFile="alias.gif" ShowNotButtons="Y">
+      <AliasName Id="AliasName" DisplayName="AliasName" Type="Leaf" ControlType="Combo" ColumnName="ALIAS_NAME" DataType="Text-40">
+         <QryTypes DefaultQryTypeId="EQ">
+            <QryType QryTypeName="Is" QryTypeId="EQ"/>
+         </QryTypes>
+         <MasterData MasterDataId="AliasName" IsReqd="Y" OverRidingClass=""/>
+      </AliasName>
+      <AliasValue Id="AliasValue" DisplayName="Alias_Value" Type="Leaf" ControlType="Text" ColumnName="ALIAS_VALUE" DataType="Text-100">
+         <QryTypes DefaultQryTypeId="EQ">
+            <QryType QryTypeName="Is" QryTypeId="EQ"/>
+            <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+            <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+         </QryTypes>
+         <MasterData MasterDataId="AliasValue" IsReqd="" OverRidingClass=""/>
+      </AliasValue>
+      <ExtendedAttributes/>
+   </ItemAlias>
+   <AdditionalAttribute DisplayName="Additional_Attributes" TableName="YFS_ADDITIONAL_ATTRIBUTE" AllowDuplicateAttributes="N" IconFile="additionalattributes.gif" ShowNotButtons="Y">
+      <Name Type="Leaf" Id="Name" DisplayName="Name" DataType="Text-40" ControlType="Text" ColumnName="NAME">
+         <QryTypes DefaultQryTypeId="EQ">
+            <QryType QryTypeName="Is" QryTypeId="EQ"/>
+            <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+            <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+         </QryTypes>
+         <MasterData MasterDataId="Name" IsReqd="" OverRidingClass=""/>
+      </Name>
+      <Value Type="Leaf" Id="Value" DisplayName="Value" DataType="Text-100" ControlType="Text" ColumnName="VALUE">
+         <QryTypes DefaultQryTypeId="EQ">
+            <QryType QryTypeName="Is" QryTypeId="EQ"/>
+            <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+            <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+         </QryTypes>
+         <MasterData MasterDataId="Value" IsReqd="" OverRidingClass=""/>
+      </Value>
+      <ExtendedAttributes/>
+   </AdditionalAttribute>
+   <ItemExclusion DisplayName="Exclusion" TableName="YFS_ITEM_EXCLUSION" AllowDuplicateAttributes="N" ShowNotButtons="Y" IconFile="exclusioncode.gif">
+      <ExclusionCode Type="Leaf" Id="ExclusionCode" DisplayName="ExclusionCode" DataType="Text-40" ControlType="Text" ColumnName="EXCLUSION_CODE">
+         <QryTypes DefaultQryTypeId="EQ">
+            <QryType QryTypeName="Is" QryTypeId="EQ"/>
+            <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+            <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+         </QryTypes>
+         <MasterData MasterDataId="ExclusionCode" IsReqd="" OverRidingClass=""/>
+      </ExclusionCode>
+      <ExtendedAttributes/>
+   </ItemExclusion>
+</AdvancedQuery>

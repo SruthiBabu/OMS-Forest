@@ -1,0 +1,61 @@
+<html>
+    <body>
+        <form name="frmCountTaskContext" target="/console/rfcount.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblCountTask"
+                                    type="text" validate="false" value="Mobile_Count_Task"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/ActionList/@Action"
+                                    col="1" gridcols="7"
+                                    gridrows="6" id="Action"
+                                    mandatory="false"
+                                    name="gridActionList"
+                                    namespace="ActionList" size="20"
+                                    tag="binding=gridActionList" validate="false">
+                                    <tr>
+                                    <td>
+									<input colno="0" colName=" " size="0"
+                                    type="hidden" value="/console/rfcount.ppc?action=frmCountTaskContext"/>
+                                    <input colno="1" colName=" " inputbinding="xml:/Action/@Value"
+                                    outputbinding="xml:/CountTask/@ActionName"
+                                    size="0" type="hidden"/>
+									<input colno="2" colName="Action" size="20" type="text" inputbinding="xml:/Action/@ActionName"/>
+									</td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+							<tr/>
+							<tr/>
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    name="DONE" size="5"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfmenu.ppc?CurrentInnerPanelID=menu"
+                                    validate="false" value="Mobile_Done"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+
+	<xsl:template match="/">
+		<Order>
+			<OrderLines>
+				<xsl:apply-templates select="/Comergent/PricingCartServiceReply/PricingCartItemList/PricingCartItem" />
+			</OrderLines>
+			<HeaderCharges Reset="Y">
+				<xsl:apply-templates select="/Comergent/PricingCartServiceReply/PricingAdjustmentList/PricingAdjustment"  mode="HeaderCharges" />
+				<xsl:call-template name="InputHeaderCharges" />
+			</HeaderCharges>
+			<Promotions>
+				<xsl:call-template name="RemovePromotions" />
+				<xsl:apply-templates select="/Comergent/PricingCartServiceReply/PricingCouponList/PricingCoupon"/>
+				<xsl:apply-templates select="/Comergent/PricingCartServiceReply/PricingAdjustmentList/PricingAdjustment" mode="Promotions"/>
+				<xsl:apply-templates select="/Comergent/PricingCartServiceReply/PricingCartItemList/PricingCartItem/PricingAdjustmentList/PricingAdjustment" mode="Promotions" />
+			</Promotions>
+			<Awards>
+				<xsl:call-template name="RemoveAwards" />
+				<xsl:apply-templates select="/Comergent/PricingCartServiceReply/PricingAdjustmentList/PricingAdjustment" mode="Awards"/>
+			</Awards>
+		</Order>
+	</xsl:template>
+
+	<xsl:template match="PricingCartItem">
+		<OrderLine>
+			<xsl:attribute name="OrderLineKey">
+				<xsl:value-of select="ExternalRefID" />
+			</xsl:attribute>
+			<LinePriceInfo>
+				<xsl:attribute name="UnitPrice">
+					<xsl:value-of select="UnitPrice" />
+				</xsl:attribute>
+			</LinePriceInfo>
+			<LineCharges Reset="Y">
+				<!-- <xsl:apply-templates select="PricingAdjustmentList/PricingAdjustment" mode="LineCharges"/> -->
+				<xsl:if test="/Comergent/PricingCartServiceReply/DistributeHeaderAdjustments = 'true'">
+					<xsl:apply-templates select="DistributedHeaderAdjustmentList/DistributedHeaderAdjustment" mode="LineCharges" />
+				</xsl:if>
+				<xsl:call-template name="InputLineCharges">
+					<xsl:with-param name="OrderLineKey" select="ExternalRefID"/>
+				</xsl:call-template>
+			</LineCharges>
+			<Awards>
+				<xsl:call-template name="InputAwardsRemovals">
+					<xsl:with-param name="OrderLineKey" select="ExternalRefID"/>
+				</xsl:call-template>
+				<xsl:apply-templates select="PricingAdjustmentList/PricingAdjustment" mode="Awards"/>
+			</Awards>
+		</OrderLine>
+	</xsl:template>
+
+	<xsl:template match="ShippingInfo">
+		<xsl:if test="TotalShippingChargeAdjustment">
+			<HeaderCharge ChargeName="Shipping Adjustment">
+				<xsl:attribute name="ChargeAmount">
+					<xsl:value-of select="(round(number(concat(substring('-', 2 - (TotalShippingChargeAdjustment &lt;0)),  '1') * TotalShippingChargeAdjustment) * 100)) div 100" />
+				</xsl:attribute>
+				<xsl:choose>
+					<xsl:when test="TotalShippingChargeAdjustment &gt; 0">
+						<xsl:attribute name="ChargeCategory">UPLIFT</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="ChargeCategory">OSDISCOUNT</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+			</HeaderCharge>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="PricingAdjustment" mode="Awards">
+		<Award AwardApplied="Y">
+			<xsl:attribute name="AwardId">
+				<xsl:value-of select="Name"/>
+			</xsl:attribute>
+			<xsl:choose>
+				<xsl:when test="AbsoluteAdjustment &gt; 0">
+					<xsl:attribute name="AwardType">UPLIFT</xsl:attribute>
+					<xsl:attribute name="AwardAmount">
+						<xsl:choose>
+							<xsl:when test="QuantityAppliedTo &gt; 0">
+								<xsl:value-of select="round(AbsoluteAdjustment * QuantityAppliedTo * 100) div 100"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="round(AbsoluteAdjustment * 100) div 100"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="AwardType">OSDISCOUNT</xsl:attribute>
+					<xsl:attribute name="AwardAmount">
+						<xsl:choose>
+							<xsl:when test="QuantityAppliedTo &gt; 0">
+								<xsl:value-of select="concat('-', string(round(number(concat(substring('-', 2 - (AbsoluteAdjustment &lt;0)),  '1') * AbsoluteAdjustment) * QuantityAppliedTo * 100) div 100))" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="concat('-', string(round(number(concat(substring('-', 2 - (AbsoluteAdjustment &lt;0)),  '1') * AbsoluteAdjustment) * 100) div 100))" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:attribute name="Description">
+				<xsl:value-of select="Description" />
+			</xsl:attribute>
+			<xsl:attribute name="PosReasonCode">
+				<xsl:value-of select="AdjustmentSubType"/>
+			</xsl:attribute>
+			<xsl:choose>
+				<xsl:when test="AdjustmentType = 'COUPON'">
+					<xsl:attribute name="PromotionId">
+						<xsl:value-of select="AdjustmentID" />
+					</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="PromotionId">
+						<xsl:value-of select="Name" />
+					</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+		</Award>
+	</xsl:template>
+
+	<xsl:template match="DistributedHeaderAdjustment" mode="LineCharges">
+		<LineCharge>
+			<xsl:attribute name="ChargePerLine">
+				<xsl:value-of select="round(number(concat(substring('-', 2 - (AbsoluteAdjustment &lt;0)),  '1') * AbsoluteAdjustment) * 100) div 100" />
+			</xsl:attribute>
+			<xsl:choose>
+				<xsl:when test="AbsoluteAdjustment &gt; 0">
+					<xsl:attribute name="ChargeCategory">UPLIFT</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="ChargeCategory">OSDISCOUNT</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:choose>
+				<xsl:when test="AdjustmentType = 'COUPON'">
+					<xsl:attribute name="ChargeName">
+						<xsl:value-of select="AdjustmentID" />
+					</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="ChargeName">
+						<xsl:value-of select="Name" />
+					</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:attribute name="Reference">
+				<xsl:value-of select="Description"/>
+			</xsl:attribute>
+		</LineCharge>
+	</xsl:template>
+
+	<xsl:template match="PricingAdjustment" mode="LineCharges">
+		<LineCharge>
+			<xsl:attribute name="ChargePerLine">
+				<xsl:choose>
+					<xsl:when test="QuantityAppliedTo &gt; 0">
+						<xsl:value-of select="round(number(concat(substring('-', 2 - (AbsoluteAdjustment &lt;0)),  '1') * AbsoluteAdjustment * QuantityAppliedTo) * 100) div 100"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="round(number(concat(substring('-', 2 - (AbsoluteAdjustment &lt;0)),  '1') * AbsoluteAdjustment) * 100) div 100"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<xsl:choose>
+				<xsl:when test="AbsoluteAdjustment &gt; 0">
+					<xsl:attribute name="ChargeCategory">UPLIFT</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="ChargeCategory">OSDISCOUNT</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:choose>
+				<xsl:when test="AdjustmentType = 'COUPON'">
+					<xsl:attribute name="ChargeName">
+						<xsl:value-of select="AdjustmentID" />
+					</xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="ChargeName">
+						<xsl:value-of select="Name" />
+					</xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:attribute name="Reference">
+				<xsl:value-of select="Description"/>
+			</xsl:attribute>
+		</LineCharge>
+	</xsl:template>
+	
+	<xsl:template match="PricingAdjustment" mode="HeaderCharges">
+		<xsl:if test="/Comergent/PricingCartServiceReply/DistributeHeaderAdjustments != 'true' or AdjustmentSubType='SHIPPING'">
+			<HeaderCharge>
+				<xsl:attribute name="ChargeAmount">
+					<xsl:choose>
+						<xsl:when test="QuantityAppliedTo &gt; 0">
+							<xsl:value-of select="round(number(concat(substring('-', 2 - (AbsoluteAdjustment &lt;0)),  '1') * AbsoluteAdjustment * QuantityAppliedTo) * 100) div 100"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="round(number(concat(substring('-', 2 - (AbsoluteAdjustment &lt;0)),  '1') * AbsoluteAdjustment) * 100) div 100"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>
+				<xsl:choose>
+					<xsl:when test="AbsoluteAdjustment &gt; 0">
+						<xsl:attribute name="ChargeCategory">UPLIFT</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="ChargeCategory">OSDISCOUNT</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:choose>
+					<xsl:when test="AdjustmentType = 'COUPON'">
+						<xsl:attribute name="ChargeName">
+							<xsl:value-of select="AdjustmentID" />
+						</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="ChargeName">
+							<xsl:value-of select="Name" />
+						</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:attribute name="Reference">
+					<xsl:value-of select="Description"/>
+				</xsl:attribute>
+			</HeaderCharge>
+		</xsl:if>
+	</xsl:template>
+				
+	<xsl:template match="PricingCoupon">
+		<Promotion PromotionType="COUPON">
+			<xsl:attribute name="PromotionId">
+				<xsl:value-of select="CouponID"/>
+			</xsl:attribute>
+			<xsl:attribute name="PromotionApplied">
+				<xsl:choose>
+					<xsl:when test="CouponStatus = 'APPLIED'">Y</xsl:when>
+					<xsl:otherwise>N</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<xsl:if test="CouponStatus != 'APPLIED'">
+				<xsl:attribute name="DenialReason">
+					<xsl:value-of select="CouponStatus" />
+				</xsl:attribute>
+			</xsl:if>
+		</Promotion>
+	</xsl:template>
+
+					
+	<xsl:template match="PricingAdjustment" mode="Promotions">
+		<xsl:if test="AdjustmentType != 'COUPON'">
+			<Promotion PromotionApplied="Y">
+				<xsl:attribute name="PromotionId">
+					<xsl:value-of select="Name"/>
+				</xsl:attribute>
+				<xsl:choose>
+					<xsl:when test="AbsoluteAdjustment &gt; 0">
+						<xsl:attribute name="PromotionType">UPLIFT</xsl:attribute>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="PromotionType">OSDISCOUNT</xsl:attribute>
+					</xsl:otherwise>
+				</xsl:choose>
+			</Promotion>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="InputLineCharges">
+		<xsl:param name="OrderLineKey" />
+		<xsl:for-each select="/Comergent/Order/OrderLines/OrderLine[@OrderLineKey=$OrderLineKey]">
+			<xsl:for-each select="LineCharges/LineCharge[@ChargeCategory !='OSDISCOUNT' and @ChargeCategory!='UPLIFT']">
+				<LineCharge>
+					<xsl:copy-of select="@*" />
+				</LineCharge>
+			</xsl:for-each>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="InputAwardsRemovals">
+		<xsl:param name="OrderLineKey" />
+		<xsl:for-each select="/Comergent/Order/OrderLines/OrderLine[@OrderLineKey=$OrderLineKey]">
+			<xsl:for-each select="Awards/Award">
+				<xsl:if test="@Action != 'REMOVE'">
+					<xsl:if test="@AwardType = 'OSDISCOUNT' or @AwardType = 'UPLIFT'">
+						<Award AwardApplied="N" AwardAmount="0" >
+							
+							<xsl:attribute name="AwardId">
+								<xsl:value-of select="@AwardId" />
+							</xsl:attribute>
+							
+						</Award>
+					</xsl:if>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="InputHeaderCharges">
+		<xsl:for-each select="/Comergent/Order/HeaderCharges/HeaderCharge[@ChargeCategory !='OSDISCOUNT' and @ChargeCategory!='UPLIFT']">
+			<HeaderCharge>
+				<xsl:copy-of select="@*" />
+			</HeaderCharge>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="RemovePromotions">
+		<xsl:for-each select="/Comergent/Order/Promotions/Promotion">
+			<xsl:if test="@Action != 'REMOVE'">
+				<Promotion PromotionApplied="N">
+					<xsl:attribute name="PromotionId">
+						<xsl:value-of select="@PromotionId" />
+					</xsl:attribute>
+				</Promotion>
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="RemoveAwards">
+		<xsl:for-each select="/Comergent/Order/Awards/Award">
+		<xsl:if test="@Action != 'REMOVE'">
+			<xsl:if test="@AwardType = 'OSDISCOUNT' or @AwardType = 'UPLIFT'">
+			<Award AwardApplied="N" AwardAmount="0" >
+				<xsl:attribute name="AwardId">
+					<xsl:value-of select="@AwardId" />
+				</xsl:attribute>
+			</Award>
+			</xsl:if>
+		</xsl:if>
+		</xsl:for-each>
+	</xsl:template>
+</xsl:stylesheet>

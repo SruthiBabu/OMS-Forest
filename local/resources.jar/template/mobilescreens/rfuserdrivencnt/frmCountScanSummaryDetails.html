@@ -1,0 +1,143 @@
+<html>
+    <body>
+        <form name="frmCountScanSummaryDetails" target="/console/rfuserdrivencnt.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="7"
+                                    inputbinding="xml:/RecordCountResult/@TaskType"
+                                    outputbinding="xml:/RecordCountResult/@TaskType"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/RecordCountResult/@TaskType"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    mandatory="false"
+                                    outputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    mandatory="false"
+                                    name="txtLastScannedLpn"
+                                    outputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecentLPN/@LastScannedLPN"
+                                    type="hidden" validate="true"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/RecordCountResult/@PalletComplete"
+                                    mandatory="false"
+                                    name="txtPalletComplete"
+                                    outputbinding="xml:/RecordCountResult/@PalletComplete"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@PalletComplete"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="7" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblVariance"
+                                    type="text" validate="false" value="Mobile_Variance_Found"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblItemId"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblSku" type="text"
+                                    validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemId"
+                                    outputbinding="xml:/Inventory/@ItemID"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Inventory/@ItemID"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblUom"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblUom" type="text"
+                                    validate="false" value="Mobile_UOM"/>			                                   
+                                </td>
+                            </tr>
+							<tr>
+								<td>
+									<input col="1"
+                                    inputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Inventory/@UnitOfMeasure"
+                                    type="text" validate="false"/> 
+								</td>
+							</tr>
+                            <tr>
+                                <td>
+									<input col="1" name="lblCountQty"
+                                    size="11" subtype="Label"
+                                    tag="binding=lblCountQty"
+                                    type="text" validate="false" value="Mobile_Count_Qty"/>
+                                    <nput col="12"
+                                    inputbinding="xml:/Inventory/@CountQuantity"
+                                    mandatory="false"
+                                    name="txtCountQty"
+                                    outputbinding="xml:/Inventory/@CountQuantity"
+                                    size="8" subtype="Text"
+                                    tag="binding=xml:/Inventory/@CountQuantity"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblSystemQty"
+                                    size="11" subtype="Hidden"
+                                    tag="binding=lblSysQty"
+                                    type="hidden" validate="false" value="Mobile_System_Qty"/>
+									<input col="12"
+                                    inputbinding="xml:/Inventory/@SystemQuantity"
+                                    mandatory="false"
+                                    name="txtSystemQty"
+                                    outputbinding="xml:/Inventory/@SystemQuantity"
+                                    size="8" subtype="Hidden"
+                                    tag="binding=xml:/Inventory/@SystemQuantity"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="2" hotkey="F3"
+                                    mandatory="false" size="13"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmCountAcceptAndUpdate"
+                                    validate="false" value="Mobile_Accept_Count"/>
+                                    <input col="16" hotkey="F6"
+                                    mandatory="false" size="7"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmCountCriteriaRescan"
+                                    validate="false" value="Mobile_Rescan"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

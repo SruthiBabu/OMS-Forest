@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity TableName="YFS_INSTRUCTION_DETAIL" TableType="TRANSACTION" GenerateIndexedListMethods="true">
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WorkOrderActivityInstructions"
+                    ChildName="WorkOrderActivityInstruction"
+                    DeleteCascade="true"
+                    ForeignEntity="Work_Order_Activity"
+                    Name="WorkOrderActivity" Type="Bidirectional" XMLName="WorkOrderActivity">
+                    <Attribute Name="Reference_Key" ParentName="Work_Order_Activity_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_WORK_ORDER_ACTIVITY"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Instructions"
+                    ChildName="Instruction" DeleteCascade="true"
+                    ForeignEntity="Work_Order" Name="WorkOrder"
+                    Type="Bidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Reference_Key" ParentName="Work_Order_Key"/>
+                    <Attribute Name="Table_Name" ParentName="YFS_WORK_ORDER"/>
+                </RelationShip>
+			</RelationShips>		
+		</Entity>
+	</Entities>
+</DBSchema>

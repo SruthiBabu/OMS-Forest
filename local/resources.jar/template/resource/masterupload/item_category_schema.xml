@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults  DefaultRecordDelimiter="#" DefaultFieldDelimiter="," DefaultEscapeCharacter="\" DefaultPadCharacter="*" RecordIdStartPosition="1" SkipCarriageReturn="false">
+      <FileHeader FileHeaderId="000" FileHeaderStartPos="1" FileHeaderLength="3"/>
+	  <!-- this needs to  be figured out -->
+      <FileTrailer FileTrailerId="666" FileTrailerStartPos="1" FileTrailerLength="3"/>
+   </ParserDefaults>
+
+   <Root Name="ModifyCategoryItems">
+		<Header Name="Action" RecordName="ACTRID" MinOccurrence="1" MaxOccurrence="1"/>
+		<Terminal Name="Category" RecordName="ITMCATRID1" MinOccurrence="1" MaxOccurrence="1"/>
+		<Sequence Name="CategoryItem" RecordName="ITMCATRID2" MinOccurrence="0" MaxOccurrence="1000"/>
+   </Root>
+   
+   <RecordDefinitions>
+    <Record RecordId="ACTRID" Name="ACTRID" XMLName="Action">
+         <Field Name="ACTION" FieldPosition="2" XMLName="Action"/>
+      </Record>
+      <Record RecordId="ITMCATRID1" Name="ITMCATRID1" XMLName="Category">
+         <Field Name="CATEGORYPATH" FieldPosition="2" XMLName="CategoryPath"/>
+      </Record>
+	  <Record RecordId="ITMCATRID2" Name="ITMCATRID2" XMLName="CategoryItem">
+         <Field Name="ITEMID" FieldPosition="2" XMLName="ItemID"/>
+		 <Field Name="UOM" FieldPosition="3" XMLName="UnitOfMeasure"/>
+      </Record>
+   </RecordDefinitions>
+
+</FlatfileDelimitedSchema>
+
+
+

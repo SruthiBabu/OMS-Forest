@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2001, 2019 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<preferences>
+    <configsynch>
+        <Settings CustomEntityClass="<custom_entity_class>" MaxChangesToDisplay="<max_changes_to_display>" ReportsDir="<reports_dir>">
+            <AuditDeployment ValidateLockid="<y/n>" ValidateOldValues="<y/n>" ValidateRecordExistsBeforeDelete="<y/n>"/>
+        </Settings>
+        <SourceDatabases>
+            <Database Name="<name>" className="<driver_class>"
+                dbType="<dbtype>" folder="<folder>"
+                jdbcURL="<jdbc_url>"
+                schema="<schema>" user="<user>"/>
+        </SourceDatabases>
+        <TargetDatabases>
+            <Database Name="<name>" className="<driver_class>"
+                dbType="<dbtype>" folder="<folder>" httpurl="<http_url>" httpuser="<http_user>"
+                jdbcURL="<jdbc_url>"
+                schema="<schema>" user="<user>"/>
+        </TargetDatabases>
+        <SourceTargetPrefs>
+            <SourceTargetPrefs>
+                <SourceTargetPair SourceDatabase="<source_database_name>" TargetDatabase="<target_database_name>">
+                    <Transformations>
+                        <Table Name="<table_name>">
+                            <Column Name="<column_name>">
+                                <Transform Match="<match>" Replace="<replace>" XPath="<xpath>"/>
+                            </Column>
+                        </Table>
+                        
+                        <!-- For e.g. null is a valid value for the column FUTURE_INVENTORY_WINDOW. 
+                        But CDT ignores null valued columns while exporting to XML and hence to deploy it correctly 
+                        on XML approach, a null value has to be transformed to a non-null value as below. 
+                        Similarly reverse transformation also must be specified in the respective SourceTargetPair 
+                        setings to convert the temporary non-null value to null on the target database. -->
+                        <!-- <Table Name="YFS_SOURCING_RULE_DTL">
+                            <Column Name="FUTURE_INVENTORY_WINDOW">
+                                <Transform Match="" Replace="999"/>
+                            </Column>
+                        </Table> -->
+
+                    </Transformations>
+                    <Ignore>
+                        <Table Name="<ignore_table_name>"/>
+                    </Ignore>
+                    <AppendOnly>
+                        <Table Name="<append_only_table_name>"/>
+                    </AppendOnly>
+                </SourceTargetPair>
+            </SourceTargetPrefs>
+        </SourceTargetPrefs>
+    </configsynch>
+</preferences>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<SYNCPRICELISTHEADER>
+  <PricelistHeaderKey Type="Leaf" Id="PricelistHeaderKey" DisplayName="PricelistHeaderKey" DataType="Text-40" ControlType="Text" ColumnName="PRICELIST_HDR_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="PricelistHeaderKey" IsReqd="" OverRidingClass=""/>
+  </PricelistHeaderKey>
+  <PricelistName Type="Leaf" Id="PricelistName" DisplayName="PricelistName" DataType="Text-40" ControlType="Text" ColumnName="PRICELIST_NAME">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="PricelistName" IsReqd="" OverRidingClass=""/>
+  </PricelistName>
+  <Description Type="Leaf" Id="Description" DisplayName="Description" DataType="Text-40" ControlType="Text" ColumnName="DESCRIPTION">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Description" IsReqd="" OverRidingClass=""/>
+  </Description>
+  <PricingStatus Type="Leaf" Id="PricingStatus" DisplayName="PricingStatus" DataType="Text-40" ControlType="Text" ColumnName="PRICING_STATUS">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="PricingStatus" IsReqd="" OverRidingClass=""/>
+  </PricingStatus>
+  <SellerOrganizationCode Type="Leaf" Id="SellerOrganizationCode" DisplayName="SellerOrganizationCode" DataType="Text-40" ControlType="Text" ColumnName="SELLER_ORGANIZATION_CODE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="SellerOrganizationCode" IsReqd="" OverRidingClass=""/>
+  </SellerOrganizationCode>
+  <OrganizationCode Type="Leaf" Id="OrganizationCode" DisplayName="OrganizationCode" DataType="Text-40" ControlType="Text" ColumnName="ORGANIZATION_CODE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="OrganizationCode" IsReqd="" OverRidingClass=""/>
+  </OrganizationCode>
+  <InheritFromPricelistHeaderKey Type="Leaf" Id="InheritFromPricelistHeaderKey" DisplayName="InheritFromPricelistHeaderKey" DataType="Text-40" ControlType="Text" ColumnName="INHERIT_FROM_PRICELIST_HDR_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="InheritFromPricelistHeaderKey" IsReqd="" OverRidingClass=""/>
+  </InheritFromPricelistHeaderKey>
+  <StartDateActive Type="Leaf" Id="StartDateActive" DisplayName="StartDateActive" DataType="Number" ControlType="Text" ColumnName="START_DATE_ACTIVE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="StartDateActive" IsReqd="" OverRidingClass=""/>
+  </StartDateActive>
+  <EndDateActive Type="Leaf" Id="EndDateActive" DisplayName="EndDateActive" DataType="Number" ControlType="Text" ColumnName="END_DATE_ACTIVE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="EndDateActive" IsReqd="" OverRidingClass=""/>
+  </EndDateActive>
+  <Currency Type="Leaf" Id="Currency" DisplayName="Currency" DataType="Number" ControlType="Text" ColumnName="CURRENCY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Currency" IsReqd="" OverRidingClass=""/>
+  </Currency>
+  <PercentAdjustmentOverride Type="Leaf" Id="PercentAdjustmentOverride" DisplayName="PercentAdjustmentOverride" DataType="Number" ControlType="Text" ColumnName="PERCENT_ADJUSTMENT_OVERRIDE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="PercentAdjustmentOverride" IsReqd="" OverRidingClass=""/>
+  </PercentAdjustmentOverride>
+  <AbsoluteAdjustmentOverride Type="Leaf" Id="AbsoluteAdjustmentOverride" DisplayName="AbsoluteAdjustmentOverride" DataType="Number" ControlType="Text" ColumnName="ABSOLUTE_ADJUSTMENT_OVERRIDE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="AbsoluteAdjustmentOverride" IsReqd="" OverRidingClass=""/>
+  </AbsoluteAdjustmentOverride>
+  <MarkedForListPrice Type="Leaf" Id="MarkedForListPrice" DisplayName="MarkedForListPrice" DataType="Flag" ControlType="Combo" ColumnName="MARKED_FOR_LIST_PRICE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+    </QryTypes>
+    <MasterData MasterDataId="MarkedForListPrice" IsReqd="" OverRidingClass="" IsStatic="true">
+      <MarkedForListPrice Code="Y" Desc="Yes"/>
+      <MarkedForListPrice Code="N" Desc="No"/>
+    </MasterData>
+  </MarkedForListPrice>
+</SYNCPRICELISTHEADER>

@@ -1,0 +1,86 @@
+<html>
+    <body>
+        <form name="frmCart" target="/console/rfcart.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+									<input col="10" 
+                                    name="lblTitle"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Criteria"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="8" subtype="Label"
+                                    tag="binding=lblCartId"
+                                    type="text" validate="false" value="Mobile_Cart_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/Cart/@CartId"
+                                    name="txtCartId"
+                                    outputbinding="xml:/Cart/@CartId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Cart/@CartId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+									name="lblZone"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblZone"
+                                    type="text" validate="false" value="Mobile_Location_Zone"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" inputbinding="xml:/Cart/@SourceZoneId"
+                                    name="txtSourceZoneId"
+                                    outputbinding="xml:/Cart/@SourceZoneId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Cart/@SourceZoneId"
+                                    type="text" validate="true"/>
+									<input col="1" inputbinding="xml:/Cart/@Context"
+                                    name="txtContext"
+                                    outputbinding="xml:/Cart/@Context"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Cart/@Context"
+                                    type="hidden" validate="false"/>
+									<input col="1" inputbinding="xml:/Cart/@MandateZone"
+                                    name="txtMandateZone"
+                                    outputbinding="xml:/Cart/@MandateZone"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Cart/@MandateZone"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rfcart.ppc?action=frmCartUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>					
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

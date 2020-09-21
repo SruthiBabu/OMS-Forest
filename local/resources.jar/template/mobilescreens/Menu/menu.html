@@ -1,0 +1,57 @@
+<html>
+    <body>
+        <form name="Menu">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="entitybasedirectory"
+                                    size="15" subtype="Hidden"
+                                    tag="binding=entitybase"
+                                    type="hidden" validate="false" value="/rf/Menu"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblTitle"
+                                    type="text" validate="false" value="Mobile_Menu"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table binding="/Menu/MenuItem"
+                                    col="1" gridcols="3"
+                                    gridrows="7" id="MenuItem"
+                                    mandatory="false"
+                                    name="grdMenu1"
+                                    namespace="PpcMenu" size="20"
+                                    tag="binding=Grid1" validate="true">
+                                    <tr>
+                                    <td>
+                                    <input colno="0" colName=" "
+                                    inputbinding="xml:/MenuItem/@MenuUrl"
+                                    size="0" type="hidden"/>
+                                    <input colno="1" colName=" "
+                                    inputbinding="xml:/MenuItem/@MenuUrl"
+                                    outputbinding="xml:Menu/MenuURL"
+                                    size="0" type="hidden"/>
+                                    <input colno="2" colName="Menu"
+                                    inputbinding="xml:/MenuItem/@Desc"
+                                    size="20" type="text"/>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

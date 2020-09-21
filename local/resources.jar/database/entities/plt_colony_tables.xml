@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema Name="plt_colony_tables">
+    <Entities>
+    	<Entity Cacheable="false"
+            Description="This table stores header-level information on colony configuration."
+            Module="ycp" Name="DbColony"
+            Prefix="PLT_" TableName="PLT_DB_COLONY" TableType="METADATA" XMLName="Colony">
+       		<Attributes>
+            	<Attribute ColumnName="DB_COLONY_KEY"
+            		DataType="Key" DefaultValue="' ' "
+            		Description="Primary key attribute of PLT_DB_COLONY."
+            		Name="Colony_Key" Nullable="false" />
+            	<Attribute ColumnName="COLONY_ID"
+            		DataType="ColonyId" DefaultValue="' '"
+            		Description="Unique identifier of a Colony"
+            		Name="Colony_Id" Nullable="false"/>
+            	<Attribute ColumnName="PK_PREFIX"
+            		DataType="ColonyPrefix" DefaultValue="' '"
+            		Description="Two-digit prefix for creation of table keys within the colony."
+            		Name="Pk_Prefix" Nullable="false"/>
+            	<Attribute ColumnName="COLONY_VERSION"
+            		DataType="ColonyVersion"
+            		Description="Version of this colony, for tracking purposes."
+            		Name="Colony_Version" Nullable="true"/>
+                <Attribute ColumnName="STATUS"
+                    DataType="ColonyStatus" 
+                    Description="Status of the colony. If a status is set, then the colony is disabled. Otherwise it is enabled."
+                    Name="Status" Nullable="true" XMLName="Status"/>
+            	<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+           	</Attributes>
+            <PrimaryKey Name="PLT_DB_COLONY_PK">
+                <Attribute ColumnName="Colony_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="PLT_DB_COLONY_I1" Unique="true">
+                	<Column Name="COLONY_ID" />
+                	<Column Name="COLONY_VERSION" />
+                </Index>
+                <Index Name="PLT_DB_COLONY_I2" Unique="true">
+                	<Column Name="PK_PREFIX" />
+                	<Column Name="COLONY_VERSION" />
+                </Index>
+            </Indices>
+        </Entity>
+    	<Entity Cacheable="false"
+            Description="This table maps a shard and table type combination for a colony."
+            Module="ycp" Name="DbColonyPool"
+            Prefix="PLT_" TableName="PLT_DB_COLONY_POOL" TableType="METADATA" XMLName="ColonyPool">
+       		<Attributes>
+            	<Attribute ColumnName="DB_COLONY_POOL_KEY"
+            		DataType="Key" DefaultValue="' ' "
+            		Description="Primary key attribute of PLT_DB_COLONY_POOL."
+            		Name="Db_Colony_Pool_Key" Nullable="false" />
+            	<Attribute ColumnName="COLONY_KEY"
+            		DataType="Key" DefaultValue="' '"
+            		Description="Colony that contains this mapping."
+            		Name="Colony_Key" Nullable="false"/>
+            	<Attribute ColumnName="TABLE_TYPE"
+            		DataType="TableType" DefaultValue="' '"
+            		Description="Type of table for this mapping."
+            		Name="Table_Type" Nullable="false"/>
+            	<Attribute ColumnName="POOL_ID"
+            		DataType="DatabasePoolId" DefaultValue="' '"
+            		Description="Shard connection to use for this mapping."
+            		Name="Pool_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+           	</Attributes>
+            <PrimaryKey Name="PLT_COLONY_POOL_PK">
+                <Attribute ColumnName="DB_COLONY_POOL_KEY"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="PLT_COLONY_POOL_I1" Unique="true">
+                	<Column Name="COLONY_KEY" />
+                	<Column Name="TABLE_TYPE" />
+                </Index>
+            </Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ColonyPoolList"
+                    ChildName="ColonyPool" DeleteCascade="true"
+                    Enforce="true" ForeignEntity="DbColony"
+                    Name="DbColony" Type="Bidirectional" XMLName="Colony">
+                    <Attribute Name="Colony_Key" ParentName="Colony_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    	<Entity Cacheable="false"
+            Description="This table stores database shard connection information."
+            Module="ycp" Name="DbPool"
+            Prefix="PLT_" TableName="PLT_DB_POOL" TableType="METADATA" XMLName="DBPool">
+       		<Attributes>
+            	<Attribute ColumnName="DB_POOL_KEY"
+            		DataType="Key" DefaultValue="' ' "
+            		Description="Primary key attribute of PLT_DB_POOL."
+            		Name="Db_Pool_Key" Nullable="false" />
+            	<Attribute ColumnName="POOL_ID"
+            		DataType="DatabasePoolId" DefaultValue="' '"
+            		Description="Unique identifier of the database shard connection"
+            		Name="Pool_Id" Nullable="false"/>
+                <Attribute ColumnName="POOL_CONFIG"
+                    DataType="CLOB" DefaultValue="' '"
+                    Description="Configuration parameters for the database shard connection."
+                    Name="Pool_Config" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+           	</Attributes>
+            <PrimaryKey Name="PLT_DB_POOL_PK">
+                <Attribute ColumnName="DB_POOL_KEY"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="PLT_DB_POOL_I1" Unique="true">
+                	<Column Name="POOL_ID" />
+                </Index>
+            </Indices>
+        </Entity>
+    	<Entity Cacheable="false"
+            Description="This table maps data in a foreign table to a particular Colony."
+            Module="ycp" Name="Colony_Map"
+            Prefix="PLT_" TableName="PLT_COLONY_MAP" TableType="METADATA" XMLName="ColonyMap">
+       		<Attributes>
+            	<Attribute ColumnName="COLONY_MAP_KEY"
+            		DataType="Key" DefaultValue="' ' "
+            		Description="Primary key attribute of PLT_COLONY_MAP."
+            		Name="Colony_Map_Key" Nullable="false" />
+            	<Attribute ColumnName="MAP_TYPE"
+            		DataType="ColonyMapType" DefaultValue="' '"
+            		Description="Type of the foreign key."
+            		Name="Map_Type" Nullable="false"/>
+            	<Attribute ColumnName="MAP_KEY"
+            		DataType="ColonyMapKey" DefaultValue="' '"
+            		Description="Key in the foreign table."
+            		Name="Map_Key" Nullable="false"/>
+            	<Attribute ColumnName="COLONY_KEY"
+            		DataType="Key" DefaultValue="' '"
+            		Description="Colony for this mapping."
+            		Name="Colony_Key" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+           	</Attributes>
+            <PrimaryKey Name="PLT_COLONY_MAP_PK">
+                <Attribute ColumnName="COLONY_MAP_KEY"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="PLT_COLONY_MAP_I1" Unique="true">
+                	<Column Name="MAP_TYPE" />
+                	<Column Name="MAP_KEY" />
+                </Index>
+            </Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ColonyMapList"
+                    ChildName="ColonyMap" DeleteCascade="true"
+                    Enforce="true" ForeignEntity="DbColony" Virtual="true"
+                    Name="DbColony" Type="Unidirectional" XMLName="Colony">
+                    <Attribute Name="Colony_Key" ParentName="Colony_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    	<Entity Cacheable="false"
+            Description="This table helps enforce unique identifiers across database schemas."
+            Module="ycp" Name="Unique_Id"
+            Prefix="PLT_" TableName="PLT_UNIQUE_ID" TableType="METADATA" XMLName="UniqueId">
+       		<Attributes>
+            	<Attribute ColumnName="UNIQUE_ID_KEY"
+            		DataType="Key" DefaultValue="' ' "
+            		Description="Primary key attribute of PLT_UNIQUE_ID."
+            		Name="Unique_Id_Key" Nullable="false" />
+            	<Attribute ColumnName="TABLE_NAME"
+            		DataType="TableName" DefaultValue="' '"
+            		Description="Name of the table that contains the unique id."
+            		Name="Table_Name" Nullable="false"/>
+            	<Attribute ColumnName="UNIQUE_ID"
+            		DataType="MetaUniqueId" DefaultValue="' '"
+            		Description="Unique identifier that exists in the given table. This may be a concatenated value if the identifier is made of multiple columns."
+            		Name="Unique_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+           	</Attributes>
+            <PrimaryKey Name="PLT_UNIQUE_ID_PK">
+                <Attribute ColumnName="UNIQUE_ID_KEY"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="PLT_UNIQUE_ID_I1" Unique="true">
+                	<Column Name="TABLE_NAME" />
+                	<Column Name="UNIQUE_ID" />
+                </Index>
+            </Indices>
+        </Entity>
+    	<Entity Cacheable="false"
+            Description="This table allows delayed message broadcasts across versions."
+            Module="ycp" Name="Dispatch"
+            Prefix="PLT_" TableName="PLT_DISPATCH" TableType="METADATA" XMLName="Dispatch">
+       		<Attributes>
+            	<Attribute ColumnName="DISPATCH_KEY"
+            		DataType="Key" DefaultValue="' ' "
+            		Description="Primary key attribute of PLT_DISPATCH."
+            		Name="Dispatch_Key" Nullable="false" />
+            	<Attribute ColumnName="SEQUENCE_NO"
+            		DataType="DispatchSequenceNo" DefaultValue="0"
+            		Description="Sequence to provide ordering of dispatch messages."
+            		Name="Sequence_No" Nullable="false"/>
+            	<Attribute ColumnName="DISPATCH_TYPE"
+            		DataType="DispatchType" DefaultValue="0"
+            		Description="Indicates the type of message. ( 0 - DB Cache Refresh , 1 - Metadata Refresh )"
+            		Name="Dispatch_Type" Nullable="false"/>
+                <Attribute ColumnName="DISPATCH_DATA"
+                    DataType="CLOB" DefaultValue="' '"
+                    Description="The dispatch message."
+                    Name="Dispatch_Data" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+           	</Attributes>
+            <PrimaryKey Name="PLT_DISPATCH_PK">
+                <Attribute ColumnName="DISPATCH_KEY"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="PLT_DISPATCH_I1" Unique="true">
+                	<Column Name="SEQUENCE_NO" />
+                </Index>
+            </Indices>
+        </Entity>
+    </Entities>
+</DBSchema>

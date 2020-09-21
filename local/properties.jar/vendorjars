@@ -1,0 +1,75 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2001, 2018 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+# VENDORFILE0 = a path only
+#               added to sh,tcsh and pc variables
+# VENDORFILE1 = a vendor jar that is also distrbuted to the customer
+#               added to sh,tcsh and pc variables
+# VENDORFILE2 = a vendor jar that is also distrbuted to the customer
+#               added to sh and pc variables
+# VENDORFILE3 = a vendor jar that is not distrubuted to the customer
+#               added to sh,tcsh and pc variables
+# DBVENDOR    = a vendor jar that is not distributed but prepended
+#               to the classpath to eliminate conflicts with other jars.
+# VENDORFILE86 = a vendor jar that is removed from an installation during patching
+#               removed from tmp.sh.in and dynamicclasspath.cfg.in
+#
+# also note that the following jars are added to the classpath in the order
+# that they are in this file irregardless of type, with the exception
+# that DBVENDOR entries are prepended to the classpath.
+#
+# NOTE: some of the versions of third party jar used are set in the
+#       sandbox.defaults file. This was done because some version
+#       numbers were different depending on the choice made while
+#       building the sandbox. This meant that setupsandbox needed to
+#       be able to set these versions for later use. That meant that
+#       they had to end up in sandbox.cfg, because that is the only
+#       file that setupsandbox created after it reads sandbox.defaults
+#       to get its default values.
+#
+# The following needs to go away
+
+VENDORFILE0=&WOODSTOCK_DIR;
+VENDORFILE0=&BINARY_DIR;
+VENDORFILE0=&BINARY_DIR;/jar
+VENDORFILE0=&VENDORS_DIR;/sbgsej/&ECCPRESSO_VER;/EccpressoFIPS.jar
+VENDORFILE0=&VENDORS_DIR;/sbgsej/&ECCPRESSO_VER;/EccpressoFIPSJca.jar
+VENDORFILE0=&VENDORS_DIR;/sbgsej/&ECCPRESSO_VER;/EccpressoJDK15ECC.jar
+VENDORFILE0=&VENDORS_DIR;/sbgsepkij/&TRUSTPOINT_VER;/TrustpointAll.jar
+VENDORFILE0=&VENDORS_DIR;/sbgsepkij/&TRUSTPOINT_VER;/TrustpointProviders.jar
+VENDORFILE0=&VENDORS_DIR;/sbgsepkij/&TRUSTPOINT_VER;/IA5OrPrintableString.jar
+VENDORFILE0=&VENDORS_DIR;/sbgsepkij/&TRUSTPOINT_VER;/UTF8OrPrintableString.jar
+VENDORFILE0=&VENDORS_DIR;/stercomm/&STERCOMM_VER;/jcae_4_2_0.jar
+
+VENDORFILE3=&VENDORS_DIR;/junit/3_8_1/junit.jar
+
+VENDORFILE3=&ANT_DIR;/ant-junit.jar
+
+VENDORFILE3=&VENDORS_DIR;/yantra/7_3/yfsclient.jar
+
+VENDORFILE1=&VENDORS_DIR;/jniregistry/1_2/jniregistry.jar
+VENDORFILE1=&VENDORS_DIR;/log4j/1_2_17/log4j-1.2.17.jar
+VENDORFILE1=&VENDORS_DIR;/icu4j/&ICU4J_VERSION;/icu4j-&ICU4J_VERSION;.jar
+
+VENDORFILE1=&VENDORS_DIR;/xml4j/&XML4J_VER;/xml-apis.jar
+VENDORFILE1=&VENDORS_DIR;/xml4j/&XML4J_VER;/xercesImpl.jar
+VENDORFILE1=&VENDORS_DIR;/xslt4j/&XSLT4J_VER;/xalan.jar
+VENDORFILE1=&VENDORS_DIR;/xslt4j/&XSLT4J_VER;/serializer.jar
+
+
+VENDORFILE1=&VENDORS_DIR;/ant/&ANT_VER;/ant.jar
+VENDORFILE1=&VENDORS_DIR;/ant/&ANT_VER;/ant-junit.jar
+VENDORFILE1=&VENDORS_DIR;/ant/&ANT_VER;/ant-launcher.jar
+
+VENDORFILE1=&VENDORS_DIR;/javamail/&JAVAMAIL_VER;/mail.jar
+VENDORFILE1=&VENDORS_DIR;/javamail/&JAVAMAIL_VER;/dsn.jar
+VENDORFILE1=&VENDORS_DIR;/javamail/&JAVAMAIL_VER;/mailapi.jar
+VENDORFILE1=&VENDORS_DIR;/javamail/&JAVAMAIL_VER;/pop3.jar
+VENDORFILE1=&VENDORS_DIR;/javamail/&JAVAMAIL_VER;/smtp.jar
+VENDORFILE1=&VENDORS_DIR;/javamail/&JAVAMAIL_VER;/imap.jar
+VENDORFILE86=&VENDORS_DIR;/xerces/2_7_1/xercesImpl.jar
+VENDORFILE86=&VENDORS_DIR;/xerces/2_7_1/xmlParserAPIs.jar
+
+VENDORFILE1=&VENDORS_DIR;/ehcache/2_0_1/ehcache-core-2.0.1.jar

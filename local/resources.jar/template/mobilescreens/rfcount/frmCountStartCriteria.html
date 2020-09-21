@@ -1,0 +1,89 @@
+<html>
+    <body>
+        <form name="frmCountStartCriteria" target="/console/rfcount.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="CurrentInnerPanelID"
+                                    size="15" subtype="Hidden"
+                                    tag="binding=CurrentInnerPanelID"
+                                    type="hidden" validate="false" value="rfcountD1IP1"/>
+                                    <input col="1" name="entitybase"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=entitybase"
+                                    type="hidden" validate="false" value="/rf/wms/count"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/@CurrentTaskId"
+                                    name="txtCurrentTaskId"
+                                    outputbinding="xml:/Task/@CurrentTaskId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@CurrentTaskId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/@AheadOfCurrentTaskOnly"
+                                    name="txtAheadOftask"
+                                    outputbinding="xml:/Task/@AheadOfCurrentTaskOnly"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@AheadOfCurrentTaskOnly"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/@TaskType"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="hidden" validate="false"/>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblCount"
+                                    type="text" validate="false" value="Mobile_Criteria"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lbllocation"
+                                    type="text" validate="false" value="Mobile_Start_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rftask.ppc?action=frmTaskController"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

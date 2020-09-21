@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<WorkflowConditionBuilderInput>
+    <VAS> 
+      <DocumentType Type="Leaf" Id="DocumentType" DisplayName="DocumentType" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="DocumentType" IsReqd="" OverRidingClass=""/>
+      </DocumentType>
+      <NodeKey Type="Leaf" Id="NodeKey" DisplayName="NodeKey" 
+            DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NodeKey" IsReqd="" OverRidingClass=""/>
+      </NodeKey>
+      <ServiceAmount Type="Leaf" Id="ServiceAmount" DisplayName="ServiceAmount" 
+            DataType="Money" ControlType="Text">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Greater_Than" QryTypeId="&gt;"/>
+				<QryType QryTypeName="Greater_Than_Or_Equal_To" QryTypeId="&gt;="/>
+				<QryType QryTypeName="Less_Than" QryTypeId="&lt;"/>
+				<QryType QryTypeName="Less_Than_Or_Equal_To" QryTypeId="&lt;="/>
+				<QryType QryTypeName="Equal_To" QryTypeId="="/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+			</QryTypes>
+      </ServiceAmount>
+      <ProductAmount Type="Leaf" Id="ProductAmount" DisplayName="ProductAmount" 
+            DataType="Money" ControlType="Text">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Greater_Than" QryTypeId="&gt;"/>
+				<QryType QryTypeName="Greater_Than_Or_Equal_To" QryTypeId="&gt;="/>
+				<QryType QryTypeName="Less_Than" QryTypeId="&lt;"/>
+				<QryType QryTypeName="Less_Than_Or_Equal_To" QryTypeId="&lt;="/>
+				<QryType QryTypeName="Equal_To" QryTypeId="="/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+			</QryTypes>
+      </ProductAmount>
+      <TotalAmount Type="Leaf" Id="TotalAmount" DisplayName="TotalAmount" 
+            DataType="Money" ControlType="Text">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Greater_Than" QryTypeId="&gt;"/>
+				<QryType QryTypeName="Greater_Than_Or_Equal_To" QryTypeId="&gt;="/>
+				<QryType QryTypeName="Less_Than" QryTypeId="&lt;"/>
+				<QryType QryTypeName="Less_Than_Or_Equal_To" QryTypeId="&lt;="/>
+				<QryType QryTypeName="Equal_To" QryTypeId="="/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+			</QryTypes>
+      </TotalAmount>
+
+      <ServiceItemGroupCode Type="Leaf" Id="ServiceItemGroupCode" DisplayName="ServiceItemGroupCode" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ServiceItemGroupCode" IsReqd="" OverRidingClass=""/>
+      </ServiceItemGroupCode>
+      <ServiceItemID Type="Leaf" Id="ServiceItemID" DisplayName="ServiceItemID" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ServiceItemID" IsReqd="" OverRidingClass=""/>
+      </ServiceItemID>
+      <ServiceComplexityLevel Type="Leaf" Id="ServiceComplexityLevel" DisplayName="Service_Complexity_Level" 
+            DataType="Text-5" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+      </ServiceComplexityLevel>
+    </VAS>
+</WorkflowConditionBuilderInput>

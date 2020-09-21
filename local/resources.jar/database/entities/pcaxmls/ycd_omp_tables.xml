@@ -1,0 +1,45 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2006, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+    <Entities>
+	    <Entity TableName="YFS_ORDER_HEADER" Name="Order_Header" XMLName="Order" Prefix="YFS_" Module="omp">
+	    <Attributes>
+			    <Attribute ColumnName="ALL_ADDRESSES_VERIFIED" VirtualDefaultValue="'N'" DataType="Flag" Description="This flag determines whether or not the addresses in this order have been verified by an address verification program." Name="All_Addresses_Verified" Nullable="true" XMLName="AllAddressesVerified"/>
+                <Attribute ColumnName="COMPL_GIFT_BOX_QTY" VirtualDefaultValue="0" DataType="DelayWindow" Description="No. of complimentary gift boxes to be given out with the order." Name="Compl_Gift_Box_Qty" Nullable="true" XMLName="ComplimentaryGiftBoxQty"/>
+                <Attribute ColumnName="NO_OF_AUTH_STRIKES" VirtualDefaultValue="0" DataType="DoubleDigit" Description="No. of credit card authorization strikes failed for the order." Name="No_Of_Auth_Strikes" Nullable="true" XMLName="NoOfAuthStrikes"/>
+                <Attribute ColumnName="SOURCE_IP_ADDRESS" VirtualDefaultValue="' '" DataType="Text-20" Description="IP address of the system from which the order was placed." Name="Source_Ip_Address" Nullable="true" XMLName="SourceIPAddress"/>
+                <Attribute ColumnName="CUSTOMER_FIRST_NAME" VirtualDefaultValue="' '" DataType="Text-64" Description="First name of the customer placing the order." Name="Customer_First_Name" Nullable="true" XMLName="CustomerFirstName"/>
+                <Attribute ColumnName="CUSTOMER_LAST_NAME" VirtualDefaultValue="' '" DataType="Text-64" Description="Last name of the customer placing the order." Name="Customer_Last_Name" Nullable="true" XMLName="CustomerLastName"/>
+                <Attribute ColumnName="CUSTOMER_PHONE_NO" VirtualDefaultValue="' '" DataType="PhoneNo" Description="Daytime Phone number of the customer placing the order." Name="Customer_Phone_No" Nullable="true" XMLName="CustomerPhoneNo"/>
+                <Attribute ColumnName="CUSTOMER_ZIP_CODE" VirtualDefaultValue="' '" DataType="ZipCode" Description="Address Zip Code of the customer placing the order." Name="Customer_Zip_Code" Nullable="true" XMLName="CustomerZipCode"/>
+			</Attributes>
+			<Indices>
+                <Index DB2Name="YCD_ORD_HDR_I1" Name="YCD_ORD_HDR_I1" Version="9.3.0">
+                    <Column Name="CUSTOMER_FIRST_NAME"/>
+                    <Column Name="CUSTOMER_LAST_NAME"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DRAFT_ORDER_FLAG"/>
+                </Index>
+            </Indices>
+		</Entity>
+	    <Entity TableName="YFS_ORDER_LINE"  Prefix="YFS_" Name="Order_Line" XMLName="OrderLine" Module="omp">
+		    <Attributes>
+				<Attribute ColumnName="BACKORDER_NOTIFICATION_QTY" VirtualDefaultValue="0" DataType="Quantity" Description="The backordered quantity for which the last customer notification was sent." Name="Backorder_Notification_Qty" Nullable="true" XMLName="BackorderNotificationQty"/>
+			    <Attribute ColumnName="IS_PRICE_MATCHED" VirtualDefaultValue="'N'" DataType="Flag" Description="This flag determines whether price match was performed for the item." Name="Is_Price_Matched" Nullable="true" XMLName="IsPriceMatched"/>
+			    <Attribute ColumnName="IS_PICK_UP_NOW" DataType="Flag" DefaultValue="" Description="This flag determines whether the item is picked up now." Name="Is_Pick_Up_Now" Nullable="true" XMLName="IsPickUpNow"/>
+				<Attribute ColumnName="ITEM_IS_IN_HAND" DataType="Flag" Description="This flag determines whether the item was in hand when the return order was created." Name="Item_Is_In_Hand" Nullable="true" XMLName="ItemIsInHand"/>
+				<Attribute ColumnName="DISPOSITION_CODE" DataType="Text-40" Description="The disposition code for the return line." Name="Disposition_Code" Nullable="true" XMLName="DispositionCode"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_OPPORTUNITY" Name="Opportunity" XMLName="Opportunity" Prefix="YFS_" Module="omp">
+          <Attributes>
+            <Attribute ColumnName="CUSTOMER_FIRST_NAME" DataType="Text-64" Description="First name of the customer for whom the opportunity is created." Name="Customer_First_Name" Nullable="true" XMLName="CustomerFirstName"/>
+            <Attribute ColumnName="CUSTOMER_LAST_NAME" DataType="Text-64"  Description="Last name of the customer for whom the opportunity is created." Name="Customer_Last_Name" Nullable="true" XMLName="CustomerLastName"/>
+           </Attributes>
+         </Entity>
+	</Entities>
+</DBSchema>

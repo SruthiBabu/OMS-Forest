@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="All device types belonging to all the participant organizations, such as RF scanners, printers, weighing scale etc.  are defined in this table."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="DeviceTypes" Module="ysc" Name="Device_Type"
+            Prefix="YFS_" TableName="YFS_DEVICE_TYPE"
+            TableType="CONFIGURATION" XMLName="DeviceType">
+            <Attributes>
+                <Attribute ColumnName="DEVICE_TYPE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_DEVICE_TYPE table."
+                    Name="Device_Type_Key" Nullable="false"/>
+                <Attribute ColumnName="DEVICE_TYPE" DataType="Text-40"
+                    DefaultValue="' '" Description="Device Type Name."
+                    Name="Device_Type" Nullable="false"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="Description of the Device Type."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="SYSTEM_DEFINED" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="Indicates if the Device Type is system defined."
+                    Name="System_Defined" Nullable="false" XMLName="SystemDefined"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="DEVICE_TYPE_KEY" Name="Device_Type_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_DEVICE_TYPE_I1" Unique="true">
+                    <Column Name="DEVICE_TYPE"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="All Device Sub Types, such as HP-LASERJET, ZEBRA, INTERMEC etc. for Printers are defined in this table. Similar Sub Types could also be stored for other device types such as Weighing Scale, RF etc."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="DeviceSubTypes" Module="ysc"
+            Name="Device_Sub_Type" Prefix="YFS_"
+            TableName="YFS_DEVICE_SUB_TYPE" TableType="CONFIGURATION" XMLName="DeviceSubType"
+            LockingEntity="Device_Type">
+            <Attributes>
+                <Attribute ColumnName="DEVICE_SUB_TYPE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_DEVICE_SUB_TYPE table."
+                    Name="Device_Sub_Type_Key" Nullable="false"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Organization to which the Device Type belongs."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="DEVICE_SUB_TYPE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Device Sub Type Name."
+                    Name="Device_Sub_Type" Nullable="false"/>
+                <Attribute ColumnName="DEVICE_TYPE" DataType="Text-40"
+                    DefaultValue="' '" Description="Device Type."
+                    Name="Device_Type" Nullable="false"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="Description of the Device Sub Type."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="DEVICE_SUB_TYPE_PK">
+                <Attribute ColumnName="DEVICE_SUB_TYPE_KEY" Name="Device_Sub_Type_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="DEVICE_SUB_TYPE_I1"
+                    Name="YFS_DEVICE_SUB_TYPE_I1" Unique="true">
+                    <Column Name="DEVICE_SUB_TYPE"/>
+                    <Column Name="DEVICE_TYPE"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DeviceSubTypes"
+                    ChildName="Device_Sub_Type"
+                    ChildXMLName="DeviceSubType" DeleteCascade="true"
+                    ForeignEntity="Device_Type" Name="Type_Of_Device"
+                    Type="Bidirectional" XMLName="DeviceType">
+                    <Attribute Name="Device_Type" ParentName="Device_Type"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    IsParent="true" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="All instances of devices in the warehouse such as RF scanners, printers, weighing scale etc. of the warehouse are defined in this table. One of more devices can be associated with equipment."
+            EntityType="CONFIGURATION" Extensible="N"
+            ListXMLName="Devices" Module="ysc" Name="Device"
+            Prefix="YFS_" TableName="YFS_DEVICE"
+            TableType="CONFIGURATION" XMLName="Device" LockingEntity="Device_Type">
+            <Attributes>
+                <Attribute ColumnName="DEVICE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_DEVICE table."
+                    Name="Device_Key" Nullable="false" FactName="false"/>
+                <Attribute ColumnName="DEVICE_ID" DataType="Key"
+                    DefaultValue="' '" Description="Device Identifier."
+                    Name="Device_Id" Nullable="false"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="Node to which the equipment type belongs."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="DEVICE_SUB_TYPE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Device Sub Type Name."
+                    Name="Device_Sub_Type" Nullable="false"/>
+                <Attribute ColumnName="DEVICE_TYPE" DataType="Text-40"
+                    DefaultValue="' '" Description="Device Type name."
+                    Name="Device_Type" Nullable="false"/>
+                <Attribute ColumnName="DEVICE_PARAMS_XML"
+                    DataType="CLOB" DefaultValue="' '"
+                    Description="Additional Attributes for the device."
+                    Name="Device_Params_Xml" Nullable="false" XMLName="DeviceParamsXML"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="DEVICE_KEY" Name="Device_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_DEVICE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DEVICE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Devices" ChildName="Device"
+                    ChildXMLName="Device" DeleteCascade="true"
+                    ForeignEntity="Device_Type" Name="Type_Of_Device"
+                    Type="Bidirectional" XMLName="DeviceType">
+                    <Attribute Name="Device_Type" ParentName="Device_Type"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Devices" ChildName="Device"
+                    ChildXMLName="Device" DeleteCascade="true"
+                    ForeignEntity="Device_Sub_Type"
+                    Name="Sub_Type_Of_Device" Type="Bidirectional" XMLName="DeviceSubType">
+                    <Attribute Name="Device_Sub_Type" ParentName="Device_Sub_Type"/>
+                    <Attribute Name="Device_Type" ParentName="Device_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="OrganizationRelation" Type="Bidirectional" XMLName="OrganizationRelation">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores the parameters for each Device Type."
+            EntityType="CONFIGURATION" Extensible="Y"
+            ListXMLName="DeviceTypeTemplateList" Module="ysc"
+            Name="Device_Type_Template" Prefix="YFS_"
+            TableName="YFS_DEVICE_TYPE_TEMPLATE"
+            TableType="CONFIGURATION" XMLName="DeviceTypeTemplate">
+            <Attributes>
+                <Attribute ColumnName="DEVICE_TYPE_TEMPLATE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_DEVICE_TYPE_TEMPLATE table."
+                    Name="Device_Type_Template_Key" Nullable="false"/>
+                <Attribute ColumnName="DEVICE_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="Device Type Identifier."
+                    Name="Device_Type" Nullable="false"/>
+                <Attribute ColumnName="DEVICE_TYPE_PARAMS_XML"
+                    DataType="CLOB" DefaultValue="' '"
+                    Description="Template xml, that is used as a parameter for each device type. The Params XML defines a set of attributes for each device type."
+                    Name="Device_Type_Params_Xml" Nullable="false" XMLName="DeviceTypeParamsXML"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="DEV_TYPE_TEMPL_PK">
+                <Attribute ColumnName="DEVICE_TYPE_TEMPLATE_KEY" Name="Device_Type_Template_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="DEV_TYPE_TEMPL_I1"
+                    Name="YFS_DEVICE_TYPE_TEMPLATE_I1" Unique="true">
+                    <Column Name="DEVICE_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne" Enforce="false"
+                    ForeignEntity="Device_Type"
+                    Name="DeviceTypeTemplates" Type="Bidirectional"
+                    XMLName="DeviceTypeTemplate">
+                    <Attribute Name="Device_Type" ParentName="Device_Type_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

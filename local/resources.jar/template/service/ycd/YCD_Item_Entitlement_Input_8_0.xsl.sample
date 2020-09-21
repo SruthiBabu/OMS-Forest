@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="no"/>
+	
+	<xsl:template match="/">
+		<Comergent>
+			<MessageHeader>
+				<MessageType>ProductSearchRequest</MessageType> 
+				<MessageVersion>4.0</MessageVersion>
+				<StoreFrontTransient><xsl:value-of select="Item/@OrganizationCode"/></StoreFrontTransient>
+			</MessageHeader>
+			<RemoteUser>
+				<UserLogin/>
+ 				<UserAuthenticator />
+			</RemoteUser>
+			<ProductSearchCriteria type="BusinessObject">
+				<xsl:choose>
+					<xsl:when test="Item/@ItemIDQryType='FLIKE'">
+						<SearchTerm>
+							<xsl:value-of select="concat(Item/@ItemID,'*')" />
+						</SearchTerm>
+					</xsl:when>
+					<xsl:when test="Item/@ItemIDQryType='LIKE'">
+						<SearchTerm>
+							<xsl:value-of select="concat(Item/@ItemID,'*')" />
+						</SearchTerm>
+					</xsl:when>
+					<xsl:otherwise>
+						<SearchTerm>
+							<xsl:value-of select="Item/@ItemID" />
+						</SearchTerm>
+					</xsl:otherwise>
+				</xsl:choose>
+				<TargetUser><xsl:value-of select="Item/@SearchReference1" /></TargetUser>
+				<NumResults><xsl:value-of select="Item/Paginate/@PageSize"/></NumResults>
+				<PageNum><xsl:value-of select="Item/Paginate/@PageNumber"/></PageNum>
+			</ProductSearchCriteria>
+		</Comergent>
+	</xsl:template>
+</xsl:stylesheet>

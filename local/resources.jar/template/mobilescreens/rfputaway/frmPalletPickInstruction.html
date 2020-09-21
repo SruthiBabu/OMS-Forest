@@ -1,0 +1,154 @@
+<html>
+    <body>
+        <form name="frmPalletPickInstruction" target="/console/rfputaway.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/@TaskKey"
+                                    name="txtTaskKey"
+                                    outputbinding="xml:/Task/@TaskKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/@EnterpriseKey"
+                                    name="txtEnterprise"
+                                    outputbinding="xml:/Task/@EnterpriseKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EnterpriseKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/TaskType/@ExecTasksThruDropoff"
+                                    name="txtExecThroughDropOff"
+                                    outputbinding="xml:/Task/TaskType/@ExecTasksThruDropoff"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskType/@ExecTasksThruDropoff"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/TaskType/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@Quantity"
+                                    name="txtQuantity"
+                                    outputbinding="xml:/TaskList/Task/Inventory/@Quantity"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/TaskList/Task/Inventory/@Quantity"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" name="lblPick" size="7" subtype="Label" value="Mobile_Pick-"
+                                    type="text" validate="false"/>
+                                    <input col="8"
+                                    inputbinding="xml:/TaskList/Task/@TaskType"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="12" subtype="Label"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="text" validate="false"/>									
+									</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLocation"
+                                    size="15" subtype="Label"
+                                    tag="binding=lblLocation"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblPalletId"
+                                    size="15" subtype="Label"
+                                    tag="binding=lblPalletId"
+                                    type="text" validate="false" value="Mobile_Pallet_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@SourcePalletId"
+                                    name="txtSuggestedPalletId"
+                                    outputbinding="xml:/TaskList/Task/Inventory/@SourcePalletId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/TaskList/Task/Inventory/@SourcePalletId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task1/Inventory/@SourcePalletId"
+                                    name="txtPalletId"
+                                    outputbinding="xml:/Task/Inventory/@SourcePalletId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Task/Inventory/@SourcePalletId"
+                                    type="text" validate="true"/>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/@TargetLocationId"
+                                    name="txtTargetLocId"
+                                    outputbinding="xml:/Task/@TargetLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TargetLocationId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfputaway.ppc?action=frmPalletPickInstructionValtxtPalletId"
+                                    validate="false" value="Mobile_Go"/>
+                                    <input col="5" hotkey="F8"
+                                    name="Deposit" size="7"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfputaway.ppc?action=frmSkipTask"
+                                    validate="false" value="Mobile_Deposit"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F4"
+                                    name="Exception" size="10"
+                                    subtype="Command" type="button"
+                                    url="/console/rfputaway.ppc?action=frmAdjustQuantityForPickException"
+                                    validate="false" value="Mobile_Exception"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,207 @@
+<html>
+    <body>
+        <form name="frmCountInventoryAttributesEntry" target="/console/rfcount.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    outputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@CountRequestKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    mandatory="false"
+                                    outputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="7"
+                                    inputbinding="xml:/RecordCountResult/@TaskType"
+                                    outputbinding="xml:/RecordCountResult/@TaskType"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/RecordCountResult/@TaskType"
+                                    type="text" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    mandatory="false"
+                                    name="txtLastScannedLpn"
+                                    outputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecentLPN/@LastScannedLPN"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/RecordCountResult/@PalletComplete"
+                                    mandatory="false"
+                                    name="txtPalletComplete"
+                                    outputbinding="xml:/RecordCountResult/@PalletComplete"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/RecordCountResult/@PalletComplete"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemId"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@DisplayItemId"
+                                    mandatory="false"
+                                    name="txtItemId"
+                                    outputbinding="xml:/Inventory/@DisplayItemId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Inventory/@DisplayItemId"
+                                    type="text" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Inventory/@ItemID"
+                                    mandatory="false"
+                                    name="txtSuggItemId"
+                                    outputbinding="xml:/Inventory/@ItemID"
+                                    size="20"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Inventory/@ItemID"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>						
+							<tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@DisplayItemDescription"
+                                    mandatory="false"
+                                    name="txtItemDesc"
+                                    outputbinding="xml:/Inventory/@DisplayItemDescription"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Inventory/@DisplayItemDescription"
+                                    type="text" validate="false"/>	
+									<input col="1"
+                                    inputbinding="xml:/Inventory/@DisplayItemDescription"
+                                    mandatory="false"
+                                    name="txtItemDesc"
+                                    outputbinding="xml:/Inventory/@DisplayItemDescription"
+                                    size="20"
+                                    subtype="Hidden"
+                                    tag="binding=xml:/Inventory/@DisplayItemDescription"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblInvStatus" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblInvStatus"
+                                    type="text" validate="false" value="Mobile_Inventory_Status"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@InventoryStatus"
+                                    mandatory="false"
+                                    name="txtInvStatus"
+                                    outputbinding="xml:/Inventory/@InventoryStatus"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Inventory/@InventoryStatus"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblProClass" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblProClass"
+                                    type="text" validate="false" value="Mobile_Product_Class"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Inventory/@ProductClass"
+                                    mandatory="false"
+                                    name="txtProClass"
+                                    outputbinding="xml:/Inventory/@ProductClass"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Inventory/@ProductClass"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+                               <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfcount.ppc?action=frmCountInventoryAttributesEntryUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+													<input col="4" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="4"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Info"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+					<td>
+						<table>
+							<tr/>                                
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblLocationId" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblLocationId"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td>
+                                    <input col="1"
+                                    inputbinding="xml:/CountRequest/@LocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/CountRequest/@LocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/CountRequest/@LocationId"
+                                    type="text" validate="false"/>
+                                </td>                      
+                            </tr>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Prev_View"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

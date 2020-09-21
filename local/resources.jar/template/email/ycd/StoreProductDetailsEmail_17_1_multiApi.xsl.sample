@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM IBM Sterling Selling and Fulfillment 
+	Suite - Foundation, IBM Order Management (5737-D18) (C) Copyright IBM Corp. 2007, 2017 All Rights Reserved. 
+	US Government Users Restricted Rights - Use, duplication or disclosure restricted 
+	by GSA ADP Schedule Contract with IBM Corp. -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template match="ItemDetails">
+		<MultiApi>
+		
+			<API Name="getCompleteItemList">
+				<Input>
+					<Item>
+						<xsl:attribute name="CallingOrganizationCode">
+							<xsl:value-of select="@OrganizationCode" />
+						</xsl:attribute>
+						<xsl:attribute name="ItemID">
+							<xsl:value-of select="@ItemID" />
+						</xsl:attribute>
+						<xsl:attribute name="ItemKey">
+							<xsl:value-of select="@ItemKey" />
+						</xsl:attribute>
+						<xsl:attribute name="UnitOfMeasure">
+							<xsl:value-of select="@UnitOfMeasure" />
+						</xsl:attribute>
+					</Item>
+				</Input>
+				<Template>
+					<ItemList>
+						<Item ItemID="" UnitOfMeasure="" >
+							<PrimaryInformation ShortDescription="" ImageLabel="" ImageLocation="" ImageID="">
+							</PrimaryInformation>
+						</Item>
+					</ItemList>
+				</Template>
+			</API>
+			
+			<API Name="getCompleteCustomerDetails">
+				<Input>
+					<Customer>
+						<xsl:attribute name="CustomerID">
+							<xsl:value-of select="@CustomerID" />
+						</xsl:attribute>
+						<xsl:attribute name="OrganizationCode">
+							<xsl:value-of select="@OrganizationCode" />
+						</xsl:attribute>
+						<xsl:attribute name="ToEmailID">
+							<xsl:value-of select="@ToEmailID" />
+						</xsl:attribute>
+					</Customer>
+				</Input>
+				<Template>
+					<CustomerList>
+						<Customer>
+							<CustomerContactList>
+								<CustomerContact FirstName="" LastName="" DayPhone="" EmailID="" >
+								</CustomerContact>
+							</CustomerContactList>
+						</Customer>
+					</CustomerList>
+				</Template>
+			</API>
+			
+			<API Name="getShipNodeList">
+				<Input>
+					<ShipNode>
+						<xsl:attribute name="ShipNode">
+							<xsl:value-of select="@ShipNode" />
+						</xsl:attribute>
+					</ShipNode>
+				</Input>
+				<Template>
+					<ShipNodeList>
+						<ShipNode Description="" ShipNode="" LocaleCode="" >
+							<ShipNodePersonInfo Company="" EMailID="" DayPhone="" >
+							</ShipNodePersonInfo>
+						</ShipNode>
+					</ShipNodeList>
+				</Template>
+			</API>
+			
+		</MultiApi>
+	</xsl:template>
+</xsl:stylesheet>

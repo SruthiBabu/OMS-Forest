@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2005, 2018  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the status of components"
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Component_Status" Prefix="YFS_"
+            TableName="YFS_COMPONENT_STATUS" TableType="CONFIGURATION" XMLName="ComponentStatus">
+            <Attributes>
+                <Attribute ColumnName="COMPONENT_STATUS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_COMPONENT_STATUS table."
+                    Name="Component_Status_Key" Nullable="false" XMLName="ComponentStatusKey"/>
+                <Attribute ColumnName="DOMAIN" DataType="Text-100"
+                    Description="Domain for the component status"
+                    Name="Domain" Nullable="true" XMLName="Domain" />
+                <Attribute ColumnName="NAME" DataType="Text-200" 
+                    Description="Name of the component"
+                    Name="Name" Nullable="true" XMLName="Name"/>
+                <Attribute ColumnName="SYNC_MODIFICATIONS" DataType="Flag"
+                    Description="Flag to indicate if modifications should be synced"
+                    Name="Sync_Modifications" Nullable="true" XMLName="SyncModifications" />
+                <Attribute ColumnName="START_SYNC" DataType="Flag"
+                    Description="Flag to indicate if syncing should start or not"
+                    Name="Start_Sync" Nullable="true" XMLName="StartSync" />
+                <Attribute ColumnName="SYNC_STATUS" DataType="Text-100"
+                    Description="Status of the component"
+                    Name="Sync_Status" Nullable="true" XMLName="SyncStatus" />
+                    
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <Indices>
+                <Index DB2Name="CPT_STATUS_I1"
+                    Name="CPT_STATUS_I1" Unique="true" Version="9.5.0">
+                    <Column Name="DOMAIN"/>
+                    <Column Name="NAME"/>
+                </Index>
+            </Indices>
+            <PrimaryKey DB2Name="CPT_STATUS_PK" Name="YFS_CPT_STATUS_PK">
+                <Attribute ColumnName="COMPONENT_STATUS_KEY" Name="Component_Status_Key"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity Cacheable="false"
+            Description="This table stores the information for migrating tables"
+            EntityType="TRANSACTION" Module="ysc"
+            Name="Migration_Progress" Prefix="YFS_"
+            TableName="YFS_MIGRATION_PROGRESS" TableType="STATISTICS" XMLName="MigrationProgress">
+            <Attributes>
+                <Attribute ColumnName="MIGRATION_PROGRESS_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_MIGRATION_PROGRESS table."
+                    Name="Migration_Progress_Key" Nullable="false" XMLName="MigrationProgressKey"/>
+                <Attribute ColumnName="TABLE_NAME" DataType="Text-100" 
+                    Description="Name of the table being migrated"
+                    Name="Table_Name" Nullable="true" XMLName="TableName"/>
+                <Attribute ColumnName="BATCH_ID" DataType="Quantity"
+                    Description="The id number for the batch"
+                    Name="Batch_Id" Nullable="true" XMLName="BatchId"/>
+                <Attribute ColumnName="TYPE" DataType="Text-12"
+                    Description="The type that the row resprestions. BATCH or RECORD"
+                    Name="Type" Nullable="true" XMLName="Type"/>
+                <Attribute ColumnName="STATUS" DataType="Text-40"
+                    Description="Status of the batch or record"
+                    Name="Status" Nullable="true" XMLName="Status"/>
+                <Attribute ColumnName="START_ROW" DataType="Quantity"
+                    Description="the starting row of the batch"
+                    Name="Start_Row" Nullable="true" XMLName="StartRow"/>
+                <Attribute ColumnName="FIRST_ROW_KEY" DataType="Text-100"
+                    Description="the first row to start the batch from"
+                    Name="First_Row_Key" Nullable="true" XMLName="FirstRowKey"/>
+                <Attribute ColumnName="LAST_ROW_KEY" DataType="Text-100"
+                    Description="the last row in the batch to process"
+                    Name="Last_Row_Key" Nullable="true" XMLName="LastRowKey"/>
+                    
+                <Attribute ColumnName="TOTAL_RECORDS" DataType="Quantity"
+                    Description="The total number of records to migration from the start row"
+                    Name="Total_Records" Nullable="true" XMLName="TotalRecords" />
+                <Attribute ColumnName="RECORDS_MIGRATED" DataType="Quantity"
+                    Description="The number of records migrated so far for the batch"
+                    Name="Records_Migrated" Nullable="true" XMLName="RecordsMigrated" />
+                <Attribute ColumnName="TOTAL_TIME" DataType="Quantity"
+                    Description="The total time in milliseconds spent migrating the batch"
+                    Name="Total_Time" Nullable="true" XMLName="TotalTime" />
+                <Attribute ColumnName="RETRY_COUNT" DataType="Quantity"
+                    Description="The number of times the batch has been retried"
+                    Name="Retry_Count" Nullable="true" XMLName="RetryCount" />
+                <Attribute ColumnName="ERROR_MESSAGE" DataType="Text-250"
+                    Description="The error message for the record migration"
+                    Name="Error_Message" Nullable="true" XMLName="ErrorMessage" />
+                <Attribute ColumnName="SESSION_ID" DataType="Text-40"
+                    Description="Session id for the currently running agent"
+                    Name="Session_Id" Nullable="true" XMLName="SessionId" />
+                <Attribute ColumnName="Criteria" DataType="Text-100"
+                    Description="Criteria this data belongs to"
+                    Name="Criteria" Nullable="true" XMLName="Criteria"/>
+                <Attribute ColumnName="Colony" DataType="Text-100"
+                    Description="Colony this data belongs to"
+                    Name="Colony" Nullable="true" XMLName="Colony"/>
+                <Attribute ColumnName="Enterprise" DataType="Text-100"
+                    Description="Enterprise this data belongs to"
+                    Name="Enterprise" Nullable="true" XMLName="Enterprise"/>
+                
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <Indices>
+                <Index DB2Name="MGR_PROGRESS_I1"
+                    Name="YFS_MGR_PROGRESS_I1" Unique="true" Version="9.5.0">
+                    <Column Name="TABLE_NAME"/>
+                    <Column Name="BATCH_ID"/>
+                    <Column Name="TYPE"/>
+                    <Column Name="START_ROW"/>
+                </Index>
+            </Indices>
+            <PrimaryKey DB2Name="MGR_PROGRESS_PK" Name="YFS_MGR_PROGRESS_PK">
+                <Attribute ColumnName="MIGRATION_PROGRESS_KEY" Name="Migration_Progress_Key"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity Cacheable="true"
+            Description="This table stores the information about where to write data for a given Component"
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Component_Endpoint" Prefix="YFS_"
+            TableName="YFS_COMPONENT_ENDPOINT" TableType="CONFIGURATION" XMLName="ComponentEndpoint">
+            <Attributes>
+                <Attribute ColumnName="COMPONENT_ENDPOINT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_COMPONENT_ENDPOINT table."
+                    Name="Component_Endpoint_Key" Nullable="false" XMLName="ComponentEndpointKey"/>
+                <Attribute ColumnName="COMPONENT_NAME" DataType="Text-200" 
+                    Description="Name of the component"
+                    Name="Component_Name" Nullable="false" XMLName="ComponentName"/>
+                <Attribute ColumnName="PURPOSE" DataType="Text-100"
+                    Description="Purpose for the Endpoint"
+                    Name="Purpose" Nullable="false" XMLName="Purpose" HasSkewedData="true"/>
+                 <Attribute ColumnName="CLASS_NAME" DataType="Text-200" 
+                    Description="Fully Qualified Name of the Endpoint class"
+                    Name="Class_Name" Nullable="false" XMLName="ClassName"/>
+				<Attribute ColumnName="ENABLED" DataType="Flag"
+                    Description="Flag to indicate if endpoint is enabled"
+                    Name="Enabled" Nullable="false" XMLName="Enabled" HasSkewedData="true"/>
+                    
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <Indices>
+                <Index DB2Name="CPT_ENDPOINT_I1"
+                    Name="CPT_ENDPOINT_I1" Unique="true" Version="9.5.0">
+                    <Column Name="COMPONENT_NAME"/>
+                    <Column Name="PURPOSE"/>
+                    <Column Name="CLASS_NAME"/>
+                </Index>
+            </Indices>
+            <PrimaryKey DB2Name="CPT_ENDPOINT_PK" Name="YFS_CPT_ENDPOINT_PK">
+                <Attribute ColumnName="COMPONENT_ENDPOINT_KEY" Name="Component_Endpoint_Key"/>
+            </PrimaryKey>
+        </Entity>
+    </Entities>
+</DBSchema>

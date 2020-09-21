@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--createDiscrBasedAdjustmentInvoice Output XML-->
+<OrderInvoiceList  LastOrderInvoiceKey="" LastRecordSet="" ReadFromHistory="" TotalOrderInvoiceList="">
+<OrderInvoice  OrderInvoiceKey="" OrderHeaderKey="" ReturnReleaseKey="" ShipmentKey="" ChargeTransactionKey="" MasterInvoiceNo="" InvoiceNo="" InvoiceType="" ChargedActualFreight="" Tax="" ActualFreightCharge="" TotalTax="" LineSubtotal="" Status="" TotalAmount="" AmountCollected="" CollectedExternally="" AmountPassedToAr="" OtherCharges="">
+	<LineDetails  TotalLines="">             
+		<LineDetail Charges=""  ExtendedPrice="" LineTotal="" OrderInvoiceDetailKey="" OrderLineKey="" ShippedQty="" Tax="" UnitPrice="" Quantity="" PricingQty="" OptionAmount="">
+			<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo="">
+				 <Item ItemID="" ProductClass="" UnitOfMeasure=""/>
+				 <LinePriceInfo DiscountReference="" DiscountType="" DiscountPercentage="" ListPrice="" RetailPrice="" UnitPrice=""  PricingUOM="" PricingQty="" PricingQtyConversionFactor="" InvoicedPricingQty=""/>
+				<References >
+					<Reference  Name="" Value=""/>
+				</References>
+			</OrderLine>
+			<LineCharges >
+				<LineCharge ChargeAmount="" ChargeCategory="" ChargeName="" ChargeNameKey="" ChargePerLine="" ChargePerUnit=""  Reference=""/>
+			</LineCharges>
+			<LineTaxes >
+				<LineTax ChargeCategory="" ChargeName="" ChargeNameKey="" Reference_1="" Reference_2="" Reference_3="" Tax="" TaxName="" TaxPercentage=""/>
+				<TaxSummary >
+					<TaxSummaryDetail  Tax="" TaxName=""/>
+				</TaxSummary>
+			</LineTaxes>
+			<References >
+			    <Reference  Name="" Value=""/>
+			</References>
+		</LineDetail>
+	</LineDetails>         
+	</OrderInvoice>
+</OrderInvoiceList>

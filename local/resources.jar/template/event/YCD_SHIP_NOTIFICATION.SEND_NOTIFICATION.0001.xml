@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Order EnterpriseCode="" OrderNo="" CarrierServiceCode=""  SCAC="" CustomerEMailID="" >
+
+<ShipmentList >
+
+<Shipment NotificationSent="" ActualDeliveryDate=" " ActualFreightCharge=" " ActualShipmentDate=" " AppointmentNo=" " BolNo=" " BuyerOrganizationCode=" " CarrierAccountNo=" " CarrierServiceCode=" " CarrierType=" " DeliveryCode=" " DeliveryMethod="" DeliveryPlanKey=" " DestinationZone=" " DownLoadCount=" " EnterpriseCode=" " ExpectedDeliveryDate=" " ExpectedShipmentDate=" " ExportTaxpayerID=" " FreightTerms=" " FromAddressKey=" " FromAppointment=" " HasOtherShipments=" " HazardousMaterialFlag=" " HeldForConfirmation=" " IsApptConfirmed="" IsProvidedService="" ITDate=" " ITNo=" "  ManifestKey=" " ManifestNo=" " NextAlertTs=" " NumOfCartons=" " NumOfPallets=" " DocumentType=" " OrderAvailableOnSystem=" " OriginZone=" " PackListType=" " ParentShipmentKey=" " PickListNo=" " PickticketNo=" " PipelineKey=" " PodNo=" " ProNo=" " PromisedApptStartDate="" PromisedApptEndDate="" ReceivingNode=" " RequestedShipmentDate="" RequestedDeliveryDate="" SCAC=" " ScacAndService=" " ScacAndServiceKey=" " SealNo=" " SellerOrganizationCode=" " ServiceLineKey=""  ShipMode=" " ShipNode=" " ShipVia=" " ShipmentClosedFlag=" " ShipmentConfirmUpdatesDone=" " ShipmentContainerizedFlag=" " ShipmentDeliverUpdatesDone=" " ShipmentKey=" " ShipmentNo=" " ShipmentPlannedFlag=" " ShipmentType=" " Status=" " StatusDate=" " ToAddressKey=" " ToAppointment=" " TotalActualCharge=" " IsSingleOrder=" " ManuallyEntered=" "  OptimizedApptStartDate="" OptimizedApptEndDate="" OrderNo=" " OrderHeaderKey=" " ReleaseNo=" " OrderReleaseKey=" " AllowOverage=" " TotalEstimatedCharge=" " TotalVolume=" " TotalVolumeUOM=" " TotalWeight=" " TotalWeightUOM=" " TrackingNo=" " TrailerNo=" " isHistory="">
+   <ToAddress AddressLine1=" " AddressLine2=" " AddressLine3=" " AddressLine4=" " AddressLine5=" " AddressLine6=" " AlternateEmailID=" " Beeper=" " City=" " Company=" " Country=" " DayFaxNo=" " DayPhone=" " Department=" " EMailID=" " ErrorTxt=" " EveningFaxNo=" " EveningPhone=" " FirstName=" " HttpUrl=" " JobTitle=" " LastName=" "  MiddleName=" " MobilePhone=" " OtherPhone=" " PersonID=" " PersonInfoKey=" " PreferredShipAddress=" " State=" " Suffix=" " Title=" " UseCount=" " VerificationStatus=" " ZipCode=" " isHistory=""/>
+   <Containers >
+	<Container ContainerNo=" " ContainerScm=" " ContainerSeqNo=" " ContainerType=" " ParentContainerNo=" " TrackingNo=" " Ucc128code=" " ShipmentContainerKey=" " >
+	 <ContainerDetails >
+		<ContainerDetail ContainerDetailsKey=" " EnterpriseKey=" " ItemID=" " ProductClass=" " Quantity=" " ShipmentContainerKey=" " ShipmentKey=" " ShipmentLineKey=" " UnitOfMeasure=" ">
+
+			<ShipmentLine ActualQuantity="" DocumentType=""
+                    ItemDesc="" ItemID=""
+                    NetWeight="" NetWeightUom=""
+                    OrderHeaderKey=""
+                    OrderLineKey=""
+                    OrderNo=""
+                    OrderReleaseKey=""
+                    OverShipQuantity="" PrimeLineNo="" ProductClass=""
+                    Quantity="" ReleaseNo="" Segment="" SegmentType=""
+                    ShipmentKey=""
+                    ShipmentLineKey=""
+                    ShipmentLineNo="" SubLineNo="" UnitOfMeasure="" isHistory="" />
+		</ContainerDetail>	
+	  </ContainerDetails>
+    </Container>
+   </Containers>
+</Shipment>
+<InvoiceList>
+<InvoiceDetail>
+    <!-- InvoiceHeader is a template-driven element but some of its attributes are not. Attributes that are not template driven: TotalCharges, TotalDiscount, TotalHeaderCharges, HeaderCharges, HeaderDiscount, HeaderTax and LineSubTotal.   -->
+    <InvoiceHeader ActualFreightCharge="" AmountCollected="" 
+        ChargedActualFreight="" CollectedExternally=""
+        CollectedThroughAR="" DateInvoiced=""
+        DerivedFromOrderHeaderKey="" HeaderCharges="" HeaderDiscount=""
+        HeaderTax="" InvoiceCreationReason="" InvoiceNo=""
+        InvoiceType="" LineSubTotal="" MasterInvoiceNo=""
+        OrderInvoiceKey="" Reference1="" TotalAmount="" TotalCharges=""
+        TotalDiscount="" TotalHeaderCharges="" TotalTax="" isHistory="">
+
+        <!-- TotalLines is not a template driven attribute. -->
+        <LineDetails TotalLines="">
+            <LineDetail Charges="" ExtendedPrice="" LineTotal=""
+                OptionPrice="" OrderInvoiceDetailKey="" OrderLineKey=""
+                PricingQty="" PrimeLineNo="" Quantity="" ShippedQty=""
+                SubLineNo="" Tax="" UnitPrice="">
+                <LineDetailTranQuantity PricingQty="" Quantity=""
+                    ShippedQty="" TransactionalUOM=""/>
+
+		<!-- LineCharges is not a template driven element.  If a line has line charges, LineCharges will appear in the output alongwith all its child elements.-->
+                <LineCharges>
+                    <LineCharge ChargeAmount="" ChargeCategory=""
+                        ChargeName="" ChargeNameKey="" ChargePerLine=""
+                        ChargePerUnit="" OriginalChargePerLine=""
+                        OriginalChargePerUnit="" Reference=""/>
+                </LineCharges>
+                <!-- LineTaxes is not a template driven element.  If a line has line taxes, LineTaxes will appear in the output alongwith all its child elements.-->
+                <LineTaxes>
+                    <LineTax ChargeCategory="" ChargeName=""
+                        ChargeNameKey="" Reference_1="" Reference_2=""
+                        Reference_3="" Tax="" TaxName="" TaxPercentage=""/>
+                    <TaxSummary>
+                        <TaxSummaryDetail Tax="" TaxName=""/>
+                    </TaxSummary>
+                </LineTaxes>
+            </LineDetail>
+        </LineDetails>
+        <TotalSummary>
+            <ChargeSummary>
+                <!-- ChargeSummaryDetail is not a template-driven element. -->
+                <ChargeSummaryDetail ChargeAmount="" ChargeCategory=""
+                    ChargeName="" ChargeNameKey="" Reference=""/>
+            </ChargeSummary>
+            <TaxSummary>
+                <!-- ChargeSummaryDetail is not a template-driven element. -->
+                <TaxSummaryDetail Tax="" TaxName=""/>
+            </TaxSummary>
+        </TotalSummary>
+        <HeaderCharges>
+            <!-- HeaderCharge is not a template driven element. If the template contains HeaderCharges element, HeaderCharge will appear in the output, alongwith all its attributes. -->
+            <HeaderCharge ChargeAmount="" ChargeCategory=""
+                ChargeName="" ChargeNameKey="" OriginalChargeAmount="" Reference=""/>
+        </HeaderCharges>
+        <!-- HeaderTaxes is not a template driven element. If the template contains HeaderCharges element, HeaderTaxes will appear in the output, alongwith all its child elements -->
+        <HeaderTaxes>
+            <HeaderTax ChargeCategory="" ChargeName="" ChargeNameKey=""
+                Reference_1="" Reference_2="" Reference_3="" Tax=""
+                TaxName="" TaxPercentage=""/>
+            <TaxSummary>
+                <TaxSummaryDetail Tax="" TaxName=""/>
+            </TaxSummary>
+        </HeaderTaxes>
+    </InvoiceHeader>
+</InvoiceDetail>
+</InvoiceList>
+</ShipmentList>
+    <PersonInfoBillTo AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <PaymentMethods>
+        <!--Only one payment info can be specified. In future releases multiple payment methods may be enabled.-->
+        <PaymentMethod CheckNo="" CheckReference="" CreditCardExpDate=""
+            CreditCardName="" CreditCardNo="" DisplayCreditCardNo="" 
+			DisplayCustomerAccountNo="" 
+			DisplayPaymentReference1="" DisplaySvcNo="" 
+			CreditCardType=""
+			GetFundsAvailableUserExitInvoked="" FundsAvailable=""
+            CustomerPONo="" CustomerAccountNo="" PaymentReference1=""
+            PaymentReference2="" PaymentReference3="" PaymentType="" SvcNo="" TotalCharged=""/>
+    </PaymentMethods>
+</Order>

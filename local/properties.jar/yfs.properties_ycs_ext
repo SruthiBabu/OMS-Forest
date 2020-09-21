@@ -1,0 +1,430 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Selling and Fulfillment Suite, IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2007, 2019 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_ycs_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_ycs_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## This file contains the yfs properties to configure the carrier service related behaviors in the product.
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.log.directory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property must be set if you use the default message handling implementation.
+## It contains the absolute path to the directory where message logs will be written.
+## yfs.log.logger
+ycs.log.directory=<full path of log directory>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.xmlDump.directory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property must be set if you use the default message handling implementation.
+## It contains the absolute path to the directory where message logs will be written.
+## yfs.log.logger
+ycs.xmlDump.directory=<full path of log directory>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.timer.switch
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: yes,no
+## PROPERTY_DESCRIPTION
+## This property is to set to enable and disable the Timer from logging.
+ycs.timer.switch=yes
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.log.size.maxallowed
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is only used if you use the default message handling implementation.
+## It specifies the maximum allowed log file size in bytes. A new active log file is created whenever
+## the currently active log file reaches this size.
+## ycs.log.size.maxallowed
+ycs.log.size.maxallowed=1000000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.log.logger
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Default class to handle messages output by PureEcommerce.
+## The default implementation will write these messages to log files.
+## Refer to the Programming Guide for how to write your own implementation for this class.
+## ycs.log.logger
+ycs.log.logger=com.yantra.ycs.util.YCSFileLogger
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.purge.path
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Purging Parameters .
+## These properties must be set for the purge programs to run.
+## The date must be in mm/dd/yyyy format
+ycs.purge.path=<full path of log directory>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.purge.days
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Purging Parameters .
+## These properties must be set for the purge programs to run.
+## The date must be in mm/dd/yyyy format
+ycs.purge.days=15
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.weight_tolerance_percent
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## If a label is printed before it is actually manifested, weight printed on the label
+## may not exactly match the actual weight. Parameter below specifies the tolerance percent
+## beyond which the label has to be reprinted.
+ycs.weight_tolerance_percent=5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: proxySet
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Proxy settings for https connections
+proxySet=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: https.proxyHost
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is required only if proxySet is set true.
+https.proxyHost=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: https.proxyUser
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is required only if proxySet is set true.
+https.proxyUser=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: https.proxyPassword
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This proprty is required only if proxySet is set true.
+https.proxyPassword=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: https.proxyPort
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is required only if proxySet is set true.
+https.proxyPort=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.pierbridge.server.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Pierbridge parameters. Specify the Pierbridge integration parameters here.
+## A sample url is 'http://10.11.20.133//pierbridge%20shipping/services/xmlservice.aspx'
+## Change the ip address according to your Pierbridge integration ip.
+ycs.pierbridge.server.url=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.pierbridge.default.rate.request.user
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+ycs.pierbridge.default.rate.request.user=pierbridge
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.pierbridge.db.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is the JDBC properties of the Pierbridge server's database.
+## A sample url is 'jdbc:sqlserver://10.11.20.133:1215;databaseName=Pierbridge Shipment Server'
+## Change the ip address according to your Pierbridge integration ip.
+ycs.pierbridge.db.url=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.pierbridge.db.username
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is the JDBC properties of the Pierbridge server's database.
+ycs.pierbridge.db.username=yantra
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.pierbridge.db.password
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is the JDBC properties of the Pierbridge server's database.
+ycs.pierbridge.db.password=yantra1
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.pierbridge.pickupsummary.wait_interval
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property will determine the wait period for the reprintCarrierLabel
+## API to print Pickup Summary Barcode Report on the Pierbridge server. These will be used
+## in reprint carrier label API to wait for the manifest to completely close on the PB
+## server side, before proceeding to print the pick up summary label. The number of
+## attempts value will determine the count of loops of the wait. (wait is in secs).
+ycs.pierbridge.pickupsummary.wait_interval=30
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.pierbridge.pickupsummary.max_no_of_retries
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property will determine the wait period for the reprintCarrierLabel
+## API to print Pickup Summary Barcode Report on the Pierbridge server. These will be used
+## in reprint carrier label API to wait for the manifest to completely close on the PB
+## server side, before proceeding to print the pick up summary label. The number of
+## attempts value will determine the count of loops of the wait. (wait is in secs).
+ycs.pierbridge.pickupsummary.max_no_of_retries=5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.manifest.reopenmanifest
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## By setting this property to N addToContainerToManifest will not reopen an already closed manifest
+ycs.manifest.reopenmanifest=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YCS_MANIFEST_UPS_DTL.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#YCS_MANIFEST_UPS_DTL.personalinfoattributes=ConsigneeAddress1,ConsigneeAddress2,ConsigneeAddress3,ConsigneeAddress4,ConsigneeCity,ConsigneeCompanyName,ConsigneeCountry,ConsigneePhone,ConsigneePostalCode,ConsigneeStateProv,ConsigneeTaxID,ConsigneeUPSAcctNumber,CustomerReferenceNumber1,CustomerReferenceNumber2,CustomerReferenceNumberType1,CustomerReferenceNumberType2
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.adapter.pierbridge.external.processing.enabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Setting this property to true enables the pierbridge adapter to 
+## do all carrier integration processing in a sub-adapter class.
+#ycs.adapter.pierbridge.external.processing.enabled=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: ycs.adapter.pierbridge.external.processor.class
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: N
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## OMS instantiates the implementation class set to this yfs property if 
+## the property ycs.adapter.pierbridge.external.processing.enabled is true.
+## The java class assigned to this property implements
+## com.yantra.ycs.business.adaptor.external.PierbridgeAdaptorProcessor interface.
+ycs.adapter.pierbridge.external.processor.class=com.yantra.ycs.business.adaptor.external.pierbridge.PierbridgeAdaptorProcessorImpl1
+## PROPERTY_END

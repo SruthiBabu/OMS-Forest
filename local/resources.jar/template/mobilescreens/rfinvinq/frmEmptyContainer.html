@@ -1,0 +1,86 @@
+<html>
+    <body>
+        <form name="frmEmptyContainer" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Inventory_Container"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input colno="1"
+                                    inputbinding="xml:CurrentUser:/User/@Node"
+                                    outputbinding="xml:CurrentUser:/User/@Node"
+                                    size="0" subtype="Hidden"
+                                    tag="binding=xml:CurrentUser:/User/@Node"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/@LPN"
+                                    name="txtContainerNo" outputbinding="xml:/InventoryContainerDtl/@LPN"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/@LPN"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblLocation"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation" value="Mobile_Location"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/@LocationId"
+                                    name="txtLocation" outputbinding="xml:/InventoryContainerDtl/@LocationId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/@LocationId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblEmptyMessage1"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblEmptyMessage1" value="Mobile_Container_Empty_1"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblEmptyMessage2"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblEmptyMessage2" value="Mobile_Container_Empty_2"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+                                    subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

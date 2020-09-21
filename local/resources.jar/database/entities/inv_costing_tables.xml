@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores information about cost factor groups defined in the system. Cost factor group are defined by the enterprise organization."
+            EntityType="CONFIGURATION" Extensible="N" Module="inv"
+            Name="Cost_Factor_Group" Prefix="YFS_"
+            TableName="YFS_COST_FACTOR_GROUP" TableType="CONFIGURATION" XMLName="CostFactorGroup">
+            <Attributes NoOfColumns="15">
+                <Attribute ColumnName="COST_FACTOR_GROUP_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for the YFS_COST_FACTOR_GROUP table."
+                    Name="Cost_Factor_Group_Key" Nullable="false" XMLName="CostFactorGroupKey"/>
+                <Attribute ColumnName="ENTERPRISE_CODE" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Organization code of the enterprise, which owns the cost factor group.Link to YFS_Organization."
+                    IsOrgColumn="Y" Name="Enterprise_Code"
+                    Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="COST_FACTOR_GROUP_NAME"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Name of the Cost Factor Group."
+                    Name="Cost_Factor_Group_Name" Nullable="false" XMLName="CostFactorGroupName"/>
+                <Attribute ColumnName="COST_FACTOR_GROUP_DESCRIPTION"
+                    DataType="FreeText-100" DefaultValue="' ' "
+                    Description="Description of the Cost Factor Group."
+                    Name="Cost_Factor_Group_Description"
+                    Nullable="false" XMLName="CostFactorGroupDescription"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="COST_FACT_PK">
+                <Attribute ColumnName="COST_FACTOR_GROUP_KEY"
+                    Name="Cost_Factor_Group_Key" XMLName="CostFactorGroupKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COST_FACT_I1"
+                    Name="YFS_COST_FACTOR_GROUP_I1" Unique="true">
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="COST_FACTOR_GROUP_NAME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores information about the cost factor setup for each cost factor groups. This is defined by the enterprise organization."
+            EntityType="CONFIGURATION" Extensible="N" Module="inv"
+            Name="Cost_Factor_Group_Dtl" Prefix="YFS_"
+            TableName="YFS_COST_FACTOR_GROUP_DTL"
+            TableType="CONFIGURATION" XMLName="CostFactorGroupDetail"
+            LockingEntity="Cost_Factor_Group">
+            <Attributes NoOfColumns="15">
+                <Attribute ColumnName="COST_FACTOR_GRP_DTL_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for the YFS_COST_FACTOR_GRP_DTL table."
+                    Name="Cost_Factor_Group_Dtl_Key" Nullable="false" XMLName="CostFactorGroupDtlKey"/>
+                <Attribute ColumnName="COST_FACTOR_GROUP_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Link to YFS_COST_FACTOR_GROUP table."
+                    Name="Cost_Factor_Group_Key" Nullable="false" XMLName="CostFactorGroupKey"/>
+                <Attribute ColumnName="COST_FACTOR_NAME"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Name of the Cost Factor."
+                    Name="Cost_Factor_Name" Nullable="false" XMLName="CostFactorName"/>
+                <Attribute ColumnName="COST_FACTOR_DESCRIPTION"
+                    DataType="FreeText-100" DefaultValue="' ' "
+                    Description="Description of the Cost Factor."
+                    Name="Cost_Factor_Description" Nullable="false" XMLName="CostFactorDescription"/>
+                <Attribute ColumnName="COST_CALCULATION_METHOD"
+                    DataType="Text-2" DefaultValue="' ' "
+                    Description="Calculation method for the cost factor. Valid values are PERCENTAGE(00) and AMOUNT(01)."
+                    Name="Cost_Calculation_Method" Nullable="false" XMLName="CostCalculationMethod"/>
+                <Attribute ColumnName="COST_APPLICATION_METHOD"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Attribute on which the calculation has to be done. Valid only if the calculation method is AMOUNT. Valid values are WEIGHT, VOLUME and QUANTITY."
+                    Name="Cost_Application_Method" Nullable="false" XMLName="CostApplicationMethod"/>
+                <Attribute ColumnName="COST_FACTOR_VALUE"
+                    DataType="UnitPrice" DefaultValue="0 "
+                    Description="Value to be applied for the cost factor."
+                    Name="Cost_Factor_Value" Nullable="false" XMLName="Value"/>
+                <Attribute ColumnName="COST_FACTOR_UOM" DataType="UOM"
+                    DefaultValue="' ' "
+                    Description="UOM in which the cost factor value is specified. This is valid only for  application attributes WEIGHT,VOLUME and QUANTITY."
+                    Name="Cost_Factor_Uom" Nullable="false" XMLName="Uom"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="COST_FACT_DTL_PK">
+                <Attribute ColumnName="COST_FACTOR_GRP_DTL_KEY"
+                    Name="Cost_Factor_Group_Dtl_Key" XMLName="CostFactorGroupDtlKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COST_FACT_DTL_I1"
+                    Name="YFS_COST_FACTOR_GRP_DTL_I1" Unique="true">
+                    <Column Name="COST_FACTOR_GROUP_KEY"/>
+                    <Column Name="COST_FACTOR_NAME"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Cost_Factor_Group"
+                    Name="CostFactorGroup" Type="Bidirectional" XMLName="CostFactorGroup">
+                    <Attribute Name="Cost_Factor_Group_Key" ParentName="Cost_Factor_Group_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores information about cost factor groups to be used for different purposes. Cost factor group to be used for a purpose can be maintained at Enterprise/Supplier/Item/Posting Classification level."
+            EntityType="CONFIGURATION" Extensible="N" Module="inv"
+            Name="Cost_Factor_Purpose" Prefix="YFS_"
+            TableName="YFS_COST_FACTOR_PURPOSE"
+            TableType="CONFIGURATION" XMLName="CostFactorPurpose">
+            <Attributes NoOfColumns="15">
+                <Attribute ColumnName="COST_FACTOR_PURPOSE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for the YFS_COST_FACTOR_PURPOSE table."
+                    Name="Cost_Factor_Purpose_Key" Nullable="false" XMLName="CostFactorPurposeKey"/>
+                <Attribute ColumnName="COST_FACTOR_GROUP_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Link to YFS_COST_FACTOR_GROUP table."
+                    Name="Cost_Factor_Group_Key" Nullable="false" XMLName="CostFactorGroupKey"/>
+                <Attribute ColumnName="ENTERPRISE_CODE" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Organization code of the enterprise, which owns the cost factor group.Link to YFS_Organization."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="SUPPLIER_ORGANIZATION_CODE"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Organization code of the supplier for which the cost factor group is defined.Link to YFS_Organization."
+                    Name="Supplier_Organization_Code" Nullable="false" XMLName="SupplierOrganizationCode"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' ' "
+                    Description="Item Id of the item for which the cost factor group is defined."
+                    Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="POSTING_CLASSIFICATION"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Posting Classification of the item for which the cost factor group is defined."
+                    Name="Posting_Classification" Nullable="false" XMLName="PostingClassification"/>
+                <Attribute ColumnName="COST_FACTOR_PURPOSE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Purpose for which cost factor group to be used. Valid values are 'LANDED', 'STANDARD', 'WIP'."
+                    Name="Cost_Factor_Purpose" Nullable="false" XMLName="CostFactorPurpose"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="COST_FACT_PUR_PK">
+                <Attribute ColumnName="COST_FACTOR_PURPOSE_KEY"
+                    Name="Cost_Factor_Purpose_Key" XMLName="CostFactorPurposeKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COST_FACT_PUR_I1"
+                    Name="YFS_COST_FACTOR_PURPOSE_I1" Unique="true">
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="SUPPLIER_ORGANIZATION_CODE"/>
+                    <Column Name="ITEM_ID"/>
+                    <Column Name="POSTING_CLASSIFICATION"/>
+                    <Column Name="COST_FACTOR_PURPOSE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization"
+                    Name="SupplierOrganization" Type="Unidirectional" XMLName="SupplierOrganization">
+                    <Attribute Name="Supplier_Organization_Code" ParentName="Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores information about the item cost and current inventory value of an item at a specific node."
+            EntityType="TRANSACTION" Extensible="N" Module="inv"
+            Name="Inventory_Item_Node_Cost" Prefix="YFS_"
+            TableName="YFS_INVENTORY_ITEM_NOD_COST"
+            TableType="TRANSACTION" XMLName="InventoryItemNodeCost">
+            <Attributes NoOfColumns="15">
+                <Attribute ColumnName="INVENTORY_ITEM_NOD_COST_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for the YFS_INVENTORY_ITEM_NODE_COST table."
+                    Name="Inventory_Item_Node_Cost_Key" Nullable="false" XMLName="InventoryItemNodeCostKey"/>
+                <Attribute ColumnName="INVENTORY_ITEM_KEY"
+                    DataType="Key" DefaultValue="' '     "
+                    Description="Primary key of the inventory item for which cost is maintained."
+                    Name="Inventory_Item_Key" Nullable="false"/>
+                <Attribute ColumnName="SHIPNODE_KEY" DataType="Key"
+                    DefaultValue="' '     "
+                    Description="Primary key of the node for which inventory item cost is maintained."
+                    Name="Shipnode_Key" Nullable="false"/>
+                <Attribute ColumnName="COST_CURRENCY"
+                    DataType="Currency" DefaultValue="' ' "
+                    Description="The currency of the cost."
+                    Name="Cost_Currency" Nullable="false"/>
+                <Attribute ColumnName="AVERAGE_COST"
+                    DataType="UnitPrice" DefaultValue="0 "
+                    Description="This is the average cost of the inventory item."
+                    Name="Average_Cost" Nullable="false" XMLName="AverageCost"/>
+                <Attribute ColumnName="UNIT_COST" DataType="UnitPrice"
+                    DefaultValue="0 "
+                    Description="This is standard cost of the inventory item."
+                    Name="Unit_Cost" Nullable="false" XMLName="UnitCost"/>
+                <Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    DefaultValue="0     "
+                    Description="Current on-hand inventory balance for the item at the ship node."
+                    Name="Quantity" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_VALUE"
+                    DataType="UnitPrice" DefaultValue="0 "
+                    Description="This is the total computed value of the on-hand inventory. This will be updated whenever on-hand inventory is updated."
+                    Name="Inventory_Value" Nullable="false" XMLName="InventoryValue"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="INVITM_NODCST_PK">
+                <Attribute ColumnName="INVENTORY_ITEM_NOD_COST_KEY"
+                    Name="Inventory_Item_Node_Cost_Key" XMLName="InventoryItemNodeCostKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="INVITM_NODCST_I1"
+                    Name="YFS_INVENTORY_ITEM_NOD_COST_I1" Unique="true">
+                    <Column Name="INVENTORY_ITEM_KEY"/>
+                    <Column Name="SHIPNODE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="ZeroToMany"
+                    ForeignEntity="Ship_Node" Name="Ship_Node"
+                    Type="Unidirectional" XMLName="ShipNode">
+                    <Attribute Name="Shipnode_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Inventory_Item" Name="InventoryItem"
+                    Type="Unidirectional" XMLName="InventoryItem">
+                    <Attribute Name="Inventory_Item_Key" ParentName="Inventory_Item_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores information about the inventory node cost shared by JDA integrated service"
+            EntityType="CONFIGURATION" Extensible="N" Module="inv"
+            Name="Node_Cost" Prefix="YFS_"
+            TableName="YFS_NODE_COST"
+            TableType="CONFIGURATION" XMLName="NodeCost">
+            <Attributes NoOfColumns="15">
+                <Attribute ColumnName="NODE_COST_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key for the YFS_NODE_COST table."
+                    Name="Node_Cost_Key" Nullable="false" XMLName="NodeCostKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE" DataType="Key"
+					Description="Primary key attribute of YFS_ORGANIZATION table. The Enterprise code"
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="NODE" DataType="Key"
+                    Description="The node for which the cost represents"
+                    IsOrgColumn="Y" Name="Node"
+                    Nullable="true" XMLName="Node"/>
+                <Attribute ColumnName="CALCULATED_COST" DataType="UnitPrice"
+                    DefaultValue="0"
+                    Description="The calculated cost for the fulfillment node"
+                    Name="Calculated_Cost" Nullable="false"
+                    XMLName="CalculatedCost"/>
+                <Attribute ColumnName="COST_CURRENCY"
+                    DataType="Currency"
+                    Description="The currency in which the cost is defined."
+                    Name="Cost_Currency" Nullable="true"
+                    XMLName="CostCurrency"/>
+                <Attribute ColumnName="EFFECTIVE_START_DATE"
+                    DataType="TimeStamp"
+                    Description="The starting date and time from which the node cost is effective"
+                    Name="Effective_Start_Date" Nullable="true" XMLName="EffectiveStartDate"/>
+                <Attribute ColumnName="EFFECTIVE_END_DATE"
+                    DataType="TimeStamp"
+                    Description="The ending date and time from which the node cost is effective"
+                    Name="Effective_End_Date" Nullable="true" XMLName="EffectiveEndDate"/>                    
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="NODE_COST_PK">
+                <Attribute ColumnName="NODE_COST_KEY"
+                    Name="Node_Cost_Key" XMLName="NodeCostKey"/>                                                                                       
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="INV_NODCST_I1"
+                    Name="YFS_NODE_COST" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="NODE"/>
+                    <Column Name="EFFECTIVE_START_DATE"/>
+                    <Column Name="EFFECTIVE_END_DATE"/>
+                </Index>
+            </Indices>
+        </Entity> 
+    </Entities>
+</DBSchema>

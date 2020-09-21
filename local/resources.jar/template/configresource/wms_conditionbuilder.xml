@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkflowConditionBuilderInput>
+    <COUNT_EXECUTION> 
+	  <AbsVarianceQuantity Type="Leaf" Id="AbsVarianceQuantity" DisplayName="AbsVarianceQuantity" DataType="Quantity" ControlType="Text">
+         <QryTypes DefaultQryTypeId="&gt;=">
+            <QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+            <QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+            <QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+         </QryTypes>
+         <MasterData MasterDataId="AbsVarianceQuantity" IsReqd="" OverRidingClass=""/>
+      </AbsVarianceQuantity>
+	  <AbsVarianceValue Type="Leaf" Id="AbsVarianceValue" DisplayName="AbsVarianceValue" DataType="VarianceValue" ControlType="Text">
+         <QryTypes DefaultQryTypeId="&gt;=">
+            <QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+            <QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+            <QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+         </QryTypes>
+         <MasterData MasterDataId="AbsVarianceValue" IsReqd="" OverRidingClass=""/>
+      </AbsVarianceValue>
+	  <CountProgramName Type="Leaf" Id="CountProgramName" DisplayName="CountProgramName" 
+            DataType="Key" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="CountProgramName" IsReqd="" OverRidingClass=""/>
+      </CountProgramName>
+	  <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" 
+            DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>    
+	  <HasAbsoluteVariance Type="Leaf" Id="HasAbsoluteVariance" DisplayName="HasAbsoluteVariance" 				DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+          <MasterData MasterDataId="HasAbsoluteVariance" IsReqd="" OverRidingClass="">
+               <HasAbsoluteVariance Code="Y" Desc="Yes"/>
+               <HasAbsoluteVariance Code="N" Desc="No"/>
+         </MasterData>
+      </HasAbsoluteVariance>
+	  <HasVariance Type="Leaf" Id="HasVariance" DisplayName="HasVariance" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+          <MasterData MasterDataId="HasVariance" IsReqd="" OverRidingClass="">
+               <HasVariance Code="Y" Desc="Yes"/>
+               <HasVariance Code="N" Desc="No"/>
+         </MasterData>
+      </HasVariance>
+	   <HasVarianceWithPreviousCount Type="Leaf" Id="HasVarianceWithPreviousCount" 
+			DisplayName="HasVarianceWithPreviousCount" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="HasVarianceWithPreviousCount" IsReqd="" OverRidingClass="">
+               <HasVarianceWithPreviousCount Code="Y" Desc="Yes"/>
+               <HasVarianceWithPreviousCount Code="N" Desc="No"/>
+         </MasterData>
+      </HasVarianceWithPreviousCount>
+	  <ItemClassification1 Type="Leaf" Id="ItemClassification1" DisplayName="ItemClassification1" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ItemClassification1" IsReqd="" OverRidingClass=""/>
+      </ItemClassification1>
+	   <ItemClassification2 Type="Leaf" Id="ItemClassification2" DisplayName="ItemClassification2" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ItemClassification2" IsReqd="" OverRidingClass=""/>
+      </ItemClassification2>
+	   <ItemClassification3 Type="Leaf" Id="ItemClassification3" DisplayName="ItemClassification3" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ItemClassification3" IsReqd="" OverRidingClass=""/>
+      </ItemClassification3>
+	  <IsCaseLevel Type="Leaf" Id="IsCaseLevel" DisplayName="IsCaseLevel" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+          <MasterData MasterDataId="IsCaseLevel" IsReqd="" OverRidingClass="">
+               <IsCaseLevel Code="Y" Desc="Yes"/>
+               <IsCaseLevel Code="N" Desc="No"/>
+         </MasterData>
+      </IsCaseLevel>
+	  	  <IsCountTaskGenerated Type="Leaf" Id="IsCountTaskGenerated" 
+			DisplayName="IsCountTaskGenerated" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="IsCountTaskGenerated" IsReqd="" OverRidingClass="">
+               <IsCountTaskGenerated Code="Y" Desc="Yes"/>
+               <IsCountTaskGenerated Code="N" Desc="No"/>
+         </MasterData>
+      </IsCountTaskGenerated>
+	  <IsItemLevel Type="Leaf" Id="IsItemLevel" DisplayName="IsItemLevel" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+          <MasterData MasterDataId="IsItemLevel" IsReqd="" OverRidingClass="">
+               <IsItemLevel Code="Y" Desc="Yes"/>
+               <IsItemLevel Code="N" Desc="No"/>
+         </MasterData>
+      </IsItemLevel>
+      <IsLPNLevel Type="Leaf" Id="IsLPNLevel" DisplayName="IsLPNLevel" DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+          <MasterData MasterDataId="IsLPNLevel" IsReqd="" OverRidingClass="">
+               <IsLPNLevel Code="Y" Desc="Yes"/>
+               <IsLPNLevel Code="N" Desc="No"/>
+         </MasterData>
+      </IsLPNLevel>
+	  <IsPalletLevel Type="Leaf" Id="IsPalletLevel" DisplayName="IsPalletLevel" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="IsPalletLevel" IsReqd="" OverRidingClass="">
+               <IsPalletLevel Code="Y" Desc="Yes"/>
+               <IsPalletLevel Code="N" Desc="No"/>
+         </MasterData>
+      </IsPalletLevel>	   
+	  <IsResolvable Type="Leaf" Id="IsResolvable" DisplayName="IsResolvable" 
+            DataType="Flag" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+          <MasterData MasterDataId="IsResolvable" IsReqd="" OverRidingClass="">
+               <IsResolvable Code="Y" Desc="Yes"/>
+               <IsResolvable Code="N" Desc="No"/>
+         </MasterData>
+      </IsResolvable>
+	  <LocationSizeCode Type="Leaf" Id="LocationSizeCode" DisplayName="LocationSizeCode" DataType="LocationSizeCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="LocationSizeCode" IsReqd="" OverRidingClass=""/>
+      </LocationSizeCode>     
+	  <NodeKey Type="Leaf" Id="NodeKey" DisplayName="NodeKey" DataType="ShipNode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="NodeKey" IsReqd="" OverRidingClass=""/>
+      </NodeKey>
+      <ProductClass Type="Leaf" Id="ProductClass" DisplayName="ProductClass" DataType="ProductClass" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ProductClass" IsReqd="" OverRidingClass=""/>
+      </ProductClass>
+	  <RequestType Type="Leaf" Id="RequestType" DisplayName="RequestType" 
+            DataType="RequestType" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="RequestType" IsReqd="" OverRidingClass=""/>
+      </RequestType> 
+      <ZoneId Type="Leaf" Id="ZoneId" DisplayName="ZoneId" DataType="ZoneId" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+          <MasterData MasterDataId="ZoneId" IsReqd="" OverRidingClass=""/>
+      </ZoneId>
+	   <UnitOfMeasure Type="Leaf" Id="UnitOfMeasure" DisplayName="UnitOfMeasure" DataType="UnitOfMeasure" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="UnitOfMeasure" IsReqd="" OverRidingClass=""/>
+      </UnitOfMeasure>
+	  <VarianceQuantity Type="Leaf" Id="VarianceQuantity" DisplayName="VarianceQuantity" DataType="Quantity" ControlType="Text">
+         <QryTypes DefaultQryTypeId="&gt;=">
+            <QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+            <QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+            <QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+         </QryTypes>
+         <MasterData MasterDataId="VarianceQuantity" IsReqd="" OverRidingClass=""/>
+      </VarianceQuantity>
+	  <VarianceValue Type="Leaf" Id="VarianceValue" DisplayName="VarianceValue" DataType="VarianceValue" ControlType="Text">
+         <QryTypes DefaultQryTypeId="&gt;=">
+            <QryType QryTypeName="Greater Than" QryTypeId="&gt;"/>
+            <QryType QryTypeName="Greater Than or Equal To" QryTypeId="&gt;="/>
+			<QryType QryTypeName="Less Than" QryTypeId="&lt;"/>
+            <QryType QryTypeName="Less Than or Equal To" QryTypeId="&lt;="/>
+         </QryTypes>
+         <MasterData MasterDataId="VarianceValue" IsReqd="" OverRidingClass=""/>
+      </VarianceValue>
+	</COUNT_EXECUTION>
+	<OUTBOUND_PICKING> 
+      <ActivityGroupId Type="Leaf" Id="ActivityGroupId" DisplayName="ActivityGroupId" 
+            DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ActivityGroupId" IsReqd="" OverRidingClass=""/>
+      </ActivityGroupId>
+	   <ShipmentGroupId Type="Leaf" Id="ShipmentGroupId" DisplayName="ShipmentGroupId" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ShipmentGroupId" IsReqd="" OverRidingClass=""/>
+      </ShipmentGroupId>
+    </OUTBOUND_PICKING> 
+</WorkflowConditionBuilderInput>

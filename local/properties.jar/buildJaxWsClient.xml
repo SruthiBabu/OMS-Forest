@@ -1,0 +1,208 @@
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<project name="YIFWebServiceClient Tool" default="make-client" basedir="..">
+	<import file="AFCTasks.xml" />
+	<AFCdebug property="basedir" />
+
+	<property environment="env" />
+
+	<condition property="appserver" value="${APPSERVER}">
+		<isset property="APPSERVER" />
+	</condition>
+
+	<!-- websphere gets generated as BlahBean_Service.java
+		 all others as BlahBeanService -->
+	<condition property="service.class.has.underscore" value="${SERVER_CLASS_HAS_UNDERSCORE}" else="false">
+		<isset property="SERVER_CLASS_HAS_UNDERSCORE" />
+	</condition>
+
+	<condition property="bean.name" value="${BEAN_NAME}">
+		<isset property="BEAN_NAME" />
+	</condition>
+
+	<condition property="file.wsdl.url" value="${FILE_WSDL_URL}" else="">
+		<isset property="FILE_WSDL_URL" />
+	</condition>
+
+	<condition property="server.url" value="${SERVER_URL}">
+		<isset property="SERVER_URL" />
+	</condition>
+
+	<AFCfail unless="server.url" message="The property SERVER_URL must be provided. " />
+	<AFCfail unless="bean.name" message="The property BEAN_NAME must be provided. " />
+	<AFCfail unless="appserver" message="The property APPSERVER must be provided. " />
+
+	<condition property="inline.schemas" value="true" else="false">
+		<equals arg1="${appserver}" arg2="jboss" />
+	</condition>
+	<!--424837: Changing the default value of schema.relative.to.server.url to false -->
+	<condition property="schema.relative.to.server.url" value="false" else="true">
+	
+		<or>
+			<equals arg1="${appserver}" arg2="websphere" />
+		    <equals arg1="${appserver}" arg2="weblogic" />
+			<equals arg1="${appserver}" arg2="jboss" />
+		</or>
+		
+		    
+		
+	</condition>
+
+	<!-- ======================================================================== -->
+
+	<property file="bin/build.properties" prefix="buildprop" />
+	<property name="input.dir" location="${basedir}/jaxwsclient/input/${bean.name}" />
+	<property name="output.dir" location="${basedir}/jaxwsclient/output/${bean.name}" />
+	<property name="server.wsdl" value="${server.url}/${bean.name}?WSDL" />
+	<property name="local.wsdl" location="${basedir}/jaxwsclient/input/${bean.name}/${bean.name}.wsdl" />
+
+	<target name="clean">
+		<delete dir="${basedir}/jaxwsclient"/>
+	</target>
+
+	<target name="make-client">
+		<mkdir dir="${input.dir}" />
+		<mkdir dir="${output.dir}" />
+
+		<antcall target="generate-jaxws-client" />
+		<antcall target="build-client" />
+	</target>
+
+	<target name="build-client" depends="">
+		<javac srcdir="${output.dir}" includes="**/*.java" fork="false" />
+	</target>
+
+
+	<!-- ==========================================================         -->
+	<!-- This is the target are for generating a Web Services client using  -->
+	<!-- the "native" wsimport tool that ships as part of the JAX-WS RI     -->
+	<!-- ==========================================================         -->
+
+
+	<target name="generate-jaxws-client">
+		<path id="jax.client.helper.path">
+			<fileset dir="${basedir}">
+				<include name="jar/platform_afc/**/platform_afc.jar" />
+				<include name="jar/**/*.jar" />
+			</fileset>
+			<pathelement location="${output.dir}" />
+		</path>
+
+		<taskdef name="jcgh" classname="com.yantra.tools.ant.JaxwsClientGenerationHelper" classpathref="jax.client.helper.path" />
+
+		<condition property="javaxTrustStore" value="${trustStore}" else="UNDEF_VALUE" >
+			<isset property="trustStore"/>
+		</condition>
+		<condition property="javaxTrustStorePassword" value="${trustStorePassword}" else="UNDEF_VALUE" >
+			<isset property="trustStorePassword"/>
+		</condition>
+
+		<condition property="javaxKeyStore" value="${keyStore}" else="UNDEF_VALUE" >
+			<isset property="keyStore"/>
+		</condition>
+		<condition property="javaxKeyStorePassword" value="${keyStorePassword}" else="UNDEF_VALUE" >
+			<isset property="keyStorePassword"/>
+		</condition>
+
+		<AFCdebug property="server.wsdl" />
+		<jcgh outputdir="${input.dir}" 
+			  serverWsdlUrl="${server.wsdl}" 
+			  fileWsdlUrl="${file.wsdl.url}" 
+			  inlineschemas="${inline.schemas}" 
+			  updatedwsdl="${buildprop.jaxws.update.wsdl}"
+              schemarelativetoserverurl="${schema.relative.to.server.url}" 
+			  trustStore="${javaxTrustStore}"
+			  trustStorePassword="${javaxTrustStorePassword}" 
+			  keyStore="${javaxKeyStore}"
+			  keyStorePassword="${javaxKeyStorePassword}" />
+
+		<exec executable="${env.JAVA_HOME}/bin/wsimport">
+			<arg line="-quiet"/>
+			<arg line="-d ${output.dir}" />
+			<arg line="-keep" />
+			<arg line="-s ${output.dir}" />
+			<arg line="${local.wsdl}" />
+			<arg line="-b ${input.dir}/custSchema.xjb" />
+		</exec>
+		
+		<property file="${basedir}/properties/sandbox.cfg" prefix="sandbox"/>
+
+		<antcall target="-apply-handler-extensions"/>
+				
+		
+		<jar jarfile="${output.dir}/${bean.name}.jar">
+			 <zipfileset dir="${output.dir}" excludes="**/*.jar" />
+		</jar>
+
+		<path id="jjur.class.path">
+			<fileset dir="${basedir}">
+				<include name="jar/platform_afc/**/platform_afc.jar" />
+				<include name="jar/**/*.jar" />
+			</fileset>
+			<pathelement location="${output.dir}/${bean.name}.jar" />
+		</path>
+
+		<pathconvert property="jjur.classpath" pathsep=":">
+			<path refid="jjur.class.path" />
+		</pathconvert>
+
+		<java classname="com.yantra.tools.ant.JaxwsJavaURLRewriter" classpathref="jjur.class.path">
+			<arg line="-inputdir ${output.dir}" />
+			<arg line="-serverurl ${server.url}" />
+			<arg line="-beanname ${bean.name}" />
+			<arg line="-xbeanNamespace ${buildprop.xbean.package}" />
+			<arg line="-appserver ${appserver}" />
+			<arg line="-suppressjaxwshandlers ${buildprop.jaxws.suppress.handlers}"/>
+			<arg line="-useoldformat ${buildprop.useoldformat}" />
+			<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+		</java>
+
+
+	</target>
+	
+	<target name="-apply-handler-extensions" unless="suppress_handlers">
+
+		<!-- Check if they supplied the handler xml, otherwise use our defaults -->
+		<condition property="handler.xml" 
+		   value="${sandbox.INSTALL_DIR}/extensions/webservices/${bean.name}/client/${bean.name}Handlers.xml"
+		   else="${input.dir}/handlers/com/ibm/afc/jaxws/handlers/client/DefaultHandlers.xml" >
+			<available file="${sandbox.INSTALL_DIR}/extensions/webservices/${bean.name}/client/${bean.name}Handlers.xml"/>
+		</condition>
+		
+		<!-- Check if they supplied the handler jar, otherwise use our defaults -->
+		<condition property="handler.jar" 
+		   value="${sandbox.INSTALL_DIR}/extensions/webservices/${bean.name}/client/${bean.name}Handlers.jar"
+		   else="${input.dir}/handlers/DefaultHandlers.jar" >
+			<available file="${installdir}/extensions/webservices/${bean.name}/client/${bean.name}Handlers.jar"/>
+		</condition>	
+		
+		
+		<!-- unzip default handler xml and classes from the afc jar -->
+		<unzip src="${sandbox.INSTALL_DIR}/jar/platform_afc/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar"
+			dest="${output.dir}/" >
+			<patternset>
+				<include name="com/ibm/afc/jaxws/handlers/client/**" />
+				<include name="com/ibm/afc/jaxws/handlers/AbstractLogicalHandler.class" />
+			</patternset>				
+		</unzip>
+		<unzip src="${sandbox.INSTALL_DIR}/jar/platform_afc/${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar"
+			dest="${input.dir}/handlers" >
+			<patternset>
+				<include name="com/ibm/afc/jaxws/handlers/client/**" />
+			</patternset>				
+		</unzip>
+		
+		<copy file="${handler.xml}" 
+		      tofile="${output.dir}/${bean.name}Handlers.xml"/>
+		
+	</target>
+
+	<!-- ==========================================================         -->
+	<!-- ==========================================================         -->
+
+</project>
+

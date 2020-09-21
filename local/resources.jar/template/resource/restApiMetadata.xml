@@ -1,0 +1,3311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RestMetadata>
+    <Api Name="shouldAccessPolicyBeAppliedOnUpdateUE">
+        <Input TagName="AccessPolicy"/>
+    </Api>
+    <Api Name="recordViolations">
+        <Input TagName="Validation"/>
+    </Api>
+    <Api Name="recordApprovals">
+        <Output PK="ApprovalStatusKey"/>
+        <Input PK="UserKey" TagName="ApproverResponse"/>
+    </Api>
+    <Api Name="markIndexAvailability">
+        <Output PK="IndexStatusKey"/>
+        <Input PK="IndexStatusKey" TagName="Index"/>
+    </Api>
+    <Api Name="manageUploadJobRecord">
+        <Output PK="JobRecordKey"/>
+        <Input PK="JobRecordKey"/>
+    </Api>
+    <Api Name="manageUploadJob">
+        <Output PK="JobKey"/>
+        <Input PK="JobKey"/>
+    </Api>
+    <Api Name="manageTransformationData">
+        <Input TagName="TransformationHeader"/>
+    </Api>
+    <Api Name="manageOverriddenRule">
+        <Input TagName="OrderApprovalRule"/>
+    </Api>
+    <Api Name="getValidationRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getValidationList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getValidationDomainList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getUploadJobList">
+        <Output IsList="Y" PK="JobKey"/>
+        <Input PK="JobKey"/>
+    </Api>
+    <Api Name="getTransformationData">
+        <Output IsList="Y" PK="TransformationConfigKey"/>
+        <Input TagName="TransformationConfig"/>
+    </Api>
+    <Api Name="getTransformationConfigList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSyncTargetList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSyncSubscriptionList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSyncProfileList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSyncDBImportList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSyncDBExportList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOverriddenRuleList">
+        <Output IsList="Y" PK="OrderApprovalRuleKey"/>
+        <Input TagName="OrderApprovalRule"/>
+    </Api>
+    <Api Name="getOrderApprovalRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getExternalDataAccessPolicyOnReadUE">
+        <Input TagName="AccessPolicy"/>
+    </Api>
+    <Api Name="getCustomerGradeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getChangeRequestUserList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getChangeRequestList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getChangeProjectList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getBaseConfigTaskList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getApprovalPlanList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getApprovalGroupList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAdditionalCustomerInformationUE">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="checkValidationRule">
+        <Input TagName="Validation"/>
+    </Api>
+    <Api Name="checkOverriddenRules">
+        <Input TagName="Validation"/>
+    </Api>
+    <Api Name="manageChargeTransactionRequest">
+        <Output IsList="Y"/>
+        <Input TagName="ChargeTransactionRequestList"/>
+    </Api>
+    <Api Name="getUserList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderPrice">
+        <Input TagName="Order"/>
+    </Api>
+    <Api Name="validateCouponUE">
+        <Input TagName="Coupon"/>
+    </Api>
+    <Api Name="selectPricelistLineUE">
+        <Output IsList="Y" PK="PricelistLineKey"/>
+        <Input TagName="ItemPrice"/>
+    </Api>
+    <Api Name="selectPricelistHeaderListUE">
+        <Output IsList="Y" PK="PricelistHeaderKey"/>
+        <Input TagName="SelectPricelistHeaderList"/>
+    </Api>
+    <Api Name="runCustomPricingRuleUE">
+        <Input TagName="RunCustomPricingRule"/>
+    </Api>
+    <Api Name="overrideGetOrderPriceUE">
+        <Input TagName="Order"/>
+    </Api>
+    <Api Name="overrideGetLowestItemPriceUE">
+        <Input TagName="ItemPrice"/>
+    </Api>
+    <Api Name="overrideGetItemPriceUE">
+        <Input TagName="ItemPrice"/>
+    </Api>
+    <Api Name="getApplicablePricingRuleList">
+        <Output IsList="Y" PK="PricingRuleKey"/>
+        <Input TagName="PricingRule"/>
+    </Api>
+    <Api Name="overrideGetApplicablePricingRuleListUE">
+        <Output IsList="Y" PK="PricingRuleKey"/>
+        <Input TagName="PricingRule"/>
+    </Api>
+    <Api Name="massManagePricelistLine">
+        <Input TagName="MassManage"/>
+    </Api>
+    <Api Name="managePriceTypeAssociation">
+        <Output IsList="Y" PK="PriceTypeAssnKey"/>
+        <Input TagName="PriceTypeAssociationList"/>
+    </Api>
+    <Api Name="getPricelistLineList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="managePricelistLine">
+        <Output IsList="Y"/>
+        <Input TagName="PricelistLineList"/>
+    </Api>
+    <Api Name="manageCouponPolicy">
+        <Output PK="CouponPolicyKey"/>
+    </Api>
+    <Api Name="manageCouponCharacterSet">
+        <Output PK="CouponCharSetKey"/>
+        <Input PK="CouponCharSetKey"/>
+    </Api>
+    <Api Name="loadCustomPricingRulesUE">
+        <Output IsList="Y" PK="PricingRuleKey"/>
+        <Input TagName="LoadCustomPricingRules"/>
+    </Api>
+    <Api Name="getPricingRuleSellerAssignmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPricingRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPricingRuleDetailsUE">
+        <Input TagName="PricingRule"/>
+    </Api>
+    <Api Name="getPricingRuleAssignmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPriceTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPricelistSellerAssignmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPricelistLineListForItem">
+        <Output IsList="Y" PK="PricelistLineKey"/>
+        <Input TagName="PricelistLine"/>
+    </Api>
+    <Api Name="getPricelistHeaderList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPricelistAssignmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderPriceUE">
+        <Input TagName="Order"/>
+    </Api>
+    <Api Name="getLowestItemPrice">
+        <Input TagName="ItemPrice"/>
+    </Api>
+    <Api Name="getLowestItemPriceUE">
+        <Input TagName="ItemPrice"/>
+    </Api>
+    <Api Name="getItemPriceUE">
+        <Input TagName="ItemPrice"/>
+    </Api>
+    <Api Name="getItemPriceTypeList">
+        <Output IsList="Y" PK="PriceTypeKey"/>
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getCouponCodeExportAuditList">
+        <Output IsList="Y" PK="CpnCodeExpAuditKey"/>
+        <Input PK="CpnCodeExpAuditKey"/>
+    </Api>
+    <Api Name="getAssignedPricelistHeaderList">
+        <Output IsList="Y" PK="PricelistHeaderKey"/>
+        <Input TagName="AssignedPricelist"/>
+    </Api>
+    <Api Name="getApplicablePricingRuleListUE">
+        <Output IsList="Y" PK="PricingRuleKey"/>
+        <Input TagName="PricingRule"/>
+    </Api>
+    <Api Name="exportCouponCode">
+        <Input TagName="Coupon"/>
+    </Api>
+    <Api Name="copyPricelistAssignment">
+        <Input TagName="PricelistHeader"/>
+    </Api>
+    <Api Name="copyPricelist">
+        <Input TagName="PricelistHeader"/>
+    </Api>
+    <Api Name="calculateShippingChargeUE">
+        <Input TagName="Order"/>
+    </Api>
+    <Api Name="assignCouponCode">
+        <Input TagName="Coupon"/>
+    </Api>
+    <Api Name="saveIntegrationError">
+        <Input PK="ErrorTxnId"/>
+    </Api>
+    <Api Name="resequenceIntegrationErrorsInGroup">
+        <Input TagName="IntegrationErrorGroup"/>
+    </Api>
+    <Api Name="reprocessIntegrationError">
+        <Input PK="ErrorTxnId"/>
+    </Api>
+    <Api Name="reprocessAllIntegrationErrorsInGroup">
+        <Input PK="ErrorTxnId" TagName="IntegrationErrorGroup"/>
+    </Api>
+    <Api Name="partiticipantData">
+        <Output IsList="Y" PK="OrganizationKey"/>
+    </Api>
+    <Api Name="modifyXReferenceValue">
+        <Input TagName="XrefValues"/>
+    </Api>
+    <Api Name="modifyXReferenceMapping">
+        <Input TagName="XrefMappings"/>
+    </Api>
+    <Api Name="ignoreIntegrationError">
+        <Input PK="ErrorTxnId"/>
+    </Api>
+    <Api Name="getIntegrationInputXML">
+        <Output PK="ErrorTxnId"/>
+        <Input PK="ErrorTxnId" TagName="IntegrationError"/>
+    </Api>
+    <Api Name="getIntegrationErrorXML">
+        <Output PK="ErrorTxnId"/>
+        <Input PK="ErrorTxnId" TagName="IntegrationError"/>
+    </Api>
+    <Api Name="getIntegrationErrorList">
+        <Output IsList="Y" PK="ErrorTxnId"/>
+        <Input PK="ErrorTxnId"/>
+    </Api>
+    <Api Name="getIntegrationErrorGroupDetails">
+        <Output IsList="Y" PK="ErrorTxnId"/>
+    </Api>
+    <Api Name="getIntegrationErrorDetails">
+        <Output PK="ErrorTxnId"/>
+        <Input PK="ErrorTxnId"/>
+    </Api>
+    <Api Name="executeXReferenceTransform">
+        <Input TagName="RootElement"/>
+    </Api>
+    <Api Name="validateConfiguration">
+        <Input TagName="ConfiguratorBOM"/>
+    </Api>
+    <Api Name="returnFromSubModel">
+        <Output IsList="Y" PK="PropertyKey"/>
+        <Input TagName="ReturnFromSubModel"/>
+    </Api>
+    <Api Name="punchIntoSubModel">
+        <Output IsList="Y" PK="PropertyKey"/>
+        <Input TagName="PunchIntoSubModel"/>
+    </Api>
+    <Api Name="processConfigurationPicks">
+        <Output IsList="Y" PK="PropertyKey"/>
+        <Input TagName="ManagePicks"/>
+    </Api>
+    <Api Name="manageModelRegression">
+        <Input TagName="ManageModelRegression"/>
+    </Api>
+    <Api Name="manageConfiguration">
+        <Input TagName="manageConfiguration"/>
+    </Api>
+    <Api Name="instantiateSubModel">
+        <Output IsList="Y" PK="PropertyKey"/>
+        <Input TagName="InstantiateSubModel"/>
+    </Api>
+    <Api Name="getModelGroupsAndModels">
+        <Input TagName="Models"/>
+    </Api>
+    <Api Name="getFlatConfigurationModel">
+        <Output IsList="Y" PK="PropertyKey"/>
+        <Input TagName="Model"/>
+    </Api>
+    <Api Name="getConfigurationModel">
+        <Output IsList="Y" PK="PropertyKey"/>
+        <Input TagName="Model"/>
+    </Api>
+    <Api Name="getConfigurationList">
+        <Input TagName="getConfigurationList"/>
+    </Api>
+    <Api Name="getConfigurationDetail">
+        <Input TagName="Configuration"/>
+    </Api>
+    <Api Name="generateConfigurationBOM">
+        <Input TagName="GenerateBom"/>
+    </Api>
+    <Api Name="extractPicksFromConfigurationBOM">
+        <Input TagName="ExtractPicks"/>
+    </Api>
+    <Api Name="Picklist">
+        <Input TagName="ShipAdvicePrint"/>
+    </Api>
+    <Api Name="voidInvoice">
+        <Input TagName="OrderInvoice"/>
+    </Api>
+    <Api Name="getOrderInvoiceDetails">
+        <Output IsList="Y"/>
+        <Input PK="OrderInvoiceKey" TagName="GetOrderInvoiceDetails"/>
+    </Api>
+    <Api Name="verifyReceipt">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey"/>
+    </Api>
+    <Api Name="verifyOrderConfirmationUE">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="validateReship">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="validateReshipUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="validateExternalPromotionsUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="updateMasterInvoiceNo">
+        <Input TagName="UpdateMasterInvoiceNo"/>
+    </Api>
+    <Api Name="updateInventoryCost">
+        <Output PK="InventoryItemNodeCostKey"/>
+        <Input PK="InventoryItemNodeCostKey" TagName="Cost"/>
+    </Api>
+    <Api Name="updateFutureInventory">
+        <Input PK="ShipnodeKey" TagName="ShipNode"/>
+    </Api>
+    <Api Name="updateConversionRates">
+        <Input TagName="UpdateCurrencyConversion"/>
+    </Api>
+    <Api Name="unScheduleOrder">
+        <Input TagName="UnScheduleOrder"/>
+    </Api>
+    <Api Name="unreceiveOrder">
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="syncInventoryDemand">
+        <Output IsList="Y"/>
+        <Input TagName="SyncInventoryDemand"/>
+    </Api>
+    <Api Name="startReceipt">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey"/>
+    </Api>
+    <Api Name="splitLine">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="shouldOrderMonitorAlertBeRaisedUE">
+        <Input TagName="OrderMonitor"/>
+    </Api>
+    <Api Name="shortOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="ShortOrder"/>
+    </Api>
+    <Api Name="master">
+        <Input TagName="Load"/>
+    </Api>
+    <Api Name="sendReturnReleaseToDCS">
+        <Input TagName="OrderRelease"/>
+    </Api>
+    <Api Name="sendOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="sendBuyerResponse">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="scheduleOrderLines">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="scheduleOrder">
+        <Input TagName="ScheduleOrder"/>
+    </Api>
+    <Api Name="reworkQuote">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="restoreOrder">
+        <Input PK="OrderHeaderKey" TagName="RestoreOrder"/>
+    </Api>
+    <Api Name="createOrder">
+        <Input PK="OrderHeaderKey"/>
+        <Output PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="changeOrder">
+        <Input PK="OrderHeaderKey"/>
+        <Output PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="reshipOrderLinesUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="reshipOrderLines">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+        <Output PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="reserveItemInventoryList">
+        <Output PK="InventoryReservationKey"/>
+        <Input PK="InventoryReservationKey" TagName="ReserveItemInventoryList"/>
+    </Api>
+    <Api Name="reserveItemInventory">
+        <Output PK="InventoryReservationKey"/>
+        <Input PK="InventoryReservationKey" TagName="ReserveItemInventory"/>
+    </Api>
+    <Api Name="getATP">
+        <Input TagName="GetATP"/>
+        <Output IsList="Y" PK="ItemKey"/>
+    </Api>
+    <Api Name="findInventory">
+        <Output IsList="Y" PK="ShipnodeKey"/>
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="reserveAvailableInventory">
+        <Output IsList="Y" PK="ShipnodeKey"/>
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="requestCollection">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="repriceOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="releaseOrder">
+        <Input TagName="ReleaseOrder"/>
+    </Api>
+    <Api Name="recordSale">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="recordReceivingDiscrepancy">
+        <Output IsList="Y"/>
+        <Input TagName="ReceivingDiscrepancies"/>
+    </Api>
+    <Api Name="recordInvoiceCreation">
+        <Input TagName="OrderInvoice"/>
+    </Api>
+    <Api Name="recordExternalCharges">
+        <Input TagName="RecordExternalCharges"/>
+    </Api>
+    <Api Name="recordCollection">
+        <Input TagName="RecordCollection"/>
+    </Api>
+    <Api Name="receiveOrder">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="raiseEvent">
+        <Input TagName="RaiseEvent"/>
+    </Api>
+    <Api Name="processOrderPayments">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="processOrderHoldTypeUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getTransactionList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="processOrderCollection">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="processAvailabilitySnapShot">
+        <Output IsList="Y" PK="InventorySupplyKey"/>
+    </Api>
+    <Api Name="presentToBuyer">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="preReceiveLPN">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="postVoidSale">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="postPendingAdjustments">
+        <Input TagName="Adjustments"/>
+    </Api>
+    <Api Name="overrideChargesForAdjustmentInvoiceUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="orderRepricingUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="monitorItemAvailability">
+        <Output PK="InventoryAlertKey"/>
+        <Input TagName="MonitorItemAvailability"/>
+    </Api>
+    <Api Name="modifyReceiptCost">
+        <Input PK="InventoryReceiptKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="modifyDistribution">
+        <Input PK="ItemshipnodeKey" TagName="ItemShipNode"/>
+    </Api>
+    <Api Name="markReceivingDiscrComplete">
+        <Output IsList="Y" PK="ReceivingDiscrepancyKey"/>
+        <Input TagName="ReceivingDiscrepancy"/>
+    </Api>
+    <Api Name="manageTransactionalRelationships">
+        <Output IsList="Y" PK="RelationshipKey"/>
+    </Api>
+    <Api Name="manageSubCatalogOrganizationAssignment">
+        <Output IsList="Y"/>
+        <Input TagName="SubCatalogOrganizationAssignmentList"/>
+    </Api>
+    <Api Name="manageSourcingRule">
+        <Input TagName="SourcingRuleHeader"/>
+    </Api>
+    <Api Name="manageInventoryAlerts">
+        <Output PK="InventoryAlertKey"/>
+        <Input PK="InventoryAlertKey"/>
+    </Api>
+    <Api Name="manageEntitlementRuleAssignment">
+        <Output IsList="Y"/>
+        <Input PK="EntitlementRuleAssignmentKey" TagName="EntitlementRuleAssignmentList"/>
+    </Api>
+    <Api Name="loadInventoryNodeCost">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="listPriceProgram">
+        <Input TagName="PriceSet"/>
+    </Api>
+    <Api Name="inspectReceipt">
+        <Input PK="ShipmentKey" TagName="InspectReceipt"/>
+    </Api>
+    <Api Name="importOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="getTransitionsForDisposition">
+        <Output PK="DispositionKey"/>
+        <Input PK="DispositionKey" TagName="ReturnDisposition"/>
+    </Api>
+    <Api Name="getTransactionSummary">
+        <Input TagName="getTransactionSummary"/>
+    </Api>
+    <Api Name="getTransactionalRelationshipList">
+        <Input PK="RelationshipKey"/>
+        <Output IsList="Y" PK="RelationshipKey"/>
+    </Api>
+    <Api Name="getTagListForOrderingUE">
+        <Input PK="InventoryTagKey" TagName="RequestedTagInfo"/>
+    </Api>
+    <Api Name="getTagListForOrdering">
+        <Output IsList="Y" PK="InventoryTagKey"/>
+        <Input PK="InventoryTagKey" TagName="Tag"/>
+    </Api>
+    <Api Name="getSupplyDetails">
+        <Input PK="InventorySupplyKey" TagName="getSupplyDetails"/>
+    </Api>
+    <Api Name="getPaymentRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPaymentTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSubCatalogOrganizationAssignmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getStoreAvailability">
+        <Output IsList="Y" PK="PersonInfoKey"/>
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getStatusInventoryTypesList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSourcingRuleList">
+        <Output IsList="Y" PK="SourcingRuleHeaderKey"/>
+        <Input TagName="SourcingRuleHeader"/>
+    </Api>
+    <Api Name="getShipNodeInventory">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="getShipNodeInventory"/>
+    </Api>
+    <Api Name="getShipmentListForOrder">
+        <Output IsList="Y" PK="ShipmentKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getSerialList">
+        <Output IsList="Y" PK="GlobalSerialKey"/>
+        <Input PK="GlobalSerialKey"/>
+    </Api>
+    <Api Name="getOrganizationList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSellerAndBuyerForOrder">
+        <Output IsList="Y" PK="OrganizationKey"/>
+        <Input TagName="Organization"/>
+    </Api>
+    <Api Name="getShipmentContainerDetails">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="getSalesOrderDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getReturnOrderList">
+        <Input TagName="GetReturnOrderList"/>
+    </Api>
+    <Api Name="getReservation">
+        <Input PK="InventoryReservationKey" TagName="getReservation"/>
+    </Api>
+    <Api Name="getReceivingDiscrReasonList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getReceivingDiscrepancyList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getReceiptNoUE">
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="getReceiptList">
+        <Output IsList="Y" PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey"/>
+    </Api>
+    <Api Name="getReceiptLinesForTransaction">
+        <Output IsList="Y" PK="ReceiptLineKey"/>
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="getReceiptLineList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getReceiptDetails">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey"/>
+    </Api>
+    <Api Name="getPropertyMetadataList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getProperty">
+        <Output IsList="Y" PK="PropertyMetadataKey"/>
+        <Input TagName="GetProperty"/>
+    </Api>
+    <Api Name="getItemListForOrdering">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getPromotionsForItemListUE">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="getPriceSetList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPriceListForOrdering">
+        <Input TagName="GetPriceListForOrdering"/>
+    </Api>
+    <Api Name="getPossibleSchedules">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getPendingAdjustments">
+        <Output IsList="Y" PK="InventoryPendingAdjKey"/>
+        <Input PK="InventoryPendingAdjKey" TagName="PendingAdjustment"/>
+    </Api>
+    <Api Name="getPaymentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOverriddenOveragePercentageUE">
+        <Input TagName="GetOverriddenOveragePercentage"/>
+    </Api>
+    <Api Name="getOverriddenDGForItem">
+        <Input TagName="InventoryItem"/>
+    </Api>
+    <Api Name="getOverallStatusUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getOrderReleaseList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderReleaseDetails">
+        <Input PK="OrderReleaseKey" TagName="OrderReleaseDetail"/>
+    </Api>
+    <Api Name="getOrderList">
+        <Output IsList="Y" PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="getOrderLineStatusList">
+        <Output IsList="Y" PK="OrderReleaseStatusKey"/>
+        <Input PK="OrderReleaseStatusKey"/>
+    </Api>
+    <Api Name="getOrderLineList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderLineDetails">
+        <Input PK="OrderLineKey" TagName="OrderLineDetail"/>
+    </Api>
+    <Api Name="getOrderInvoiceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderInvoiceDetailList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderHoldTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderExternallyUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="RestoreOrder"/>
+    </Api>
+    <Api Name="getOrderDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="getOrderAuditList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="GetOpportunityIDUE">
+        <Input TagName="Opportunity"/>
+    </Api>
+    <Api Name="getNodeReceivingPreferenceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getMonitoringCalendarForWorkOrderUE">
+        <Input TagName="MonitorRule"/>
+    </Api>
+    <Api Name="getMonitoringCalendarForShipmentUE">
+        <Input TagName="MonitorRule"/>
+    </Api>
+    <Api Name="getMonitoringCalendarForOrderUE">
+        <Input TagName="MonitorRule"/>
+    </Api>
+    <Api Name="getLotList">
+        <Output IsList="Y" PK="InventoryTagKey"/>
+        <Input PK="InventoryTagKey" TagName="Tag"/>
+    </Api>
+    <Api Name="getLinesToReceive">
+        <Output PK="ShipmentKey"/>
+        <Input PK="ReceiptHeaderKey" TagName="GetLinesToReceive"/>
+    </Api>
+    <Api Name="getLineConstraints">
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="getItemNodeCostForSourcing">
+        <Input TagName="ItemCostList"/>
+    </Api>
+    <Api Name="getInvoicePricingQtyUE">
+        <Input TagName="InvoiceDetail"/>
+    </Api>
+    <Api Name="getInventorySupply">
+        <Output PK="InventoryItemKey"/>
+    </Api>
+    <Api Name="getInventorySnapShot">
+        <Output IsList="Y" PK="ShipnodeKey"/>
+        <Input TagName="GetInventorySnapShot"/>
+    </Api>
+    <Api Name="getInventoryMismatch">
+        <Output IsList="Y" PK="InventorySupplyKey"/>
+        <Input TagName="InventorySnapShot"/>
+    </Api>
+    <Api Name="getInventoryItemList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryFromCacheUE">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input PK="InventoryAlertKey" TagName="InventoryAlerts"/>
+    </Api>
+    <Api Name="getInventoryCost">
+        <Output PK="InventoryItemNodeCostKey"/>
+        <Input PK="InventoryItemNodeCostKey" TagName="Cost"/>
+    </Api>
+    <Api Name="getInventoryAudit">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryAlertsList">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input PK="InventoryAlertKey"/>
+    </Api>
+    <Api Name="getFundsAvailableUE">
+        <Input PK="PaymentKey" TagName="PaymentMethod"/>
+    </Api>
+    <Api Name="getExternalPricesForItemListUE">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="getExternalPriceListForOrderingUE">
+        <Input TagName="GetPriceListForOrdering"/>
+    </Api>
+    <Api Name="getExternalInventoryUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getExternalInventoryForItemListUE">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="getExternalDataForValidationUE">
+        <Input TagName="Validation"/>
+    </Api>
+    <Api Name="getExternalAvailabilityUE">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getEntitlementRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getEntitlementRuleDetailItemList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getEntitlementAssignmentList">
+        <Output IsList="Y" PK="EntitlementRuleAssignmentKey"/>
+        <Input TagName="EntitlementRuleAssignment"/>
+    </Api>
+    <Api Name="getEncryptedString">
+        <Input TagName="GetEncryptedString"/>
+    </Api>
+    <Api Name="getEncryptedCreditCardNumber">
+        <Input TagName="GetEncryptedCreditCardNumber"/>
+    </Api>
+    <Api Name="getDistributionSetup">
+        <Output PK="InventoryItemKey"/>
+        <Input PK="InventoryItemKey" TagName="getDistributionSetup"/>
+    </Api>
+    <Api Name="getDistributionList">
+        <Output IsList="Y" PK="ItemshipnodeKey"/>
+        <Input PK="ItemshipnodeKey" TagName="ItemShipNode"/>
+    </Api>
+    <Api Name="getDistribution">
+        <Output PK="ItemshipnodeKey"/>
+        <Input PK="ItemshipnodeKey" TagName="ItemShipNode"/>
+    </Api>
+    <Api Name="getDistanceUE">
+        <Input PK="OrderHeaderKey" TagName="GetDistance"/>
+    </Api>
+    <Api Name="getDistanceForNodeListUE">
+        <Output IsList="Y" PK="ShipnodeKey"/>
+        <Input TagName="GetDistanceForNodeList"/>
+    </Api>
+    <Api Name="getDemandSummary">
+        <Output IsList="Y" PK="InventoryDemandKey"/>
+        <Input PK="InventoryDemandKey"/>
+    </Api>
+    <Api Name="getDemandDetailsList">
+        <Output IsList="Y" PK="InvtdmddtlVwKey"/>
+        <Input PK="InvtdmddtlVwKey"/>
+    </Api>
+    <Api Name="getDeliveryLeadTimeUE">
+        <Input PK="OrderHeaderKey" TagName="GetDeliveryLeadTime"/>
+    </Api>
+    <Api Name="getDecryptedString">
+        <Input TagName="GetDecryptedString"/>
+    </Api>
+    <Api Name="getDecryptedCreditCardNumber">
+        <Input TagName="GetDecryptedCreditCardNumber"/>
+    </Api>
+    <Api Name="getCarrierServiceOptionsForOrderingUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getCarrierServiceOptionsForOrdering">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getAvailabilityCorrectionsUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getAvailabilityCorrectionsForItemListUE">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="getAuditList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAssignedEntitlementList">
+        <Output IsList="Y" PK="EntitlementRuleKey"/>
+        <Input TagName="EntitlementRuleAssignment"/>
+    </Api>
+    <Api Name="getApplicablePricingRulesForOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getAdjustmentDetailsUE">
+        <Output PK="InventoryPendingAdjKey"/>
+        <Input PK="InventorySupplyKey" TagName="Supply"/>
+    </Api>
+    <Api Name="getAdditionalServicesForLine">
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="getAdditionalProductLinesForDelivery">
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="getAdditionalOptionsForLine">
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="getAdditionalDeliveryServicesForOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="generateWorkOrderUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="generateWorkOrder">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+        <Output PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="findShipment">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="findReceipt">
+        <Output IsList="Y" PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey"/>
+    </Api>
+    <Api Name="executeCollection">
+        <Input TagName="ExecuteCollection"/>
+    </Api>
+    <Api Name="confirmDraftOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="ConfirmDraftOrder"/>
+    </Api>
+    <Api Name="determineDerivedOrderForConsolidationUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="determineDateForPricingUE">
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="determineChainedOrderForConsolidationUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="deleteSourcingRule">
+        <Input TagName="SourcingRuleHeader"/>
+    </Api>
+    <Api Name="deleteOrder">
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="deleteDistribution">
+        <Input PK="ItemshipnodeKey" TagName="ItemShipNode"/>
+    </Api>
+    <Api Name="createOrderInvoice">
+        <Output IsList="Y"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="createImportDataEx">
+        <Input PK="ImportKey" TagName="CreateImportDataEx"/>
+    </Api>
+    <Api Name="createExportDataEx">
+        <Input PK="ExportKey" TagName="CreateExportDataEx"/>
+    </Api>
+    <Api Name="createEnvironment">
+        <Input TagName="YFSEnvironment"/>
+    </Api>
+    <Api Name="createDistribution">
+        <Input PK="ItemshipnodeKey" TagName="ItemShipNode"/>
+    </Api>
+    <Api Name="createDiscrBasedAdjustmentInvoice">
+        <Output IsList="Y" PK="OrderInvoiceKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="createDerivedOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="createChainedOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="copyOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="convertUOM">
+        <Input TagName="convertUOM"/>
+    </Api>
+    <Api Name="convertCurrency">
+        <Input TagName="convertCurrency"/>
+    </Api>
+    <Api Name="confirmAssignmentsUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="computePriceForItem">
+        <Output IsList="Y" PK="PriceSetKey"/>
+        <Input TagName="ComputePriceForItem"/>
+    </Api>
+    <Api Name="completeServiceLine">
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="closeReceipt">
+        <Input PK="ReceiptHeaderKey"/>
+    </Api>
+    <Api Name="checkOrderBeforeProcessingUE">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkHoldTypesForOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkAvailability">
+        <Input TagName="CheckAvailability"/>
+    </Api>
+    <Api Name="changeRelease">
+        <Input TagName="OrderRelease"/>
+    </Api>
+    <Api Name="changeReceiptStatus">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="changeReceipt">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey"/>
+    </Api>
+    <Api Name="changeOrderStatus">
+        <Output IsList="Y" PK="OrderAuditKey"/>
+        <Input TagName="OrderStatusChange"/>
+    </Api>
+    <Api Name="changeOrderSchedule">
+        <Output IsList="Y" PK="OrderAuditKey"/>
+        <Input TagName="ChangeSchedule"/>
+    </Api>
+    <Api Name="changeImportDataStatus">
+        <Input TagName="ChangeImportDataStatus"/>
+    </Api>
+    <Api Name="changeExportDataStatus">
+        <Input TagName="ChangeExportDataStatus"/>
+    </Api>
+    <Api Name="cancelReservation">
+        <Output PK="InventoryReservationKey"/>
+        <Input PK="InventoryReservationKey" TagName="CancelReservation"/>
+    </Api>
+    <Api Name="beforeSplitLineUE">
+        <Output IsList="Y" PK="OrderLineKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="beforeSendShipAdviceToWMSUE">
+        <Input TagName="WMSShipmentAdviceDownload"/>
+    </Api>
+    <Api Name="beforeSendPOToWMSUE">
+        <Input TagName="WMSPODownload"/>
+    </Api>
+    <Api Name="beforeReceiveOrderUE">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="beforePurgeUE">
+        <Input TagName="PurgeDetails"/>
+    </Api>
+    <Api Name="beforeCreateOrderUE">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+        <Output PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="beforeContainerPack">
+        <Output IsList="Y" PK="ShipmentContainerKey"/>
+        <Input TagName="Containers"/>
+    </Api>
+    <Api Name="beforeCloseReceiptUE">
+        <Output PK="ReceiptHeaderKey"/>
+        <Input PK="ReceiptHeaderKey" TagName="Receipt"/>
+    </Api>
+    <Api Name="beforeChangeOrderUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="adjustInventory">
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="addLineToOrder">
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="acceptOrderLineReservation">
+        <Input TagName="OrderLineStatusList"/>
+    </Api>
+    <Api Name="voidTrackingNo">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="splitShipment">
+        <Input TagName="SplitShipment"/>
+    </Api>
+    <Api Name="shouldShipmentMonitorAlertBeRaisedUE">
+        <Input TagName="ShipmentMonitor"/>
+    </Api>
+    <Api Name="reprintCarrierLabel">
+        <Output IsList="Y" PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="removeFromContainer">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="removeContainerFromTrailer">
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="removeContainerFromManifest">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="recordContainerActivity">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="receiveIntransitUpdates">
+        <Input TagName="Load"/>
+    </Api>
+    <Api Name="printPickList">
+        <Input TagName="PickList"/>
+    </Api>
+    <Api Name="overrideDetermineRoutingUE">
+        <Input TagName="RoutingGuide"/>
+    </Api>
+    <Api Name="manageLoad">
+        <Output IsList="Y"/>
+        <Input TagName="Loads"/>
+    </Api>
+    <Api Name="getUPSLabelData">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="getUPSCheckDigit">
+        <Input TagName="Manifest"/>
+    </Api>
+    <Api Name="getTransportationCostUE">
+        <Input TagName="RoutableCarriers"/>
+    </Api>
+    <Api Name="getTrackingNoAndPrintLabel">
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="getSpecialServicesList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getShipmentReceiptDiscrepancy">
+        <Output IsList="Y" PK="ReceivingDiscrepancyKey"/>
+        <Input PK="ShipmentKey" TagName="GetShipmentReceiptDiscrepancy"/>
+    </Api>
+    <Api Name="getShipmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getShipmentLineList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getShipmentInstructionsUE">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="getShipmentContainerList">
+        <Output IsList="Y"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="getRoutingGuideList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getRoutingGuideDetailList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPickListList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPickListDetails">
+        <Input TagName="PickList"/>
+    </Api>
+    <Api Name="getParcelSCACSummary">
+        <Output IsList="Y" PK="ScacKey"/>
+        <Input TagName="Scac"/>
+    </Api>
+    <Api Name="getOverridenAttributesForShipmentLineItemUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getNodeSCACAccountList">
+        <Output PK="ScacExKey"/>
+        <Input PK="ScacExKey"/>
+    </Api>
+    <Api Name="getNextProNoUE">
+        <Input TagName="GetNextProNo"/>
+    </Api>
+    <Api Name="getNextContainerSCMUE">
+        <Input TagName="generateSCM"/>
+    </Api>
+    <Api Name="getManifestList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getLoadSummary">
+        <Output IsList="Y" PK="LoadKey"/>
+        <Input TagName="Load"/>
+    </Api>
+    <Api Name="getLoadList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getFreightTermsList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getDeliveryPlanList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getContainerInnerPackList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="generateSCM">
+        <Input TagName="generateSCM"/>
+    </Api>
+    <Api Name="determineShipmentToConsolidateWithUE">
+        <Input TagName="DetermineShipmentToConsolidateWith"/>
+    </Api>
+    <Api Name="determineRoutingExternallyUE">
+        <Input TagName="Routables"/>
+    </Api>
+    <Api Name="determineRouting">
+        <Input TagName="RoutingGuide"/>
+    </Api>
+    <Api Name="createShipmentInvoice">
+        <Output IsList="Y" PK="OrderInvoiceKey"/>
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="createShipmentContainer">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="consolidateToShipment">
+        <Input TagName="OrderRelease"/>
+    </Api>
+    <Api Name="computeCheckDigitUE">
+        <Input TagName="CheckDigit"/>
+    </Api>
+    <Api Name="checkHoldTypesForShipment">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="checkHoldTypesForLoad">
+        <Input TagName="Load"/>
+    </Api>
+    <Api Name="changeShipmentStatus">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="changeShipmentContainer">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="changeLoadStatus">
+        <Input TagName="Load"/>
+    </Api>
+    <Api Name="canShipmentBeProcessedUE">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="canAddToContainerUE">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="beforePackShipmentUE">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="beforeManageRoutingGuideUE">
+        <Input TagName="RoutingGuide"/>
+    </Api>
+    <Api Name="beforeDetermineRoutingUE">
+        <Input TagName="RoutingGuide"/>
+    </Api>
+    <Api Name="beforeCreateShipmentUE">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="beforeCreateLoadUE">
+        <Input TagName="Load"/>
+    </Api>
+    <Api Name="beforeConsolidateToShipmentUE">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="beforeChangeShipmentUE">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="beforeChangeShipmentContainerUE">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="beforeAddToContainerUE">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="beforeAddContainerToManifestUE">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="addToContainer">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="addContainerToTrailer">
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="addContainerToManifest">
+        <Output PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="shipCarton">
+        <Input TagName="UPSPLD"/>
+    </Api>
+    <Api Name="EODFile">
+        <Input TagName="Manifest"/>
+    </Api>
+    <Api Name="deleteCarton">
+        <Input TagName="DelPackage"/>
+    </Api>
+    <Api Name="ShipCartonUserExit">
+        <Input TagName="UPSPLD"/>
+    </Api>
+    <Api Name="shipCartonExtCarrSys">
+        <Input TagName="SHIPMENTREQUEST"/>
+    </Api>
+    <Api Name="returnShippingLabelUserExit">
+        <Input TagName="ReturnShippingLabel"/>
+    </Api>
+    <Api Name="reprintCarrierLabelUserExit">
+        <Input TagName="ReprintPackage"/>
+    </Api>
+    <Api Name="openManifestUserExit">
+        <Output PK="ManifestUpsHdrKey"/>
+        <Input PK="ManifestUpsHdrKey" TagName="Manifest"/>
+    </Api>
+    <Api Name="getFreightChargeUE">
+        <Input TagName="FreightCharge"/>
+    </Api>
+    <Api Name="eodFileExtCarrSys">
+        <Input TagName="EODFILEREQUEST"/>
+    </Api>
+    <Api Name="deleteCartonUserExit">
+        <Input PK="ManifestUpsHdrKey" TagName="DelPackage"/>
+    </Api>
+    <Api Name="deleteCartonExtCarrSys">
+        <Input TagName="VOIDREQUEST"/>
+    </Api>
+    <Api Name="closeManifestUserExit">
+        <Output PK="ManifestUpsHdrKey"/>
+        <Input PK="ManifestUpsHdrKey" TagName="Manifest"/>
+    </Api>
+    <Api Name="closeManifestExtCarrSys">
+        <Input TagName="CLOSEOUTREQUEST"/>
+    </Api>
+    <Api Name="BeforeShipCartonUE">
+        <Output IsList="Y" PK="SpecialServicesKey"/>
+        <Input TagName="UPSPLD"/>
+    </Api>
+    <Api Name="BeforeDeleteCartonUE">
+        <Input TagName="Manifest"/>
+    </Api>
+    <Api Name="BeforeCloseManifestUE">
+        <Input TagName="Manifest"/>
+    </Api>
+    <Api Name="validateTokenUE">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="validatePasswordResetRequest">
+        <Input PK="PwdReqKey" TagName="ResetPassword"/>
+    </Api>
+    <Api Name="validateChangedPasswordUE">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="validateAuthAnswers">
+        <Input PK="AuthAnswerKey" TagName="AuthAnswerList"/>
+    </Api>
+    <Api Name="updateShipNodeCoordinates">
+        <Input TagName="ShipNodes"/>
+    </Api>
+    <Api Name="updateExceptionReferences">
+        <Input TagName="UpdateReferences"/>
+    </Api>
+    <Api Name="updateCustomerAssignmentLookup">
+        <Input TagName="CustomerAssignment"/>
+    </Api>
+    <Api Name="updateCustomerAccountBalance">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="unassignException">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="triggerAgent">
+        <Input TagName="TriggerAgent"/>
+    </Api>
+    <Api Name="translateBarCode">
+        <Input PK="BarCodeTranslationKey"/>
+    </Api>
+    <Api Name="sendMail">
+        <Input TagName="SendMail"/>
+    </Api>
+    <Api Name="resolveException">
+        <Output IsList="Y" PK="InboxKey"/>
+        <Input PK="InboxKey" TagName="ResolutionDetails"/>
+    </Api>
+    <Api Name="requestPasswordReset">
+        <Input PK="PwdReqKey" TagName="ResetPassword"/>
+    </Api>
+    <Api Name="rejectTasks">
+        <Output IsList="Y" PK="TaskKey"/>
+        <Input TagName="TaskList"/>
+    </Api>
+    <Api Name="registerTaskInProgress">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="registerTaskCompletion">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="registerProcessCompletion">
+        <Input TagName="RegisterProcessCompletionInput"/>
+    </Api>
+    <Api Name="registerLogout">
+        <Input PK="UserActivityKey" TagName="registerLogout"/>
+    </Api>
+    <Api Name="registerLogin">
+        <Input PK="UserActivityKey" TagName="registerLogin"/>
+    </Api>
+    <Api Name="registerBatchCompletion">
+        <Input TagName="Batch"/>
+    </Api>
+    <Api Name="receiveCustomerChanges">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="recalculateCreditedMinsUE">
+        <Input TagName="Productivity"/>
+    </Api>
+    <Api Name="printDocumentSet">
+        <Output IsList="Y" PK="PrintDocumentKey"/>
+        <Input TagName="PrintDocuments"/>
+    </Api>
+    <Api Name="multiApi">
+        <Input TagName="MultiApi"/>
+    </Api>
+    <Api Name="modifyUserTranConstraint">
+        <Output PK="UserTranConstraintsKey"/>
+        <Input PK="UserTranConstraintsKey"/>
+    </Api>
+    <Api Name="modifyNegotiation">
+        <Input TagName="ModifyNegotiation"/>
+    </Api>
+    <Api Name="modifyCache">
+        <Input TagName="CachedGroups"/>
+    </Api>
+    <Api Name="markTaskAvailability">
+        <Input PK="UserActivityKey"/>
+    </Api>
+    <Api Name="manageUserGroup">
+        <Output PK="UsergroupKey"/>
+        <Input PK="UsergroupKey"/>
+    </Api>
+    <Api Name="manageTeam">
+        <Output PK="DataSecurityGroupKey"/>
+        <Input PK="DataSecurityGroupKey"/>
+    </Api>
+    <Api Name="manageTaskQueue">
+        <Output PK="TaskQKey"/>
+        <Input PK="TaskQKey"/>
+    </Api>
+    <Api Name="manageRule">
+        <Input TagName="Rules"/>
+    </Api>
+    <Api Name="manageReturnDisposition">
+        <Output PK="DispositionKey"/>
+        <Input PK="DispositionKey"/>
+    </Api>
+    <Api Name="manageQualifiedTagVerCompatblty">
+        <Input TagName="QualifiedTagVersionCompatibility"/>
+    </Api>
+    <Api Name="managePaymentTerms">
+        <Output PK="CommonCodeKey"/>
+        <Input PK="CommonCodeKey"/>
+    </Api>
+    <Api Name="manageEntityCustomAttribute">
+        <Output IsList="Y"/>
+        <Input TagName="EntityCustomAttributeList"/>
+    </Api>
+    <Api Name="manageDevice">
+        <Input TagName="Devices"/>
+    </Api>
+    <Api Name="manageDBPool">
+        <Output PK="DbPoolKey"/>
+        <Input PK="DbPoolKey"/>
+    </Api>
+    <Api Name="manageCustomerUE">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="manageCarrierServiceSchedule">
+        <Output PK="CarrierServiceDowKey"/>
+        <Input PK="CarrierServiceDowKey"/>
+    </Api>
+    <Api Name="manageCarrierServiceOverride">
+        <Output IsList="Y"/>
+        <Input TagName="CarrierServiceOverrideList"/>
+    </Api>
+    <Api Name="manageAttributeGroup">
+        <Output IsList="Y"/>
+        <Input TagName="AttributeGroupList"/>
+    </Api>
+    <Api Name="manageAttribute">
+        <Input TagName="AttributeList"/>
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="login">
+        <Input TagName="Login"/>
+    </Api>
+    <Api Name="logError">
+        <Input TagName="LogError"/>
+    </Api>
+    <Api Name="invokeUE">
+        <Input TagName="InvokeUE"/>
+    </Api>
+    <Api Name="invalidateTokenUE">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="getVendorList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getUserTranConstraintList">
+        <Output IsList="Y" PK="UserTranConstraintsKey"/>
+        <Input PK="UserTranConstraintsKey"/>
+    </Api>
+    <Api Name="getUserTranConstraintDetails">
+        <Output PK="UserTranConstraintsKey"/>
+        <Input PK="UserTranConstraintsKey"/>
+    </Api>
+    <Api Name="getUserGroupList">
+        <Input PK="UsergroupKey"/>
+    </Api>
+    <Api Name="getUserGroupDetails">
+        <Output PK="UsergroupKey"/>
+        <Input PK="UsergroupKey"/>
+    </Api>
+    <Api Name="getUserConstraintList">
+        <Output IsList="Y" PK="UserKey"/>
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="getUserConstraintDetails">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="getUomList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getTraceList">
+        <Input TagName="Traces"/>
+    </Api>
+    <Api Name="getTraceableComponentList">
+        <Input TagName="TraceableComponents"/>
+    </Api>
+    <Api Name="getTeamList">
+        <Output IsList="Y" PK="DataSecurityGroupKey"/>
+        <Input PK="DataSecurityGroupKey"/>
+    </Api>
+    <Api Name="getTeamDetails">
+        <Output PK="DataSecurityGroupKey"/>
+        <Input PK="DataSecurityGroupKey"/>
+    </Api>
+    <Api Name="getTaskTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getTaskSummary">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="getTaskReferenceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getTaskQueueDataList">
+        <Input PK="TransactionKey" TagName="GetTaskQueueDataInput"/>
+    </Api>
+    <Api Name="getTaskList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSupportedTableTypeList">
+        <Input TagName="TableType"/>
+    </Api>
+    <Api Name="getStatusMilestoneList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getStatusList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="GetShortZipCodeUE">
+        <Output PK="PersonInfoKey"/>
+        <Input PK="PersonInfoKey" TagName="Address"/>
+    </Api>
+    <Api Name="getShipNodeList">
+        <Output IsList="Y" PK="ShipnodeKey"/>
+        <Input PK="ShipnodeKey"/>
+    </Api>
+    <Api Name="getServiceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getServerProperties">
+        <Output IsList="Y" PK="PropertyKey"/>
+        <Input TagName="Server"/>
+    </Api>
+    <Api Name="getServerList">
+        <Output IsList="Y"/>
+        <Input TagName="Servers"/>
+    </Api>
+    <Api Name="getServerActivityConfigList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getScacList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getScacAndServiceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getSavedSearchList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getRuleList">
+        <Output IsList="Y" PK="RulesKey"/>
+        <Input TagName="Rules"/>
+    </Api>
+    <Api Name="getRuleDetails">
+        <Input TagName="Rules"/>
+    </Api>
+    <Api Name="getRoleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getReturnDispositionList">
+        <Output IsList="Y" PK="DispositionKey"/>
+        <Input PK="DispositionKey"/>
+    </Api>
+    <Api Name="getResourcesForUserGroup">
+        <Output IsList="Y" PK="ResourceKey"/>
+        <Input PK="UsergroupKey" TagName="getResourcesForUserGroup"/>
+    </Api>
+    <Api Name="getResourcesForUser">
+        <Input PK="UserKey" TagName="getResourcesForUser"/>
+    </Api>
+    <Api Name="getResourceHierarchy">
+        <Input PK="ResourceKey" TagName="getResourceHierarchy"/>
+    </Api>
+    <Api Name="getRegionSchemaList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getRegionList">
+        <Output IsList="Y" PK="RegionSchemaKey"/>
+    </Api>
+    <Api Name="getReadableConditionValue">
+        <Output IsList="Y" PK="ConditionKey"/>
+        <Input TagName="ConditionList"/>
+    </Api>
+    <Api Name="getQueueList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getQuestionHierarchyWithAnswerSet">
+        <Input TagName="QuestionType"/>
+    </Api>
+    <Api Name="getQueryList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getQualifiedTagVerCompatbltyList">
+        <Output IsList="Y" PK="QualifiedTagVersionCompatibilityKey"/>
+        <Input TagName="QualifiedTagVersionCompatibility"/>
+    </Api>
+    <Api Name="getQualifiedTagVerCompatbltyDetails">
+        <Input TagName="QualifiedTagVersionCompatibility"/>
+    </Api>
+    <Api Name="getQualifiedTagTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getQualifiedTagList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getProductivityTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getProductivitySummary">
+        <Output IsList="Y" PK="ProductivityTypeKey"/>
+    </Api>
+    <Api Name="getProductivityReferenceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getProductivityList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getProcessStatusList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPrinter">
+        <Input TagName="GetPrinter"/>
+    </Api>
+    <Api Name="getPrintDocumentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPriceProgramList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPickupStatus">
+        <Input TagName="GetPickUpStatusInput"/>
+    </Api>
+    <Api Name="getPersonInfoList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPaymentCardTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPasswordRuleDefnList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPasswordRuleCfgList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPasswordPolicyList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getParticipantNoteList">
+        <Output IsList="Y"/>
+        <Input PK="ParticipantNoteKey" TagName="Note"/>
+    </Api>
+    <Api Name="getOrgGroupOverrideList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrgExceptionTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderLineTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getNoteList">
+        <Output IsList="Y" PK="NotesKey"/>
+        <Input PK="NotesKey"/>
+    </Api>
+    <Api Name="getNodeTransferScheduleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getNodeNotificationPeriodList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getNodeMinimumNotificationTimeUE">
+        <Output PK="ShipnodeKey"/>
+        <Input PK="ShipnodeKey" TagName="ShipNode"/>
+    </Api>
+    <Api Name="getNextTask">
+        <Output IsList="Y" PK="TaskKey"/>
+        <Input PK="TaskKey" TagName="GetNextTask"/>
+    </Api>
+    <Api Name="getNextException">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="getNegotiationList">
+        <Output IsList="Y" PK="NegotiationHeaderKey"/>
+        <Input PK="NegotiationHeaderKey"/>
+    </Api>
+    <Api Name="getNegotiationHistory">
+        <Output PK="NegotiationHeaderKey"/>
+        <Input PK="NegotiationHeaderKey" TagName="Negotiation"/>
+    </Api>
+    <Api Name="getNegotiationDetails">
+        <Output IsList="Y" PK="NegotiationHeaderKey"/>
+        <Input PK="NegotiationHeaderKey"/>
+    </Api>
+    <Api Name="getMonitorRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getMonitorConsolidationList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getMenuHierarchyForUser">
+        <Input PK="UserKey" TagName="getMenuHierarchyForUser"/>
+    </Api>
+    <Api Name="getLocaleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getLineRelationshipTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getLabelPreferenceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getLabelFormat">
+        <Input TagName="GetLabelFormat"/>
+    </Api>
+    <Api Name="getInventorySupplyTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryDemandTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getHoldTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getFlowList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getExceptionTypeRoleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getExceptionTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getExceptionRoutingRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getExceptionListForUser">
+        <Output IsList="Y" PK="InboxKey"/>
+        <Input TagName="getExceptionListForUser"/>
+    </Api>
+    <Api Name="getExceptionListForOrder">
+        <Output IsList="Y" PK="InboxKey"/>
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="getExceptionList">
+        <Output IsList="Y" PK="InboxKey"/>
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="getExceptionDetails">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="getEntityCustomAttributeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getEntityAttributeList">
+        <Input TagName="Entity"/>
+    </Api>
+    <Api Name="getDropStatus">
+        <Output IsList="Y" PK="PipelineDefinitionKey"/>
+        <Input PK="PipelineDefinitionKey" TagName="GetDropStatusInput"/>
+    </Api>
+    <Api Name="getDocumentTypeList">
+        <Output IsList="Y" PK="DocumentParamsKey"/>
+        <Input TagName="DocumentParams"/>
+    </Api>
+    <Api Name="getDocTypeDeterminationList">
+        <Output IsList="Y" PK="DocTypeDeterKey"/>
+        <Input TagName="DocTypeDeter"/>
+    </Api>
+    <Api Name="getDocTypeDeterminationDetails">
+        <Input TagName="DocTypeDeter"/>
+    </Api>
+    <Api Name="getDistributionRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getDeviceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getDepartmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getDBPoolList">
+        <Output IsList="Y" PK="DbPoolKey"/>
+        <Input PK="DbPoolKey"/>
+    </Api>
+    <Api Name="getDBMSType">
+        <Input TagName="GetDBMSType"/>
+    </Api>
+    <Api Name="getDBConnParams">
+        <Input TagName="GetDBConnParams"/>
+    </Api>
+    <Api Name="getDateTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCustomerSubscriptionList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCustomerList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCustomerListUE">
+        <Output IsList="Y" PK="CustomerKey"/>
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="getCustomerIDUE">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="getCustomerDetailsUE">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="getCustomerContactList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCustomerContactListUE">
+        <Output IsList="Y" PK="CustomerContactKey"/>
+        <Input TagName="CustomerContact"/>
+    </Api>
+    <Api Name="getCustomerAssignmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCurrencyList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getConfigVersionLabelList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getConditionList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getComponentStatusList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCommonCodeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getColonyPoolList">
+        <Output IsList="Y" PK="DbColonyPoolKey"/>
+        <Input PK="DbColonyPoolKey"/>
+    </Api>
+    <Api Name="getColonyPoolDetails">
+        <Output PK="DbColonyPoolKey"/>
+        <Input PK="DbColonyPoolKey"/>
+    </Api>
+    <Api Name="getColonyList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getChargeNameList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getChargeCategoryList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCarrierServiceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCallOutList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCalendarList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCalendarDayDetails">
+        <Input TagName="Calendar"/>
+    </Api>
+    <Api Name="getCachedDetails">
+        <Input TagName="CachedGroups"/>
+    </Api>
+    <Api Name="getBatchList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAuthQuestionList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAttributeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAttributeGroupList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAttributeAllowedValueList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAsyncRequestList">
+        <Output IsList="Y" PK="AsyncronousRequestKey"/>
+        <Input TagName="AsyncronousRequest"/>
+    </Api>
+    <Api Name="getApplicationVersionList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getApiTemplateList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAllocationRuleList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAlertStatisticsForUser">
+        <Output IsList="Y" PK="QueueKey"/>
+        <Input TagName="getAlertStatisticsForUser"/>
+    </Api>
+    <Api Name="getAgentCriteriaList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getActivityList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getActivityGroupList">
+        <Output IsList="Y" PK="BaseActivityGroupKey"/>
+        <Input TagName="BaseActivityGroup"/>
+    </Api>
+    <Api Name="getActivityConfigMetadataList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getActivityConfigList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="generatePasswordUE">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="exceptionResolver">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="exceptionConsolidator">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="exceptionChangeNotificationUE">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="determineTaskTypeUE">
+        <Input TagName="TaskType"/>
+    </Api>
+    <Api Name="determinePrintJobNameUE">
+        <Input TagName="PrintDocument"/>
+    </Api>
+    <Api Name="determinePrinterUE">
+        <Input TagName="GetPrinter"/>
+    </Api>
+    <Api Name="determinePipeline">
+        <Output PK="PipelineKey"/>
+        <Input TagName="DeterminePipelineInput"/>
+    </Api>
+    <Api Name="determineLabelFormatUE">
+        <Input TagName="GetLabelFormat"/>
+    </Api>
+    <Api Name="deleteUserTranConstraint">
+        <Input PK="UserTranConstraintsKey"/>
+    </Api>
+    <Api Name="deletePageCache">
+        <Input TagName="Page"/>
+    </Api>
+    <Api Name="deleteGDPRDataUE">
+        <Input TagName="GDPRData"/>
+    </Api>
+    <Api Name="createUserTranConstraint">
+        <Output PK="UserTranConstraintsKey"/>
+        <Input PK="UserTranConstraintsKey"/>
+    </Api>
+    <Api Name="createTokenUE">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="createNegotiatorResponse">
+        <Input TagName="Responses"/>
+    </Api>
+    <Api Name="createNegotiation">
+        <Input TagName="Negotiations"/>
+    </Api>
+    <Api Name="createInitiatorResponse">
+        <Input TagName="Responses"/>
+    </Api>
+    <Api Name="createException">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="createBatchForReferences">
+        <Output IsList="Y" PK="BatchKey"/>
+        <Input TagName="Batch"/>
+    </Api>
+    <Api Name="createAsyncRequest">
+        <Input TagName="CreateAsyncRequest"/>
+    </Api>
+    <Api Name="copyHubModificationRules">
+        <Input TagName="StatusModification"/>
+    </Api>
+    <Api Name="computeSAM">
+        <Input TagName="ProductivityType"/>
+    </Api>
+    <Api Name="checkPasswordsMatchUE">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="changePassword">
+        <Input TagName="User"/>
+    </Api>
+    <Api Name="changeException">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="changeAvailDateInTaskQueue">
+        <Input TagName="ChangeAvailDateInput"/>
+    </Api>
+    <Api Name="canTaskBeSuggestedUE">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="beforeRegisterTaskInProgressUE">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="beforeRegisterTaskCompletionUE">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="beforeCreateTaskUE">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="beforeCreateNegotiationUE">
+        <Output IsList="Y" PK="NegotiationHeaderKey"/>
+        <Input TagName="Negotiations"/>
+    </Api>
+    <Api Name="beforeCreateExceptionUE">
+        <Input TagName="Inbox"/>
+    </Api>
+    <Api Name="beforeCreateBatchUE">
+        <Input TagName="Batch"/>
+    </Api>
+    <Api Name="beforeChangeTaskUE">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="beforeCancelTaskUE">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="authorizeUser">
+        <Input TagName="AuthorizeUser"/>
+    </Api>
+    <Api Name="assignException">
+        <Input TagName="AssignmentDetails"/>
+    </Api>
+    <Api Name="accessTokenGenerationUE">
+        <Input TagName="AccessToken"/>
+    </Api>
+    <Api Name="acceptTasks">
+        <Output IsList="Y" PK="TaskKey"/>
+        <Input TagName="TaskList"/>
+    </Api>
+    <Api Name="manageItem">
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="validateItemModificationUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="validateItemCreationUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="receiveItemChanges">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="searchCatalogIndex">
+        <Output IsList="Y" PK="CategoryDomainKey"/>
+        <Input TagName="CatalogSearch"/>
+    </Api>
+    <Api Name="parseAssetUE">
+        <Input TagName="Asset"/>
+    </Api>
+    <Api Name="modifyMasterCatalog">
+        <Input TagName="MasterCatalogList"/>
+    </Api>
+    <Api Name="modifyItemAssociations">
+        <Input PK="ItemKey" TagName="AssociationList"/>
+    </Api>
+    <Api Name="modifyItem">
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="modifyCategoryItem">
+        <Input TagName="ModifyCategoryItems"/>
+    </Api>
+    <Api Name="modifyCategoryDomain">
+        <Input TagName="CategoryDomainList"/>
+    </Api>
+    <Api Name="modifyCategory">
+        <Input TagName="CategoryList"/>
+    </Api>
+    <Api Name="manageServiceSkill">
+        <Output IsList="Y"/>
+        <Input TagName="ServiceSkills"/>
+    </Api>
+    <Api Name="manageItemAttributeGroupsForCategory">
+        <Input TagName="ItemAttributeGroupType"/>
+    </Api>
+    <Api Name="manageClassificationPurpose">
+        <Output IsList="Y"/>
+        <Input TagName="ClassificationPurposeList"/>
+    </Api>
+    <Api Name="manageCategory">
+        <Input TagName="CategoryList"/>
+    </Api>
+    <Api Name="getXrefItemDetails">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getWebChannelItemPreviewURLUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getServiceTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getServiceSkillList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getServiceActivityList">
+        <Output IsList="Y"/>
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getSearchIndexTriggerList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getNodeItemDetails">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getMasterCatalogList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemUOMMasterList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemUOMList">
+        <Output IsList="Y"/>
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getItemNodeDefnList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemListUE">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getItemInstructionCodeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemDetailsUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getItemAttributeGroupTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemAttributeGroupsForCategory">
+        <Input TagName="ItemAttributeGroupType"/>
+    </Api>
+    <Api Name="getItemAssociations">
+        <Output IsList="Y" PK="AssociationKey"/>
+        <Input PK="AssociationKey" TagName="AssociationList"/>
+    </Api>
+    <Api Name="getItemAssociationsUE">
+        <Output IsList="Y" PK="AssociationKey"/>
+        <Input PK="AssociationKey" TagName="AssociationList"/>
+    </Api>
+    <Api Name="getHazmatComplianceList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getDisplayItemAttributesUE">
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getClassificationPurposeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCategoryList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCategoryDomainList">
+        <Output IsList="Y"/>
+        <Input PK="CategoryDomainKey" TagName="CategoryDomainList"/>
+    </Api>
+    <Api Name="getCategoryDomainDetail">
+        <Input TagName="CategoryDomain"/>
+    </Api>
+    <Api Name="getAdditionalCatalogIndexInformationUE">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="SearchIndexTrigger"/>
+    </Api>
+    <Api Name="createMasterCatalog">
+        <Input TagName="MasterCatalogList"/>
+    </Api>
+    <Api Name="createItem">
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="createCategoryDomain">
+        <Input TagName="CategoryDomainList"/>
+    </Api>
+    <Api Name="createCategory">
+        <Input TagName="CategoryList"/>
+    </Api>
+    <Api Name="verifyAddressWithAVSUE">
+        <Output IsList="Y" PK="PersonInfoKey"/>
+        <Input TagName="PersonInfo"/>
+    </Api>
+    <Api Name="verifyAddress">
+        <Output IsList="Y" PK="PersonInfoKey"/>
+        <Input TagName="PersonInfo"/>
+    </Api>
+    <Api Name="validateCreditCardInfoUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="updateLocationInventoryUE">
+        <Input TagName="UpdateLocationInventory"/>
+    </Api>
+    <Api Name="undoBackRoomPick">
+        <Input TagName="UndoPick"/>
+    </Api>
+    <Api Name="sortBatchLinesUE">
+        <Input TagName="StoreBatch"/>
+    </Api>
+    <Api Name="sendFutureOrderCustomerAppeasementUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="reserveOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="registerBatchPick">
+        <Input TagName="StoreBatch"/>
+    </Api>
+    <Api Name="registerBarcodeForPacking">
+        <Output IsList="Y" PK="ShipmentKey"/>
+        <Input PK="BarCodeTranslationKey" TagName="BarCode"/>
+    </Api>
+    <Api Name="registerBarcodeForCustomerPick">
+        <Output IsList="Y" PK="ShipmentKey"/>
+        <Input PK="BarCodeTranslationKey" TagName="BarCode"/>
+    </Api>
+    <Api Name="registerBarcodeForBackroomPick">
+        <Output IsList="Y" PK="ShipmentKey"/>
+        <Input PK="BarCodeTranslationKey" TagName="BarCode"/>
+    </Api>
+    <Api Name="recordShortageForPack">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="recordShortageForBatchPick">
+        <Input TagName="StoreBatch"/>
+    </Api>
+    <Api Name="recordCustomerPick">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="provideAppeasementInStoreUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input TagName="AppeasementOffers"/>
+    </Api>
+    <Api Name="provideAppeasementAsGiftCardUE">
+        <Input TagName="AppeasementOffers"/>
+    </Api>
+    <Api Name="provideAppeasementAsCouponUE">
+        <Input TagName="AppeasementOffers"/>
+    </Api>
+    <Api Name="PromotionValidationUE">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="processReturnCompletionUE">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="processOrderFraudCheckUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="processDuplicateOrderCheckUE">
+        <Output IsList="Y" PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="overrideDeliveryMethodUE">
+        <Output IsList="Y" PK="OrderLineKey"/>
+        <Input TagName="OrderLineList"/>
+    </Api>
+    <Api Name="overrideDeliveryMethodForLinesUE">
+        <Output IsList="Y" PK="OrderLineKey"/>
+        <Input TagName="OrderLineList"/>
+    </Api>
+    <Api Name="modifyFulfillmentOptions">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="manageServiceGrouping">
+        <Input TagName="ManageServiceGrouping"/>
+    </Api>
+    <Api Name="managePriceMatchUE">
+        <Input TagName="PriceMatch"/>
+    </Api>
+    <Api Name="manageEventAuditor">
+        <Output IsList="Y"/>
+        <Input TagName="EventAuditorList"/>
+    </Api>
+    <Api Name="manageAssociationRelationship">
+        <Output IsList="Y" PK="AsscRelationshipKey"/>
+        <Input TagName="AsscRelationshipList"/>
+    </Api>
+    <Api Name="listOrderLinePriceMatch">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="listCarrierService">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="handleShortageForBatchLineUE">
+        <Input TagName="StoreBatch"/>
+    </Api>
+    <Api Name="getTrackingNumberURLUE">
+        <Input TagName="TrackingNumbers"/>
+    </Api>
+    <Api Name="getStoreBatchLocationList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getStoreBatchList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getStateRegionList">
+        <Output IsList="Y" PK="RegionSchemaKey"/>
+        <Input TagName="Region"/>
+    </Api>
+    <Api Name="getSortedShipmentDetails">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="getSalesOrderDetailsWithLocalQty">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getReturnPolicyUE">
+        <Input TagName="ReturnPolicy"/>
+    </Api>
+    <Api Name="getReturnMethodUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getReturnMethod">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getCompleteOrderDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getReturnFulfillmentSummaryDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getCompleteOrderLineList">
+        <Output IsList="Y" PK="OrderLineKey"/>
+        <Input TagName="OrderLine"/>
+    </Api>
+    <Api Name="getReshippableOrderLines">
+        <Output PK="OrderHeaderKey"/>
+        <Input TagName="Reship"/>
+    </Api>
+    <Api Name="getPriceMatchListUE">
+        <Output IsList="Y" PK="PriceMatchKey"/>
+        <Input TagName="PriceMatch"/>
+    </Api>
+    <Api Name="getPriceMatchList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPriceMatchDetailsUE">
+        <Input TagName="PriceMatch"/>
+    </Api>
+    <Api Name="getPriceMatchCompetitorsUE">
+        <Output IsList="Y" PK="PriceMatchKey"/>
+        <Input TagName="PriceMatchCompetitors"/>
+    </Api>
+    <Api Name="getPriceMatchCompetitors">
+        <Output IsList="Y" PK="PriceMatchKey"/>
+        <Input PK="PriceMatchKey"/>
+    </Api>
+    <Api Name="getPaymentInquiryDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getOrderLinesWithTransactionQuantity">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getOrderLinesForPriceMatch">
+        <Input TagName="PriceMatch"/>
+    </Api>
+    <Api Name="getOrderHoldResolutionList">
+        <Output IsList="Y" PK="OrderHoldTypeKey"/>
+        <Input PK="OrderHeaderKey" TagName="OrderHoldType"/>
+    </Api>
+    <Api Name="getOrderFulfillmentDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getNewBatchesUE">
+        <Output IsList="Y" PK="StoreBatchKey"/>
+        <Input TagName="StoreBatch"/>
+    </Api>
+    <Api Name="getItemAvailabilityForStore">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getFulfillmentSummaryDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getEventAuditorList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getDuplicateOrderCriteriaUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getDashboardContentForStore">
+        <Input TagName="Dashboard"/>
+    </Api>
+    <Api Name="getCustomerPaymentMethodList">
+        <Output IsList="Y"/>
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="getCustomerAccessibility">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="getCompleteShipmentDetails">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getStopDeliveryRequestDetails">
+        <Output PK="StopDeliveryRequestHeaderKey"/>
+        <Input PK="StopDeliveryRequestHeaderKey"/>
+    </Api>
+    <Api Name="getCompleteOrderLineDetails">
+        <Input PK="OrderLineKey" TagName="OrderLineDetail"/>
+    </Api>
+    <Api Name="getCompleteOrderInvoiceDetails">
+        <Output IsList="Y" PK="OrderInvoiceKey"/>
+        <Input PK="OrderInvoiceKey" TagName="GetOrderInvoiceDetails"/>
+    </Api>
+    <Api Name="getCompleteItemList">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="Item"/>
+    </Api>
+    <Api Name="getCompleteCustomerList">
+        <Output IsList="Y" PK="CustomerKey"/>
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="getCompleteCustomerDetails">
+        <Input TagName="Customer"/>
+    </Api>
+    <Api Name="getCompetitorListUE">
+        <Output IsList="Y" PK="CompetitorKey"/>
+        <Input TagName="Competitor"/>
+    </Api>
+    <Api Name="getCompetitorList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCompetitorDetailsUE">
+        <Input TagName="Competitor"/>
+    </Api>
+    <Api Name="getBatchPickPriorityUE">
+        <Output IsList="Y" PK="ShipmentLineKey"/>
+        <Input TagName="ShipmentLines"/>
+    </Api>
+    <Api Name="getAssociationRelationshipList">
+        <Output IsList="Y" PK="AsscRelationshipKey"/>
+        <Input TagName="AsscRelationship"/>
+    </Api>
+    <Api Name="getAppeasementOffersUE">
+        <Input TagName="AppeasementOffers"/>
+    </Api>
+    <Api Name="getAppeasementOffersForStoreUE">
+        <Input TagName="AppeasementOffers"/>
+    </Api>
+    <Api Name="getAlternateStoreInventory">
+        <Input TagName="AlternateStore"/>
+    </Api>
+    <Api Name="getAlternateStoreAvailability">
+        <Input TagName="AlternateStore"/>
+    </Api>
+    <Api Name="emailOrderUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkOrderPriceMatchUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkOrderPriceMatch">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkNoHasslePriceMatchUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkNoHasslePriceMatch">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkFraudOnOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkDuplicateOrder">
+        <Output IsList="Y" PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="canPriceMatchBePerformedUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="canPriceMatchBePerformedOnLinesUE">
+        <Output IsList="Y" PK="OrderLineKey"/>
+        <Input TagName="OrderLineList"/>
+    </Api>
+    <Api Name="cancelOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="beforeConfirmShipmentOfRecordCustomerPick">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="afterConfirmShipmentOfRecordCustomerPick">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="addAllContainersToManifest">
+        <Output IsList="Y" PK="ShipmentContainerKey"/>
+        <Input PK="ShipmentContainerKey" TagName="Container"/>
+    </Api>
+    <Api Name="transferLocnInvOwnership">
+        <Input TagName="TransferOwnership"/>
+    </Api>
+    <Api Name="transferLocationInventoryOwnership">
+        <Input TagName="TransferOwnership"/>
+    </Api>
+    <Api Name="suggestOpenContainer">
+        <Output PK="LPNHdrKey"/>
+        <Input TagName="SuggestContainer"/>
+    </Api>
+    <Api Name="startPhysicalCount">
+        <Output PK="NodeTranAttrKey"/>
+    </Api>
+    <Api Name="sortShipmentLinesUE">
+        <Output IsList="Y" PK="ShipmentLineKey"/>
+        <Input TagName="ShipmentLines"/>
+    </Api>
+    <Api Name="requestWaveRelease">
+        <Input TagName="Wave"/>
+    </Api>
+    <Api Name="requestWaveCreate">
+        <Input TagName="Wave"/>
+    </Api>
+    <Api Name="removeShipmentFromWave">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="releaseMoveRequest">
+        <Output PK="MoveRequestKey"/>
+    </Api>
+    <Api Name="releaseCountRequest">
+        <Input PK="CountRequestKey" TagName="ReleaseCountRequest"/>
+    </Api>
+    <Api Name="registerActivityDemandCompletion">
+        <Input TagName="ActivityDemand"/>
+    </Api>
+    <Api Name="recordCountResult">
+        <Output PK="CountResultKey"/>
+        <Input PK="CountResultKey" TagName="RecordCountResult"/>
+    </Api>
+    <Api Name="recordCount">
+        <Input PK="CountKey" TagName="RecordCount"/>
+    </Api>
+    <Api Name="prepareForDeposit">
+        <Input TagName="PrepareForDeposit"/>
+    </Api>
+    <Api Name="postPickContainerization">
+        <Input TagName="ContainerizeShipmentLines"/>
+    </Api>
+    <Api Name="overrideSuggestedContainerListUE">
+        <Output IsList="Y" PK="ItemKey"/>
+        <Input TagName="ContainerList"/>
+    </Api>
+    <Api Name="overrideShipmentGroupUE">
+        <Input TagName="ShipmentGroup"/>
+    </Api>
+    <Api Name="overridePickLocationAssignmentUE">
+        <Output IsList="Y" PK="LocationKey"/>
+        <Input TagName="overridePickLocationAssignment"/>
+    </Api>
+    <Api Name="overrideContainerizationCategoryUE">
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="overrideAssignLaneUE">
+        <Output IsList="Y" PK="ShipmentKey"/>
+        <Input TagName="ShipmentList"/>
+    </Api>
+    <Api Name="openContainer">
+        <Input TagName="OpenContainer"/>
+    </Api>
+    <Api Name="movePlannedTaskDate">
+        <Input TagName="MovePlannedTaskDate"/>
+    </Api>
+    <Api Name="moveLocationInventory">
+        <Input TagName="MoveLocationInventory"/>
+    </Api>
+    <Api Name="modifyLPN">
+        <Input TagName="ModifyLPN"/>
+    </Api>
+    <Api Name="managePlannedTasks">
+        <Output IsList="Y" PK="PlannedTaskKey"/>
+        <Input PK="PlannedTaskKey"/>
+    </Api>
+    <Api Name="managePhysicalCount">
+        <Input TagName="PhysicalCountPlan"/>
+    </Api>
+    <Api Name="listOpenContainers">
+        <Output IsList="Y" PK="OpenContainerKey"/>
+        <Input TagName="OpenContainer"/>
+    </Api>
+    <Api Name="includeInBatch">
+        <Input TagName="Batch"/>
+    </Api>
+    <Api Name="getZoneListForCount">
+        <Output IsList="Y" PK="ZoneKey"/>
+        <Input TagName="Zone"/>
+    </Api>
+    <Api Name="getZoneList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getWaveList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getWaveAuditList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getShipmentProfileSummary">
+        <Output IsList="Y" PK="ShipmentKey"/>
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="getShipmentPlannedEffort">
+        <Output IsList="Y" PK="PlannedTaskKey"/>
+        <Input TagName="Shipment"/>
+    </Api>
+    <Api Name="getShipmentGroupList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPutawayLocations">
+        <Output PK="ActivityConstraintKey"/>
+        <Input PK="ActivityConstraintKey" TagName="getPutawayLocations"/>
+    </Api>
+    <Api Name="getPreferenceZoneListUE">
+        <Output PK="ActivityConstraintKey"/>
+        <Input TagName="ActivityConstraint"/>
+    </Api>
+    <Api Name="getPlannedTasks">
+        <Output IsList="Y" PK="PlannedTaskKey"/>
+        <Input TagName="PlannedTask"/>
+    </Api>
+    <Api Name="getPlannedEffort">
+        <Output IsList="Y" PK="PlannedTaskKey"/>
+        <Input TagName="Request"/>
+    </Api>
+    <Api Name="getPlannedDemandSummary">
+        <Output IsList="Y" PK="PlannedTaskKey"/>
+        <Input PK="PlannedTaskKey" TagName="Demand"/>
+    </Api>
+    <Api Name="getPickLocationsForMoves">
+        <Input TagName="getPickLocationsForMoves"/>
+    </Api>
+    <Api Name="getPhysicalCountStatus">
+        <Input TagName="PhysicalCount"/>
+    </Api>
+    <Api Name="getPhysicalCountPlanList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getPhysicalCountCategoryList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getOrderPlannedEffort">
+        <Output IsList="Y" PK="PlannedTaskKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getNodeInventory">
+        <Input PK="LocationKey"/>
+    </Api>
+    <Api Name="getNextDepositLocation">
+        <Input TagName="DepositLocation"/>
+    </Api>
+    <Api Name="getMoveRequestStatusAuditList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getMoveRequestList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getLPNList">
+        <Output IsList="Y" PK="LPNHdrKey"/>
+        <Input PK="LPNHdrKey"/>
+    </Api>
+    <Api Name="getLPNDetails">
+        <Output IsList="Y" PK="LPNHdrKey"/>
+        <Input TagName="GetLPNDetails"/>
+    </Api>
+    <Api Name="getLocationStorageCodeList">
+        <Output IsList="Y" PK="LocationStorageKey"/>
+        <Input PK="LocationStorageKey"/>
+    </Api>
+    <Api Name="getLocationSizeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getLocationPrioritySchemeUE">
+        <Input PK="ActivityConstraintKey" TagName="getLocationPriorityScheme"/>
+    </Api>
+    <Api Name="getLocationList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getLocationInventoryAuditList">
+        <Output IsList="Y" PK="LocnInventoryAuditKey"/>
+        <Input PK="LocnInventoryAuditKey"/>
+    </Api>
+    <Api Name="getLocationInventoryAuditDetails">
+        <Output PK="LocnInventoryAuditKey"/>
+        <Input PK="LocnInventoryAuditKey"/>
+    </Api>
+    <Api Name="getInventoryStatusList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getFifoNumberUE">
+        <Output PK="LocationInventoryKey"/>
+        <Input PK="LocationInventoryKey" TagName="Inventory"/>
+    </Api>
+    <Api Name="getExecutionExceptionList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getExecutionExceptionAuditList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getEquipmentTypeList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getEquipmentList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCountTaskForItem">
+        <Input TagName="GetCountTaskForItem"/>
+    </Api>
+    <Api Name="getCountResultList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCountRequestList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCountProgramList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getCountList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAdjustmentReasonList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getActivityDemandList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="endPhysicalCount">
+        <Input PK="NodeTranAttrKey"/>
+    </Api>
+    <Api Name="doesItemMatchCountTask">
+        <Input TagName="DoesItemMatchCountTask"/>
+    </Api>
+    <Api Name="deleteLPN">
+        <Input TagName="DeleteLPN"/>
+    </Api>
+    <Api Name="deleteCountResultRecordsForTask">
+        <Input TagName="DeleteCountResultRecordsForTask"/>
+    </Api>
+    <Api Name="deleteCountRecordsForTask">
+        <Input TagName="DeleteCountRecordsForTask"/>
+    </Api>
+    <Api Name="createWaveForNode">
+        <Input TagName="Wave"/>
+    </Api>
+    <Api Name="createSortingTasks">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="createLPN">
+        <Input TagName="CreateLPN"/>
+    </Api>
+    <Api Name="createCountRequest">
+        <Input PK="CountRequestKey" TagName="CreateCountRequest"/>
+    </Api>
+    <Api Name="createAdhocPutawayTasks">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="containerizeShipmentLines">
+        <Input TagName="ContainerizeShipmentLines"/>
+    </Api>
+    <Api Name="confirmDemandPlanningCompletion">
+        <Input TagName="DemandPlan"/>
+    </Api>
+    <Api Name="closeSortingContainers">
+        <Input TagName="SortingStation"/>
+    </Api>
+    <Api Name="circumventLooseContainerizationUE">
+        <Input TagName="LooseContainerization"/>
+    </Api>
+    <Api Name="changeWaveStatus">
+        <Input TagName="Wave"/>
+    </Api>
+    <Api Name="changeLocationInventoryAttributes">
+        <Input TagName="ChangeLocationInventoryAttributes"/>
+    </Api>
+    <Api Name="changeCountRequestStatus">
+        <Input PK="CountRequestKey" TagName="ChangeCountRequestStatus"/>
+    </Api>
+    <Api Name="canReleaseMoveRequestUE">
+        <Input TagName="MoveRequest"/>
+    </Api>
+    <Api Name="canLocationBeSuggestedForPutawayUE">
+        <Input PK="ActivityConstraintKey" TagName="CanLocationBeSuggested"/>
+    </Api>
+    <Api Name="canChangeInventoryAttrsWithOpenTasksUE">
+        <Input TagName="CanChangeInventoryAttributesWithOpenTasks"/>
+    </Api>
+    <Api Name="cancelCountRequest">
+        <Input PK="CountRequestKey" TagName="CancelCountRequest"/>
+    </Api>
+    <Api Name="cancelCorporateCountRequest">
+        <Input PK="CountProgramKey" TagName="CancelCountProgram"/>
+    </Api>
+    <Api Name="breakParentContainer">
+        <Input TagName="BreakParentContainer"/>
+    </Api>
+    <Api Name="beforePrepareForDepositUE">
+        <Input TagName="Task"/>
+    </Api>
+    <Api Name="beforeMoveLocationInventoryUE">
+        <Output IsList="Y" PK="LPNLocationKey"/>
+        <Input TagName="MoveLocationInventory"/>
+    </Api>
+    <Api Name="beforeManageDockAppointmentUE">
+        <Input TagName="DockAppointment"/>
+    </Api>
+    <Api Name="beforeDeleteLPNUE">
+        <Output IsList="Y" PK="LPNHdrKey"/>
+        <Input TagName="DeleteLPN"/>
+    </Api>
+    <Api Name="beforeCreateZoneUE">
+        <Input TagName="Zone"/>
+    </Api>
+    <Api Name="beforeCreateWaveUE">
+        <Input TagName="Wave"/>
+    </Api>
+    <Api Name="beforeCreateMoveRequestUE">
+        <Input TagName="MoveRequest"/>
+    </Api>
+    <Api Name="beforeCreateLPNUE">
+        <Output IsList="Y" PK="LPNHdrKey"/>
+        <Input TagName="CreateLPN"/>
+    </Api>
+    <Api Name="beforeCreateLocationUE">
+        <Input TagName="Location"/>
+    </Api>
+    <Api Name="beforeCreateCountRequestUE">
+        <Output PK="CountRequestKey"/>
+        <Input PK="CountRequestKey" TagName="CreateCountRequest"/>
+    </Api>
+    <Api Name="beforeChangeAttributeUE">
+        <Output IsList="Y" PK="LPNLocationKey"/>
+        <Input TagName="ChangeLocationInventoryAttributes"/>
+    </Api>
+    <Api Name="beforeAdjustInventoryUE">
+        <Output IsList="Y" PK="LocationKey"/>
+        <Input TagName="AdjustLocationInventory"/>
+    </Api>
+    <Api Name="beforeAdjustInventoryForVirtualLocnTypeUE">
+        <Output PK="LocationInventoryKey"/>
+        <Input PK="LocationInventoryKey" TagName="Inventory"/>
+    </Api>
+    <Api Name="assignLane">
+        <Input TagName="Wave"/>
+    </Api>
+    <Api Name="adjustLocationInventory">
+        <Input TagName="AdjustLocationInventory"/>
+    </Api>
+    <Api Name="acceptVariance">
+        <Input PK="LocnInventoryAuditKey" TagName="CountRequest"/>
+    </Api>
+    <Api Name="shouldWorkOrderMonitorAlertBeRaisedUE">
+        <Input TagName="WorkOrderMonitor"/>
+    </Api>
+    <Api Name="processWorkOrderHoldTypeUE">
+        <Input TagName="WorkOrder"/>
+    </Api>
+    <Api Name="getWorkOrderStatusAuditList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getWorkOrderList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getWorkOrderAppointmentOptions">
+        <Input PK="WorkOrderKey" TagName="Promise"/>
+    </Api>
+    <Api Name="getWorkOrderAppointmentList">
+        <Output IsList="Y" PK="WorkOrderApptKey"/>
+        <Input PK="WorkOrderApptKey"/>
+    </Api>
+    <Api Name="getWorkOrderAllocConsList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="confirmWorkOrderActivity">
+        <Input TagName="WorkOrder"/>
+    </Api>
+    <Api Name="confirmAssignmentsForWorkOrderAllocationUE">
+        <Input TagName="WorkOrder"/>
+    </Api>
+    <Api Name="checkHoldTypesForWorkOrder">
+        <Input TagName="WorkOrder"/>
+    </Api>
+    <Api Name="changeWorkOrderStatus">
+        <Input TagName="WorkOrder"/>
+    </Api>
+    <Api Name="beforeCreateWorkOrderUE">
+        <Input TagName="WorkOrder"/>
+    </Api>
+    <Api Name="copyNode">
+        <Input TagName="Organization"/>
+    </Api>
+    <Api Name="manageUserUiState">
+        <Output PK="PltUserUiStateKey"/>
+        <Input PK="PltUserUiStateKey"/>
+    </Api>
+    <Api Name="getUserUiStateList">
+        <Output IsList="Y" PK="PltUserUiStateKey"/>
+        <Input PK="PltUserUiStateKey"/>
+    </Api>
+    <Api Name="getChargeTransactionList">
+        <Output IsList="Y"/>
+        <Input PK="ChargeTransactionKey" TagName="ChargeTransactionDetail"/>
+    </Api>
+    <Api Name="voidChargeTransaction">
+        <Output IsList="Y"/>
+        <Input TagName="ChargeTransactionDetails"/>
+    </Api>
+    <Api Name="validatePlannedRefundUE">
+        <Output IsList="Y" PK="PaymentKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="validateItemForOrdering">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="triggerRequestCollection">
+        <Output IsList="Y" PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="sendOrderForApproval">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="returnOrderAssociationUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="recordOrderApproval">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="processRoutingExternally">
+        <Input TagName="PromiseShipments"/>
+    </Api>
+    <Api Name="processReturnOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="modifyChargeTransactionRequestMappingUE">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="manageStopDeliveryRequest">
+        <Output PK="StopDeliveryRequestHeaderKey"/>
+        <Input PK="StopDeliveryRequestHeaderKey"/>
+    </Api>
+    <Api Name="manageNodeTransferScheduleOverride">
+        <Output IsList="Y"/>
+        <Input TagName="NodeTransferScheduleOverrideList"/>
+    </Api>
+    <Api Name="manageItemBasedAllocationTrigger">
+        <Output PK="IBATriggerKey"/>
+        <Input PK="IBATriggerKey"/>
+    </Api>
+    <Api Name="importAvailabilityCache">
+        <Input TagName="InventoryItem"/>
+    </Api>
+    <Api Name="getSurroundingNodeListUE">
+        <Input TagName="GetSurroundingNodeList"/>
+    </Api>
+    <Api Name="getSurroundingNodeList">
+        <Output IsList="Y" PK="PersonInfoKey"/>
+        <Input TagName="GetSurroundingNodeList"/>
+    </Api>
+    <Api Name="getStopDeliveryRequestList">
+        <Output IsList="Y" PK="StopDeliveryRequestHeaderKey"/>
+        <Input PK="StopDeliveryRequestHeaderKey"/>
+    </Api>
+    <Api Name="getSourcingCorrectionsUE">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getSourcedFromNodesExternallyUE">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getReturnOrderPriceUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getPurgedDataUE">
+        <Input TagName="GDPRData"/>
+    </Api>
+    <Api Name="getPurgedDataCountUE">
+        <Input TagName="GDPRData"/>
+    </Api>
+    <Api Name="getPromotionsForOrdering">
+        <Output IsList="Y" PK="PricingRuleKey"/>
+        <Input TagName="Promotion"/>
+    </Api>
+    <Api Name="getOrdersForReturnUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getOrdersForReturn">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="getOpportunityList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemSubstitutesOverrideUE">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="getInvoiceNoUE">
+        <Input TagName="InvoiceDetail"/>
+    </Api>
+    <Api Name="getFulfillmentOptionsForLines">
+        <Output IsList="Y" PK="OrderHeaderKey"/>
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getExternalCostForOptions">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getChargeTransactionRequestList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getAvailableInventory">
+        <Input TagName="Promise"/>
+    </Api>
+    <Api Name="getAvailabilityCache">
+        <Output IsList="Y" PK="PersonInfoKey"/>
+        <Input TagName="Availability"/>
+    </Api>
+    <Api Name="executeReturnPolicy">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="executePaymentTransactions">
+        <Input TagName="PaymentMethods"/>
+        <Output IsList="Y" PK="PaymentKey"/>
+    </Api>
+    <Api Name="determineBestMultistopTransferUE">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="createOrderFromQuote">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="createOrderFromMasterOrder">
+        <Output IsList="Y" PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="confirmRefundDistributionUE">
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+        <Output PK="OrderHeaderKey"/>
+    </Api>
+    <Api Name="computeRefundPayments">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="checkOrderTransactionComplete">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="changeOpportunityStatus">
+        <Input TagName="Opportunity"/>
+    </Api>
+    <Api Name="capturePayment">
+        <Output PK="OrderHeaderKey"/>
+        <Input TagName="CapturePayment"/>
+    </Api>
+    <Api Name="cancelMasterOrder">
+        <Output PK="OrderHeaderKey"/>
+        <Input PK="OrderHeaderKey" TagName="Order"/>
+    </Api>
+    <Api Name="transferInventoryOwnership">
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="syncLoadedInventory">
+        <Input TagName="Inventory"/>
+    </Api>
+    <Api Name="overrideResourcePoolCapacity">
+        <Input TagName="OverrideResourcePoolCapacity"/>
+    </Api>
+    <Api Name="manageServiceResourceAssignments">
+        <Output IsList="Y" PK="ServiceResourceAssignmentKey"/>
+    </Api>
+    <Api Name="manageItemStatusRules">
+        <Output PK="RuleKey"/>
+        <Input PK="RuleKey"/>
+    </Api>
+    <Api Name="manageItemNodeVelocity">
+        <Output IsList="Y"/>
+        <Input TagName="ItemNodeVelocities"/>
+    </Api>
+    <Api Name="manageInventoryMonitorRule">
+        <Input TagName="InventoryMonitorRules"/>
+    </Api>
+    <Api Name="manageCapacityReservation">
+        <Output IsList="Y" PK="ResPoolConsmptnDtlsKey"/>
+        <Input TagName="CapacityReservationList"/>
+    </Api>
+    <Api Name="loadInventoryMismatch">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="getTagNoUE">
+        <Input TagName="InventoryTagAttributes"/>
+    </Api>
+    <Api Name="getSupplyCorrectionsUE">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="getServiceSlotGroupList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getServiceResourceCapacity">
+        <Output IsList="Y" PK="ServiceResourceKey"/>
+        <Input TagName="ServiceResource"/>
+    </Api>
+    <Api Name="getSerialNumbers">
+        <Output IsList="Y" PK="GlobalSerialKey"/>
+        <Input PK="GlobalSerialKey" TagName="Serial"/>
+    </Api>
+    <Api Name="getResourcePoolList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getResourcePoolConsumptionDetailsList">
+        <Output IsList="Y" PK="ResPoolConsmptnDtlsKey"/>
+        <Input PK="ResPoolConsmptnDtlsKey" TagName="ConsumptionDetail"/>
+    </Api>
+    <Api Name="getResourcePoolCapacity">
+        <Input TagName="ResourcePool"/>
+    </Api>
+    <Api Name="getNodeCostList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getItemStatusRulesList">
+        <Output IsList="Y" PK="RuleKey"/>
+        <Input PK="RuleKey"/>
+    </Api>
+    <Api Name="getItemNodeVelocityList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryReservationList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryOwnershipTransferRecordList">
+        <Output IsList="Y" PK="InventoryOwnerTransferRecordKey"/>
+        <Input PK="InventoryOwnerTransferRecordKey"/>
+    </Api>
+    <Api Name="getInventoryNodeControlList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryMonitorRulesList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryConsiderationsList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getInventoryAuditSummary">
+        <Output IsList="Y" PK="InventoryAuditKey"/>
+        <Input PK="InventoryAuditKey"/>
+    </Api>
+    <Api Name="getExternalSupplyUE">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="getExternalResourcePoolCapacityUE">
+        <Input PK="ResourcePoolKey" TagName="ResourcePoolCapacity"/>
+    </Api>
+    <Api Name="getDemandCorrectionsUE">
+        <Output IsList="Y" PK="InventoryItemKey"/>
+        <Input TagName="Items"/>
+    </Api>
+    <Api Name="getCostFactorGroupList">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="getATPRulesList">
+        <Output IsList="Y" PK="AtpRuleKey"/>
+        <Input PK="AtpRuleKey" TagName="AtpRules"/>
+    </Api>
+    <Api Name="generateSerialSequenceUE">
+        <Input TagName="Serials"/>
+    </Api>
+    <Api Name="generateSerialNumbers">
+        <Input TagName="Serials"/>
+    </Api>
+    <Api Name="determineActualInventoryItemUE">
+        <Input TagName="ItemList"/>
+    </Api>
+    <Api Name="deleteInventoryMonitorRule">
+        <Input PK="InventoryMonitorRulesKey"/>
+    </Api>
+    <Api Name="createInventoryActivity">
+        <Output IsList="Y"/>
+    </Api>
+    <Api Name="createInventoryActivityList">
+        <Output IsList="Y"/>
+        <Input TagName="InventoryActivityList"/>
+    </Api>
+    <Api Name="changeResourcePoolCapacity">
+        <Input TagName="ResourcePool"/>
+    </Api>
+</RestMetadata>

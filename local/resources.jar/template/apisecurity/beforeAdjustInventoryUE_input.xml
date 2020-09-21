@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdjustLocationInventory>
+    <!-- Either (Location) or (CaseId xor PalletId) must be passed 
+   If (CaseId xor PalletId) is passed, (Location) will be validated as 
+   being the location that contains it. -->
+    <Source>
+        <!-- Fifo number if not passed will be obtained from a user exit. 
+			If user exit is missing, we will 
+            default it to current date in format (YYYYMM) -->
+        <Inventory>
+            <Receipt/>
+            <InventoryItem/>
+            <TagDetail/>
+            <SerialList>
+                <SerialDetail/>
+            </SerialList>
+        </Inventory>
+    </Source>
+    <Audit/>
+</AdjustLocationInventory>

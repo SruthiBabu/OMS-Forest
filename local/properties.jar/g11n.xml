@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="g11n" basedir=".." default="check-ant-g11n-compliance" >
+
+	<import file="AFCTasks.xml"/>
+
+	<target name="check-ant-g11n-compliance">
+
+		<condition property="ignore-file" value="${IGNORE_FILE}" else="${basedir}/tmp/excludes.txt" >
+			<isset property="IGNORE_FILE"/>
+		</condition>
+		<condition property="dummy-ignore-file" value="true">
+			<equals arg1="${basedir}/tmp/excludes.txt" arg2="${ignore-file}"/>
+		</condition>
+
+		<property file="${basedir}/properties/sandbox.cfg"/>
+
+		<condition property="generate.bundle" value="true" else="false" >
+			<and>
+				<isset property="GENERATE_BUNDLE" />
+				<istrue value="${GENERATE_BUNDLE}" />
+			</and>
+		</condition>
+
+		<taskdef name="complianceChecker" classname="com.yantra.tools.ant.AFCAntScriptG11NComplianceTool" >
+			<classpath>
+				<pathelement location="${basedir}/jar/${PLATFORM_AFC_LIC_PROD_VERSION}/platform_afc.jar"/>
+			</classpath>
+		</taskdef>
+
+		<property name="generate.overrides" value="true"/>
+		<antcall target="prepare-dummy-ignore-file"/>
+		<complianceChecker installDir="${basedir}" overrides="${generate.overrides}" > 
+			<fileset dir="${basedir}" excludesfile="${ignore-file}" >
+				<include name="bin/**/*.xml"/>
+				<include name="properties/**/*.xml"/>
+			</fileset>
+		</complianceChecker>
+		<antcall target="cleanup-dummy-ignore-file"/>
+	</target>
+
+	<target name="prepare-dummy-ignore-file" if="dummy-ignore-file" >
+		<mkdir dir="${basedir}/tmp"/>
+		<touch file="${ignore-file}"/>
+	</target>
+
+	<target name="cleanup-dummy-ignore-file" if="dummy-ignore-file" >
+		<delete file="${ignore-file}"/>
+	</target>
+
+</project>

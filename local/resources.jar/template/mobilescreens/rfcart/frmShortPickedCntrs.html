@@ -1,0 +1,61 @@
+<html>
+    <body>
+        <form name="frmShortPickedCntrs" target="/console/rfcart.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Short_Picked_Containers"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/ShipmentContainerList/@ShipmentContainer"
+                                    col="1" gridcols="20"
+                                    gridrows="6" id="ShipmentContainer"
+                                    mandatory="false"
+                                    name="gridShipmentContainerList"
+                                    namespace="ShipmentContainerList" size="20"
+                                    tag="binding=gridShipmentContainerList" validate="false">
+                                    <tr>
+                                    <td>
+									<input colno="0" name="lblProceed" colName=" " size="0"
+                                    type="hidden" value="/console/rfcart.ppc?action=frmNoOpenTasks"/>   
+									<input colno="1" colName="CartLocation"
+                                    inputbinding="xml:/ShipmentContainer/@CartLocation" size="12" type="text"/>
+								    <input colno="2" colName="Slot"
+                                    inputbinding="xml:/ShipmentContainer/@Slot" size="4" type="text"/>
+                                    <input colno="3" colName="ContainerSCM"
+                                    inputbinding="xml:/ShipmentContainer/@ContainerSCM" size="20" type="text"/>
+									</td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>                      
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr>
+                                <td>
+									<input col="1" name="Done"
+                                    size="5" mandatory="false"
+									subtype="Command" hotkey="F3"
+                                    type="button" url="/console/rfcart.ppc?action=frmNoOpenTasks" validate="false" value="Mobile_Done"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

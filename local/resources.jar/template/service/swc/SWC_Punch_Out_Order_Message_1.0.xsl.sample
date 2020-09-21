@@ -1,0 +1,151 @@
+<?xml version='1.0'?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<!-- 
+ * Stylesheet for transforming PunchInOrderResponse  to cXML 1.1 PunchOutOrder
+ * 
+-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:output method="xml" version="1.0" indent="yes" encoding="UTF-8"  />
+<xsl:strip-space elements="*" />
+<xsl:variable name="date" >
+	<xsl:value-of select="/PunchOutOrder/Order/@Createts"/>
+</xsl:variable>
+<xsl:variable name="payloadid" >
+	<xsl:value-of select="/PunchOutOrder/@PayloadID"/>
+</xsl:variable>
+<xsl:template match="/">
+	<xsl:apply-templates select="PunchOutOrder" />
+</xsl:template>
+
+<xsl:template match="PunchOutOrder">
+	<cXML payloadID="{$payloadid}" xml:lang="en-US" timestamp="{$date}">
+		<xsl:apply-templates select="HeaderInfo" />
+		<Message>
+			<PunchOutOrderMessage>
+				<BuyerCookie>
+					<xsl:value-of select="HeaderInfo/@BuyerCookie" />
+				</BuyerCookie>	
+				<PunchOutOrderMessageHeader operationAllowed="edit">
+					<Total>
+						<Money>
+							<xsl:attribute name="currency">
+								<xsl:value-of select="Order/PriceInfo/@Currency" />
+							</xsl:attribute>							
+							<xsl:value-of select="Order/OverallTotals/@GrandTotal" />	
+						</Money>
+					</Total>
+				</PunchOutOrderMessageHeader>		
+				<xsl:apply-templates select="Order/OrderLines" />
+			</PunchOutOrderMessage>
+		</Message>		
+	</cXML>
+</xsl:template>
+
+<xsl:template match="HeaderInfo">
+	
+	<Header>
+		<From>
+			<Credential domain="NetworkID">
+				<Identity><xsl:value-of select="@Identity"/></Identity>
+			</Credential>
+		</From>
+		<To>
+			<Credential domain="NetworkId">
+				<Identity><xsl:value-of select="@ToIdentity"/></Identity>
+			</Credential>
+		</To>
+		<Sender>
+			<Credential domain="NetworkID">
+				<Identity><xsl:value-of select="@Identity"/></Identity>
+			</Credential>
+			<UserAgent>
+				<xsl:value-of select="@UserAgent"/>
+			</UserAgent>
+		</Sender>
+	</Header>
+</xsl:template>
+
+
+<xsl:template match="OrderLines">	
+	<xsl:apply-templates select="OrderLine" />	
+</xsl:template>
+
+<xsl:template match="OrderLine">
+	<ItemIn>
+		<xsl:attribute name="quantity">
+			<xsl:value-of select="@OrderedQty" />
+		</xsl:attribute>
+		<xsl:attribute name="lineNumber">
+			<xsl:value-of select="@PrimeLineNo" />
+		</xsl:attribute>
+		<ItemID>
+			<SupplierPartID>
+				<xsl:value-of select="Item/@ItemID"/>
+			</SupplierPartID>
+			<SupplierPartAuxiliaryID>
+				&lt;OrderHeaderKey&gt;<xsl:value-of select="/PunchOutOrder/Order/@OrderHeaderKey"/>&lt;/OrderHeaderKey&gt;
+				&lt;ProductClass&gt;<xsl:value-of select="Item/@ProductClass"/>&lt;/ProductClass&gt;
+				<xsl:choose>
+					<xsl:when test="string-length(@KitCode) > 0">					
+					  &lt;KitCode&gt;<xsl:value-of select="@KitCode"/>&lt;/KitCode&gt;
+					  <xsl:if test="@KitCode = 'BUNDLE'">
+					      &lt;ConfigurationKey&gt;
+						   <xsl:value-of select="@ConfigurationKey"/>
+					      &lt;/ConfigurationKey&gt;
+					      &lt;IsLinePriceForInformationOnly&gt;
+						   <xsl:value-of select="LinePriceInfo/@IsLinePriceForInformationOnly"/>
+					      &lt;/IsLinePriceForInformationOnly&gt;
+					  </xsl:if>					
+					</xsl:when>
+					<xsl:otherwise>				        
+					    <xsl:if test="string-length(BundleParentLine/@PrimeLineNo) > 0">
+						&lt;IsLinePriceForInformationOnly&gt;
+						   <xsl:value-of select="LinePriceInfo/@IsLinePriceForInformationOnly"/>
+					        &lt;/IsLinePriceForInformationOnly&gt;
+						&lt;BundleParentPrimeLineNo&gt;
+						   <xsl:value-of select="BundleParentLine/@PrimeLineNo"/>
+						&lt;/BundleParentPrimeLineNo&gt;
+					    </xsl:if>					
+				        </xsl:otherwise>
+				</xsl:choose>				
+			</SupplierPartAuxiliaryID>
+		</ItemID>
+		<ItemDetail>
+			<UnitPrice>
+				<Money>
+					<xsl:attribute name="currency">
+						<xsl:value-of select="/PunchOutOrder/Order/PriceInfo/@Currency" />
+					</xsl:attribute>
+					<xsl:choose>
+						<xsl:when test="@OrderedQty > 0">
+							<xsl:variable name="linetotal" >
+								<xsl:choose>
+									<xsl:when test="LinePriceInfo/@IsLinePriceForInformationOnly='Y'">0.00</xsl:when>
+									<xsl:otherwise><xsl:value-of select="LineOverallTotals/@LineTotalWithoutTaxes"/></xsl:otherwise>
+								</xsl:choose>
+							</xsl:variable>
+							<xsl:value-of select="(round(100*($linetotal div @OrderedQty)) div 100)"/>	
+						</xsl:when>
+						<xsl:otherwise>0.00</xsl:otherwise>
+					</xsl:choose>
+				</Money>
+			</UnitPrice>
+			<Description xml:lang="en-US">
+				<xsl:value-of select="Item/@ItemDesc"/>
+			</Description>
+			<UnitOfMeasure>
+				<xsl:value-of select="Item/@UnitOfMeasure"/>
+			</UnitOfMeasure>
+			<Classification domain="UNSPSC"><xsl:value-of select="ItemDetails/ClassificationCodes/@UNSPSC"/></Classification>
+			<ManufacturerName>
+				<xsl:value-of select="Item/PrimaryInformation/@ManufacturerName"/>
+			</ManufacturerName>
+		</ItemDetail>
+	</ItemIn>
+</xsl:template>
+
+</xsl:stylesheet>

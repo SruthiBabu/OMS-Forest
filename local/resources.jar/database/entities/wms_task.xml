@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the work area definition for each user group. Work area is the set of locations, consisting of the zone and aisle combination within which a set of users work. The system suggests tasks originating and terminating only in these areas."
+            EntityType="CONFIGURATION" Module="wms" Name="User_Zone"
+            Prefix="YFS_" TableName="YFS_USER_ZONE"
+            TableType="MASTER" XMLName="UserZone">
+            <Attributes>
+                <Attribute ColumnName="USER_ZONE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_USER_ZONE table."
+                    Name="User_Zone_Key" Nullable="false" XMLName="UserZoneKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this user zone."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="DATA_SECURITY_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The data security group key that is associated with this user zone."
+                    Name="Data_Security_Group_Key" Nullable="false" XMLName="DataSecurityGroupKey"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' ' "
+                    Description="The field indicates the zone identifier for this user group that carries out the tasks."
+                    Name="Zone_Id" Nullable="false" XMLName="ZoneId"/>
+                <Attribute ColumnName="AISLE" DataType="Integer"
+                    DefaultValue="0"
+                    Description="This field indicates the aisle number the user currently works in."
+                    Name="Aisle" Nullable="false" XMLName="Aisle"/>
+                <Attribute ColumnName="RECORD_TYPE"
+                    DataType="EnumRecordType" DefaultValue="' ' "
+                    Description="This field indicates whether the work area record applies to the source or the target locations zone and aisle combination. Valid values are: Option 01: Indicates that the work area record applies to the Source Zone and Aisle. Option 02: Indicates that the work area record applies to the Target Zone and Aisle."
+                    DescriptionRows="4" Name="Record_Type"
+                    Nullable="false" XMLName="RecordType"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_USER_ZONE_PK">
+                <Attribute ColumnName="USER_ZONE_KEY" Name="User_Zone_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_USER_ZONE_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="DATA_SECURITY_GROUP_KEY"/>
+                    <Column Name="ZONE_ID"/>
+                    <Column Name="AISLE"/>
+                    <Column Name="RECORD_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserZoneList" ChildName="UserZone"
+                    DeleteCascade="true"
+                    DeleteValidationError="YDB100152" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNode" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserZoneList" ChildName="UserZone"
+                    ChildXMLName="UserZone"
+                    DeleteValidationError="YDB100153"
+                    ForeignEntity="Data_Security_Group"
+                    Name="Data_Security_Group" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="DataSecurityGroup">
+                    <Attribute Name="Data_Security_Group_Key" ParentName="Data_Security_Group_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="UserZoneList" ChildName="UserZone"
+                    DeleteValidationError="YDB100154" Enforce="true"
+                    ForeignEntity="Zone" Name="Zone"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Zone">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Zone_Id" ParentName="Zone_Id"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores the actual location of the shipment or container in the cart."
+            EntityType="TRANSACTION" Extensible="Y" HasHistory="Y"
+            Module="wms" Name="Batch_Location" Prefix="YFS_"
+            TableName="YFS_BATCH_LOCATION" TableType="TRANSACTION" XMLName="BatchLocation">
+            <Attributes>
+                <Attribute ColumnName="BATCH_LOCATION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_BATCH_LOCATION table."
+                    Name="Batch_Location_Key" Nullable="false" XMLName="BatchLocationKey"/>
+                <Attribute ColumnName="BATCH_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The batch key that is associated with this batch location."
+                    Name="Batch_Key" Nullable="false" XMLName="BatchKey"/>
+                <Attribute ColumnName="CART_LOCATION_ID"
+                    DataType="CartLocationId" DefaultValue="' '"
+                    Description="This field indicates the unique identifier of the location within a cart."
+                    Name="Cart_Location_Id" Nullable="false"/>
+                <Attribute ColumnName="SLOT_NUMBER" DataType="Count"
+                    DefaultValue="0 "
+                    Description="This field identifies the slot number within a cart location."
+                    Name="Slot_Number" Nullable="false" XMLName="SlotNumber"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The shipment key that is associated with this batch location."
+                    Name="Shipment_Key" Nullable="false" XMLName="ShipmentKey"/>
+                <Attribute ColumnName="SHIPMENT_CONTAINER_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The shipment container key that is associated with this batch location."
+                    Name="Shipment_Container_Key" Nullable="false" XMLName="ShipmentContainerKey"/>
+                <Attribute ColumnName="MOVE_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The move request key that is associated with this batch location."
+                    Name="Move_Request_Key" Nullable="false"/>
+                <Attribute ColumnName="TOTE_ID" DataType="Text-40" 
+					DefaultValue="' ' "
+                    Description="This field indicates the unique identifier of a tote."
+                    Name="Tote_Id" Nullable="false" XMLName="ToteId"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="BATCH_LOCATION_PK" Name="YFS_BATCH_LOCATION_PK">
+                <Attribute ColumnName="BATCH_LOCATION_KEY" Name="Batch_Location_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="BATCH_LOCATION_I1"
+                    Name="YFS_BATCH_LOCATION_I1" Unique="true">
+                    <Column Name="BATCH_KEY"/>
+                    <Column Name="SHIPMENT_KEY"/>
+                    <Column Name="SHIPMENT_CONTAINER_KEY"/>
+                    <Column Name="MOVE_REQUEST_KEY"/>
+					<Column Name="TOTE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BatchLocations"
+                    ChildName="Batch_Location"
+                    ChildXMLName="BatchLocation" ForeignEntity="Batch"
+                    Name="Batch" Type="Bidirectional"
+                    UsedForDataSecurity="true" XMLName="Batch">
+                    <Attribute Name="Batch_Key" ParentName="Batch_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BatchLocations"
+                    ChildName="Batch_Location"
+                    ChildXMLName="BatchLocation"
+                    ForeignEntity="Shipment_Container" Name="Container"
+                    Type="Unidirectional" XMLName="Container">
+                    <Attribute Name="Shipment_Container_Key" ParentName="Shipment_Container_Key"/>
+                </RelationShip>
+			    <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BatchLocations"
+                    ChildName="Batch_Location"
+                    ChildXMLName="BatchLocation"
+                    ForeignEntity="Shipment" Name="Shipment"
+                    Type="Bidirectional" XMLName="Shipment">
+                    <Attribute Name="Shipment_Key" ParentName="Shipment_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the user-defined execution exception codes."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Execution_Exception" Prefix="YFS_"
+            TableName="YFS_EXECUTION_EXCEPTION"
+            TableType="CONFIGURATION" XMLName="ExecutionException">
+            <Attributes>
+                <Attribute ColumnName="EXECUTION_EXCEPTION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_EXECUTION_EXCEPTION table."
+                    Name="Execution_Exception_Key" Nullable="false" XMLName="ExecutionExceptionKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this execution exception."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="EXCEPTION_CODE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field specifies the unique code of the user defined execution exception."
+                    Name="Exception_Code" Nullable="false" XMLName="ExceptionCode"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="EXCEPTION_SHORT_DESCRIPTION"
+                    DataType="CodeShortDescription" DefaultValue="' ' "
+                    Description="This field specifies the short description of the user defined execution exception."
+                    Name="Exception_Short_Description" Nullable="false" XMLName="ExceptionShortDescription"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="EXCEPTION_LONG_DESCRIPTION"
+                    DataType="CodeLongDescription" DefaultValue="' ' "
+                    Description="This field specifies the long description of the user defined execution exception."
+                    Name="Exception_Long_Description" Nullable="false" XMLName="ExceptionLongDescription"/>
+                <Attribute ColumnName="EXCEPTION_TYPE"
+                    DataType="EnumExecutionException"
+                    DefaultValue="' ' "
+                    Description="This field indicates the execution exception types. Valid values are: PICK, DEPOSIT, and SKIP."
+                    Name="Exception_Type" Nullable="false" XMLName="ExceptionType"/>
+                <Attribute ColumnName="HOLD_TASK" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the task should be held."
+                    Name="Hold_Task" Nullable="false" XMLName="HoldTask"/>
+                <Attribute ColumnName="FREEZE_SOURCE_FOR_MOVE_OUT"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the source location is frozen for moving out the inventory."
+                    Name="Freeze_Source_For_Move_Out" Nullable="false" XMLName="FreezeSourceForMoveOut"/>
+                <Attribute ColumnName="SUGGESTED_ALTERNATE_PICK_LCN"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether an alternate pick location is suggested. This is used when a pick exception encounters."
+                    Name="Suggested_Alternate_Pick_Location"
+                    Nullable="false" XMLName="SuggestedAlternatePickLocation"/>
+                <Attribute ColumnName="FREEZE_TARGET_FOR_MOVE_IN"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the target location is frozen for moving in the inventory."
+                    Name="Freeze_Target_For_Move_In" Nullable="false" XMLName="FreezeTargetForMoveIn"/>
+                <Attribute ColumnName="SUGGESTED_ALT_DEPOSIT_LCN"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether an alternate deposit location should be suggested. This is used when a deposit exception is encountered."
+                    Name="Suggested_Alternate_Deposite_Location"
+                    Nullable="false" XMLName="SuggestedAlternateDepositLocation"/>
+				<Attribute ColumnName="ANY_ZONE_FOR_ALT_DEP"
+                    DataType="Flag" DefaultValue="'N' "
+                    Description="This flag indicates whether an alternate deposit location should be suggested from any zone as defined in putaway preferences."
+                    Name="Any_Zone_For_Alternate_Deposit"
+                    Nullable="true" XMLName="AnyZoneForAlternateDeposit"/>
+                <Attribute ColumnName="MARK_TARGET_AS_FULL"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the target location should be marked as full."
+                    Name="Mark_Target_As_Full" Nullable="false" XMLName="MarkTargetAsFull"/>
+                <Attribute ColumnName="UNASSIGN_USER" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the current task should be rejected."
+                    Name="Unassign_User" Nullable="false" XMLName="UnassignUser"/>
+                <Attribute ColumnName="INV_STS_FOR_UNAVAILABLE_QTY"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the inventory status of the unavailable item quantity."
+                    Name="Inventory_Status_For_Unavailable_Qty"
+                    Nullable="false" XMLName="InventoryStatusForUnavailableQty"/>
+                <Attribute ColumnName="FLOW_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The flow key that is associated with this execution exception."
+                    Name="Flow_Key" Nullable="false" XMLName="FlowKey"/>
+				<Attribute ColumnName="ALLOW_PARTIAL_DEPOSIT"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether to allow partial deposit of picked inventory at the suggested location. Valid values are Y and N. Default value is N."
+                    Name="Allow_Partial_Deposit" Nullable="false" XMLName="AllowPartialDeposit"/>
+				<Attribute ColumnName="CHECK_DIGIT" DataType="VText-5"
+                    Description="Check Digit is a numeric representation of Execution Exception. It is generally used by Voice Systems to verify the Execution Exception. Execution Exception Check Digit is unique for a Node."
+                    Name="Check_Digit" Nullable="true" XMLName="CheckDigit"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="EXEC_EXCEPTION_PK" Name="YFS_EXECUTION_EXCEPTION_PK">
+                <Attribute ColumnName="EXECUTION_EXCEPTION_KEY" Name="Execution_Exception_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="EXEC_EXCEPTION_I1"
+                    Name="YFS_EXECUTION_EXCEPTION_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="EXCEPTION_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ExecutionExceptionList"
+                    ChildName="Execution_Exception"
+                    ChildXMLName="ExecutionException"
+                    ForeignEntity="Flow" Name="Flow"
+                    Type="Bidirectional" XMLName="Flow">
+                    <Attribute Name="Flow_Key" ParentName="FlowKey"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+		 <Entity
+            Description="This table stores the tote id and the associated reference."
+            EntityType="TRANSACTION" Extensible="N" Module="wms"
+            Name="Tote" Prefix="YFS_" TableName="YFS_TOTE"
+            TableType="TRANSACTION" XMLName="Tote">
+            <Attributes>
+                <Attribute ColumnName="TOTE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_TOTE table."
+                    Name="Tote_Key" Nullable="false" XMLName="ToteKey"/>
+                <Attribute ColumnName="TOTE_ID" DataType="Text-40"
+                    Description="This field indicates the unique identifier of a tote."
+                    Name="Tote_Id" Nullable="true" XMLName="ToteId"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this user zone."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="REFERENCE_NAME"
+                    DataType="Text-40"
+                    Description="This field indicates the name of reference type that has been associated with the tote."
+                    Name="Reference_Name" Nullable="true" XMLName="ReferenceName"/>
+                <Attribute ColumnName="REFERENCE_VALUE"
+                    DataType="Text-40" 
+                    Description="This field indicates the value of reference type that has been associated with the tote."
+                    Name="Reference_Value" Nullable="true" XMLName="ReferenceValue"/>
+                <Attribute ColumnName="REFERENCE_KEY" DataType="Key"
+                    Description="This key identifies the reference associated with the tote for the reference type."
+                    Name="Reference_Key" Nullable="true" XMLName="ReferenceKey"/>
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="true" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" 
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TOTE_PK" Name="YFS_TOTE_PK">
+                <Attribute ColumnName="TOTE_KEY" Name="Tote_Key"/>
+            </PrimaryKey>
+			<RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ForeignEntity="Shipment_Container"
+                    Name="ShipmentContainer" Type="Bidirectional" XMLName="ShipmentContainer">
+					<Attribute Name="Reference_Key" ParentName="Shipment_Container_Key"/>
+					<Attribute Name="Reference_Name" ParentName="ContainerNo"/>
+                </RelationShip>
+				 <RelationShip Cardinality="OneToMany"
+					ForeignEntity="Ship_Node" Name="Ship_Node" Virtual="true"
+					Type="Unidirectional" XMLName="Node">
+					<Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+				</RelationShip>
+			</RelationShips>
+            <Indices>
+                <Index DB2Name="TOTE_ID_I1" Name="YFS_TOTE_ID_I1" Unique="true">
+                    <Column Name="TOTE_ID"/>
+					<Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+        </Entity>
+		<Entity
+            Description="This table stores the cart id and its associated batch no. During the process of building a cart manually using mobile UI, a set of tasks are associated with a newly created batch. This table stores the cart along with the newly created batch."
+            EntityType="TRANSACTION" Extensible="N" Module="wms"
+            Name="Cart" Prefix="YFS_" TableName="YFS_CART"
+            TableType="TRANSACTION" XMLName="Cart">
+            <Attributes>
+                <Attribute ColumnName="CART_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_CART table."
+                    Name="Cart_Key" Nullable="false" XMLName="CartKey"/>
+                <Attribute ColumnName="CART_ID" DataType="Text-40"
+                    Description="This field indicates the unique identifier of a cart."
+                    Name="Cart_Id" Nullable="true" XMLName="CartId"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this user zone."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="BATCH_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="Identifies the newly created batch for the cart build process."
+                    Name="Batch_No" Nullable="false" XMLName="BatchNo"/>
+				<Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="true" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" 
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="YFS_CART_PK" Name="YFS_CART_PK">
+                <Attribute ColumnName="CART_KEY" Name="Cart_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CART_ID_I1" Name="CART_TOTE_ID_I1" Unique="true">
+                    <Column Name="CART_ID"/>
+					<Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the maximum number of user allowed to work simultaneously in an aisle in the warehouse."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Aisle_User_Constraint" Prefix="YFS_"
+            TableName="YFS_AISLE_USER_CONSTRAINT"
+            TableType="CONFIGURATION" XMLName="AisleUserConstraint">
+            <Attributes>
+                <Attribute ColumnName="AISLE_USER_CONSTRAINT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+					Description="The primary key for the YFS_AISLE_USER_CONSTRAINT table."
+                    Name="Aisle_User_Constraint_Key" Nullable="false" XMLName="AisleUserConstraintKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The node key that is associated with the aisle."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="AISLE_NUMBER" DataType="Integer"
+                    DefaultValue="0 "
+                    Description="This field indicates the aisle Number of the location. A zone could belong to multiple aisles and multiple zones could belong to an aisle. A location in a zone always belongs to one aisle and an aisle section always belong to one zone."
+                    Name="Aisle_Number" Nullable="false" XMLName="AisleNumber"/>
+                <Attribute ColumnName="AISLE_SUFFIX" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the aisle section of the location."
+                    Name="Aisle_Suffix" Nullable="false" XMLName="AisleSuffix"/>
+                <Attribute ColumnName="MAXIMUM_USERS_ALLOWED"
+                    DataType="Integer" DefaultValue="0 "
+                    Description="This field indicates the maximum number of users to work simultaneously in the aisle." 
+					Name="Maximum_Users_Allowed" Nullable="false" XMLName="MaximumUsersAllowed"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="AISLE_USR_PK" Name="YFS_AISLE_USER_CONSTRAINT_PK">
+                <Attribute ColumnName="AISLE_USER_CONSTRAINT_KEY" Name="Aisle_User_Constraint_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="AISLE_USR_I1"
+                    Name="YFS_AISLE_USER_CONSTRAINT_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="AISLE_NUMBER"/>
+                    <Column Name="AISLE_SUFFIX"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AisleUserConstraintList"
+					ChildName="AisleUserConstraint" DeleteCascade="true"
+                    DeleteValidationError="YDB100152" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNode" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Description="This table track the presence of user in an aisle in the warehouse."
+            EntityType="TRANSACTION" Module="wms" Name="User_Aisle"
+            Prefix="YFS_" TableName="YFS_USER_AISLE"
+            TableType="TRANSACTION" XMLName="UserAisle">
+            <Attributes>
+                <Attribute ColumnName="USER_AISLE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+					Description="The primary key for the YFS_USER_AISLE table."
+                    Name="User_Aisle_Key" Nullable="false" XMLName="UserAisleKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The node key that is associated with the aisle."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="USER_ID" DataType="LoginId"
+                    DefaultValue="' ' "
+                    Description="The login id of a user." Name="User_Id"
+                    Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="SESSION_ID" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="A session is a series of interactions between two communication end points that occur during the span of a single connection. This field indicates the primary key of the YFS_User_Activity table where the identifier for the session used by the user is stored."
+                    Name="Session_Id" Nullable="false" XMLName="SessionId"/>
+                <Attribute ColumnName="AISLE_NUMBER" DataType="Integer"
+                    DefaultValue="0 "
+                    Description="This field indicates the aisle Number of the location. A zone could belong to multiple aisles and multiple zones could belong to an aisle. A location in a zone always belongs to one aisle and an aisle section always belong to one zone."
+                    Name="Aisle_Number" Nullable="false" XMLName="AisleNumber"/>
+                <Attribute ColumnName="AISLE_SUFFIX" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the aisle section of the location."
+                    Name="Aisle_Suffix" Nullable="false" XMLName="AisleSuffix"/>
+				<!--<Attribute ColumnName="AISLE_USER_CONSTRAINT_KEY" DataType="Key" DefaultValue="' ' " 
+					Description="The primary key for the YFS_AISLE_USER_CONSTRAINT table."
+                    Name="Aisle_User_Constraint_Key" Nullable="false" XMLName="AisleUserConstraintKey"/>-->
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' ' "
+                    Description="This field indicates the zone to which a location belongs."
+                    Name="Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' ' "
+                    Description="This field indicates the unique identifier for the location."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_USER_AISLE_PK">
+                <Attribute ColumnName="USER_AISLE_KEY" Name="User_Aisle_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_USER_AISLE_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+					<Column Name="SESSION_ID"/>
+                </Index>
+                <Index Name="YFS_USER_AISLE_I2" Unique="true">
+					<Column Name="NODE_KEY"/>
+					<Column Name="USER_ID"/>
+                </Index>
+                <Index Name="YFS_USER_AISLE_I3">
+					<Column Name="NODE_KEY"/>
+					<Column Name="LOCATION_ID"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity
+            Description="This table stores the execution exception audits."
+            EntityType="TRANSACTION" Module="wms"
+            Name="Execution_Exception_Audit" Prefix="YFS_"
+            TableName="YFS_EXECUTION_EXCEPTION_AUDIT"
+            TableType="TRANSACTION" XMLName="ExecutionExceptionAudit">
+            <Attributes>
+                <Attribute ColumnName="EXECUTION_EXCEPTION_AUDIT_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_EXECUTION_EXCEPTION_AUDIT table."
+                    Name="Execution_Exception_Audit_Key"
+                    Nullable="false" XMLName="ExecutionExceptionAuditKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="NODE" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The ship node's organization code."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The enterprise key that is associated with the task."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+			  <Attribute ColumnName="TASK_ID" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The one up number that uniquely identifies the task against which the exception is recorded."
+                    Name="Task_Id" Nullable="false" XMLName="TaskId"/>
+			  <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The activity group of the task in context."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+			  <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="The task type associated with the task in context."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+			  <Attribute ColumnName="EXCEPTION_TYPE"
+                    DataType="EnumExecutionException"
+                    DefaultValue="' ' "
+                    Description="This field indicates the execution exception types. Valid values are: PICK, DEPOSIT, and SKIP."
+                    Name="Exception_Type" Nullable="false" XMLName="ExceptionType"/>
+			  <Attribute ColumnName="EXCEPTION_CODE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field specifies the unique code of the user defined execution exception."
+                    Name="Exception_Code" Nullable="false" XMLName="ExceptionCode"/>  
+                <Attribute ColumnName="USER_ID" DataType="LoginId"
+                    DefaultValue="' '"
+                    Description="The user who executed the exception."
+                    Name="User_Id" Nullable="false" XMLName="UserId"/>
+			  <Attribute ColumnName="IS_TASK_HELD" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether the task is held."
+                    Name="Is_Task_Held" Nullable="false" XMLName="IsTaskHeld"/>
+			  <Attribute ColumnName="IS_TASK_SKIPPED" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether the task is skipped."
+                    Name="Is_Task_Skipped" Nullable="false" XMLName="IsTaskSkipped"/>
+			  <Attribute ColumnName="FREEZE_SOURCE_FOR_MOVE_OUT"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the source location is frozen for moving out the inventory."
+                    Name="Freeze_Source_For_Move_Out" Nullable="false" XMLName="FreezeSourceForMoveOut"/>
+			  <Attribute ColumnName="SUGGEST_ALTERNATE_PICK_LCN"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether an alternate pick location is requested."
+                    Name="Suggest_Alternate_Pick_Location"
+                    Nullable="false" XMLName="SuggestAlternatePickLocation"/>
+			  <Attribute ColumnName="FREEZE_TARGET_FOR_MOVE_IN"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the target location is frozen for moving in the inventory."
+                    Name="Freeze_Target_For_Move_In" Nullable="false" XMLName="FreezeTargetForMoveIn"/>
+			  <Attribute ColumnName="SUGGEST_ALT_DEPOSIT_LCN"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether an alternate deposit location is requested."
+                    Name="Suggest_Alternate_Deposit_Location"
+                    Nullable="false" XMLName="SuggestAlternateDepositLocation"/>
+			  <Attribute ColumnName="MARK_TARGET_AS_FULL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the target location is marked as full."
+                    Name="Mark_Target_As_Full" Nullable="false" XMLName="MarkTargetAsFull"/>
+			  <Attribute ColumnName="UNASSIGN_USER" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether the current task is rejected."
+                    Name="Unassign_User" Nullable="false" XMLName="UnassignUser"/>
+			  <Attribute ColumnName="ALLOW_PARTIAL_DEPOSIT"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether picked inventory is partially deposited at the suggested location."
+                    Name="Allow_Partial_Deposit" Nullable="false" XMLName="AllowPartialDeposit"/>
+			  <Attribute ColumnName="ORIGINAL_SOURCE_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The original location from where inventory has to be picked up."
+                    Name="Original_Source_Location_Id" Nullable="false" XMLName="OriginalSourceLocationId"/>
+			  <Attribute ColumnName="ALTERNATE_PICK_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The alternate pick location suggested."
+                    Name="Alternate_Pick_Location_Id" Nullable="false" XMLName="AlternatePickLocationId"/>
+			  <Attribute ColumnName="ORIGINAL_TARGET_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The original location where inventory has to be deposited."
+                    Name="Original_Target_Location_Id" Nullable="false" XMLName="OriginalTargetLocationId"/>
+			  <Attribute ColumnName="ALTERNATE_DEPOSIT_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The alternate deposit location suggested."
+                    Name="Alternate_Deposit_Location_Id"
+                    Nullable="false" XMLName="AlternateDepositLocationId"/>
+                <Attribute ColumnName="ORIGINAL_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The quantity for which the task is created."
+                    Name="Original_Quantity" Nullable="false" XMLName="OriginalQuantity"/>
+                <Attribute ColumnName="EXCEPTION_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The quantity for which the exception is executed."
+                    Name="Exception_Quantity" Nullable="false" XMLName="ExceptionQuantity"/>
+			  <Attribute ColumnName="INV_STS_FOR_UNAVAILABLE_QTY"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the inventory status of the unavailable item quantity."
+                    Name="Inventory_Status_For_Unavailable_Qty"
+                    Nullable="false" XMLName="InventoryStatusForUnavailableQty"/>
+			  <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+              <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+              <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+              <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+              <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+              <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+              <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>            
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="EXEC_EXCE_AUDIT_PK" Name="YFS_EXEC_EXCEP_AUDIT_PK">
+                <Attribute ColumnName="EXECUTION_EXCEPTION_AUDIT_KEY" Name="Execution_Exception_Audit_Key"/>
+            </PrimaryKey>
+            <Indices/>
+            <RelationShips/>
+        </Entity>
+        <Entity
+            Description="This table stores the external Voice Solution Application Definitions."
+            EntityType="CONFIGURATION" Module="wms" Cacheable="true" 
+            Name="Voice_Application" Prefix="YFS_"
+            TableName="YFS_VOICE_APPLICATION" TableType="CONFIGURATION" XMLName="VoiceApplication">
+            <Attributes>
+              <Attribute ColumnName="VOICE_APPLICATION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_VOICE_APPLICATION table."
+                    Name="Voice_Application_Key" Nullable="false" XMLName="VoiceApplicationKey"/>
+			  <Attribute ColumnName="VOICE_APPLICATION_NAME"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Unique Identifier of the External Voice Solution Application."
+                    Name="Voice_Application_Name" Nullable="false" XMLName="VoiceApplicationName"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="Description of the External Voice Solution Application."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+			  <Attribute ColumnName="APPLICATION_INSTANCE_TEMPLATE" 
+                    DataType="CLOB" DefaultValue="' ' "
+                    Description="The Template xml contains all the Integration Parameters specific to the Voice Application."
+                    Name="Application_Instance_Template"
+                    Nullable="false" XMLName="ApplicationInstanceTemplate"/>
+                <Attribute ColumnName="IS_SYSTEM_DEFINED"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="Indicates if Voice Applcation is System Defined."
+                    Name="Is_System_Defined" Nullable="false" XMLName="IsSystemDefined"/>
+			  <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+              <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+              <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+              <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+              <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="VOICE_APPL_PK" Name="YFS_VOICE_APPLICATION_PK">
+                <Attribute ColumnName="VOICE_APPLICATION_KEY" Name="Voice_Application_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YFS_VOICE_APPL_I1"
+                    Name="YFS_VOICE_APPLICATION_I1" Unique="true">
+                    <Column Name="VOICE_APPLICATION_NAME"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+        </Entity>
+        <Entity
+            Description="This table stores details of Instance of external Voice Solution Application and other Integration Parameters."
+            EntityType="CONFIGURATION" Cacheable="true" 
+            ListXMLName="VoiceApplicationInstanceList" Module="wms"
+            Name="Voice_Application_Instance" Prefix="YFS_"
+            TableName="YFS_VOICE_APPLICATION_INSTANCE"
+            TableType="CONFIGURATION" XMLName="VoiceApplicationInstance">
+            <Attributes>
+              <Attribute ColumnName="VOICE_APPL_INSTANCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_VOICE_APPLICATION_INSTANCE table."
+                    Name="Voice_Application_Instance_Key"
+                    Nullable="false" XMLName="VoiceApplicationInstanceKey"/>
+			  <Attribute ColumnName="VOICE_APPLICATION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Indicates the Voice Application of the Instance."
+                    Name="Voice_Application_Key" Nullable="false" XMLName="VoiceApplicationKey"/>
+                <Attribute ColumnName="INSTANCE_ID" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Unique Identifier of the Voice Application Instance."
+                    Name="Instance_Id" Nullable="false" XMLName="InstanceId"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="Description of the Voice Application Instance."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+			  <Attribute ColumnName="APPLICATION_INSTANCE_ATTRS" 
+                    DataType="CLOB" DefaultValue="' ' "
+                    Description="This xml stores the Values of all the Parameters of the Voice Application Instance including Integration Parameters."
+                    Name="Application_Instance_Attributes"
+                    Nullable="false" XMLName="ApplicationInstanceAttributes"/>
+			  <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+              <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+              <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+              <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+              <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="VOICE_APPL_INST_PK" Name="YFS_VOICE_APPL_INSTANCE_PK">
+                <Attribute ColumnName="VOICE_APPL_INSTANCE_KEY" Name="Voice_Application_Instance_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="VOICE_APP_INST_I1"
+                    Name="YFS_VOICE_APPL_INST_I1" Unique="true">
+                    <Column Name="VOICE_APPLICATION_KEY"/>
+					<Column Name="INSTANCE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="VoiceApplicationInstanceList"
+                    ChildName="VoiceApplicationInstance"
+                    ChildXMLName="VoiceApplicationInstance"
+                    DeleteCascade="true"
+                    ForeignEntity="Voice_Application"
+                    Name="VoiceApplication" Type="Bidirectional" XMLName="VoiceApplication">
+                    <Attribute Name="Voice_Application_Key" ParentName="Voice_Application_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores Voice Processes deployed on the Voice Application."
+            EntityType="CONFIGURATION" ListXMLName="VoiceWorkFlowList" Cacheable="true" 
+            Module="wms" Name="Voice_Work_Flow" Prefix="YFS_"
+            TableName="YFS_VOICE_WORK_FLOW" TableType="CONFIGURATION" XMLName="VoiceWorkFlow">
+            <Attributes>
+              <Attribute ColumnName="VOICE_WORK_FLOW_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_VOICE_WORK_FLOW table."
+                    Name="Voice_Work_Flow_Key" Nullable="false" XMLName="VoiceWorkFlowKey"/>
+                <Attribute ColumnName="WORK_FLOW_ID" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Unique Identifier of the Voice Work Flow Deployed."
+                    Name="Work_Flow_Id" Nullable="false" XMLName="WorkFlowId"/>
+			  <Attribute ColumnName="VOICE_APPLICATION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Indicates the Voice Application on which the Work Flow is Deployed."
+                    Name="Voice_Application_Key" Nullable="false" XMLName="VoiceApplicationKey"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="Description of the Voice Work Flow Deployed."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="IS_SYSTEM_DEFINED"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="Indicates if the Voice Work Flow is System Defined."
+                    Name="Is_System_Defined" Nullable="false" XMLName="IsSystemDefined"/>
+			  <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+              <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+              <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+              <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+              <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="VOICE_WORK_FLOW_PK" Name="YFS_VOICE_WORK_FLOW_PK">
+                <Attribute ColumnName="VOICE_WORK_FLOW_KEY" Name="Voice_Work_Flow_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="VOICE_WORK_FLW_I1"
+                    Name="YFS_VOICE_WORK_FLOW_I1" Unique="true">
+                    <Column Name="VOICE_APPLICATION_KEY"/>
+					<Column Name="WORK_FLOW_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="VoiceWorkFlowList"
+                    ChildName="VoiceWorkFlow"
+                    ChildXMLName="VoiceWorkFlow" DeleteCascade="true"
+                    ForeignEntity="Voice_Application"
+                    Name="VoiceApplication" Type="Bidirectional" XMLName="VoiceApplication">
+                    <Attribute Name="Voice_Application_Key" ParentName="Voice_Application_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores Voice Work Flow associations with different Activity Groups and Codes."
+            EntityType="CONFIGURATION" Cacheable="true" 
+            ListXMLName="VoiceWorkFlowActivityAssociationList"
+            Module="wms" Name="Voice_Work_Flow_Activity_Association"
+            Prefix="YFS_" TableName="YFS_VOICE_WORK_FLOW_ACT_ASSOC"
+            TableType="CONFIGURATION" XMLName="VoiceWorkFlowActivityAssociation">
+            <Attributes>
+              <Attribute ColumnName="VOICE_WRK_FL_ACT_ASN_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_VOICE_WORK_FLOW_ACT_ASSOC table."
+                    Name="Voice_Work_Flow_Activity_Association_Key"
+                    Nullable="false" XMLName="VoiceWorkFlowActivityAssociationKey"/>
+			  <Attribute ColumnName="VOICE_WORK_FLOW_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Indicates the Voice Workflow associated."
+                    Name="Voice_Work_Flow_Key" Nullable="false" XMLName="VoiceWorkFlowKey"/>
+			  <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The Warehouse Activity Group that is associated to the Voice Work Flow. For example - OUTBOUND_PICKING, PUTAWAY."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+              <Attribute ColumnName="ACTIVITY_CODE" DataType="Text-40"
+                    Description="Indicates Specific Activity within the Associated Activity Group. For example - ItemPick,Storage."
+                    Name="Activity_Code" Nullable="true" XMLName="ActivityCode"/>
+                <Attribute ColumnName="IS_SYSTEM_DEFINED"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="Indicates if the Voice Work Flow Activity Association is System Defined."
+                    Name="Is_System_Defined" Nullable="false" XMLName="IsSystemDefined"/>
+			  <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+              <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+              <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+              <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+              <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+              <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="VOIC_WK_FW_ASCN_PK" Name="YFS_VOICE_WK_FW_ASCN_PK">
+                <Attribute ColumnName="VOICE_WRK_FL_ACT_ASN_KEY" Name="Voice_Work_Flow_Activity_Association_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="VOIC_WK_FW_ASCN_I1"
+                    Name="YFS_VOICE_WK_FW_ASCN_I1" Unique="true">
+                    <Column Name="VOICE_WORK_FLOW_KEY"/>
+					<Column Name="ACTIVITY_GROUP_ID"/>
+					<Column Name="ACTIVITY_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="VoiceWorkFlowActivityAssociationList"
+                    ChildName="VoiceWorkFlowActivityAssociation"
+                    ChildXMLName="VoiceWorkFlowActivityAssociation"
+                    DeleteCascade="true" ForeignEntity="Voice_Work_Flow"
+                    Name="VoiceWorkFlow" Type="Bidirectional" XMLName="VoiceWorkFlow">
+                    <Attribute Name="Voice_Work_Flow_Key" ParentName="Voice_Work_Flow_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

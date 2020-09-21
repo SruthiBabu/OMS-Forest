@@ -1,0 +1,65 @@
+<DBSchema>
+	<Entities>
+		<Entity TableName="YFS_SHIPMENT">
+			<Attributes>
+				 <Attribute ColumnName="SHIPMENT_SORT_LOCATION_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The location identifier where sorting is done, based upon shipment."
+                    Name="Shipment_Sort_Location_Id" Nullable="false" XMLName="ShipmentSortLocationId"/>
+                <Attribute ColumnName="CARRIER_SORT_LOCATION_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The identifier of the location where sorting is done, based upon carrier."
+                    Name="Carrier_Sort_Location_Id" Nullable="false" XMLName="CarrierSortLocationId"/>
+				 <Attribute ColumnName="SHIPMENT_GROUP_ID"
+                    DataType="ID-10" DefaultValue="' ' "
+                    Description="The identifier of the shipment group."
+                    Name="Shipment_Group_Id" Nullable="false" XMLName="ShipmentGroupId"/>
+			</Attributes>
+			<Indices>
+				<Index Name="YFS_SHIPMENT_I99" Unique="false">
+					<Column Name="SHIPNODE_KEY"/>
+					<Column Name="SHIPMENT_GROUP_ID"/>
+					<Column Name="SHIPMENT_KEY"/>
+					<Column Name="STATUS"/>
+					<Column Name="DOCUMENT_TYPE"/>
+				</Index>
+			</Indices>
+			<RelationShips>
+			</RelationShips>
+		</Entity>
+		<Entity TableName="YFS_SHIPMENT_CONTAINER">
+			<Attributes>
+				<Attribute ColumnName="WAVE_KEY" DataType="Key" DefaultValue="' '" Description="The wave key that is associated with this shipment container." Name="Wave_Key" Nullable="false" XMLName="WaveKey"/>
+			</Attributes>
+			<RelationShips>
+				<RelationShip Cardinality="OneToOne" ForeignEntity="LPN_Hdr" Name="LPN" Type="Unidirectional" XMLName="LPN" UsedForDataSecurity="true">
+                    <Attribute Name="Container_Scm" ParentName="LPN_No"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" ChildListXMLName="Containers" ChildName="Container" ChildXMLName="Container" ForeignEntity="Wave" Name="Wave" Type="Unidirectional" XMLName="Wave">
+                    <Attribute Name="Wave_Key" ParentName="Wave_Key"/>
+                </RelationShip>
+			</RelationShips>
+		</Entity>
+		<Entity TableName="YFS_SHIPMENT_LINE">
+			<Attributes>
+				<Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    DefaultValue="' '" XMLName="WaveNo"
+                    Description="The wave number to which the line belongs."
+                    Name="Wave_No" Nullable="false"/>
+			</Attributes>
+			<Indices>
+				<Index DB2Name="SHIPMENT_LINE_I7" Name="YFS_SHIPMENT_LINE_I7">
+                    <Column Name="WAVE_NO"/>
+                    <Column Name="SHIPMENT_KEY"/>
+                </Index>
+				<Index DB2Name="SHIPMENT_LINE_I99" Name="YFS_SHIPMENT_LINE_I99">
+                    <Column Name="ITEM_ID"/>
+					<Column Name="PRODUCT_CLASS"/>
+					<Column Name="UOM"/>
+					<Column Name="WAVE_NO"/>
+					<Column Name="SHIPMENT_KEY"/>
+                </Index>
+			</Indices>
+		</Entity>
+	</Entities>
+</DBSchema>

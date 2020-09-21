@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+	<!-- Displaying the Origin Node's Address -->
+    <LabelField Binding="/Load/OriginAddress/@Company" LabelFieldName="FromName" RepeatingElement=""/>
+    <LabelField Binding="/Load/OriginAddress/@AddressLine1" LabelFieldName="FromAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Load/OriginAddress/@City" LabelFieldName="FromCity" RepeatingElement=""/>
+    <LabelField Binding="/Load/OriginAddress/@State" LabelFieldName="FromState" RepeatingElement=""/>
+    <LabelField Binding="/Load/OriginAddress/@ZipCode" LabelFieldName="FromZip" RepeatingElement=""/>
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/Shipment/@SellerOrganizationCode" LabelFieldName="SID" RepeatingElement=""/>
+    <LabelField Binding="/Load/DestinationAddress/@Company" LabelFieldName="ToName" RepeatingElement=""/>
+    <LabelField Binding="/Load/DestinationAddress/@AddressLine1" LabelFieldName="ToAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Load/DestinationAddress/@City" LabelFieldName="ToCity" RepeatingElement=""/>
+    <LabelField Binding="/Load/@BuyerOrganizationCode" LabelFieldName="CID" RepeatingElement=""/>
+    <LabelField Binding="/Load/DestinationAddress/@State" LabelFieldName="ToState" RepeatingElement=""/>
+    <LabelField Binding="/Load/DestinationAddress/@ZipCode" LabelFieldName="ToZip" RepeatingElement=""/>
+    <LabelField Binding="/Load/LoadShipments/LoadShipment/Shipment/MarkForAddress/@Company" LabelFieldName="ShipToLocationNo" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/ThirdPartyBillTo/@Company" LabelFieldName="BillToName" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/ThirdPartyBillTo/@AddressLine1" LabelFieldName="BillToAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/ThirdPartyBillTo/@City" LabelFieldName="BillToCity" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/ThirdPartyBillTo/@State" LabelFieldName="BillToState" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/ThirdPartyBillTo/@ZipCode" LabelFieldName="BillToZip" RepeatingElement=""/>
+
+    <LabelField Binding="/Load/@BolNo" LabelFieldName="BolNo" RepeatingElement=""/>
+    <LabelField Binding="/Load/Carrier/@ScacDesc" LabelFieldName="CarrierName" RepeatingElement=""/>
+    <LabelField Binding="/Load/@TrailerNo" LabelFieldName="TrailerNo" RepeatingElement=""/>
+    <LabelField Binding="/Load/@SealNo" LabelFieldName="SealNo" RepeatingElement=""/>
+    <LabelField Binding="/Load/Carrier/@Scac" LabelFieldName="Scac" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@Prepaid" LabelFieldName="Prepaid" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@Collect" LabelFieldName="Collect" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@ThirdParty" LabelFieldName="ThirdParty" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CustomerOrderInfoList/@TotalPackages" LabelFieldName="TotalPkgs" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CustomerOrderInfoList/@TotalWeight" LabelFieldName="TotalWeight" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CustomerOrderInfoList/CustomerOrderInfo/@CustomerPONo" LabelFieldName="CustomerPONo" RepeatingElement="CustomerOrderInfo"/>
+    <LabelField Binding="/Load/VICSBOLData/CustomerOrderInfoList/CustomerOrderInfo/@Packages" LabelFieldName="NumPkgs" RepeatingElement="CustomerOrderInfo"/>
+    <LabelField Binding="/Load/VICSBOLData/CustomerOrderInfoList/CustomerOrderInfo/@Weight" LabelFieldName="Weight" RepeatingElement="CustomerOrderInfo"/>
+    <LabelField Binding="/Load/VICSBOLData/CustomerOrderInfoList/CustomerOrderInfo/@Pallet" LabelFieldName="Pallet" RepeatingElement="CustomerOrderInfo"/>
+    <LabelField Binding="/Load/Instructions/Instruction[@InstructionType='SHIP']/@InstructionText" LabelFieldName="SpecialInstruction" RepeatingElement=""/>
+	<LabelField Binding="/Load/@BolInstruction" LabelFieldName="BolInstruction" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@UnitQty" LabelFieldName="UnitQty" RepeatingElement="Commodity"/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@UnitType" LabelFieldName="UnitType" RepeatingElement="Commodity"/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@PackageType" LabelFieldName="PkgType" RepeatingElement="Commodity"/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@Packages" LabelFieldName="PkgQty" RepeatingElement="Commodity"/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@Weight" LabelFieldName="PkgWeight" RepeatingElement="Commodity"/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@HazardousMaterial" LabelFieldName="HM" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/@TotalUnits" LabelFieldName="TotalUnitQty" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/@TotalPackages" LabelFieldName="TotalPkgQty" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/@TotalWeight" LabelFieldName="TotalPkgWeight" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@NMFCDescription" LabelFieldName="CommodityDesc" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CustomerOrderInfoList/CustomerOrderInfo/@AdditionalInfo" LabelFieldName="AdditionalShipperInfo" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@NMFCCode" LabelFieldName="NMFCCode" RepeatingElement="Commodity"/>
+    <LabelField Binding="/Load/VICSBOLData/CommodityList/Commodity/@NMFCClass" LabelFieldName="NMFCClass" RepeatingElement="Commodity"/>
+    <LabelField Binding="/Load/VICSBOLData/@TrailerLoadedByShipper" LabelFieldName="TrailerLoadedByShipper" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@TrailerLoadedByDriver" LabelFieldName="TrailerLoadedByDriver" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@FreightCountedByShipper" LabelFieldName="FreightCountedByShipper" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@FreightCountedByPallets" LabelFieldName="FreightCountedByPallets" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@FreightCountedByPieces" LabelFieldName="FreightCountedByPieces" RepeatingElement=""/>
+
+    <LabelField Binding="/Load/@ProNo" LabelFieldName="ProNo" RepeatingElement=""/>
+    <LabelField Binding="/Load/@ProNo" LabelFieldName="ProNoBarCode" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@IsMasterBOL" LabelFieldName="MBOL" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@FromFOB" LabelFieldName="FromFOB" RepeatingElement=""/>
+    <LabelField Binding="/Load/VICSBOLData/@ToFOB" LabelFieldName="ToFOB" RepeatingElement=""/>
+	<LabelField Binding="/Load/LoadStops/LoadStop[@StopType='D']/@CarrierAppointmentNo" LabelFieldName="AppointmentNo" RepeatingElement=""/>
+	<LabelField Binding="/Load/LoadStops/LoadStop[@StopType='D']/@CarrierAppointmentDate" LabelFieldName="AppointmentDate" RepeatingElement="" DataType="DateTime"/>
+	<LabelField Binding="/Load/@Copy" LabelFieldName="Copy" RepeatingElement=""/>
+    <RepeatingFields>
+        <RepeatingField LabelFieldName="CustomerPONo" MaxFirstPage="5"
+            MaxLastPage="14" MaxMidPage="14"/>
+        <RepeatingField LabelFieldName="NumPkgs" MaxFirstPage="5"
+            MaxLastPage="14" MaxMidPage="14"/>
+        <RepeatingField LabelFieldName="Weight" MaxFirstPage="5"
+            MaxLastPage="14" MaxMidPage="14"/>
+        <RepeatingField LabelFieldName="Pallet" MaxFirstPage="5"
+            MaxLastPage="14" MaxMidPage="14"/>
+        <RepeatingField LabelFieldName="UnitQty" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="UnitType" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="PkgType" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="PkgQty" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="PkgWeight" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="HM" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="CommodityDesc" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="AdditionalShipperInfo"
+            MaxFirstPage="5" MaxLastPage="14" MaxMidPage="14"/>
+        <RepeatingField LabelFieldName="NMFCCode" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="NMFCClass" MaxFirstPage="5"
+            MaxLastPage="12" MaxMidPage="12"/>
+    </RepeatingFields>
+</LabelFieldMap>

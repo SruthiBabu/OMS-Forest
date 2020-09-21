@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity
+            Description="All appointments taken for dock location(s) are stored in this table. The table can also store the reference to the shipment, load, carrier etc. for which appointment is taken."
+            EntityType="TRANSACTION" Extensible="Y"
+            ListXMLName="DockAppointment" Module="scw"
+            Name="Dock_Appointment" Prefix="YFS_"
+            SupportHangOffEntity="Y" TableName="YFS_DOCK_APPOINTMENT"
+            TableType="TRANSACTION" XMLName="DockAppointment">
+            <Attributes>
+                <Attribute ColumnName="DOCK_APPOINTMENT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_DOCK_APPOINTMENT table."
+                    Name="Dock_Appointment_Key" Nullable="false" XMLName="DockAppointmentKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Organization code of the user creating the appointment."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="RES_POOL_CONSMPTN_DTLS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_RES_POOL_CONSMPTN_DTLS_KEY table which is associated to this dock appointment."
+                    Name="Res_Pool_Consmptn_Dtls_Key" Nullable="false" XMLName="ResPoolConsmptnDtlsKey"/>
+                <Attribute ColumnName="APPOINTMENT_TYPE"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="This field indicates the appointment type of the appointment being taken. It can either be OUTBOUND or INBOUND."
+                    Name="Appointment_Type" Nullable="false" XMLName="AppointmentType"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this appointment."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="APPOINTMENT_NO"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="The appointment number is a one up number that system generates to uniquely identify the dock appointments in a node."
+                    Name="Appointment_No" Nullable="false" XMLName="AppointmentNo"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The order header key of the order associated with this dock appointment."
+                    Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The shipment key of the shipment associated with this dock appointment."
+                    Name="Shipment_Key" Nullable="false" XMLName="ShipmentKey"/>
+                <Attribute ColumnName="LOAD_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The load key of the load associated with this dock appointment."
+                    Name="Load_Key" Nullable="false" XMLName="LoadKey"/>
+                <Attribute ColumnName="CARRIER" DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The carrier service code associated with the dock appointment."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="BOL_NO" DataType="DocumentNo"
+                    DefaultValue="' '"
+                    Description="The bill of lading number ."
+                    Name="Bol_No" Nullable="false" XMLName="BolNo"/>
+                <Attribute ColumnName="PRO_NO" DataType="DocumentNo"
+                    DefaultValue="' '"
+                    Description="The progressive number. It is generated for Loads with shipment mode as LTL, also if shipment mode changes from any other mode to LTL. Re-generation of PRO number happens, when the Carrier changes."
+                    Name="Pro_No" Nullable="false"/>
+                <Attribute ColumnName="TRAILER_NO" DataType="DocumentNo"
+                    DefaultValue="' '"
+                    Description="The trailer number by which the shipment/load leaves the ship node."
+                    Name="Trailer_No" Nullable="false" XMLName="TrailerNo"/>
+                <Attribute ColumnName="NOTES" DataType="Text-256"
+                    DefaultValue="' '"
+                    Description="The notes associated with the dock appointment."
+                    Name="Notes" Nullable="false" XMLName="Notes"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="DOCK_APPT_PK" Name="YFS_DOCK_APPOINTMENT_PK">
+                <Attribute ColumnName="DOCK_APPOINTMENT_KEY" Name="Dock_Appointment_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="DOCK_APPT_I1"
+                    Name="YFS_DOCK_APPOINTMENT_I1" Unique="true">
+                    <Column Name="RES_POOL_CONSMPTN_DTLS_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DockAppointmentList"
+                    ChildName="DockAppointment"
+                    ChildXMLName="DockAppointment" DeleteCascade="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="DockAppointmentList"
+                    ChildName="DockAppointment"
+                    ChildXMLName="DockAppointment" DeleteCascade="true"
+                    ForeignEntity="Res_Pool_Consmptn_Dtls"
+                    Name="Res_Pool_Consmptn_Dtls" Type="Bidirectional" XMLName="ResourcePoolCapacityConsumptionDetails">
+                    <Attribute Name="Res_Pool_Consmptn_Dtls_Key" ParentName="Res_Pool_Consmptn_Dtls_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DockAppointmentList"
+                    ChildName="DockAppointment"
+                    ChildXMLName="DockAppointment" DeleteCascade="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DockAppointmentList"
+                    ChildName="DockAppointment"
+                    ChildXMLName="DockAppointment" DeleteCascade="true"
+                    ForeignEntity="Order_Header" Name="OrderHeader"
+                    Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DockAppointmentList"
+                    ChildName="DockAppointment"
+                    ChildXMLName="DockAppointment" DeleteCascade="true"
+                    ForeignEntity="Shipment" Name="Shipment"
+                    Type="Bidirectional" XMLName="Shipment">
+                    <Attribute Name="Shipment_Key" ParentName="Shipment_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="DockAppointmentList"
+                    ChildName="DockAppointment"
+                    ChildXMLName="DockAppointment" DeleteCascade="true"
+                    ForeignEntity="Load" Name="Load"
+                    Type="Bidirectional" XMLName="Load">
+                    <Attribute Name="Load_Key" ParentName="Load_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

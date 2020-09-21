@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:emailformatters="com.yantra.pca.email.formatters"
+    xmlns:java="java"
+    exclude-result-prefixes="java emailformatters">
+
+<xsl:template match="/">
+<HTML>
+ <xsl:comment>RECIPIENTS=Undisclosed </xsl:comment>
+<xsl:comment>FROM=sales@yourcompany.com</xsl:comment>
+<xsl:comment>SUBJECT=Item Details</xsl:comment>
+<xsl:comment>CONTENT_TYPE=text/html</xsl:comment>
+ 	<HEAD>
+	    <STYLE TYPE="text/css">
+
+		.table  {
+		    padding:0;
+		    font-size: 12;
+		    font-family: Tahoma;
+		    font-weight: normal;
+		    color: #000000;
+		    width: 100%;
+		    border: 1;
+		}
+
+		.tablecolumn{
+		    padding-left:2px; 
+		    padding-right:2px; 
+		    padding-top: 0px;
+		    padding-bottom: 0px;
+		    font-size: 12;
+		    vertical-align: top;
+		    text-align: left;
+		}
+		.numerictablecolumn{
+		    padding-left:2px; 
+		    padding-right:2px; 
+		    padding-top: 0px;
+		    padding-bottom: 0px;
+		    vertical-align: top;
+		    text-align: right;
+		    font-size: 12;
+		}
+		.tablecolumnheader {
+		    border-left:1px solid buttonhighlight;
+		    border-right:1px solid buttonshadow;
+		    border-top:1px solid buttonhighlight;
+		    border-bottom:1px solid buttonshadow;
+		    PADDING-LEFT: 2px;
+		    PADDING-RIGHT: 2px;
+		    PADDING-top: 0px;
+		    PADDING-bottom: 0px;
+		    VERTICAL-ALIGN: middle;
+		    HORIZONTAL-ALIGN: center;
+		    BACKGROUND-COLOR: #e0e0e0;
+		    TEXT-ALIGN: left
+		}
+	    </STYLE>
+
+	</HEAD>
+ 
+<BODY topmargin="0" leftmargin="0">
+<xsl:apply-templates select="ItemList"/>	    
+	 
+</BODY>
+</HTML>
+</xsl:template>
+
+<xsl:template match="ItemList">
+<BR/><BR/><BR/><P><font><B>Item ID : <xsl:value-of select="Item/@ItemID"/></B></font></P>
+<BR/>
+		<TABLE BORDER="2" WIDTH="50%" CELLSPACING="0"  CELLPADDING="3" borderColor="#e0e0e0">
+		<thead>
+				<tr>
+					<td class="tablecolumnheader">
+						Item Description
+					</td>
+
+					<td class="tablecolumnheader" style="text-align:right;">
+						Unit Price
+					</td>
+
+					<td class="tablecolumnheader" style="text-align:right;">
+						UnitOfMeasure
+					</td>
+
+ 				</tr>
+			</thead>			
+			
+			 
+			<tr class="Items">
+				<td class="tablecolumn" >
+				     <xsl:value-of select="Item/PrimaryInformation/@Description"/>
+				</td>		
+				<td class="numerictablecolumn">
+				     <xsl:value-of select="Item/ComputedPrice/@UnitPrice"/>   <xsl:value-of select="@Currency"/> 
+				</td>
+				<td class="tablecolumn" >
+			             <xsl:value-of select="Item/@UnitOfMeasure"/>
+				</td>
+	 
+			</tr>
+
+			 
+		</TABLE>
+
+<P></P>
+
+<BR/><BR/>Thank you for shopping with us and hope you visit our site soon.<BR/><BR/>
+
+Sincerely,<BR/>
+Customer Service Manager.<BR/><BR/>
+
+</xsl:template>		
+</xsl:stylesheet>

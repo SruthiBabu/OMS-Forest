@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:include href="template/email/ycd/common/YCD_brand.xsl.sample"/>
+	<xsl:include href="template/email/ycd/common/YCD_personalInfo.xsl.sample"/>
+	<xsl:include href="template/email/ycd/common/YCD_miscUtils.xsl.sample"/>
+	<xsl:include href="template/email/ycd/common/YCD_bkorderLines.xsl.sample"/>
+
+	<xsl:variable name="maxstatus">3200</xsl:variable>
+	<xsl:variable name="sts_bofn">1400</xsl:variable>
+	<xsl:variable name="sts_bo">1300</xsl:variable>
+	<xsl:variable name="sts_cncld">9000</xsl:variable>
+	<xsl:variable name="datetype_fpdd">YCD_FTC_FIRST_PROMISE_DATE</xsl:variable>
+	<xsl:variable name="datetype_spdd">YCD_FTC_NEXT_PROMISE_DATE</xsl:variable>
+
+	<xsl:variable name="Brand">
+		<xsl:call-template name="BrandName">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+	<xsl:variable name="BrandPhoneNumber">
+		<xsl:call-template name="BrandPhoneNumber">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+
+	<xsl:template match="/">
+		<HTML >
+			<xsl:call-template name="applyStyle"/>
+			<BODY topmargin="0" leftmargin="0" STYLE="font:normal 10pt Tahoma">
+				<xsl:apply-templates select="Order"/>
+			</BODY>
+		</HTML >
+	</xsl:template>
+
+
+<xsl:template match="Order">
+
+<xsl:call-template name="Greeting"><xsl:with-param name="FirstName" select="PersonInfoBillTo/@FirstName"/><xsl:with-param name="LastName" select="PersonInfoBillTo/@LastName"/></xsl:call-template>
+	<p/>
+	Thank you for shopping at www.<xsl:value-of select="$Brand"/>.com.  We regret to inform you that we are still unable to ship your item described below by the date promised when we first informed you of a delayed shipment. Your satisfaction is important to us and we are making every effort to ship your item as soon as possible.  However, in the event that we are unable to ship by the date listed below, we will cancel any part of your order that has not shipped and provide you with a full refund.  If you are willing to wait, you can contact our customer support department and request that the order not be cancelled.  <xsl:call-template name="OrderStatusMessage"><xsl:with-param name="Brand" select="$Brand"/></xsl:call-template>
+	<p/>
+
+	<table class="table">
+	<xsl:call-template name="bkorderDataHeader" />
+	<xsl:apply-templates select="OrderLines" />
+	</table>
+
+	<p/>
+
+	<xsl:call-template name="StandardClosingMessage">
+		<xsl:with-param name="Brand" select="$Brand"/>
+		<xsl:with-param name="BrandPhoneNumber" select="$BrandPhoneNumber"/>
+		<xsl:with-param name="AdditionalClosing"><p />Thanks again for your order and remember, if you are willing to wait and would like us to keep the order past the date shown above, please contact customer support.</xsl:with-param>
+	</xsl:call-template>
+
+
+</xsl:template>
+
+<xsl:template match="OrderLine">
+	<xsl:variable name="ApplicableQty">
+		<xsl:value-of select="sum(OrderStatuses/OrderStatus[number(substring(@Status,1,4))&lt;$maxstatus][substring(@Status,1,4)!=$sts_bofn]/@StatusQty)" />
+	</xsl:variable>
+	<xsl:variable name="PromisedDate">
+		<xsl:value-of select="OrderDates/OrderDate[@DateTypeId=$datetype_spdd]/@ActualDate" />
+	</xsl:variable>
+	<xsl:if test="number($ApplicableQty) > 0">
+		<xsl:variable name="TotalPricePerUnit" select="LineOverallTotals/@LineTotal div LineOverallTotals/@PricingQty" />
+		<xsl:call-template name="bkorderData">
+			<xsl:with-param name="ItemDesc" select="Item/@ItemDesc" />
+			<xsl:with-param name="ExpectedShipDate" select="$PromisedDate" />
+			<xsl:with-param name="Quantity" select="$ApplicableQty" />
+			<xsl:with-param name="UnitPrice" select="$TotalPricePerUnit" />
+			<xsl:with-param name="TotalPrice" select="$ApplicableQty * $TotalPricePerUnit" />
+		</xsl:call-template>
+	</xsl:if>
+</xsl:template>
+
+
+</xsl:stylesheet>

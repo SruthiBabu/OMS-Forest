@@ -1,0 +1,42 @@
+<html>
+    <body>
+        <form name="frmLocInvItemList" target="/console/rfmanualmove.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="2" mandatory="false" name="lblManualMove"
+                                    size="18" subtype="Label"
+                                    tag="binding=lblManualMove"
+                                    type="text" validate="false" value=""/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <table binding="/BarCode/Translations/@Translation"
+                                    col="1" gridcols="2"
+                                    gridrows="6" id="Translation"
+                                    mandatory="false"
+                                    name="grdList1"
+                                    namespace="BarCode" size="20"
+                                    tag="binding=grdList1" validate="false">
+                                    <tr>
+                                    <td>
+									<input colno="0" size="0" colName=" "
+                                    type="hidden" value="/console/rfmanualmove.ppc?action=frmGetSKU"/>
+									<input colno="1" size="0" colName=" "
+                                    type="hidden" inputbinding="xml:/Translation/@UniqueKey" outputbinding="xml:/Translation/@UniqueKey" />
+									</td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

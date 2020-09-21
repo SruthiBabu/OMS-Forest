@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   <xsl:output method="xml" indent="yes" />
+
+   <xsl:template match="Order">
+      <Order>
+       
+         <xsl:attribute name="OrderHeaderKey">
+            <xsl:value-of select="@OrderHeaderKey" />
+         </xsl:attribute>
+
+         <xsl:attribute name="OrderNo">
+            <xsl:value-of select="@OrderNo" />
+         </xsl:attribute>
+
+         <FraudCheckResponseMessages>
+            <xsl:apply-templates select="FraudCheckResponseMessages" />
+         </FraudCheckResponseMessages>
+      </Order>
+   </xsl:template>
+
+   <xsl:template match="FraudCheckResponseMessages">
+      <FraudCheckResponseMessage>
+         <xsl:attribute name="Text">
+            <xsl:value-of select="FraudCheckResponseMessage/@Text" />
+         </xsl:attribute>
+      </FraudCheckResponseMessage>
+   </xsl:template>
+</xsl:stylesheet>
+

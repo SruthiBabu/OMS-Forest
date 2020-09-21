@@ -1,0 +1,173 @@
+<html>
+    <body>
+        <form name="frmProductDiversions" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@OrganizationCode"
+                                    mandatory="false"
+                                    name="txtEnterpriseCode"
+                                    outputbinding="xml:/Receipt/@OrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@OrganizationCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ShipmentKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ReceiptHeaderKey"
+                                    mandatory="false"
+                                    name="ReceiptHeaderKey"
+                                    outputbinding="xml:/Receipt/@ReceiptHeaderKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceiptHeaderKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ReceivingDock"
+                                    mandatory="false"
+                                    name="ReceivingDock"
+                                    outputbinding="xml:/Receipt/@ReceivingDock"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceivingDock"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@LocationId"
+                                    mandatory="false"
+                                    name="ReceivingLocation"
+                                    outputbinding="xml:/Receipt/@LocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@LocationId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    mandatory="false"
+                                    name="ParentPalletId"
+                                    outputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/ParentLPN/@PalletId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Receipt/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@AdhocTaskCreated"
+                                    mandatory="false"
+                                    name="AdhocTaskCreated"
+                                    outputbinding="xml:/Receipt/@AdhocTaskCreated"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@AdhocTaskCreated"
+                                    type="hidden" validate="false" value=" "/>
+									<input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblCaseId"
+                                    type="text" validate="false" value="Mobile_Case_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/ActivityDemands/ActivityDemand/@CaseId"
+                                    mandatory="false"
+                                    name="txtCaseId"
+                                    outputbinding="xml:/MoveLocationInventory/Source/@CaseId"
+                                    size="15"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/MoveLocationInventory/Source/@CaseId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblDiversions"
+                                    type="text" validate="false" value="Mobile_Activity_Demand_For"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/ActivityDemands/ActivityDemand/@ForActivityCode"
+                                    mandatory="false"
+                                    name="txtDiversionType"
+                                    size="15"
+                                    subtype="ProtectedText"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblPalletId"
+                                    type="text" validate="false" value="Mobile_Pallet_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtPalletId"
+                                    outputbinding="xml:/MoveLocationInventory/Destination/@PalletId"
+                                    size="15" subtype="Text"
+                                    tag="binding=xml:/MoveLocationInventory/Destination/@PalletId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+									<input col="1" mandatory="false"
+									name="lblDemandQty"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblDemandQty"
+                                    type="text" validate="false" value="Mobile_Demand_Quantity"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/ActivityDemands/ActivityDemand/@DemandQty"
+                                    name="txtDemandQty" outputbinding="xml:/ActivityDemands/ActivityDemand/@DemandQty"
+									size="6" subtype="ProtectedText"
+                                    tag="xml:/ActivityDemands/ActivityDemand/@DemandQty"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="4" subtype="Command"
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmDivert"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

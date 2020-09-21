@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Order>
+    <Notes>
+        <Note/>
+    </Notes>
+    <OrderLines>
+        <!-- OrderLine is not a template-driven element. It is returned same as what was passed to the api. -->
+        <OrderLine>
+            <Notes>
+                <Note/>
+            </Notes>
+        </OrderLine>
+    </OrderLines>
+    <OrderAudit>
+        <Order/>
+        <OrderAuditLevels>
+            <OrderAuditLevel>
+                <OrderLine>
+                    <Item>
+                        <LanguageDescriptionList>
+                            <LanguageDescription/>
+                        </LanguageDescriptionList>
+                    </Item>
+                </OrderLine>
+                <OrderRelease/>
+                <OrderAuditDetails>
+                    <OrderAuditDetail>
+                        <IDs>
+                            <!-- ID is not a template-driven element. If the template contains OrderAuditDetail element, this element will come based on AuditType. For AuditTypes like Order, OrderLine this element does not come.-->
+                            <ID/>
+                        </IDs>
+                        <Attributes>
+                            <!-- Attribute is not a template-driven element. If the template contains OrderAuditDetail element, this element will appear in the output xml alongwith all its attributes.-->
+                            <Attribute/>
+                        </Attributes>
+                        <!-- CustomAuditDetails is not a template-driven element. If custom entity is modified, this element will appear in the output xml . -->
+                        <!-- Nested CustomAuditDetails element will be returned if custom table has a hangoff table. -->
+                        <CustomAuditDetails>
+                            <OrderAuditDetail>
+                                <IDs>
+                                    <!-- ID is not a template-driven element. If the template contains OrderAuditDetail element, this element will come based on AuditType. For AuditTypes like Order, OrderLine this element does not come.-->
+                                    <ID/>
+                                </IDs>
+                                <Attributes>
+                                    <!-- Attribute is not a template-driven element. If the template contains OrderAuditDetail element, this element will appear in the output xml alongwith all its attributes.-->
+                                    <Attribute/>
+                                </Attributes>
+                            </OrderAuditDetail>
+                        </CustomAuditDetails>
+                    </OrderAuditDetail>
+                </OrderAuditDetails>
+                <ModificationTypes>
+                    <ModificationType/>
+                </ModificationTypes>
+            </OrderAuditLevel>
+        </OrderAuditLevels>
+    </OrderAudit>
+</Order>

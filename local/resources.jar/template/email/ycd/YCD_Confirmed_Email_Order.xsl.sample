@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:emailformatters="com.yantra.pca.email.formatters"
+    xmlns:java="java"
+    exclude-result-prefixes="java emailformatters">
+
+	<xsl:include href="/template/email/ycd/common/YCD_brand.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_personalInfo.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_miscUtils.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_itemData.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_summaryOfCharges.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_paymentInfo.xsl.sample"/>
+
+	<xsl:variable name="Brand">
+		<xsl:call-template name="BrandName">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+	<xsl:variable name="BrandPhoneNumber">
+		<xsl:call-template name="BrandPhoneNumber">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+	<xsl:variable name="Currency"><xsl:value-of select="/Order/PriceInfo/@Currency"/></xsl:variable>
+
+	<xsl:template match="/">
+		<HTML>
+			<xsl:call-template name="applyStyle"/>
+			<BODY topmargin="0" leftmargin="0" STYLE="font:normal 10pt Tahoma">
+				<xsl:apply-templates select="Order"/>
+			</BODY>
+		</HTML>
+	</xsl:template>
+
+<xsl:template name="break">
+	   <xsl:param name="text" select="."/>
+	   <xsl:choose>
+	   <xsl:when test="contains($text, '&#xa;')">
+	      <xsl:value-of select="substring-before($text, '&#xa;')"/>
+	      <br/>
+	      <xsl:call-template name="break">
+		  <xsl:with-param name="text" select="substring-after($text,'&#xa;')"/>
+	      </xsl:call-template>
+	   </xsl:when>
+	   <xsl:otherwise>
+		<xsl:value-of select="$text"/>
+	   </xsl:otherwise>
+	   </xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="Order">
+		<xsl:call-template name="break">
+			<xsl:with-param name="text" select="@Memo"/>
+		</xsl:call-template>
+		<xsl:if test="@Memo and not(@Memo = '')">
+			<hr/>
+		</xsl:if>
+		Dear Customer,
+
+		<p/>
+		Thank you for shopping <xsl:value-of select="$Brand"/>.com. Your order number is <xsl:value-of select="@OrderNo"/>. 
+		<xsl:call-template name="OrderStatusMessage"><xsl:with-param name="Brand" select="$Brand"/></xsl:call-template>
+		<br/>
+		Here&apos;s a summary of your order placed on <xsl:value-of select="emailformatters:TextEmailFormat.formatDate(@OrderDate, 'MMM dd, yyyy')"/>:
+		<p/>
+
+		<xsl:call-template name="ShippingDetails">
+			<xsl:with-param name="carrierServiceCode" select="@CarrierServiceCode"/>
+		</xsl:call-template>
+		 
+		<p/>
+		<b>Shipping Address:</b>
+		<xsl:apply-templates select="PersonInfoShipTo"/>
+
+		<p/>
+		<b>Items in this order</b>
+		<table class="table" >
+			<xsl:call-template name="ItemDataHeader"/>
+			<xsl:apply-templates select="OrderLines//OrderLine"/>
+		</table>
+
+		<p/>
+
+		<b>Summary of Charges</b>
+		<table class="table" >
+			<xsl:apply-templates select="OverallTotals[1]"/>
+		</table>
+
+		<p/>
+		<b>Payment Info</b>
+		<br/>
+		<xsl:apply-templates select="PaymentMethods//PaymentMethod"/>
+
+		<p/>
+		You may receive status updates regarding your order, and we will send a confirmation e-mail as soon as we ship your order.
+		<xsl:call-template name="UnsubscribeMessage"><xsl:with-param name="Brand" select="$Brand"/><xsl:with-param name="CustomerEmailID" select="@CustomerEMailID"/></xsl:call-template>
+
+		<p/>
+		<xsl:call-template name="StandardClosingMessage"><xsl:with-param name="Brand" select="$Brand"/><xsl:with-param name="BrandPhoneNumber" select="$BrandPhoneNumber"/></xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="OrderLine">
+	    <xsl:variable name="LineQuantity"><xsl:value-of select="./@OrderedQty"/></xsl:variable>
+	    <xsl:variable name="_UnitPrice"><xsl:value-of select="format-number(LinePriceInfo/@UnitPrice , '.00')"/></xsl:variable>
+	    <xsl:variable name="LineTotal"><xsl:value-of select="format-number($_UnitPrice * $LineQuantity, '.00')"/></xsl:variable>
+
+	    <xsl:call-template name="ItemData">
+		<xsl:with-param name="ItemDesc" select="Item/@ItemDesc"/>
+		<xsl:with-param name="UnitPrice" select="$_UnitPrice"/>
+		<xsl:with-param name="Quantity" select="$LineQuantity"/>
+		<xsl:with-param name="TotalPrice" select="$LineTotal"/>
+		<xsl:with-param name="UnitOfMeasure" select="Item/@UnitOfMeasure"/>
+		<xsl:with-param name="Currency" select="$Currency"/>
+	    </xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="PersonInfoShipTo">
+	    <xsl:call-template name="FormatYantraAddress"/>
+	</xsl:template>
+
+	<xsl:template match="OverallTotals">
+	    <xsl:call-template name="DisplaySummaryOfCharges">
+		  <xsl:with-param name="LineSubTotal" select="@LineSubTotal"/>
+		  <xsl:with-param name="TotalCharges" select="@GrandCharges"/>
+		  <xsl:with-param name="TotalTax" select="@GrandTax"/>
+		  <xsl:with-param name="TotalDiscount" select="@GrandDiscount"/>
+		  <xsl:with-param name="GrandTotal" select="@GrandTotal"/>
+		  <xsl:with-param name="Currency" select="$Currency"/>
+	    </xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="PaymentMethod">
+		<xsl:if test="./@PaymentType='CREDIT_CARD'">
+			<xsl:call-template name="PaymentTypeCreditCard">
+				<xsl:with-param name="CreditCardType" select="./@CreditCardType"/>
+				<xsl:with-param name="DisplayCreditCardNo" select="./@DisplayCreditCardNo"/>
+			</xsl:call-template>
+		</xsl:if>
+
+		<xsl:if test="./@PaymentType='CHECK'">
+			<xsl:call-template name="PaymentTypeCheck">
+				<xsl:with-param name="CheckNo" select="./@CheckNo"/>
+			</xsl:call-template>
+		</xsl:if>
+
+		<xsl:if test="./@PaymentType='SVC'">
+			<xsl:call-template name="PaymentTypeCheck">
+				<xsl:with-param name="PaymentAmount" select="./@PaymentAmount"/>
+				<xsl:with-param name="DisplaySvcNo" select="./@DisplaySvcNo"/>
+			</xsl:call-template>
+		</xsl:if>
+		<br/>
+	</xsl:template>
+
+</xsl:stylesheet>

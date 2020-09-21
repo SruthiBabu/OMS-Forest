@@ -1,0 +1,129 @@
+<html>
+    <body>
+        <form name="frmClosePallet" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ShipmentKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ReceiptHeaderKey"
+                                    mandatory="false"
+                                    name="ReceiptHeaderKey"
+                                    outputbinding="xml:/Receipt/@ReceiptHeaderKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceiptHeaderKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ReceivingDock"
+                                    mandatory="false"
+                                    name="ReceivingDock"
+                                    outputbinding="xml:/Receipt/@ReceivingDock"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ReceivingDock"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@LocationId"
+                                    mandatory="false"
+                                    name="ReceivingLocation"
+                                    outputbinding="xml:/Receipt/@LocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@LocationId"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@OrganizationCode"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Receipt/@OrganizationCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@OrganizationCode"
+                                    type="hidden" validate="false" value=" "/>
+									<input col="1" mandatory="false"
+                                    name="txtClosePallet"
+                                    outputbinding="xml:/Receipt/@ClosePallet"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ClosePallet"
+                                    type="hidden" validate="false" value="Y"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Receipt/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="10" mandatory="false"
+                                    size="11" subtype="Label"
+                                    tag="binding=lblPallet"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblPalletId"
+                                    type="text" validate="false" value="Mobile_Pallet_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/ParentLPN/@PalletId"
+                                    mandatory="false"
+                                    name="txtPalletId"
+                                    outputbinding="xml:/Receipt/@PalletId"
+                                    size="15"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Receipt/@PalletId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblQty" type="text"
+                                    validate="false" value="Mobile_Total_Quantity"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/NodeInventory/@TotalPalletQuantity"
+                                    mandatory="false"
+                                    name="txtTotalQty" size="8"
+                                    subtype="ProtectedText"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfreceive.ppc?action=frmClosePalletUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

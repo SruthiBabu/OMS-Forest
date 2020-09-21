@@ -1,0 +1,142 @@
+<html>
+    <body>
+        <form name="frmOutboundContainerDtl" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Outbound_Container"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@ContainerSCM"
+                                    name="txtContainerSCM" outputbinding="xml:/OutboundContainerDtl/Container/@ContainerSCM"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@ContainerSCM"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@LocationId"
+                                    name="txtLocation" outputbinding="xml:/OutboundContainerDtl/Container/@LocationId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@LocationId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblShipmentNo"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblShipmentNo" value="Mobile_ShipmentNo"
+                                    type="text" validate="false"/>
+									<input col="11" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@ShipmentNo"
+                                    name="txtShipmentNo" outputbinding="xml:/OutboundContainerDtl/Container/@ShipmentNo"
+                                    size="10" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@ShipmentNo"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    name="lblLoadNo"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblLoadNo" value="Mobile_LoadNo"
+                                    type="text" validate="false"/> 
+									<input col="11" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@LoadNo"
+                                    name="txtLoadNo" outputbinding="xml:/OutboundContainerDtl/Container/@LoadNo"
+                                    size="10" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@LoadNo"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblShipDate"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblShipDate" value="Mobile_Ship_Date"
+                                    type="text" validate="false"/>
+                                    <input col="11" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@ShipDate"
+                                    name="txtShipDate" outputbinding="xml:/OutboundContainerDtl/Container/@ShipDate"
+                                    size="10" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@ShipDate"
+                                    type="text" validate="false"/>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblContainerStatus"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblContainerStatus" value="Mobile_Container_Status"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@ContainerStatus"
+                                    name="txtContainerStatus" outputbinding="xml:/OutboundContainerDtl/Container/@ContainerStatus"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@ContainerStatus"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblCarrier"
+                                    size="8" subtype="Label"
+                                    tag="binding=lblCarrier" value="Mobile_Carrier"
+                                    type="text" validate="false"/>
+                                    <input col="10" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@SCAC"
+                                    name="txtCarrier" outputbinding="xml:/OutboundContainerDtl/Container/@SCAC"
+                                    size="8" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@SCAC"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblOpenTask"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblOpenTask" value="Mobile_Open_Tasks"
+                                    type="text" validate="false"/>
+                                    <input col="12" defaultoutput="false"
+                                    inputbinding="xml:/OutboundContainerDtl/Container/@OpenTaskExists"
+                                    name="txtOpenTask" outputbinding="xml:/OutboundContainerDtl/Container/@OpenTaskExists"
+                                    size="2" subtype="ProtectedText"
+                                    tag="binding=xml:/OutboundContainerDtl/Container/@OpenTaskExists"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+                                    subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+                          </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

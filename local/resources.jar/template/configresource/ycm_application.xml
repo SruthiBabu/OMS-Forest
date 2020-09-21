@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FormDefs>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPApplicationRulesTreeBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPTree"
+        Icon=""
+        IsPermissionControlled="Y" Name="YCPPM352">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Use_Default_Configuration"
+                ID="YCPPM352A03"
+                Icon="com/yantra/ycp/ui/icons/deletepickupstatus.gif"
+                IsPermissionControlled="Y" Name="btnUseDefaults"/>
+            <Action Description="Yank_Configuration" ID="YCPPM352A02"
+                Icon="com/yantra/ycp/ui/icons/addpickupstatus.gif"
+                IsPermissionControlled="Y" Name="btnYank"/>
+            <Action Description="Load_Rules_For_Organization"
+                ID="YCPPM352A05"
+                Icon="com/yantra/ycp/ui/icons/activateruleset.gif"
+                IsPermissionControlled="Y" Name="btnLoadOrganization"/>
+            <Action Description="Details" ID="YCPPM352A01"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="Y" Name="btnModify"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPDetailsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMProductItemUOMRules"
+        Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"
+        IsPermissionControlled="N" Name="YCM00074"/>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/instructioncode.gif"
+        IsPermissionControlled="N" Name="YCM00033">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00033A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00033A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00033A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00033A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMCategoriesBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPTree"
+        Icon="com/yantra/ycm/ui/icons/category.gif"
+        IsPermissionControlled="N" Name="YCM00003">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Delete_Category" ID="YCM00003A06"
+                Icon="com/yantra/ycm/ui/icons/deletecategory.gif"
+                IsPermissionControlled="N" Name="DeleteCategory"/>
+            <Action Description="Category_Detail" ID="YCM00003A05"
+                Icon="com/yantra/ycm/ui/icons/modifycategory.gif"
+                IsPermissionControlled="N" Name="ModifyCategory"/>
+            <Action Description="Create_New_Category" ID="YCM00003A04"
+                Icon="com/yantra/ycm/ui/icons/createcategory.gif"
+                IsPermissionControlled="N" Name="CreateCategory"/>
+            <Action Description="Delete_Category_Domain"
+                ID="YCM00003A03"
+                Icon="com/yantra/ycm/ui/icons/deletecategorydomain.gif"
+                IsPermissionControlled="N" Name="DeleteCategoryDomain"/>
+            <Action Description="Category_Domain_Detail"
+                ID="YCM00003A02"
+                Icon="com/yantra/ycm/ui/icons/modifycategorydomain.gif"
+                IsPermissionControlled="N" Name="ModifyCategoryDomain"/>
+            <Action Description="Create_New_Category_Domain"
+                ID="YCM00003A01"
+                Icon="com/yantra/ycm/ui/icons/createcategorydomain.gif"
+                IsPermissionControlled="N" Name="CreateCategoryDomain"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchItem"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00002"/>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPSearchBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMMasterCatalog"
+        Icon="/com/yantra/ycm/ui/icons/mastercatalog.gif"
+        IsPermissionControlled="N" Name="YCM00001"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchServiceItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchServiceItem"
+        Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"
+        IsPermissionControlled="N" Name="YCM00073"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchServiceItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchServiceItem"
+        Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"
+        IsPermissionControlled="N" Name="YCM00072"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchServiceItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchServiceItem"
+        Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"
+        IsPermissionControlled="N" Name="YCM00070"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchServiceItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchServiceItem"
+        Icon="com/yantra/ycm/ui/icons/deliveryitem.gif"
+        IsPermissionControlled="N" Name="YCM00067"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchServiceItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchServiceItem"
+        Icon="com/yantra/ycm/ui/icons/provideditem.gif"
+        IsPermissionControlled="N" Name="YCM00060"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationDefnBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMClassificationDefn"
+        Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"
+        IsPermissionControlled="N" Name="YCM00051"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationValueDtlsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMClassificationValueDtls"
+        Icon="com/yantra/ycm/ui/icons/classifications.gif"
+        IsPermissionControlled="N" Name="YCM00036"/>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/instructiontype.gif"
+        IsPermissionControlled="N" Name="YCPPM260">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCPPM260A04"
+                Icon="com/yantra/ycp/ui/icons/deleteinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCPPM260A03"
+                Icon="com/yantra/ycp/ui/icons/saveasinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCPPM260A02"
+                Icon="com/yantra/ycp/ui/icons/modifyinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCPPM260A01"
+                Icon="com/yantra/ycp/ui/icons/createinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemInstructionDtlsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemInstructionDtls"
+        Icon="com/yantra/ycm/ui/icons/instructiontype.gif"
+        IsPermissionControlled="N" Name="YCM00081">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00081A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMOptionItemDetailsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMOptionItemDetails"
+        Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"
+        IsPermissionControlled="N" Name="YCM00078">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00078A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMUomDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMBasicUomDtl"
+        Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"
+        IsPermissionControlled="N" Name="YCM00076">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00076A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="/com/yantra/ycp/ui/icons/pricesets.gif"
+        IsPermissionControlled="N" Name="YCM00075">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00075A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00075A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00075A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00075A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"
+        IsPermissionControlled="N" Name="YCM00077">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00077A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00077A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00077A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00077A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"
+        IsPermissionControlled="N" Name="YCM00071">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Add_Options_To_Item" ID="YCM00071A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnAddToRelationship"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"
+        IsPermissionControlled="N" Name="YCM00069">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Remove_Options_From_Item"
+                ID="YCM00069A03"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Find_Options_To_Add_To_Item"
+                ID="YCM00069A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemNodeDefnListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCM00064">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00064A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00064A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00064A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00064A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemNodeSearchBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemNodeSearch"
+        Icon="com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCM00063"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMModifyServiceItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMModifyServiceItem"
+        Icon="com/yantra/ycm/ui/icons/serviceitem.gif"
+        IsPermissionControlled="N" Name="YCM00066">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00066A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+            <Action Description="Extended_Attributes" ID="YCM00066A02"
+                Icon="com/yantra/ycp/ui/icons/additionalattributes.gif"
+                IsPermissionControlled="N" Name="btnExtendedAttributes"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMCreateServiceItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMCreateServiceItem"
+        Icon="com/yantra/ycm/ui/icons/serviceitem.gif"
+        IsPermissionControlled="N" Name="YCM00062">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00062A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/itemoptions.gif"
+        IsPermissionControlled="N" Name="YCM00061">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00061A04"
+                Icon="com/yantra/ycm/ui/icons/deleteitem.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00061A03"
+                Icon="com/yantra/ycm/ui/icons/saveasitem.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00061A02"
+                Icon="com/yantra/ycm/ui/icons/modifyitem.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00061A01"
+                Icon="com/yantra/ycm/ui/icons/createitem.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemNodeDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemNodeDefnDtl"
+        Icon="/com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCM00065">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00065A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemServiceAssocBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemServiceAssoc"
+        Icon="com/yantra/ycm/ui/icons/availableservices.gif"
+        IsPermissionControlled="N" Name="YCM00059">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00059A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/availableservices.gif"
+        IsPermissionControlled="N" Name="YCM00058">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00058A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00058A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00058A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00058A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"
+        IsPermissionControlled="N" Name="YCM00056">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00056A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00056A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00056A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00056A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"
+        IsPermissionControlled="N" Name="YCM00055">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00055A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00055A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00055A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00055A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+	<Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="/com/yantra/ycm/ui/icons/associations.gif"
+        IsPermissionControlled="N" Name="YCM00079">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00079A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00079A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00079A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00079A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMQtyUomDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMUomDtl"
+        Icon="com/yantra/ycp/ui/icons/quantityuom.gif"
+        IsPermissionControlled="N" Name="YCM00054">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00054A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="/com/yantra/ycp/ui/icons/quantityuom.gif"
+        IsPermissionControlled="N" Name="YCM00053">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00053A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00053A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00053A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00053A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/classificationpurpose.gif"
+        IsPermissionControlled="N" Name="YCM00050">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00050A03"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Details" ID="YCM00050A02"
+                Icon="com/yantra/ycp/ui/icons/edit.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00050A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationAttributeListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"
+        IsPermissionControlled="N" Name="YCM00042">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00042A03"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Details" ID="YCM00042A02"
+                Icon="com/yantra/ycp/ui/icons/edit.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00042A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationPurposeBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMClassificationPurpose"
+        Icon="com/yantra/ycm/ui/icons/classificationpurpose.gif"
+        IsPermissionControlled="N" Name="YCM00052">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00052A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAddItemNodeBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAddItemNodeDefn"
+        Icon="/com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCM00068">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00068A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAddAlternateUOMBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAddAlternateUOM"
+        Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"
+        IsPermissionControlled="N" Name="YCM00048">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00048A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationAttributeBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMClassificationAttribute"
+        Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"
+        IsPermissionControlled="N" Name="YCM00043">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00043A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00041">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Add_Items_To_Classification" ID="YCM00041A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnAddToRelationship"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchItem"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00040"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationItemListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00039">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Remove_Item_From_Classification"
+                ID="YCM00039A02"
+                Icon="com/yantra/ycm/ui/icons/deleteitemfromcategory.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Find_Items_To_Add_To_Classification"
+                ID="YCM00039A01"
+                Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPDetailsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAvailableServices"
+        Icon="com/yantra/ycm/ui/icons/availableservices.gif"
+        IsPermissionControlled="N" Name="YCM00057"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSingleClassValueDtlsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSingleClassValueDtls"
+        Icon="com/yantra/ycm/ui/icons/classificationvalues.gif"
+        IsPermissionControlled="N" Name="YCM00038">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00038A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationTreeBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPTree"
+        Icon=""
+        IsPermissionControlled="N" Name="YCM00037">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Available_Services" ID="YCM00037A04"
+                Icon="com/yantra/ycm/ui/icons/availableservices.gif"
+                IsPermissionControlled="N" Name="btnAvailableServices"/>
+            <Action Description="Delete_Classification_Value"
+                ID="YCM00037A03"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDeleteClassificationValue"/>
+            <Action Description="Modify_Classification_Value"
+                ID="YCM00037A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModifyClassificationValue"/>
+            <Action Description="Create_Classification_Value"
+                ID="YCM00037A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateClassificationValue"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassificationTreeBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPTree"
+        Icon=""
+        IsPermissionControlled="N" Name="YCM00090"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemInstructionCodeDtlsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemInstructionCodeDtls"
+        Icon="com/yantra/ycm/ui/icons/instructioncode.gif"
+        IsPermissionControlled="N" Name="YCM00034">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00034A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAddComponentBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAddComponent"
+        Icon="com/yantra/ycm/ui/icons/components.gif"
+        IsPermissionControlled="N" Name="YCM00031">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00031A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00024">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Add_Items_To_Category" ID="YCM00024A01"
+                Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+                IsPermissionControlled="N" Name="btnAddToRelationship"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMCreateItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMCreateItem"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00014">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00014A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMModifyItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMModifyItem"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00004">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00004A06"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+            <Action Description="Inherited_Values" ID="YCM00004A05"
+                Icon="com/yantra/ycm/ui/icons/classifications.gif"
+                IsPermissionControlled="N" Name="btnInheritedAttrs"/>
+            <Action Description="Extended_Attributes" ID="YCM00004A04"
+                Icon="com/yantra/ycp/ui/icons/additionalattributes.gif"
+                IsPermissionControlled="N" Name="btnExtendedAttributes"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchItem"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00023"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchItem"
+        Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+        IsPermissionControlled="N" Name="YCM00009"/>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPDetailsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMMasterCatalogDtl"
+        Icon="/com/yantra/ycm/ui/icons/mastercatalog.gif"
+        IsPermissionControlled="N" Name="YCM00013">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00013A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00021">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Remove_Item_From_Category"
+                ID="YCM00021A02"
+                Icon="com/yantra/ycm/ui/icons/deleteitemfromcategory.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Find_Items_To_Add_To_Category"
+                ID="YCM00021A01"
+                Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMInstructionTypeListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/instructiontype.gif"
+        IsPermissionControlled="N" Name="YCM00080">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00080A04"
+                Icon="com/yantra/ycp/ui/icons/deleteinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00080A03"
+                Icon="com/yantra/ycp/ui/icons/saveasinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00080A02"
+                Icon="com/yantra/ycp/ui/icons/modifyinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00080A01"
+                Icon="com/yantra/ycp/ui/icons/createinstructiontype.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemNodeDefnListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="/com/yantra/ycm/ui/icons/nodeitems.gif"
+        IsPermissionControlled="N" Name="YCM00049">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00049A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00049A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00049A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00049A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"
+        IsPermissionControlled="N" Name="YCM00047">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00047A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00047A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00047A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00047A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+	<Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="/com/yantra/ycm/ui/icons/associations.gif"
+        IsPermissionControlled="N" Name="YCM00099">
+		<Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00099A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00099A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00099A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00099A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+	<Form BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior" ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList" Icon="com/yantra/wms/ui/icons/zone.gif" IsPermissionControlled="N" Name="YCM404">
+		<Actions ID="Actions" Name="Actions">
+			<Action Description="CONFIG_Delete" ID="YCM404A01" Icon="com/yantra/ycp/ui/icons/delete.gif" IsPermissionControlled="N" Name="btnDelete" /> 
+		</Actions>
+	</Form>
+	<Form BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior" ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList" Icon="com/yantra/wms/ui/icons/zone.gif" IsPermissionControlled="N" Name="YCM405">
+		<Actions ID="Actions" Name="Actions">
+			<Action Description="CONFIG_Delete" ID="YCM405A01" Icon="com/yantra/ycp/ui/icons/delete.gif" IsPermissionControlled="N" Name="btnDelete" /> 
+		</Actions>
+	</Form>
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMCreateSKUCapacityDefinitionBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMCreateSKUCapacityDefinition"
+        Icon="com/yantra/wms/ui/icons/zone.gif"
+        IsPermissionControlled="N" Name="YCM406">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM406A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemTagBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon=""
+        IsPermissionControlled="N" Name="YCM00045"/>
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemTagBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon=""
+        IsPermissionControlled="N" Name="YCM00046"/>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/components.gif"
+        IsPermissionControlled="N" Name="YCM00030">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00030A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00030A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00030A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00030A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPSubscriptionPanelBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPSubscriptionPanel"
+        Icon="com/yantra/ycp/ui/icons/exclusioncode.gif"
+        IsPermissionControlled="N" Name="YCM00025"/>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAddAssociatedQueryBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAddAssociatedQuery"
+        Icon="/com/yantra/ycm/ui/icons/associations.gif"
+        IsPermissionControlled="N" Name="YCM00011">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00011A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAddAssociatedItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAddAssociatedItem"
+        Icon="com/yantra/ycm/ui/icons/associations.gif"
+        IsPermissionControlled="N" Name="YCM00010">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00010A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMCategoryDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMCategoryDtl"
+        Icon="com/yantra/ycm/ui/icons/category.gif"
+        IsPermissionControlled="N" Name="YCM00019">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00019A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPDetailsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMCategoryDomain"
+        Icon="com/yantra/ycm/ui/icons/categorydomain.gif"
+        IsPermissionControlled="N" Name="YCM00012">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00012A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00022">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Recompute_Cost" ID="YCM00022A05"
+                Icon="com/yantra/ycm/ui/icons/recomputecost.gif"
+                IsPermissionControlled="N" Name="btnDefault"/>
+            <Action Description="CONFIG_Delete" ID="YCM00022A04"
+                Icon="com/yantra/ycm/ui/icons/deleteitem.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00022A03"
+                Icon="com/yantra/ycm/ui/icons/saveasitem.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00022A02"
+                Icon="com/yantra/ycm/ui/icons/modifyitem.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00022A01"
+                Icon="com/yantra/ycm/ui/icons/createitem.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="/com/yantra/ycm/ui/icons/mastercatalog.gif"
+        IsPermissionControlled="N" Name="YCM00020">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00020A04"
+                Icon="com/yantra/ycm/ui/icons/deletemastercatalog.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00020A03"
+                Icon="com/yantra/ycm/ui/icons/saveasmastercatalog.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00020A02"
+                Icon="com/yantra/ycm/ui/icons/modifymastercatalog.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00020A01"
+                Icon="com/yantra/ycm/ui/icons/createmastercatalog.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/kittingservices.gif"
+        IsPermissionControlled="N" Name="YCM00110">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00110A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00110A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00110A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00110A01"
+                Icon="com/yantra/ycp/ui/icons/createaction.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/dekittingservices.gif"
+        IsPermissionControlled="N" Name="YCM00111">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00111A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00111A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00111A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00111A01"
+                Icon="com/yantra/ycp/ui/icons/createaction.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/complianceservices.gif"
+        IsPermissionControlled="N" Name="YCM00112">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00112A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00112A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00112A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00112A01"
+                Icon="com/yantra/ycp/ui/icons/createaction.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/inventorychangeservices.gif"
+        IsPermissionControlled="N" Name="YCM00113">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00113A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00113A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00113A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00113A01"
+                Icon="com/yantra/ycp/ui/icons/createaction.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMModifyActivityServiceBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMModifyActivityService"
+        Icon="com/yantra/ycm/ui/icons/serviceitem.gif"
+        IsPermissionControlled="N" Name="YCM00114">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00114A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>    
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMModifyActivityServiceBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMModifyActivityService"
+        Icon="com/yantra/ycm/ui/icons/serviceitem.gif"
+        IsPermissionControlled="N" Name="YCM00120">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00120A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>  
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMModifyActivityServiceBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMModifyActivityService"
+        Icon="com/yantra/ycm/ui/icons/serviceitem.gif"
+        IsPermissionControlled="N" Name="YCM00121">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00121A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>  
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMModifyActivityServiceBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMModifyActivityService"
+        Icon="com/yantra/ycm/ui/icons/serviceitem.gif"
+        IsPermissionControlled="N" Name="YCM00122">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00122A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>  
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceactivity.gif"
+        IsPermissionControlled="N" Name="YCM00115">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00115A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00115A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00115A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00115A01"
+                Icon="com/yantra/ycp/ui/icons/createaction.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMServiceActivityBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMServiceActivity"
+        Icon="com/yantra/ycm/ui/icons/serviceitem.gif"
+        IsPermissionControlled="N" Name="YCM00116">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00116A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCPActivityInstructionListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/instructiontype.gif"
+        IsPermissionControlled="N" Name="YCM00117">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00117A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00117A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00117A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00117A01"
+                Icon="com/yantra/ycp/ui/icons/createaction.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMServiceActivityInstDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMServiceActivityInstructionDtl"
+        Icon="com/yantra/ycm/ui/icons/instructioncode.gif"
+        IsPermissionControlled="N" Name="YCM00118">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00118A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceactivity.gif"
+        IsPermissionControlled="N" Name="YCM00119">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00119A02"
+                Icon="com/yantra/ycm/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save" ID="YCM00119A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+
+  <!-- Node Item definition resource exposed in wms app tree.-->
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemNodeSearchBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemNodeSearch"
+        Icon="com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCMWMS00063"/>
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemNodeDefnListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCMWMS00064">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCMWMS00064A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Details" ID="YCMWMS00064A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCMWMS00064A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAddItemNodeBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAddItemNodeDefn"
+        Icon="/com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCMWMS00068">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCMWMS00068A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+	 <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemNodeDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemNodeDefnDtl"
+        Icon="/com/yantra/ycm/ui/icons/itemshipnode.gif"
+        IsPermissionControlled="N" Name="YCMWMS00065">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCMWMS00065A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceskills.gif"
+        IsPermissionControlled="N" Name="YCM00082">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00082A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00082A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00082A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00082A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPDetailsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMServiceSkillDtl"
+        Icon="com/yantra/ycm/ui/icons/serviceskills.gif"
+        IsPermissionControlled="N" Name="YCM00083">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00083A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceskills.gif"
+        IsPermissionControlled="N" Name="YCM00084">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00084A02"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Create_New" ID="YCM00084A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceskills.gif" IsPermissionControlled="N" Name="YCM00085">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Add_Service_Skill_To_Service_Item"
+                ID="YCM00085A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnAddToRelationship"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceskills.gif"
+        IsPermissionControlled="N" Name="YCM00086">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00086A02"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Create_New" ID="YCM00086A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceskills.gif" IsPermissionControlled="N" Name="YCM00087">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Add_Service_Skill_To_Service_Association"
+                ID="YCM00087A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnAddToRelationship"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/serviceskills.gif" IsPermissionControlled="N" Name="YCM00088">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Add_Service_Skill_To_Resource_Pool"
+                ID="YCM00088A01"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnAddToRelationship"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAdditionalCapacityListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon=""
+        IsPermissionControlled="N" Name="YCM00092">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00092A01"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAdditionalCapacityBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMAdditionalCapacity"
+        Icon="com/yantra/ycp/ui/icons/slot.gif"
+        IsPermissionControlled="N" Name="YCM00091">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00091A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/servicetypegroup.gif"
+        IsPermissionControlled="N" Name="YCM00094">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00094A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00094A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00094A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00094A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/servicetypegroup.gif"
+        IsPermissionControlled="N" Name="YCM00095">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM00095A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM00095A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM00095A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM00095A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMServiceTypeDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMServiceTypeDtl"
+        Icon="com/yantra/ycm/ui/icons/servicetypegroup.gif"
+        IsPermissionControlled="N" Name="YCM00096">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00096A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMClassItemAttrsBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMClassItemAttrs"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00093">
+        <Actions ID="Actions" Name="Actions">
+	        <Action Description="Extended_Attributes" ID="YCM00093A01"
+				Icon="com/yantra/ycp/ui/icons/additionalattributes.gif"
+				IsPermissionControlled="N" Name="btnExtendedAttributes"/>
+        </Actions>
+	</Form>
+
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMInheritedFromClassificationBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMInheritedFromClassification"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00970" />
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/instructioncode.gif"
+        IsPermissionControlled="N" Name="YCM00971" />
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMAssociationsTreeBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPTree"
+        Icon="com/yantra/ycm/ui/icons/associations.gif"
+        IsPermissionControlled="N" Name="YCM00097">
+		<Actions ID="Actions" Name="Actions">
+			<Action Description="View_Associations" ID="YCM00097A01"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemAttributeListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"
+        IsPermissionControlled="N" Name="YCM00098">
+        <Actions ID="Actions" Name="Actions">
+			<Action Description="Move_Down" ID="YCM00098A04"
+                Icon="com/yantra/ycp/ui/icons/movedown.gif"
+                IsPermissionControlled="N" Name="btnMoveDown"/>
+            <Action Description="Move_Up" ID="YCM00098A03"
+                Icon="com/yantra/ycp/ui/icons/moveup.gif"
+                IsPermissionControlled="N" Name="btnMoveUp"/>
+			<Action Description="Add_Remove_Item_Attributes"
+                ID="YCM00098A02"
+                Icon="com/yantra/ycp/ui/icons/settodaysdate.gif"
+                IsPermissionControlled="N" Name="btnAddRemove"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemAttributeGroupDtlBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMItemAttributeGroupDtl"
+        Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"
+        IsPermissionControlled="N" Name="YCM00100">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM00100A03"
+                Icon="com/yantra/ycm/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+            <Action Description="Undo_Override" ID="YCM00100A02"
+                Icon="com/yantra/ycm/ui/icons/deleteitemfromcategory.gif"
+                IsPermissionControlled="N" Name="btnUndoOverride"/>
+            <Action Description="Override" ID="YCM00100A01"
+                Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+                IsPermissionControlled="N" Name="btnOverride"/>
+        </Actions>
+    </Form>
+	<Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00101">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Delete_Association" ID="YCM00101A03"
+                Icon="com/yantra/ycm/ui/icons/deleteassociations.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Modify_Association" ID="YCM00101A02"
+                Icon="com/yantra/ycm/ui/icons/modifyassociations.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Add_Association" ID="YCM00101A01"
+                Icon="com/yantra/ycm/ui/icons/createassociations.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/query.gif"
+        IsPermissionControlled="N" Name="YCM00102">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Delete_Association" ID="YCM00102A03"
+                Icon="com/yantra/ycm/ui/icons/deleteassociations.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Modify_Association" ID="YCM00102A02"
+                Icon="com/yantra/ycm/ui/icons/modifyassociations.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Add_Association" ID="YCM00102A01"
+                Icon="com/yantra/ycm/ui/icons/createassociations.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemSubscriptionPanelSelectionPopupBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPSubscriptionPanelSelectionPopup"
+        Icon="com/yantra/ycp/ui/icons/user.gif"
+        IsPermissionControlled="N" Name="YCM00103">
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemAttributeSubscriptionPanelBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPSubscriptionPanel"
+        Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+        IsPermissionControlled="N" Name="YCM00104"/>
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMItemAttributeGroupListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM00105">
+		<Actions ID="Actions" Name="Actions">
+			<Action Description="Move_Down" ID="YCM00105A05"
+                Icon="com/yantra/ycp/ui/icons/movedown.gif"
+                IsPermissionControlled="N" Name="btnMoveDown"/>
+            <Action Description="Move_Up" ID="YCM00105A04"
+                Icon="com/yantra/ycp/ui/icons/moveup.gif"
+                IsPermissionControlled="N" Name="btnMoveUp"/>
+			<Action Description="Remove_Local_Group" ID="YCM00105A03"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Details" ID="YCM00105A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create" ID="YCM00105A01"
+                Icon="com/yantra/ycp/ui/icons/new.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+	</Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSingleGroupItemAttributeListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"
+        IsPermissionControlled="N" Name="YCM000106">
+        <Actions ID="Actions" Name="Actions">
+			<Action Description="Move_Down" ID="YCM000106A04"
+                Icon="com/yantra/ycp/ui/icons/movedown.gif"
+                IsPermissionControlled="N" Name="btnMoveDown"/>
+            <Action Description="Move_Up" ID="YCM000106A03"
+                Icon="com/yantra/ycp/ui/icons/moveup.gif"
+                IsPermissionControlled="N" Name="btnMoveUp"/>
+			<Action Description="Add_Remove_Item_Attributes"
+                ID="YCM000106A02"
+                Icon="com/yantra/ycp/ui/icons/settodaysdate.gif"
+                IsPermissionControlled="N" Name="btnAddRemove"/>
+            <Action Description="Undo_Override" ID="YCM000106A05"
+                Icon="com/yantra/ycm/ui/icons/deleteitemfromcategory.gif"
+                IsPermissionControlled="N" Name="btnUndoOverride"/>
+            <Action Description="Override" ID="YCM000106A01"
+                Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+                IsPermissionControlled="N" Name="btnOverride"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM000109">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Add_Items_To_Model_Item" ID="YCM000109A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnAddToRelationship"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMSimpleSearchItemBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMSimpleSearchItem"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM000108"/>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/item.gif"
+        IsPermissionControlled="N" Name="YCM000107">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Remove_Item_From_Model_Children"
+                ID="YCM000107A02"
+                Icon="com/yantra/ycm/ui/icons/deleteitemfromcategory.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Find_Items_To_Add_To_Model_Children"
+                ID="YCM000107A01"
+                Icon="com/yantra/ycm/ui/icons/additemtocategory.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+	<Form
+        BehaviorClassName="com.yantra.ycm.ui.screens.YCMCatalogRulesBehavior"
+        ClassName="com.yantra.ycm.ui.screens.forms.YCMCatalogRules"
+        Icon="com/yantra/ycm/ui/icons/otherservices.gif"
+        IsPermissionControlled="N" Name="YCM000110">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="Save" ID="YCM000110A01"
+                Icon="com/yantra/ycp/ui/icons/save.gif"
+                IsPermissionControlled="N" Name="btnSave"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycm/ui/icons/add.gif"
+        IsPermissionControlled="N" Name="YCM000111">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM000111A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM000111A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM000111A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM000111A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+    <Form
+        BehaviorClassName="com.yantra.ycp.ui.screens.YCPGenericListBehavior"
+        ClassName="com.yantra.ycp.ui.screens.forms.YCPGenericList"
+        Icon="com/yantra/ycp/ui/icons/location.gif"
+        IsPermissionControlled="N" Name="YCM000112">
+        <Actions ID="Actions" Name="Actions">
+            <Action Description="CONFIG_Delete" ID="YCM000112A04"
+                Icon="com/yantra/ycp/ui/icons/delete.gif"
+                IsPermissionControlled="N" Name="btnDelete"/>
+            <Action Description="Save_As" ID="YCM000112A03"
+                Icon="com/yantra/ycp/ui/icons/saveas.gif"
+                IsPermissionControlled="N" Name="btnSaveAs"/>
+            <Action Description="Details" ID="YCM000112A02"
+                Icon="com/yantra/ycp/ui/icons/modify.gif"
+                IsPermissionControlled="N" Name="btnModify"/>
+            <Action Description="Create_New" ID="YCM000112A01"
+                Icon="com/yantra/ycp/ui/icons/add.gif"
+                IsPermissionControlled="N" Name="btnCreateNew"/>
+        </Actions>
+    </Form>
+</FormDefs>
+

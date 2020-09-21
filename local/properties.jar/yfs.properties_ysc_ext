@@ -1,0 +1,2923 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management  (5725-D10), IBM Order Management (5737-D18)
+# IBM Sterling Configure Price Quote (5725-D11)
+# (C) Copyright IBM Corp. 2005, 2018 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_ysc_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_ysc_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## This file contains the yfs properties to configure the supply chain specific behaviors in the product.
+## PROPERTY_FILE_DETAIL_END
+
+########## Business Intelligence Properties
+
+## PROPERTY_START
+## PROPERTY_NAME: analytics.portal.url
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Powerplay Business Intelligence
+## Launch URI:Uncomment the line below and replace the <machine> with the Cognos Upfront installation machine name/ip address
+## Do not change anything else in the URI, else Business Intelligence access will fail.
+## analytics.portal.url=http://<machine>/cognos/cgi-bin/login.cgi?signon=#USERID#&password=#PASSWORD#&return_url=upfcgi.exe
+analytics.portal.url=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: analytics.reportnet.url
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Reportnet Business Intelligence
+## Replace the <host>:<port> with the Cognos Connection machine name/ip address and port number.
+## Change "ibmcognos" if you have deployed cognos with a different context path.
+## Change cgi-bin/cognos.cgi if you are using a different handler such as isapi
+## analytics.reportnet.url=http://<host>:<port>/ibmcognos/cgi-bin/cognos.cgi
+analytics.reportnet.url=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: analytics.namespace
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Business Intelligence Namespace
+## This indicates the namespace that has been configured in Cognos authentication, against which the users would be authenticated. Default value "smcfs"
+analytics.namespace=smcfs
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.inventory.sortandlock
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Setting this property to Y will prevent dead locking on YFS_Inventory_Item table during order creation and when sychronizing changes
+## from a shipment back to the order.  This parameter is only used if the order contains a logical kit, or when a shipment contains shipment
+## lines from different orders.
+## Setting this property to Y will result into holding lock on YFS_Inventory_Item table for longer period. So, this may degrade
+## overall system performance. Because of this reason, you should set this property to Y only if you are getting excessive dead locks
+## on YFS_Inventory_Item table.
+#yfs.inventory.sortandlock=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.install.applyshipdateoptimization
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## set this property to "N" if allocation should not optimize releases based on ReqShipDate.
+yfs.install.applyshipdateoptimization=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.rcp.ui.pagesize
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property sets the maximum number of records to display on a single page in the Table on the Search List screen.
+## This property will be used by PCA Applications.
+## Default value is 30, user can change this according to his requirements.
+yfs.rcp.ui.pagesize=30
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.closemanifest.online
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Manifesting options. Set this property to N to close manifest asyncronously using the CLOSE_MANIFEST Agent.
+yfs.closemanifest.online=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.confirmbatch.online
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Batch completion options.
+## Set this property to N to complete batch asyncronously using the REQ_BATCH_COMPLETION Agent.
+yfs.confirmbatch.online=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.reopentask.time
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The re-open task agent will change the status of a suggested task back to open status,
+## if the task is not modified for the time specified by this property. This property is specified
+## in hours. The default is 1 hour.
+yfs.reopentask.time=1
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.urlforhelp.path
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This controls where the link to the online help will go.
+## The value must begin and end in a forward slash (/) to ensure proper behavior.
+## Default value is /wwhelp/wwhimpl/common/html/wwhelp.htm
+yfs.urlforhelp.path=/wwhelp/wwhimpl/common/html/wwhelp.htm
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.heightforhelp.path
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This controls height for the online help.
+## Default value is 590
+yfs.heightforhelp.path=390
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.widthforhelp.path
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This controls width for the online help.
+## Default value is 715
+yfs.widthforhelp.path=515
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.serial.receiving
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set the following property to 'Y' to process one serial at a time
+## during receiving i.e on scanning one serial user is taken to Disposition Code
+## entry screen.
+yfs.serial.receiving=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.releasetaskagent.mode
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## releaseTaskAgent uses the below mentioned property to select the mode of execution
+## for releasing tasks.
+## 01: Location Driven. All the pending tasks from the location are evaluated.
+## 02: Reference(eg. ShipmentNo) Driven. All the pending tasks for the reference are evaluated.
+## The default value of this property is 01 (ie Location Driven).
+yfs.releasetaskagent.mode=01
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.retain.pack.tasks.for.minutes
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## In case of item driven packing, shipment level pack tasks are created in order to
+## reserve the shipment against the packer. And, once the shipment packing is
+## complete, these tasks are deleted from from DB.
+## Due to some reason if packing for this shipment could not be completed by the packer,
+## these idle pack tasks blocks other users from packing this shipment.
+## This property can used to define maximum time, in minutes, for which the shipment level
+## idle pack tasks are retained. If it is set to 120, and a user scans a Pallet
+## in Pack HSDE, pack tasks created 120 minutes before will be deleted so that the
+## unpacked blocked shipment becomes available to other users. The default value
+## is taken as 60 minutes.
+yfs.retain.pack.tasks.for.minutes=60
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.override.user.constraints.for.manually.assigned.task
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Based on this property, the maximum user constraints defined for a task type will be evaulated.
+## If task is manually assigned to a user and this property is set to Y,
+## the maximun user constraint defined for task type will not be honoured.
+## To retain the existing behavior, set this property to N
+yfs.override.user.constraints.for.manually.assigned.task=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.displayTaskInfoDetails
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to 'Y' to show the task details (Pick Location, Item ID and
+## Quantity ) in RF mobile terminal when tasktype is defined to say pick onto
+## equipment. This provides user an ability to determine whether he needs to carry
+## a pallet/case to pick inventory even before he goes to the pick location.
+yfs.displayTaskInfoDetails=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.transferPreparation.minTimeReq
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Set this property with the minimum time (Hours) required for transfer preparation.
+## This property is used by all Promising and Scheduling API's.
+## The default value is 0 and supported maximum value is 24 HRs.
+yfs.transferPreparation.minTimeReq=0
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.allow.container.quantity.adjustment
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## In case of picking through mobile application if user picks a full LPN,
+## system currently doesn't provide an option to adjust the discrpencies.
+## To allow user to adjust the discrepencies in the license plates,the below property needs to be set to Y.
+## If this property is not set or set to N, system will retain the current behavior.
+yfs.allow.container.quantity.adjustment=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.gridLayout.maximumRecords
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to limit the number of records shown in grid screens in
+## Mobile Application. For vt220 client, because of memory implications,
+## this property shouldn't be set to more than 7.
+## If this property is not set or is not a positive integer, the default value would be taken as 7.
+yfs.gridLayout.maximumRecords=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.canceltask.onshortpick.tasktypelist
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## In case of picking through mobile application if user reports a short pick exception which involves
+## suggestion of alternate pick location, system moves the tasks to held status incase of failure
+## of alternate pick location suggestion. To allow user to cancel these held tasks for certain task types, the below
+## property needs to be set to a comma seperated values of task types.
+## If this property is not set or task is not of the task type mentioned in the list, system will retain the current behavior.
+yfs.canceltask.onshortpick.tasktypelist=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.massageapioutput.registerextnpoint
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## If the user exit 'YCPMassageApiOutput is not implemented, then this property
+## can be set to 'N'. By default it is set to 'Y'. If this property is set to 'N'
+## then the extension point to modify the API output, is not registered.
+yfs.massageapioutput.registerextnpoint=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.install.displaydoublequantity
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Installation
+## Set this property to "Y" in installs using fractional quantities for order lines
+yfs.install.displaydoublequantity=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.dsg.api.disable
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to set the list of Api's for which the data security will not be applied.
+## The property can be set by passing a comma seperated list of Api's.
+## By default the system will appply data security to all the security enabled Api's.
+## Refer to the documentation for the list of Api's for which the security is enabled.
+yfs.dsg.api.disable=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.searchIndex.rootDirectory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property are used by the Catalog Index Build Agent and Search logic
+## A rootDirectory property must be set before building an index.
+yfs.searchIndex.rootDirectory=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.searchIndex.maxRetryCount
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property are used by the Catalog Index Build Agent and Search logic
+## A rootDirectory property must be set before building an index.
+yfs.searchIndex.maxRetryCount=24
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.searchIndex.maxNumberOfErrors
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property are used by the Catalog Index Build Agent and Search logic
+## A rootDirectory property must be set before building an index.
+yfs.searchIndex.maxNumberOfErrors=3
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.searchIndex.sleepCount
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property are used by the Catalog Index Build Agent and Search logic
+## A rootDirectory property must be set before building an index.
+yfs.searchIndex.sleepCount=300000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cache.size.regionmap
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to set the cache size for maintaining an LRU cache of RegionMaps. If a RegionMap
+## needs to be inserted into the cache beyond this size, then the least recently accessed RegionMap is
+## removed from the map to make room for the new RegionMap.
+yfs.cache.size.regionmap=10000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.loftware.tcpip.sockets
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+yfs.loftware.tcpip.sockets=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.loftware.tcpip.sockets.mode
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+yfs.loftware.tcpip.sockets.mode=NOWAIT
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssdcs.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property control interactions with the Secure Data Capture
+## Server.  The URL and path components are used to locate the servlet and JSP
+## on the SSDCS, while the flags control which payment types are effected.
+yfs.ssdcs.url=https://host:port/ssdcs
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssdcs.servlet
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property control interactions with the Secure Data Capture
+## Server.  The URL and path components are used to locate the servlet and JSP
+## on the SSDCS, while the flags control which payment types are effected.
+yfs.ssdcs.servlet=/tokenize
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssdcs.jsp
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property control interactions with the Secure Data Capture
+## Server.  The URL and path components are used to locate the servlet and JSP
+## on the SSDCS, while the flags control which payment types are effected.
+yfs.ssdcs.jsp=/jsp/ssdcs_tokenize_pan.jsp
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssdcs.tokenize.svc
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property control interactions with the Secure Data Capture
+## Server.  The URL and path components are used to locate the servlet and JSP
+## on the SSDCS, while the flags control which payment types are effected.
+yfs.ssdcs.tokenize.svc=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssdcs.tokenize.cc
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property control interactions with the Secure Data Capture
+## Server.  The URL and path components are used to locate the servlet and JSP
+## on the SSDCS, while the flags control which payment types are effected.
+yfs.ssdcs.tokenize.cc=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.shipmentPurge.shipmentPurgeNumDaysToExecute
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Set this property with the Number of Days to Execute for the Shipment Purge Agent.
+## This property is used to decide the Date Window processed by the Agent in a run.
+## This should be used to improve performance if the volume of shipment data is huge.
+## The default value is 0 and supported values are positive integers only.
+yfs.shipmentPurge.shipmentPurgeNumDaysToExecute=0
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ignorePaymentEncryptionForPurgeAndRestore
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## If user does not want encryption logic to be called at the time of Purge and RestoreOrder.
+## Then set the following property to Y
+yfs.ignorePaymentEncryptionForPurgeAndRestore=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.<Organization>.MultiStopTransfer
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to define the relationship type for multistoptransfer for a particular organization...
+## If you do not specify organization then we assume that it is for all the organizations...
+#yfs.<Organization>.MultiStopTransfer=<Relationship Type>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YSCMultiStopTransferCacheManager.object.size
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property are used to maintain the cache in multistoptransfer...
+## YSCMultiStopTransferCacheManager.object.size = define the size of the cache.
+YSCMultiStopTransferCacheManager.object.size=10000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YSCMultiStopTransferCacheManager.skipcache
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## This property are used to maintain the cache in multistoptransfer...
+## YSCMultiStopTransferCacheManager.skipcache = set this property to true if you want to skip the cache.
+YSCMultiStopTransferCacheManager.skipcache=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: enable.resource.addition
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Set this property for adding new resources from Application Manager and currently
+## by Sterling Web application. The default value is false.
+enable.resource.addition=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.manageItem.EnableUpdateOfAdditionalAttribute
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to enable manageItem API to run in the backward compatibility (BC) mode similar to modifyItem API.
+## If this property is set to 'Y', the BC mode would be enabled.
+## If this property is not set or set to N, system will retain the current behavior.
+yfs.manageItem.EnableUpdateOfAdditionalAttribute=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.encoding.standard.for.prints
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to encode characters during prints. Set appropriate encoding standard for this property.
+## By default this property is set UTF-8 encoded.
+yfs.encoding.standard.for.prints=UTF-8
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.manifest.manifestAtContainerLevelForDomesticParcelShipment
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property for having manifest at container level for Domestic Parcel
+## Shipments while integrating with Pierbridge.
+yfs.manifest.manifestAtContainerLevelForDomesticParcelShipment=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sterling.foundation.version
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Foundation Product version
+sterling.foundation.version=9.5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.closeManifest.doInventoryUpdatesOfflineOnConfirmShipment
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## The below property will pass DoInventoryUpdatesOffline=Y or N based on what is set
+## here, to confirm Shipment call from within close Manifest to improve performance.
+yfs.closeManifest.doInventoryUpdatesOfflineOnConfirmShipment=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: app.context.keys
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: N
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This properties is used by Change Project Management feature and should not be changed.
+app.context.keys=ChangeProjectKey,ChangeRequestKey,StoreType,LaneType,Channel,OverrideUserID
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.manageItem.InheritClassificationExtnAttributesOnly
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used during manageItem for the inheritance of extension columns' values from model item to child item.
+## If this property is set to Y, the extension columns that are used for classification are only inherited from model item to child item.
+## If this property is not set or set to N, all extension columns are inherited from model item to child item.
+## By default this property is set to N
+yfs.manageItem.InheritClassificationExtnAttributesOnly=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sc.file.upload.maxfilesize.YFS_UPLOAD_JOB
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Specifies the maximum size of the file that can be uploaded per installation,
+## specified either in bytes (B), kilobytes (KB), megabytes (MB) or gigabytes (GB).
+## The default value is 10 MB.
+## To have no file size limit, the value should be -1.
+##Use sc.file.upload.maxfilesize.<table_name> to specify the maximum size
+## of the file that can be uploaded for a table whose name is <table_name>,
+## for example, sc.file.upload.maxfilesize.YFS_USER=[something].
+## sc.file.upload.maxfilesize=10MB
+sc.file.upload.maxfilesize.YFS_UPLOAD_JOB=4MB
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sc.file.upload.allowedfiletypes.YFS_UPLOAD_JOB
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Specifies the file types that can be uploaded per installation.
+## To have no restrictions on the allowed file types, set the property to all.
+## Note: if the defaulted values are removed, then an exception will be thrown during the file upload.
+## Use the sc.file.upload.allowedfiletypes.<table_name> property to specify
+## the file types that can be uploaded for the specified table.  The <table_name>
+## variable is the parent table name for which files are being attached.
+## sc.file.upload.allowedfiletypes=*.csv
+sc.file.upload.allowedfiletypes.YFS_UPLOAD_JOB=*.csv
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sc.file.upload.dir
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+sc.file.upload.dir=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sc.file.upload.type
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+sc.file.upload.type=ONSUBMIT
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sc.uploadjob.purge.days
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: Y
+## PROPERTY_GROUP: Master Upload Functionality
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Specifies the number of days(from the date of creation of the Upload Jobs), after which  the upload jobs
+## are considered to be purged from the system.
+## The default value is 5 Days.
+sc.uploadjob.purge.days=5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.providerurl
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.providerurl=corbaloc::<host>:<bootstrap port>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.import.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.import.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.import.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.import.qcf=<QueueConnectionFactory Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.export.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.export.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.export.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.export.qcf=<QueueConnectionFactory Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.pricing.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.pricing.qcf=<QueueConnectionFactory Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.getitempriceue.request.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.getitempriceue.request.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.getitempriceue.response.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.getitempriceue.response.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.getorderpriceue.request.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.getorderpriceue.request.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.getorderpriceue.response.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.getorderpriceue.response.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.getpricingruledetailsue.request.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.getpricingruledetailsue.request.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.getpricingruledetailsue.response.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.getpricingruledetailsue.response.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.validatecouponue.request.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.validatecouponue.request.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.validatecouponue.response.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.validatecouponue.response.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.changeorderonsuccess.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.changeorderonsuccess.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.changeorderoncancel.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.changeorderoncancel.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.createorderonsuccess.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.createorderonsuccess.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: scwc.integration.apis.sendinventorychanges.event.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+scwc.integration.apis.sendinventorychanges.event.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.massageapiinput.registerextnpoint
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## If the user override functionality is not implemented, then this property
+## should be set to 'N'. By default it is set to 'Y'.
+## If this property is set to 'Y'  then the extension point to read user override information
+## in API input, is  registered.
+yfs.massageapiinput.registerextnpoint=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.iehs.hostname
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help IEHS framework.
+yfs.iehs.hostname=pic.dhe.ibm.com
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.iehs.port
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help IEHS framework.
+yfs.iehs.port=80
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.iehs.helpcontext
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help IEHS framework.
+yfs.iehs.helpcontext=infocenter/ssfs/v9r3
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.online.help.url
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help IEHS framework.
+yfs.online.help.url=http://pic.dhe.ibm.com:80/infocenter/ssfs/v9r3/index.jsp
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.local.iehs.help
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help IEHS framework.
+yfs.local.iehs.help=false;
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.kc.hostname
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help KC framework.
+yfs.kc.hostname=www.ibm.com
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.kc.port
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help KC framework.
+yfs.kc.port=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.kc.helpcontext
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help KC framework.
+yfs.kc.helpcontext=support/knowledgecenter
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.kc.default.pid
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help Knowledge Center framework to identify the documentation SSID for IBM Order Management and Call Center.
+## For eg: SSID for the On-Premise version 'IBM Sterling Order Management' is 'SS6PEW' whereas the On-Cloud offerings till v16.4.12, released 
+## under the umbrella 'IBM Commerce on Cloud' were with SSID 'SSWT7D', and the releases from v17.1.3 are live on Knowledge Center with SSID 'SSGTJF'.
+## The releases after On-Prem v9.5.0 are offered only on Cloud and hence this property is defaulted to the SSID of the respective release 
+## to get the documentation of On-Cloud features. 
+yfs.kc.default.pid=SSGTJF
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.wsc.kc.default.pid
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## For eg: SSID for the On-Premise version 'IBM Sterling Store' is 'SS6PEW' whereas the On-Cloud offerings till v16.4.12, released 
+## under the umbrella 'IBM Commerce on Cloud' were with SSID 'SSWT7D', and the releases from v17.1.3 are live on Knowledge Center with SSID 'SSGTZV'.
+## The releases after On-Prem v9.5.0 are offered only on Cloud and hence this property is defaulted to the SSID of the respective release 
+## to get the documentation of On-Cloud features. 
+yfs.wsc.kc.default.pid=SSGTZV
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.kc.version
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used by online help KC framework.
+## For eg: 9.5.0 is the last version of On-Premise release of 'IBM Sterling Order Management' 
+## whereas the On-Cloud offerings till v16.4.12 were documented under the version 16.2.6. 
+## The releases after On-Prem v9.5.0 are offered only on Cloud and hence customers are requested 
+## to set this property to the documentation edition version (if any) of the respective On-Cloud Releases. 
+## Please reach out Technical Support team to get this information for On-Cloud offerings and set accordingly.
+yfs.kc.version=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.item.attrs.max.records.forquery
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to prevent an overly long query on Additional_Attributes
+## table when there are too many item attribute-based pricing rules.
+## If number of attributes exceeds this value, attributes are evaluated in the API
+## rather than in the query.
+yfs.item.attrs.max.records.forquery=100
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.pricing.upgrade.complete
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used to check status of pricing upgrade.
+yfs.pricing.upgrade.complete=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.track.api.input
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## This property is used by Manager Overrides to track api information.
+yfs.track.api.input=true
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ItemProperties.cache.size
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used for item Properties Caching.
+## yfs.ItemProperties.cache.size = define the size of the cache.
+yfs.ItemProperties.cache.size=10000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ItemProperties.cache.disabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used for item Properties Caching.
+## yfs.ItemProperties.cache.disabled = set this property to true if you want to skip the cache.
+yfs.ItemProperties.cache.disabled=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.promotionrules.cache.maxsize.toload
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used for pricing rules JVM level Caching(Note: This is different from the existing DB caching) .
+## yfs.promotionrules.cache.maxsize.toload = Defines the maximum number of rules if present to use the cache
+yfs.promotionrules.cache.maxsize.toload=50000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.pricelistheader.cache.maxsize.toload
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used for pricing rules JVM level Caching(Note: This is different from the existing DB caching) .
+## yfs.pricelistheader.cache.maxsize.toload = Defines the maximum number of priceListHeaders if present to use the cache
+yfs.pricelistheader.cache.maxsize.toload=50000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.pricelistheader.cache.disabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used for pricing rules JVM level Caching(Note: This is different from the existing DB caching) .
+## yfs.pricelistheader.cache.disabled = used for disabling the pricelistheader JVM caching
+yfs.pricelistheader.cache.disabled=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.promotionrules.cache.disabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used for pricing rules JVM level Caching(Note: This is different from the existing DB caching) .
+## yfs.promotionrules.cache.disabled = used for disabling the promotionrules JVM caching
+yfs.promotionrules.cache.disabled=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.pricing.cache.testmode
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used for testing the price caching in test mode .
+## yfs.pricing.cache.testmode = Defines whether the pricing is running in the internal sterling cache test mode.
+yfs.pricing.cache.testmode=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.overrides.cache.testmode
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used for testing manager overrides rule caching in test mode.
+## yfs.overrides.cache.testmode = Defines whether manager overrides is running in the internal sterling cache test mode.
+yfs.overrides.cache.testmode=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ChangeDataPublisherExportDirectory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## ChangeDataPublisherExportDirectory - location of the zip files created by the export agent
+yfs.ChangeDataPublisherExportDirectory=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ChangeDataPublisherWorkingDirectory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## ChangeDataPublisherWorkingDirectory - working directory for export agent, can be the same as the export dir
+yfs.ChangeDataPublisherWorkingDirectory=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ChangeDataPublisherCompletionDirectory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## ChangeDataPublisherCompletionDirectory - location of xml files, can be the same as the export dir
+yfs.ChangeDataPublisherCompletionDirectory=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ChangeDataPublisherFilePrefix
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## ChangeDataPublisherFilePrefix - prefix to put on exported files - can be blank
+yfs.ChangeDataPublisherFilePrefix=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ChangeDataImportDirectory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## ChangeDataImportDirectory - location of zip files to be imported
+yfs.ChangeDataImportDirectory=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.changeImport.sleepCount
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## changeImport.sleepCount - number of milliseconds to sleep between retries
+yfs.changeImport.sleepCount=60000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.changeImport.maxRetryCount
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## changeImport.maxRetryCount - number of retry attempts before the Import agent raises failure event
+yfs.changeImport.maxRetryCount=30
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.changeExport.maxRetryCount
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Properties used by Change Data Management and Data Sync agents
+## changeExport.maxRetryCount - number of retry attempts before the Export agent raises failure event
+yfs.changeExport.maxRetryCount=30
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.customer.details.use.hierarchical.query
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to leverage hierarchical query functionality provided in
+## Oracle database while fetching Customer Details, to fetch only the relevant
+## customer hierarchy till the Root Customer.
+## This is applicable only for Oracle database, and will improve the performance
+## if the number of Customers are very large with only a few Root Customers
+## and customer hierarchy spanning only a few levels.
+yfs.customer.details.use.hierarchical.query=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.synchLoadedInventory.onInvMismatchEventListSize;
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to indicate the maximum number of inventory mismatch records to be included in one event
+yfs.synchLoadedInventory.onInvMismatchEventListSize;=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.loadInventoryMismatch.maxNumRecordsPerBatch
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to indicate the maximum number of inventory mismatch records to be processed in one batch for
+## loadInventoryMismatch
+yfs.loadInventoryMismatch.maxNumRecordsPerBatch=1000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.RealisticQuantityForInfiniteInventory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used to specify a number to represent infinite inventory in promising.
+#yfs.RealisticQuantityForInfiniteInventory=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.setInvoiceCompleteForCancelledLines
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used to set the invoice complete flag for cancelled lines in an order
+yfs.setInvoiceCompleteForCancelledLines=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: api.colony.indexer
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: disabled,ssi,nonindexed,<a custom value>
+## PROPERTY_DESCRIPTION
+## This property is used to decide the logic that is used to determine the shards from where data
+## needs to be obtained for get-list operations
+## Allowed Values :
+## 1. disabled - This disables obtaining data from other shards.
+## 2. ssi - Uses the out of box 'Sterling Search Index' index to determine the shards to obtain data from.
+## 3. nonindexed - To be used when sharding is used, but search index is not to be used to determine the shards to obtain data from. This ensures that data is obtained from ALL SHARDS.
+## 4. <custom value> - Any custom implementation to be used to determine shards to obtain data from. Use the property 'api.colony.indexer.<custom value>.class' below to provide the name of the implementing class.
+## Default Value : disabled
+api.colony.indexer=disabled
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: api.colony.indexer.<custom value>.class
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## If '<custom value>' is chosen above, provide the fully qualified class name of the class implementing
+## com.ibm.sterling.afc.colony.indexer.PLTIndexingService
+#api.colony.indexer.<custom value>.class=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: api.colony.indexer.ssi.class
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: N
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property indicates the class name which provides the OOB implementation for index search.
+## This is not to be modified.
+api.colony.indexer.ssi.class=com.yantra.ssi.core.searcher.ColonySearcher
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: api.colony.indexlookup.processing
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: INTERSECTION
+## PROPERTY_DESCRIPTION
+## There are APIs enabled to search against multiple indices. This property is to decide the behaviour
+## # when the input to the API contains attributes from both the indices. If the value is unset, the
+## # behaviour is to process the index corresponding to the indexLookup element appearing first in
+## the input XML definition. If the value is set to 'INTERSECTION', search will be performed against
+## all the indices enabled for that API, and the intersection of the results will be used to determine
+## the colonies to obtain data from.
+## 
+## If api.colony.indexer is set to either disabled or nonindexed, this property is ignored.
+## Allowed Values:
+## 1. INTERSECTION
+## 2. <blank>
+## Default Value : INTERSECTION
+api.colony.indexlookup.processing=INTERSECTION
+## PROPERTY_END
+
+######## Search Index Properties - Begin   ########
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.enabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## 
+## Set this property to 'Y' to enable the 'Sterling Search Index' feature. This will index all
+## entities that are enabled for indexing (e.g. Order, Shipment). Note that this MUST be
+## enabled if 'api.colony.indexer' above is set to 'ssi'
+## Allowed Values: Y, N
+## Default Value: N
+yfs.ssi.enabled=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.disabled.entities
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## According to Sterling Search Index, the Entity Indexing is enabled in the entity configuration.
+## The attributes to be indexed is also configured at the same place. The propagation of indexable
+## content from Sterling transactions to the physical search index is handled in the backend framework
+## and is unconditional except providing a facility to turn it off globaly by setting yfs.ssi.enabled=N.
+## 
+## There are various 'indexing' entities enabled for for distinct purposes in Sterling OM. Setting the above
+## property will enable them all. Customers are therefore requested to assess these purposes, identify the
+## entities which are not required to index, disable them and avoid populating search index unnecessarily.
+## 
+## The below property disables indexing for the entities.
+## This is a comma separated list of XMLName of the entities on which indexing to be disabled.
+yfs.ssi.disabled.entities=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.search.engine.name
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property holds the name of the search engine.
+## Based on the name provided here, other properties will be looked up from below.
+## If a custom implementation is being provided, specify a <custom value> here. Then uncomment
+## properties corresponding to <custom value> below
+## Allowed values:
+## 1. elasticsearch
+## 2. <custom value>
+## Default value: elasticsearch
+yfs.ssi.search.engine.name=elasticsearch
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.search.engine.<custom value>.class
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property indicates the class name that provides the implementation of the search engine client.
+## The property corresponding to search engine name 'xyz', would be 'yfs.ssi.search.engine.xyz.class'.
+## Therefore, if <custom value> is chosen as the search.engine.name, provide the fully qualified class name
+## under 'yfs.ssi.search.engine.<custom value>.class' property below.
+## 
+## Uncomment and set the following to use with the <custom value> implementation:
+#yfs.ssi.search.engine.<custom value>.class=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.search.engine.elasticsearch.class
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: N
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The following enables the out of box elasticsearch implementation. Do not change.
+yfs.ssi.search.engine.elasticsearch.class=com.yantra.ssi.provider.elasticsearch.ElasticSearchClient
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.batch.index.periodicity.secs
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property determines the periodicity with which search index will be updated through a batch
+## operation. The value provided here is the time in seconds after which another batch will
+## be submitted to the search engine.
+yfs.ssi.batch.index.periodicity.secs=3
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## This property enables the 'fast fail' logic. The fast fail logic ensures that upon
+## 'continuous failure', indexing into the search engine and searching from the search
+## engine would be stopped temporarily until the problem is fixed.
+## 
+## In case of continuous failure in either indexing or search operation, the corresponding operation
+## is not attempted again until the user fixes the problem and re-enables the operation. Please refer
+## to the documentation for more details on the API or SMA UI to be used to re-enable the operation.
+## 
+## The index and search operations are tracked separately and the successes and failures on both the
+## operations are sampled apart on each JVM (application or agent/integration servers) that
+## does the said operation. The sampled events are used to determine if there has been a 'continuous failure'.
+## 
+## Once a 'continuous failure' is determined by any one JVM the same is communicated to all the others,
+## and the search/index operations are stopped on all the JVMs. The user is also notified of the same,
+## so he can take corrective measures and re-enable index/search operations.
+## 
+## The definition of what constitues a 'continuous failure' can be configured through a set of properties.
+## 
+## Note that if the indexing operation continuously fails, the search operation is also automatically
+## disabled. This is to avoid searching on an index which is now very likely dirty (since indexing
+## operation has been continuously failing for some time).
+yfs.ssi.fail.fast=true
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast.index.monitor.time.mins
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The minimum duration of time (in mins) the index operation should fail to be treated as a 'continuous failure'
+## situation.
+## 
+## Indexing operation is said to continuously fail under the following conditions:
+## a. If at least 50 (configurable) index operations were performed in a given JVM in the last
+## 10 mins (configurable), and if there are at least 90% (configurable) of failures in that sample.
+## b. If less than 50 index operations were performed in a given JVM in the last 10 mins, and among
+## the last 50 samples, there is a 90% failure (irrespective of how long it took for 50 index
+## operations to occur)
+## 
+## E.g. If there is a load of 30 index operations per minute overall, and there are five application
+## servers in the cluster to handle that load, each application server would be handling 60 such operations
+## in 10 minutes. In such a case, the condition 'a' above will apply, and continuous failure will be determined
+## based on 90% failure in this sample of 60 operations, viz. 54 failures out of 60. If, on the other hand,
+## there were ten application servers handling the same load, there would have been only 30 such operations in
+## 10 minutes. In that case, the condition 'b' is applied, and failure is determined only if there are
+## 45 failures (90% of 50) in the last 50 index operations.
+## 
+## This property is '10' in the example above and is one among the three configurable settings.
+## Default Value: 10
+yfs.ssi.fail.fast.index.monitor.time.mins=10
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast.index.min.sample.count
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The minimum sample count to be used to determine a 'continuous failure' situation.
+## 
+## Indexing operation is said to continuously fail under the following conditions:
+## a. If at least 50 (configurable) index operations were performed in a given JVM in the last
+## 10 mins (configurable), and if there are at least 90% (configurable) of failures in that sample.
+## b. If less than 50 index operations were performed in a given JVM in the last 10 mins, and among
+## the last 50 samples, there is a 90% failure (irrespective of how long it took for 50 index
+## operations to occur)
+## 
+## E.g. If there is a load of 30 index operations per minute overall, and there are five application
+## servers in the cluster to handle that load, each application server would be handling 60 such operations
+## in 10 minutes. In such a case, the condition 'a' above will apply, and continuous failure will be determined
+## based on 90% failure in this sample of 60 operations, viz. 54 failures out of 60. If, on the other hand,
+## there were ten application servers handling the same load, there would have been only 30 such operations in
+## 10 minutes. In that case, the condition 'b' is applied, and failure is determined only if there are
+## 45 failures (90% of 50) in the last 50 index operations.
+## 
+## This is '50' in the example above and is one among the three configurable settings.
+## Default Value: 50
+yfs.ssi.fail.fast.index.min.sample.count=50
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast.index.threshold.percent
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The failure threshold that, if crossed, indicates 'continuous failure'.
+## 
+## Indexing operation is said to continuously fail under the following conditions:
+## a. If at least 50 (configurable) index operations were performed in a given JVM in the last
+## 10 mins (configurable), and if there are at least 90% (configurable) of failures in that sample.
+## b. If less than 50 index operations were performed in a given JVM in the last 10 mins, and among
+## the last 50 samples, there is a 90% failure (irrespective of how long it took for 50 index
+## operations to occur)
+## 
+## E.g. If there is a load of 30 index operations per minute overall, and there are five application
+## servers in the cluster to handle that load, each application server would be handling 60 such operations
+## in 10 minutes. In such a case, the condition 'a' above will apply, and continuous failure will be determined
+## based on 90% failure in this sample of 60 operations, viz. 54 failures out of 60. If, on the other hand,
+## there were ten application servers handling the same load, there would have been only 30 such operations in
+## 10 minutes. In that case, the condition 'b' is applied, and failure is determined only if there are
+## 45 failures (90% of 50) in the last 50 index operations.
+## 
+## This is '90' in the example above and is one among the three configurable settings.
+## Default Value: 90
+yfs.ssi.fail.fast.index.threshold.percent=90
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast.search.monitor.time.mins
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The minimum duration of time (in mins) the search operation should fail to be treated as a 'continuous failure' situation
+## 
+## Searching operation is said to continuously fail under the following conditions:
+## a. If at least 50 (configurable) search operations were performed in a given JVM in the last
+## 10 mins (configurable), and if there are at least 90% (configurable) of failures in that sample.
+## b. If less than 50 search operations were performed in a given JVM in the last 10 mins, and among
+## the last 50 samples, there is a 90% failure (irrespective of how long it took for 50 search
+## operations to occur)
+## 
+## E.g. If there is a load of 30 search operations per minute overall, and there are five application
+## servers in the cluster to handle that load, each application server would be handling 60 such operations
+## in 10 minutes. In such a case, the condition 'a' above will apply, and continuous failure will be determined
+## based on 90% failure in this sample of 60 operations, viz. 54 failures out of 60. If, on the other hand,
+## there were ten application servers handling the same load, there would have been only 30 such operations in
+## 10 minutes. In that case, the condition 'b' is applied, and failure is determined only if there are
+## 45 failures (90% of 50) in the last 50 search operations.
+## 
+## This is '10' in the example above and is one among the three configurable settings.
+## Default Value: 10
+yfs.ssi.fail.fast.search.monitor.time.mins=10
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast.search.min.sample.count
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The minimum sample count to be used to determine a 'continuous failure' situation.
+## 
+## Searching operation is said to continuously fail under the following conditions:
+## a. If at least 50 (configurable) search operations were performed in a given JVM in the last
+## 10 mins (configurable), and if there are at least 90% (configurable) of failures in that sample.
+## b. If less than 50 search operations were performed in a given JVM in the last 10 mins, and among
+## the last 50 samples, there is a 90% failure (irrespective of how long it took for 50 search
+## operations to occur)
+## 
+## E.g. If there is a load of 30 search operations per minute overall, and there are five application
+## servers in the cluster to handle that load, each application server would be handling 60 such operations
+## in 10 minutes. In such a case, the condition 'a' above will apply, and continuous failure will be determined
+## based on 90% failure in this sample of 60 operations, viz. 54 failures out of 60. If, on the other hand,
+## there were ten application servers handling the same load, there would have been only 30 such operations in
+## 10 minutes. In that case, the condition 'b' is applied, and failure is determined only if there are
+## 45 failures (90% of 50) in the last 50 search operations.
+## 
+## This is '50' in the example above and is one among the three configurable settings.
+## Default Value: 50
+yfs.ssi.fail.fast.search.min.sample.count=50
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast.search.threshold.percent
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The failure threshold that, if crossed, indicates 'continuous failure'.
+## 
+## Searching operation is said to continuously fail under the following conditions:
+## a. If at least 50 (configurable) search operations were performed in a given JVM in the last
+## 10 mins (configurable), and if there are at least 90% (configurable) of failures in that sample.
+## b. If less than 50 search operations were performed in a given JVM in the last 10 mins, and among
+## the last 50 samples, there is a 90% failure (irrespective of how long it took for 50 search
+## operations to occur)
+## 
+## E.g. If there is a load of 30 search operations per minute overall, and there are five application
+## servers in the cluster to handle that load, each application server would be handling 60 such operations
+## in 10 minutes. In such a case, the condition 'a' above will apply, and continuous failure will be determined
+## based on 90% failure in this sample of 60 operations, viz. 54 failures out of 60. If, on the other hand,
+## there were ten application servers handling the same load, there would have been only 30 such operations in
+## 10 minutes. In that case, the condition 'b' is applied, and failure is determined only if there are
+## 45 failures (90% of 50) in the last 50 search operations.
+## 
+## This is '90' in the example above and is one among the three configurable settings.
+## Default Value: 90
+yfs.ssi.fail.fast.search.threshold.percent=90
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.ssi.fail.fast.enabled.indexes
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Overrides for specific indexes
+## The above yfs.ssi.fail.fast.. properties are globally applicable for all indexes. To override a property for a particular
+## index, the property can be suffixed with '.<index-name>'. E.g. to override the 'yfs.ssi.fail.fast.index.monitor.time.mins'
+## property for the index 'Order', the following property can be set:
+## yfs.ssi.fail.fast.index.monitor.time.mins.Order=10
+## This can be done for all properties described above, and for all indexes available.
+## 
+## Enable fail fast wrapper only for the following indexes. This is a comma separated list of indexes fail fast wrapper
+## will be used for. For other indexes, the underlying search engine client will be used directly without the fail fast
+## wrapper.
+## Default: Order, Shipment
+yfs.ssi.fail.fast.enabled.indexes=Order,Shipment
+## PROPERTY_END
+######## Search Index Properties - End   ########
+
+## PROPERTY_START
+## PROPERTY_NAME: shard.ignoreDisabledColonies.getOrderList
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Property to ignore execeptions if a colony/colonies are disabled
+## property is shard.ignoreDisabledColonies.<apiname>=true
+## Allowed Values: true, false
+## Default Value: false
+#shard.ignoreDisabledColonies.getOrderList=true
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: shard.ignoreDisabledColonies.getShipmentList
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## 
+#shard.ignoreDisabledColonies.getShipmentList=true
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: shard.ignoreDisabledColonies.processReturnOrder
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## 
+#shard.ignoreDisabledColonies.processReturnOrder=true
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: <enterprise_code>.PromisingServerUpgradeDateTime
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Enter the date and time in format given below for existing enterprises to use promising server with upgraded oms
+#<enterprise_code>.PromisingServerUpgradeDateTime=yyyy-MM-ddTHH:mm:ss
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: <enterprise_code>.PromisingServerMaximumRecords
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Enter MaximumRecords for reservation scenario in promising server. Set this property on Order Server. Default value is 50.
+#<enterprise_code>.PromisingServerMaximumRecords=<enter positive integer>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.<enterpriseCode>.ConsiderDefaultDGForProcurement
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Property to consider the Default Distribution group for Procurement. If the value is N it will not consider
+## default distribution group
+## Allowed Values: Y,N,<blank>
+## Default Value: Y
+yfs.<enterpriseCode>.ConsiderDefaultDGForProcurement=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.print.lookuplimit
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## For Defect:341224
+## Set this to a numeric value, Hence the will be your limit for the number of printer that will be
+## displayed in the dropdown. if the list of printer extends this property value then a lookup is
+## povided without showing the dropdown.
+yfs.print.lookuplimit=10
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.edgedeployment.id
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Edge Deployment properties
+## 
+## This property needs to mention the unique id of the Edge Deployment instance
+## For e.g. if the Edge instance is the 5th edge server configured in store STORE1, id can be STORE1_5
+## This should only be configured if the property yfs.enableedgedeployment is turned Y
+#yfs.edgedeployment.id=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.searchIndex.UpdateMaxModifyTS
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## This property is used to prevent update of MaxModifyTS on item during modifyCategoryItem or manageCategory api calls.
+## If this property is set to N, MaxModifyTS will not be updated. This will improve the performance. This can be set when you are not using the Search Catalog Index.
+## If this property is not set or set to Y, MaxModifyTS will be updated on Item.
+## By default this property is not set at all.
+#yfs.searchIndex.UpdateMaxModifyTS=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.consolidate.shipments.for.preassigned.carrier
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to Y for consolidating an order with pre-assigned carrier to an
+## existing shipment created for the same carrier when routing is performed externally
+yfs.consolidate.shipments.for.preassigned.carrier=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.unset.dbhk.fields.YFS_ATP_RULES
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## For Defect:401038
+## This property control the caching behavior of the housekeeping fields of the respective tables in the database.
+yfs.unset.dbhk.fields.YFS_ATP_RULES=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.unset.dbhk.fields.YFS_ITEM_ATTR_GROUP_TYPE
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## For Defect:401038
+## This property control the caching behavior of the housekeeping fields of the respective tables in the database.
+yfs.unset.dbhk.fields.YFS_ITEM_ATTR_GROUP_TYPE=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.unset.dbhk.fields.YFS_INDEX_STATUS
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## For Defect:401038
+## This property control the caching behavior of the housekeeping fields of the respective tables in the database.
+yfs.unset.dbhk.fields.YFS_INDEX_STATUS=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.manageCategory.additionalAttr.tryIntelligentUpdateOfSingleValuedAttr
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Enable this property to try an intelligent update of single valued Additional Attributes when manageCategory API is invoked.
+## If this property is set to Y, for addnl. attributes which do not allow multiple values system will
+## try to remove the old value (if one exists) and associate new value.
+## This is done when Operation is left blank or is Modify only.
+#yfs.manageCategory.additionalAttr.tryIntelligentUpdateOfSingleValuedAttr=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.manageCustomer.create.businesscustomer.bcmode
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## When this property is set to Y, application doesn't throw error when trying to create a Business customer
+## when a combination of OrganizationCode and Buyer Organization already exists.
+yfs.manageCustomer.create.businesscustomer.bcmode=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.batch.size
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## number of records to move to cassandra at a time
+yfs.cassandra.table.migrator.batch.size=10000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.rdbms.fetch.size
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## number of records to fetch for the rdbms at a time
+yfs.cassandra.table.migrator.rdbms.fetch.size=5000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.cassandra.retry.waittime.millissec
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## amount of time to wait between retry requests in milliseconds
+yfs.cassandra.table.migrator.cassandra.retry.waittime.millissec=5000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.max.batch.retry.count
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## maximum number of times to retry a failed batch
+yfs.cassandra.table.migrator.max.batch.retry.count=5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.max.wait.time.cassandra.results.minutes
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## maximum time to wait to see if requests sent to cassandra succeeded in minutes
+yfs.cassandra.table.migrator.max.wait.time.cassandra.results.minutes=5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.high.failure.threshold.percent
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Decimal
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## the high failure percent to use when logging failures. value must be a decimal percent
+yfs.cassandra.table.migrator.high.failure.threshold.percent=0.6
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.default.days.to.live
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## default value to use as the time to live for non-counter records. '0' is forever
+yfs.cassandra.table.migrator.default.days.to.live=0
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.cassandra.table.migrator.days.in.the.past
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## default value to use as the time stamp for non-counter records
+yfs.cassandra.table.migrator.days.in.the.past=1
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.remove.only.manifest.info.from.container.for.carriers
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## This property is used while removing container from manifest.
+## For carriers with external integration, tracking number and other carrier info is derived before manifestation.
+## When container is removed from manifest, information like tracking number, frieght chanrge etc is cleared.
+## This property will help retain such information. Set this property with list of carriers separated by commas.
+yfs.remove.only.manifest.info.from.container.for.carriers=
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.printCountSheet.OrderByLocation
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to Y enables the batched count tasks sorted on Location/Itemid order for print sheet process.
+## else it sorted based on the sequence configured on task-type level.
+yfs.printCountSheet.OrderByLocation=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: gdpr.enabled
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y, N
+## PROPERTY_DESCRIPTION
+## This property controls enabling of the GDPR support.
+## Valid values: 
+## Y: GDPR support is enabled.
+## N: GDPR support is disabled.
+gdpr.enabled=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YFS_CUSTOMER_PAYMENT_METHOD.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#YFS_CUSTOMER_PAYMENT_METHOD.personalinfoattributes=CreditCardExpDate,CreditCardName,CreditCardNo,CreditCardType,CustomerAccountNo,DebitCardNo,DisplayCreditCardNo,DisplayCustomerAccountNo,DisplayDebitCardNo,DisplayPaymentReference1,DisplayPrimaryAccountNo,FirstName,LastName,MiddleName,PaymentReference1,PaymentReference2,PaymentReference3,PaymentType,PaymentTypeGroup,PrimaryAccountNo
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YFS_PERSON_INFO.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#YFS_PERSON_INFO.personalinfoattributes=AddressLine1,AddressLine2,AddressLine3,AddressLine4,AddressLine5,AddressLine6,AlternateEmailID,Beeper,City,Company,Country,DayFaxNo,DayPhone,Department,EMailID,EveningFaxNo,EveningPhone,FirstName,JobTitle,LastName,Latitude,Longitude,MiddleName,MobilePhone,OtherPhone
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: YFS_CUSTOMER_CONTACT.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#YFS_CUSTOMER_CONTACT.personalinfoattributes=Company,DateOfBirth,DayFaxNo,DayPhone,Department,EmailID,EveningFaxNo,EveningPhone,FirstName,JobTitle,LastName,MiddleName,MobilePhone,SpendingLimit,SpendingLimitCurrency,SpouseDateOfBirth,Status,Title,WeddingAnniversaryDate
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: PLT_AUTH_ANSWER.personalinfoattributes
+## DATABASE_SUPPORT: N
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: GDPR
+## PROPERTY_TYPE: String
+## PROPERTY_DESCRIPTION
+## This property controls deletion and restriction of the listed attribute's XML names for GDPR,if GDPR is enabled (based on the gdpr.enabled property).
+## Set this to a comma-separated list of attribute's XML names. 
+## When adding an extended attribute to this property, add the prefix 'Extn_' to the attribute's XML name. For example, add Extn_<Attribute's XMLName>.
+## If restriction exists on the table record,this property controls restriction over publishing of the listed attributes as part of API/UE/Event output.
+## This property also controls deletion of the table record column values corresponding to these attribute names as part of GDPR data deletion request.
+#PLT_AUTH_ANSWER.personalinfoattributes=Answer,QuestionText
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: gdpr.managerequest.queue
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The queue name for the asynchronous GDPR service requests.
+gdpr.managerequest.queue=<Queue Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: gdpr.managerequest.providerurl
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The provider url used for the asynchronous GDPR service requests.
+gdpr.managerequest.providerurl=corbaloc::<host>:<bootstrap port>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: gdpr.managerequest.qcf
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## The QCF used for the asynchronous GDPR service requests.
+gdpr.managerequest.qcf=<QueueConnectionFactory Name>
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.rollout.version
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Long
+## PROPERTY_PERMISSIBLE_VALUES:
+## PROPERTY_DESCRIPTION
+## An increasing number managed by the final solution integrator for a given deployment. It is a single number that represents a set of product and extension version numbers that are deployed.
+yfs.rollout.version=
+## PROPERTY_END

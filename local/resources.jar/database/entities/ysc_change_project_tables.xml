@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+   		<Entity AuditRequired="Y" Cacheable="true" Description="This table stores Change Project definitions. 
+   		A Change Project provides the mechanism to consolidate database changes under a single unit. 
+   		A Change Project can be approved on one system so that the database changes associated with it can be sent to another system.
+		A Change Project is a collection of Change Requests. It is also the unit which a valid user can approve or reject. 
+		All data changed as part of a Change Project will be logged under the same Change Project."
+            Module="ysc" Name="Change_Project" Prefix="YFS_" ConfigurableByOrgOrNode="Y"
+            TableName="YFS_CHANGE_PROJECT" EntityType="CONFIGURATION" TableType="CONFIGURATION" XMLName="ChangeProject">
+            <Attributes>
+                <Attribute ColumnName="CHANGE_PROJECT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_CHANGE_PROJECT."
+                    Name="Change_Project_Key" Nullable="false" XMLName="ChangeProjectKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" IsOrgColumn="Y" DataSecurityUsageType="ORG"
+                    Description="The organization that defines the Change Project."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="CHANGE_PROJECT_ID"
+                    DataType="VarcharID-24" Description="The identifier for the Change Project. If it is not passed during creation, 
+                    it is generated and pre-fixed with the Deployment Type prefix. It cannot be set to DEFAULT."
+                    Name="Change_Project_ID" Nullable="true" XMLName="ChangeProjectID"/>
+                <Attribute ColumnName="WORKSPACE_ID"
+                    DataType="VarcharID-24" DefaultValue="DEFAULT"
+                    Description="The identifier for the workspace to which the Change Project belongs."
+                    Name="Workspace_ID" Nullable="true" XMLName="WorkspaceID"/>
+                <Attribute ColumnName="USER_GROUP_ID"
+                    DataType="UserGroup"  
+                    Description="The identifier for the user group that can approve the Change Project."
+                    Name="User_Group_ID" Nullable="true" XMLName="UserGroupID"/>
+                <Attribute ColumnName="TEAM_CODE"
+                    DataType="DataSecurityGroupId" 
+                    Description="The identifier for the team that can approve the Change Project."
+                    Name="Team_Code" Nullable="true" XMLName="TeamCode"/>
+                <Attribute ColumnName="USE_ENTERPRISE_SYNC_TIME"
+                    DataType="Flag" 
+                    Description="If set as Y, indicates that sync time needs to be determined from the enterprise configuration."
+                    Name="Use_Enterprise_Sync_Time" Nullable="true" XMLName="UseEnterpriseSyncTime"/>
+                <Attribute ColumnName="MANAGE_USER_ID"
+                    DataType="LoginId-50" 
+                    Description="Identifier for the user who caused a change in the Change Project. This is always taken from the Environment."
+                    Name="Manage_User_ID" Nullable="true" XMLName="ManageUserID"/>
+                <Attribute ColumnName="STATUS"
+                    DataType="ChangeProjectStatus" 
+                    Description="The status of the Change Project. As the Change Project progresses through the change process, the status changes."
+                    Name="Status" Nullable="true" XMLName="Status"/>
+                <Attribute ColumnName="IS_IMPORTED"
+                    DataType="Flag" 
+                    Description="If set as Y, indicates whether this Change Project was imported from another instance."
+                    Name="Is_Imported" Nullable="true" XMLName="IsImported"/>
+                <Attribute ColumnName="SHORT_DESCRIPTION"
+                    DataType="Text-100" 
+                    Description="The short description of the Change Project."
+                    Name="Short_Description" Nullable="true" XMLName="ShortDescription"
+                    Localized="true"/>
+                <Attribute ColumnName="LONG_DESCRIPTION"
+                    DataType="Description-255" 
+                    Description="The long description of the Change Project."
+                    Name="Long_Description" Nullable="true" XMLName="LongDescription"
+                    Localized="true"/>
+                 <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="YFS_CHG_PROJECT_PK" Name="YFS_CHANGE_PROJECT_PK">
+                <Attribute ColumnName="CHANGE_PROJECT_KEY" Name="Change_Project_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_CHANGE_PROJECT_I1" DB2Name="YFS_CHG_PROJECT_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="CHANGE_PROJECT_ID"/>
+                    <Column Name="WORKSPACE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="User_Group" Name="User_Group"
+                    Type="Bidirectional" XMLName="UserGroup">
+                    <Attribute Name="User_Group_ID" ParentName="Usergroup_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Data_Security_Group" Name="Data_Security_Group"
+                    Type="Bidirectional" XMLName="DataSecurityGroup">
+                    <Attribute Name="Team_Code" ParentName="Data_Security_Group_Id"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="The table is used to store localized information for the related Change Projects in different locales."
+            Extensible="N" Name="Change_Project_Locale" Prefix="YFS_" 
+            TableName="YFS_CHANGE_PROJECT_LOCALE" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="ChangeProjectLocale" LocaleDescriptionForEntity="Change_Project"
+            LockingEntity="Change_Project">
+            <Attributes>
+                <Attribute ColumnName="CHANGE_PROJECT_LOCALE_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_CHANGE_PROJECT_LOCALE table."
+                    Name="Change_Project_Locale_Key" Nullable="false" XMLName="ChangeProjectLocaleKey"/>
+                <Attribute ColumnName="CHANGE_PROJECT_KEY"
+                    DataType="Key" Description="The reference key to the YFS_CHANGE_PROJECT table."
+                    Name="Change_Project_Key" Nullable="true" XMLName="ChangeProjectKey"/>
+				<Attribute ColumnName="COUNTRY"
+					DataType="Country" Description="The country associated with the locale."
+                    Name="Country" Nullable="true" XMLName="Country"/>
+                <Attribute ColumnName="LANGUAGE"
+					DataType="Text-10" Description="The language associated with the locale."
+                    Name="Language" Nullable="true" XMLName="Language"/>
+                <Attribute ColumnName="VARIANT"
+					DataType="Text-20" Description="The variant associated with the locale."
+                    Name="Variant" Nullable="true" XMLName="Variant"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+         </Attributes>
+         <PrimaryKey DB2Name="YFS_CHG_PRJ_LOC_PK" Name="YFS_CHANGE_PROJECT_LOCALE_PK">
+             <Attribute ColumnName="CHANGE_PROJECT_LOCALE_KEY" Name="Change_Project_Locale_Key"/>
+         </PrimaryKey>
+         <Indices>
+            <Index Name="YFS_CHANGE_PROJECT_LOCALE_I1" DB2Name="YFS_CHG_PRJ_LOC_I1" Unique="true">
+               <Column Name="CHANGE_PROJECT_KEY"/>
+               <Column Name="COUNTRY"/>
+               <Column Name="LANGUAGE"/>
+               <Column Name="VARIANT"/>
+            </Index>
+         </Indices>
+         <RelationShips>
+			<RelationShip Cardinality="OneToMany"
+                ChildListXMLName="ChangeProjectLocaleList" ChildXMLName="ChangeProjectLocale"
+                DeleteCascade="true" ForeignEntity="Change_Project" UsedForDataSecurity="true"
+                Name="Change_Project" Type="Bidirectional" XMLName="ChangeProject">
+					<Attribute Name="Change_Project_Key" ParentName="Change_Project_Key"/>
+			</RelationShip>	
+		</RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores information about the users who can approve a Change Project."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Change_Project_Approver" Prefix="YFS_"
+            TableName="YFS_CHANGE_PROJECT_APPROVER" TableType="CONFIGURATION" XMLName="ChangeProjectApprover"
+            LockingEntity="Change_Project">
+            <Attributes>
+                <Attribute ColumnName="CHANGE_PROJECT_APPROVER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_CHANGE_PROJECT_APPROVER."
+                    Name="Change_Project_Approver_Key" Nullable="false" XMLName="ChangeProjectApproverKey"/>
+                <Attribute ColumnName="CHANGE_PROJECT_KEY"
+                    DataType="Key" Description="The reference key to the YFS_CHANGE_PROJECT table."
+                    Name="Change_Project_Key" Nullable="true" XMLName="ChangeProjectKey"/>
+                <Attribute ColumnName="USER_ID"
+                    DataType="LoginId-50" Description="The identifier for the user who can approve this change project."
+                    Name="User_ID" Nullable="true" XMLName="UserID"/>
+                 <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="YFS_CHG_PRJ_APR_PK" Name="YFS_CHANGE_PROJECT_APPROVER_PK">
+                <Attribute ColumnName="CHANGE_PROJECT_APPROVER_KEY" Name="Change_Project_Approver_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_CHANGE_PROJECT_APPROVER_I1" DB2Name="YFS_CHG_PRJ_APR_I1" Unique="true">
+                    <Column Name="CHANGE_PROJECT_KEY"/>
+                    <Column Name="USER_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChangeProjectApproverList" ChildName="Change_Project_Approver"
+                    ChildXMLName="ChangeProjectApprover" DeleteCascade="true" 
+                    ForeignEntity="Change_Project" Name="ChangeProject"
+                    Type="Bidirectional" XMLName="ChangeProject">
+                    <Attribute Name="Change_Project_Key" ParentName="Change_Project_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true" Description="This table stores Change Request definitions."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Change_Request" Prefix="YFS_"
+            TableName="YFS_CHANGE_REQUEST" TableType="CONFIGURATION" XMLName="ChangeRequest"
+            LockingEntity="Change_Project">
+            <Attributes>
+                <Attribute ColumnName="CHANGE_REQUEST_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_CHANGE_REQUEST."
+                    Name="Change_Request_Key" Nullable="false" XMLName="ChangeRequestKey"/>
+                <Attribute ColumnName="CHANGE_PROJECT_KEY"
+                    DataType="Key" Description="The reference key to the YFS_CHANGE_PROJECT table."
+                    Name="Change_Project_Key" Nullable="true" XMLName="ChangeProjectKey"/>
+                <Attribute ColumnName="CHANGE_REQUEST_ID"
+                    DataType="VarcharID-24" 
+                    Description="The identifier for this change request. If it is not passed during creation, 
+                    it is generated. It cannot be set to DEFAULT."
+                    Name="Change_Request_ID" Nullable="true" XMLName="ChangeRequestID"/>
+                <Attribute ColumnName="MANAGE_USER_ID"
+                    DataType="LoginId-50" 
+                    Description="Identifier for the user who caused a change in the Change Project. This is always taken from the Environment."
+                    Name="Manage_User_ID" Nullable="true" XMLName="ManageUserID"/>
+                <Attribute ColumnName="STATUS"
+                    DataType="ChangeRequestStatus" 
+                    Description="The status of the Change Request. As the request progresses through the change process, the status changes."
+                    Name="Status" Nullable="true" XMLName="Status"/>
+                <Attribute ColumnName="SHORT_DESCRIPTION"
+                    DataType="Text-100" 
+                    Description="The short description of the Change Request."
+                    Name="Short_Description" Nullable="true" XMLName="ShortDescription"
+                    Localized="true"/>
+                <Attribute ColumnName="LONG_DESCRIPTION"
+                    DataType="Description-255" 
+                    Description="The long description of the Change Request."
+                    Name="Long_Description" Nullable="true" XMLName="LongDescription"
+                    Localized="true"/>
+                 <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_CHANGE_REQUEST_PK" DB2Name="YFS_CHG_REQUEST_PK">
+                <Attribute ColumnName="CHANGE_REQUEST_KEY" Name="Change_Request_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_CHANGE_REQUEST_I1" DB2Name="YFS_CHG_REQUEST_I1" Unique="true">
+                    <Column Name="CHANGE_PROJECT_KEY"/>
+                    <Column Name="CHANGE_REQUEST_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChangeRequestList" ChildName="Change_Request"
+                    ChildXMLName="ChangeRequest" DeleteCascade="true"
+                    ForeignEntity="Change_Project" Name="ChangeProject"
+                    Type="Bidirectional" XMLName="ChangeProject">
+                    <Attribute Name="Change_Project_Key" ParentName="Change_Project_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>  
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="The table is used to store localized information for the related Change Requests in different locales."
+            Extensible="N" Name="Change_Request_Locale"
+            Prefix="YFS_"
+            TableName="YFS_CHANGE_REQUEST_LOCALE" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="ChangeRequestLocale" LocaleDescriptionForEntity="Change_Request"
+            LockingEntity="Change_Request">
+            <Attributes>
+                <Attribute ColumnName="CHANGE_REQUEST_LOCALE_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_CHANGE_REQUEST_LOCALE table."
+                    Name="Change_Request_Locale_Key" Nullable="false" XMLName="ChangeRequestLocaleKey"/>
+                <Attribute ColumnName="CHANGE_REQUEST_KEY"
+                    DataType="Key"
+                    Description="The reference key to the YFS_CHANGE_REQUEST table."
+                    Name="Change_Request_Key" Nullable="true" XMLName="ChangeRequestKey"/>
+				<Attribute ColumnName="COUNTRY"
+					DataType="Country" Description="The country associated with the locale."
+                    Name="Country" Nullable="true" XMLName="Country"/>
+                <Attribute ColumnName="LANGUAGE"
+					DataType="Text-10" Description="The language associated with the locale."
+                    Name="Language" Nullable="true" XMLName="Language"/>
+                <Attribute ColumnName="VARIANT"
+					DataType="Text-20" Description="The variant associated with the locale."
+                    Name="Variant" Nullable="true" XMLName="Variant"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+             </Attributes>
+             <PrimaryKey DB2Name="YFS_CHG_REQ_LOC_PK" Name="YFS_CHANGE_REQUEST_LOCALE_PK">
+                 <Attribute ColumnName="CHANGE_REQUEST_LOCALE_KEY" Name="Change_Request_Locale_Key"/>
+             </PrimaryKey>
+             <Indices>
+                <Index Name="YFS_CHANGE_REQUEST_LOCALE_I1" DB2Name="YFS_CHG_REQ_LOC_I1" Unique="true">
+                   <Column Name="CHANGE_REQUEST_KEY"/>
+                   <Column Name="COUNTRY"/>
+                   <Column Name="LANGUAGE"/>
+                   <Column Name="VARIANT"/>
+               </Index>
+             </Indices>
+             <RelationShips>
+    			<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChangeRequestLocaleList" ChildXMLName="ChangeRequestLocale"
+                    DeleteCascade="true" ForeignEntity="Change_Request" UsedForDataSecurity="true"
+                    Name="Change_Request" Type="Bidirectional" XMLName="ChangeRequest">
+		    		<Attribute Name="Change_Request_Key" ParentName="Change_Request_Key"/>
+    			</RelationShip>
+    		</RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores information about Change Request assignments."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Change_Request_Assignment" Prefix="YFS_"
+            TableName="YFS_CHANGE_REQUEST_ASSIGNMENT" TableType="CONFIGURATION" XMLName="ChangeRequestAssignment"
+            LockingEntity="Change_Request">
+            <Attributes>
+                <Attribute ColumnName="CHANGE_REQUEST_ASSIGNMENT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_CHANGE_REQUEST_ASSIGNMENT."
+                    Name="Change_Request_Assignment_Key" Nullable="false" XMLName="ChangeRequestAssignmentKey"/>
+                <Attribute ColumnName="CHANGE_REQUEST_KEY"
+                    DataType="Key" Description="The reference key to the YFS_CHANGE_REQUEST table."
+                    Name="Change_Request_Key" Nullable="true" XMLName="ChangeRequestKey"/>
+                <Attribute ColumnName="USER_ID"
+                    DataType="LoginId-50" Description="Identifier for the user assigned to the Change Request."
+                    Name="User_ID" Nullable="true" XMLName="UserID"/>
+                 <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CHG_RQST_ASSGN_PK" Name="YFS_CHG_REQUEST_ASSIGNMENT_PK">
+                <Attribute ColumnName="CHANGE_REQUEST_ASSIGNMENT_KEY" Name="Change_Request_Assignment_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_CHG_REQUEST_ASSIGNMENT_I1" DB2Name="CHG_RQST_ASSGN_I1" Unique="true">
+                    <Column Name="CHANGE_REQUEST_KEY"/>
+                    <Column Name="USER_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChangeRequestAssignmentList" ChildName="Change_Request_Assignment"
+                    ChildXMLName="ChangeRequestAssignment" DeleteCascade="true" 
+                    ForeignEntity="Change_Request" Name="ChangeRequest"
+                    Type="Bidirectional" XMLName="ChangeRequest">
+                    <Attribute Name="Change_Request_Key" ParentName="Change_Request_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores information about users working on a change request."
+            EntityType="TRANSACTION" Module="ysc"
+            Name="Change_Request_User" Prefix="YFS_"
+            TableName="YFS_CHANGE_REQUEST_USER" TableType="TRANSACTION" XMLName="ChangeRequestUser">
+            <Attributes>
+                <Attribute ColumnName="CHANGE_REQUEST_USER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_CHANGE_USER_ASSIGNMENT."
+                    Name="Change_Request_User_Key" Nullable="false" XMLName="ChangeRequestUserKey"/>
+                <Attribute ColumnName="CHANGE_REQUEST_KEY"
+                    DataType="Key" FactName="false"
+                    Description="The reference key to the YFS_CHANGE_REQUEST table."
+                    Name="Change_Request_Key" Nullable="true" XMLName="ChangeRequestKey"/>
+                <Attribute ColumnName="USER_ID"
+                    DataType="LoginId-50"
+                    Description="The identifier for the user who worked on the change request. This is taken from the Environment if not passed."
+                    Name="User_ID" Nullable="true" XMLName="UserID"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="true" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="true" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CHG_RQST_USER_PK" Name="YFS_CHANGE_REQUEST_USER_PK">
+                <Attribute ColumnName="CHANGE_REQUEST_USER_KEY" Name="Change_Request_User_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_CHANGE_REQUEST_USER_I1" DB2Name="CHG_RQST_USER_I1" Unique="true">
+                    <Column Name="USER_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" ChildName="Change_Request_User"
+                    ForeignEntity="Change_Request" Name="ChangeRequest"
+                    Type="Unidirectional" XMLName="ChangeRequest">
+                    <Attribute Name="Change_Request_Key" ParentName="Change_Request_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToOne" ChildName="Change_Request_User"
+                    ForeignEntity="Change_Request_Assignment" Name="ChangeRequestAssignment"
+                    Type="Unidirectional" XMLName="ChangeRequestAssignment">
+                    <Attribute Name="Change_Request_Key" ParentName="Change_Request_Key"/>
+                    <Attribute Name="User_ID" ParentName="User_ID"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores information about entities changed in a change request."
+            EntityType="CONFIGURATION/MASTER" Module="ysc"
+            Name="Entity_Change" Prefix="YFS_"
+            TableName="YFS_ENTITY_CHANGE" XMLName="EntityChange">
+            <TableTypeList>
+            	<TableType Name="CONFIGURATION"/>
+				<TableType Name="MASTER"/>				
+			</TableTypeList>
+            <Attributes>
+                <Attribute ColumnName="ENTITY_CHANGE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_ENTITY_CHANGE."
+                    Name="Entity_Change_Key" Nullable="false" XMLName="EntityChangeKey"/>
+                <Attribute ColumnName="COLONY_ID"
+            		DataType="ColonyId" DefaultValue="DEFAULT"
+            		Description="Unique identifier of a Colony to which this record belongs."
+            		Name="Colony_Id" Nullable="false"/>
+                <Attribute ColumnName="TABLE_TYPE"
+                    DataType="TableType" 
+                    Description="Type of table associated with the changed entity."
+                    Name="Table_Type" Nullable="true" XMLName="TableType"/>
+				<Attribute ColumnName="ORGANIZATION_CODE"
+                	DataType="OrgCode" IsOrgColumn="Y" 
+                	Description="The primary Enterprise that owns this ENTITY_CHANGE record."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="CHANGE_PROJECT_KEY"
+                    DataType="Key" DefaultValue="DEFAULT"
+                    Description="The Change Project with which this entity change is associated."
+                    Name="Change_Project_Key" Nullable="true" XMLName="ChangeProjectKey"/>
+                <Attribute ColumnName="CHANGE_REQUEST_KEY"
+                    DataType="Key" DefaultValue="DEFAULT"
+                    Description="The Change Request with which this entity change is associated."
+                    Name="Change_Request_Key" Nullable="true" XMLName="ChangeRequestKey"/>
+                <Attribute ColumnName="LOCKING_ENTITY"
+                    DataType="TableName" 
+                    Description="The table name of the entity that has locked the changed entity."
+                    Name="Locking_Entity" Nullable="true" XMLName="LockingEntity"/>
+                <Attribute ColumnName="LOCKING_ENTITY_KEY"
+                    DataType="Key" 
+                    Description="The key of the entity that has locked the changed entity."
+                    Name="Locking_Entity_Key" Nullable="true" XMLName="LockingEntityKey"/>
+                <Attribute ColumnName="ENTITY"
+                    DataType="TableName" 
+                    Description="The table name of the entity that has been changed."
+                    Name="Entity" Nullable="true" XMLName="Entity">
+                    <DBType Name="DERBY" ColumnName="ENTITY_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="ENTITY_KEY"
+                    DataType="Key" 
+                    Description="The key of the entity that has been changed."
+                    Name="Entity_Key" Nullable="true" XMLName="EntityKey"/>
+                <Attribute ColumnName="DB_OPERATION"
+                    DataType="DBOperation" 
+                    Description="The Operation (insert/update/delete) that was performed on the entity associated with this record."
+                    Name="DB_Operation" Nullable="true" XMLName="DBOperation"/>
+                 <Attribute ColumnName="EXPORTED"
+                    DataType="Exported" DefaultValue="N"
+                    Description="Indicates whether the record has been exported."
+                    Name="Exported" Nullable="true" XMLName="Exported"/>
+                 <Attribute ColumnName="SYNC_EXPORTED"
+                    DataType="Exported" VirtualDefaultValue="'N'"
+                    Description="Indicates whether the record has been exported by Data Sync."
+                    Name="Sync_Exported" Nullable="true" XMLName="SyncExported"/>
+                 <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="true" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="true" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ENTITY_CHANGE_PK" Name="YFS_ENTITY_CHANGE_PK">
+                <Attribute ColumnName="ENTITY_CHANGE_KEY" Name="Entity_Change_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_ENTITY_CHANGE_I1" DB2Name="ENTITY_CHANGE_I1" Unique="false">
+				   <Column Name="ENTITY_KEY"/>
+				   <Column Name="ENTITY"/>                 
+				   <Column Name="TABLE_TYPE"/>  
+				   <Column Name="COLONY_ID"/>
+				</Index> 				
+				<Index Name="YFS_ENTITY_CHANGE_I2" DB2Name="ENTITY_CHANGE_I2" Unique="false">
+				   <Column Name="LOCKING_ENTITY_KEY"/>
+				   <Column Name="LOCKING_ENTITY"/>
+				</Index>
+                <Index Name="YFS_ENTITY_CHANGE_I3" DB2Name="ENTITY_CHANGE_I3" Unique="false">
+                    <Column Name="CHANGE_PROJECT_KEY"/>
+                	<Column Name="CHANGE_REQUEST_KEY"/>
+                </Index>
+                <Index Name="YFS_ENTITY_CHANGE_I4" DB2Name="ENTITY_CHANGE_I4" Unique="false">
+                    <Column Name="ORGANIZATION_CODE"/>
+                	<Column Name="TABLE_TYPE"/>
+                </Index>
+                <Index Name="YFS_ENTITY_CHANGE_I5" DB2Name="ENTITY_CHANGE_I5" Unique="false">
+                	<Column Name="DB_OPERATION"/>
+                </Index>
+                <Index Name="YFS_ENTITY_CHANGE_I6" DB2Name="ENTITY_CHANGE_I6" Unique="false">
+                	<Column Name="EXPORTED"/>
+                </Index>
+                <Index Name="YFS_ENTITY_CHANGE_I7" DB2Name="ENTITY_CHANGE_I7" Unique="false">
+                	<Column Name="SYNC_EXPORTED"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" ChildName="Entity_Change"
+                    ForeignEntity="Change_Request" Name="ChangeRequest"
+                    Type="Unidirectional" XMLName="ChangeRequest">
+                    <Attribute Name="Change_Request_Key" ParentName="Change_Request_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" ChildName="Entity_Change"
+                    ForeignEntity="Change_Project" Name="ChangeProject"
+                    Type="Unidirectional" XMLName="ChangeProject">
+                    <Attribute Name="Change_Project_Key" ParentName="Change_Project_Key"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="EntityChangeList" ChildName="EntityChange"
+                    DeleteCascade="false" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores information about entities locked by a change request."
+            EntityType="CONFIGURATION/MASTER" Module="ysc"
+            Name="Entity_Lock" Prefix="YFS_"
+            TableName="YFS_ENTITY_LOCK" XMLName="EntityLock">
+            <TableTypeList>
+				<TableType Name="MASTER"/>
+				<TableType Name="CONFIGURATION"/>
+			</TableTypeList>
+            <Attributes>
+                <Attribute ColumnName="ENTITY_LOCK_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_ENTITY_LOCK."
+                    Name="Entity_Lock_Key" Nullable="false" XMLName="EntityLockKey"/>
+                <Attribute ColumnName="ENTITY"
+                    DataType="TableName" 
+                    Description="The table name for the entity that has been locked."
+                    Name="Entity" Nullable="true" XMLName="Entity">
+                    <DBType Name="DERBY" ColumnName="ENTITY_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="ENTITY_KEY"
+                    DataType="Key" 
+                    Description="The key for the entity that has been locked."
+                    Name="Entity_Key" Nullable="true" XMLName="EntityKey"/>
+                <Attribute ColumnName="CHANGE_PROJECT_KEY"
+                    DataType="Key" DefaultValue="DEFAULT"
+                    Description="The Change Project with which this entity lock is associated."
+                    Name="Change_Project_Key" Nullable="true" XMLName="ChangeProjectKey"/>
+                <Attribute ColumnName="CHANGE_REQUEST_KEY"
+                    DataType="Key" DefaultValue="DEFAULT"
+                    Description="The change request with which this entity lock is associated."
+                    Name="Change_Request_Key" Nullable="true" XMLName="ChangeRequestKey"/>
+                 <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="true" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="true" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="UserId"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ENTITY_LCK_PK" Name="YFS_ENTITY_LOCK_PK">
+                <Attribute ColumnName="ENTITY_LOCK_KEY" Name="Entity_Lock_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_ENTITY_LOCK_I1" DB2Name="ENTITY_LCK_I1" Unique="false">
+                    <Column Name="CHANGE_PROJECT_KEY"/>
+                    <Column Name="CHANGE_REQUEST_KEY"/>
+                </Index>
+                <Index Name="YFS_ENTITY_LOCK_I2" DB2Name="ENTITY_LCK_I2" Unique="false">
+                    <Column Name="ENTITY"/>
+                    <Column Name="ENTITY_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" ChildName="Entity_Lock"
+                    ForeignEntity="Change_Request" Name="ChangeRequest"
+                    Type="Unidirectional" XMLName="ChangeRequest">
+                    <Attribute Name="Change_Request_Key" ParentName="Change_Request_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" ChildName="Entity_Lock"
+                    ForeignEntity="Change_Project" Name="ChangeProject"
+                    Type="Unidirectional" XMLName="ChangeProject">
+                    <Attribute Name="Change_Project_Key" ParentName="Change_Project_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+	</Entities>
+</DBSchema>

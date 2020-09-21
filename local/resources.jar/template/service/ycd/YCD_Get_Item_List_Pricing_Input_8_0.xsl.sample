@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="no"/>
+
+	<xsl:template match="/Organization/ItemList">
+		<Comergent>
+			<MessageHeader>
+				<MessageType>PricingLineServiceRequest</MessageType>
+				<MessageVersion>4.0</MessageVersion>
+				<StoreFrontTransient>
+					<xsl:value-of select="/Organization/@PrimaryEnterpriseKey"/>
+				</StoreFrontTransient>
+			</MessageHeader>
+			<RemoteUser>
+				<UserLogin/>
+ 				<UserAuthenticator />
+			</RemoteUser>
+			<PricingLineServiceRequest type="BusinessObject">
+				<Date><xsl:value-of select="@PricingDate"/></Date>
+				<Currency><xsl:value-of select="@Currency"/></Currency>
+				<BuyerUser><xsl:value-of select="@SearchReference1"/></BuyerUser>
+				<BuyerOrgCode><xsl:value-of select="@SearchReference2"/></BuyerOrgCode>
+				<PricingLineItemList>
+					<xsl:apply-templates select="/Organization/ItemList/Item[@ItemGroupCode='PROD']" />
+				</PricingLineItemList>
+			</PricingLineServiceRequest>
+		</Comergent>
+	</xsl:template>
+	
+	<xsl:template match="/Organization/ItemList/Item">
+		<PricingLineItem>
+			<SKU><xsl:value-of select="@ItemID" /></SKU>
+			<ExternalRefID><xsl:value-of select="concat(@UnitOfMeasure,'_',@OrganizationCode)" /></ExternalRefID>
+		</PricingLineItem>
+	</xsl:template>
+
+</xsl:stylesheet>

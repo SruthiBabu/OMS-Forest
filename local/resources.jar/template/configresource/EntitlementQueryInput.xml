@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery  QueryType="Entitlement">
+   <EntitlementRule DisplayName="Entitlement_Rule" TableName="YFS_ENTITLEMENT_RULE_HDR" IconFile="item.gif" ShowNotButtons="Y">
+	  <Purpose Type="Leaf" Id="Purpose" DisplayName="Purpose" DataType="Text-10" ControlType="Text" ColumnName="PURPOSE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="Purpose" IsReqd="" OverRidingClass=""/>
+	  </Purpose>
+	  <EntitlementRuleID Type="Leaf" Id="EntitlementRuleID" DisplayName="EntitlementRuleID" DataType="ID-24" ControlType="Text" ColumnName="ENTITLEMENT_RULE_HDR_ID">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="EntitlementRuleID" IsReqd="" OverRidingClass=""/>
+	  </EntitlementRuleID>
+	  <EffectiveFromDate Type="Leaf" Id="EffectiveFromDate" DisplayName="EffectiveFromDate" DataType="Date" ControlType="Text" ColumnName="EFFECTIVE_FROM_DATE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+		  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+		</QryTypes>
+		<MasterData MasterDataId="EffectiveFromDate" IsReqd="" OverRidingClass=""/>
+	  </EffectiveFromDate>
+	  <EffectiveToDate Type="Leaf" Id="EffectiveToDate" DisplayName="EffectiveToDate" DataType="Date" ControlType="Text" ColumnName="EFFECTIVE_TO_DATE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+		  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+		</QryTypes>
+		<MasterData MasterDataId="EffectiveToDate" IsReqd="" OverRidingClass=""/>
+	  </EffectiveToDate>
+   </EntitlementRule>
+</AdvancedQuery>

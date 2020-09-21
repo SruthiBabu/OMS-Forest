@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:emailformatters="com.yantra.pca.email.formatters"
+    xmlns:java="java"
+    exclude-result-prefixes="java emailformatters">
+
+	<xsl:include href="/template/email/ycd/common/YCD_brand.xsl.sample"/>
+	<xsl:include href="/template/email/ycd/common/YCD_miscUtils.xsl.sample"/>
+
+	<xsl:variable name="Brand">
+		<xsl:call-template name="BrandName">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+
+	<xsl:variable name="BrandPhoneNumber">
+		<xsl:call-template name="BrandPhoneNumber">
+			<xsl:with-param name="BrandCode" select="/Order/@EnterpriseCode"/>
+		</xsl:call-template>
+	</xsl:variable>
+
+	<xsl:template match="/">
+		<HTML>
+			<xsl:call-template name="applyStyle"/>
+			<BODY topmargin="0" leftmargin="0" STYLE="font:normal 10pt Tahoma">
+				<xsl:apply-templates select="Order"/>
+			</BODY>
+		</HTML>
+	</xsl:template>
+
+	<xsl:template match="Order">
+		<p>Greetings from <xsl:value-of select="$Brand"/>,</p>
+
+		<p>
+		The order you recently placed,  <xsl:value-of select="@OrderNo"/>, was just approved.  We will now start processing this order.
+		</p>
+		<p>
+		To review this order, please follow the link to the order summary:<br/>
+		<a>
+			<xsl:attribute name="href">http://www.<xsl:value-of select="$Brand"/>.com/order/<xsl:value-of select="@OrderHeaderKey"/></xsl:attribute>
+			<xsl:attribute name="target">_blank</xsl:attribute>
+			http://www.<xsl:value-of select="$Brand"/>.com/order/<xsl:value-of select="@OrderHeaderKey"/>
+		</a><br/><br/>
+		<xsl:call-template name="StandardClosingMessage"><xsl:with-param name="Brand" select="$Brand"/><xsl:with-param name="BrandPhoneNumber" select="$BrandPhoneNumber"/></xsl:call-template>
+		</p>
+	</xsl:template>
+
+</xsl:stylesheet>
+

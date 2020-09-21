@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<DBSchema Name="uifwk_tables">
+    <Entities>
+        <Entity EntityType="CONFIGURATION" TableType="CONFIGURATION" Extensible="Y" IsAbstract="N" ListXMLName="UserUiStateList" Module="uifwkimpl" Name="Plt_User_Ui_State" Prefix="" TableName="PLT_USER_UI_STATE" XMLName="UserUiState" Description="This table stores the user preference regarding the state of the UI.">
+            <Attributes>
+                <Attribute ColumnName="PLT_USER_UI_STATE_KEY" DataType="Key" DefaultValue="' '" Description="The primary key for the PLT_USER_UI_STATE table." Name="Plt_User_Ui_State_Key"
+                    Nullable="false" XMLName="PltUserUiStateKey"/>
+                <Attribute ColumnName="APPLICATION_NAME" DataType="ApplicationName" DefaultValue="' '" Description="The identifier of the application for which the state is being stored"
+                    Name="Application_Name" Nullable="false" XMLName="ApplicationName"/>
+                <Attribute ColumnName="SCREEN_NAME" DataType="ScreenName-200" DefaultValue="' '" Description="Screen to which this ui state belongs" Name="Screen_Name" Nullable="false" XMLName="ScreenName"/>
+                <Attribute ColumnName="COMPONENT_NAME" DataType="ComponentName" DefaultValue="' '" Description="Component to which this ui state belongs" Name="Component_Name" Nullable="false" XMLName="ComponentName"/>
+                <Attribute ColumnName="LOGINID" DataType="LoginId" DefaultValue="' '" Description="User associated with this ui state" Name="Loginid" Nullable="false" XMLName="Loginid"/>
+                <Attribute ColumnName="DEFINITION" DataType="CLOB" Description="The actual ui state definition" Name="Definition" Nullable="true" XMLName="Definition"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate" Description="The timestamp for the creation of this record." Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate" Description="The timestamp for the last modification of this record." Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID" DataType="Createuserid" DefaultValue="' '" Description="The user who created this record." Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID" DataType="Modifyuserid" DefaultValue="' '" Description="The user who last modified this record." Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' '" Description="The program that created this record." Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="' '" Description="The program that modified this record." Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0" Description="An integer used to track and prevent concurrent modifications." Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLT_USER_UI_STA_PK" Name="PLT_PLT_USER_UI_STATE_PK">
+                <Attribute ColumnName="PLT_USER_UI_STATE_KEY" Name="Plt_User_Ui_State_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PLT_USER_UI_ST_I1" Name="PLT_USER_UI_STATE_I1" Unique="true">
+                    <Column Name="APPLICATION_NAME"/>
+                    <Column Name="SCREEN_NAME"/>
+                    <Column Name="COMPONENT_NAME"/>
+                    <Column Name="LOGINID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" ChildXMLName="UserUiState" ChildListXMLName="UserUiStateList" ForeignEntity="User" Name="User" ReadOnly="true" Type="Bidirectional" Enforce="true" DeleteCascade="true" XMLName="User">
+                    <Attribute Name="Loginid" ParentName="Loginid"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

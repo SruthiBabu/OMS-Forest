@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores the configuration for a validation domain"
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Validation_Domain" Prefix="YFS_"
+            TableName="YFS_VALIDATION_DOMAIN" TableType="CONFIGURATION" XMLName="ValidationDomain">
+            <Attributes>
+                <Attribute ColumnName="VALIDATION_DOMAIN_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_VALIDATION_DOMAIN table."
+                    Name="Validation_Domain_Key" Nullable="false" XMLName="ValidationDomainKey"/>
+                <Attribute ColumnName="ENTERPRISE_CODE" 
+                    DataType="OrgCode" Description="The enterprise for which the validation domain belongs."
+                    IsOrgColumn="Y" Name="Enterprise_Code" Nullable="true" XMLName="EnterpriseCode"/>
+               	<Attribute ColumnName="DOCUMENT_TYPE" DataType="DocumentType" 
+                    Description="The document type for the validation domain"
+                    Name="Document_Type" Nullable="true" XMLName="DocumentType"/>
+				<Attribute ColumnName="DOMAIN" DataType="Text-100" 
+                    Description="The validation domain for this configuration."
+                    Name="Domain" Nullable="true" XMLName="Domain"/>
+				<Attribute ColumnName="IS_ENABLED"
+                    DataType="Flag"
+                    Description="The flag indicates whether or not the validation domain is enable." 
+                    Name="Is_Enabled" Nullable="true" XMLName="IsEnabled" VirtualDefaultValue="Y"/>
+				<Attribute ColumnName="HOLD_TYPE" DataType="CodeType"
+                    Description="The hold type of the hold that will be applied on the order when a violation of the validation within the validation domain occur."
+                    Name="Hold_Type" Nullable="true" XMLName="HoldType"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="VAL_DOMAIN_I1"
+                    Name="YFS_VAL_DOMAIN_I1" Unique="true">
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="DOMAIN"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="VAL_DOMAIN_PK" Name="YFS_VAL_DOMAIN_PK">
+                <Attribute ColumnName="VALIDATION_DOMAIN_KEY" Name="Validation_Domain_Key"/>
+            </PrimaryKey>
+             <RelationShips>
+            	  <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+			</RelationShips>
+        </Entity>
+		<Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the configuration for a Validation Reference.  Validation References are used to differentiate one violation from another."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Validation_Reference" Prefix="YFS_"
+            TableName="YFS_VALIDATION_REFERENCE" TableType="CONFIGURATION" XMLName="ValidationReference">
+            <Attributes>
+                <Attribute ColumnName="VALIDATION_REFERENCE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_VALIDATION_REFERENCE table."
+                    Name="Validation_Reference_Key" Nullable="false" XMLName="ValidationReferenceKey"/>
+               	<Attribute ColumnName="VALIDATION_KEY"
+                    DataType="Key" 
+                    Description="Reference key to the YFS_VALIDATION table."
+                    Name="Validation_Key" Nullable="true" XMLName="ValidationKey"/>
+               	<Attribute ColumnName="REFERENCE_NAME" DataType="DocumentType"
+                    Description="Indicates the reference name for identifying the approval rule violation."
+                    Name="Reference_Name" Nullable="true" XMLName="ReferenceName"/>
+				<Attribute ColumnName="IS_PRIMARY_REFERENCE"
+                    DataType="Flag"
+                    Description="The flag indicates whether or not the Reference is used to define the level at which the framework is invoked for the associated Validation." 
+                    Name="Is_Primary_Reference" Nullable="true" XMLName="IsPrimaryReference"  VirtualDefaultValue="N"/>
+                <Attribute ColumnName="IS_INFORMATIONAL"
+                    DataType="Flag"
+                    Description="The flag indicates whether or not the Reference is informational and should therefore not be used to differentiate one violation from another." 
+                    Name="Is_Informational" Nullable="true" XMLName="IsInformational" VirtualDefaultValue="N"/>
+				<Attribute ColumnName="DATA_TYPE" DataType="DocumentType"
+                    Description="Species the data type of the reference value."
+                    Name="Data_Type" Nullable="true" XMLName="DataType"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="VAL_REF_I1"
+                    Name="YFS_VAL_REF_I1" Unique="true">
+                    <Column Name="VALIDATION_KEY"/>
+                    <Column Name="REFERENCE_NAME"/>
+				</Index>
+			</Indices>
+            <PrimaryKey DB2Name="VAL_REF_PK" Name="YFS_VAL_REF_PK">
+                <Attribute ColumnName="VALIDATION_REFERENCE_KEY" Name="Validation_Reference_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Validation"
+                    Name="Validation" Type="Bidirectional" XMLName="Validation">
+                   <Attribute Name="Validation_Key" ParentName="Validation_Key"/>
+                </RelationShip>
+                
+            </RelationShips>
+    	</Entity>
+    	
+		<Entity AuditRequired="Y" Cacheable="true" ConfigurableByOrgOrNode="Y"
+			Description="This table stores the configuration for a validation"
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Validation" Prefix="YFS_"
+            TableName="YFS_VALIDATION" TableType="CONFIGURATION" XMLName="Validation">
+            <Attributes>
+                <Attribute ColumnName="VALIDATION_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_VALIDATION table."
+                    Name="Validation_Key" Nullable="false" XMLName="ValidationKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" Description="The organization for which the validation belongs." 
+                    IsOrgColumn="Y" Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+				 <Attribute ColumnName="VALIDATION_ID"
+                    DataType="ID-40" 
+                    Description="The unique identifier for the VALIDATION."
+                    Name="Validation_ID" Nullable="true" XMLName="ValidationID"/>
+              
+				<Attribute ColumnName="DOMAIN" DataType="Text-100" 
+                    Description="The validation domain for this configuration."      
+                    Name="Domain" Nullable="true" XMLName="Domain"/>
+				 <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" 
+                    Description="The description of the validation."
+                    Name="Description" Nullable="true" XMLName="Description"/>
+                <Attribute ColumnName="EXTERNAL_INIT_PERFORM"
+                    DataType="Flag" 
+                    Description="The flag indicates that the initial validation is done outside of the framework.." 
+                    Name="External_Init_Perform" Nullable="true" XMLName="ExternalInitPerform" VirtualDefaultValue="N"/>
+               	<Attribute ColumnName="VALIDATION_TYPE" DataType="Text-10"
+                    Description="The type of the validation."
+                    Name="Validation_Type" Nullable="true" XMLName="ValidationType"/>
+				<Attribute ColumnName="INPUT_TEMPLATE" DataType="DocumentType"
+                    Description="The template name identfier is for determining template to be used in business API for sending the data in XML format to approval engine."
+                    Name="Input_Template" Nullable="true" XMLName="InputTemplate"/>
+				<Attribute ColumnName="MODEL_TEMPLATE" DataType="DocumentType"
+                    Description="The model template is used in SBC for showing appropriate model in Approval Rule creation screens"
+                    Name="Model_Template" Nullable="true" XMLName="ModelTemplate"/>
+				<Attribute ColumnName="APPROVAL_POSTPONABLE"	
+                    DataType="Flag" 
+                    Description="The flag indicates if the transaction violation can be approved at a later point of time. If it is marked as (N), then violation has to be approved before operator can proceed with the transaction." 
+                    Name="Can_Approval_Be_Postponed" Nullable="true" XMLName="CanApprovalBePostponed" VirtualDefaultValue="Y"/>
+			    <Attribute ColumnName="VIOLATION_ENTITY"
+                    DataType="Text-100"
+                    Description=" This specifies the violation entity for storing the violations and approver information."
+                    Name="Violation_Entity" Nullable="true" XMLName="ViolationEntity"/>
+				<Attribute ColumnName="ERROR_CODE" DataType="Text-24"
+                    Description="This specifies the error code that needs to thrown in case validation fails."
+                    Name="Error_Code" Nullable="true" XMLName="ErrorCode"/>
+				<Attribute ColumnName="PRE_DEFINED_GREEX_RULE"
+                    DataType="CLOB" 
+                    Description="The pre-defined greex rules for the validation."
+                     Name="Pre_Defined_Greex_Rule" Nullable="true" XMLName="PreDefinedGreexRule"/>
+				<Attribute ColumnName="DATA_CAPTURE"
+                    DataType="CLOB" 
+                    Description="This is used to indicate the attributes whose values need to be captured to be used as part of the greex condition defined in the pre-defined greex rule."
+                     Name="Data_Capture" Nullable="true" XMLName="DataCapture"/>
+				<Attribute ColumnName="IS_SYSTEM_DEFINED"
+                    DataType="Flag" 
+                    Description="This flag indicates that the validation is provided as part of the factory setup and should not be modified." 
+                    Name="Is_SystemDefined" Nullable="true" XMLName="IsSystemDefined" VirtualDefaultValue="N"/>
+				<Attribute ColumnName="IS_OVERRIDABLE"
+                    DataType="Flag" 
+                    Description="This flag indicates that the validation can be overridden by overridden rules." 
+                    Name="Is_Overridable" Nullable="true" XMLName="IsOverridable" VirtualDefaultValue="Y"/>
+				<Attribute ColumnName="CONFIGURATION_GROUP"
+                    DataType="Text-40"
+                    Description="The configuration group that identify the level for which the validation can be configured." 
+                    Name="Configuration_Group" Nullable="true" XMLName="ConfigurationGroup"/>
+				<Attribute ColumnName="REAPPROVAL_REQUIRED"
+					DataType="Flag" 
+                    Description="This flag specifies if each transaction violation for this validation needs to be approved or not." 
+                    Name="Is_Approval_Required_On_Reoccurence" Nullable="true" XMLName="IsApprovalRequiredOnReoccurence" VirtualDefaultValue="Y"/>
+ 				<Attribute ColumnName="IS_USER_EXIT_ACTIVE"
+                    DataType="Flag" 
+                    Description="This flag indicates that  user exit for the validation is active or not." 
+                    Name="Is_User_Exit_Active" Nullable="true" XMLName="IsUserExitActive" VirtualDefaultValue="N"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="VALIDATION_I1"
+                    Name="YFS_VALIDATION_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+					<Column Name="VALIDATION_ID"/>
+                    <Column Name="DOMAIN"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="VALIDATION_PK" Name="YFS_VALIDATION_PK">
+                <Attribute ColumnName="VALIDATION_KEY" Name="Validation_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+            	  <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+			</RelationShips>
+    	</Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores validation rules"
+            EntityType="MASTER" Module="ysc"
+            Name="Validation_Rule" Prefix="YFS_"
+            TableName="YFS_VALIDATION_RULE" TableType="MASTER" XMLName="ValidationRule">
+            <Attributes>
+                <Attribute ColumnName="VALIDATION_RULE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key of the YFS_VALIDATION_RULE table."
+                    Name="Validation_Rule_Key" Nullable="false" XMLName="ValidationRuleKey"/>
+				<Attribute ColumnName="VALIDATION_KEY"
+                    DataType="Key" 
+                    Description="Reference key to the YFS_VALIDATION table."
+                    Name="Validation_Key" Nullable="true" XMLName="ValidationKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" 
+                    Description="The organization that is associated with this validation rule."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+               	<Attribute ColumnName="DOCUMENT_TYPE" DataType="DocumentType" 
+                    Description="Document type to which this validation rule belongs."
+                    Name="Document_Type" Nullable="true" XMLName="DocumentType"/>
+				<Attribute ColumnName="VALIDATION_RULE_ID"
+                    DataType="Text-40" 
+                    Description="Validation rule identifier." Name="Validation_Rule_ID" Nullable="true" XMLName="ValidationRuleID"/>
+				<Attribute ColumnName="GREEX_RULE"
+                    DataType="CLOB" 
+                    Description="The Greex format advanced XML condition associated with this Validation."
+                    Name="Greex_Rule"
+                    Nullable="true" XMLName="GreexRule"/>
+				<Attribute ColumnName="DATA_FOR_PREDEFINED_RULE"
+                    DataType="CLOB"
+                    Description="The data for the validation with pre-defined rule." 
+                    Name="Data_For_Pre_Defined_Rule" Nullable="true" XMLName="DataForPreDefinedRule"/>
+                <Attribute ColumnName="IS_ACTIVE"
+                    DataType="Flag"
+                    Description="Indicates when the validation rule is active." 
+                    Name="Is_Active" Nullable="true" XMLName="IsActive" VirtualDefaultValue="Y"/>
+                <Attribute ColumnName="EFFECTIVE_START_DATE" DataType="Date"
+					Description="Defines the time after which the rule is effective."
+                    Name="Effective_Start_Date" Nullable="true"
+                    XMLName="EffectiveStartDate"/>
+                <Attribute ColumnName="EFFECTIVE_END_DATE" DataType="Date"
+					Description="Defines the time before which the rule is effective."
+                    Name="Effective_End_Date" Nullable="true"
+                    XMLName="EffectiveEndDate"/>
+                <Attribute ColumnName="MESSAGE"
+                    DataType="Text-100" 
+                    Description="Message to be displayed when validation rule is violated." 
+                    Name="Message" Nullable="true" XMLName="Message"/>
+				<Attribute ColumnName="MESSAGE_CODE"
+                    DataType="Text-100" 
+                    Description="Message code to be displayed when validation rule is violated." 
+                    Name="Message_Code" Nullable="true" XMLName="MessageCode"/>  
+				<Attribute ColumnName="CHANNEL"
+                    DataType="Text-20" 
+                    Description="The channel for which this rule applies." 
+                    Name="Channel" Nullable="true" XMLName="Channel"/>  
+				<Attribute ColumnName="LANE_TYPE"
+                    DataType="Text-20" 
+                    Description="The Lane type for which this rule applies." 
+                    Name="Lane_Type" Nullable="true" XMLName="LaneType"/>  
+				<Attribute ColumnName="STORE_TYPE"
+                    DataType="Text-20" 
+                    Description="The store type for which this rule applies." 
+                    Name="Store_Type" Nullable="true" XMLName="StoreType"/>  
+				<Attribute ColumnName="REGION_KEY"
+                    DataType="Key" 
+                    Description="The region for which this rule applies." 
+                    Name="Region_Key" Nullable="true" XMLName="RegionKey"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="VALIDATION_RULE_I1"
+                    Name="YFS_VALIDATION_RULE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="VALIDATION_RULE_ID"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="VALITION_RUL_PK" Name="YFS_VALIDATION_RULE_PK">
+                <Attribute ColumnName="VALIDATION_RULE_KEY" Name="Validation_Rule_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                  <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+				 <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Validation"
+                    Name="Validation" Type="Bidirectional" XMLName="Validation">
+                   <Attribute Name="Validation_Key" ParentName="Validation_Key"/>
+                </RelationShip>
+            </RelationShips>
+    	</Entity>
+	</Entities>
+</DBSchema>

@@ -1,0 +1,12 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2020 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+# This file should contain all OMoC solution provided, non-DB based, overridable by customer, property overrides
+# For DB based such properties, use the <version>_system_defaults.properties file
+# This file was named this way and not system_overrides.properties to have compatibility with both OMoC 1.0 and 2.0
+
+#The paymentFilter is the default layout filter for the product. Below configuration includes PIIXMLFilter and SPIIFilter also to the filter set.
+#These two filters mask the PII data appears in the input/output XMLs of API/Services and the SPII data appears in the log of API/Services respectively.
+logfilter.filterset.paymentFilter.includes=PIIXMLFilter,SPIIFilter

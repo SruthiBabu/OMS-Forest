@@ -1,0 +1,2422 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite - Foundation
+(C) Copyright IBM Corp. 2006, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Entities>
+	<Entity EntityTitle="Rules" EntityName="Rules" PrimaryKeyAttributeName="CallingOrganizationCode"> 
+      <YCD0001 Title="Price_Match_Rules" ScreenType="Detail">
+        <ConfigurationAttributes RuleName="YCD_PRICE_MATCH_WINDOW">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD001" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+         <DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Price_Match_Rules">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Price_Match_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Price_Match_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>
+		 <MasterData>
+			<Table Name="ChargeCategory" XMLName="ChargeCategory" AllRecords="Y">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				<StaticAttributes IsDiscount="Y"/>
+			</Table>
+			<Table Name="ChargeName" XMLName="ChargeName" AllRecords="Y">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			</Table>
+			<Table Name="ChargeCategory" XMLName="ShippingCharge" AllRecords="Y">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				<StaticAttributes IsDiscount="N"/>
+			</Table>
+		</MasterData>
+      </YCD0001>
+	
+	
+	 <YCD0005 Title="Store_Pickup_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_STORE_ENABLED">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD005" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Store_Pickup_Rules">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Store_Pickup_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Store_Pickup_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+		 <MasterData>
+			<Table Name="Uom" XMLName="DistanceUOM" AllRecords="Y">
+			   <StaticAttributes UomType="DIMENSION"/>
+			</Table>
+			<Table Name="CommonCode" XMLName="FulfillmentType">
+            	<StaticAttributes CodeType="FULFILLMENT_TYPE"/>
+        	</Table>
+		 </MasterData>
+	  </YCD0005>
+	  <YCD0006 Title="Address_Verification_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_MUST_VERIFY_ADDRESS_IF_AVS_DOWN">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD006" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Address_Verification_Rules">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Address_Verification_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Address_Verification_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0006>
+	  <YCD0007 Title="Payment_Failure_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_AUTH_RETRY_LIMIT">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD007" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Payment_Failure_Rules">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Payment_Failure_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Payment_Failure_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0007>
+	  <YCD0008 Title="Add_Line_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_ORDER_AGE">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD008" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Add_Line_Rules">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Add_Line_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Add_Line_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0008>
+	  <YCD0013 Title="COM_UOM_Display_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_USE_TRANSACTIONAL_QUANTITY">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD014" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_COM_UOM_Display_Rules" />
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_COM_UOM_Display_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_COM_UOM_Display_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0013>
+
+	  <YCD0014 Title="Config_Gift_Options" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_ENABLE_GIFT_SHIPMENT">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD018" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_ENABLE_GIFT_PICKUP">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD018" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Gift_Options" />
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Gift_Options"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Gift_Options">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+       	</DetailInfo>		 
+	  	</YCD0014>
+	  	<YCD0015 Title="Config_Cntry_State_Display_Options" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_ALLOW_COUNTRY_ENTRY">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD019" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_STATE_DROP_DOWN_REGION_SCHEMA">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD019" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+            	<Get>
+	              	 <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Cntry_State_Display_Options" />
+            	</Get>
+            	<Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Cntry_State_Display_Options"/>
+				</Modify>
+            	<CreateNew>
+              		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Cntry_State_Display_Options">
+				     	<StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+           	 	</CreateNew>
+         	</DetailInfo>
+         	<MasterData>
+         	   <Table Name="RegionSchema" RemoveCallingOrgCode="Y"/>
+        	</MasterData>
+	  </YCD0015>
+	  <YCD0016 Title="Reservation_And_Availability_Check_Options" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_POSTPONE_AVAILABILITY_CHECK">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD020" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_AVAILABILITY_CHECK_IN_ITEM_INQUIRY">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD020" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_RESERVATION_REQUIRED">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD020" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Reservation_And_Availability_Check_Options" />
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Reservation_And_Availability_Check_Options"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Reservation_And_Availability_Check_Options">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+       	</DetailInfo>
+       	<MasterData>
+				<Table Name="DistributionRule" XMLName="DistributionRule" AllRecords="Y">
+					<StaticAttributes ItemGroupCode="PROD" />
+				</Table>
+			</MasterData>		 
+	  	</YCD0016>
+	  	<YCD0017 Title="Config_User_Alert_Notification" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_ALERT_CONFIG">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD021" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_ALERT_POLING_INTERVAL">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD021" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+	            <Get>
+				     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_User_Alert_Notification" />
+	            </Get>
+	            <Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_User_Alert_Notification"/>
+				</Modify>
+				<CreateNew>
+	        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_User_Alert_Notification">
+					     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+       		</DetailInfo>
+       	</YCD0017>
+       	<YCD0018 Title="Config_Print_Options" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_PRINT_AT_ORDER_MODIFY">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD022" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+	            <Get>
+				     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Print_Options" />
+	            </Get>
+	            <Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Print_Options"/>
+				</Modify>
+				<CreateNew>
+	        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Print_Options">
+					     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+       		</DetailInfo>
+       	</YCD0018>
+       	<YCD0019 Title="Config_Payment_Handling_Rules" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_PAYMENT_ENTERED_EXTERNALLY">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD023" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+	            <Get>
+				     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Payment_Options" />
+	            </Get>
+	            <Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Payment_Options"/>
+				</Modify>
+				<CreateNew>
+	        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Payment_Options">
+					     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+       		</DetailInfo>
+       	</YCD0019>
+       	<YCD0020 Title="Config_OpenBox_Options" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_OPENBOX_ENABLED">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD016" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_OPENBOX_TAG_ATTR">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD016" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_OPENBOX_DEL_PICKUP_ONLY">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD016" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_OPENBOX_DEFAULT_PRODUCTCLASS">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD016" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+	            <Get>
+				     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_OpenBox_Options" />
+	            </Get>
+	            <Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_OpenBox_Options"/>
+				</Modify>
+				<CreateNew>
+	        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_OpenBox_Options">
+					     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+       		</DetailInfo>
+       		<MasterData>
+				<Table Name="CommonCode" XMLName="ProductClass">
+                	<StaticAttributes CodeType="PRODUCT_CLASS"/>
+            	</Table>
+            </MasterData>
+       	</YCD0020>
+       	<YCD0022 Title="Config_Pickup_Line_After_Release" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_MODIFY_PICK_POST_REL">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD024" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_CANCEL_PICKUP_LINES">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD024" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+	            <Get>
+				     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Pickup_Line_After_Release" />
+	            </Get>
+	            <Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Pickup_Line_After_Release"/>
+				</Modify>
+				<CreateNew>
+	        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Pickup_Line_After_Release">
+					     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+       		</DetailInfo>
+       	</YCD0022>
+       	<YCD0023 Title="Config_Charge_Name_Category_For_LevelOfService" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_USE_COMMITTED_DATES">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD025" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+	            <Get>
+				     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Charge_Name_Category_For_LevelOfService" />
+	            </Get>
+	            <Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Charge_Name_Category_For_LevelOfService"/>
+				</Modify>
+				<CreateNew>
+	        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Charge_Name_Category_For_LevelOfService">
+					     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+       		</DetailInfo>
+       	</YCD0023>
+       	<YCD0024 Title="Config_Alternate_Item_Identifier_Display" ScreenType="Detail">
+			<ConfigurationAttributes RuleName="YCD_USE_ALT_ITEM_ID">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD017" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<ConfigurationAttributes RuleName="YCD_ITEM_ALIAS">
+             	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD017" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			<DetailInfo>
+	            <Get>
+				     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Alternate_Item_Identifier_Display" />
+	            </Get>
+	            <Modify>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Alternate_Item_Identifier_Display"/>
+				</Modify>
+				<CreateNew>
+	        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Alternate_Item_Identifier_Display">
+					     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+       		</DetailInfo>
+       		<MasterData>
+				<Table Name="CommonCode" XMLName="ItemAliasType">
+                	<StaticAttributes CodeType="ITEM_ALIAS_TYPE"/>
+            	</Table>
+            </MasterData>
+       	</YCD0024>
+       	<YCD0011 Title="Order_Entry_Rules" ScreenType="Detail">
+  		<Wizard firstScreen="YCD00111" title="Order_Entry_Controller_Wizard" WizardSummary="Y">
+  			<YCD00111 resourceId="YCD00111" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00112">
+					</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Cust_Identification_Step_First">
+						<Expression lhs="xml:/RulesList/@YCD_CUSTOMER_SCR_SEQ" rhs="1" op="EQ"/>
+					</Condition>
+					<Condition Summary="Item_Entry_Step_First">
+						<Expression lhs="xml:/RulesList/@YCD_MULTI_LINE_SCR_SEQ" rhs="1" op="EQ"/>
+					</Condition>
+				</WizardSummary>
+  			</YCD00111>
+  			<YCD00112 resourceId="YCD00112" back="true" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD00113">
+						<Expression lhs="xml:/RulesList/@YCD_CUSTOMER_SEARCH" rhs="Y" op="EQ"/>					 
+					</Condition>
+					<Condition nextScreen="YCD00119">
+						<Expression lhs="xml:/RulesList/@YCD_CUSTOMER_SEARCH" rhs="A" op="EQ"/>					 
+					</Condition>
+					<Condition nextScreen="YCD00114">
+						<Expression lhs="xml:/RulesList/@YCD_CUSTOMER_SEARCH" rhs="N" op="EQ"/>				 
+					</Condition>
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Search_Existing_Address">
+						<Expression lhs="xml:/RulesList/@YCD_CUSTOMER_SEARCH" rhs="N" op="EQ"/>		
+					</Condition>
+					<Condition Summary="Search_Customer_Database">
+						<Expression lhs="xml:/RulesList/@YCD_CUSTOMER_SEARCH" rhs="Y" op="EQ"/>		
+					</Condition>
+					<Condition Summary="Search_Customer_Database_New">
+						<Expression lhs="xml:/RulesList/@YCD_CUSTOMER_SEARCH" rhs="A" op="EQ"/>		
+					</Condition>
+				</WizardSummary>
+  			</YCD00112>
+  			<YCD00113 resourceId="YCD00113" back="true" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD001142"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Default_Customer_Type_Search" SummaryPlaceHolder="xml:/RulesList/@YCD_DISP_SRCH_DESCRP">
+						<Expression lhs="xml:/RulesList/@YCD_DEFAULT_CUST_SRCH" rhs="02" op="EQ"/>		
+					</Condition>
+					<Condition Summary="Default_Customer_Type_Search" SummaryPlaceHolder="xml:/RulesList/@YCD_DISP_SRCH_DESCRP">
+						<Expression lhs="xml:/RulesList/@YCD_DEFAULT_CUST_SRCH" rhs="01" op="EQ"/>		
+					</Condition>
+				</WizardSummary>
+  			</YCD00113>
+  			<YCD00114 resourceId="YCD00114" back="true" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD001142"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Enable_Business_Customer_Search">
+						<Expression lhs="xml:/RulesList/@YCD_CORPORATE_USER_ENABLED" rhs="Y" op="EQ"/>
+					</Condition>					 
+				</WizardSummary>
+  			</YCD00114>
+  			<YCD001142 resourceId="YCD001142" back="true" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD00115"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Advanced_Item_Config" SummaryPlaceHolder="xml:/RulesList/@YCD_ALTERNATE_ITEM_DISPLAY">
+					</Condition>
+				</WizardSummary>
+  			</YCD001142>
+  			<YCD00115 resourceId="YCD00115" back="true" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD00116"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Default_Pickup">
+						<Expression lhs="xml:/RulesList/@YCD_DEFAULT_DELIVERY_METHOD" rhs="PICK" op="EQ"/>
+					</Condition>
+					<Condition Summary="Default_Shipping">
+						<Expression lhs="xml:/RulesList/@YCD_DEFAULT_DELIVERY_METHOD" rhs="SHP" op="EQ"/>
+					</Condition>
+					<Condition Summary="Default_Delivery">
+						<Expression lhs="xml:/RulesList/@YCD_DEFAULT_DELIVERY_METHOD" rhs="DEL" op="EQ"/>
+					</Condition>
+				</WizardSummary>
+  			</YCD00115>
+  			<YCD00116 resourceId="YCD00116" back="true" next="true" finish="false">
+  				<OnNext>
+					<Condition nextScreen="YCD00117"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Show_Columns" SummaryPlaceHolder="xml:/RulesList/@Display_Description" />
+				</WizardSummary>
+  			</YCD00116>
+  			<YCD00117 resourceId="YCD00117" back="true" next="true" finish="false">
+  				<OnNext>
+					<Condition nextScreen="YCD00118"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Show_Related_Items_As" SummaryPlaceHolder="xml:/RulesList/@Related_Items_Descrp">
+						<Expression lhs="xml:/RulesList/@YCD_SHOW_RELITEMS_POPUP" rhs="Y" op="EQ"/>
+					</Condition>
+					<Condition Summary="Show_Related_Items_As" SummaryPlaceHolder="xml:/RulesList/@Related_Items_Descrp">
+						<Expression lhs="xml:/RulesList/@YCD_SHOW_RELITEMS_POPUP" rhs="N" op="EQ"/>
+					</Condition>
+				</WizardSummary>
+  			</YCD00117>
+  			<YCD00118 resourceId="YCD00118" back="true" next="false" finish="true">
+  				<OnNext>
+					<Condition nextScreen="YCD0011"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="YCD_Association_Types_Summary" SummaryPlaceHolder="xml:/RulesList/@YCD_SELCTED_ASSOCIATIONS">
+						<!-- <Expression lhs="xml:/RulesList/@YCD_SELCTED_ASSOCIATIONS" rhs="" op="EQ"/> -->
+					</Condition>					
+				</WizardSummary>
+  			</YCD00118>
+  			<YCD00119 resourceId="YCD00119" back="true" next="true" finish="false" >
+  				<OnNext>
+					<Condition nextScreen="YCD00113"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Tax_Options_Show_Business"> 
+						<Expression lhs="xml:/RulesList/@YCD_DISPLAY_TAX_OPTIONS" rhs="Y" op="EQ"/>
+					</Condition>
+					<Condition Summary="Tax_Options_Show_None"> 
+						<Expression lhs="xml:/RulesList/@YCD_DISPLAY_TAX_OPTIONS" rhs="N" op="EQ"/>
+					</Condition>
+					<Condition Summary="Tax_Options_Show_All"> 
+						<Expression lhs="xml:/RulesList/@YCD_DISPLAY_TAX_OPTIONS" rhs="A" op="EQ"/>
+					</Condition>
+				</WizardSummary>
+  			</YCD00119>  			
+  		</Wizard>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Alternate_Item_Identifier_Display" />
+            </Get>
+			<Modify>
+					<API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="modifyOrderEntryRulesDetail" Message="Message_Saving_Order_Entry_Rules"/>
+					 <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			</Modify>
+			<CreateNew>
+				<API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="modifyOrderEntryRulesDetail" Message="Message_Saving_Order_Entry_Rules">
+					 <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					  <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</API>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+		 </MasterData>
+	  </YCD0011>
+	  <YCD0026 Title="Order_Entry_Rules" ScreenType="Detail">
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="getOrderEntryRulesDetail" Message="Message_Loading_Config_Alternate_Item_Identifier_Display" />
+            </Get>
+			<Modify></Modify>
+			<CreateNew>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+		 </MasterData>
+      </YCD0026>
+	  <YCD0027 Title="Title_YCD_Config_Calendar_View" ScreenType="Detail">
+	  	<ConfigurationAttributes RuleName="YCD_CALENDAR_MONTHLY_VIEW">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD026" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="YCD_CALENDAR_WEEK_WINDOW">
+         	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD026" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="YCD_CALENDAR_SLOT_FIRST">
+         	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD026" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Calendar_View" />
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+   		</DetailInfo>
+  	  </YCD0027>
+  	  <YCD0028 Title="Config_ProvidedService_RelationshipType" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Saving_Config_Calendar_View"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData>
+			<Table Name="LineRelationshipType" XMLName="LineRelationshipType"/>
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+        </MasterData>
+  	  </YCD0028>
+  	  <YCD0029 Title="YCD_Delivery_Line_Rules" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Delivery_Line_Rules"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Delivery_Line_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Delivery_Line_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	  </YCD0029>
+  	<YCD0033 Title="Display_Bundle_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_DISPLAY_BUNDLE_COMPONENTS">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD031" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Bundle_Components_Display_Rule">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Bundle_Components_Display_Rule"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Bundle_Components_Display_Rule">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0033>
+	  <YCD0061 Title="Backroom_Pick_Required" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_STORE_IS_BP_REQD">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="SOPSOMCONFIG01" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="YCD_STORE_SHP_BP_REQD">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="SOPSOMCONFIG01" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Bundle_Components_Display_Rule">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Bundle_Components_Display_Rule"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Bundle_Components_Display_Rule">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0061>
+  	<YCD0055 Title="Config_DOM_Console_Title" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_DOM_CONSOLE_URL">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD040" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_DOM_Console_Rules">
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_DOM_Console_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_DOM_Console_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0055>
+	  <YCD0034 Title="Display_Model_Item_View" ScreenType="Detail">
+	  	<ConfigurationAttributes RuleName="YCD_MODEL_ITEM_DISPLAY_LIST_VIEW">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD032" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Display_Model_View" />
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Display_Model_View"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Display_Model_View">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+   		</DetailInfo>
+  	  </YCD0034>
+  	  <YCD0039 Title="Order_History_Notes" ScreenType="Detail">
+  		<Wizard firstScreen="YCD00391" title="Order_History_Notes_Wizard" WizardSummary="Y">
+  			<YCD00391 resourceId="YCD00391" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00392">
+					</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_First" SummaryPlaceHolder="xml:/RulesList/@TotalNumberOfNotes">
+					</Condition>
+				</WizardSummary>
+			</YCD00391>
+			<YCD00392 resourceId="YCD00392" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00393">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_Two" SummaryPlaceHolder="xml:/RulesList/@DisplayHoldAdded">
+					</Condition>
+				</WizardSummary>
+			</YCD00392>
+			<YCD00393 resourceId="YCD00393" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00394">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_Three" SummaryPlaceHolder="xml:/RulesList/@DisplayHoldRejected">
+					</Condition>
+				</WizardSummary>
+			</YCD00393>
+			<YCD00394 resourceId="YCD00394" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00395">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_Four" SummaryPlaceHolder="xml:/RulesList/@DisplayHoldResolved">
+					</Condition>
+				</WizardSummary>
+			</YCD00394>
+			<YCD00395 resourceId="YCD00395" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00396">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_Five" SummaryPlaceHolder="xml:/RulesList/@DisplayAlert">
+					</Condition>
+				</WizardSummary>
+			</YCD00395>
+			<YCD00396 resourceId="YCD00396" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00397">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_Six" SummaryPlaceHolder="xml:/RulesList/@DisplayOrderStatus">
+					</Condition>
+				</WizardSummary>
+			</YCD00396>
+			<YCD00397 resourceId="YCD00397" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD00398">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_Seven" SummaryPlaceHolder="xml:/RulesList/@DisplayAppointment">
+					</Condition>
+				</WizardSummary>
+			</YCD00397>
+			<YCD00398 resourceId="YCD00398" back="true" next="false" finish="true">
+	  			<OnNext>
+	  				<Condition nextScreen="YCD0039">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Order_History_Step_Eight" SummaryPlaceHolder="xml:/RulesList/@RulePlaceHolder">
+					</Condition>
+				</WizardSummary>
+			</YCD00398>
+		</Wizard>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Alternate_Item_Identifier_Display" />
+            </Get>
+			<Modify>
+					<API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="modifyOrderHistoryNotesDetail" Message="Message_Saving_Order_Entry_Rules"/>
+					 <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			</Modify>
+			<CreateNew>
+				<API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="modifyOrderHistoryNotesDetail" Message="Message_Saving_Order_Entry_Rules">
+					 <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					  <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</API>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+		 </MasterData>
+		 </YCD0039>
+		 <YCD0048 Title="Config_Service_To_Execute" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Saving_Config_Calendar_View"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData>
+			<Table Name="Flow">
+                <StaticAttributes FlowType="00" ProcessTypeKey="ORDER_FULFILLMENT"/>
+                <!--<DynamicAttributes ProcessTypeKey="@ProcessTypeKey" />-->
+    		</Table>
+	    </MasterData>
+  	  </YCD0048>
+	  <SAA001041 Title="Config_Service_To_Execute" ScreenType="Detail">
+	  		<ConfigurationAttributes RuleName="SAA_SERVICE_TO_LOG_QUOTE_NOTES">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSSAA0010" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Saving_Config_Calendar_View"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Calendar_View">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData>
+			<Table Name="Flow">
+                <StaticAttributes FlowType="00" ProcessTypeKey="QUOTE_FULFILLMENT"/>                
+    		</Table>
+	    </MasterData>
+  	  </SAA001041>
+ 	  <YCD0049 Title="Config_Pagination_Rules" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Pagination_Rules"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Pagination_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Pagination_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData/>
+  	  </YCD0049>
+  	  <YCD0056 Title="Order_History_Notes" ScreenType="Detail">
+  	   <ConfigurationAttributes RuleName="YCD_SERVICE_TO_LOG_NOTES">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD033" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+			 <Get>
+			     <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getOrderHistoryNotesDetail" Message="Message_Loading_Config_Alternate_Item_Identifier_Display" />
+            </Get>
+			<Modify></Modify>
+			<CreateNew>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	          </Table>
+	          <Table Name="HoldType" XMLName="HoldType">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey" BaseProcessTypeKey="@BaseProcessTypeKey" />
+			  </Table>
+			  </MasterData>
+      </YCD0056>
+  	  <YCD0050 Title="Config_Customer_Search_Rules" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Customer_Search_Rules"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Customer_Search_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Customer_Search_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData/>
+  	  </YCD0050>
+   	  <YCD0051 Title="Config_Item_Search" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Item_Search"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Item_Search"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Item_Search">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData/>
+  	  </YCD0051>
+      <YCD0053 Title="Config_Credit_Card_Rules" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Credit_Card_Rules"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Credit_Card_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Credit_Card_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData/>
+  	  </YCD0053>
+      <YCD0054 Title="Config_Wrongly_Ship_Items" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Wrongly_Ship_Items"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Wrongly_Ship_Items"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Wrongly_Ship_Items">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+  	    <MasterData>
+				<Table Name="CommonCode" XMLName="ReshipReason">
+                	<StaticAttributes CodeType="YCD_RESHIP_REASON"/>
+            	</Table>
+            	<Table Name="ItemUOMMaster" XMLName="UOM">
+					<DynamicAttributes  OrganizationCode="@CallingOrganizationCode"/>
+					<StaticAttributes ItemGroupCode="PROD" />
+					<!--<CodeAttributes> 
+	                  	<CodeAttribute CodeValue="@ComponentUnitOfMeasure" />
+	                </CodeAttributes>-->
+            	</Table>
+  	    </MasterData>
+  	  </YCD0054>
+  	  <YCD0057 Title="Return_Entry_Rules" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Wrongly_Ship_Items"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Wrongly_Ship_Items"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Wrongly_Ship_Items">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+        <MasterData>
+        	<Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	        </Table>
+	        <Table Name="CommonCode" XMLName="ExchangeType" AllRecords="Y">
+	                	<StaticAttributes CodeType="EXCHANGE_TYPE"/>
+	        </Table>
+        </MasterData>
+  	  </YCD0057>
+  	    <YCD0058 Title="Return_Line_Types" ScreenType="Detail">
+  	  	<DetailInfo>
+        	<Get>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Config_Wrongly_Ship_Items"/>
+            </Get>
+             <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Wrongly_Ship_Items"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Config_Wrongly_Ship_Items">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+        </DetailInfo>
+        <MasterData>
+        	<Table Name="OrderLineType" XMLName="OrderLineType">
+					<DynamicAttributes DocumentType="@DocumentType" CallingOrganizationCode="@CallingOrganizationCode"/>
+			</Table>
+        </MasterData>
+  	  </YCD0058>
+	  	  <YCD0063 Title="Configure_Announcement" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_ANNOUNCEMENT_EXCEPTION_TYPE">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD047" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="YCD_ANNOUNCEMENT_POLLING_INTERVAL">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD047" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Customer_Payment_Rules">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Customer_Payment_Methods"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Customer_Payment_Methods">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		
+         <MasterData>
+			<Table Name="ExceptionType" XMLName="ExceptionType" AllRecords="Y">
+			</Table> 
+			</MasterData>
+	  </YCD0063>
+
+	<YCD0064 Title="Config_FS_Rules" ScreenType="Detail">
+        <ConfigurationAttributes RuleName="YCD_USE_FULFILLMENT_SCREEN">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="YCD_SHIPMENT_OPTIMIZATION_RULE">
+         	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_FS_Rules" />
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FS_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FS_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+   		</DetailInfo>
+		<MasterData>
+            	<Table Name="AllocationRule" XMLName="AllocationRule">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+             	</Table>
+  	    </MasterData>
+      </YCD0064>
+	  <YCD0065 Title="" ScreenType="Detail">
+        <ConfigurationAttributes RuleName="YCD_USE_FULFILLMENT_SCREEN">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="YCD_SHIPMENT_OPTIMIZATION_RULE">
+         	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_FS_Rules" />
+				 <DynamicAttributes OrganizationCode="@CallingOrganizationCode" QualifiedTagId="@QualifiedTagId"/>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FS_Rules"/>
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" QualifiedTagId="@QualifiedTagId"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FS_Rules">
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" QualifiedTagId="@QualifiedTagId"/>
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>			
+   		</DetailInfo>
+		    <MasterData>
+			<Table Name="AllocationRule" XMLName="AllocationRule">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+             	</Table>
+		   </MasterData>
+      </YCD0065>
+	  <YCD0066 Title="" ScreenType="Detail">
+        <ConfigurationAttributes RuleName="YCD_DISPLAY_TAX_OPTIONS">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_FS_Rules" />
+				 <DynamicAttributes OrganizationCode="@CallingOrganizationCode"
+				 QualifiedTagId="@QualifiedTagId" DocumentType="@DocumentType"/>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FS_Rules"/>
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" QualifiedTagId="@QualifiedTagId" DocumentType="@DocumentType"/>
+			</Modify>			
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Tax_Options">
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" QualifiedTagId="@QualifiedTagId" DocumentType="@DocumentType"/>
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+   		</DetailInfo>		  
+      </YCD0066>
+	  <YCD0067 Title="Config_Version_Spec_Rules" ScreenType="Detail">
+		 <ConfigurationAttributes RuleName="YCD_USE_FULFILLMENT_SCREEN">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="YCD_SHIPMENT_OPTIMIZATION_RULE">
+         	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		 <ConfigurationAttributes RuleName="YCD_DISPLAY_TAX_OPTIONS">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+		<Get>
+			 <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_FS_Rules" />
+			 <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+            </Get>
+	</DetailInfo>
+     <MasterData>
+			<Table Name="AllocationRule" XMLName="AllocationRule">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+             	</Table>
+			<Table Name="QualifiedTag" XMLName="QualifiedTag"/>
+	   </MasterData>
+      </YCD0067>
+
+	<YCD0062 Title="Save_Payment_Information" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_USE_CUSTOMER_PAYMENT_METHODS">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD046" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Customer_Payment_Rules">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Customer_Payment_Methods"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Customer_Payment_Methods">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>
+	  </YCD0062>
+	  <YCD0070 Title="Consumer_Customer_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_DEFAULT_CONSUMER_USER_ROLE">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD070" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Consumer_Customer_Rules">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Consumer_Customer_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Consumer_Customer_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>
+         <MasterData>
+			<Table Name="UserGroup" XMLName="UserGroup">
+				<StaticAttributes GroupType="EXTERNAL"/>
+				<DynamicAttributes OwnerKey="@CallingOrganizationCode"/>
+			</Table>
+        </MasterData>
+	  </YCD0070>
+	  <YCD0080 Title="Web_Channel_Version" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_WEB_CHANNEL_VERSION">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD080" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Web_Channel_Version_Rules">
+					<DynamicAttributes OrganizationCode="@CallingOrganizationCode"/>
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Web_Channel_Version_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Web_Channel_Version_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>
+	  </YCD0080>
+	  <YCD0099 Title="Display_Item_Details_Url_Title" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="YCD_ITEM_ASSET_URL">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD050" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Item_Details_Url_Rules">
+					<!--<DynamicAttributes OrganizationCode="@CallingOrganizationCode" ProcessTypeKey="@ProcessTypeKey" DocumentType="@DocumentType"/>-->
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Item_Details_Url_Rules"/>
+				<DynamicAttributes  CallingOrganizationCode="@CallingOrganizationCode"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Item_Details_Url_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				     <DynamicAttributes  CallingOrganizationCode="@CallingOrganizationCode"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>	
+         <MasterData>
+	          <Table Name="CommonCode" XMLName="AssetType" AllRecords="Y">
+	                	<StaticAttributes CodeType="ASSET_TYPE"/>
+						<DynamicAttributes  CallingOrganizationCode="@CallingOrganizationCode"/>
+	          </Table>
+			  </MasterData>	 
+	  </YCD0099>
+	  <YCD0073 Title="Web_Channel_Cart_Rules" ScreenType="Detail">
+  		<Wizard firstScreen="YCD00733" title="Configure_Web_Channel_Cart_Rules" WizardSummary="Y">
+  			<YCD00733 resourceId="YCD00733" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD00734"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Check_Inventory_Summary" SummaryPlaceHolder="xml:/RulesList/@Check_Inventory_Rules"/>
+				</WizardSummary>
+  			</YCD00733>
+  			<YCD00734 resourceId="YCD00734" back="true" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD00735"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="YCD_Association_Types_Summary" SummaryPlaceHolder="xml:/RulesList/@YCD_SELCTED_ASSOCIATIONS">
+					</Condition>					
+				</WizardSummary>
+  			</YCD00734>
+  			<YCD00735 resourceId="YCD00735" back="true" next="true" finish="false">
+	  			<OnNext>
+					<Condition nextScreen="YCD00736"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Enable_Coupon_Entry_Summary"  SummaryPlaceHolder="xml:/RulesList/@Coupon_Entry_Enabled_Disabled"/>
+				</WizardSummary>
+  			</YCD00735>
+  			<YCD00736 resourceId="YCD00736" back="true" next="true" finish="false">
+  				<OnNext>
+					<Condition nextScreen="YCD00737"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Validate_Configurable_Items_Summary" SummaryPlaceHolder="xml:/RulesList/@Validate_Configurable_Items_Rules"/>
+				</WizardSummary>
+  			</YCD00736>
+  			<YCD00737 resourceId="YCD00737" back="true" next="false" finish="true">
+  				<OnNext>
+					<Condition nextScreen="YCD0073"/> 
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Default_Carrier_Service_For_New_Draft_Orders_Summary" SummaryPlaceHolder="xml:/RulesList/@Default_Carrier_Service"/>
+				</WizardSummary>
+			</YCD00737>
+  		</Wizard>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Web_Channel_Cart_Rules" />
+            </Get>
+			<Modify>
+					<API Servlet="com.yantra.pca.ycd.ui.backend.YCDWebChannelCartRulesControllerAPI" APIName="modifyWebChannelCartRulesDetail" Message="Message_Saving_Web_Channel_Cart_Rules"/>
+					 <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			</Modify>
+			<CreateNew>
+				<API Servlet="com.yantra.pca.ycd.ui.backend.YCDWebChannelCartRulesControllerAPI" APIName="modifyWebChannelCartRulesDetail" Message="Message_Saving_Web_Channel_Cart_Rules">
+					 <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					  <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</API>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+		  <Table Name="CarrierService" XMLName="CarrierService" AllRecords="Y"/>
+		  <Table Name="Uom" XMLName="DistanceUOM" AllRecords="Y">
+			   <StaticAttributes UomType="DIMENSION"/>
+			</Table>
+		 </MasterData>
+	  </YCD0073>
+	  <SWC0001 Title="Web_Channel_Store_Pickup_Rules" ScreenType="Detail">
+	  <ConfigurationAttributes RuleName="SWC_STORE_PICKUP_ENABLED">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="SAASWC079" IsPrimary="Y"/>
+        	<DynamicAttributes DocumentType="@DocumentType" OrganizationCode="@CallingOrganizationCode"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Store_Pickup_Rules">
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.pca.ycd.ui.backend.YCDWebChannelCartRulesControllerAPI" APIName="modifyRulesList" Message="Message_Saving_Store_Pickup_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.pca.ycd.ui.backend.YCDWebChannelCartRulesControllerAPI" APIName="modifyRulesList" Message="Message_Saving_Store_Pickup_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>
+	  	<MasterData>
+		  <Table Name="Uom" XMLName="DistanceUOM" AllRecords="Y">
+			   <StaticAttributes UomType="DIMENSION"/>
+			</Table>
+		 </MasterData>
+	  </SWC0001>
+	  <YCD0075 Title="Web_Channel_Cart_Rules" ScreenType="Detail">
+		<DetailInfo>
+			 <Get>
+			     <API Servlet="com.yantra.pca.ycd.ui.backend.YCDWebChannelCartRulesControllerAPI" APIName="getWebChannelCartRulesDetail" Message="Message_Loading_Web_Channel_Cart_Rules" />
+            </Get>
+			<Modify></Modify>
+			<CreateNew>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+		 </MasterData>
+      </YCD0075>
+	  <YCD0076 Title="Config_Associationship_Relationship" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="AsscRelationship" ShowFooter="N">
+            <List AttributeName="@AssociationTypeDes" ColumnTitle="Association_Type" DataType="Text-20" EditableAddRow="N" Editable="N">
+            </List>
+            <List AttributeName="@ShowInWCUI" ColumnTitle="Show_In_UI" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+            <List AttributeName="@MaxNumberToShow" ColumnTitle="Max_No_To_Show" DataType="MaxRecordCount" Editable="Y" EditableComponent="textbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+			<List AttributeName="@Function" ColumnTitle="Function" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+            	<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/AsscRelationshipList/MasterData/CommonCodes@CommonCode"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CodeShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CodeValue"/>
+            </List>
+            <List AttributeName="@RelationshipType" ColumnTitle="Relationship_Type" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+                <ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/AsscRelationshipList/MasterData/LineRelationshipTypes@LineRelationshipType"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="RelationshipShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="RelationshipType"/>
+            </List>
+         </ListInfo>
+         <MasterData>
+			<Table Name="LineRelationshipType" XMLName="LineRelationshipType">
+			<StaticAttributes ConsiderForSorting="Y"/>
+			</Table>
+			<Table Name="CommonCode" XMLName="CommonCode">
+                	<StaticAttributes CodeType="YCD_ASSC_FUNCTION"/>
+            </Table>
+        </MasterData>
+        <API Servlet="com.yantra.pca.ycd.ui.backend.YCDWebChannelCartRulesControllerAPI" APIName="getAsscRelationshipTableData" Message="Message_Loading_Web_Channel_Cart_Rules"/>
+      </YCD0076>
+	  
+	  <YCD0074 Title="Web_Channel_User_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="SWC_ALLOW_REMEMBER_ME">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD074" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<ConfigurationAttributes RuleName="SWC_ALLOW_USER_PREFERENCES">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD074" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Web_Channel_User_Rules">
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Web_Channel_User_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Web_Channel_User_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0074>
+	  <YCD0078 Title="Web_Channel_Cat_Rules" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="SWC_NUM_OF_CATEGORIES_DISPLAY">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="SAASWC078" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Web_Channel_User_Rules">
+				 </API>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Web_Channel_User_Rules"/>
+			</Modify>
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Web_Channel_User_Rules">
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N" />
+				     <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+				</API>
+			</CreateNew>
+         </DetailInfo>		 
+	  </YCD0078>
+	  <YCD0056 Title="Order_History_Notes" ScreenType="Detail">
+  	   <ConfigurationAttributes RuleName="YCD_SERVICE_TO_LOG_NOTES">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD033" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+			 <Get>
+			     <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getOrderHistoryNotesDetail" Message="Message_Loading_Config_Alternate_Item_Identifier_Display" />
+            </Get>
+			<Modify></Modify>
+			<CreateNew>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	          </Table>
+	          <Table Name="HoldType" XMLName="HoldType">
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType" ProcessTypeKey="@ProcessTypeKey" BaseProcessTypeKey="@BaseProcessTypeKey" />
+			  </Table>
+			  </MasterData>
+      </YCD0056>
+	  <SAA00100 Title="Quote_Audit_Notes" ScreenType="Detail">
+		<ConfigurationAttributes RuleName="SAA_SERVICE_TO_LOG_QUOTE_NOTES">
+             <ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSSAA0010" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+			 <Get>
+			  <API Servlet="com.yantra.pca.saa.ui.backend.SAAQuoteAuditControllerAPI" APIName="getQuoteAuditNotesDetail" Message="Message_Loading_Config_Alternate_Item_Identifier_Display" /> 
+            </Get>			
+		 </DetailInfo>
+		 <MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	          </Table>
+			  </MasterData>
+      </SAA00100>
+	  <SAA0010 Title="Quote_Audit_Notes" ScreenType="Detail">
+  		<Wizard firstScreen="SAA00101" title="Quote_Audit_Notes_Wizard" WizardSummary="Y">
+  			<SAA00101 resourceId="SAA00101" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="SAA00102">
+					</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Quote_Audit_Step_First" SummaryPlaceHolder="xml:/RulesList/@TotalNumberOfNotes">
+					</Condition>
+				</WizardSummary>
+			</SAA00101>
+			<SAA00102 resourceId="SAA00102" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="SAA00103">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Quote_Audit_Step_Two" SummaryPlaceHolder="xml:/RulesList/@DisplayQuoteStatus">
+					</Condition>
+				</WizardSummary>
+			</SAA00102>
+			<SAA00103 resourceId="SAA00103" back="true" next="true" finish="false">
+	  			<OnNext>
+	  				<Condition nextScreen="SAA00104">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Quote_Audit_Step_Three" SummaryPlaceHolder="xml:/RulesList/@DisplaySendEvent">
+					</Condition>
+				</WizardSummary>
+			</SAA00103>
+			<SAA00104 resourceId="SAA00104" back="true" next="false" finish="true">
+	  			<OnNext>
+	  				<Condition nextScreen="SAA0010">
+	  				</Condition>					
+				</OnNext>
+				<WizardSummary>
+					<Condition Summary="Quote_Audit_Step_Four" SummaryPlaceHolder="xml:/RulesList/@RulePlaceHolder">
+					</Condition>
+				</WizardSummary>
+			</SAA00104>			
+		</Wizard>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_Quote_Audit_Config_Rules" />
+            </Get>
+			<Modify>
+					<API Servlet="com.yantra.pca.saa.ui.backend.SAAQuoteAuditControllerAPI" APIName="modifyQuoteAuditDetails" Message="Message_Saving_Quote_Audit_Rules"/>
+					 <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			</Modify>
+			<CreateNew>
+				<API Servlet="com.yantra.pca.saa.ui.backend.SAAQuoteAuditControllerAPI" APIName="modifyQuoteAuditDetails" Message="Message_Saving_Quote_Audit_Rules">
+					 <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					  <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</API>
+			</CreateNew>
+		 </DetailInfo>
+		 <MasterData>
+		 </MasterData>
+		 </SAA0010>
+		 <SAA0024 Title="Define_Quote_Entry_Rules" ScreenType="Detail">
+			<DetailInfo>
+				<Get>
+					 <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="getRulesList" Message="Message_Loading_Quote_Entry_Rules" />
+					<InnerPanels>
+						<ListPanel FormName="SAA0026" ListPanel="pnlTable" InsertUnderElement="xml:/RulesList">
+							<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType" ModifyFlag="@ModifyFlag" />
+						</ListPanel>
+					</InnerPanels>
+				</Get>
+				<Modify>
+					<API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="modifyOrderEntryRulesDetail" Message="Message_Saving_Quote_Entry_Rules"/>
+				</Modify>
+				<CreateNew>
+        			<API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="modifyOrderEntryRulesDetail" Message="Message_Saving_Quote_Entry_Rules">
+						<StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+					</API>
+				</CreateNew>
+			</DetailInfo>
+			<MasterData>
+			</MasterData>
+		</SAA0024>
+	<YCD0084 Title="Version_Spec_Item_Search_Rules" ScreenType="Detail">
+        <ConfigurationAttributes RuleName="YCD_ITEM_SEARCH_SCREEN">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>		
+		<ConfigurationAttributes RuleName="YCD_ITEM_SRCH_CACHED_AVAIL">
+        	<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD051" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<DetailInfo>
+            <Get>
+			     <API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_FS_Rules" />
+				 <DynamicAttributes OrganizationCode="@CallingOrganizationCode"
+				 QualifiedTagId="@QualifiedTagId" DocumentType="@DocumentType"/>
+            </Get>
+            <Modify>
+				<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FS_Rules"/>
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" QualifiedTagId="@QualifiedTagId" DocumentType="@DocumentType"/>
+			</Modify>			
+			<CreateNew>
+        		<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_Tax_Options">
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" QualifiedTagId="@QualifiedTagId" DocumentType="@DocumentType"/>
+				     <StaticAttributes  MeantForInternal="Y" MeantForSupplier="N"/>
+				</API>
+			</CreateNew>
+   		</DetailInfo>		  
+      </YCD0084>
+	</Entity>
+	<Entity EntityTitle="Common_Code" EntityName="CommonCode" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="CommonCodeKey">
+		<YCD0002 Title="Cancellation_Reasons" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_CANCEL_REASON">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD002" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Cancellation_Reason" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_CANCEL_REASON"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_CANCEL_REASON"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0002>
+		  <YCD0003 Title="Appeasement_Reasons" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_APPEASEMENT_RSN">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD003" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Appeasement_Reason" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_APPEASEMENT_RSN" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_APPEASEMENT_REASON"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_APPEASEMENT_RSN" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_APPEASEMENT_RSN"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0003>
+		  <YCD0004 Title="Reship_Reasons" ScreenType="List">
+		    <ConfigurationAttributes  CodeType="YCD_RESHIP_REASON">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD004" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Reship_Reason" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_RESHIP_REASON" SystemDefinedCode="N"/>
+				    <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName=""					  Message="Message_Deleting_RESHIP_REASON"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_RESHIP_REASON" SystemDefinedCode="N"/>
+				    <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_RESHIP_REASON"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0004>
+		  <YCD0009 Title="Credit_Card_Types" ScreenType="List">
+		    <ConfigurationAttributes  CodeType="YCD_CREDIT_CARD_TYPE">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD009" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Credit_Card_Type" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_CREDIT_CARD_TYPE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_CREDIT_CARD_TYPE"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_CREDIT_CARD_TYPE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_CREDIT_CARD_TYPE"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0009>
+		  <YCD0300 Title="Title" ScreenType="List">
+		    <ConfigurationAttributes  CodeType="YCD_TITLE">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD300" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Title" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_TITLE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_TITLE"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_TITLE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" />
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_TITLE"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+			 </API>
+		  </YCD0300>
+		  <YCD0010 Title="Price_Override_Reasons" ScreenType="List">
+		    <ConfigurationAttributes  CodeType="YCD_PRICEOVERRIDE">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD010" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Price_Override_Reason_Code" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_PRICEOVERRIDE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_PRICEOVERRIDE"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_PRICEOVERRIDE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_PRICEOVERRIDE"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0010>
+		  <YCD0012 Title="Charge_Override_Reasons" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_CHARGEOVERRIDE">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD012" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Charge_Override_Reason_Code" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Charge_Override_Reason_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_CHARGEOVERRIDE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_CHARGE_OVERRIDE_RSN"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_CHARGEOVERRIDE" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_CHARGEOVERRIDE"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0012>
+		<YCD0025 Title="Config_Associationship_Relationship" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="AsscRelationship" ShowFooter="N">
+            <List AttributeName="@AssociationTypeDes" ColumnTitle="Association_Type" DataType="Text-20" EditableAddRow="N" Editable="N">
+            </List>
+            <List AttributeName="@ShowInUI" ColumnTitle="Show_In_UI" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+            <List AttributeName="@Function" ColumnTitle="Item_Association" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+            	<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/AsscRelationshipList/MasterData/CommonCodes@CommonCode"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CodeShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CodeValue"/>
+            </List>
+            <List AttributeName="@InventoryChkRequired" ColumnTitle="Inventory_Check_Required" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+            <List AttributeName="@RelationshipType" ColumnTitle="Relationship_Type" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+                <ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/AsscRelationshipList/MasterData/LineRelationshipTypes@LineRelationshipType"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="RelationshipShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="RelationshipType"/>
+            </List>
+         </ListInfo>
+         <MasterData>
+			<Table Name="LineRelationshipType" XMLName="LineRelationshipType">
+			<StaticAttributes ConsiderForSorting="Y"/>
+			</Table>
+			<Table Name="CommonCode" XMLName="CommonCode">
+                	<StaticAttributes CodeType="YCD_ASSC_FUNCTION"/>
+            </Table>
+        </MasterData>
+        <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="getAsscRelationshipTableData" Message="Message_Retrieving_Region_Detail_List"/>
+      </YCD0025>
+      
+      <YCD0031 Title="Price_Match_Statuses" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_PRICE_MATCH_STS">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD029" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Price_Match_Statuses" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Status_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_PRICE_MATCH_STS" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_PRICE_MATCH_STS"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_PRICE_MATCH_STS" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_PRICE_MATCH_STS"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		</YCD0031>
+		<YCD0032 Title="Competitor_Statuses" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_COMPETITOR_STS">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD030" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Competitor_Statuses" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Competitor_Status_Desc" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_COMPETITOR_STS" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_COMPETITOR_STS"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_COMPETITOR_STS" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_COMPETITOR_STS"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		</YCD0032>
+		<YCD0036 Title="Shortage_Resolution_Customer_Pick" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_CP_SHRTG_RSLTN">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="SOPSOMCONFIG01" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Shortage_Resolution_Customer_Pick" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_CP_SHRTG_RSLTN" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_Shortage_Resolution"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_CP_SHRTG_RSLTN" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_CP_SHRTG_RSLTN"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		</YCD0036>
+		<YCD0037 Title="Shortage_Resolution_Backroom_Pick" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_BP_SHRTG_RSLTN">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="SOPSOMCONFIG01" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Shortage_Resolution_Backroom_Pick" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_BP_SHRTG_RSLTN" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_Shortage_Resolution"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_BP_SHRTG_RSLTN" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_BP_SHRTG_RSLTN"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		</YCD0037>
+		<YCD0038 Title="Verification_Criteria_for_Customer_Pick" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_CUST_VERFN_TYP">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD045" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Verification_Criteria_Customer_Pick" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="YCD_CUST_VERFN_TYP" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_Verification_Criteria"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_CUST_VERFN_TYP" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_CUST_VERFN_TYP"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		</YCD0038>
+		<YCD0040 Title="Hold_Added" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="EventAuditor" ShowFooter="N">
+            <List AttributeName="@HoldTypeDes" ColumnTitle="Hold_Type" DataType="Text-20" EditableAddRow="N" Editable="N">
+            </List>
+            <List AttributeName="@Active" ColumnTitle="Log_Note" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+           	<List AttributeName="@NoteType" ColumnTitle="Note_Type" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+                <ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/EventAuditorList/MasterData/NotesReasons@CommonCode"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CodeShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CodeValue"/>
+            </List>
+            <List AttributeName="@TransformationFile" ColumnTitle="Transformation_File" DataType="Text-100" Editable="Y" EditableComponent="textbox">
+            </List>
+         </ListInfo>
+         <MasterData>
+			<Table Name="CommonCode" XMLName="NotesReason">
+                	<StaticAttributes CodeType="NOTES_REASON"/>
+            </Table>
+		 </MasterData>
+        <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventAuditorTableData" Message="Message_Retrieving_Region_Detail_List">
+        <StaticAttributes EventAuditorType="HOLD_ADDED_EVENT"/>
+        </API>
+      </YCD0040>
+      <YCD0041 Title="Hold_Rejected" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="EventAuditor" ShowFooter="N">
+            <List AttributeName="@HoldTypeDes" ColumnTitle="Hold_Type" DataType="Text-20" EditableAddRow="N" Editable="N">
+            </List>
+            <List AttributeName="@Active" ColumnTitle="Log_Note" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+           	<List AttributeName="@NoteType" ColumnTitle="Note_Type" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+                <ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/EventAuditorList/MasterData/NotesReasons@CommonCode"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CodeShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CodeValue"/>
+            </List>
+            <List AttributeName="@TransformationFile" ColumnTitle="Transformation_File" DataType="Text-100" Editable="Y" EditableComponent="textbox">
+            </List>
+         </ListInfo>
+         <MasterData>
+			<Table Name="CommonCode" XMLName="NotesReason">
+                	<StaticAttributes CodeType="NOTES_REASON"/>
+            </Table>
+		 </MasterData>
+        <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventAuditorTableData" Message="Message_Retrieving_Region_Detail_List">
+        <StaticAttributes EventAuditorType="HOLD_REJECTED_EVENT"/>
+        </API>
+      </YCD0041>
+      <YCD0042 Title="Hold_Resolved" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="EventAuditor" ShowFooter="N">
+            <List AttributeName="@HoldTypeDes" ColumnTitle="Hold_Type" DataType="Text-20" EditableAddRow="N" Editable="N">
+            </List>
+            <List AttributeName="@Active" ColumnTitle="Log_Note" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+           	<List AttributeName="@NoteType" ColumnTitle="Note_Type" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+                <ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/EventAuditorList/MasterData/NotesReasons@CommonCode"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CodeShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CodeValue"/>
+            </List>
+            <List AttributeName="@TransformationFile" ColumnTitle="Transformation_File" DataType="Text-100" Editable="Y" EditableComponent="textbox">
+            </List>
+         </ListInfo>
+         <MasterData>
+			<Table Name="CommonCode" XMLName="NotesReason">
+                	<StaticAttributes CodeType="NOTES_REASON"/>
+            </Table>
+		 </MasterData>
+        <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventAuditorTableData" Message="Message_Retrieving_Region_Detail_List">
+        <StaticAttributes EventAuditorType="HOLD_RESOLVED_EVENT"/>
+        </API>
+      </YCD0042>
+      <YCD0059 Title="Returns_Note_Types" ScreenType="List">
+			<ConfigurationAttributes  CodeType="NOTES_REASON">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD043" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Notes_Reason" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					 <StaticAttributes CodeType="NOTES_REASON" SystemDefinedCode="N"/>
+	           		 <DynamicAttributes OrganizationCode="@OrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_NOTES_REASON"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="NOTES_REASON" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="NOTES_REASON"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0059>
+		  <YCD0060 Title="Cancellation_Reasons" ScreenType="List">
+			<ConfigurationAttributes  CodeType="YCD_CANCEL_REASON">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD044" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Cancellation_Reasons" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					 <StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+	           		 <DynamicAttributes OrganizationCode="@OrganizationCode" DocumentType="@DocumentType"/>
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_CANCEL_REASON"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="YCD_CANCEL_REASON"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			 </API>
+		  </YCD0060>
+		  
+	  <YCD0069 Title="Common_Code_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+        <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Common_Code"/>
+        </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/CommonCode/modify" APIName="" Message="Message_Saving_Common_Code"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/CommonCode/create" APIName="" Message="Message_Creating_Common_Code"/>
+            </CreateNew>
+            <Delete/>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtCancellationReason"/>
+			   <LogicalKey ComponentType="JComboBox" ComponentName="cmbQualifierTagId"/>
+            </LogicalKeys>
+         </DetailInfo>
+		<MasterData>
+         <Table Name="QualifiedTag" XMLName="QualifiedTag" >
+        </Table>
+    </MasterData>
+      </YCD0069>
+      <SWC0002 Title="Common_Code_Details" ScreenType="Detail">
+         <DetailInfo>
+            <Get>
+        <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Common_Code"/>
+        </Get>
+            <Modify>
+               <API Servlet="/yantra/entities/CommonCode/modify" APIName="" Message="Message_Saving_Common_Code"/>
+            </Modify>
+            <CreateNew>
+               <API Servlet="/yantra/entities/CommonCode/create" APIName="" Message="Message_Creating_Common_Code"/>
+            </CreateNew>
+            <Delete/>
+            <LogicalKeys>
+               <LogicalKey ComponentType="JTextField" ComponentName="txtStoreRadiusDistance"/>
+			   <LogicalKey ComponentType="JTextField" ComponentName="txtShortDescription"/>
+            </LogicalKeys>
+         </DetailInfo>
+      </SWC0002>
+	  <YCD0072 Title="Version_Specific_Common_Codes" ScreenType="List" TitleSuffixAttr="Description">
+        <ConfigurationAttributes  CodeType="YCD_CANCEL_REASON">
+			<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD044" IsPrimary="Y"/>	
+		</ConfigurationAttributes>
+		<ListInfo NamePrefix="/" ChildTag="CommonCode">
+            <List AttributeName="@CodeValue" ColumnTitle="Cancellation_Reason" DataType="Text-100"/>
+            <List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-40"/>
+			<List AttributeName="@QualifiedTagId" ColumnTitle="Qualified_Tag_Id" DataType="Text-100"/>
+            <Modify DisplayForm="YCD0069" DisplayMode="Dialog"/>
+            <SaveAs DisplayForm="YCD0069" DisplayMode="Dialog">
+            	<StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+				<DynamicAttributes OrganizationCode="@OrganizationCode" 
+					DocumentType="@DocumentType"/>
+        	</SaveAs>
+           	<Delete>
+                  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" Message="Message_Deleting_Order_Header_External_Reference"/>
+           	</Delete>
+           	<CreateNew DisplayForm="YCD0069" DisplayMode="Dialog" >
+           		<StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" 
+					DocumentType="@DocumentType"/>
+           </CreateNew>
+         </ListInfo>
+         <API Servlet="/yantra/entities/CommonCode/list" APIName="" Message="Message_Retrieving_Search_Results">
+            <StaticAttributes CodeType="YCD_CANCEL_REASON" QualifiedTagIdQryType="NE"
+			QualifiedTagId="ISNULL"/>
+			<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" 
+					DocumentType="@DocumentType"/>
+         </API>
+
+      </YCD0072>
+	   <YCD0071 Title="Version_Specific_Common_Codes" ScreenType="List" TitleSuffixAttr="Description">
+        <ConfigurationAttributes  CodeType="YCD_CANCEL_REASON">
+			<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD044" IsPrimary="Y"/>	
+		</ConfigurationAttributes>
+		<ListInfo NamePrefix="/" ChildTag="CommonCode">
+            <List AttributeName="@CodeValue" ColumnTitle="Cancellation_Reason" DataType="Text-100"/>
+            <List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-40"/>
+			<List AttributeName="@QualifiedTagId" ColumnTitle="Qualified_Tag_Id" DataType="Text-100"/>
+            <Modify DisplayForm="YCD0069" DisplayMode="Dialog"/>
+            <SaveAs DisplayForm="YCD0069" DisplayMode="Dialog">
+            	<StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+				<DynamicAttributes OrganizationCode="@OrganizationCode" 
+					DocumentType="@DocumentType"/>
+        	</SaveAs>
+           	<Delete>
+                  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" Message="Message_Deleting_Order_Header_External_Reference"/>
+           	</Delete>
+           	<CreateNew DisplayForm="YCD0069" DisplayMode="Dialog" >
+           		<StaticAttributes CodeType="YCD_CANCEL_REASON" SystemDefinedCode="N"/>
+				<DynamicAttributes OrganizationCode="@CallingOrganizationCode" 
+					DocumentType="@DocumentType"/>
+           </CreateNew>
+         </ListInfo>
+         <API Servlet="/yantra/entities/CommonCode/list" APIName="" Message="Message_Retrieving_Search_Results">
+            <StaticAttributes CodeType="YCD_CANCEL_REASON" QualifiedTagIdQryType="NE"
+			QualifiedTagId="ISNULL"/>
+			<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" 
+					DocumentType="@DocumentType"/>
+         </API>
+	 </YCD0071>
+	 <YCD0077 Title="Config_Distance_User_Can_Enter" ScreenType="List">
+	  <ConfigurationAttributes  CodeType="SWC_STORE_RADIUS">
+			<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD044" IsPrimary="Y"/>	
+		</ConfigurationAttributes>
+         <ListInfo NamePrefix="/" ChildTag="CommonCode" ShowFooter="N">
+            <List AttributeName="@CodeShortDescription" ColumnTitle="Distance" DataType="Text-40" Editable="N">
+            </List>
+            <List AttributeName="@Default" ColumnTitle="Default" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+            <Modify DisplayForm="SWC0002" DisplayMode="Dialog"/>
+			<SaveAs DisplayForm="SWC0002" DisplayMode="Dialog">
+					<StaticAttributes CodeType="SWC_STORE_RADIUS" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" />
+			</SaveAs>
+			<Delete>
+				  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_CANCEL_REASON"/>
+				</Delete>
+			<CreateNew DisplayForm="SWC0002" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="SWC_STORE_RADIUS" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" />
+			</CreateNew>
+         </ListInfo>
+		 <MasterData>
+			<Table Name="CommonCode" XMLName="CommonCode">
+                	<StaticAttributes CodeType="SWC_STORE_RADIUS"/>
+                	<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" />
+            </Table>
+        </MasterData>
+		<API Servlet="com.yantra.pca.ycd.ui.backend.YCDWebChannelCartRulesControllerAPI" APIName="getStoreRadiusTableData" Message="Message_Loading_Web_Channel_Cart_Rules"/>
+      </YCD0077>
+	  <SAA0025 Title="Configure_Proposal_Templates" ScreenType="List">
+			<ConfigurationAttributes  CodeType="SAA_QUOTE_PRNT_TMPLT">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSSAA002" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Template_Name" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Template_Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="SAA_QUOTE_PRNT_TMPLT" SystemDefinedCode="N"/>
+				   <DynamicAttributes DocumentType="@DocumentType" OrganizationCode="@CallingOrganizationCode" />
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_CANCEL_REASON"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="SAA_QUOTE_PRNT_TMPLT" SystemDefinedCode="N"/>
+				   <DynamicAttributes DocumentType="@DocumentType" OrganizationCode="@CallingOrganizationCode" />
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="SAA_QUOTE_PRNT_TMPLT"/>
+				<DynamicAttributes DocumentType="@DocumentType" CallingOrganizationCode="@CallingOrganizationCode" />
+			 </API>
+		  </SAA0025>
+		  <SAA0027 Title="Configure_Print_Formats" ScreenType="List">
+			<ConfigurationAttributes  CodeType="SAA_QUOTE_PRNT_FRMT">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSSAA002" IsPrimary="Y"/>	
+			</ConfigurationAttributes>
+			<ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Print_Format_Type" DataType="Text-40"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Format_Short_Description" DataType="Text-100"/>
+				<Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+				<SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+					<StaticAttributes CodeType="SAA_QUOTE_PRNT_FRMT" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" />
+				</SaveAs>
+				<Delete>
+					  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+						  Message="Message_Deleting_Print_Format"/>
+				</Delete>
+				<CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+					<StaticAttributes CodeType="SAA_QUOTE_PRNT_FRMT" SystemDefinedCode="N"/>
+				   <DynamicAttributes OrganizationCode="@CallingOrganizationCode" />
+				</CreateNew>
+			</ListInfo>
+			<API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+				Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="SAA_QUOTE_PRNT_FRMT"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" />
+			 </API>
+		  </SAA0027>
+	 </Entity>
+	 
+	 <Entity EntityTitle="User" EntityName="User" PrimaryKeyAttributeName="UserKey">
+		<ConfigurationAttributes  TableName="YFS_USER">
+			<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD021" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+      	<YCD0021 Title="Load_Store" ScreenType="Detail">
+	        <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Loading_Organization" />			   
+	            </Get>
+	       	</DetailInfo>
+	        <MasterData>
+				<Table Name="Organization" XMLName="Organization">
+					<DynamicAttributes PrimaryEnterpriseKey="@CallingOrganizationCode" />
+					<StaticAttributes IsNode="Y"> 
+						<Node NodeType="Store"/>
+					</StaticAttributes> 
+				</Table>
+	         </MasterData>
+      </YCD0021>
+      <YCD0030 Title="FTC_Compliance_Rules" ScreenType="Detail">
+		  <ConfigurationAttributes RuleName="YCD_FTC_DEFAULT_ORIG_PROM_DATE">
+				<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD028" IsPrimary="Y" /> 
+		  </ConfigurationAttributes>
+		  <DetailInfo>
+				<Get>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="getRulesList" Message="Message_Loading_FTC_Compliance_Options" /> 
+				</Get>
+				<Modify>
+					<API Servlet="com.yantra.pca.ycd.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FTC_Compliance_Options" /> 
+				</Modify>
+				<CreateNew>
+					<API Servlet="com.yantra.ycp.pm.ui.backend.YCPBusinessRulesAPI" APIName="modifyRulesList" Message="Message_Saving_FTC_Compliance_Options">
+						<StaticAttributes MeantForInternal="Y" MeantForSupplier="N" /> 
+					</API>
+				</CreateNew>
+	 	  </DetailInfo>
+		  <MasterData>
+				<Table Name="CommonCode" XMLName="CancelReason">
+					<StaticAttributes CodeType="YCD_CANCEL_REASON" /> 
+				</Table>
+		  </MasterData>
+	  </YCD0030>
+	</Entity>
+	<Entity EntityTitle="AsscRelationship" EntityName="AsscRelationship" PrimaryKeyAttributeName="AsscRelationshipKey" OrganizationAttribute="EnterpriseCode"> 
+		<ConfigurationAttributes TableName="YFS_ASSC_RELATIONSHIP">
+			<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD021" IsPrimary="Y" />
+		</ConfigurationAttributes>
+		<SAA0026 Title="Config_Associationship_Relationship" ScreenType="List">
+         <ListInfo NamePrefix="/" ChildTag="AsscRelationship" ShowFooter="N">
+            <List AttributeName="@AssociationTypeDes" ColumnTitle="Association_Type" DataType="Text-20" EditableAddRow="N" Editable="N">
+            </List>
+            <List AttributeName="@ShowInUI" ColumnTitle="Show_In_UI" DataType="Boolean" Editable="Y" EditableComponent="checkbox">
+            	<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+            </List>
+            <List AttributeName="@RelationshipType" ColumnTitle="Relationship_Type" DataType="Text-20" EditableAddRow="Y" Editable="Y" EditableComponent="combobox">
+                <ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/AsscRelationshipList/MasterData/LineRelationshipTypes@LineRelationshipType"/>
+                <ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="RelationshipShortDescription"/>
+                <ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="RelationshipType"/>
+            </List>
+         </ListInfo>
+         <MasterData>
+			<Table Name="LineRelationshipType" XMLName="LineRelationshipType">
+				<StaticAttributes ConsiderForSorting="Y"/>
+				<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+			</Table>
+        </MasterData>
+        <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderEntryRulesControllerAPI" APIName="getAsscRelationshipTableData" Message="Message_Retrieving_Relationship_List"/>
+      </SAA0026>
+	</Entity>
+	 <Entity EntityTitle="Event_Auditor" EntityName="Event_Auditor" PrimaryKeyAttributeName="Event_Auditor_Key">
+		<ConfigurationAttributes  TableName="YFS_EVENT_AUDITOR">
+			<ApplicationSpecificAttributes ApplicationCode="saa" PermissionId="YSYCD021" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YCD0043 Title="YCD_Alert_Event_Auditor" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="CREATE_EXCEPTION" Eventid="ON_SUCCESS"/>
+					
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	          </Table>
+			  </MasterData>
+		 </YCD0043>
+      	
+	  <YCD0044 Title="YCD_BackOrdered_Event_Auditor" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="SCHEDULE.0001" Eventid="ON_BACKORDER"/>
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	          </Table>
+			  </MasterData>
+		 </YCD0044>
+		 <YCD0045 Title="YCD_Shipment_Event_Auditor" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				    <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="CONFIRM_SHIPMENT" Eventid="ON_SUCCESS"/>
+					</API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	          </Table>
+			  </MasterData>
+		 </YCD0045>
+		 <YCD0046 Title="YCD_AppComplete_Event_Auditor" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="CONFIRM_WORK_ORDER" Eventid="ON_WORK_ORDER_COMPLETION"/>
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	          </Table>
+			  </MasterData>
+		 </YCD0046>
+		 <YCD0047 Title="YCD_AppFailed_Event_Auditor" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="CONFIRM_WORK_ORDER" Eventid="ON_WORK_ORDER_EXECUTION_FAILURE"/>
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	          </Table>
+			  </MasterData>
+		 </YCD0047>
+ 		<SAA001021 Title="SAA_QuoteAudit_CreateQuote" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.ycd.ui.backend.YCDOrderHistoryNotesControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="ORDER_CREATE.0015" Eventid="ON_SUCCESS"/>
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	          </Table>
+			  </MasterData>
+		 </SAA001021>
+		<SAA001022 Title="SAA_QuoteAudit_ConvertQuote" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.saa.ui.backend.SAAQuoteAuditControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="CREATE_ORD_FROM_QUOTE" Eventid="ON_SUCCESS"/>
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	          </Table>
+			  </MasterData>
+		 </SAA001022>
+		  <SAA001031 Title="SAA_QuoteAudit_SentToCustomer" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.saa.ui.backend.SAAQuoteAuditControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="PRESENT_QUOTE" Eventid="ON_SUCCESS"/>
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	          </Table>
+			  </MasterData>
+		 </SAA001031>
+		  <SAA001032 Title="SAA_QuoteAudit_SentToApproval" ScreenType="Detail">
+			 <DetailInfo>
+	 			<Get>
+	               <API Servlet="com.yantra.pca.saa.ui.backend.SAAQuoteAuditControllerAPI" APIName="getEventTransactData" Message="Message_Loading_Organization" >
+				   <StaticAttributes EventAuditorType="TRANSACTION_EVENT" Tranid="SEND_FOR_APPROVAL" Eventid="ON_APPROVAL_STATUS_CHANGE"/>
+				   </API>
+	            </Get>
+	       	</DetailInfo>
+			<MasterData>
+	          <Table Name="CommonCode" XMLName="NotesReason" AllRecords="Y">
+	                	<StaticAttributes CodeType="NOTES_REASON"/>
+	                	<DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+	          </Table>
+			  </MasterData>
+		 </SAA001032>
+		 
+		 <SAA00105 Title="Node" ScreenType="Detail">
+            <DetailInfo>
+                <Get>
+                    <API Servlet="com.yantra.scw.ui.backend.SCWConfigurationRulesAPI" APIName="getEnterpriseNodeList"  Message="Loading_Context_Dialog">
+                    </API>
+                </Get>
+                <RefreshMasterData>
+                   <API Servlet="com.yantra.scw.ui.backend.SCWConfigurationRulesAPI" APIName="updateEnterpriseMasterData" Message="Message_Loading"/>
+                </RefreshMasterData>
+            </DetailInfo>
+        </SAA00105>
+	</Entity>
+</Entities>

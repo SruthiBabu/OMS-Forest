@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores Standard Allowable Minutes for different Productivity Types."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Productivity_Type" Prefix="YFS_"
+            TableName="YFS_PRODUCTIVITY_TYPE" TableType="CONFIGURATION" XMLName="ProductivityType">
+            <Attributes>
+                <Attribute ColumnName="PRODUCTIVITY_TYPE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute."
+                    Name="Productivity_Type_Key" Nullable="false" XMLName="ProductivityTypeKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DataSecurityUsageType="NODE"
+                    DefaultValue="' '"
+                    Description="Owner organization of the node for which this productivity type is defined."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute 
+                    ColumnName="PRODUCTIVITY_TYPE"
+                    DataType="ProductivityType" DefaultValue="' ' "
+                    Description="The productivity type defined for this SAM."
+                    Name="Productivity_Type" Nullable="false" XMLName="ProductivityType"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="FreeText-100" DefaultValue="' ' "
+                    Description="Description of productivity type."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="CAPTURE_TRIP_LEVEL_METRICS"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This column indicates whether the productivity metrics should be captured by trip level."
+                    Name="Capture_Trip_Level_Metrics" Nullable="false" XMLName="CaptureTripLevelMetrics"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_SOURCE_LOCN"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per source location visited."
+                    Name="Allowed_Mins_Per_Source_Locn" Nullable="false" XMLName="AllowedMinsPerSourceLocn"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_UNIT_WEIGHT"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per unit weight of item moved."
+                    Name="Allowed_Mins_Per_Unit_Weight" Nullable="false" XMLName="AllowedMinsPerUnitWeight"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_UNIT_HOR_DIST"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per unit horizontal distance covered."
+                    Name="Allowed_Mins_Per_Unit_Horizontal_Distance"
+                    Nullable="false" XMLName="AllowedMinsPerUnitHorizontalDistance"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_UNIT_VER_DIST"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per unit vertical distance covered."
+                    Name="Allowed_Mins_Per_Unit_Vertical_Distance"
+                    Nullable="false" XMLName="AllowedMinsPerUnitVerticalDistance"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' ' "
+                    Description="Equipment type associated with the productivity type."
+                    Name="Equipment_Type" Nullable="false" XMLName="EquipmentType"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_TARGET_LOCN"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per target location visited."
+                    Name="Allowed_Mins_Per_Target_Locn" Nullable="false" XMLName="AllowedMinsPerTargetLocn"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_SOURCE_LEVEL"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per source level visited."
+                    Name="Allowed_Mins_Per_Source_Level"
+                    Nullable="false" XMLName="AllowedMinsPerSourceLevel"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_TARGET_LEVEL"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per target level visited."
+                    Name="Allowed_Mins_Per_Target_Level"
+                    Nullable="false" XMLName="AllowedMinsPerTargetLevel"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_TASK"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per task performed."
+                    Name="Allowed_Mins_Per_Task" Nullable="false" XMLName="AllowedMinsPerTask"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_CASE"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per case handled."
+                    Name="Allowed_Mins_Per_Case" Nullable="false" XMLName="AllowedMinsPerCase"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_PALLET"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per pallet handled."
+                    Name="Allowed_Mins_Per_Pallet" Nullable="false" XMLName="AllowedMinsPerPallet"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_UNIT"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per unit handled."
+                    Name="Allowed_Mins_Per_Unit" Nullable="false" XMLName="AllowedMinsPerUnit"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_SOURCE_AISLE"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per source aisle visited."
+                    Name="Allowed_Mins_Per_Source_Aisle"
+                    Nullable="false" XMLName="AllowedMinsPerSourceAisle"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_TARGET_AISLE"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per target aisle visited."
+                    Name="Allowed_Mins_Per_Target_Aisle"
+                    Nullable="false" XMLName="AllowedMinsPerTargetAisle"/>
+                <Attribute ColumnName="ALLOWED_MINS_PER_ITEM"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per item handled."
+                    Name="Allowed_Mins_Per_Item" Nullable="false" XMLName="AllowedMinsPerItem"/>
+                <Attribute ColumnName="ALLOWED_MINS_CONSTANT"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the time credit for users  per trip."
+                    Name="Allowed_Mins_Constant" Nullable="false" XMLName="AllowedMinsConstant"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="COMPUTED_SAM_DATE"
+                    DataType="TimeStamp"
+                    Description="The time stamp of when the standard allowable minutes for the productivity type are last computed using computeSAM api ."
+                    Name="Computed_Sam_Date" Nullable="true" XMLName="ComputedSamDate"/>
+                <Attribute ColumnName="IS_MINS_PER_SOURCE_LOCN_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per source location visited is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Source_Locn_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerSourceLocnAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_UNIT_WEIGHT_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per unit weight of item moved is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Unit_Weight_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerUnitWeightAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_UNIT_HOR_DIST_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per unit horizontal distance covered is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Unit_Horizontal_Distance_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerUnitHorizontalDistanceAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_UNIT_VER_DIST_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per unit vertical distance covered is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Unit_Vertical_Distance_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerUnitVerticalDistanceAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_TARGET_LOCN_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per target location visited is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Target_Locn_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerTargetLocnAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_SOURCE_LEVEL_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per source level visited is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Source_Level_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerSourceLevelAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_TARGET_LEVEL_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per target level visited is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Target_Level_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerTargetLevelAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_TASK_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per task performed is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Task_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerTaskAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_CASE_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per case handled is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Case_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerCaseAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_PALLET_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per pallet handled is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Pallet_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerPalletAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_UNIT_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per unit handled is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Unit_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerUnitAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_SOURCE_AISLE_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per source aisle visited is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Source_Aisle_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerSourceAisleAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_TARGET_AISLE_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per target aisle visited is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Target_Aisle_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerTargetAisleAppl"/>
+                <Attribute ColumnName="IS_MINS_PER_ITEM_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per item handled is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Per_Item_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsPerItemAppl"/>
+                <Attribute ColumnName="IS_MINS_CONSTANT_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per trip is applicable to this productivity type or not."
+                    Name="Is_Allowed_Mins_Constant_Appl"
+                    Nullable="false" XMLName="IsAllowedMinsConstantAppl"/>
+                <Attribute ColumnName="IS_PLANNED_PER_TASK_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per task is applicable to this productivity type during planning."
+                    Name="Is_Planned_Per_Task_Appl" Nullable="false" XMLName="IsPlannedPerTaskAppl"/>
+                <Attribute ColumnName="IS_PLANNED_PER_BATCH_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per batch is applicable to this productivity type during planning."
+                    Name="Is_Planned_Per_Batch_Appl" Nullable="false" XMLName="IsPlannedPerBatchAppl"/>
+                <Attribute ColumnName="IS_PLANNED_PER_ITEM_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per item is applicable to this productivity type in planning."
+                    Name="Is_Planned_Per_Item_Appl" Nullable="false" XMLName="IsPlannedPerItemAppl"/>
+                <Attribute ColumnName="IS_PLANNED_PER_UNIT_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per unit is applicable to this productivity type in planning."
+                    Name="Is_Planned_Per_Unit_Appl" Nullable="false" XMLName="IsPlannedPerUnitAppl"/>
+                <Attribute ColumnName="IS_PLANNED_PER_CASE_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per case is applicable to this productivity type in planning."
+                    Name="Is_Planned_Per_Case_Appl" Nullable="false" XMLName="IsPlannedPerCaseAppl"/>
+                <Attribute ColumnName="IS_PLANNED_PER_PALLET_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per pallet is applicable to this productivity type in planning."
+                    Name="Is_Planned_Per_Pallet_Appl" Nullable="false" XMLName="IsPlannedPerPalletAppl"/>
+                <Attribute ColumnName="IS_PLANNED_PER_UNIT_WT_APPL"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This column indicates whether the time credit for users  per unit weight is applicable to this productivity type in planning."
+                    Name="Is_Planned_Per_Unit_Wt_Appl" Nullable="false" XMLName="IsPlannedPerUnitWtAppl"/>
+                <Attribute ColumnName="PLANNED_MINS_PER_TASK"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Estimated time credit in minutes for users per task."
+                    Name="Planned_Mins_Per_Task" Nullable="false" XMLName="PlannedMinsPerTask"/>
+                <Attribute ColumnName="PLANNED_MINS_PER_BATCH"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Estimated time credit in minutes for users per batch."
+                    Name="Planned_Mins_Per_Batch" Nullable="false" XMLName="PlannedMinsPerBatch"/>
+                <Attribute ColumnName="PLANNED_MINS_PER_ITEM"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Estimated time credit in minutes for users per item."
+                    Name="Planned_Mins_Per_Item" Nullable="false" XMLName="PlannedMinsPerItem"/>
+                <Attribute ColumnName="PLANNED_MINS_PER_UNIT"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Estimated time credit in minutes for users per unit."
+                    Name="Planned_Mins_Per_Unit" Nullable="false" XMLName="PlannedMinsPerUnit"/>
+                <Attribute ColumnName="PLANNED_MINS_PER_CASE"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Estimated time credit in minutes for users per case."
+                    Name="Planned_Mins_Per_Case" Nullable="false" XMLName="PlannedMinsPerCase"/>
+                <Attribute ColumnName="PLANNED_MINS_PER_PALLET"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Estimated time credit in minutes for users per pallet."
+                    Name="Planned_Mins_Per_Pallet" Nullable="false" XMLName="PlannedMinsPerPallet"/>
+                <Attribute ColumnName="PLANNED_MINS_PER_UNIT_WT"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="Estimated time credit in minutes for users per unit wt."
+                    Name="Planned_Mins_Per_Unit_Wt" Nullable="false" XMLName="PlannedMinsPerUnitWt"/>
+                <Attribute ColumnName="MAX_IDLE_TIME_BETWEEN_TASKS"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This column indicates the maximum idle time between tasks."
+                    Name="Max_Idle_Time_Between_Tasks" Nullable="false" XMLName="MaxIdleTimeBetweenTasks"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PROD_TYPE_PK" Name="YFS_PRODUCTIVITY_TYPE_PK">
+                <Attribute ColumnName="PRODUCTIVITY_TYPE_KEY"
+                    Name="Productivity_Type_Key" XmlName="ProductivityTypeKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PROD_TYPE_I1"
+                    Name="YFS_PRODUCTIVITY_TYPE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="PRODUCTIVITY_TYPE"/>
+                    <Column Name="EQUIPMENT_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    IsParent="true" Name="OrgCodeFromOrganization"
+                    Type="Bidirectional" XMLName="OrgCode_From_Organziation">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores productivity reference for different Productivity Types."
+            EntityType="CONFIGURATION" Module="ysc"
+            Name="Productivity_Reference" Prefix="YFS_"
+            TableName="YFS_PRODUCTIVITY_REFERENCE"
+            TableType="CONFIGURATION" XMLName="ProductivityReference"
+            LockingEntity="Productivity_Type">
+            <Attributes>
+                <Attribute ColumnName="PRODUCTIVITY_REFERENCE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute."
+                    Name="Productivity_Reference_Key" Nullable="false" XMLName="ProductivityReferenceKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Owner organization of the node for which this productivity reference is defined."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="PRODUCTIVITY_TYPE"
+                    DataType="ProductivityType" DefaultValue="' ' "
+                    Description="The productivity type for which this Productivity reference is defined."
+                    Name="Productivity_Type" Nullable="false" XMLName="ProductivityType"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="EquipmentType" DefaultValue="' ' "
+                    Description="Equipment type associated with the productivity type."
+                    Name="Equipment_Type" Nullable="false" XMLName="EquipmentType"/>
+                <Attribute ColumnName="PRODUCTIVITY_REFERENCE"
+                    DataType="ProductivityReference" DefaultValue="' ' "
+                    Description="This contains the XMLAttribute name of any String column in the YFS_PRODUCITVITY record."
+                    Name="Productivity_Reference" Nullable="false" XMLName="ProductivityReference"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PROD_REF_PK" Name="YFS_PRODUCTIVITY_REFERENCE_PK">
+                <Attribute ColumnName="PRODUCTIVITY_REFERENCE_KEY"
+                    Name="Productivity_Reference_Key" XmlName="ProductivityReferenceKey"/>
+            </PrimaryKey>
+            <!-- Though Productivity_Type,Organization_Code & Equipment_Type form a unique key for YFS_PRODUCTIVITY_TYPE,  Equipment_Type in not included in the unique key defined below so that Productivity References are defined only for the Productivity Type with blank Equipment Type -->
+            <Indices>
+                <Index DB2Name="PROD_REF_I1"
+                    Name="YFS_PRODUCTIVITY_REFERENCE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="PRODUCTIVITY_TYPE"/>
+                    <Column Name="PRODUCTIVITY_REFERENCE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ProductivityReferences"
+                    ChildName="Productivity_Reference"
+                    ChildXMLName="ProductivityReference"
+                    DeleteCascade="true"
+                    ForeignEntity="Productivity_Type" IsParent="true"
+                    Name="ProductivityType"
+                    Type="Bidirectional" XMLName="ProductivityType">
+                    <Attribute Name="Productivity_Type" ParentName="Productivity_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Equipment_Type" ParentName="Equipment_Type"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table gives the productivity metrics for tasks done by users."
+            EntityType="TRANSACTION" Extensible="Y" Module="ysc"
+            Name="Productivity" Prefix="YFS_"
+            TableName="YFS_PRODUCTIVITY" TableType="TRANSACTION" XMLName="Productivity">
+            <Attributes>
+                <Attribute ColumnName="PRODUCTIVITY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PRODUCTIVITY table."
+                    Name="Productivity_Key" Nullable="false" XMLName="ProductivityKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The organization of the task."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="EQUIPMENT_TYPE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Equipment type associated with the productivity type."
+                    Name="Equipment_Type" Nullable="false" XMLName="EquipmentType"/>
+                <Attribute ColumnName="USER_ID" DataType="LoginId"
+                    DefaultValue="' ' "
+                    Description="The user for whom the productivity is being defined."
+                    Name="User_Id" Nullable="false" XMLName="UserId"/>
+                <Attribute ColumnName="TEAM_LEAD_ID" DataType="UserId"
+                    DefaultValue="' '"
+                    Description="The identifier of the team lead id used to an organization's server."
+                    Name="Team_Lead_Id" Nullable="false" XMLName="TeamLead"/>
+                <Attribute ColumnName="ENTERPRISE_KEY"
+                    DataSecurityUsageType="ORG" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The enterprise key that is associated with this productivity."
+                    Name="Enterprise_Key" Nullable="false" XMLName="EnterpriseKey"/>
+                <Attribute ColumnName="PRODUCTIVITY_TYPE"
+                    DataType="ProductivityType" DefaultValue="' ' "
+                    Description="The productivity type for which the metrics has been calculated."
+                    Name="Productivity_Type" Nullable="false" XMLName="ProductivityType"/>
+                <Attribute ColumnName="DATE_OF_EXECUTION"
+                    DataType="Date" DefaultValue="sysdate "
+                    Description="The date on which the tasks were executed."
+                    Name="Date_Of_Execution" Nullable="false" XMLName="DateOfExecution"/>
+                <Attribute ColumnName="EARLIEST_TASK_START_TIME_STAMP"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The start time of the earliest task included in this productivity batch."
+                    Name="Earliest_Task_Start_Time_Stamp"
+                    Nullable="false" XMLName="EarliestTaskStartTimeStamp"/>
+                <Attribute ColumnName="LATEST_TASK_END_TIME_STAMP"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The end time of the latest task included in this productivity batch."
+                    Name="Latest_Task_End_Time_Stamp" Nullable="false" XMLName="LatestTaskEndTimeStamp"/>
+                <Attribute ColumnName="NUM_OF_TASKS"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of tasks performed by the user."
+                    Name="Num_Of_Tasks" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfTasks"/>
+                <Attribute ColumnName="NUM_OF_UNITS"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of units handled by the user."
+                    Name="Num_Of_Units" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfUnits"/>
+                <Attribute ColumnName="NUM_OF_CASES"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of cases handled by the user."
+                    Name="Num_Of_Cases" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NofOfCases"/>
+                <Attribute ColumnName="TOTAL_WEIGHT"
+                    DataType="Dimension" DefaultValue="0"
+                    Description="Total weight carried by the user for completion of the task."
+                    Name="Total_Weight" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="TotalWeight"/>
+                <Attribute ColumnName="HORIZONTAL_DISTANCE"
+                    DataType="Distance" DefaultValue="0"
+                    Description="This column indicates the horizontal distance convered."
+                    Name="Horizontal_Distance" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="HorizontalDistance"/>
+                <Attribute ColumnName="VERTICAL_DISTANCE"
+                    DataType="Distance" DefaultValue="0"
+                    Description="This column indicates the vertical distance convered."
+                    Name="Vertical_Distance" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="VerticalDistance"/>
+                <Attribute ColumnName="NUM_OF_PALLETS"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of pallets handled by the user."
+                    Name="Num_Of_Pallets" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfPallets"/>
+                <Attribute ColumnName="NUM_SOURCE_LOCATIONS_VISITED"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of source locations visited by the user."
+                    Name="Num_Source_Locations_Visited" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfSourceLocationsVisited"/>
+                <Attribute ColumnName="NUM_TARGET_LOCATIONS_VISITED"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of target locations visited by the user."
+                    Name="Num_Target_Locations_Visited" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfTargetLocationsVisited"/>
+                <Attribute ColumnName="NUM_SOURCE_AISLES_VISITED"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of source aisles visited by the user."
+                    Name="Num_Source_Aisles_Visited" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfSourceAislesVisited"/>
+                <Attribute ColumnName="NUM_TARGET_AISLES_VISITED"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of target aisles visited by the user."
+                    Name="Num_Target_Aisles_Visited" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfTargetAislesVisited"/>
+                <Attribute ColumnName="NUM_SOURCE_LEVELS_VISITED"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of source levels visited by the user."
+                    Name="Num_Source_Levels_Visited" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NumSourceLevelsVisited"/>
+                <Attribute ColumnName="NUM_TARGET_LEVELS_VISITED"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of target levels visited by the user."
+                    Name="Num_Target_Levels_Visited" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NumTargetLevelsVisited"/>
+                <Attribute ColumnName="NUM_OF_ITEMS"
+                    DataType="ProductivityMetric" DefaultValue="0"
+                    Description="The number of items handled by the user."
+                    Name="Num_Of_Items" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="NoOfItems"/>
+                <Attribute ColumnName="CREDITED_MINS"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The minutes credited to the user."
+                    Name="Credited_Mins" Nullable="false"
+                    XMLGroup="ProductivityMetrics" XMLName="CreditedMins"/>
+                <Attribute ColumnName="ORDER_NO" DataType="VarcharDocumentNo"
+                    Description="The order number for which the user has done some task."
+                    Name="Order_No" Nullable="true"
+                    XMLGroup="ProductivityReferences" XMLName="OrderNo"/>
+                <Attribute ColumnName="RECEIPT_NO" DataType="DocumentNo"
+                    DefaultValue="' ' "
+                    Description="Thereceipt number for which the user has done some task."
+                    Name="Receipt_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ReceiptNo"/>
+                <Attribute ColumnName="RELEASE_NO" DataType="Count"
+                    DefaultValue="0 "
+                    Description="The release number for which the user has done some task."
+                    Name="Release_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ReleaseNo"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The document type to which the task belongs."
+                    Name="Document_Type" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="DocumentType"/>
+                <Attribute ColumnName="PRIME_LINE_NO" DataType="LineNo"
+                    DefaultValue="0 "
+                    Description="The prime line number. This is a part of the unique key of the order line."
+                    Name="Prime_Line_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="PrimeLineNo"/>
+                <Attribute ColumnName="SUB_LINE_NO" DataType="LineNo"
+                    DefaultValue="0 "
+                    Description="The sub line number. This is a part of the unique key of the order line."
+                    Name="Sub_Line_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="SubLineNo"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="The order header key that is associated with this productivity."
+                    Name="Order_Header_Key" Nullable="false" DefaultValue="' '" 
+                    XMLGroup="ProductivityReferences" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    Description="The order line key that is associated with this productivity."
+                    Name="Order_Line_Key" Nullable="true"
+                    XMLGroup="ProductivityReferences" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="ORDER_RELEASE_KEY" DataType="Key"
+                    Description="The order release key that is associated with this productivity."
+                    Name="Order_Release_Key" Nullable="true"
+                    XMLGroup="ProductivityReferences" XMLName="OrderReleaseKey"/>
+                <Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The wave number in which a task belongs."
+                    Name="Wave_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="WaveNo"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The shipment number for which the user has done some task."
+                    Name="Shipment_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ShipmentNo"/>
+                <Attribute ColumnName="CONTAINER_NO"
+                    DataType="ContainerNo" DefaultValue="' '"
+                    Description="The Container Number for which the user has done some task."
+                    Name="Container_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ContainerNo"/>
+                <Attribute ColumnName="SHIPMENT_CONTAINER_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The shipment container key that is associated with this productivity."
+                    Name="Shipment_Container_Key" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ShipmentContainerKey"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The shipment key that is associated with this productivity."
+                    Name="Shipment_Key" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ShipmentKey"/>
+                <Attribute ColumnName="BATCH_NO" DataType="SequenceNo"
+                    DefaultValue="' '" Description="The batch number."
+                    Name="Batch_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="BatchNo"/>
+                <Attribute ColumnName="SCAC" DataType="OrgCode"
+                    DefaultValue="' ' "
+                    Description="The carrier organization code."
+                    Name="Scac" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="Scac"/>
+                <Attribute ColumnName="LOAD_NO" DataType="DocumentNo"
+                    DefaultValue="' ' "
+                    Description="The load number for which the user has done some task."
+                    Name="Load_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="LoadNo"/>
+                <Attribute ColumnName="BOL_NO" DataType="VarcharDocumentNo"
+                    Description="The Bill of Lading number."
+                    Name="Bol_No" Nullable="true"
+                    XMLGroup="ProductivityReferences" XMLName="BolNo"/>
+                <Attribute ColumnName="TRAILER_NO" DataType="VarcharDocumentNo"
+                    Description="The trailer number by which the shipment leaves the node."
+                    Name="Trailer_No" Nullable="true"
+                    XMLGroup="ProductivityReferences" XMLName="TrailerNo"/>
+                <Attribute ColumnName="MANIFEST_NO"
+                    DataType="VarcharDocumentNo" 
+                    Description="An attribute used to store manifest number assigned by carrier server."
+                    Name="Manifest_No" Nullable="true"
+                    XMLGroup="ProductivityReferences" XMLName="ManifestNo"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_CODE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="An attribute used to store the classification code of an item."
+                    Name="Item_Classification_Code" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ItemClassificationCode"/>
+                <Attribute ColumnName="SHIPMENT_LINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The shipment line key that is associated with this productivity."
+                    Name="Shipment_Line_Key" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="ShipmentLineKey"/>
+                <Attribute ColumnName="MOVE_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The move request key that is associated with this productivity."
+                    Name="Move_Request_Key" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="MoveRequestKey"/>
+                <Attribute ColumnName="MOVE_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The identifier of a move request within the context of a module for a node."
+                    Name="Move_Request_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="MoveRequestNo"/>
+                <Attribute ColumnName="MOVE_REQUEST_LINE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The move request line key that is associated with this productivity."
+                    Name="Move_Request_Line_Key" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="MoveRequestLineKey"/>
+                <Attribute ColumnName="COUNT_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The count request key that is associated with this productivity."
+                    Name="Count_Request_Key" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="CountRequestKey"/>
+                <Attribute ColumnName="COUNT_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The identifier of a count request along with Document type and Node."
+                    Name="Count_Request_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="CountRequestNo"/>
+                <Attribute ColumnName="WORK_ORDER_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="A work order within the context of a node and enterprise."
+                    Name="Work_Order_No" Nullable="false"
+                    XMLGroup="ProductivityReferences" XMLName="WorkOrderNo"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    Description="The work order key that is associated with this productivity."
+                    Name="Work_Order_Key" Nullable="true"
+                    XMLGroup="ProductivityReferences" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PRODUCTIVITY_PK" Name="YFS_PRODUCTIVITY_PK">
+                <Attribute ColumnName="PRODUCTIVITY_KEY"
+                    Name="Productivity_Key" XmlName="ProductivityKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PRODUCTIVITY_I1" Name="YFS_PRODUCTIVITY_I1">
+                    <Column Name="USER_ID"/>
+                </Index>
+                <Index DB2Name="PRODUCTIVITY_I2" Name="YFS_PRODUCTIVITY_I2">
+                    <Column Name="PRODUCTIVITY_TYPE"/>
+                </Index>
+                <Index DB2Name="PRODUCTIVITY_I3" Name="YFS_PRODUCTIVITY_I3">
+                    <Column Name="EQUIPMENT_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ProductivityList"
+                    ChildName="Productivity" ChildXMLName="Productivity"
+                    DeleteCascade="true"
+                    ForeignEntity="Productivity_Type"
+                    Name="ProductivityType" ReadOnly="true"
+                    Type="Bidirectional" XMLName="ProductivityType">
+                    <Attribute Name="Productivity_Type" ParentName="Productivity_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Equipment_Type" ParentName="Equipment_Type"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

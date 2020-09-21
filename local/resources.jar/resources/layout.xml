@@ -1,0 +1,39 @@
+<project name="Layout">
+<!-- Copyright(c) 2008, Sterling Commerce, Inc. All rights reserved. -->
+    <!--
+        Called to copy lib files into a common directory.
+        This will not be called when creating a WAR that relies on the system classpath.
+    -->
+    <target name="copyto.libs">
+	<copy todir="${dir.libs.copyto}">
+	    <fileset dir="${installdir}/jar">
+		<include name="woodstock.jar" />
+		<include name="platform/*/*.jar" />
+		<include name="log4j/1_2_11/*.jar" />
+		<include name="comm/2_0/*.jar" />
+		<include name="jaf/1_0_2/*.jar" />
+		<include name="jakarta_oro/2_0_8/*.jar" />
+		<include name="yantratemp/1_0/JBChartX.jar" />
+		<include name="yantratemp/1_0/lxgis20.jar" />
+		<include name="jloox/2_0/*.jar" />
+		<include name="javamail/1_3_2/*.jar" />
+		<include name="netcomponents/1_3_8/*.jar" />
+		<include name="soap/2_3_1/*.jar" />
+		<include name="commons*/*/*.jar" />
+		<include name="smcfs/*/*.jar" />
+	    <include name="scecore/*/*.jar" />
+	    </fileset>
+	</copy>
+	<echo message="copyto: ${dir.libs.copyto}" />
+        <echo message="tmpwardir: ${tmpwardir}" />
+    </target>
+
+    <!--
+        Called after the WAR has been set up, just before packaging it.
+        Custom logic should take care of any extra files not located inside the war directory.
+    -->
+    <target name="war.finish">
+        <echo message="Temporary war dir: ${tmpwardir}" />
+    </target>
+</project>
+

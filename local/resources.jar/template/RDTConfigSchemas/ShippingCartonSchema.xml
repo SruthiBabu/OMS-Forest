@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults DefaultRecordDelimiter="Newline" DefaultFieldDelimiter="," DefaultPadCharacter="#" RecordIdStartPosition="1">
+   </ParserDefaults>
+
+	<Root Name="ItemList">
+		<Header Name="ITEMHEDR" RecordName="ITEMHEDR" MinOccurence="1" MaxOccurence="1"/>
+	</Root>
+
+	<RecordDefinitions>
+		<Record RecordId="ITEMHEDR" Name="ITEMHEDR" XMLName="Item">
+			<Field Name="ItemID" FieldPosition="2" XMLName="ItemID"/>
+			<Field Name="OrganizationCode" FieldPosition="3" XMLName="OrganizationCode"/>
+			<Field Name="UnitOfMeasure" FieldPosition="4" XMLName="UnitOfMeasure"/>
+			<Field Name="UnitWeight" FieldPosition="5" XMLName="UnitWeight"/>
+			<Field Name="UnitHeight" FieldPosition="6" XMLName="UnitHeight"/>
+			<Field Name="UnitLength" FieldPosition="7" XMLName="UnitLength"/>
+			<Field Name="UnitWidth" FieldPosition="8" XMLName="UnitWidth"/>
+			<Field Name="MaxCntrWeight" FieldPosition="9" XMLName="MaxCntrWeight"/>
+		</Record>
+	</RecordDefinitions>
+</FlatfileDelimitedSchema>

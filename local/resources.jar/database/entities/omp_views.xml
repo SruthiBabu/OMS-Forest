@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity
+            Description="The view formed by joining the YFS_ORDER_HEADER, YFS_ORDER_LINE, YFS_ORDER_LINE_SCHEDULE, and  YFS_ORDER_RELEASE_STATUS tables.   This view represents the demands of the orders, which will be processed by the Item-Based Allocation agent."
+            EntityType="VIEW" Extensible="N"
+            ListXMLName="IBAOrderDemands" Module="omp"
+            Name="IBA_Ord_Demand_Vw" Prefix="YFS_"
+            TableName="YFS_IBA_ORD_DEMAND_VW_94" TableType="TRANSACTION"
+            View="true" XMLName="IBAOrderDemand">
+            <Attributes>
+                <Attribute ColumnName="IBA_ORD_DEMAND_VW_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_IBA_ORD_DEMAND_VW view."
+                    Name="IBA_Ord_Demand_Vw_Key" Nullable="false" XMLName="IBAOrdDemandVwKey"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' ' "
+                    Description="The item associates with the demand."
+                    Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' ' "
+                    Description="The unit of measure of the item associates with the demand."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' ' "
+                    Description="The product class of the item associates with the demand."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order header key of the order associates with the demand."
+                    Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order line key of the order line associates with the demand."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="ENTERPRISE_KEY"
+                    DataType="OrgCode" DefaultValue="' ' "
+                    Description="The enterprise of the order associates with the demand."
+                    Name="Enterprise_Key" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="SELLER_ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' ' "
+                    Description="The seller organization of the order associates with the demand."
+                    Name="Seller_Organization_Code" Nullable="false" XMLName="SellerOrganizationCode"/>
+                <Attribute ColumnName="ORDER_DATE" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The date on which the order was placed."
+                    Name="Order_Date" Nullable="false" XMLName="OrderDate"/>
+                <Attribute ColumnName="HEADER_REQ_SHIP_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The requested ship date on the order header."
+                    Name="Header_Req_Ship_Date" Nullable="false" XMLName="HeaderReqShipDate"/>
+                <Attribute ColumnName="PROMISED_APPT_START_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The promised appointment start date on the order line."
+                    Name="Promised_Appt_Start_Date" Nullable="false" XMLName="PromisedApptStartDate"/>
+                <Attribute ColumnName="REQ_SHIP_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The requested ship date on the order line."
+                    Name="Req_Ship_Date" Nullable="false" XMLName="ReqShipDate"/>
+                <Attribute ColumnName="EXPECTED_SHIPMENT_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The date the scheduled order line is expected to ship by."
+                    Name="Expected_Shipment_Date" Nullable="false" XMLName="ExpectedShipmentDate"/>
+                <Attribute ColumnName="PRODUCT_AVAILABILITY_DATE"
+                    DataType="TimeStamp"
+                    Description="The date product is available at the ship node or procurement node. If procurement node is present on the line, this date indicates product availability at the procurement node, otherwise ship node."
+                    Name="Product_Availability_Date" Nullable="true" XMLName="ProductAvailabilityDate"/>
+                <Attribute ColumnName="SHIP_NODE" DataType="Key"
+                    Description="The ship node fulfilling this scheduled order line."
+                    Name="Ship_Node" Nullable="true" XMLName="ShipNode"/>
+                <Attribute ColumnName="PROCURE_FROM_NODE"
+                    DataType="ShipNode" 
+                    Description="The node from which the scheduled order line should be procured if it cannot be sourced from the ship node specified on the order line."
+                    Name="Procure_From_Node" Nullable="true" XMLName="ProcureFromNode"/>
+                <Attribute ColumnName="STATUS" DataType="ShortStatus"
+                    DefaultValue="' ' "
+                    Description="This field indicates the status of the order release."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="STATUS_QUANTITY"
+                    DataType="Quantity" DefaultValue="0 "
+                    Description="The quantity currently in this status."
+                    Name="Status_Quantity" Nullable="false" XMLName="StatusQty"/>
+                <Attribute ColumnName="CHAINED_TO_ORDER_LINE_KEY"
+                    DataType="Key" 
+                    Description="The order line that the order line of this status chained to."
+                    Name="Chained_To_Order_Line_Key" Nullable="true" XMLName="ChainedToOrderLineKey"/>
+                <Attribute ColumnName="CHAINED_FROM_ORDER_LINE_KEY"
+                    DataType="Key" 
+                    Description="The order line that is associated with this chained order line. If this line is chained from another order line, this key will point to the parent order line."
+                    HasSkewedData="true"
+                    Name="Chained_From_Order_Line_Key" Nullable="true" XMLName="ChainedFromOrderLineKey"/>
+                <Attribute ColumnName="MIN_SHIP_BY_DATE"
+                    DataType="TimeStamp"
+                    Description="The preferred minimum ship by date of the available supply that order line can allocate against.  This only applies to the order line or kit line with time-sensitive item."
+                    Name="Min_Ship_By_Date" Nullable="true" XMLName="MinShipByDate"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' ' "
+                    Description="The segment of the inventory."
+                    Name="Segment" Nullable="false"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' ' "
+                    Description="The segment type of the inventory."
+                    Name="Segment_Type" Nullable="false"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' "
+                    Description="The tag number that has been specified on the scheduled order line."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The document type that is associated with this order. For example, Sales Order document (0001), Planned Order document (0002), Return Order document (0003) , and Purchase Order document (0005). This field determines the order's fulfillment cycle and controls the inventory and payment updates performed on the order."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="KIT_CODE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The kit code of the order line that is associated with this demand."
+                    Name="Kit_Code" Nullable="false" XMLName="KitCode"/>
+                <Attribute ColumnName="OVERRIDE_ITEM_ID"
+                    DataType="ItemID"
+                    Description="Indicates that this item id should be used for inventory updates. If null, Item ID on the line will be used."
+                    Name="Override_Item_Id" Nullable="true" XMLName="OverrideItemId"/>
+                <Attribute ColumnName="OVERRIDE_UOM" DataType="UOM"
+                    Description="Unit of measure for the override inventory item."
+                    Name="Override_UOM" Nullable="true" XMLName="OverrideUOM"/>
+                <Attribute ColumnName="OVERRIDE_PRODUCT_CLASS"
+                    DataType="ProductClass"
+                    Description="The override product class of the scheduled order line."
+                    Name="Override_Product_Class" Nullable="true" XMLName="OverrideProductClass"/>
+                <Attribute ColumnName="FOB" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="Indicates Freight Terms for the line."
+                    Name="Fob" Nullable="false" XMLName="FreightTerms"/>
+                <Attribute ColumnName="CHAIN_TYPE"
+                    DataType="EnumChainType" DefaultValue="' '"
+                    Description="Specifies the chaining type of the order."
+                    Name="Chain_Type" Nullable="false" XMLName="ChainType"/>
+                <Attribute ColumnName="PRIORITY_CODE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The priority code of the order. External logic can be built for prioritizing orders."
+                    Name="Priority_Code" Nullable="false" XMLName="PriorityCode"/>
+                <Attribute ColumnName="PRIORITY_NUMBER"
+                    DataType="Priority" DefaultValue="0 "
+                    Description="The numeric priority code as opposed to alphanumeric field PRIORITY_CODE."
+                    Name="Priority_Number" Nullable="false" XMLName="PriorityNumber"/>
+                <Attribute ColumnName="EXCHANGE_TYPE"
+                    DataType="EnumExchangeType"
+                    Description="This field indicates the exchange type of the order. The payment processing logic is dependent on this attribute."
+                    Name="Exchange_Type" Nullable="true" XMLName="ExchangeType"/>
+                <Attribute ColumnName="BILL_TO_ID" DataType="ID-40"
+                    Description="The identifier of the bill to customer.  If a customer definition representing the buyer organization exists within the system, the BillToID can represent the CustomerID of the customer.  Otherwise, the BillToID can represent the PersonID of the bill to address or the BuyerOrganizationCode of the buyer organization."
+                    Name="Bill_To_Id" Nullable="true" XMLName="BillToID"/>
+                <Attribute ColumnName="ORDER_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="An order classification attribute. This field can be used for reporting purposes or to build conditions while modeling your business process. Sterling Selling And fulfillment Suite system has no default logic based on this field."
+                    Name="Order_Type" Nullable="false" XMLName="OrderType"/>
+                <Attribute ColumnName="ENTRY_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The channel through which this order was created."
+                    Name="Entry_Type" Nullable="false" XMLName="EntryType"/>
+                <Attribute ColumnName="SEARCH_CRITERIA_1"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="This field is provided for allowing custom searches. You can decide at implementation time what should be stored in this field."
+                    Name="Search_Criteria_1" Nullable="false" XMLName="SearchCriteria1"/>
+                <Attribute ColumnName="SEARCH_CRITERIA_2"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="This field is provided for allowing custom searches. You can decide at implementation time what should be stored in this field."
+                    Name="Search_Criteria_2" Nullable="false" XMLName="SearchCriteria2"/>
+                <Attribute ColumnName="LINE_TYPE" DataType="LineType"
+                    DefaultValue="' ' "
+                    Description="Can be used in process modeling in pipeline determination or for doing conditional processing for this line."
+                    Name="Line_Type" Nullable="false" XMLName="LineType"/>
+                <Attribute ColumnName="SHIP_TO_ID" DataType="ID-40"
+                    Description="The ship to identifier. If a customer definition representing the buyer organization exists within the system, the ShipToID can represent the CustomerID of the customer. Otherwise, the ShipToID can represent the PersonID of the ship to address or the receiving node of the order. This represents the SHIP_TO_ID on the line. If it does not exist on the line, it represents the SHIP_TO_ID on the order."
+                    Name="Ship_To_Id" Nullable="true" XMLName="ShipToId"/>
+                <Attribute ColumnName="CONDITION_VARIABLE_1"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="A user defined variable that can be used for condition building in process modeling."
+                    Name="Condition_Variable_1" Nullable="false" XMLName="ConditionVariable1"/>
+                <Attribute ColumnName="CONDITION_VARIABLE_2"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="A user defined variable that can be used for condition building in process modeling."
+                    Name="Condition_Variable_2" Nullable="false" XMLName="ConditionVariable2"/>
+                <Attribute ColumnName="CARRIER_SERVICE_CODE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The carrier service code for this order. This represents the CARRIER_SERVICE_CODE on the line. If it does not exist on the line, it represents the CARRIER_SERVICE_CODE on the order."
+                    Name="Carrier_Service_Code" Nullable="false" XMLName="CarrierServiceCode"/>
+                <Attribute ColumnName="LEVEL_OF_SERVICE"
+                    DataType="LevelOfService"
+                    Description="Indicates the level of service required for this order. This represents the LEVEL_OF_SERVICE on the order line. If it does not exist on the line, it represents the LEVEL_OF_SERVICE on the order."
+                    Name="Level_Of_Service" Nullable="true" XMLName="LevelOfService"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="IBA_ORD_DEMAND_VW_KEY" Name="IBA_Ord_Demand_Vw_Key"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity
+            Description="The view formed by joining the YFS_ORDER_HEADER, YFS_ORDER_LINE, and YFS_ORDER_LINE_RESERVATION tables.    This view represents the demands of the order line reservations, which will be processed by the Item-Based Allocation agent."
+            EntityType="VIEW" Extensible="N"
+            ListXMLName="IBAReservationDemands" Module="omp"
+            Name="IBA_Resv_Demand_Vw" Prefix="YFS_"
+            TableName="YFS_IBA_RESV_DEMAND_VW" TableType="TRANSACTION"
+            View="true" XMLName="IBAReservationDemand">
+            <Attributes>
+                <Attribute ColumnName="IBA_RESV_DEMAND_VW_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_IBA_RESV_DEMAND_VW view."
+                    Name="IBA_Resv_Demand_Vw_Key" Nullable="false" XMLName="IBAResvDemandVwKey"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' ' "
+                    Description="The item associates with the demand."
+                    Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' ' "
+                    Description="The unit of measure of the item associates with the demand."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' ' "
+                    Description="The product class of the item associates with the demand."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order header key of the order associates with the demand."
+                    Name="Order_Header_Key" Nullable="false" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The order line key of the order line associates with the demand."
+                    Name="Order_Line_Key" Nullable="false" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="ENTERPRISE_KEY"
+                    DataType="OrgCode" DefaultValue="' ' "
+                    Description="The enterprise of the order associates with the demand."
+                    Name="Enterprise_Key" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="SELLER_ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' ' "
+                    Description="The seller organization of the order associates with the demand."
+                    Name="Seller_Organization_Code" Nullable="false" XMLName="SellerOrganizationCode"/>
+                <Attribute ColumnName="ORDER_DATE" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The date on which the order was placed."
+                    Name="Order_Date" Nullable="false" XMLName="OrderDate"/>
+                <Attribute ColumnName="HEADER_REQ_SHIP_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The requested ship date on the order header."
+                    Name="Header_Req_Ship_Date" Nullable="false" XMLName="HeaderReqShipDate"/>
+                <Attribute ColumnName="REQ_SHIP_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="The requested ship date."
+                    Name="Req_Ship_Date" Nullable="false" XMLName="ReqShipDate"/>
+                <Attribute ColumnName="PRODUCT_AVAILABILITY_DATE"
+                    DataType="TimeStamp"
+                    Description="The first date on which the reserved inventory is available."
+                    Name="Product_Availability_Date" Nullable="true" XMLName="ProductAvailabilityDate"/>
+                <Attribute ColumnName="REQ_RESERVATION_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The date when the reserved inventory is needed, such as the shipping date."
+                    Name="Req_Reservation_Date" Nullable="false" XMLName="RequestedReservationDate"/>
+                <Attribute ColumnName="NODE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The ship node at which the item has been reserved."
+                    Name="Node_Key" Nullable="false" XMLName="NodeKey"/>
+                <Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The quantity reserved."
+                    Name="Quantity" Nullable="false" XMLName="Quantity"/>
+                <Attribute ColumnName="MIN_SHIP_BY_DATE"
+                    DataType="TimeStamp"
+                    Description="The preferred minimum ship by date of the available supply that order line can allocate against.  This only applies to the order line or kit line with time-sensitive item."
+                    Name="Min_Ship_By_Date" Nullable="true" XMLName="MinShipByDate"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' ' "
+                    Description="The segment of the inventory."
+                    Name="Segment" Nullable="false"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' ' "
+                    Description="The segment type of the inventory."
+                    Name="Segment_Type" Nullable="false"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' "
+                    Description="The tag number that has been specified on the scheduled order line."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="DEMAND_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The inventory demand type used by the reservation.  This field is only used internally.  For all user-created reservations, this will be defaulted from the document params."
+                    Name="Demand_Type" Nullable="false" XMLName="DemandType"/>
+                <Attribute ColumnName="CHAINED_FROM_ORDER_LINE_KEY"
+                    DataType="Key" 
+                    Description="The order line that is associated with this chained order line. If this line is chained from another order line, this key will point to the parent order line."
+                    HasSkewedData="true"
+                    Name="Chained_From_Order_Line_Key" Nullable="true" XMLName="ChainedFromOrderLineKey"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The document type that is associated with this order. For example, Sales Order document (0001), Planned Order document (0002), Return Order document (0003) , and Purchase Order document (0005). This field determines the order's fulfillment cycle and controls the inventory and payment updates performed on the order."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="PRIORITY_CODE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The priority code of the order. External logic can be built for prioritizing orders."
+                    Name="Priority_Code" Nullable="false" XMLName="PriorityCode"/>
+                <Attribute ColumnName="PRIORITY_NUMBER"
+                    DataType="Priority" DefaultValue="0 "
+                    Description="The numeric priority code as opposed to alphanumeric field PRIORITY_CODE."
+                    Name="Priority_Number" Nullable="false" XMLName="PriorityNumber"/>
+                <Attribute ColumnName="EXCHANGE_TYPE"
+                    DataType="EnumExchangeType" 
+                    Description="This field indicates the exchange type of the order. The payment processing logic is dependent on this attribute."
+                    Name="Exchange_Type" Nullable="true" XMLName="ExchangeType"/>
+                <Attribute ColumnName="BILL_TO_ID" DataType="ID-40"
+                    Description="The identifier of the bill to customer.  If a customer definition representing the buyer organization exists within the system, the BillToID can represent the CustomerID of the customer.  Otherwise, the BillToID can represent the PersonID of the bill to address or the BuyerOrganizationCode of the buyer organization."
+                    Name="Bill_To_Id" Nullable="true" XMLName="BillToID"/>
+                <Attribute ColumnName="ORDER_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="An order classification attribute. This field can be used for reporting purposes or to build conditions while modeling your business process. Sterling Selling And fulfillment Suite system has no default logic based on this field."
+                    Name="Order_Type" Nullable="false" XMLName="OrderType"/>
+                <Attribute ColumnName="ENTRY_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="The channel through which this order was created."
+                    Name="Entry_Type" Nullable="false" XMLName="EntryType"/>
+                <Attribute ColumnName="SEARCH_CRITERIA_1"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="This field is provided for allowing custom searches. You can decide at implementation time what should be stored in this field."
+                    Name="Search_Criteria_1" Nullable="false" XMLName="SearchCriteria1"/>
+                <Attribute ColumnName="SEARCH_CRITERIA_2"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="This field is provided for allowing custom searches. You can decide at implementation time what should be stored in this field."
+                    Name="Search_Criteria_2" Nullable="false" XMLName="SearchCriteria2"/>
+                <Attribute ColumnName="LINE_TYPE" DataType="LineType"
+                    DefaultValue="' ' "
+                    Description="Can be used in process modeling in pipeline determination or for doing conditional processing for this line."
+                    Name="Line_Type" Nullable="false" XMLName="LineType"/>
+                <Attribute ColumnName="SHIP_TO_ID" DataType="ID-40"
+                    Description="The ship to identifier. If a customer definition representing the buyer organization exists within the system, the ShipToID can represent the CustomerID of the customer. Otherwise, the ShipToID can represent the PersonID of the ship to address or the receiving node of the order. This represents the SHIP_TO_ID on the line. If it does not exist on the line, it represents the SHIP_TO_ID on the order."
+                    Name="Ship_To_Id" Nullable="true" XMLName="ShipToId"/>
+                <Attribute ColumnName="CONDITION_VARIABLE_1"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="A user defined variable that can be used for condition building in process modeling."
+                    Name="Condition_Variable_1" Nullable="false" XMLName="ConditionVariable1"/>
+                <Attribute ColumnName="CONDITION_VARIABLE_2"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="A user defined variable that can be used for condition building in process modeling."
+                    Name="Condition_Variable_2" Nullable="false" XMLName="ConditionVariable2"/>
+                <Attribute ColumnName="CARRIER_SERVICE_CODE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="The carrier service code for this order. This represents the CARRIER_SERVICE_CODE on the line. If it does not exist on the line, it represents the CARRIER_SERVICE_CODE on the order."
+                    Name="Carrier_Service_Code" Nullable="false" XMLName="CarrierServiceCode"/>
+                <Attribute ColumnName="LEVEL_OF_SERVICE"
+                    DataType="LevelOfService"
+                    Description="Indicates the level of service required for this order. This represents the LEVEL_OF_SERVICE on the order line. If it does not exist on the line, it represents the LEVEL_OF_SERVICE on the order."
+                    Name="Level_Of_Service" Nullable="true" XMLName="LevelOfService"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="IBA_RESV_DEMAND_VW_KEY" Name="IBA_Resv_Demand_Vw_Key"/>
+            </PrimaryKey>
+        </Entity>
+		<Entity
+            Description="The view formed by joining the YFS_ORDER_HEADER and YFS_ORDER_LINE. This view represents the some of the common attributes between the two tables and updates the attributes in YFS_ORDER_LINE having null values to the values present in YFS_ORDER_HEADER."
+            EntityType="VIEW" Extensible="N" ListXMLName="DistinctOrderLine" Module="omp" 
+			Name="Distinct_Order_Line_Vw" Prefix="YFS_" TableName="YFS_DISTINCT_ORDER_LINE_VW" TableType="TRANSACTION" 
+            View="true" XMLName="DistinctOrderLine" GenerateDistinctWithWhereMethod="true">
+            <Attributes>
+                <Attribute ColumnName="DISTINCT_ORDER_LINE_VW_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_DISTINCT_ORDER_LINE_VW view."
+                    Name="Distinct_Order_line_Vw_Key" Nullable="false" XMLName="DistinctOrderLineVwKey"/>
+                <Attribute ColumnName="ORDER_LINE_KEY"
+                    DataType="Key"
+                    Description="The order line key of the order lines."
+                    Name="Order_Line_Key" Nullable="true" XMLName="OrderLineKey"/>
+                <Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"
+                    Description="The order header key of the order associates with the line."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey"/>
+                <Attribute ColumnName="SHIPNODE_KEY" DataType="ShipNode"
+                    Description="The ship node at which the item has been reserved."
+                    Name="ShipNode_key" Nullable="true" XMLName="ShipNode"/>
+                <Attribute ColumnName="SHIP_TO_ID" DataType="ID-40"
+                    Description="The ship to identifier. If a customer definition representing the buyer organization exists within the system, the ShipToID can represent the CustomerID of the customer. Otherwise, the ShipToID can represent the PersonID of the ship to address or the receiving node of the order. This represents the SHIP_TO_ID on the line. If it does not exist on the line, it represents the SHIP_TO_ID on the order."
+                    Name="Ship_To_Id" Nullable="true" XMLName="ShipToId"/>
+                <Attribute ColumnName="CARRIER_SERVICE_CODE"
+                    DataType="Text-40"
+                    Description="The carrier service code for this order. This represents the CARRIER_SERVICE_CODE on the line. If it does not exist on the line, it represents the CARRIER_SERVICE_CODE on the order."
+                    Name="Carrier_Service_Code" Nullable="true" XMLName="CarrierServiceCode"/>
+                <Attribute ColumnName="SHIP_TO_KEY" DataType="Key"
+                    Description="The ship to address that is associated with this order line. If not provided, it is defaulted from order header."
+                    Name="Ship_To_Key" Nullable="true"/>
+                <Attribute ColumnName="RECEIVING_NODE"
+                    DataType="ShipNode"
+                    Description="The receiving node that is associated with this order line."
+                    Name="Receiving_Node" Nullable="true" XMLName="ReceivingNode"/>
+                <Attribute ColumnName="SCAC" DataType="Text-40"
+                    Description="The carrier code."
+                    Name="Scac" Nullable="true" XMLName="SCAC"/>
+                <Attribute ColumnName="LEVEL_OF_SERVICE"
+                    DataType="LevelOfService"
+                    Description="Indicates the level of service required for this order line.  Default is Null."
+                    Name="Level_Of_Service" Nullable="true" XMLName="LevelOfService"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey DB2Name="DIST_ORD_LN_VW_PK" Name="DIST_ORD_LN_VW_PK">
+                <Attribute ColumnName="DISTINCT_ORDER_LINE_VW_KEY" Name="Distinct_Order_line_Vw_Key"/>
+            </PrimaryKey>
+        </Entity>
+    </Entities>
+</DBSchema>

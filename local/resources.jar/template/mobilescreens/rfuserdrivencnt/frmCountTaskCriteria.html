@@ -1,0 +1,99 @@
+<html>
+    <body>
+        <form name="frmCountTaskCriteria" target="/console/rfuserdrivencnt.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label" name="lblTitle"
+                                    tag="binding=lblTaskList"
+                                    type="text" validate="false" value="Tasks_to_Accept"/>
+				                </td>
+							</tr>
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/TaskList/@Task"
+                                    col="1" gridcols="20"
+                                    gridrows="6" id="Task"
+                                    mandatory="false"
+                                    name="gridTaskList"
+                                    namespace="TaskList" size="20"
+                                    tag="binding=gridTaskList" validate="false">
+                                    <tr>
+                                    <td>
+									<input colno="0" name="lblProceed" colName=" " size="0"
+                                    type="hidden" value="/console/rfuserdrivencnt.ppc?action=frmCountProceedTask"/>
+                                    <input colno="1" colName="1" inputbinding="xml:/Task/@TaskId"
+                                    outputbinding="xml:/CountTask/@TaskId"
+                                    size="0" type="hidden"/>
+                                    <input colno="2" colName="2" inputbinding="xml:/Task/@SourceLocationId"
+                                    outputbinding="xml:/CountTask/@SourceLocationId"
+                                    size="0" type="hidden"/>
+									<input colno="3" colName="3" inputbinding="xml:/Task/Inventory/@ItemId"
+                                    outputbinding="xml:/CountTask/@ItemId"
+                                    size="0" type="hidden"/>
+									<input colno="4" colName="4" inputbinding="xml:/Task/@ItemClassification1"
+                                    outputbinding="xml:/CountTask/@ItemClassification1"
+                                    size="0" type="hidden"/>
+									<input colno="5" colName="5" inputbinding="xml:/Task/@ItemClassification2"
+                                    outputbinding="xml:/CountTask/@ItemClassification2"
+                                    size="0" type="hidden"/>
+									<input colno="6" colName="6" inputbinding="xml:/Task/@ItemClassification3"
+                                    outputbinding="xml:/CountTask/@ItemClassification3"
+                                    size="0" type="hidden"/>
+									<input colno="7" colName="7" inputbinding="xml:/Task/@EnterpriseKey"
+                                    outputbinding="xml:/CountTask/@EnterpriseKey"
+                                    size="0" type="hidden"/>
+									<input colno="8" colName="Location"
+									inputbinding="xml:/Task/@SourceLocationId" size="10" type="text"/>
+									<input colno="9" colName="Item"
+                                    inputbinding="xml:/Task/Inventory/@ItemId" size="10" type="text"/>
+								    <input colno="10" colName="IC_1"
+                                    inputbinding="xml:/Task/@ItemClassification1" size="10" type="text"/>
+                                    <input colno="11" colName="IC_2"
+                                    inputbinding="xml:/Task/@ItemClassification2" size="10" type="text"/>
+                                    <input colno="12" colName="IC_3"
+                                    inputbinding="xml:/Task/@ItemClassification3" size="10" type="text"/>
+                                    <input colno="13" colName="Status"
+                                    inputbinding="xml:/Task/@TaskStatusDesc" size="10" type="text"/>
+									<input colno="14" colName="User"
+                                    inputbinding="xml:/Task/@AssignedToUserId" size="10" type="text"/>
+									</td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+							<tr/>
+							<tr/>
+                             <tr>
+                                <td>
+                                    <input col="1" hotkey="F2"
+                                    name="Back" size="8"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmInitiateCount"
+                                    validate="false" value="Mobile_Done"/>
+								   <input col="9" hotkey="F3"
+                                    name="Proceed" size="10"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfuserdrivencnt.ppc?action=frmCountTaskContext"
+                                    validate="false" value="Mobile_Proceed"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

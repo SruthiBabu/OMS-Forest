@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+   	<LabelField Binding="/HazmatData/FromAddress/@Company" LabelFieldName="FromName" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/FromAddress/@AddressLine1" 
+	LabelFieldName="FromAddressLine1" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/FromAddress/@AddressLine2" LabelFieldName="FromAddressLine2" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/FromAddress/@City" LabelFieldName="FromCity" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/FromAddress/@State" LabelFieldName="FromState" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/FromAddress/@ZipCode" LabelFieldName="FromZipCode" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/FromAddress/@Country" LabelFieldName="FromCountry" RepeatingElement=""/>
+	
+
+	<LabelField Binding="/HazmatData/ToAddress/@Company" LabelFieldName="ToName" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/ToAddress/@AddressLine1" 
+	LabelFieldName="ToAddressLine1" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/ToAddress/@AddressLine2" LabelFieldName="ToAddressLine2" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/ToAddress/@City" LabelFieldName="ToCity" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/ToAddress/@State" LabelFieldName="ToState" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/ToAddress/@ZipCode" LabelFieldName="ToZipCode" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/ToAddress/@Country" LabelFieldName="ToCountry" RepeatingElement=""/>
+
+	<LabelField Binding="/HazmatData/@ScacDesc" LabelFieldName="SCAC" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/@TrailerNo" LabelFieldName="TrailerNo" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/@ActualShipmentDate" LabelFieldName="ShipmentDate" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/@BolNo" LabelFieldName="BolNo" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/@ProNo" LabelFieldName="PRONo" RepeatingElement=""/>
+	<LabelField Binding="/HazmatData/@TotalWeightUOM" LabelFieldName="WeightUOM" RepeatingElement=""/>
+
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@PkgQty" LabelFieldName="PkgQty" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@ContainerType" LabelFieldName="PkgType" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@IsHazmat" LabelFieldName="HM" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@UnitOfMeasure" LabelFieldName="ItemUOM" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@ProperShippingName" LabelFieldName="ProperShippingName" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@HazardClass" LabelFieldName="HazardClass" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@LabelCode" LabelFieldName="LabelCode" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@UNNumber" LabelFieldName="UNNumber" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@PackingGroup" LabelFieldName="PackingGroup" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@HazmatClass" LabelFieldName="HazmatClass" RepeatingElement="HazardousContainer"/>
+	<LabelField Binding="/HazmatData/HazardousContainers/HazardousContainer/@Weight" LabelFieldName="Weight" RepeatingElement="HazardousContainer"/>
+	
+	
+
+	<RepeatingFields>
+        <RepeatingField LabelFieldName="PkgQty" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="PkgType" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ItemUOM" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ProperShippingName" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="HazardClass" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="LabelCode" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="UNNumber" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="PackingGroup" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="HazmatClass" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="Weight" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="HM" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+	</RepeatingFields>
+</LabelFieldMap>

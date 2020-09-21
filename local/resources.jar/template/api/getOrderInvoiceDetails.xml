@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<InvoiceDetail>
+	<InvoiceHeader ActualFreightCharge="" AmountCollected="" ChargedActualFreight="" CollectedExternally="" CollectedThroughAR=""  DateInvoiced="" HeaderCharges="" HeaderDiscount="" HeaderTax="" InvoiceNo="" InvoiceType="" LineSubTotal="" MasterInvoiceNo="" OrderInvoiceKey="" Reference1="" TotalAmount="" TotalCharges="" TotalDiscount="" TotalHeaderCharges="" TotalTax="" >
+		 <Order BuyerOrganizationCode="" DeliveryCode="" DocumentType="" EnteredBy="" EnterpriseCode="" EntryType="" OrderNo="" OrderHeaderKey="" SellerOrganizationCode="" TermsCode="">
+			<PriceInfo Currency=""/>
+			<PersonInfoBillTo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" PersonID="" City="" Company="" Country=""  DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+			<AdditionalAddresses>
+				<AdditionalAddress AddressType="">
+					<PersonInfo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AddressType="" AlternateEmailID="" Beeper="" City="" Company="" Country=""  DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" State="" Suffix="" Title="" ZipCode=""/>
+				</AdditionalAddress>
+			</AdditionalAddresses>
+			<References >
+				<Reference  Name="" Value=""/>
+			</References>
+		</Order>
+		<Shipment ShipDate="" SCAC="" ManifestNo="" ReceivingNode="" ShipNode="">
+			<ToAddress AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" State="" Suffix="" Title="" ZipCode=""/>
+			<ShipNode ShipnodeKey="">
+				<ShipNodePersonInfo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" State="" Suffix="" Title="" ZipCode=""/>
+			</ShipNode>
+		</Shipment>
+		<LineDetails  TotalLines="">             
+			<LineDetail Charges=""  ExtendedPrice="" LineTotal="" OrderInvoiceDetailKey="" OrderLineKey="" ShippedQty="" Tax="" UnitPrice="" Quantity="" PricingQty="" OptionAmount="">
+				<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo="">
+					 <Item ItemID="" ProductClass="" UnitOfMeasure=""/>
+					 <LinePriceInfo DiscountReference="" DiscountType="" DiscountPercentage="" ListPrice="" RetailPrice="" UnitPrice=""  PricingUOM="" PricingQty="" PricingQtyConversionFactor="" InvoicedPricingQty=""/>
+					<References >
+						<Reference  Name="" Value=""/>
+					</References>
+				</OrderLine>
+				<LineCharges >
+					<LineCharge ChargeAmount="" ChargeCategory="" ChargeName="" ChargeNameKey="" ChargePerLine="" ChargePerUnit=""  Reference=""/>
+				</LineCharges>
+				<LineTaxes >
+					<LineTax ChargeCategory="" ChargeName="" ChargeNameKey="" Reference_1="" Reference_2="" Reference_3="" Tax="" TaxName="" TaxPercentage=""/>
+					<TaxSummary >
+						<TaxSummaryDetail  Tax="" TaxName=""/>
+					</TaxSummary>
+				</LineTaxes>
+				<References >
+				    <Reference  Name="" Value=""/>
+				</References>
+			</LineDetail>
+		</LineDetails>         
+		<TotalSummary >
+			<ChargeSummary >
+				<ChargeSummaryDetail ChargeAmount="" ChargeCategory="" ChargeName="" ChargeNameKey=""  Reference=""/>
+			</ChargeSummary>
+			<TaxSummary >
+				<TaxSummaryDetail  Tax="" TaxName=""/>
+			</TaxSummary>
+		</TotalSummary>
+		<HeaderCharges >
+			<HeaderCharge ChargeAmount="" ChargeCategory="" ChargeName="" ChargeNameKey=""  Reference=""/>
+		</HeaderCharges>         
+		<HeaderTaxes >
+			<HeaderTax ChargeCategory="" ChargeName="" ChargeNameKey="" Reference_1="" Reference_2="" Reference_3="" Tax="" TaxName="" TaxPercentage=""/>
+			<TaxSummary >
+				<TaxSummaryDetail  Tax="" TaxName=""/>
+			</TaxSummary>
+		</HeaderTaxes>
+		<CollectionDetails  TotalLines="">
+		    <CollectionDetail AmountCollected=""
+			ChargeTransactionKey="" ChargeType="" Status="" StatusReason="" CreditAmount="" DebitAmount="" BookAmount="" OpenAuthorizedAmount="" RequestAmount="" DistributedAmount="" AuthorizationID="" AuthorizationExpirationDate=""   TransactionDate="" OrderInvoiceKey="" OrderHeaderKey="" AuditTransactionID="" UserExitStatus="" PaymentKey="" CollectionDate="" HoldAgainstBook="" SettledAmount="">
+			<CreditCardTransactions>
+				<CreditCardTransaction CreditCardTransactionKey="" ChargeTransactionKey="" TranType="" TranAmount="" TranRequestTime="" TranReturnCode="" TranReturnMessage="" TranReturnFlag="" RequestId="" InternalReturnCode="" InternalReturnFlag="" InternalReturnMessage="" AuthAmount="" AuthCode="" AuthAvs="" AuthReturnCode="" AuthReturnFlag="" AuthReturnMessage="" AuthTime="" ParentKey="" Reference1="" Reference2=""/>
+			</CreditCardTransactions>
+			<PaymentMethod PaymentKey="" PaymentType="" ChargeSequence="" CustomerAccountNo="" CustomerPONo="" CreditCardType="" CreditCardName="" CreditCardNo="" 
+			DisplayCreditCardNo="" DisplayCustomerAccountNo="" DisplayPaymentReference1="" DisplaySvcNo="" 
+			CreditCardExpDate="" PaymentReference1="" PaymentReference2="" PaymentReference3="" CheckNo="" CheckReference="" MaxChargeLimit="" TotalAuthorized="" TotalCharged="" RequestedAuthAmount="" RequestedChargeAmount="" AwaitingAuthInterfaceAmount="" AwaitingChargeInterfaceAmount="" TotalRefundedAmount="" IncompletePaymentType="" SuspendAnyMoreCharges="" UnlimitedCharges="" SvcNo="" />
+		   </CollectionDetail>
+		</CollectionDetails>
+	</InvoiceHeader>
+</InvoiceDetail>

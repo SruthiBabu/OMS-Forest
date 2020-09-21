@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="Configuration table. Stores rules for handling of dispositions. Based on a chosen disposition, inventory can be updated or product class and inventory status switched for the item."
+            EntityType="CONFIGURATION" ListXMLName="NodeDispositionList"
+            Module="wms" Name="Node_Disposition" Prefix="YFS_"
+            TableName="YFS_NODE_DISPOSITION" TableType="CONFIGURATION" XMLName="NodeDisposition">
+            <Attributes>
+                <Attribute ColumnName="NODE_DISPOSITION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_NODE_DISPOSITION table."
+                    Name="Node_Disposition_Key" Nullable="false"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The document type for which the disposition is set up. This is the unique key of the YFS_DOCUMENT_PARAMS table."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="ShipNode"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this node disposition."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The enterprise code that is associated with this node disposition."
+                    IsOrgColumn="Y" Name="Enterprise_Code"
+                    Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="DISPOSITION_CODE"
+                    DataType="DispositionCode" DefaultValue="' ' "
+                    Description="The code used for identifying a disposition."
+                    Name="Disposition_Code" Nullable="false" XMLName="DispositionCode"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The status in which inventory is sub-classified once it is received in the warehouse. For example, product class is a classification of inventory that the product comes with when it arrives at the warehouse. Typical values of product class are First Quality and Second Quality. Due to additional inventory processes within the warehouse, it is required to further classify inventory. Typical inventory status values are Normal, Awaiting Inventory Check, Inventory Held, etc."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="NODE_DISP_PK" Name="YFS_NODE_DISPOSITION_PK">
+                <Attribute ColumnName="NODE_DISPOSITION_KEY" Name="Node_Disposition_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="NODE_DISP_I1"
+                    Name="YFS_NODE_DISPOSITION_I1" Unique="true">
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="DISPOSITION_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" Virtual="true"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    Name="Ship_Node" Type="Unidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Document_Params"
+                    Name="DocumentParams" Type="Unidirectional" XMLName="DocumentParams">
+                    <Attribute Name="Document_Type" ParentName="Document_Params_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true"
+                    ForeignEntity="Return_Disposition"
+                    Name="Return_Disposition" Type="Bidirectional" XMLName="ReturnDisposition">
+                    <Attribute Name="Disposition_Code" ParentName="Disposition_Code"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                    <Attribute Name="Document_Type" ParentName="Document_Type"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true"
+                    ForeignEntity="Inventory_Status"
+                    Name="Disposition_Inventory_Status"
+                    Type="Unidirectional" XMLName="DispositionInventoryStatus">
+                    <Attribute Name="Inventory_Status" ParentName="Inventory_Status"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="Configuration table. Stores receiving preferences at node level."
+            EntityType="CONFIGURATION"
+            ListXMLName="NodeReceivingPreferences" Module="wms"
+            Name="Node_Receiving_Preference" Prefix="YFS_"
+            TableName="YFS_NODE_RECEIVING_PREF"
+            TableType="CONFIGURATION" XMLName="NodeReceivingPreference">
+            <Attributes>
+                <Attribute ColumnName="NODE_RECEIVING_PREF_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_NODE_RECEIVING_PREF table."
+                    Name="Node_Receiving_Preference_Key" Nullable="false"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The document type for which the preference is set up. This field is a unique key of the YFS_DOCUMENT_PARAMS table."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="ShipNode"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this node receiving preference."
+                    Name="Node_Key" Nullable="false" XMLName="Node" DataSecurityUsageType="NODE"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The enterprise code that is associated with this node receiving preference."
+                    IsOrgColumn="Y" Name="Enterprise_Code"
+                    Nullable="false" XMLName="EnterpriseCode" />
+                <Attribute ColumnName="ALLOW_MANUAL_SHIPMENT_ENTRY"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the shipment entry should be allowed if the ASN is not received."
+                    Name="Allow_Manual_Shipment_Entry" Nullable="false" XMLName="AllowManualShipmentEntry"/>
+                <Attribute ColumnName="PALLET_BUILD_PREFERENCE"
+                    DataType="EnumBuildPreference" DefaultValue="' '"
+                    Description="This flag indicates the preference for receiving. Valid values are:  Always, Optional, if tag or serial tracked."
+                    Name="Pallet_Build_Preference" Nullable="false" XMLName="PalletBuildPreference"/>
+                <Attribute ColumnName="CASE_BUILD_PREFERENCE"
+                    DataType="EnumBuildPreference" DefaultValue="' '"
+                    Description="This flag indicates the preferences for receiving. Valid values are: Always, Optional, if tag or serial tracked."
+                    Name="Case_Build_Preference" Nullable="false" XMLName="CaseBuildPreference"/>
+                <Attribute ColumnName="DFLT_RECEIVING_DISP_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The default receiving disposition code."
+                    Name="Default_Receiving_Disposition_Code"
+                    Nullable="false" XMLName="DefaultReceivingDispositionCode"/>
+                <Attribute ColumnName="DFLT_INSPECTION_DISP_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The default inspection disposition code."
+                    Name="Default_Inspection_Disposition_Code"
+                    Nullable="false" XMLName="DefaultInspectionDispositionCode"/>
+                <Attribute ColumnName="ALLOW_NEW_ITEM_RECEIPT"
+                    DataType="Text-20" DefaultValue="' '"
+                    Description="This indicates whether an unexpected Item can be received in a receipt. The values being: SHIPMENT - Allow the receipt of unexpected items on shipment if it exists on order and DO_NOT_ALLOW - Receiving unexpected items on shipment is not allowed."
+                    Name="Allow_New_Item_Receipt" Nullable="false" XMLName="AllowNewItemReceipt"/>
+                <Attribute ColumnName="CLOSE_RECEIPT_PREFERENCE"
+                    DataType="EnumCloseReceiptPreference"
+                    DefaultValue="' '"
+                    Description="This flag indicates the preference for receipt closure. Valid values are: 0 - Close Now , 1 - Expected quantity at least equal to received quantity, 2 - Stock putaway."
+                    Name="Close_Receipt_Preference" Nullable="false" XMLName="CloseReceiptPreference"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="NODE_REC_PREF_PK" Name="YFS_NODE_RECEIVING_PREF_PK">
+                <Attribute ColumnName="NODE_RECEIVING_PREF_KEY" Name="Node_Receiving_Preference_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="NODE_REC_PREF_I1"
+                    Name="YFS_NODE_RECEIVING_PREF_I1" Unique="true">
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" ForeignEntity="Ship_Node" Virtual="true"
+                    Name="Ship_Node" Type="Unidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Document_Params"
+                    Name="DocumentParams" Type="Unidirectional" XMLName="DocumentParams">
+                    <Attribute Name="Document_Type" ParentName="Document_Params_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

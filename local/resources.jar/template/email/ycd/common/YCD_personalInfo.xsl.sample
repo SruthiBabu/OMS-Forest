@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template name="Greeting">
+	<xsl:param name="FirstName"></xsl:param>
+	<xsl:param name="LastName"></xsl:param>
+	Dear <xsl:value-of select="$FirstName"/><xsl:text> </xsl:text><xsl:value-of select="$LastName"/>,
+</xsl:template>
+
+<xsl:template name="FormatAddress">
+	<xsl:param name="FirstName"></xsl:param>
+	<xsl:param name="LastName"></xsl:param>
+	<xsl:param name="AddressLine1"></xsl:param>
+	<xsl:param name="AddressLine2"></xsl:param>
+	<xsl:param name="AddressLine3"></xsl:param>
+	<xsl:param name="City"></xsl:param>
+	<xsl:param name="State"></xsl:param>
+	<xsl:param name="ZipCode"></xsl:param>
+	<xsl:param name="Country"></xsl:param>
+<br/>
+<xsl:value-of select="$FirstName"/><xsl:text> </xsl:text><xsl:value-of select="$LastName"/>
+<br/>
+<xsl:value-of select="$AddressLine1"/>
+<br/>
+<xsl:if test="$AddressLine2 != ''">
+	<xsl:value-of select="$AddressLine2"/>
+	<br/>
+</xsl:if>
+<xsl:if test="$AddressLine3 != ''">
+	<xsl:value-of select="$AddressLine3"/>
+	<br/>
+</xsl:if>
+
+<xsl:value-of select="$City"/>, <xsl:value-of select="$State"/><xsl:text> </xsl:text><xsl:value-of select="$ZipCode"/>, <xsl:value-of select="$Country"/>
+</xsl:template>
+
+<xsl:template name="FormatYantraAddress">
+	<xsl:call-template name="FormatAddress">
+		<xsl:with-param name="FirstName" select="@FirstName"/>
+		<xsl:with-param name="LastName" select="@LastName"/>
+		<xsl:with-param name="AddressLine1" select="@AddressLine1"/>
+		<xsl:with-param name="AddressLine2" select="@AddressLine2"/>
+		<xsl:with-param name="AddressLine3" select="@AddressLine3"/>
+		<xsl:with-param name="City" select="@City"/>
+		<xsl:with-param name="State" select="@State"/>
+		<xsl:with-param name="ZipCode" select="@ZipCode"/>
+		<xsl:with-param name="Country" select="@Country"/>
+	</xsl:call-template>
+</xsl:template>
+
+</xsl:stylesheet>

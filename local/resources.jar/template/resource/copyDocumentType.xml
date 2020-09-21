@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Tables> 
+	<DocumentType> 
+		<Table TableName="DocumentTemplate" KeyAttribute="DocumentTemplateKey"/>
+		<Table TableName="ChargeCategory" KeyAttribute="ChargeCategoryKey">
+			<Template> 
+				<ChargeCategory>
+					<ChargeNameList> 
+						<ChargeName/>
+					</ChargeNameList>
+				</ChargeCategory>
+			</Template>
+		</Table>
+		<Table TableName="CommonCode" KeyAttribute="CommonCodeKey"/>
+		<Table TableName="OrderLineType" KeyAttribute="OrderLineTypeKey"/>
+		<Table TableName="PurgeCriteria" KeyAttribute="PurgeCriteriaKey"/>
+		<Table TableName="Rules" KeyAttribute="RulesKey"/>
+		<Table TableName="ReturnDisposition" KeyAttribute="DispositionKey"/>
+		<Table TableName="OrderApprovalRule" KeyAttribute="OrderApprovalRuleKey"/>
+	</DocumentType>
+	<ProcessType> 
+        <Table TableName="DateType" KeyAttribute="DateTypeKey"/>
+        <Table TableName="MonitorType" KeyAttribute="MonitorTypeKey"/>
+        <Table TableName="StatusMilestone" KeyAttribute="StatusMilestoneKey"/>
+		<Table TableName="ProcessTaskType" KeyAttribute="ProcessTaskTypeKey"/>
+		<Table TableName="Status" KeyAttribute="StatusKey"/>
+		<Table TableName="StatusInventoryTypes" KeyAttribute="StatusInventoryTypesKey"/>
+		<Table TableName="StatusModificationType" 
+            KeyAttribute="StatusModificationTypeKey">
+			<Template> 
+				<StatusModificationType> 
+					<StatusModifications> 
+						<StatusModification/> 
+					</StatusModifications> 
+					<ModificationAttributes> 
+						<ModificationAttribute/>
+					</ModificationAttributes>
+				</StatusModificationType>
+			</Template>
+		</Table>
+		<Table TableName="Transaction" 
+			KeyAttribute="TransactionKey" 
+			TranidPostfixLiteral="DocumentType">
+			<Template>
+				<Transaction>
+					<TransactionPickupStatusList>
+						<TransactionPickupStatus TransactionKey="" ProcessTypeKey="" Status="" /> 
+					</TransactionPickupStatusList>
+					<TransactionDropStatusList>
+						<TransactionDropStatus/> 
+					</TransactionDropStatusList>
+					<EventList>
+						<Event/> 
+					</EventList>
+				</Transaction>
+			</Template>
+		</Table>
+	</ProcessType>
+</Tables>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- Order_Release_Change.On_Success Event XML-->
+<OrderRelease CarrierAccountNo="" CarrierServiceCode="" Currency=""
+    CustomerPoNo="" DeliveryCode="" Division="" EnterpriseCode=""
+    FOB="" HoldFlag="" HoldReasonCode="" MarkForKey=""
+    MaxOrderReleaseStatus="" MaxOrderReleaseStatusDesc=""
+    MinOrderReleaseStatus="" MinOrderReleaseStatusDesc=""
+    NotificationReference="" NotificationType=""
+    NotifyAfterShipmentFlag="" OrderDate="" OrderHeaderKey=""
+    OrderName="" OrderReleaseKey="" OrderType="" OtherCharges=""
+    PacklistType="" PersonalizeCode="" PickListNo="" PriorityCode=""
+    Purpose="" ReceivingNode="" ReleaseNo="" ReleaseSeqNo=""
+    ReqCancelDate="" ReqDeliveryDate="" ReqShipDate="" 
+    SCAC="" SalesOrderNo="" ScacAndService="" ScacAndServiceKey=""
+    ShipAdviceNo="" ShipCompleteFlag="" ShipLineComplete="" ShipNode=""
+    ShipNodeClass="" ShipOrderComplete="" ShipToId="" ShipToKey=""
+    Status="" SupplierCode="" SupplierName="" TaxpayerId="" isHistory="">
+    <OrderAudit AuditTransactionId="" NewBuffer="" OldBuffer=""
+        OrderAuditKey="" OrderHeaderKey="" OrderLineKey=""
+        OrderReleaseKey="" ReasonCode="" ReasonText="" Reference1=""
+        Reference2="" Reference3="" Reference4="" XMLFlag="">
+        <Order EnterpriseCode="" DocumentType="" OrderNo=""/>
+        <OrderAuditLevels>
+            <OrderAuditLevel ModificationLevel="" OrderLineKey="" OrderReleaseKey="">
+                <ModificationTypes>
+                    <ModificationType Name=""/>
+                </ModificationTypes>
+                <OrderLine PrimeLineNo="" SubLineNo=""/>
+                <OrderRelease ReleaseNo=""/>
+                <OrderAuditDetails>
+                    <OrderAuditDetail Action="" AuditType="">
+                        <IDs>
+                            <ID Name="" Value=""/>
+                        </IDs>
+                        <Attributes>
+                            <Attribute Name=""
+                                NewValue="" OldValue=""/>
+                        </Attributes>
+                    </OrderAuditDetail>
+                </OrderAuditDetails>
+            </OrderAuditLevel>
+        </OrderAuditLevels>
+    </OrderAudit>
+    <Order AllocationRuleID="" AuthorizationExpirationDate=""
+        BillToID="" BuyerOrganizationCode="" CarrierAccountNo=""
+        CarrierServiceCode="" ChargeActualFreightFlag=""
+        CustomerEMailID="" CustomerPONo="" DeliveryCode="" Division=""
+        DocumentType="" EnteredBy="" EnterpriseCode="" EntryType=""
+        FreightTerms="" HoldFlag="" HoldReasonCode=""
+        NotificationReference="" NotificationType=""
+        NotifyAfterShipmentFlag="" OrderDate="" OrderHeaderKey=""
+        OrderName="" OrderNo="" OrderType="" OriginalTax=""
+        OriginalTotalAmount="" OtherCharges="" PaymentStatus=""
+        PersonalizeCode="" PriceProgramKey="" PriorityCode=""
+        PriorityNumber="" Purpose="" ReceivingNode="" ReqCancelDate="" ReqDeliveryDate=""
+        ReqShipDate="" SCAC="" ScacAndService="" ScacAndServiceKey=""
+        SearchCriteria1="" SearchCriteria2="" SellerOrganizationCode=""
+        ShipCompleteFlag="" ShipToID="" TaxExemptFlag=""
+        TaxExemptionCertificate="" TaxJurisdiction="" TaxPayerId=""
+        TermsCode="" TotalAdjustmentAmount="" isHistory=""/>
+    <PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <PersonInfoMarkFor AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" JobTitle="" LastName=""
+        MiddleName="" MobilePhone="" OtherPhone="" PersonID=""
+        PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+    <OrderLine AllocationDate="" CarrierAccountNo=""
+        CarrierServiceCode="" CustomerLinePONo="" CustomerPONo=""
+        DeliveryCode="" DepartmentCode="" FreightTerms="" HoldFlag=""
+        HoldReasonCode="" ImportLicenseExpDate="" ImportLicenseNo=""
+        KitCode="" LineSeqNo="" LineType="" MaxLineStatus=""
+        MaxLineStatusDesc="" MinLineStatus="" MinLineStatusDesc=""
+        OpenQty=""  OrderHeaderKey="" OrderLineKey=""
+        OrigOrderLineKey="" OtherCharges="" 
+         PackListType="" PersonalizeCode=""
+        PersonalizeFlag="" PickableFlag="" PrimeLineNo="" Purpose=""
+        ReceivingNode="" ReqCancelDate="" ReqDeliveryDate=""
+        ReqShipDate="" ReservationID="" ReservationPool="" SCAC=""
+        ScacAndService="" ScacAndServiceKey="" ShipNode="" ShipToID=""
+        ShipTogetherNo="" Status="" StatusQuantity="" SubLineNo=""
+         isHistory="">
+        <Item CostCurrency="" CountryOfOrigin="" CustomerItem=""
+            CustomerItemDesc="" ECCNNo="" HarmonizedCode="" ISBN=""
+            ItemDesc="" ItemID="" ItemShortDesc="" ItemWeight=""
+            ItemWeightUOM="" ManufacturerItem="" ManufacturerItemDesc=""
+            ManufacturerName="" NMFCClass="" NMFCCode=""
+            NMFCDescription="" ProductClass="" ProductLine=""
+            ScheduleBCode="" SupplierItem="" SupplierItemDesc=""
+            TaxProductCode="" UPCCode="" UnitCost="" UnitOfMeasure=""/>
+        <OrderStatuses>
+            <OrderStatus  
+                OrderHeaderKey="" OrderLineKey=""
+                OrderLineScheduleKey="" OrderReleaseKey=""
+                OrderReleaseStatusKey="" PipelineKey="" Status=""
+                StatusDate="" StatusDescription="" StatusQty=""
+                StatusReason="" TotalQuantity=""/>
+        </OrderStatuses>
+    </OrderLine>
+</OrderRelease>

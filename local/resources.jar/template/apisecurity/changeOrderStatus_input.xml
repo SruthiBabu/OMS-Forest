@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--changeOrderStatus Input XML-->
+<!-- Either OrderHeaderKey or OrderNo, DocumentType and EnterpriseCode is required -->
+<!-- BaseDropStatus Used only if ChangeForAllAvailableQty is passed as "Y" for Order Level operations -->
+<!-- OrderLines node is ignored if ChangeForAllAvailableQty is passed as "Y" in the order node -->
+<OrderStatusChange>
+    <OrderLines>
+        <!-- Either OrderLineKey or PrimeLineNo and SubLineNo is required -->
+        <!-- If BaseDropStatus not passed at line level then BaseDropStatus from order node is used -->
+        <!-- BaseDropStatus at order node or line node is mandatory -->
+        <!-- After the orderline is released and no release number is passed at orderline level, if ChangeForAllAvailableQty is passed as "Y", status of all quantitity of that orderline will change to baseDropStatus -->
+        <OrderLine>
+            <OrderLineTranQuantity/>
+        </OrderLine>
+    </OrderLines>
+</OrderStatusChange>

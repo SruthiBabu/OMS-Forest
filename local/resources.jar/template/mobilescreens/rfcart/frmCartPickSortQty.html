@@ -1,0 +1,267 @@
+<html>
+    <body>
+        <form name="frmCartPickSortQty" target="/console/rfcart.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="8" 
+                                    name="lblTitle"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Sort"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+								    <input col="1"
+                                    inputbinding="xml:/Exception1/@ApplyException"
+                                    name="txtException"
+                                    outputbinding="xml:/Exception/@ApplyException"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Exception/@ApplyException"
+                                    type="hidden" validate="false"/>
+									 <input col="1"
+                                    inputbinding="xml:/Item1/InventoryParameters/@IsSerialTracked"
+                                    name="txtSerial"
+                                    outputbinding="xml:/Item/InventoryParameters/@IsSerialTracked"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Item/InventoryParameters/@IsSerialTracked"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Item1/PrimaryInformation/@SerializedFlag"
+                                    name="txtSerial"
+                                    outputbinding="xml:/Item/PrimaryInformation/@SerializedFlag"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Item/PrimaryInformation/@SerializedFlag"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/TaskType/@PackWhilePick"
+                                    name="txtPackWhilePick"
+                                    outputbinding="xml:/Task/TaskType/@PackWhilePick"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/TaskType/@PackWhilePick"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Exception1/@ExceptionCode"
+                                    name="txtExceptionCode"
+                                    outputbinding="xml:/TaskException/@ExceptionCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/TaskException/@ExceptionCode"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Enterprise/@Enterprise"
+                                    name="txtEnterprise"
+                                    outputbinding="xml:/TaskList/Enterprise/@Enterprise"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/TaskList/Enterprise/@Enterprise"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/@ConsolidatedTaskId"
+                                    name="txtConsolTaskId"
+                                    outputbinding="xml:/TaskList/Task/@ConsolidatedTaskId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/TaskList/Task/@ConsolidatedTaskId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/@SuggTargetCaseId"
+                                    name="txtSuggTargetCaseId"
+                                    outputbinding="xml:/Task/@SuggTargetCaseId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@SuggTargetCaseId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/@BatchNo"
+                                    name="txtBatchNo"
+                                    outputbinding="xml:/Task/@BatchNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@BatchNo"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/@EffectiveTotalQty"
+                                    name="txtEffectiveTotalQty"
+                                    outputbinding="xml:/Task/@EffectiveTotalQty"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EffectiveTotalQty"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/@ConsolidationFlag"
+                                    name="txtConsolidationFlag"
+                                    outputbinding="xml:/Task/@ConsolidationFlag"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ConsolidationFlag"
+                                    type="hidden" validate="false"/>
+								    <input col="1"
+                                    inputbinding="xml:/TaskList/@SuggTotalQuantity"
+                                    name="txtSuggTotalQuantity"
+                                    outputbinding="xml:/Task/@SuggTotalQuantity"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@SuggTotalQuantity"
+                                    type="hidden" validate="false"/>
+								    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@UnitOfMeasure"
+                                    name="txtUOM"
+                                    outputbinding="xml:/Task/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@UnitOfMeasure"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/@SourceLocationId"
+                                    name="txtSourceLocation"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/@TaskId"
+                                    name="txtTaskId"
+                                    outputbinding="xml:/Task/@TaskId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/@TaskKey"
+                                    name="txtTaskKey"
+                                    outputbinding="xml:/Task/@TaskKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskKey"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+									<input col="1" name="lblLocation"
+                                    size="5" subtype="Label"
+                                    tag="binding=lblLocation"
+                                    type="text" validate="false" value="Mobile_Short_Location"/>
+									<input col="8"
+                                    inputbinding="xml:/TaskList/Task/@SuggCartLocationId"
+                                    name="txtSuggestedLocationId"
+                                    outputbinding="xml:/Task/@SuggCartLocationId"
+                                    size="5"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@SuggCartLocationId"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DisplayPurpose/CartPick/Sort/@LastScannedToteId"
+                                    name="txtLastScannedToteId" defaultoutput="false" outputbinding="xml:/DisplayPurpose/CartPick/Sort/@LastScannedToteId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/DisplayPurpose/CartPick/Sort/@LastScannedToteId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" name="lblSlotNo"
+                                    size="6" subtype="Label"
+                                    tag="binding=lblSlotNo"
+                                    type="text" validate="false" value="Mobile_Slot_#"/>
+									<input col="8"
+                                    inputbinding="xml:/TaskList/Task/@SlotNumber"
+                                    name="txtSuggSlotNumber"
+                                    outputbinding="xml:/Task/@SlotNumber"
+                                    size="2"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@SlotNumber"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" 
+                                    inputbinding="xml:/TaskList1/Task/@CartLocationId"
+                                    name="txtCartLocationId"
+                                    outputbinding="xml:/Task/@CartLocationId"
+                                    size="20"
+                                    subtype="Text"
+                                    tag="binding=xml:/Task/@CartLocationId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+								<td>
+                                    <input col="1"
+                                    inputbinding="xml:/TaskList9/Task/Inventory/@ItemId" outputbinding="xml:/TaskList9/Task/Inventory/@ItemId" tag="binding=xml:/TaskList9/Task/Inventory/@ItemId"
+                                    name="txtDisplayItemId" size="20" subtype="ProtectedText" type="text"/>	
+								    <input col="1"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@ItemId"
+                                    name="txtSuggestedItemId"
+                                    outputbinding="xml:/TaskList/Task/Inventory/@ItemId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/TaskList/Task/Inventory/@ItemId"
+                                    type="hidden" validate="false"/>
+								</td>
+                            </tr>
+							<tr>
+							     <td>
+								    <input col="1" name="lblUom"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblUom"
+                                    type="text" validate="false" value="Mobile_UOM"/>
+                                    <input col="11" name="lblQuantity"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblQuantity"
+                                    type="text" validate="false" value="Mobile_Short_Quantity"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@UnitOfMeasure"
+                                    name="txtSuggestedUOM"
+                                    outputbinding="xml:/Task/@UnitOfMeasure"
+                                    size="9" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@UnitOfMeasure"
+                                    type="text" validate="false"/>
+									<input col="11"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@SortQty"
+                                    name="txtSuggSortQty" 
+									outputbinding="xml:/Task/@SortQty"
+                                    size="10" subtype="ProtectedText"
+									 tag="binding=xml:/Task/@SortQty"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" name="lblPrevToteId"
+                                    size="13" subtype="Hidden"
+                                    tag="binding=lblPrevToteId"
+                                    type="hidden" validate="false" value="Mobile_Tote_ID"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+									<input col="1"
+                                    inputbinding="xml:/TaskList/Task/@PrevToteId"
+                                    name="txtPrevToteId" defaultoutput="false" outputbinding="xml:/Task/@PrevToteId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@PrevToteId"
+                                    type="text" validate="false"/>
+									<input col="1" name="lblQty"
+                                    size="8" subtype="Hidden"
+                                    tag="binding=lblQty"
+                                    type="hidden" validate="false" value="Mobile_Short_Quantity"/>
+								</td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfcart.ppc?action=frmCartPickSortQtyValtxtCartLocationId"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

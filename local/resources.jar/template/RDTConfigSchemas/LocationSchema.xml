@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults DefaultRecordDelimiter="Newline" DefaultFieldDelimiter="," DefaultPadCharacter="#" RecordIdStartPosition="1">
+   </ParserDefaults>
+
+   <Root Name="LocationList">
+         <Header Name="Locahedr" RecordName="LOCAHEDR" MinOccurence="1" MaxOccurence="1"/>
+   </Root>
+ 
+   <RecordDefinitions>
+    <Record RecordId="LOCAHEDR" Name="LOCAHEDR" XMLName="Location">
+        <Field Name="LocationId" FieldPosition="2" XMLName="LocationId"/>
+        <Field Name="Node" FieldPosition="3" XMLName="Node"/>         
+        <Field Name="LocationType" FieldPosition="4" XMLName="LocationType"/>
+        <Field Name="ZoneId" FieldPosition="5" XMLName="ZoneId"/>
+        <Field Name="AisleNumber" FieldPosition="6" XMLName="AisleNumber"/>
+        <Field Name="LevelNumber" FieldPosition="7" XMLName="LevelNumber"/> 
+        <Field Name="BayNumber" FieldPosition="8" XMLName="BayNumber"/>
+        <Field Name="MoveInSeqNo" FieldPosition="9" XMLName="MoveInSeqNo"/>
+        <Field Name="MoveOutSeqNo" FieldPosition="10" XMLName="MoveOutSeqNo"/>
+        <Field Name="InStagingLocationId" FieldPosition="11" XMLName="InStagingLocationId"/>
+        <Field Name="OutStagingLocationId" FieldPosition="12" XMLName="OutStagingLocationId"/>
+		<Field Name="VelocityCode" FieldPosition="13" XMLName="VelocityCode"/>
+        <Field Name="LocationSizeCode" FieldPosition="14" XMLName="LocationSizeCode"/>
+        <Field Name="StorageCode" FieldPosition="15" XMLName="StorageCode"/>
+		<Field Name="XCoOrdinate" FieldPosition="16" XMLName="XCoOrdinate"/>
+		<Field Name="YCoOrdinate" FieldPosition="17" XMLName="YCoOrdinate"/>
+		<Field Name="ZCoOrdinate" FieldPosition="18" XMLName="ZCoOrdinate"/>
+    </Record>
+    </RecordDefinitions>
+</FlatfileDelimitedSchema>
+

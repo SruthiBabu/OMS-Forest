@@ -1,0 +1,103 @@
+<html>
+    <body>
+        <form name="frmEnterprise" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Shipment/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@ShipmentKey"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@DocumentType"
+                                    mandatory="false"
+                                    name="DocumentType"
+                                    outputbinding="xml:/Shipment/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@DocumentType"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@BolNo"
+                                    mandatory="false" name="BolNo"
+                                    outputbinding="xml:/Shipment/@BolNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@BolNo"
+                                    type="hidden" validate="false" value=" "/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ShipmentNo"
+                                    mandatory="false"
+                                    name="txtShipmentNo"
+                                    outputbinding="xml:/Shipment/@ShipmentNo"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@ShipmentNo"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@OrderNo"
+                                    mandatory="false" name="txtPONo"
+                                    outputbinding="xml:/Shipment/@OrderNo"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@OrderNo"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@SellerOrganizationCode"
+                                    mandatory="false"
+                                    name="txtSellerOrganizationCode"
+                                    outputbinding="xml:/Shipment/@SellerOrganizationCode"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@SellerOrganizationCode"
+                                    type="hidden" validate="true"/>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblEnterprise"
+                                    type="text" validate="false" value="Mobile_Enterprise"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@EnterpriseCode"
+                                    mandatory="false"
+                                    name="txtEnterprise"
+                                    outputbinding="xml:/Shipment/@EnterpriseCode"
+                                    size="9" subtype="Text"
+                                    tag="binding=xml:/Shipment/@EnterpriseCode"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    type="button"
+                                    url="/console/rfreceive.ppc?action=frmEnterpriseValtxtEnterprise"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

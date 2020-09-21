@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Config Name="IBM Sterling Selling and Fulfillment Suite Configuration">
+    <IgnoreColumns>
+        <Column Name="LOCKID"/>
+        <Column Name="CREATETS"/>
+        <Column Name="MODIFYTS"/>
+        <Column Name="CREATEUSERID"/>
+        <Column Name="MODIFYUSERID"/>
+        <Column Name="CREATEPROGID"/>
+        <Column Name="MODIFYPROGID"/>
+    </IgnoreColumns>
+    <Group CheckAbandonedRecords="true" Name="Master Data" SupportCDV="false">
+        <Group Name="Organization Driven Master Data">
+            <Driver CompareValueArg="CompareOrganizationCode"
+                CompareValueMandatory="Y"
+                CompareValuePrompt="Enter Organization Code(s) To Compare"
+                DriverOnly="true" Name="YFS_ORGANIZATION">
+                <Group Name="Customers and Vendors">
+                    <Table Name="YFS_CUSTOMER" RelationshipXMLName="DefinedByOrganization">
+                        <Table Name="YFS_CONSUMER">
+                            <Table Name="YFS_PERSON_INFO"/>
+                        </Table>
+                        <Table Name="YFS_CUSTOMER_CONTACT">
+                            <Table Name="YFS_CUSTOMER_PAYMENT_METHOD"/>
+                            <Table Name="YFS_CUSTOMER_ADDNL_ADDRESS">
+                                <Table Name="YFS_PERSON_INFO"/>
+                            </Table>
+                            <Table Name="YFS_PARTICIPANT_NOTE" RelationshipXMLName="CustomerContact"/>
+                        </Table>
+                        <Table Name="YFS_CUSTOMER_PAYMENT_METHOD"/>
+                        <Table Name="YFS_CUSTOMER_ADDNL_ADDRESS">
+                            <Table Name="YFS_PERSON_INFO"/>
+                        </Table>
+                        <Table Name="YFS_CUSTOMER_SCH_PREFERENCE"/>
+                        <Table Name="YFS_CUSTOMER_SLOT_PREFERENCE"/>
+                        <Table Name="YFS_ANSWER_SET_MASTER">
+                            <Table Name="YFS_ANSWER_MASTER"/>
+                        </Table>
+                        <Table Name="YFS_PARTICIPANT_NOTE" RelationshipXMLName="Customer"/>
+                        <Table Name="YFS_CUSTOMER_CURRENCY"/>
+                        <Table Name="YFS_CUSTOMER_ANALYTICS"/>
+                    </Table>
+                    <Table Name="YFS_CUSTOMER_ASSIGNMENT"/>
+                    <Table Name="YFS_VENDOR" RelationshipXMLName="DefinedByOrganization"/>
+                </Group>
+                <Group Name="Item Entitlement">
+                    <Table Name="YFS_ENTITLEMENT_RULE_HDR">
+                        <Table Name="YFS_ENTITLE_RULE_ASSIGNMENT"/>
+                        <Table Name="YFS_ENTITLEMENT_RULE_DTL">
+                            <Table Name="YFS_ENTITLE_RULE_DTL_ITEM"/>
+                        </Table>
+                    </Table>
+                </Group>
+                <Group Name="Product Definition">
+                    <Table Name="YFS_ITEM">
+                        <Table Name="YIC_BOM_HEADER">
+                            <Table Name="YIC_BOM_LINE"/>
+                            <Table Name="YIC_BOM_PROP"/>
+                            <Table Name="YIC_BOM_MESSAGE"/>
+                        </Table>
+                        <Table Name="YFS_ITEM_OPTION"/>
+                        <Table Name="YFS_ITEM_SERVICE_ASSOC"/>
+                        <Table Name="YFS_KIT_ITEM"/>
+                        <Table Name="YFS_ASSOCIATION">
+                            <Table Name="YFS_QUERY"/>
+                        </Table>
+                        <Table Name="YFS_ADDITIONAL_ATTRIBUTE"/>
+                        <Table Name="YFS_ITEM_EXCLUSION"/>
+                        <Table Name="YFS_SERVICE_ACTIVITY">
+                            <Table Name="YFS_SERVICE_ACTIVITY_INSTR"/>
+                        </Table>
+                        <Table Name="YFS_ITEM_UOM"/>
+                        <Table Name="YFS_ITEM_ALIAS"/>
+                        <Table Name="YFS_ITEM_TAG"/>
+                        <Table Name="YFS_LANGUAGE_DESCRIPTION"/>
+                        <Table Name="YFS_ITEM_INSTRUCTION"/>
+                        <Table Name="YFS_ITEM_SERVICE_SKILL"/>
+                        <Table Name="YFS_CNTR_BUYER_ASSOC"/>
+                        <Table Name="YFS_CNTR_CATEGORY_ASSOC"/>
+                        <Table Name="YFS_CNTR_CAPACITY_DEFN"/>
+                        <Table Name="YFS_ASSET">
+                            <Table Name="YFS_ASSET_LOCALE"/>
+                        </Table>
+                        <Table Name="YFS_ITEM_NODE_DEFN">
+                            <Table Name="YFS_SKU_SAFETY_FACTOR_DEFN"/>
+                        </Table>
+                        <Table Name="YFS_ITEM_LOCALE"/>
+                        <Table Name="YFS_SKU_SAFETY_FACTOR_DEFN"/>
+                    </Table>
+                    <Table Name="YFS_SERVICE_SKILL">
+                        <Table Name="YFS_ITEM_SERVICE_ASSC_SKILL"/>
+                    </Table>
+                    <Table Name="YFS_MASTER_CATALOG"/>
+                    <Table Name="YFS_ITEM_INSTRUCTION_CODE"/>
+                </Group>
+                <Group Name="Product Categorization">
+                    <Table Name="YFS_CATEGORY">
+                        <Table Name="YFS_CATEGORY_LOCALE"/>
+                        <Table Name="YFS_CLASS_ITEM_ATTR">
+                            <Table Name="YFS_SKU_SAFETY_FACTOR_DEFN"/>
+                        </Table>
+                        <Table Name="YFS_CATEGORY_ITEM"/>
+                        <Table Name="YFS_ADDITIONAL_ATTRIBUTE"/>
+                        <Table Name="YFS_ASSET">
+                            <Table Name="YFS_ASSET_LOCALE"/>
+                        </Table>
+                        <Table Name="YFS_ITEM_ATTR"/>
+                        <Table Name="YFS_ITEM_SERVICE_ASSOC"/>
+                    </Table>
+                </Group>
+                <Group Name="Resource Pools">
+                    <Table Name="YFS_RES_POOL">
+                        <Table Name="YFS_PERSON_INFO"/>
+                        <Table Name="YFS_RES_POOL_ITEM"/>
+                        <Table Name="YFS_RES_POOL_REGION"/>
+                        <Table Name="YFS_RES_POOL_SECONDARY_UOM"/>
+                        <Table Name="YFS_RES_POOL_SERVICE_SKILL"/>
+                        <Table Name="YFS_SERVICE_RESOURCE">
+                            <Table Name="YFS_PERSON_INFO"/>
+                            <Table Name="YFS_SERVICE_RESOURCE_USER"/>
+                            <Table Name="YFS_SRVC_RESOURCE_ASSIGNMENT"/>
+                            <Table Name="YFS_SRVC_RESOURCE_EFFICIENCY"/>
+                        </Table>
+                        <Table Name="YFS_SRVC_RESOURCE_ASSIGNMENT"/>
+                        <Table Name="YFS_SRVC_RESOURCE_EFFICIENCY"/>
+                        <Table Name="YFS_TASK_TYPE_RES_POOL"/>
+                        <Table Name="YFS_RES_POOL_ATTR"/>
+                    </Table>
+                </Group>
+                <Group Name="Service Slot">
+                    <Table Name="YFS_SERVICE_SLOT_GROUP">
+                        <Table Name="YFS_SERVICE_SLOT"/>
+                    </Table>
+                </Group>
+                <Group Name="User Profile">
+                    <Table Name="YFS_USER">
+                        <Table Name="YFS_CUSTOMER_CONTACT"/>
+                        <Table Name="YFS_PERSON_INFO" RelationshipXMLName="ContactPersonInfo"/>
+                        <Table Name="YFS_PERSON_INFO" RelationshipXMLName="BillingPersonInfo"/>
+                        <Table Name="YFS_SAVED_SEARCH"/>
+                        <Table Name="YFS_USER_GROUP_LIST"/>
+                        <Group Name="Password Policy Data">
+                            <Table Name="PLT_PWD_HIST"/>
+                            <Table Name="PLT_PWD_REQ"/>
+                            <Table Name="PLT_AUTH_ANSWER"/>
+                            <Table Name="PLT_USER_UI_STATE"/>
+                            <Table Name="PLT_USER_LOGIN_FAIL"/>
+                        </Group>
+                        <Group Name="Queue Subscription">
+                            <Table Name="YFS_QUEUE_SUBSCRIPTION"/>
+                        </Group>
+                        <Group Name="User Preferences">
+                            <Table Name="YFS_USER_PRINTER_PREFERENCE"/>
+                        </Group>
+                        <Group Name="User Delegates">
+                            <Table Name="YFS_USER_DELEGATE"/>
+                        </Group>
+                    </Table>
+                </Group>
+                <Group Name="Approvals">
+                    <Table Name="YFS_ORDER_APPROVAL_RULE">
+                        <Table Name="YFS_APPROVAL_RULE_ASSOC"/>
+                    </Table>
+                </Group>
+                <Group Name="Business Validation">
+                    <Table Name="YFS_VALIDATION_RULE"/>
+                </Group>
+            </Driver>
+        </Group>
+        <Group Name="Ship Node Driven Master Data">
+            <Driver CompareValueArg="CompareOrganizationCode"
+                CompareValueMandatory="Y"
+                CompareValuePrompt="Enter Organization Code(s) To Compare"
+                DriverOnly="true" Name="YFS_SHIP_NODE">
+                <Group Name="Warehouse Equipments">
+                    <Table Name="YFS_EQUIPMENT">
+                        <Table Name="YFS_EQUIPMENT_DETAIL"/>
+                        <Table Name="YFS_EQUIPMENT_DEVICE"/>
+                    </Table>
+                </Group>
+                <Group Name="Warehouse Layout">
+                    <Table Name="YFS_LOCATION_SIZE">
+                        <Table Name="YFS_LOCATION_CAPACITY"/>
+                    </Table>
+                    <Table Name="YFS_LOCATION_STORAGE_CODE"/>
+                    <Table Name="YFS_ZONE">
+                        <Table Name="YFS_ZONE_ENTERPRISE">
+                            <Table Name="YFS_STORAGE_CONSTRAINT"/>
+                        </Table>
+                        <Table Name="YFS_LOCATION">
+                            <Table Name="YFS_SKU_DEDICATION"/>
+                            <Table Name="YFS_TRAN_LOCN_ATTRS"/>
+                        </Table>
+                        <Table Name="YFS_USER_ZONE"/>
+                    </Table>
+                </Group>
+            </Driver>
+        </Group>
+    </Group>
+</Config>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Order AllocationRuleID="" CheckCapacity="" CheckInventory="" ConsiderChangingShippingToDelivery="" ConsiderSupplementalCapacity="" ConsolidateProvidedServiceLinesWithSameAddress="" ConsolidateToExistingWorkOrder="" DelayWindow="" DocumentType="" EnterpriseCode="" IgnoreMinNotificationTime="" IgnoreProductLines="" IgnoreServices="" MaximumRecords="" OrderHeaderKey="" OrderNo="">
+	<WorkOrders TotalNumberOfRecords="">
+		<WorkOrder CreatedOrModified="" EnterpriseCode="" NodeKey="" PromisedApptEndDate="" PromisedApptStartDate="" ProviderOrganizationCode="" Purpose="" QuantityRequested="" Status="" StatusDate="" StatusDescription="" Timezone="" WorkOrderKey="" WorkOrderNo="">
+			<PersonInfo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+			<WorkOrderServiceLines>
+				<WorkOrderServiceLine IsComplete="" ItemGroupCode="" ItemID="" LineNo="" QuantityRequired="" Uom="" WorkOrderServiceLineKey="">
+					<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo="" ShipNode=""/>
+				</WorkOrderServiceLine>
+			</WorkOrderServiceLines>
+			<WorkOrderProdDeliveries>
+				<WorkOrderProdDelivery CauseAppointmentChange="" ItemID="" LineNo="" ProductClass="" QuantityDelivered="" QuantityRequired="" Uom="" WorkOrderProdDeliveryKey="">
+					<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo="" ShipNode=""/>
+				</WorkOrderProdDelivery>
+			</WorkOrderProdDeliveries>
+			<SuggestedAppointment ApptDate="" ApptEndTimestamp="" ApptStartTimestamp="" EndTime="" ExternalNode="" NodePriority="" ShipNode="" StartTime="" TimeZone=""/>
+		</WorkOrder>
+	</WorkOrders>
+	<OrderLinesWithoutWorkOrder>
+		<OrderLine OrderLineKey="" PrimeLineNo="" SubLineNo="" ShipNode="">
+			<Item ItemID="" ProductClass="" UnitOfMeasure=""/>
+			<PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="" IsCommercialAddress="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" State="" Suffix="" Title="" ZipCode=""/>
+		</OrderLine>
+	</OrderLinesWithoutWorkOrder>
+</Order>

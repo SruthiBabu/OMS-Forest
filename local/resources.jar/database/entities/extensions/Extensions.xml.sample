@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite
+(C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<DBSchema>
+   <Entities>        
+    
+      <Entity TableName="YFS_USER" >
+        <Attributes>
+        <Attribute ColumnName="EXTN_User_Active" 
+          DataType="Flag"
+          DecimalDigits="" 
+          DefaultValue="' '" 
+          Description=" "  
+          Nullable="false" 
+          Size="1" 
+          Type="CHAR" 
+          XMLName="ExtnUserActive"
+          XMLGroup="Extn" 
+          SqlServerDataType=""/>		  
+        </Attributes>		
+      </Entity>
+	
+      <Entity TableName="YFS_ORGANIZATION">
+	<Attributes>
+	     <Attribute ColumnName="EXTN_PERSON2" 
+		DataType="Key" 
+		DefaultValue="' '" 
+		XMLGroup="Extn" 
+		XMLName="ExtnPerson"/>
+	</Attributes>
+	<ForeignKeys>
+	     <ForeignKey ParentTableName="YFS_PERSON_INFO" >
+		<Attribute ColumnName="EXTN_PERSON2" ParentColumnName="PERSON_INFO_KEY"/>
+	     </ForeignKey>
+	</ForeignKeys>
+      </Entity>
+
+
+    </Entities>
+</DBSchema>

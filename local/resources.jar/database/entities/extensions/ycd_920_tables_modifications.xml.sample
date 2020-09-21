@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<DBSchema>
+    <Entities>
+	    <Entity TableName="YFS_ORDER_HEADER" >
+	    <Attributes>
+		<Attribute ColumnName="ALL_ADDRESSES_VERIFIED" DefaultValue="'N'" Name="All_Addresses_Verified" Nullable="false" />
+                <Attribute ColumnName="COMPL_GIFT_BOX_QTY"  DefaultValue="0" Name="Compl_Gift_Box_Qty" Nullable="false" />
+                <Attribute ColumnName="NO_OF_AUTH_STRIKES" DefaultValue="0" Name="No_Of_Auth_Strikes" Nullable="false" />
+                <Attribute ColumnName="SOURCE_IP_ADDRESS" DefaultValue="' '" Name="Source_Ip_Address" Nullable="false" />
+                <Attribute ColumnName="CUSTOMER_FIRST_NAME" DefaultValue="' '" Name="Customer_First_Name" Nullable="false"/>
+                <Attribute ColumnName="CUSTOMER_LAST_NAME" DefaultValue="' '"  Name="Customer_Last_Name" Nullable="false" />
+                <Attribute ColumnName="CUSTOMER_PHONE_NO" DefaultValue="' '"  Name="Customer_Phone_No" Nullable="false" />
+                <Attribute ColumnName="CUSTOMER_ZIP_CODE" DefaultValue="' '" Name="Customer_Zip_Code" Nullable="false" />
+
+			</Attributes>
+		</Entity>
+		
+	    <Entity TableName="YFS_ORDER_LINE">
+		    <Attributes>
+				<Attribute ColumnName="BACKORDER_NOTIFICATION_QTY" DefaultValue="0" Name="Backorder_Notification_Qty" Nullable="false" />
+			    <Attribute ColumnName="IS_PRICE_MATCHED"  DefaultValue="'N'" Name="Is_Price_Matched" Nullable="false" />
+
+			</Attributes>
+		</Entity>
+
+	   <Entity TableName="YFS_SHIPMENT">
+		    <Attributes>
+			    <Attribute ColumnName="NOTIFICATION_SENT" DefaultValue="'N'" Nullable="false"  />
+			</Attributes>
+		</Entity>
+		
+	</Entities>
+</DBSchema>

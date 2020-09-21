@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+    <LabelField Binding="translate(concat(/Manifest/ShipNode/ShipNodePersonInfo/@FirstName,' ',substring(/Manifest/ShipNode/ShipNodePersonInfo/@MiddleName,1,1),' ',/Manifest/ShipNode/ShipNodePersonInfo/@LastName),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromName" RepeatingElement=""/>
+    <LabelField Binding="translate(/Manifest/ShipNode/ShipNodePersonInfo/@Company,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="CompanyName" RepeatingElement=""/>
+    <LabelField Binding="translate(/Manifest/ShipNode/ShipNodePersonInfo/@AddressLine1,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="translate(/Manifest/ShipNode/ShipNodePersonInfo/@AddressLine2,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="FromAddressLine2" RepeatingElement=""/>
+    <LabelField Binding="translate(/Manifest/ShipNode/ShipNodePersonInfo/@City,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="City" RepeatingElement=""/>
+    <LabelField Binding="translate(/Manifest/ShipNode/ShipNodePersonInfo/@State,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')" LabelFieldName="State" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/ShipNode/ShipNodePersonInfo/@ZipCode" LabelFieldName="Zip" RepeatingElement=""/>
+	<!--Can be comined into one -->
+    <LabelField Binding="/Manifest/@PickupSummaryNo" LabelFieldName="PickupSummaryNo" RepeatingElement=""/>
+	<!--Cannot be done this way-->
+    <LabelField Binding="/Manifest/@ShipperAccountNo" LabelFieldName="AccountNumber" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/ManifestSummary/@TotalPackages" LabelFieldName="TotalPackages" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/ManifestSummary/@NextDayPackages" LabelFieldName="OneDayTotal" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/ManifestSummary/@TwoDayPackages" LabelFieldName="TwoDayTotal" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/ManifestSummary/@ThreeDayPackages" LabelFieldName="ThreeDayTotal" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/ManifestSummary/@IntlPackages" LabelFieldName="InternationalTotal" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/ManifestSummary/@CODPackages" LabelFieldName="CODTotal" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/@Mod7CheckDigit" LabelFieldName="Mod7CheckDigit" RepeatingElement=""/>
+    <LabelField Binding="/Manifest/@PickupSummaryCheckDigit" LabelFieldName="PickupSummaryCheckDigit" RepeatingElement=""/>
+    <LabelField Binding="concat('YCS 07.02.01 ZPL140XIII ',/Manifest/Shipments/Shipment/Containers/Container/ScacEx/@OnlineControlNumber)" LabelFieldName="ControlNumber" RepeatingElement=""/>
+    <RepeatingFields/>
+</LabelFieldMap>

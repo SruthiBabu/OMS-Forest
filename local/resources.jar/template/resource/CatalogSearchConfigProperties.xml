@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<SearchConfigurations>
+	<SearchSystemConfigurations>
+		<MergeFactor Value="2"/>
+		<MaxMergeDocs Value="2147483647"/>
+	</SearchSystemConfigurations>
+	<IndexSets>
+		<IndexSet Name="CatalogIndex">
+			<Locales>
+				<Locale LocaleCode="en_US" QueryParserClass="org.apache.lucene.queryparser.classic.QueryParser" AnalyzerClass="org.apache.lucene.analysis.standard.StandardAnalyzer" SynonymFile="/properties/SearchIndexSynonym.properties"/>
+			</Locales>
+			<Entities>
+				<Entity Name="Item">
+					<Attributes>
+						<Attribute IndexFieldName="Item.ItemKey" XMLName="ItemKey" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="Y" UseSynonyms="N" Searchable="N"/>
+						<Attribute IndexFieldName="Item.ItemID" XMLName="ItemID" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="N" UseSynonyms="N" Searchable="N" Sortable="Y"/>
+						<Attribute IndexFieldName="Item.SearchableItemID" XMLName="ItemID" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="Y" Sortable="N"/>
+						<Attribute IndexFieldName="Item.UnitOfMeasure" XMLName="UnitOfMeasure" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="N" UseSynonyms="N" Searchable="N"/>
+						<Attribute IndexFieldName="Item.ItemGroupCode" XMLName="ItemGroupCode" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="N" UseSynonyms="N" Searchable="N" CanUseAsFilter="Y"/>
+						<Attribute IndexFieldName="Item.ShortDescription" XMLName="ShortDescription" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y"/>
+						<Attribute IndexFieldName="Item.SortableShortDescription" XMLName="ShortDescription" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="N" UseSynonyms="N" Searchable="N" Sortable="Y" />
+						<Attribute IndexFieldName="Item.Description" XMLName="Description" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y"/>
+						<Attribute IndexFieldName="Item.ExtendedDescription" XMLName="ExtendedDescription" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y"/>
+						<Attribute IndexFieldName="Item.ExtendedDisplayDescription" XMLName="ExtendedDescription" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y"/>
+						<Attribute IndexFieldName="Item.Keywords" XMLName="Keywords" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y"/>
+						<Attribute IndexFieldName="Item.EffectiveStartDate" XMLName="EffectiveStartDate" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="N" UseSynonyms="N" Searchable="N"/>
+						<Attribute IndexFieldName="Item.EffectiveEndDate" XMLName="EffectiveEndDate" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="N" UseSynonyms="N" Searchable="N" />
+						<Attribute IndexFieldName="Item.IsItemSuperseded" XMLName="IsItemSuperseded" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N" />
+						<Attribute IndexFieldName="Item.ManufacturerName" XMLName="ManufacturerName" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="Y" />
+						<Attribute IndexFieldName="Item.ManufacturerItem" XMLName="ManufacturerItem" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="Y" />
+						<Attribute IndexFieldName="Item.ManufacturerItemDesc" XMLName="ManufacturerItemDesc" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y" />
+						<Attribute IndexFieldName="Item.IsSoldSeparately" XMLName="IsSoldSeparately" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N" />
+						<Attribute IndexFieldName="Item.IsModelItem" XMLName="IsModelItem" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N" />
+						<Attribute IndexFieldName="Item.ModelItemUnitOfMeasure" XMLName="ModelItemUnitOfMeasure" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N" />
+						<Attribute IndexFieldName="Item.Model" XMLName="Model" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N" />
+						<Attribute IndexFieldName="Item.IsStandaloneService" XMLName="IsStandaloneService" DefaultWeight="1.0" Index="NOT_ANALYZED" Store="N" UseSynonyms="N" Searchable="N" Sortable="N" CanUseAsFilter="Y"/>
+					</Attributes>
+					<Entity Name="Item_Attr" RelationshipName="ItemAttributeList">
+						<Attributes>
+							<Attribute IndexFieldName="AdditionalAttributes" XMLName="ItemAttributes" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y"/>
+						</Attributes>
+						<Entity Name="AssignedValue" RelationshipName="AssignedValueList">
+							<Attributes>
+								<Attribute XMLName="Value"/>
+							</Attributes>
+							<Entity Name="Attr_Allowed_Value" RelationshipName="AttributeAllowedValue">
+								<Attributes>
+									<Attribute XMLName="ShortDescription"/>
+									<Attribute XMLName="LongDescription"/>
+								</Attributes>
+							</Entity>
+						</Entity>
+					</Entity>
+					<Entity Name="Category_Item" RelationshipName="Category_ItemList">
+						<Entity Name="Category" RelationshipName="Category">
+							<Attributes>
+								<Attribute IndexFieldName="CatalogSearch.CategoryPath" XMLName="CategoryPath" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N"/>
+								<Attribute IndexFieldName="Item.Category_Item.Category.Keywords" XMLName="Keywords" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="Y" Searchable="Y"/>
+							</Attributes>
+						</Entity>
+					</Entity>
+					<Entity Name="Pricelist_Header">
+						<Attributes>
+							<Attribute XMLName="PricelistName" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N"/>
+						</Attributes>
+					</Entity>
+					<Entity Name="Asset" RelationshipName="AssetList">
+						<Attributes>
+							<Attribute XMLName="Text" Type="Text" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="Y"/>
+						</Attributes>
+					</Entity>
+					<Entity Name="Entitle_Rule_Dtl_Item">
+						<Attributes>
+							<Attribute XMLName="EntitlementRuleDetailKey" DefaultWeight="1.0" Index="ANALYZED" Store="N" UseSynonyms="N" Searchable="N"/>
+						</Attributes>
+					</Entity>
+				</Entity>
+			</Entities>
+		</IndexSet>
+	</IndexSets>
+</SearchConfigurations>
+

@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity
+            Description="This table stores all the move requests that are created for a node. The move requests may be created from any activity group."
+            EntityType="TRANSACTION" Extensible="Y"
+            ListXMLName="MoveRequests" Module="wms" Name="Move_Request"
+            Prefix="YFS_" TableName="YFS_MOVE_REQUEST"
+            TableType="TRANSACTION" XMLName="MoveRequest">
+            <Attributes>
+                <Attribute ColumnName="MOVE_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_MOVE_REQUEST table."
+                    Name="Move_Request_Key" Nullable="false" XMLName="MoveRequestKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this move request."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="MOVE_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The number of the move request. This field identifies a move request for a node, within the context of a module."
+                    Name="Move_Request_No" Nullable="false" XMLName="MoveRequestNo"/>
+                <Attribute ColumnName="FROM_ACTIVITY_GROUP"
+                    DataType="EnumActivityGroup" DefaultValue="' '"
+                    Description="The department requesting the move. Valid values are: Replenishment, Outbound Picking, Receipt, Count, Value Added Services, Packing, Outbound Inventory Container Build, Shipping Container Build, and Inspection."
+                    Name="From_Activity_Group" Nullable="false" XMLName="FromActivityGroup"/>
+                <Attribute ColumnName="FOR_ACTIVITY_CODE"
+                    DataType="Activity" DefaultValue="' '"
+                    Description="This code identifies the activity for which the move request is being logged."
+                    Name="For_Activity_Code" Nullable="false" XMLName="ForActivityCode"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="An integer priority. Requests will be processed in the order of this priority."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute ColumnName="REQUEST_USER_ID"
+                    DataType="LoginId" DefaultValue="' '"
+                    Description="The user who requested the move."
+                    Name="Request_User_Id" Nullable="false" XMLName="RequestUserId"/>
+                <Attribute ColumnName="START_NO_EARLIER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the time when the task can start. This is a pass through field which is stamped on each task."
+                    Name="Start_No_Earlier_Than" Nullable="false" XMLName="StartNoEarlierThan"/>
+                <Attribute ColumnName="FINISH_NO_LATER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the time by which the task has to finish. This is a pass through field which is stamped on each task."
+                    Name="Finish_No_Later_Than" Nullable="false" XMLName="FinishNoLaterThan"/>
+                <Attribute ColumnName="SHIPMENT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The shipment key that is associated with this move request."
+                    Name="Shipment_Key" Nullable="false" XMLName="ShipmentKey"/>
+                <Attribute ColumnName="WAVE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The wave key that is associated with this move request."
+                    Name="Wave_Key" Nullable="false" XMLName="WaveKey"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The work order key that is associated with this move request."
+                    Name="Work_Order_Key" Nullable="false" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="STATUS"
+                    DataType="EnumMoveRequestStatus" DefaultValue="' '"
+                    Description="The status of the move request. The system defined Common Code Type is &quot;MOVE_REQUEST_STATUS.&quot; Valid values are: Created, Released, Cancellation Requested, Cancellation Failed and Closed."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="HAS_EXCEPTIONS" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether there were any exceptions in either creating or executing the tasks for the move request."
+                    Name="Has_Exceptions" Nullable="false" XMLName="HasExceptions"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' '"
+                    Description="This code identifies the reason why the move request was cancelled. The user defined Common Code Type is &quot;MOVE_REQ_CANCEL_RSN&quot;."
+                    Name="Reason_Code" Nullable="false" XMLName="ReasonCode"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' '"
+                    Description="The description of the reason why the move request was cancelled."
+                    Name="Reason_Text" Nullable="false" XMLName="ReasonText"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="MV_REQ_KEY_PK" Name="YFS_MOVE_REQUEST_PK">
+                <Attribute ColumnName="MOVE_REQUEST_KEY" Name="Move_Request_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="MV_REQ_KEY_I1"
+                    Name="YFS_MOVE_REQUEST_KEY_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="MOVE_REQUEST_NO"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="MoveRequests"
+                    ChildName="Move_Request" ChildXMLName="MoveRequest"
+                    ForeignEntity="Shipment" Name="Shipment"
+                    Type="Bidirectional" XMLName="Shipment">
+                    <Attribute Name="Shipment_Key" ParentName="Shipment_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="MoveRequests"
+                    ChildName="Move_Request" ChildXMLName="MoveRequest"
+                    ForeignEntity="Work_Order" Name="Work_Order"
+                    Type="Unidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="MoveRequests"
+                    ChildName="Move_Request" ChildXMLName="MoveRequest"
+                    ForeignEntity="Wave" Name="Wave"
+                    Type="Unidirectional" XMLName="Wave">
+                    <Attribute Name="Wave_Key" ParentName="Wave_Key"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Unidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table contains details of the inventory that needs to be moved against a move request."
+            EntityType="TRANSACTION" ListXMLName="MoveRequestLines"
+            Module="wms" Name="Move_Request_Line" Prefix="YFS_"
+            TableName="YFS_MOVE_REQUEST_LINE" TableType="TRANSACTION" XMLName="MoveRequestLine">
+            <Attributes>
+                <Attribute ColumnName="MOVE_REQUEST_LINE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_MOVE_REQUEST_LINE table."
+                    Name="Move_Request_Line_Key" Nullable="false" XMLName="MoveRequestLineKey"/>
+                <Attribute ColumnName="MOVE_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The move request key that is associated with this move request line."
+                    Name="Move_Request_Key" Nullable="false" XMLName="MoveRequestKey"/>
+                <Attribute ColumnName="SOURCE_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The source location from where the inventory is moved."
+                    Name="Source_Location_Id" Nullable="false" XMLName="SourceLocationId"/>
+                <Attribute ColumnName="TARGET_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The destination location to which the inventory is moved."
+                    Name="Target_Location_Id" Nullable="false" XMLName="TargetLocationId"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The receipt header key that is associated with this move request line."
+                    Name="Receipt_Header_Key" Nullable="false" XMLName="ReceiptHeaderKey"/>
+                <Attribute ColumnName="SHIPMENT_LINE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The shipment line against which the move request line was created."
+                    Name="Shipment_Line_Key" Nullable="false" XMLName="ShipmentLineKey"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' '"
+                    Description="The task type to be used for the task created."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="The type of the License Plate Number. For requests involving a license plate, this field is populated as Case or Pallet."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="A Case Id or Pallet Id." Name="LPN_No"
+                    Nullable="false" XMLName="LPNNo"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="The item that is moved." Name="Item_Id"
+                    Nullable="false" XMLName="ItemId"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The unit of measure of the item that is moved."
+                    Name="Unit_Of_Measure" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="The product class of the item that is moved."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This code identifies the enterprise to which the item that is moved belongs."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The inventory status of the item that is moved."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="The segment type of the item  that is moved. Typical values are: MTO (made to order) and MTC (made to customer)."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory that is moved belongs."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date before which a time-sensitive inventory must be shipped out."
+                    Name="Ship_By_Date" Nullable="false" XMLName="ShipByDate"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' '"
+                    Description="The tag number of the item, which uniquely identifies a set of inventory tags."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="SerialNo"
+                    DefaultValue="' '"
+                    Description="A serial number for a request involving serialized items."
+                    Name="Serial_No" Nullable="false" XMLName="SerialNo"/>
+                <Attribute ColumnName="COUNTRY_OF_ORIGIN"
+                    DataType="Country" DefaultValue="' '"
+                    Description="The country in which the item that is moved was manufactured."
+                    Name="Country_Of_Origin" Nullable="false" XMLName="CountryOfOrigin"/>
+                <Attribute ColumnName="REQUEST_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The quantity in the item's unit of measure that needs to be moved."
+                    Name="Request_Quantity" Nullable="false" XMLName="RequestQuantity"/>
+                <Attribute ColumnName="RELEASED_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The quantity in the item's unit of measure for which tasks have been created."
+                    Name="Released_Quantity" Nullable="false" XMLName="ReleasedQuantity"/>
+                <Attribute ColumnName="RELEASED_FLAG" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This code indicates whether a line is fully tasked."
+                    Name="Released_Flag" Nullable="false" XMLName="ReleasedFlag"/>
+                <Attribute ColumnName="CANCELLED_FLAG" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether a line is cancelled."
+                    Name="Cancelled_Flag" Nullable="false" XMLName="CancelledFlag"/>
+                <Attribute ColumnName="HAS_EXCEPTIONS" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether there were any exceptions in either creating or executing tasks for the move request."
+                    Name="Has_Exceptions" Nullable="false" XMLName="HasExceptions"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' '"
+                    Description="This code identifies the reason why the move request was cancelled. The user defined Common Code Type is &quot;MOVE_REQ_CANCEL_RSN&quot;."
+                    Name="Reason_Code" Nullable="false" XMLName="ReasonCode"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' '"
+                    Description="The description of the reason why the move request was cancelled."
+                    Name="Reason_Text" Nullable="false" XMLName="ReasonText"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="MV_REQ_LINE_PK" Name="YFS_MOVE_REQUEST_LINE_PK">
+                <Attribute ColumnName="MOVE_REQUEST_LINE_KEY" Name="Move_Request_Line_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="MV_REQ_LINE_I1" Name="YFS_MOVE_REQUEST_LINE_I1">
+                    <Column Name="MOVE_REQUEST_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="MoveRequestLines"
+                    ChildName="Move_Request_Line"
+                    ChildXMLName="MoveRequestLine"
+                    ForeignEntity="Move_Request" Name="Move_Request"
+                    Type="Bidirectional" XMLName="MoveRequest">
+                    <Attribute Name="Move_Request_Key" ParentName="Move_Request_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="MoveRequestLines"
+                    ChildName="Move_Request_Line"
+                    ChildXMLName="MoveRequestLine"
+                    ForeignEntity="Receipt_Header" Name="Receipt"
+                    Type="Unidirectional" XMLName="Receipt">
+                    <Attribute Name="Receipt_Header_Key" ParentName="Receipt_Header_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table stores the details of the inventory tags, for inventory that needs to be moved against a move request."
+            EntityType="TRANSACTION" Extensible="Y"
+            ListXMLName="MoveRequestLineTags" Module="wms"
+            Name="Move_Request_Line_Tag" Prefix="YFS_"
+            TableName="YFS_MOVE_REQUEST_LINE_TAG"
+            TableType="TRANSACTION" XMLName="MoveRequestLineTag">
+            <Attributes>
+                <Attribute ColumnName="MOVE_REQUEST_LINE_TAG_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_MOVE_REQUEST_LINE_TAG table."
+                    Name="Move_Request_Line_Tag_Key" Nullable="false" XMLName="MoveRequestLineTagKey"/>
+                <Attribute ColumnName="MOVE_REQUEST_LINE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The move request line key that is associated with this move request line tag."
+                    Name="Move_Request_Line_Key" Nullable="false" XMLName="MoveRequestLineKey"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' '"
+                    Description="The tag number of the item, which uniquely identifies a set of inventory tags."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="LOT_NUMBER" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The lot number of the item."
+                    Name="Lot_Number" Nullable="false" XMLName="LotNumber"/>
+                <Attribute ColumnName="LOT_KEY_REFERENCE"
+                    DataType="Text-4000" DefaultValue="' ' "
+                    Description="The reference information for the lot number."
+                    Name="Lot_Key_Reference" Nullable="false" XMLName="LotKeyReference"/>
+                <Attribute ColumnName="BATCH_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The batch number of the item."
+                    Name="Batch_No" Nullable="false" XMLName="BatchNo"/>
+                <Attribute ColumnName="REVISION_NO" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The revision number of the item."
+                    Name="Revision_No" Nullable="false" XMLName="RevisionNo"/>
+                <Attribute ColumnName="LOT_MANUFACTURE_DATE"
+                    DataType="Date" DefaultValue="sysdate "
+                    Description="The date of manufacture of the lot to which the item belongs."
+                    Name="Lot_Manufacture_Date" Nullable="false" XMLName="LotManufactureDate"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE1"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="An attribute of the lot to which the item belongs."
+                    Name="Lot_Attribute1" Nullable="false" XMLName="LotAttribute1"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE2"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="An attribute of the lot to which the item belongs."
+                    Name="Lot_Attribute2" Nullable="false" XMLName="LotAttribute2"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE3"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="An attribute of the lot to which the item belongs."
+                    Name="Lot_Attribute3" Nullable="false" XMLName="LotAttribute3"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="MVREQLNTAGKEY_PK" Name="YFS_MOVE_REQUEST_LINE_TAG_PK">
+                <Attribute ColumnName="MOVE_REQUEST_LINE_TAG_KEY" Name="Move_Request_Line_Tag_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="MVREQLNTAGKEY_I1"
+                    Name="YFS_MOVE_REQ_LINE_TAG_KEY_I1" Unique="true">
+                    <Column Name="MOVE_REQUEST_LINE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="MoveRequestLineTags"
+                    ChildName="Move_Request_Line_Tag"
+                    ChildXMLName="MoveRequestLineTag"
+                    ForeignEntity="Move_Request_Line"
+                    Name="Move_Request_Line" Type="Bidirectional"
+                    UsedForDataSecurity="true" XMLName="MoveRequestLine">
+                    <Attribute Name="Move_Request_Line_Key" ParentName="Move_Request_Line_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This entity stores audits of all status changes on the move request."
+            EntityType="TRANSACTION"
+            ListXMLName="MoveRequestStatusAudits" Module="wms"
+            Name="Move_Request_Status_Audit" Prefix="YFS_"
+            TableName="YFS_MOVE_REQ_STATUS_AUDIT"
+            TableType="TRANSACTION" XMLName="MoveRequestStatusAudit">
+            <Attributes>
+                <Attribute ColumnName="MOVE_REQUEST_STATUS_AUDIT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_MOVE_REQ_STATUS_AUDIT table."
+                    Name="Move_Request_Status_Audit_Key"
+                    Nullable="false" XMLName="MoveRequestStatusAuditKey"/>
+                <Attribute ColumnName="MOVE_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The move request key that is associated with this move request status audit."
+                    Name="Move_Request_Key" Nullable="false" XMLName="MoveRequestKey"/>
+                <Attribute ColumnName="OLD_STATUS" DataType="Status"
+                    DefaultValue="' '"
+                    Description="The old (previous) status of the move request."
+                    Name="Old_Status" Nullable="false" XMLName="OldStatus"/>
+                <Attribute ColumnName="NEW_STATUS" DataType="Status"
+                    DefaultValue="' '"
+                    Description="The new (latest) status of the move request."
+                    Name="New_Status" Nullable="false" XMLName="NewStatus"/>
+                <Attribute ColumnName="OLD_STATUS_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the date on which the status of this move request was changed to the old (previous) status."
+                    Name="Old_Status_Date" Nullable="false" XMLName="OldStatusDate"/>
+                <Attribute ColumnName="NEW_STATUS_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp for the date on which the status of this move request was changed to the new (latest) status."
+                    Name="New_Status_Date" Nullable="false" XMLName="NewStatusDate"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="MVREQSTAAUDKEY_PK" Name="YFS_MOVE_REQ_STATUS_AUDIT_PK">
+                <Attribute ColumnName="MOVE_REQ_STATUS_AUDIT_KEY" Name="Move_Request_Status_Audit_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="MVREQSTAAUDKEY_I1"
+                    Name="YFS_MOVE_REQ_STATUS_AUD_KEY_I1" Unique="true">
+                    <Column Name="MOVE_REQUEST_KEY"/>
+                    <Column Name="OLD_STATUS"/>
+                    <Column Name="NEW_STATUS"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="MoveRequestStatusAudits"
+                    ChildName="Move_Request_Status_Audit"
+                    ChildXMLName="MoveRequestStatusAudit"
+                    ForeignEntity="Move_Request" Name="Move_Request"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="MoveRequest">
+                    <Attribute Name="Move_Request_Key" ParentName="Move_Request_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores attributes values based on whose values put away tasks will be executed. Put away Task Type determination algorithm uses the best match algorithm to pick up the strategy that matches the attributes of the stock that needs to be put away."
+            EntityType="CONFIGURATION" ListXMLName="PutawayStrategies"
+            Module="wms" Name="Putaway_Strategy" Prefix="YFS_"
+            TableName="YFS_PUTAWAY_STRATEGY" TableType="CONFIGURATION" XMLName="PutawayStrategy">
+            <Attributes>
+                <Attribute ColumnName="PUTAWAY_STRATEGY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PUTAWAY_STRATEGY table."
+                    Name="Putaway_Strategy_Key" Nullable="false" XMLName="PutawayStrategyKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PUTAWAY_STRATEGY table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="The description of the Putaway Strategy."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The unit of measure of the stock under consideration for put away, or the operation unit of measure for which task creation is attempted."
+                    Name="UOM" Nullable="false" XMLName="UOM"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="The item's classification or category. The catalog purpose for this item classification would be STORAGE1."
+                    Name="Item_Classification_1" Nullable="false" XMLName="ItemClassification1"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="The item's classification or category. The catalog purpose for this item classification would be STORAGE2."
+                    Name="Item_Classification_2" Nullable="false" XMLName="ItemClassification2"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="The item's classification or category. The catalog purpose for this item classification would be STORAGE3."
+                    Name="Item_Classification_3" Nullable="false" XMLName="ItemClassification3"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The code of the enterprise for which task creation is attempted."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PUT_STRGY_KEY_PK" Name="YFS_PUTAWAY_STRATEGY_PK">
+                <Attribute ColumnName="PUTAWAY_STRATEGY_KEY" Name="Putaway_Strategy_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PUT_STRGY_KEY_I1"
+                    Name="YFS_PUTAWAY_STRATEGY_KEY_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="UOM"/>
+                    <Column Name="ITEM_CLASSIFICATION_1"/>
+                    <Column Name="ITEM_CLASSIFICATION_2"/>
+                    <Column Name="ITEM_CLASSIFICATION_3"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    Name="Ship_Node" Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="For a put away strategy, Put away Task Type determination algorithm uses the best match algorithm to pick up the Task Type based on Source Zone, Source LPNType and Target Zone."
+            EntityType="CONFIGURATION"
+            ListXMLName="PutawayStrategyDetails" Module="wms"
+            Name="Putaway_Strategy_Detail" Prefix="YFS_"
+            TableName="YFS_PUTAWAY_STRATEGY_DTL"
+            TableType="CONFIGURATION" XMLName="PutawayStrategyDetail">
+            <Attributes>
+                <Attribute ColumnName="PUTAWAY_STRATEGY_DTL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PUTAWAY_STRATEGY_DTL table."
+                    Name="Putaway_Strategy_Detail_Key" Nullable="false" XMLName="PutawayStrategyDetailKey"/>
+                <Attribute ColumnName="PUTAWAY_STRATEGY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PUTAWAY_STRATEGY_DTL table."
+                    Name="Putaway_Strategy_Key" Nullable="false" XMLName="PutawayStrategyKey"/>
+                <Attribute ColumnName="SOURCE_ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The source zone where a task originates."
+                    Name="Source_Zone_Id" Nullable="false" XMLName="SourceZoneId"/>
+                <Attribute ColumnName="TARGET_ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The target zone where a task terminates."
+                    Name="Target_Zone_Id" Nullable="false" XMLName="TargetZoneId"/>
+                <Attribute ColumnName="SOURCE_LPN_TYPE"
+                    DataType="EnumLPNType" DefaultValue="' '"
+                    Description="The type of the License Plate Number from which the task originates. For requests involving a license plate, this field is populated as Case or Pallet."
+                    Name="Source_LPN_Type" Nullable="false" XMLName="SourceLPNType"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' '"
+                    Description="The task type to be used for the task created."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="IS_AD_HOC_MOVE" DataType="Flag"
+                    DefaultValue="'N'"
+                    Description="This flag indicates whether putaway can be performed on an ad hoc basis."
+                    Name="Is_Ad_Hoc_Move" Nullable="false" XMLName="IsAdHocMove"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PUTSTRGYDTLKEY_PK" Name="YFS_PUTAWAY_STRATEGY_DTL_PK">
+                <Attribute ColumnName="PUTAWAY_STRATEGY_DTL_KEY" Name="Putaway_Strategy_Detail_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="PUTSTRGYDTLKEY_I1"
+                    Name="YFS_PUT_STRATEGY_DTL_KEY_I1" Unique="true">
+                    <Column Name="PUTAWAY_STRATEGY_KEY"/>
+                    <Column Name="SOURCE_ZONE_ID"/>
+                    <Column Name="TARGET_ZONE_ID"/>
+                    <Column Name="SOURCE_LPN_TYPE"/>
+                    <Column Name="IS_AD_HOC_MOVE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PutawayStrategyDetails"
+                    ChildName="Putaway_Strategy_Detail"
+                    ChildXMLName="PutawayStrategyDetail"
+                    DeleteCascade="true"
+                    ForeignEntity="Putaway_Strategy" IsParent="true"
+                    Name="Putaway_Strategy" Type="Bidirectional"
+                    XMLName="PutawayStrategy">
+                    <Attribute Name="Putaway_Strategy_Key" ParentName="Putaway_Strategy_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

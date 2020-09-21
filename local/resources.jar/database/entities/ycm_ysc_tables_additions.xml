@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity TableName="YFS_ADDITIONAL_ATTRIBUTE" TableType="MASTER">
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Item"
+                    Name="Item" Type="Bidirectional">
+                    <Attribute Name="Parent_Key" ParentName="Item_Key"/>
+                    <Attribute Name="Parent_Table" ParentName="YFS_ITEM"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Category"
+                    Name="Category" Type="Bidirectional">
+                    <Attribute Name="Parent_Key" ParentName="Category_Key"/>
+                    <Attribute Name="Parent_Table" ParentName="YFS_CATEGORY"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="false"
+                    ForeignEntity="Catalog_Mass_Audit"
+                    Name="Catalog_Mass_Audit" Type="Bidirectional">
+					<Attribute Name="Mass_Audit_ID" ParentName="Mass_Audit_ID"/>
+				</RelationShip>
+            </RelationShips>
+		</Entity>
+	</Entities>
+</DBSchema>

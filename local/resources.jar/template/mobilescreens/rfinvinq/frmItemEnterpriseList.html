@@ -1,0 +1,84 @@
+<html>
+    <body>
+        <form name="frmItemEnterpriseList" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Enterprises"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+     						<tr>
+								<td>
+									<input col="1" mandatory="false"
+										name="lblSKU" size="20"
+										subtype="Label" tag="binding=lblItemId"
+										type="text" validate="false" value="Mobile_Item_ID"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input col="1" defaultoutput="false"
+										inputbinding="xml:/EnterpriseList/@ItemID"
+										name="txtItemID" 
+										size="20" subtype="ProtectedText"
+										tag="binding=xml:/EnterpriseList/@ItemID"
+										type="text" validate="false"/>
+								</td>
+							</tr>
+							<tr>
+                                <td>
+                                    <table
+										binding="/EnterpriseList/Enterprises/@Enterprise"
+										col="1" gridcols="20"
+										gridrows="5" id="Enterprise"
+										mandatory="false"
+										name="gridEnterpriseList"
+										namespace="EnterpriseList" size="20"
+										tag="binding=gridEnterpriseList" validate="false">
+										<tr>
+											<td>
+												<input colno="0" name="lblProceed" colName=" " 
+												size="0" type="hidden" value="/console/rfinvinq.ppc?action=frmBarCodeItemLocn"/>
+												<input colno="1" colName="1" inputbinding="xml:CurrentUser:/User/@Node"
+												outputbinding="xml:CurrentUser:/User/@Node"
+												size="0" type="hidden"/>
+												<input colno="2" colName="2" inputbinding="xml:/InvInqCriteria/@BarCodeData"
+												outputbinding="xml:/InvInqCriteria/@BarCodeData"
+												size="0" type="hidden"/> 
+												<input colno="3" colName="3" inputbinding="xml:/Item/@InventoryUOM"
+												outputbinding="xml:/Item/@InventoryUOM"
+												size="0" type="hidden"/>
+												<input colno="4" colName="4" 
+												inputbinding="xml:/Enterprise/@Enterprise"
+												outputbinding="xml:/Item/@OrganizationCode"
+												size="0" type="hidden"/>
+												<input colno="5" colName="Enterprise" 
+												inputbinding="xml:/Enterprise/@Enterprise"
+												size="20" type="text"/> 
+   											</td>
+										</tr>
+                                    </table>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+									subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

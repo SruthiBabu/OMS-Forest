@@ -1,0 +1,1967 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores the services supported by UPS."
+            EntityType="CONFIGURATION" Module="ycs" Name="Carr_Service"
+            Prefix="YCS_" TableName="YCS_CARRIER_SERVICE"
+            TableType="CONFIGURATION" XMLName="CarrService">
+            <Attributes>
+                <Attribute ColumnName="CARRIER_SERVICE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Carrier_Service_Key" Nullable="false" XMLName="CarrierServiceKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The carrier code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SERVICE" DataType="Text-4"
+                    DefaultValue="' '"
+                    Description="The UPS Service Type code."
+                    Name="Service" Nullable="false" XMLName="Service"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="Text-256"
+                    DefaultValue="' '"
+                    Description="Description of the UPS service."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_CARRIER_S1_PK">
+                <Attribute ColumnName="CARRIER_SERVICE_KEY"
+                    Name="Carrier_Service_Key" XMLName="CarrierServiceKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_CARRIER_S_I1"
+                    Name="YCS_CARRIER_SERVICE_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="SERVICE"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,SERVICE"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table is referred to get the carrier service and service group during tracking number generation for UPS."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="Carrier_Special_Service" Prefix="YCS_"
+            TableName="YCS_CARRIER_SPECIAL_SERVICE"
+            TableType="CONFIGURATION" XMLName="CarrierSpecialService">
+            <Attributes>
+                <Attribute ColumnName="CARRIER_SPECIAL_SERVICE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Carrier_Special_Service_Key" Nullable="false" XMLName="CarrierSpecialServiceKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier Code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SERVICE" DataType="Text-20"
+                    DefaultValue="' '"
+                    Description="The UPS Service Type Code."
+                    Name="Service" Nullable="false" XMLName="Service"/>
+                <Attribute ColumnName="SPECIAL_SERVICE_GROUP"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="UPS Service Level Indicator for bytes 9 and 10 of the UPS tracking number."
+                    Name="Special_Service_Group" Nullable="false" XMLName="SpecialServiceGroup"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_CARRIER_S2_PK">
+                <Attribute ColumnName="CARRIER_SPECIAL_SERVICE_KEY"
+                    Name="Carrier_Special_Service_Key" XMLName="CarrierSpecialServiceKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_CARRIER_S_I3"
+                    Name="YCS_CARRIER_SPECIAL_SERVICE_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="SERVICE"/>
+                    <Column Name="SPECIAL_SERVICE_GROUP"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,SERVICE,SPECIAL_SERVICE_GROUP"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores UPS published zone information based on the source location."
+            EntityType="CONFIGURATION" Module="ycs" Name="Carrier_Zone"
+            Prefix="YCS_" TableName="YCS_CARRIER_ZONE"
+            TableType="CONFIGURATION" XMLName="CarrierZone">
+            <Attributes>
+                <Attribute ColumnName="CARRIER_ZONE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Carrier_Zone_Key" Nullable="false" XMLName="CarrierZoneKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier Code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SERVICE" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="The UPS Service Type Code."
+                    Name="Service" Nullable="false" XMLName="Service"/>
+                <Attribute ColumnName="SOURCE_POSTAL_CODE"
+                    DataType="Text-9" DefaultValue="' '"
+                    Description="Postal Code of the source location."
+                    Name="Source_Postal_Code" Nullable="false" XMLName="SourcePostalCode"/>
+                <Attribute ColumnName="DEST_FROM_POSTAL_CODE"
+                    DataType="Text-9" DefaultValue="' '"
+                    Description="UPS provides destination postal codes as a range of postal codes. The lower value in the range goes here."
+                    Name="Dest_From_Postal_Code" Nullable="false" XMLName="DestFromPostalCode"/>
+                <Attribute ColumnName="DEST_TO_POSTAL_CODE"
+                    DataType="Text-9" DefaultValue="' '"
+                    Description="UPS provides destination postal codes as a range of postal codes. The higher value in the range goes here."
+                    Name="Dest_To_Postal_Code" Nullable="false" XMLName="DestToPostalCode"/>
+                <Attribute ColumnName="DEST_COUNTRY" DataType="Text-5"
+                    DefaultValue="' '" Description="Destination country."
+                    Name="Dest_Country" Nullable="false" XMLName="DestCountry"/>
+                <Attribute ColumnName="ZONE" DataType="Text-5"
+                    DefaultValue="' '"
+                    Description="The zone as given by UPS." Name="Zone"
+                    Nullable="false" XMLName="Zone">
+                    <DBType Name="DERBY" ColumnName="ZONE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_CARRIER_Z3_PK">
+                <Attribute ColumnName="CARRIER_ZONE_KEY"
+                    Name="Carrier_Zone_Key" XMLName="CarrierZoneKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_CARRIER_Z_I5"
+                    Name="YCS_CARRIER_ZONE_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="SERVICE"/>
+                    <Column Name="SOURCE_POSTAL_CODE"/>
+                    <Column Name="DEST_COUNTRY"/>
+                    <Column Name="DEST_FROM_POSTAL_CODE"/>
+                    <Column Name="DEST_TO_POSTAL_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,SERVICE,SOURCE_POSTAL_CODE,DEST_COUNTRY,DEST_FROM_POSTAL_CODE,DEST_TO_POSTAL_CODE"/>
+        </Entity>
+        <Entity Cacheable="N" ConfigurableByOrgOrNode="N"
+            Description="This table stores item level information for an international UPS shipper. So there will be one record for each item of the carton in the manifest."
+            EntityType="TRANSACTION" Module="ycs"
+            Name="Commodity_Record" Prefix="YCS_"
+            TableName="YCS_COMMODITY_RECORD" TableType="TRANSACTION" XMLName="CommodityRecord">
+            <Attributes>
+                <Attribute ColumnName="COMMODITY_RECORD_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Commodity_Record_Key" Nullable="false" XMLName="CommodityRecordKey"/>
+                <Attribute ColumnName="MANIFEST_NUMBER"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="This has the MANIFEST_UPS_DTL_KEY of the carton (the carton to which the item belongs) in the YCS_MANIFEST_UPS_DTL table."
+                    Name="Manifest_Number" Nullable="false" XMLName="ManifestNumber"/>
+                <Attribute ColumnName="INVOICE_LINE_NUMBER"
+                    DataType="Text-3" DefaultValue="' '"
+                    Description="The line number associated with the commodity or invoice line as indicated on the commercial invoice."
+                    Name="InvoiceLineNumber" Nullable="false" XMLName="InvoiceLineNumber"/>
+                <Attribute ColumnName="COMMODITY_CODE"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="The harmonized code representing the commodity as indicated on the commercail invoice."
+                    Name="Commodity_Code" Nullable="false" XMLName="CommodityCode"/>
+                <Attribute ColumnName="PART_NUMBER" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="The shipper's part number or reference number for the commodity as indicated on the commercial invoice."
+                    Name="Part_Number" Nullable="false" XMLName="PartNumber"/>
+                <Attribute ColumnName="LINE_ORIGIN_COUNTRY"
+                    DataType="ID-2" DefaultValue="' '"
+                    Description="The country of manufacture or production or growth of the article. Must coform to ISO/IATA country code."
+                    Name="Line_Origin_Country" Nullable="false" XMLName="LineOriginCountry"/>
+                <Attribute ColumnName="LINE_CURRENCY_CODE"
+                    DataType="Text-3" DefaultValue="' '"
+                    Description="The Currency Code for the value of the commodity contained in the invoice line as indicated on the commercial invoice."
+                    Name="Line_Currency_Code" Nullable="false" XMLName="LineCurrencyCode"/>
+                <Attribute ColumnName="ECCN" DataType="ID-15"
+                    DefaultValue="' '"
+                    Description="The Export Commodity Control Number for the commodity."
+                    Name="Eccn" Nullable="false" XMLName="Eccn"/>
+                <Attribute ColumnName="LINE_UNIT_AMT_PRICE"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The per unit value of the commodity in the invoice line as indicated on the commercial invoice."
+                    Name="Line_Unit_Amt_Price" Nullable="false" XMLName="LineUnitAmtPrice"/>
+                <Attribute ColumnName="LINE_QUANTITY"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The quantity of the commodity in the invoice line as indicated on the commercial invoice."
+                    Name="Line_Quantity" Nullable="false" XMLName="LineQuantity"/>
+                <Attribute ColumnName="LINE_QTY_UOM" DataType="Text-3"
+                    DefaultValue="' '"
+                    Description="The unit of measure of the commodity in the invoice line as indicated on the commercial invoice."
+                    Name="Line_Qty_Uom" Nullable="false" XMLName="LineQtyUom"/>
+                <Attribute ColumnName="LINE_LICENSE_INFO"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The validated export license number for the commodity contained in the shipment, as indicated on the Waybill and/or S.E.D. . This field is currently used for US and PR origins only, as specified by UPS. Required if the SED_Code equals D or U and shipment origin is US or PR."
+                    Name="Line_License_Info" Nullable="false" XMLName="LineLicenseInfo"/>
+                <Attribute ColumnName="LINE_LICENSE_EXP_DATE"
+                    DataType="Date" DefaultValue="SYSDATE"
+                    Description="The expiry date for the validated export license, as indicated on the Waybill and/or S.E.D. If LINE_LICENSE_INFO is an exception, this is set to spaces."
+                    Name="Line_License_Exp_Date" Nullable="false" XMLName="LineLicenseExpDate"/>
+                <Attribute ColumnName="LINE_MERCH_DESC1"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The detail description of the commodity in the invoice line, as indicated on the commercial/customs invoice."
+                    Name="Line_Merch_Desc1" Nullable="false" XMLName="LineMerchDesc1"/>
+                <Attribute ColumnName="LINE_MERCH_DESC2"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Continuation of the detail description of the commodity in the invoice line, as indicated on the commercial/customs invoice."
+                    Name="Line_Merch_Desc2" Nullable="false" XMLName="LineMerchDesc2"/>
+                <Attribute ColumnName="LINE_MERCH_DESC3"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Continuation of the detail description of the commodity in the invoice line, as indicated on the commercial/customs invoice."
+                    Name="Line_Merch_Desc3" Nullable="false" XMLName="LineMerchDesc3"/>
+                <Attribute ColumnName="CERT_OF_ORIGIN_NO"
+                    DataType="ID-10" DefaultValue="' '"
+                    Description="The number found on Certificate Of Origin."
+                    Name="Cert_Of_Origin_No" Nullable="false" XMLName="CertOfOriginNo"/>
+                <Attribute ColumnName="CERT_OF_ORIGIN_CODE"
+                    DataType="Text-5" DefaultValue="' '"
+                    Description="The code representing the type of origin certification that applies to the commodity."
+                    Name="Cert_Of_Origin_Code" Nullable="false" XMLName="CertOfOriginCode"/>
+                <Attribute ColumnName="AGREEMENT_TYPE"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="The types of trade agreements that are applicable for the commodities contained in the invoice line, as indicated on the commercial/customs invoice.      EEC          European Economic Community      EFTA         European Free Trade Agreement      NAFTA        North American Free Trade Agreement."
+                    Name="Agreement_Type" Nullable="false" XMLName="AgreementType"/>
+                <Attribute ColumnName="COMMODITY_REMARKS"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="Commodity level remarks produced by the customer. Example: Commodity Level Declaration Statements."
+                    Name="Commodity_Remarks" Nullable="false" XMLName="CommodityRemarks"/>
+                <Attribute ColumnName="QUANTITY_SCHEDULE_BUNITS"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The quantity of the commodity contained in the SED (Shipper's Export Declaration) line, as indicated in the SED document. This field is used for US and PR origins only, as specified by UPS."
+                    Name="Quantity_Schedule_Bunits" Nullable="false" XMLName="QuantityScheduleBunits"/>
+                <Attribute ColumnName="MARKS_NUMBERS" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Any distinguishing marks or numbers that appear on the package. This field is valid only for US, PR, CA and VI shippers, as specified by UPS."
+                    Name="Marks_Numbers" Nullable="false" XMLName="MarksNumbers"/>
+                <Attribute ColumnName="COMMODITY_WEIGHT"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The gross commodity weight for the SED and/or CO document. This field must be greater than zero if SED_CODE or COCODE in YCS_INTERNATIONAL_RECORD is not blank."
+                    Name="Commodity_Weight" Nullable="false" XMLName="CommodityWeight"/>
+                <Attribute ColumnName="NUMBER_OF_PACKAGES_PER_CMMDTY"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The number of packages in the shipment containing this commodity. This field is currently used for US and PR origins, as specified by UPS."
+                    Name="Number_Of_Packages_Per_Cmmdty"
+                    Nullable="false" XMLName="NumberOfPackagesPerCmmdty"/>
+                <Attribute ColumnName="SED_LINE_AMT"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The value of the SED Commodity contained on the SED. As per UPS specification, this field is currently used for US and PR origins only and this field must be greater than zero if SED_CODE in YCS_INTERNATIONAL_RECORD is not blank."
+                    Name="Sed_Line_Amt" Nullable="false" XMLName="SedLineAmt"/>
+                <Attribute ColumnName="CO_TYPE" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="The Certificate Of Origin Type. As per UPS specification, this field is currently used for US and PR origins only; if COCODE in YCS_INTERNATIONAL_RECORD is not blank, valid values are 1 ( Certificate of Origin), 2 (NAFTA Certificate of Origin); if COCODE is blank, this is set to space."
+                    Name="Co_Type" Nullable="false" XMLName="CoType"/>
+                <Attribute ColumnName="SED_IND" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="This indicates if SED is applicable.As per UPS specification, this field is currently used for US and PR origins only; if SED_CODE in YCS_INTERNATIONAL_RECORD is not blank, valid value is 1; else 0."
+                    Name="Sed_Ind" Nullable="false" XMLName="SedInd"/>
+                <Attribute ColumnName="LINE_EXTENDED_AMT"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The value of the commodity in the invoice line, as indicated on the commercial invoice. This equals the LINE_UNIT_AMT_PRICE multiplied by the LINE_QUANTITY."
+                    Name="Line_Extended_Amt" Nullable="false" XMLName="LineExtendedAmt"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_COMMODITY4_PK">
+                <Attribute ColumnName="COMMODITY_RECORD_KEY"
+                    Name="Commodity_Record_Key" XMLName="CommodityRecordKey"/>
+            </PrimaryKey>
+            <Indices/>
+            <RelationShips/>
+            <OrderBy Value="COMMODITY_RECORD_KEY"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores the freight charges."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="Freight_Charge" Prefix="YCS_"
+            TableName="YCS_FREIGHT_CHARGE" TableType="CONFIGURATION" XMLName="FreightCharge">
+            <Attributes>
+                <Attribute ColumnName="FREIGHT_CHARGE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Freight_Charge_Key" Nullable="false" XMLName="FreightChargeKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '"
+                    Description="Indicates the carrier to which the package is manifested."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SERVICE" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="Indicates the service to which package is manifested."
+                    Name="Service" Nullable="false" XMLName="Service"/>
+                <Attribute ColumnName="ACCOUNT_TYPE" DataType="Text-3"
+                    DefaultValue="' '"
+                    Description="Indicates the RE or CO."
+                    Name="Account_Type" Nullable="false" XMLName="AccountType"/>
+                <Attribute ColumnName="WEIGHT" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="Indicates the weight of the package."
+                    Name="Weight" Nullable="false" XMLName="Weight"/>
+                <Attribute ColumnName="ZONE" DataType="Text-5"
+                    DefaultValue="' '"
+                    Description="The zone as given by the Carrier."
+                    Name="Zone" Nullable="false" XMLName="Zone">
+                    <DBType Name="DERBY" ColumnName="ZONE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="MIN_CHARGE" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="The basic charge specified by the Carrier."
+                    Name="Min_Charge" Nullable="false" XMLName="MinCharge"/>
+                <Attribute ColumnName="FACTOR_CHARGE"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="This field is used in basic charge computation.If MIN_CHARGE > (FACTOR_CHARGE * Weight) then MIN_CHARGE is considered as the basic charge. Else,(FACTOR_CHARGE * Weight) is considered as the basic charge."
+                    Name="Factor_Charge" Nullable="false" XMLName="FactorCharge"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_FREIGHT_C5_PK">
+                <Attribute ColumnName="FREIGHT_CHARGE_KEY"
+                    Name="Freight_Charge_Key" XMLName="FreightChargeKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_FREIGHT_C_I8"
+                    Name="YCS_FREIGHT_CHARGE_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="ACCOUNT_TYPE"/>
+                    <Column Name="ZONE"/>
+                    <Column Name="SERVICE"/>
+                    <Column Name="WEIGHT"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,ACCOUNT_TYPE,ZONE,SERVICE,WEIGHT"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table is used to set some flags or to store certain mapped information. This table will have the values for those fields that are set to MAPPING in YCS_PLD_DETAIL table."
+            EntityType="CONFIGURATION" Module="ycs" Name="General_Codes"
+            Prefix="YCS_" TableName="YCS_GENERAL_CODES"
+            TableType="CONFIGURATION" XMLName="GeneralCodes">
+            <Attributes>
+                <Attribute ColumnName="GENERAL_CODES_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="General_Codes_Key" Nullable="false" XMLName="GeneralCodesKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier Code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="CODE" DataType="Text-40" 
+                    DefaultValue="' '"
+                    Description="This is usually the value that is sent in the XML to YCS in a particular field.In case of a flag, this will be the name of the flag."
+                    Name="Code" Nullable="false" XMLName="Code">
+                    <DBType Name="DERBY" ColumnName="CODE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="VALUE" DataType="Text-100"
+                    DefaultValue="' '"
+                    Description="This is the value that is set for the mapped field which will be sent in the XML to FedEx server or UPS server or AirBorne server. In Case of a flag it will be Y/N."
+                    Name="Value" Nullable="false" XMLName="Value">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="DESCRIPTION" DataType="Text-256"
+                    DefaultValue="' '"
+                    Description="The field name in the XML sent to YCS."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="CARRIER_ADAPTER_IMPL_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="FK of YFS_Carrier_Adapter_Impl..  adaptor for which the mapping is being defined."
+                    Name="Carrier_Adapter_Impl_Key" Nullable="false" XMLName="CarrierAdapterImplKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_GENERAL_C6_PK">
+                <Attribute ColumnName="GENERAL_CODES_KEY"
+                    Name="General_Codes_Key" XMLName="GeneralCodesKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_GENERAL_C_I10"
+                    Name="YCS_GENERAL_CODES_I1" Unique="true">
+					<Column Name="CARRIER_ADAPTER_IMPL_KEY"/>
+                    <Column Name="CARRIER"/>
+                    <Column Name="CODE"/>
+                    <Column Name="DESCRIPTION"/>
+                    <Column Name="VALUE"/>					
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER_ADAPTER_IMPL_KEY,CARRIER,CODE,DESCRIPTION,VALUE"/>
+        </Entity>
+        <Entity Cacheable="N" ConfigurableByOrgOrNode="N"
+            Description="This table stores UPS international shipper information."
+            EntityType="TRANSACTION" Module="ycs"
+            Name="International_Record" Prefix="YCS_"
+            TableName="YCS_INTERNATIONAL_RECORD" TableType="TRANSACTION" XMLName="InternationalRecord">
+            <Attributes>
+                <Attribute ColumnName="INTERNATIONAL_RECORD_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="International_Record_Key" Nullable="false" XMLName="InternationalRecordKey"/>
+                <Attribute ColumnName="MANIFEST_NUMBER"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="This will have the MANIFEST_UPS_DTL_KEY of the shipper's carton record in YCS_MANIFEST_UPS_DTL table."
+                    Name="Manifest_Number" Nullable="false" XMLName="ManifestNumber"/>
+                <Attribute ColumnName="INVOICE_DATE" DataType="Date"
+                    DefaultValue="SYSDATE"
+                    Description="The ship time stamp."
+                    Name="Invoice_Date" Nullable="false" XMLName="InvoiceDate"/>
+                <Attribute ColumnName="WAYBILL_PRINT_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates if Waybill was produced for the shipment. As per UPS specification, valid values are 1 (Waybill was produced for shipment), default value is 0(No waybill used for shipment)."
+                    Name="Waybill_Print_Ind" Nullable="false" XMLName="WaybillPrintInd"/>
+                <Attribute ColumnName="INVOICE_LINE_TOTALS"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The value of the goods determined by shipper, as indicated on the waybill or commercial invoice.This is the sum of all LINE_EXTENDED_AMT in YCS_COMMODITY_RECORD table for the shipment."
+                    Name="Invoice_Line_Totals" Nullable="false" XMLName="InvoiceLineTotals"/>
+                <Attribute ColumnName="INVOICE_CURRENCY_CODE"
+                    DataType="Text-3" DefaultValue="' '"
+                    Description="The currency code used for INVOICE_LINE_TOTALS. This must conform to IATA/ISO country codes."
+                    Name="Invoice_Currency_Code" Nullable="false" XMLName="InvoiceCurrencyCode"/>
+                <Attribute ColumnName="SHIPMENTINSURANCEDECLAREDVALUE"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The value for goods that is determined by shipper for insurance purpose."
+                    Name="Shipmentinsurancedeclaredvalue"
+                    Nullable="false" XMLName="Shipmentinsurancedeclaredvalue"/>
+                <Attribute ColumnName="CONSOLIDATED_CLEAR_QTY"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The number of consignees in the consolidated clearance."
+                    Name="Consolidated_Clear_Qty" Nullable="false" XMLName="ConsolidatedClearQty"/>
+                <Attribute ColumnName="ULTIMATE_DEST_COUNTRY"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="The country of ultimate destination, as indicated on the waybill or SED. As per UPS specification, this is required when an Ultimate Consignee address is completed on the S.E.D."
+                    Name="Ultimate_Dest_Country" Nullable="false" XMLName="UltimateDestCountry"/>
+                <Attribute ColumnName="SED_CODE" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="This indicates if the Shipper's Export Declaration has been completed or not. As per UPS specification, this field is currently used for US and PR origins only; valid values are D(S.E.D. included with export documents), E(Electronically filed by the shipper pre-departure with an AES transaction number),   P(Electronically filed by the shipper post-departure), U(UPS-prepared on the shipper's behalf), Y(S.E.D. exists but type unknown), space (Not applicable)."
+                    Name="Sed_Code" Nullable="false" XMLName="SedCode"/>
+                <Attribute ColumnName="SHIPMENT_SED_CAS_NUM"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="As per UPS specification this field should be set to spaces."
+                    Name="Shipment_Sed_Cas_Num" Nullable="false" XMLName="ShipmentSedCasNum"/>
+                <Attribute ColumnName="INVOICE_NUMBER" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="The invoice number as indicated on the invoice/waybill."
+                    Name="Invoice_Number" Nullable="false" XMLName="InvoiceNumber"/>
+                <Attribute ColumnName="PO_NUMBER" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="The Purchase Order Number as indicated on invoice/waybill."
+                    Name="Po_Number" Nullable="false" XMLName="PoNumber"/>
+                <Attribute ColumnName="DESCRIPTION_OF_GOODS"
+                    DataType="Text-50" DefaultValue="' '"
+                    Description="A general description of the goods contained in the shipment."
+                    Name="Description_Of_Goods" Nullable="false" XMLName="DescriptionOfGoods"/>
+                <Attribute ColumnName="SPECIAL_INSTRUCTIONS"
+                    DataType="Text-69" DefaultValue="' '"
+                    Description="Shipper's comments or special instructions."
+                    Name="SpecialInstructions" Nullable="false" XMLName="Special_Instructions"/>
+                <Attribute ColumnName="PARTIES_TO_TRANS"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="If SED is applicable, it indicates whether shipper and consignee/importer are related or non-related.If not applicable, this is set to space. As per UPS specification, this is currently used for US and PR origins only; valid values are R(related), N(not related), space(not applicable)."
+                    Name="Parties_To_Trans" Nullable="false" XMLName="PartiesToTrans"/>
+                <Attribute ColumnName="TERMS_OF_SHIPMENT"
+                    DataType="Text-3" DefaultValue="' '"
+                    Description="Terms of delivery as indicated on the commercial invoice. As per UPS specification, valid values are CFR(Cost and Freight), CIF(Cost Insurance and Freight), CIP(Carriage and Insurance Paid), CPT(Carriage Paid To), DAF(Delivered At Frontier),      DDP(Delivered Duty Paid), DDU(Delivered Duty Unpaid), DEQ(Delivered Ex Quay),       DES(Delivered Ex Ship), EXW(Ex Works), FAS(Free Along Side), FCA(Free Carrier),      FOB(Free on Board), Space(Not applicable)."
+                    Name="Terms_Of_Shipment" Nullable="false" XMLName="TermsOfShipment"/>
+                <Attribute ColumnName="PAYMENT_TERMS" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Description of the payment terms."
+                    Name="Payment_Terms" Nullable="false" XMLName="PaymentTerms"/>
+                <Attribute ColumnName="FREIGHT_CHARGES"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The freight amount as indicated on the commercial invoice."
+                    Name="Freight_Charges" Nullable="false" XMLName="FreightCharges"/>
+                <Attribute ColumnName="INSURANCE_CHARGES"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The Insurance Amount as indicated on the commercial invoice."
+                    Name="Insurance_Charges" Nullable="false" XMLName="InsuranceCharges"/>
+                <Attribute ColumnName="DISCOUNT_REBATE"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="Discount or Rebate amount as indicated on the commercial invoice."
+                    Name="Discount_Rebate" Nullable="false" XMLName="DiscountRebate"/>
+                <Attribute ColumnName="OTHER_CHARGES"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="Sum of the other amounts being charged as indicated on the commercial invoice."
+                    Name="Other_Charges" Nullable="false" XMLName="OtherCharges"/>
+                <Attribute ColumnName="WAYBILLNUMBER_BROKERAGEID"
+                    DataType="Text-11" DefaultValue="' '"
+                    Description="The waybill/brokerage Identification Number."
+                    Name="Waybillnumber_BrokerageId" Nullable="false" XMLName="WaybillnumberBrokerageid"/>
+                <Attribute ColumnName="COCODE" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="This field indicates if Certificate of Origin was completed or not, and the form it was on. As per UPS specification, this field is currently used for US and PR origins only; valid values are Space(No Certificate of Origin created), D(US Certificate of Origin created through shipping system and included with export documents), N(NAFTA Certificate of Origin created through shipping system and included with export documents, U(US Certificate of Origin prepared by UPS on shippers behalf)."
+                    Name="Cocode" Nullable="false" XMLName="Cocode"/>
+                <Attribute ColumnName="OTHER_DOC_CODE" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="This indicates if any additional document is attached to the shipper. As per UPS specification, valid values are 0(no documents attached), 1(documents are attached), space(not applicable)."
+                    Name="Other_Doc_Code" Nullable="false" XMLName="OtherDocCode"/>
+                <Attribute ColumnName="REASON_FOR_EXPORT"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The reason the shipment is to be exported as indicated on the commercial invoice."
+                    Name="Reason_For_Export" Nullable="false" XMLName="ReasonForExport"/>
+                <Attribute ColumnName="INVOICE_SUB_TOTAL"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="This is the result of subtracting DISCOUNT_REBATE from INVOICE_LINE_TOTALS."
+                    Name="Invoice_Sub_Total" Nullable="false" XMLName="InvoiceSubTotal"/>
+                <Attribute ColumnName="TOTAL_INVOICE_AMOUNT"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The sum of INVOICE_LINE_TOTALS, DISCOUNT_REBATE, FREIGHT_CHARGES, INSURANCE_CHARGES and OTHER_CHARGES."
+                    Name="Total_Invoice_Amount" Nullable="false" XMLName="TotalInvoiceAmount"/>
+                <Attribute ColumnName="BROKER_CODE" DataType="Text-3"
+                    DefaultValue="' '"
+                    Description="Identifies the broker for the shipment."
+                    Name="Broker_Code" Nullable="false" XMLName="BrokerCode"/>
+                <Attribute ColumnName="DESTINATION_CONTROL"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="The destination control statement,as per UPS specification."
+                    Name="Destination_Control" Nullable="false" XMLName="DestinationControl"/>
+                <Attribute ColumnName="SHIPMENT_COMMODITY_ORIGIN"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="The country code that identifies the country of origin for the commodities."
+                    Name="Shipment_Commodity_Origin" Nullable="false" XMLName="ShipmentCommodityOrigin"/>
+                <Attribute ColumnName="DECLARATION_STATEMENT"
+                    DataType="Text-256" DefaultValue="' '"
+                    Description="A statement or statements from the shipper declaring certain facts or criteria to be true."
+                    Name="Declaration_Statement" Nullable="false" XMLName="DeclarationStatement"/>
+                <Attribute ColumnName="ADDITIONAL_COMMENTS"
+                    DataType="Text-256" DefaultValue="' '"
+                    Description="Comments or remarks directed from the shipper to the consignee."
+                    Name="Additional_Comments" Nullable="false" XMLName="AdditionalComments"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_INTERNATI7_PK">
+                <Attribute ColumnName="INTERNATIONAL_RECORD_KEY"
+                    Name="International_Record_Key" XMLName="InternationalRecordKey"/>
+            </PrimaryKey>
+            <Indices/>
+            <RelationShips/>
+            <OrderBy Value="INTERNATIONAL_RECORD_KEY"/>
+        </Entity>
+        <Entity Cacheable="N" ConfigurableByOrgOrNode="N"
+            Description="This table stores carton level information for UPS shipments."
+            EntityType="TRANSACTION" Module="ycs"
+            Name="Manifest_Ups_Dtl" Prefix="YCS_"
+            TableName="YCS_MANIFEST_UPS_DTL" TableType="TRANSACTION" XMLName="ManifestUpsDtl">
+            <Attributes>
+                <Attribute ColumnName="COD_CONTROL_NUMBER"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Preprinted control number or alternate control number provided by the shipper."
+                    Name="Cod_Control_Number" Nullable="false" XMLName="CodControlNumber"/>
+                <Attribute ColumnName="CALL_TAG_ARSNUMBER"
+                    DataType="Text-12" DefaultValue="' '"
+                    Description="As per UPS specification, this field is required when CALL_TAG_ARSIND is 1; if shipper country is US or CA, this field uniquely identifies the package and for other shipper countries, this field holds the number of call tag packages in the shipment."
+                    Name="Call_Tag_Arsnumber" Nullable="false" XMLName="CallTagArsnumber"/>
+                <Attribute ColumnName="COD_IND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="The Collect on Delivery Indicator-Indicates whether it is Non-COD(0) or standard COD(1) or Tagless COD(3)."
+                    Name="COD_Ind" Nullable="false" XMLName="CODInd"/>
+                <Attribute ColumnName="SHIPMENT_COD_CURRENCY_CODE"
+                    DataType="Text-3" DefaultValue="' '"
+                    Description="The currency code of the COD amount."
+                    Name="Shipment_Cod_Currency_Code" Nullable="false" XMLName="ShipmentCodCurrencyCode"/>
+                <Attribute ColumnName="INCREMENTAL_PLD_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="This field is set to space, as specified by UPS."
+                    Name="Incremental_Pld_Ind" Nullable="false" XMLName="IncrementalPldInd"/>
+                <Attribute ColumnName="DOC_IND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Identifies the content-type of the shipment. As per UPS specification, valid values are 1(Letter), 2(Document), 3(non-document)."
+                    Name="Doc_Ind" Nullable="false" XMLName="DocInd"/>
+                <Attribute ColumnName="SHIPPER_EIN" DataType="Text-15"
+                    DefaultValue="' '"
+                    Description="Shipper's Exporter Identification Number (Tax ID Number)."
+                    Name="Shipper_Ein" Nullable="false" XMLName="ShipperEin"/>
+                <Attribute ColumnName="SHIPPER_COUNTRY"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="The country code of the shipper."
+                    Name="Shipper_Country" Nullable="false" XMLName="ShipperCountry"/>
+                <Attribute ColumnName="SENDER_NAME" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Name of the person at the shipping location who actually sent the package."
+                    Name="Sender_Name" Nullable="false" XMLName="SenderName"/>
+                <Attribute ColumnName="CONSIGNEE_TAXID"
+                    DataType="Text-15" DefaultValue="' '"
+                    Description="Consignee's Tax Identification Number."
+                    Name="Consignee_Taxid" Nullable="false" XMLName="ConsigneeTaxid"/>
+                <Attribute ColumnName="CONSIGNEE_COUNTRY"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="The consignee's country."
+                    Name="Consignee_Country" Nullable="false" XMLName="ConsigneeCountry"/>
+                <Attribute ColumnName="CALCULATED_RATES_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="This is set to space, as specified by UPS."
+                    Name="Calculated_Rates_Ind" Nullable="false" XMLName="CalculatedRatesInd"/>
+                <Attribute ColumnName="SOURCE_TYPE_CODE"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="The source of shipment data. As per UPS specification, valid values are       07(UPS EDI System), 20(UPS OnLine Host Access), 93(UPS OnLine Host Manifest Upload),      94(UPS OnLine Tools - Electronic)."
+                    Name="Source_Type_Code" Nullable="false" XMLName="SourceTypeCode"/>
+                <Attribute ColumnName="SHIPPER_CREDIT_CARD_NO"
+                    DataType="Text-16" DefaultValue="' '"
+                    Description="This field is set to space, as specified by UPS."
+                    Name="Shipper_Credit_Card_No" Nullable="false" XMLName="ShipperCreditCardNo"/>
+                <Attribute ColumnName="SHIPPER_CREDIT_CARD_EXP_DATE"
+                    DataType="Text-6" DefaultValue="' '"
+                    Description="This field is set to space, as specified by UPS."
+                    Name="Shipper_Credit_Card_Exp_Date" Nullable="false" XMLName="ShipperCreditCardExpDate"/>
+                <Attribute ColumnName="ADDITIONAL_HANDLING_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates whether additional handling is needed. As per UPS specification, valid values are 0(no additional handling), 1(additional handling required)."
+                    Name="Additional_Handling_Ind" Nullable="false" XMLName="AdditionalHandlingInd"/>
+                <Attribute ColumnName="EXTENDED_DEST_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates whether the deliver to address is within an extended destination area. As per UPS specification, valid values are 0(Not extended), 1(Extended)."
+                    Name="Extended_Dest_Ind" Nullable="false" XMLName="ExtendedDestInd"/>
+                <Attribute ColumnName="HAZ_MAT" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Hazardous material indicator. As per UPS specification, if shipper country is US, PR or CA, the only valid value is 0(No hazardous material); for other shipper counties, valid values are 0(No hazardous material), 1(Hazardous material)."
+                    Name="Haz_Mat" Nullable="false" XMLName="HazMat"/>
+                <Attribute ColumnName="HOLD_FOR_PICKUP_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates if the package is designated as hold for pickup. As per UPS specification, valid values are 0(no hold for pickup), 1(hold for pickup)."
+                    Name="Hold_For_Pickup_Ind" Nullable="false" XMLName="HoldForPickupInd"/>
+                <Attribute ColumnName="MODIFY_IND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Modification indicator. As per UPS specification, if shipper country is US, PR, CA or VI, valid values are 0(No modification), 1(service was provided); for other shipper countries, valid value is 0(No modification)."
+                    Name="Modify_Ind" Nullable="false" XMLName="ModifyInd"/>
+                <Attribute ColumnName="OCA_INDICATOR" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="On Call air indicator. As per UPS specification, if shipper country is US, PR, CA, BE, DE, GB, HK, MX, NL or VI, valid values are 0(Standard), 1(On Call Air); for other shipper countries, valid value is 0(standard)."
+                    Name="Oca_Indicator" Nullable="false" XMLName="OcaIndicator"/>
+                <Attribute ColumnName="VOID_IND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Indicates whether package is processed or voided. Valid values are 0(package processed), 1(package voided)."
+                    Name="Void_Ind" Nullable="false" XMLName="VoidInd"/>
+                <Attribute ColumnName="PACKAGE_LENGTH"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The package length."
+                    Name="Package_Length" Nullable="false" XMLName="PackageLength"/>
+                <Attribute ColumnName="PACKAGE_WIDTH"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The package width." Name="Package_Width"
+                    Nullable="false" XMLName="PackageWidth"/>
+                <Attribute ColumnName="PACKAGE_HEIGHT"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The package height."
+                    Name="Package_Height" Nullable="false" XMLName="PackageHeight"/>
+                <Attribute ColumnName="SPECIAL_INSTRUCTIONS"
+                    DataType="Text-69" DefaultValue="' '"
+                    Description="Shipper's comments or special service instrucations."
+                    Name="Special_Instructions" Nullable="false" XMLName="SpecialInstructions"/>
+                <Attribute ColumnName="VERBAL_CONFIRMATION_NAME"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The contact name if the package is designated for verbal confirmation."
+                    Name="Verbal_Confirmation_Name" Nullable="false" XMLName="VerbalConfirmationName"/>
+                <Attribute ColumnName="VERBAL_CONFIRMATION_PHONE"
+                    DataType="ID-15" DefaultValue="' '"
+                    Description="The contact phone number if the package is designated for verbal confirmation."
+                    Name="Verbal_Confirmation_Phone" Nullable="false" XMLName="VerbalConfirmationPhone"/>
+                <Attribute ColumnName="EARLIEST_DELIVERY_TIME"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="An alternate delivery time to be used if the UPS service related committed time is too early."
+                    Name="Earliest_Delivery_Time" Nullable="false" XMLName="EarliestDeliveryTime"/>
+                <Attribute ColumnName="SHIPMENT_CREDIT_CARD_NUMBER"
+                    DataType="Text-16" DefaultValue="' '"
+                    Description="The shipment credit card number if payment is made by credit card."
+                    Name="Shipment_Credit_Card_Number" Nullable="false" XMLName="ShipmentCreditCardNumber"/>
+                <Attribute ColumnName="SHIPMENT_CREDIT_CARD_EXP_DATE"
+                    DataType="Text-6" DefaultValue="' '"
+                    Description="Shipment credit card expiration date."
+                    Name="Shipment_Credit_Card_Exp_Date"
+                    Nullable="false" XMLName="ShipmentCreditCardExpDate"/>
+                <Attribute ColumnName="CONSIGNEE_NUMBER"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="Shipper assigned ID for the consignee."
+                    Name="Consignee_Number" Nullable="false" XMLName="ConsigneeNumber"/>
+                <Attribute ColumnName="CONSIGNEE_CREDIT_CARD_NO"
+                    DataType="Text-16" DefaultValue="' '"
+                    Description="Consignee Credit card number. This field is set to space, as specified by UPS."
+                    Name="Consignee_Credit_Card_No" Nullable="false" XMLName="ConsigneeCreditCardNo"/>
+                <Attribute ColumnName="CONSIGNEE_CREDIT_CARD_EXP_DATE"
+                    DataType="Text-6" DefaultValue="' '"
+                    Description="Consignee Credit Card Expiration date.This field is set to space, as specified by UPS."
+                    Name="Consignee_Credit_Card_Exp_Date"
+                    Nullable="false" XMLName="ConsigneeCreditCardExpDate"/>
+                <Attribute ColumnName="DCIS_NUMBER" DataType="Text-11"
+                    DefaultValue="' '"
+                    Description="The UPS delivery confirmation number."
+                    Name="Dcis_Number" Nullable="false" XMLName="DcisNumber"/>
+                <Attribute ColumnName="CONSIGNEE_FAX_DESTINATION_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Consignee Fax destination Indicator. 0 indicates US, PR, CA or VI consignee fax number, 1 indicates non-US consignee fax number."
+                    Name="Consignee_Fax_Destination_Ind"
+                    Nullable="false" XMLName="ConsigneeFaxDestinationInd"/>
+                <Attribute ColumnName="CONSIGNEE_FAX" DataType="ID-15"
+                    DefaultValue="' '"
+                    Description="The consignee Fax number."
+                    Name="Consignee_Fax" Nullable="false" XMLName="ConsigneeFax"/>
+                <Attribute ColumnName="EXPRESS_COD_TRACKING_NUMBER"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="This field is set to space, as specified by UPS."
+                    Name="Express_Cod_Tracking_Number" Nullable="false" XMLName="ExpressCodTrackingNumber"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO_TYPE3"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Used by the shipper to identify the contents of the field CUSTOMER_REFERENCE_NO3. As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number), DP      Department Number, IK(Invoice Number), etc."
+                    Name="Customer_Reference_No_Type3" Nullable="false" XMLName="CustomerReferenceNoType3"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO3"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Shipper identified package reference number."
+                    Name="Customer_Reference_No3" Nullable="false" XMLName="CustomerReferenceNo3"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO_TYPE4"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Used by the shipper to identify the contents of the field CUSTOMER_REFERENCE_NO4. As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number),       DP(Department Number), IK(Invoice Number), etc."
+                    Name="Customer_Reference_No_Type4" Nullable="false" XMLName="CustomerReferenceNoType4"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO4"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Shipper identified package reference number. As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number), DP(Department Number), IK(Invoice Number), etc."
+                    Name="Customer_Reference_No4" Nullable="false" XMLName="CustomerReferenceNo4"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO_TYPE5"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Used by the shipper to identify the contents of the field CUSTOMER_REFERENCE_NO5.As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number), DP      Department Number, IK(Invoice Number), etc."
+                    Name="Customer_Reference_No_Type5" Nullable="false" XMLName="CustomerReferenceNoType5"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO5"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Shipper identified package reference number."
+                    Name="Customer_Reference_No5" Nullable="false" XMLName="CustomerReferenceNo5"/>
+                <Attribute ColumnName="ALTERNATE_PARTY_TYPE"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Indicates whether the address information is shipper third party billing address or consignee third party billing address or exporter address information."
+                    Name="Alternate_Party_Type" Nullable="false" XMLName="AlternatePartyType"/>
+                <Attribute ColumnName="ID_ACCTNUMBER" DataType="Text-10"
+                    DefaultValue="' '"
+                    Description="UPS account number of the chosen alternate party type."
+                    Name="Id_Acctnumber" Nullable="false" XMLName="IdAcctnumber"/>
+                <Attribute ColumnName="POD_REPLY_TYPE" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="This field is set to space, as specified by UPS."
+                    Name="Pod_Reply_Type" Nullable="false" XMLName="PodReplyType"/>
+                <Attribute ColumnName="COMPANY_NAME" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Company name of the chosen alternate party type."
+                    Name="Company_Name" Nullable="false" XMLName="CompanyName"/>
+                <Attribute ColumnName="ATTENTION" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Contact name of the chosen alternate party type."
+                    Name="Attention" Nullable="false" XMLName="Attention"/>
+                <Attribute ColumnName="ADDRESS1" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="First Line of the address of the chosen alternate party type."
+                    Name="Address1" Nullable="false" XMLName="Address1"/>
+                <Attribute ColumnName="ADDRESS2" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="second line of the address of the chosen alternate party type."
+                    Name="Address2" Nullable="false" XMLName="Address2"/>
+                <Attribute ColumnName="ADDRESS3" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Third line of the address of the chosen alternate party type."
+                    Name="Address3" Nullable="false" XMLName="Address3"/>
+                <Attribute ColumnName="CITY" DataType="City"
+                    DefaultValue="' '"
+                    Description="The city of the chosen alternate party type."
+                    Name="City" Nullable="false" XMLName="City"/>
+                <Attribute ColumnName="STATEPROV" DataType="Text-5"
+                    DefaultValue="' '"
+                    Description="The state or province code of the chosen alternate party type."
+                    Name="Stateprov" Nullable="false" XMLName="Stateprov"/>
+                <Attribute ColumnName="POSTAL_CODE" DataType="Text-9"
+                    DefaultValue="' '"
+                    Description="The postal code of the chosen alternate party type."
+                    Name="Postal_Code" Nullable="false" XMLName="PostalCode"/>
+                <Attribute ColumnName="COUNTRY" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="The country code of the chosen alternate party type."
+                    Name="Country" Nullable="false" XMLName="Country"/>
+                <Attribute ColumnName="PHONE" DataType="Text-15"
+                    DefaultValue="' '"
+                    Description="Telephone number of the chosen alternate party type."
+                    Name="Phone" Nullable="false" XMLName="Phone"/>
+                <Attribute ColumnName="FAX_DESTINATION_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="The fax destination indicator. As per UPS specification, 0 indicates US, PR, CA and VI destination; 1 indicates non-US destination."
+                    Name="Fax_Destination_Ind" Nullable="false" XMLName="FaxDestinationInd"/>
+                <Attribute ColumnName="FAX" DataType="Text-15"
+                    DefaultValue="' '"
+                    Description="Fax number of the chosen alternate party type."
+                    Name="Fax" Nullable="false" XMLName="Fax"/>
+                <Attribute ColumnName="LANG_CODE" DataType="Text-3"
+                    DefaultValue="' '"
+                    Description="Language Code.This is set to space, as specified by UPS."
+                    Name="Lang_Code" Nullable="false" XMLName="LangCode"/>
+                <Attribute ColumnName="CREDIT_CARD_NO"
+                    DataType="Text-16" DefaultValue="' '"
+                    Description="Credit card Number of the chosen alternate party type. This is set to space, as specified by UPS."
+                    Name="Credit_Card_No" Nullable="false" XMLName="CreditCardNo"/>
+                <Attribute ColumnName="CREDIT_CARD_EXP_DATE"
+                    DataType="Text-6" DefaultValue="' '"
+                    Description="Credit card expiration date. This is set to space, as specified by UPS."
+                    Name="Credit_Card_Exp_Date" Nullable="false" XMLName="CreditCardExpDate"/>
+                <Attribute ColumnName="TAX_ID" DataType="Text-15"
+                    DefaultValue="' '"
+                    Description="The Tax ID of the chosen alternate party type."
+                    Name="Tax_Id" Nullable="false" XMLName="TaxId"/>
+                <Attribute ColumnName="ADDRESS_TYPE" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="This is set to space, as specified by UPS."
+                    Name="Address_Type" Nullable="false" XMLName="AddressType"/>
+                <Attribute ColumnName="ADVISORY_INFO_LEVEL"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates whether the notification request is at shipment level(S) or package level(P)."
+                    Name="Advisory_Info_Level" Nullable="false" XMLName="AdvisoryInfoLevel"/>
+                <Attribute ColumnName="SN_FAX_DESTINATION_IND1"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="The destination indicator for SN_FAX_NUMBER1. As per UPS specification, 0 indicates US, PR, CA or VI fax, 1 indicates fax of other counties."
+                    Name="Sn_Fax_Destination_Ind1" Nullable="false" XMLName="SnFaxDestinationInd1"/>
+                <Attribute ColumnName="SN_FAX_NUMBER1"
+                    DataType="Text-15" DefaultValue="' '"
+                    Description="The fax number to be notified."
+                    Name="Sn_Fax_Number1" Nullable="false" XMLName="SnFaxNumber1"/>
+                <Attribute ColumnName="SN_LANG_CODE1" DataType="Text-3"
+                    DefaultValue="' '"
+                    Description="Language code. This is set to space, as specified by UPS."
+                    Name="Sn_Lang_Code1" Nullable="false" XMLName="SnLangCode1"/>
+                <Attribute ColumnName="SN_COMPANY_NAME1"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Company Name1 to be notified."
+                    Name="Sn_Company_Name1" Nullable="false" XMLName="SnCompanyName1"/>
+                <Attribute ColumnName="SN_ATTN_NAME1" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Attention Name1 to be notified."
+                    Name="Sn_Attn_Name1" Nullable="false" XMLName="SnAttnName1"/>
+                <Attribute ColumnName="SN_CONTACT_PHONE1"
+                    DataType="Text-15" DefaultValue="' '"
+                    Description="Phone Number1 to be notified."
+                    Name="Sn_Contact_Phone1" Nullable="false" XMLName="SnContactPhone1"/>
+                <Attribute ColumnName="SN_FAX_DESTINATION_IND2"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="The destination indicator for SN_FAX_NUMBER2. As per UPS specification, 0 indicates US, PR, CA or VI fax, 1 indicates fax of other counties."
+                    Name="Sn_Fax_Destination_Ind2" Nullable="false" XMLName="SnFaxDestinationInd2"/>
+                <Attribute ColumnName="SN_FAX_NUMBER2"
+                    DataType="Text-15" DefaultValue="' '"
+                    Description="Fax Number2 to be notified."
+                    Name="Sn_Fax_Number2" Nullable="false" XMLName="SnFaxNumber2"/>
+                <Attribute ColumnName="SN_LANG_CODE2" DataType="Text-3"
+                    DefaultValue="' '" Description="Language Code."
+                    Name="Sn_Lang_Code2" Nullable="false" XMLName="SnLangCode2"/>
+                <Attribute ColumnName="SN_COMPANY_NAME2"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Company Name2 to be notified."
+                    Name="Sn_Company_Name2" Nullable="false" XMLName="SnCompanyName2"/>
+                <Attribute ColumnName="SN_ATTN_NAME2" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Attention2 to be notified."
+                    Name="Sn_Attn_Name2" Nullable="false" XMLName="SnAttnName2"/>
+                <Attribute ColumnName="SN_CONTACT_PHONE2"
+                    DataType="Text-15" DefaultValue="' '"
+                    Description="Phone2 to be notified."
+                    Name="Sn_Contact_Phone2" Nullable="false" XMLName="SnContactPhone2"/>
+                <Attribute ColumnName="ALT_PROFILE_ACCESS_NUMBER"
+                    DataType="Text-14" DefaultValue="' '"
+                    Description="This field is set to space, as specified by UPS."
+                    Name="Alt_Profile_Access_Number" Nullable="false" XMLName="AltProfileAccessNumber"/>
+                <Attribute ColumnName="SN_TYPE_DESTINATION1"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates the ship notification type- 0(SN_Type_destination1 not used), 3(e-mail), 4(fax)."
+                    Name="SN_Type_Destination1" Nullable="false" XMLName="SNTypeDestination1"/>
+                <Attribute ColumnName="SN_EMAIL_ADDRESS_DESTINATION1"
+                    DataType="Text-50" DefaultValue="' '"
+                    Description="The e-mail address1 to be notified."
+                    Name="Sn_Email_Address_Destination1"
+                    Nullable="false" XMLName="SnEmailAddressDestination1"/>
+                <Attribute ColumnName="SN_TYPE_DESTINATION2"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates the ship notification type-0(SN_Type_destination2 not used), 3(e-mail), 4(fax)."
+                    Name="Sn_Type_Destination2" Nullable="false" XMLName="SnTypeDestination2"/>
+                <Attribute ColumnName="SN_EMAIL_ADDRESS_DESTINATION2"
+                    DataType="Text-50" DefaultValue="' '"
+                    Description="The e-mail address2 to be notified."
+                    Name="Sn_Email_Address_Destination2"
+                    Nullable="false" XMLName="SnEmailAddressDestination2"/>
+                <Attribute ColumnName="SN_MEMO" DataType="Text-150"
+                    DefaultValue="' '"
+                    Description="The free-form message to be sent through mail or fax."
+                    Name="SN_Memo" Nullable="false" XMLName="SNMemo"/>
+                <Attribute ColumnName="MANIFEST_UPS_DTL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Manifest_Ups_Dtl_Key" Nullable="false" XMLName="ManifestUpsDtlKey"/>
+                <Attribute ColumnName="MANIFEST_NUMBER"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="The Manifest Number to which the package is manifested."
+                    Name="Manifest_Number" Nullable="false" XMLName="ManifestNumber"/>
+                <Attribute ColumnName="SHIP_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This will have the carton_no as value."
+                    Name="Ship_ID" Nullable="false" XMLName="ShipID"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="PICKUP_DATE" DataType="Date"
+                    DefaultValue="SYSDATE"
+                    Description="Date the packages are to be picked by UPS."
+                    Name="Pickup_Date" Nullable="false" XMLName="PickupDate"/>
+                <Attribute ColumnName="SHIPPER_ACCOUNT_NUMBER"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="Sender's UPS Account Number."
+                    Name="Shipper_Account_Number" Nullable="false" XMLName="ShipperAccountNumber"/>
+                <Attribute ColumnName="BOOK_NUMBER" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="A 7 byte number expected by UPS."
+                    Name="Book_Number" Nullable="false" XMLName="BookNumber"/>
+                <Attribute ColumnName="PAGE_NUMBER" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="A 3 byte number expected by UPS."
+                    Name="Page_Number" Nullable="false" XMLName="PageNumber"/>
+                <Attribute ColumnName="SHIPMENT_NUMBER" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="The shipment number to which the package belongs. During PLD Upload, this field corresponds to the lead package tracking number."
+                    Name="Shipment_Number" Nullable="false" XMLName="ShipmentNumber"/>
+                <Attribute ColumnName="PACKAGE_TRACKING_NUMBER"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="The UPS tracking number."
+                    Name="Package_Tracking_Number" Nullable="false" XMLName="PackageTrackingNumber"/>
+                <Attribute ColumnName="CONSIGNEE_COMPANY_NAME"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The Company name of the consignee for shipments."
+                    Name="Consignee_Company_Name" Nullable="false" XMLName="ConsigneeCompanyName"/>
+                <Attribute ColumnName="CONSIGNEE_ATTENTION"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The contact name at the consignee's address."
+                    Name="Consignee_Attention" Nullable="false" XMLName="ConsigneeAttention"/>
+                <Attribute ColumnName="CONSIGNEE_ADDRESS1"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The first line of the consignee's address."
+                    Name="Consignee_Address1" Nullable="false" XMLName="ConsigneeAddress1"/>
+                <Attribute ColumnName="CONSIGNEE_ADDRESS2"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The second line of the consignee's address."
+                    Name="Consignee_Address2" Nullable="false" XMLName="ConsigneeAddress2"/>
+                <Attribute ColumnName="CONSIGNEE_ADDRESS3"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The third line of the consignee's address."
+                    Name="Consignee_Address3" Nullable="false" XMLName="ConsigneeAddress3"/>
+                <Attribute ColumnName="CONSIGNEE_CITY" DataType="City"
+                    DefaultValue="' '" Description="Consignee's city."
+                    Name="Consignee_City" Nullable="false" XMLName="ConsigneeCity"/>
+                <Attribute ColumnName="CONSIGNEE_STATEPROV"
+                    DataType="State" DefaultValue="' '"
+                    Description="State or Province code of the consignee."
+                    Name="Consignee_Stateprov" Nullable="false" XMLName="ConsigneeStateprov"/>
+                <Attribute ColumnName="CONSIGNEE_POSTALCODE"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="The Consignee's postal code."
+                    Name="Consignee_Postalcode" Nullable="false" XMLName="ConsigneePostalcode"/>
+                <Attribute ColumnName="CONSIGNEE_PHONE" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="Consignee's Phone number."
+                    Name="Consignee_Phone" Nullable="false" XMLName="ConsigneePhone"/>
+                <Attribute ColumnName="SHIPMENT_CHG_TYPE"
+                    DataType="Text-3" DefaultValue="' '"
+                    Description="Billing type selected for the shipment."
+                    Name="Shipment_Chg_Type" Nullable="false" XMLName="ShipmentChgType"/>
+                <Attribute ColumnName="CWTIND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Indicates whether shipment is qualified for Hundred weight."
+                    Name="CWTInd" Nullable="false" XMLName="CWTInd"/>
+                <Attribute ColumnName="UPS_SERVICE_TYPE"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="The UPS Service type code."
+                    Name="Ups_Service_Type" Nullable="false" XMLName="UpsServiceType"/>
+                <Attribute ColumnName="PACKAGING_TYPE" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="The type of packaging used for the package."
+                    Name="Packaging_Type" Nullable="false" XMLName="PackagingType"/>
+                <Attribute ColumnName="DELIVERY_ZONE"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="UPS Delivery Zone Code."
+                    Name="Delivery_Zone" Nullable="false" XMLName="DeliveryZone"/>
+                <Attribute ColumnName="PACKAGE_ACTUAL_WEIGHT"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The actual weight of the package."
+                    Name="Package_Actual_Weight" Nullable="false" XMLName="PackageActualWeight"/>
+                <Attribute ColumnName="PKG_PUBLISHED_DIM_WT"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The dimensional weight of the package."
+                    Name="Pkg_Published_Dim_Wt" Nullable="false" XMLName="PkgPublishedDimWt"/>
+                <Attribute ColumnName="UOM_WEIGHT" DataType="Text-3"
+                    DefaultValue="' '" Description="Weight Unit Code."
+                    Name="Uom_Weight" Nullable="false" XMLName="UomWeight"/>
+                <Attribute ColumnName="UOM_DIM" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="The unit of measure used for package dimensions."
+                    Name="Uom_Dim" Nullable="false" XMLName="UomDim"/>
+                <Attribute ColumnName="COD_AMOUNT" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="The amount to be collected from consignee."
+                    Name="Cod_Amount" Nullable="false" XMLName="CodAmount"/>
+                <Attribute ColumnName="COD_FUNDS_IND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="The COD funds indicator."
+                    Name="Cod_Funds_Ind" Nullable="false" XMLName="CodFundsInd"/>
+                <Attribute ColumnName="CURRENCY_CODE" DataType="Text-3"
+                    DefaultValue="' '" Description="The currency code."
+                    Name="Currency_Code" Nullable="false" XMLName="CurrencyCode"/>
+                <Attribute ColumnName="CALLTAG_ARSIND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Indicates the type of call tag."
+                    Name="Calltag_Arsind" Nullable="false" XMLName="CalltagArsind"/>
+                <Attribute ColumnName="CALLTAG_ARSSCHEDULEPICKDATE"
+                    DataType="Date" DefaultValue="SYSDATE"
+                    Description="As per UPS, this is used in conjunction with calltag."
+                    Name="Calltag_Arsschedulepickdate" Nullable="false" XMLName="CalltagArsschedulepickdate"/>
+                <Attribute ColumnName="MERCHANDISE_DESCRIPTION"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Description of the overall package contents."
+                    Name="Merchandise_Description" Nullable="false" XMLName="MerchandiseDescription"/>
+                <Attribute ColumnName="SAT_DELIVERY_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates whether the shipment is designated as Saturday delivery."
+                    Name="Sat_Delivery_Ind" Nullable="false" XMLName="SatDeliveryInd"/>
+                <Attribute ColumnName="SATURDAY_PICKUP_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates whether the shipment is designated as Saturday pickup."
+                    Name="Saturday_Pickup_Ind" Nullable="false" XMLName="SaturdayPickupInd"/>
+                <Attribute ColumnName="OVERSIZE_PACKAGE_IND"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Indicates the size range of the package."
+                    Name="Oversize_Package_Ind" Nullable="false" XMLName="OversizePackageInd"/>
+                <Attribute ColumnName="DECLARED_VALUE_INSURANCE"
+                    DataType="Text-19" DefaultValue="' '"
+                    Description="The value of the goods the shipper determines for insurance purpose."
+                    Name="Declared_Value_Insurance" Nullable="false" XMLName="DeclaredValueInsurance"/>
+                <Attribute ColumnName="RES_IND" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Residence type indicator."
+                    Name="Res_Ind" Nullable="false" XMLName="ResInd"/>
+                <Attribute ColumnName="DCIS_TYPE" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Delivery Confirmation type code. As per UPS specification, valid values are 1(Name/Date), 2(Signature/Date), A(Adult Signature/Date)."
+                    Name="DCIS_Type" Nullable="false" XMLName="DCISType"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO_TYPE1"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Used by the shipper to identify the contents of the field CUSTOMER_REFERENCE_NO1.As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number), DP      Department Number, IK(Invoice Number), etc."
+                    Name="Customer_Reference_No_Type1" Nullable="false" XMLName="CustomerReferenceNoType1"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO1"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Shipper identified package reference number."
+                    Name="Customer_Reference_No1" Nullable="false" XMLName="CustomerReferenceNo1"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO_TYPE2"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Used by the shipper to identify the contents of the field CUSTOMER_REFERENCE_NO2.As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number), DP      Department Number, IK(Invoice Number), etc."
+                    Name="Customer_Reference_No_Type2" Nullable="false" XMLName="CustomerReferenceNoType2"/>
+                <Attribute ColumnName="CUSTOMER_REFERENCE_NO2"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Shipper identified package reference number."
+                    Name="Customer_Reference_No2" Nullable="false" XMLName="CustomerReferenceNo2"/>
+                <Attribute ColumnName="SHIPMENT_REFERENCE_NO1_TYPE"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Used by the shipper to identify the contents of the field SHIPMENT_REFERENCE_NO1.As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number), DP      Department Number, IK(Invoice Number), etc."
+                    Name="Shipment_Reference_No1_Type" Nullable="false" XMLName="ShipmentReferenceNo1Type"/>
+                <Attribute ColumnName="SHIPMENT_REFERENCE_NO1"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Shipment Reference Number1."
+                    Name="Shipment_Reference_No1" Nullable="false" XMLName="ShipmentReferenceNo1"/>
+                <Attribute ColumnName="SHIPMENT_REFERENCE_NO2_TYPE"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="Used by the shipper to identify the contents of the field SHIPMENT_REFERENCE_NO2.As specified by UPS, valid values are 3Q(Food and Drug Administration Product Code),  PO(Purchase Order Number), ST(Store Number), DP      Department Number, IK(Invoice Number), etc."
+                    Name="Shipment_Reference_No2Type" Nullable="false" XMLName="ShipmentReferenceNo2Type"/>
+                <Attribute ColumnName="SHIPMENT_REFERENCE_NO2"
+                    DataType="ID-35" DefaultValue="' '"
+                    Description="Shipment Reference Number2."
+                    Name="Shipment_Reference_No2" Nullable="false" XMLName="ShipmentReferenceNo2"/>
+                <Attribute ColumnName="MANIFESTED_FLAG"
+                    DataType="Text-1" DefaultValue="' '"
+                    Description="Specifies the actual manifest status of package: Y(Manifested)/P(Printed)/N(Not manifested)/Q(Printed and belonging to Shipment requiring shipment level integration). Value P would be used if just the Package label was printed. Value of N would be used for international packages when package is manifested by user on WMS but YCS saves this information before it calls the actual Carrier's system. When the last package of a shipment requiring shipment level integration is printed, the flag is set to P for all the packages of the shipment. See input_xml also for more details."
+                    Name="Manifested_Flag" Nullable="false" XMLName="ManifestedFlag"/>
+                <Attribute ColumnName="INPUT_XML" DataType="CLOB"
+                    DefaultValue="' '"  CompressionSupported="true"
+                    Description="This is used to save the input XML passed from WMS to YCS."
+                    Name="Input_Xml" Nullable="false" XMLName="InputXml"/>
+                <Attribute ColumnName="OUTPUT_XML" DataType="Text-2000"
+                    DefaultValue="' '"
+                    Description="See input_xml for details."
+                    Name="Output_Xml" Nullable="false" XMLName="OutputXml"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_MANIFEST_8_PK">
+                <Attribute ColumnName="MANIFEST_UPS_DTL_KEY"
+                    Name="Manifest_Ups_Dtl_Key" XMLName="ManifestUpsDtlKey"/>
+            </PrimaryKey>
+            <Indices/>
+            <RelationShips/>
+            <OrderBy Value="MANIFEST_UPS_DTL_KEY"/>
+        </Entity>
+        <Entity Cacheable="N" ConfigurableByOrgOrNode="N"
+            Description="This table stores UPS and FEDX manifest information."
+            EntityType="TRANSACTION" Module="ycs"
+            Name="Manifest_Ups_Hdr" Prefix="YCS_"
+            TableName="YCS_MANIFEST_UPS_HDR" TableType="TRANSACTION" XMLName="ManifestUpsHdr">
+            <Attributes>
+                <Attribute ColumnName="MANIFEST_UPS_HDR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Manifest_Ups_Hdr_Key" Nullable="false" XMLName="ManifestUpsHdrKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The carrier code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="MANIFEST_NUMBER"
+                    DataType="Text-30" DefaultValue="' '"
+                    Description="The manifest number."
+                    Name="Manifest_Number" Nullable="false" XMLName="ManifestNumber"/>
+                <Attribute ColumnName="STATUS" DataType="Text-1"
+                    DefaultValue="' '"
+                    Description="Indicates if the manifest is open 'O' or closed 'C' or uploaded 'U'."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="PICKUP_DATE" DataType="Date"
+                    DefaultValue="SYSDATE"
+                    Description="The date the packages are to be picked up by the corresponding carrier."
+                    Name="Pickup_Date" Nullable="false" XMLName="PickupDate"/>
+                <Attribute ColumnName="SHIPPER_ACCOUNT_NUMBER"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="Sender's UPS or FedEx account number."
+                    Name="Shipper_Account_Number" Nullable="false" XMLName="ShipperAccountNumber"/>
+                <Attribute ColumnName="PICKUP_SUMMARY_NO"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="This field is used to derive Book Number and Page Number for UPS manifest."
+                    Name="PickUp_Summary_No" Nullable="false" XMLName="PickUpSummaryNo"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_MANIFEST_9_PK">
+                <Attribute ColumnName="MANIFEST_UPS_HDR_KEY"
+                    Name="Manifest_Ups_Hdr_Key" XMLName="ManifestUpsHdrKey"/>
+            </PrimaryKey>
+            <Indices/>
+            <RelationShips/>
+            <OrderBy Value="MANIFEST_UPS_HDR_KEY"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores information related to UPS PLDUpload, FedEx 020,120,007,107,023,123 transactions and Airborne shipment request, reply and void transactions. This information is as per the specification given by the respective carrier."
+            EntityType="CONFIGURATION" Module="ycs" Name="PLD_Detail"
+            Prefix="YCS_" TableName="YCS_PLD_DETAIL"
+            TableType="CONFIGURATION" XMLName="PLDDetail">
+            <Attributes>
+                <Attribute ColumnName="PLD_DETAIL_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Pld_Detail_Key" Nullable="false" XMLName="PldDetailKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This is the adaptor key that is trying to find the mapping."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="TXN" DataType="Text-30"
+                    DefaultValue="' '"
+                    Description="The transaction codes like 020, 120, 007,107,023,123 for FedEx, PLDUpload for UPS, GENERATE_SHIPMENT, GENERATE_SHIPMENT_RESPONSE, VOID_SHIPMENT for AirBorne."
+                    Name="Transaction" Nullable="false" XMLName="Transaction"/>
+                <Attribute ColumnName="SUB_TXN" DataType="Text-30"
+                    DefaultValue="' '"
+                    Description="The sub-transactions like Request, Reply for AirBorne and FedEx, PackageLevelDetail, AlternatePartyRecord, InternationalRecord, CommodityRecord, etc for UPS."
+                    Name="Sub_Transaction" Nullable="false" XMLName="SubTransaction"/>
+                <Attribute ColumnName="FIELD_NAME" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="The field name in the input XML like ShipperAccountNumber, ConsigneeCompanyName, etc."
+                    Name="Field_Name" Nullable="false" XMLName="FieldName"/>
+                <Attribute ColumnName="FIELD_LOCATION"
+                    DataType="Integer" DefaultValue="0"
+                    Description="Starting byte position of the field."
+                    Name="Field_Location" Nullable="false" XMLName="FieldLocation"/>
+                <Attribute ColumnName="FIELD_TYPE" DataType="Text-15"
+                    DefaultValue="' '"
+                    Description="The data type of the field."
+                    Name="Field_Type" Nullable="false" XMLName="FieldType"/>
+                <Attribute ColumnName="FIELD_LENGTH" DataType="Integer"
+                    DefaultValue="0" Description="Length of the field."
+                    Name="Field_Length" Nullable="false" XMLName="FieldLength"/>
+                <Attribute ColumnName="DECIMAL_DIGITS"
+                    DataType="Integer" DefaultValue="0"
+                    Description="Indicates the number of bytes to the right of the decimal point in case of YCS_REAL datatype."
+                    Name="Decimal_Digits" Nullable="false" XMLName="DecimalDigits"/>
+                <Attribute ColumnName="REQUIRED_FLAG" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="Indicates whether the field is Required (R) or Optional (O) or Conditional (C)."
+                    Name="Required_Flag" Nullable="false" XMLName="RequiredFlag"/>
+                <Attribute ColumnName="DEFAULT_TYPE" DataType="Text-10"
+                    DefaultValue="' '"
+                    Description="This field can be set to blanks or 'SYSTEM' or 'MAPPING' or 'USER'. If set to blanks, value for the field is taken from the corresponding field in the input XML. If this is set to 'SYSTEM', value for the field is taken from DEFAULT_VALUE. If this is set to 'MAPPING', value is taken from YCS_GENERAL_CODES table. If this is set to 'USER', value is taken from YCS_PLD_USER_DEFAULTS table."
+                    Name="Default_Type" Nullable="false" XMLName="DefaultType"/>
+                <Attribute ColumnName="DEFAULT_VALUE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the default value to be considered when DEFAULT_TYPE is set to 'SYSTEM'."
+                    Name="Default_Value" Nullable="false" XMLName="DefaultValue"/>
+                <Attribute ColumnName="CARRIER_FIELD_NAME"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="This indicates the location of the field within the XML document."
+                    Name="Carrier_Field_Name" Nullable="false" XMLName="CarrierFieldName"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_PLD_DETAIL_PK">
+                <Attribute ColumnName="PLD_DETAIL_KEY"
+                    Name="Pld_Detail_Key" XMLName="PldDetailKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_PLD_DETAIL_I1"
+                    Name="YCS_PLD_DETAIL_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="TXN"/>
+                    <Column Name="SUB_TXN"/>
+                    <Column Name="FIELD_LOCATION"/>
+                    <Column Name="CARRIER_FIELD_NAME"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,TXN,SUB_TXN,FIELD_LOCATION,CARRIER_FIELD_NAME"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores user defined default values for fields in YCS_PLD_DETAIL table."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="PLD_User_Defaults" Prefix="YCS_"
+            TableName="YCS_PLD_USER_DEFAULTS" TableType="CONFIGURATION" XMLName="PLDUserDefaults">
+            <Attributes>
+                <Attribute ColumnName="PLD_USER_DEFAULTS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Pld_User_Defaults_Key" Nullable="false" XMLName="PldUserDefaultsKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-40"
+                    DefaultValue="' '" Description="The Carrier Code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="TXN" DataType="Text-30"
+                    DefaultValue="' '"
+                    Description="The transaction codes like 020, 120, 007,107,023,123 for FedEx, PLDUpload for UPS, GENERATE_SHIPMENT, GENERATE_SHIPMENT_RESPONSE, VOID_SHIPMENT for AirBorne."
+                    Name="Transaction" Nullable="false" XMLName="Transaction"/>
+                <Attribute ColumnName="FIELD_NAME" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The field name in the input XML like ShipperAccountNumber, ConsigneeCompanyName, etc."
+                    Name="Field_Name" Nullable="false" XMLName="FieldName"/>
+                <Attribute ColumnName="DEFAULT_VALUE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This indicates the default value for the input XML field when the DEFAULT_TYPE is set to 'USER' in YCS_PLD_DETAIL table."
+                    Name="Default_Value" Nullable="false" XMLName="DefaultValue"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_PLD_USER_10_PK">
+                <Attribute ColumnName="PLD_USER_DEFAULTS_KEY"
+                    Name="Pld_User_Defaults_Key" XMLName="PldUserDefaultsKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_PLD_USER__I15"
+                    Name="YCS_PLD_USER_DEFAULTS_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="TXN"/>
+                    <Column Name="FIELD_NAME"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,TXN,FIELD_NAME"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores the APIs that are applicable to the carriers."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="Process_Control" Prefix="YCS_"
+            TableName="YCS_PROCESS_CONTROL" TableType="CONFIGURATION" XMLName="ProcessControl">
+            <Attributes>
+                <Attribute ColumnName="PROCESS_CONTROL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Process_Control_Key" Nullable="false" XMLName="ProcessControlKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="API_NAME" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="The API that is available for the carrier."
+                    Name="Api_Name" Nullable="false" XMLName="ApiName"/>
+                <Attribute ColumnName="LOGIC_SWITCH" DataType="ID-35"
+                    DefaultValue="' '"
+                    Description="This indicates the method that is available for the carrier."
+                    Name="Logic_Switch" Nullable="false" XMLName="LogicSwitch"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_PROCESS_C11_PK">
+                <Attribute ColumnName="PROCESS_CONTROL_KEY"
+                    Name="Process_Control_Key" XMLName="ProcessControlKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_PROCESS_C_I17"
+                    Name="YCS_PROCESS_CONTROL_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="API_NAME"/>
+                    <Column Name="LOGIC_SWITCH"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,API_NAME,LOGIC_SWITCH"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores the special services supported by Carriers."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="Special_Service" Prefix="YCS_"
+            TableName="YCS_SPECIAL_SERVICE" TableType="CONFIGURATION" XMLName="SpecialService">
+            <Attributes>
+                <Attribute ColumnName="SPECIAL_SERVICE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Special_Service_Key" Nullable="false" XMLName="SpecialServiceKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier Code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SPECIAL_SERVICE"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="The Special service supported by the Carrier."
+                    Name="Special_Service" Nullable="false" XMLName="SpecialService"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="Text-256"
+                    DefaultValue="' '"
+                    Description="Description of the Carrier special service."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_SPECIAL_S12_PK">
+                <Attribute ColumnName="SPECIAL_SERVICE_KEY"
+                    Name="Special_Service_Key" XMLName="SpecialServiceKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_SPECIAL_S_I19"
+                    Name="YCS_SPECIAL_SERVICE_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="SPECIAL_SERVICE"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,SPECIAL_SERVICE"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table is used to get the list of UPS special services for the UPS special service group."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="Special_Service_Group" Prefix="YCS_"
+            TableName="YCS_SPECIAL_SERVICE_GROUP"
+            TableType="CONFIGURATION" XMLName="SpecialServiceGroup">
+            <Attributes>
+                <Attribute ColumnName="SPECIAL_SERVICE_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Special_Service_Group_Key" Nullable="false" XMLName="SpecialServiceGroupKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SPECIAL_SERVICE_GROUP"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="The UPS Service Level Indicator."
+                    Name="Special_Service_Group" Nullable="false" XMLName="SpecialServiceGroup"/>
+                <Attribute ColumnName="SPECIAL_SERVICE"
+                    DataType="Text-25" DefaultValue="' '"
+                    Description="The UPS special service."
+                    Name="Special_Service" Nullable="false" XMLName="SpecialService"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_SPECIAL_S13_PK">
+                <Attribute ColumnName="SPECIAL_SERVICE_GROUP_KEY"
+                    Name="Special_Service_Group_Key" XMLName="SpecialServiceGroupKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_SPECIAL_S_I21"
+                    Name="YCS_SPECIAL_SERVICE_GROUP_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="SPECIAL_SERVICE_GROUP"/>
+                    <Column Name="SPECIAL_SERVICE"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,SPECIAL_SERVICE_GROUP,SPECIAL_SERVICE"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table is referred to get the extra charges for special services while computing freight charge for UPS package."
+            EntityType="CONFIGURATION" Module="ycs" Name="Surcharges"
+            Prefix="YCS_" TableName="YCS_SURCHARGES"
+            TableType="CONFIGURATION" XMLName="Surcharges">
+            <Attributes>
+                <Attribute ColumnName="SURCHARGES_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Surcharges_Key" Nullable="false" XMLName="SurchargesKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The Carrier code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SERVICE" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="The UPS Service type code."
+                    Name="Service" Nullable="false" XMLName="Service"/>
+                <Attribute ColumnName="SURCHARGE_NAME"
+                    DataType="Text-15" DefaultValue="' '"
+                    Description="The UPS Special Service."
+                    Name="Surcharge_Name" Nullable="false" XMLName="SurchargeName"/>
+                <Attribute ColumnName="STD_CHARGE" DataType="Number-22"
+                    DefaultValue="0"
+                    Description="The standard charge for the special service as published by UPS."
+                    Name="Std_Charge" Nullable="false" XMLName="StdCharge"/>
+                <Attribute ColumnName="FACTOR_CHARGE"
+                    DataType="Number-22" DefaultValue="0"
+                    Description="The factor charge for the special service, as published by UPS.       If FACTOR_CHARGE_ON is weight, then       Extra Charge = STD_CHARGE + FACTOR_CHARGE * PackageWeight.      If FACTOR_CHARGE_ON is charge, then       Extra Charge = STD_CHARGE + FACTOR_CHARGE * Basic charge."
+                    Name="Factor_Charge" Nullable="false" XMLName="FactorCharge"/>
+                <Attribute ColumnName="FACTOR_CHARGE_ON"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="Indicates whether the FACTOR_CHARGE has to be applied on package weight or basic charge. This is specified by UPS."
+                    Name="Factor_Charge_On" Nullable="false" XMLName="FactorChargeOn"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_SURCHARGES_PK">
+                <Attribute ColumnName="SURCHARGES_KEY"
+                    Name="Surcharges_Key" XMLName="SurchargesKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_SURCHARGES_I1"
+                    Name="YCS_SURCHARGES_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="SERVICE"/>
+                    <Column Name="SURCHARGE_NAME"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,SERVICE,SURCHARGE_NAME"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores the UPS published zip codes for which surcharges are applicable."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="Surcharge_Applicable" Prefix="YCS_"
+            TableName="YCS_SURCHARGE_APPLICABLE"
+            TableType="CONFIGURATION" XMLName="SurchargeApplicable">
+            <Attributes>
+                <Attribute ColumnName="SURCHARGE_APPLICABLE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Surcharge_Applicable_Key" Nullable="false" XMLName="SurchargeApplicableKey"/>
+                <Attribute ColumnName="CARRIER" DataType="Text-20"
+                    DefaultValue="' '" Description="The carrier code."
+                    Name="Carrier" Nullable="false" XMLName="Carrier"/>
+                <Attribute ColumnName="SERVICE" DataType="Text-2"
+                    DefaultValue="' '"
+                    Description="The UPS Service type code."
+                    Name="Service" Nullable="false" XMLName="Service"/>
+                <Attribute ColumnName="ACCOUNT_TYPE" DataType="Text-3"
+                    DefaultValue="' '"
+                    Description="Identifies whether the shipping address is residential or commercial."
+                    Name="Account_Type" Nullable="false" XMLName="AccountType"/>
+                <Attribute ColumnName="DEST_FROM_POSTAL_CODE"
+                    DataType="Text-9" DefaultValue="' '"
+                    Description="UPS provides destination postal codes as a range of postal codes. The lower value in the range goes here."
+                    Name="Dest_From_Postal_Code" Nullable="false" XMLName="DestFromPostalCode"/>
+                <Attribute ColumnName="DEST_TO_POSTAL_CODE"
+                    DataType="Text-9" DefaultValue="' '"
+                    Description="UPS provides destination postal codes as a range of postal codes. The higher value in the range goes here."
+                    Name="Dest_To_Postal_Code" Nullable="false" XMLName="DestToPostalCode"/>
+                <Attribute ColumnName="DEST_COUNTRY" DataType="Text-15"
+                    DefaultValue="' '"
+                    Description="The destination country code."
+                    Name="Dest_Country" Nullable="false" XMLName="DestCountry"/>
+                <Attribute ColumnName="SURCHARGE_TYPE"
+                    DataType="Text-15" DefaultValue="' '"
+                    Description="THe UPS Special Service."
+                    Name="Surcharge_Type" Nullable="false" XMLName="SurchargeType"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_SURCHARGE14_PK">
+                <Attribute ColumnName="SURCHARGE_APPLICABLE_KEY"
+                    Name="Surcharge_Applicable_Key" XMLName="SurchargeApplicableKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_SURCHARGE_I23"
+                    Name="YCS_SURCHARGE_APPLICABLE_I1" Unique="true">
+                    <Column Name="CARRIER"/>
+                    <Column Name="ACCOUNT_TYPE"/>
+                    <Column Name="SERVICE"/>
+                    <Column Name="SURCHARGE_TYPE"/>
+                    <Column Name="DEST_COUNTRY"/>
+                    <Column Name="DEST_FROM_POSTAL_CODE"/>
+                    <Column Name="DEST_TO_POSTAL_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="CARRIER,ACCOUNT_TYPE,SERVICE,SURCHARGE_TYPE,DEST_COUNTRY,DEST_FROM_POSTAL_CODE,DEST_TO_POSTAL_CODE"/>
+        </Entity>
+        <Entity Cacheable="true" ConfigurableByOrgOrNode="N"
+            Description="This table stores the UPS routing code (URC) corresponding to the destination of the package and postal code.  This data is used to indicate the destination to which the cartons are shipped. This helps UPS in tracking and routing the packages quickly and efficiently."
+            EntityType="CONFIGURATION" Module="ycs"
+            Name="UPS_Routing_Code" Prefix="YCS_"
+            TableName="YCS_UPS_ROUTING_CODE" TableType="CONFIGURATION" XMLName="UpsRoutingCode">
+            <Attributes>
+                <Attribute ColumnName="UPS_ROUTING_CODE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary Key Attribute."
+                    Name="Ups_Routing_Code_Key" Nullable="false" XMLName="UpsRoutingCodeKey"/>
+                <Attribute ColumnName="COUNTRY_CODE" DataType="Text-5"
+                    DefaultValue="' '"
+                    Description="The country to which cartons are shipped."
+                    Name="Country_Code" Nullable="false" XMLName="CountryCode"/>
+                <Attribute ColumnName="ZIP_CODE" DataType="Text-11"
+                    DefaultValue="' '"
+                    Description="Zip code to which cartons are shipped."
+                    Name="Zip_Code" Nullable="false" XMLName="ZipCode"/>
+                <Attribute ColumnName="URC" DataType="Text-20"
+                    DefaultValue="' '"
+                    Description="The UPS Routing Code published by UPS."
+                    Name="Urc" Nullable="false" XMLName="Urc"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YCS_UPS_ROUTI15_PK">
+                <Attribute ColumnName="UPS_ROUTING_CODE_KEY"
+                    Name="Ups_Routing_Code_Key" XMLName="UpsRoutingCodeKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YCS_UPS_ROUTI_I25"
+                    Name="YCS_UPS_ROUTING_CODE_I1" Unique="true">
+                    <Column Name="COUNTRY_CODE"/>
+                    <Column Name="ZIP_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips/>
+            <OrderBy Value="COUNTRY_CODE,ZIP_CODE"/>
+        </Entity>
+    </Entities>
+</DBSchema>

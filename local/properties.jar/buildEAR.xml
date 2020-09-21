@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite, IBM Order Management (5737-D18)
+     (C) Copyright IBM Corp. 2001, 2019 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project basedir=".." name="Build EAR for deployment on an application server" default="create-ear">
+
+	<import file="buildWARCommonUtils.xml" />
+	<import file="buildEJBUtils.xml" />
+	<import file="buildWSUtils.xml" />
+
+	<condition property="earfile" value="${package}.ear">
+		<and>
+			<isset property="package" />
+			<not>
+				<isset property="earfile" />
+			</not>
+		</and>
+	</condition>
+
+	<condition property="support.multi.war" value="false" else="true">
+		<or>
+			<equals arg1="${supportmultiwar}" arg2="false" casesensitive="false" />
+			<equals arg1="${supportmultiwar}" arg2="n" casesensitive="false" />
+			<equals arg1="${supportmultiwar}" arg2="no" casesensitive="false" />
+		</or>
+	</condition>
+
+	<condition property="require.struts.workaround" value="true"> 
+		<equals arg1="${support.multi.war}" arg2="true"/>
+	</condition>
+
+	<condition property="nodocear2" value="true">
+		<or>
+			<and>
+				<isset property="nodocear"/>
+				<equals arg1="${nodocear}" arg2="true" casesensitive="false" trim="true"/>
+			</and>
+			<and>
+				<not>
+					<isset property="nodocear"/>
+				</not>
+				<isfalse value="${build.doc.ear}"/>
+			</and>
+		</or>
+	</condition>
+
+	<condition property="isjboss" value="true">
+		<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true"/>
+	</condition>
+	<condition property="nonweblogic" value="true">
+		<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true"/>
+	</condition>
+	
+	<condition property="isweblogic" value="true">
+		<equals arg1="${appserver}" arg2="weblogic" casesensitive="false" trim="true"/>
+	</condition>
+	<condition property="nonweblogic" value="false">
+		<equals arg1="${appserver}" arg2="weblogic" casesensitive="false" trim="true"/>
+	</condition>
+	
+	
+	<condition property="iswebsphere" value="true">
+		<equals arg1="${appserver}" arg2="websphere" casesensitive="false" trim="true"/>
+	</condition>
+	<condition property="nonweblogic" value="true">
+		<equals arg1="${appserver}" arg2="websphere" casesensitive="false" trim="true"/>
+	</condition>
+	
+	<condition property="app.display.name" value="${app.name}" else="Sterling Applications" >
+		<isset property="app.name"/>
+	</condition>
+
+	
+	<AFCfail unless="earfile" message="Could not determine earfile name from input properties.  One of 'package' or 'earfile' must be passed." />
+
+	<sciregexpproperty propertyName="ear.basename" inputString="${earfile}" regexp="(.*)\.ear" replacementString="$1" />
+
+	<condition property="earname.setup.failure">
+		<equals arg1="${ear.basename}" arg2="${earfile}" casesensitive="false" trim="true" />
+	</condition>
+	<AFCfail if="earname.setup.failure" message="Invalid -Dearfile given.  Value should end with '.ear'" />
+
+
+	<property name="eartmp" value="${tmpdir}/${ear.basename}" />
+	<condition property="libtmp" value="${eartmp}/lib" else="${eartmp}" >
+			<equals arg1="${appserver}" arg2="jboss" />
+	</condition>
+	<property name="propstmp" location="${eartmp}/properties" />
+    <property name="isear" value="true" />
+		<!-- TD 223614 ..we always create only one ejb jar, named with earfile/package specified during command-->
+	<property name="ejbjarname" value="${ear.basename}ejb.jar"/>
+	
+		<!-- EJB used to provide parallel processing capability within JEE Container environment -->
+	<property name="asyncejb.jar.basename" value="asyncejb" />
+	<property name="asyncejb.jarname" value="${asyncejb.jar.basename}.jar"/>
+
+	<!-- =========================================================================== -->
+
+
+	<target name="create-ear" depends="-initialize, -initialize-ear , prep-classpath-libs">
+
+		<AFCecho message="Create the ear file:  {1} for deployment on {2}" >
+			<arg value="${earfile}"/>
+			<arg value="${appserver.build.platform}"/>
+		</AFCecho>
+
+		<antcall target="create-wars" />
+
+		<move todir="${eartmp}">
+			<fileset dir="${tmpdir}" includes="*.war" />
+		</move>
+
+		<antcall target="create-ejb" />
+		
+		<antcall target="create-async-ejb" />
+		
+		<antcall target="create-webservice" />
+
+		<!-- <antcall target="create-war-for-gbm"/> 	-->
+
+		<antcall target="update-ear"/>
+		
+        <antcall target="weblogic-update-ear"/>
+		
+		<antcall target="zip-ear"/>
+		  
+		<antcall target="create-doc-ear" />
+
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-initialize-ear">
+		<mkdir dir="${eartmp}" />
+		<antcall target="webservice.utils.validate-setup" />
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-no-update" />
+
+	<target name="update-ear">
+		<condition property="update-target" value="-no-update" else="-update-ear">
+			<and>
+				<equals arg1="${appserver}" arg2="websphere" casesensitive="false" trim="true" />
+				<istrue value="${build.webservices}" />
+			</and>
+		</condition>		
+		<antcall target="${update-target}" />
+	</target>
+	
+	<target name="-update-ear" >
+		<update-application-xml product.or.doc="product" />
+		
+		<JBossClassloadingXmlGen namespace="urn:jboss:classloading:1.0" name="${earfile}" domain="${earfile}" parentdomain="DefaultDomain" exportall="NON_EMPTY" importall="false" parentfirst="false" outputfile="${eartmp}/META-INF/jboss-classloading.xml" appserver="${appserver}" noejb="${noejb}"/>
+	</target>
+	
+
+	<target name="weblogic-update-ear" unless="${nonweblogic}">
+		<update-weblogic-application-xml/> 
+	</target>
+	
+	<target name="zip-ear" >
+		<antcall target="-zip-ear" />
+	</target>
+	
+
+	<!-- =========================================================================== -->
+	
+	<target name="-zip-ear">
+		<condition property="copy-ear-jars" value="copy-ear-jars-jboss" else="copy-ear-jars">
+				<equals arg1="${appserver}" arg2="jboss" />
+		</condition>
+		<antcall target="${copy-ear-jars}"/>
+		<listFiles prop="earuicp" isWar="false" isEar="true"/>
+
+		<condition property="ear.ui.classpath" value=" " else="${earuicp}">
+			<and>
+				<isset property="support.multi.war"/>
+				<equals arg1="${support.multi.war}" arg2="true"/>
+			</and>
+		</condition>
+
+		<condition property="package-ear-target" value="package-ear-target-wlp">
+			<and>
+				<equals arg1="${websphere-profile}" arg2="liberty" />
+				<equals arg1="${appserver}" arg2="websphere" />
+			</and>
+		</condition>
+
+		<condition property="package-ear-target" value="package-ear-target-jboss" else="package-ear-target">
+				<equals arg1="${appserver}" arg2="jboss" />
+		</condition>
+
+		<condition property="package-ear-target" value="package-ear-target">
+			<not>
+				<isset property="package-ear-target" />
+			</not>
+		</condition>
+		
+		<antcall target="${package-ear-target}"/>	
+		<delete file="${dir.external}/${earfile}~" failonerror="false" />
+	</target>
+
+	<target name="copy-ear-jars-jboss">
+		<mkdir dir="${eartmp}/lib" />
+		<copy todir="${eartmp}/lib" failonerror="false">
+			<fileset dir="${uijartmpdir}" includes="*.jar" />
+		</copy>
+	</target>
+
+	<target name="copy-ear-jars">
+		<copy todir="${eartmp}" failonerror="false">
+			<fileset dir="${uijartmpdir}" includes="*.jar" />
+		</copy>
+	</target>
+	<target name="gen-jboss-deploy-struct-xml" unless="suppress.jboss.deployment.struct.xml">
+		<taskdef name="JBossDeployStructXmlGen" classname="com.yantra.tools.ant.taskdefs.JBossDeploymentStructureGenerator" />
+		<JBossDeployStructXmlGen outputdir="${eartmp}" warfiles="${warfiles}" packagename="${package}" appserver="${appserver}" />
+	</target>
+	
+	<target name="package-ear-target-jboss">
+		<condition property="suppress.jboss.deployment.struct.xml" value="true">
+				<istrue value="${suppress.deployment.struct.xml}"/>
+		</condition>
+		<antcall target="gen-jboss-deploy-struct-xml"/>
+		<ear destfile="${dir.external}/${earfile}" appxml="${eartmp}/META-INF/application.xml" update="true" duplicate="preserve">
+			<!-- I think we can remove this classloading xml thingy for jboss 6 -->
+			<metainf file="${eartmp}/META-INF/jboss-classloading.xml"/>
+			<metainf file="${eartmp}/META-INF/jboss-deployment-structure.xml"/>
+			<fileset dir="${eartmp}" includes="*.war,*.jar,lib/*.jar" />
+		</ear>
+	</target>
+
+	<target name="package-ear-target">
+		<delete file="${dir.external}/${earfile}" failonerror="false" />
+		<ear destfile="${dir.external}/${earfile}" appxml="${eartmp}/META-INF/application.xml" update="true" duplicate="preserve">
+			<manifest>
+				<attribute name="Class-Path" value="${deployment.manifest.classpath} ${ear.basename}wsbe.jar ${ear.ui.classpath}" />
+			</manifest>									
+			<metainf file="${eartmp}/META-INF/jboss-classloading.xml"/>
+			<metainf file="${eartmp}/META-INF/weblogic-application.xml"/>
+			<fileset dir="${eartmp}" includes="*.war,*.jar,lib/*.jar" />
+		</ear>
+	</target>
+
+	<target name="package-ear-target-wlp">
+		<delete file="${dir.external}/${earfile}" failonerror="false" />
+		<zip destfile="${dir.external}/${earfile}">
+			<zipfileset dir="${eartmp}" includes="*.war"/>
+			<zipfileset dir="${eartmp}" includes="*.jar" prefix="lib"/>
+		</zip>
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<macrodef name="update-application-xml">
+		<attribute name="product.or.doc" />
+		<sequential>
+			<condition property="context.namespace" value="${sandbox.YFS_CONTEXT_NAMESPACE}" else="">
+				<isset property="sandbox.YFS_CONTEXT_NAMESPACE"/>
+			</condition>
+			<taskdef name="AppXmlGen" classname="com.yantra.tools.ant.taskdefs.ApplicationXmlGenerator" />
+			<mkdir dir="${eartmp}/META-INF" />
+			<condition property="appxml.target" value="-update-@{product.or.doc}-application-xml-websphere">
+				<equals arg1="${appserver}" arg2="websphere" casesensitive="false" trim="true" />
+			</condition>
+			<condition property="appxml.target" value="-update-@{product.or.doc}-application-xml-weblogic" >
+				<equals arg1="${appserver}" arg2="weblogic" casesensitive="false" trim="true" />
+			</condition>
+			<condition property="appxml.target" value="-update-@{product.or.doc}-application-xml-jboss" >
+				<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true" />
+			</condition>
+			<antcall target="${appxml.target}" />
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="update-weblogic-application-xml">
+			<sequential>
+				<condition property="context.namespace" value="${sandbox.YFS_CONTEXT_NAMESPACE}" else="">
+					<isset property="sandbox.YFS_CONTEXT_NAMESPACE"/>
+				</condition>
+				<taskdef name="WebLogicAppXmlGen" classname="com.yantra.tools.ant.taskdefs.WebLogicApplicationXmlGenerator" />
+				<mkdir dir="${eartmp}/META-INF" />
+				
+				<condition property="wlappxml.target" value="-update-app-xml-weblogic" >
+					<equals arg1="${appserver}" arg2="weblogic" casesensitive="false" trim="true" />
+				</condition>
+				<antcall target="${wlappxml.target}" />	
+			</sequential>
+	</macrodef>
+
+	<!-- ====================================================================== -->
+
+	<target name="-update-product-application-xml-websphere">
+		<generate-websphere-appxml appxmlgendir="${eartmp}" />
+	</target>
+	<target name="-update-product-application-xml-weblogic" >
+		<generate-generic-appxml appxmlgendir="${eartmp}" appversion="5" />
+	</target>
+	<target name="-update-product-application-xml-jboss">
+		<generate-generic-appxml appxmlgendir="${eartmp}" appversion="5" />
+	</target>
+	
+	<target name="-update-app-xml-weblogic" >
+		<generate-weblogic-appxml appxmlgendir="${eartmp}"  />
+	</target>
+	
+	<!-- ====================================================================== -->
+
+	<target name="-update-doc-application-xml-websphere">
+		<generate-websphere-appxml appxmlgendir="${doc_ear_tmp}" />
+	</target>
+	<target name="-update-doc-application-xml-weblogic">
+		<generate-generic-appxml appxmlgendir="${doc_ear_tmp}" appversion="5" />
+	</target>
+	<target name="-update-doc-application-xml-jboss">
+		<generate-generic-appxml appxmlgendir="${doc_ear_tmp}" appversion="5" />
+	</target>
+	
+	<!-- ====================================================================== -->
+
+	<macrodef name="generate-websphere-appxml">
+		<attribute name="appxmlgendir" />
+		<sequential>
+			<mkdir dir="@{appxmlgendir}/META-INF" />
+			<AppXmlGen appid="Application_ID" appversion="5" appxmlnamespace="http://java.sun.com/xml/ns/javaee" appxmlnsxsi="http://www.w3.org/2001/XMLSchema-instance" appxsischemalocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd" displayname="${app.display.name}" smallicon="item02.gif" largeicon="item02.gif" eartmpdir="@{appxmlgendir}" outputfile="@{appxmlgendir}/META-INF/application.xml" contextnamespace="${context.namespace}" propertyfile="${installdir}/bin/build.properties" ejbjarnames="${ejbjarname}, ${asyncejb.jarname}"/>
+		</sequential>
+	</macrodef>
+
+	
+	<macrodef name="generate-generic-appxml">
+		<attribute name="appxmlgendir" />
+		<attribute name="appversion" />
+		<sequential>
+			<mkdir dir="@{appxmlgendir}/META-INF" />
+			<AppXmlGen appid="Application_ID" appversion="@{appversion}" appxmlnamespace="http://java.sun.com/xml/ns/javaee" appxmlnsxsi="http://www.w3.org/2001/XMLSchema-instance" appxsischemalocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd" displayname="${app.display.name}" smallicon="item02.gif" largeicon="image02.gif" eartmpdir="@{appxmlgendir}" outputfile="@{appxmlgendir}/META-INF/application.xml" contextnamespace="${context.namespace}" propertyfile="${installdir}/bin/build.properties" ejbjarnames="${ejbjarname}, ${asyncejb.jarname}"/>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="generate-weblogic-appxml">
+			<attribute name="appxmlgendir" />
+			<sequential>
+				<mkdir dir="@{appxmlgendir}/META-INF" />
+				<WebLogicAppXmlGen appxmlnamespace="http://www.bea.com/ns/weblogic/90" eartmpdir="@{appxmlgendir}" outputfile="@{appxmlgendir}/META-INF/weblogic-application.xml" />
+			</sequential>
+	</macrodef>
+	
+	
+
+	<!-- =========================================================================== -->
+
+
+	<target name="create-doc-ear" description="Creates Application Documentation EAR" unless="nodocear2">
+		<property name="doc_war_tmp" value="${tmpdir}/${ear.basename}doc/war" />
+		<property name="doc_ear_tmp" value="${tmpdir}/${ear.basename}doc" />
+		<property name="docwarfile" value="${doc_ear_tmp}/${ear.basename}docs.war" />
+		<property name="docearfile" value="${dir.external}/${ear.basename}docs.ear" />
+		<property name="doc_dir" location="${installdir}/xapidocs" />
+
+		<mkdir dir="${dir.external}" />
+		<mkdir dir="${doc_war_tmp}" />
+		<mkdir dir="${doc_ear_tmp}" />
+		<mkdir dir="${installdir}/xapidocs/WEB-INF" />
+		<mkdir dir="${installdir}/xapidocs/META-INF/" />		
+		<mkdir dir="${installdir}/xapidocs/jsdocs" />
+		<mkdir dir="${installdir}/xapidocs/cufdocs" />
+		<mkdir dir="${doc_dir}/propertydocs"/>
+		<delete file="${docearfile}" />
+		<delete file="${docwarfile}" />
+		<jar jarfile="${docwarfile}">
+			<zipfileset dir="${doc_dir}/ERD" prefix="yfscommon/ERD" />
+			<zipfileset dir="${doc_dir}/api_javadocs" prefix="yfscommon/api_javadocs" />
+			<zipfileset dir="${doc_dir}/core_javadocs" prefix="yfscommon/core_javadocs" />
+			<zipfileset dir="${doc_dir}/propertydocs" prefix="yfscommon/propertydocs" />
+			<zipfileset dir="${doc_dir}/jsdocs" prefix="yfscommon/jsdocs" />
+			<zipfileset dir="${doc_dir}/cufdocs" prefix="yfscommon/cufdocs" />
+			<zipfileset dir="${doc_dir}/WEB-INF" prefix="WEB-INF" />			
+			<manifest>
+				<attribute name="Class-Path" value="" />
+			</manifest>
+		</jar>
+		<update-application-xml product.or.doc="doc" />
+		<ear zipfile="${docearfile}" appxml="${doc_ear_tmp}/META-INF/application.xml" update="true" duplicate="preserve">
+			<zipfileset dir="${doc_ear_tmp}" excludes="META-INF/application.xml" />
+		</ear>
+		<delete file="${docearfile}~" failonerror="false" />
+	</target>
+	<!-- =========================================================================== -->
+
+</project>
+

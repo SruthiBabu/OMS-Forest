@@ -1,0 +1,86 @@
+<html>
+    <body>
+        <form name="frmInventoryScan" target="/console/rfsortinventory.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+						    <tr>
+                                <td>
+                                    <input col="3" size="16"
+                                    subtype="Label"
+                                    tag="binding=lblInventoryScan"
+                                    type="text" validate="false" value="Mobile_Scan_Inventory"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblInventory"
+                                    type="text" validate="false" value="Mobile_Item_Case"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtInventory"
+									mandatory="false"
+                                    outputbinding="xml:/Inventory/@Inventory"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Inventory/@Inventory"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr/>
+							<tr/>
+							 <tr>
+                                <td>
+								    <input col="1" size="9"
+                                    subtype="Hidden"  name="txtLblUOM"
+                                    tag="binding=lblUOM"
+                                    type="text" validate="false" value="Mobile_UOM"/>
+                                    <input col="11" size="9"
+                                    subtype="Hidden"  name="txtLblQuantity"
+                                    tag="binding=lblQuantity"
+                                    type="text" validate="false" value="Mobile_Quantity"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+								    <input col="1"
+                                    name="txtUOM"
+                                    size="9" subtype="Hidden"
+                                    type="ProtectedText" 
+									inputbinding="xml:/Inventory/@UOM" />
+                                    <input col="11"
+                                    name="txtQuantity"
+									mandatory="false"
+                                    outputbinding="xml:/Inventory/@Quantity"
+                                    size="9" subtype="Hidden"
+                                    tag="binding=xml:/Inventory/@Quantity"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" hotkey="F6" name="CloseContainers"
+                                    size="16" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfsortinventory.ppc?action=frmCloseAllContainers"
+                                    validate="false" value="Mobile_Close_Containers"/>
+									<input col="17" name="Back"                              size="4" mandatory="false"
+									subtype="Hidden" hotkey="F4"
+									type="hidden"
+									url="/console/rfsortinventory.ppc?action=frmInventoryScan"
+									validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

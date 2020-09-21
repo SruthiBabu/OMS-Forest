@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity TableName="YFS_ADDITIONAL_ATTRIBUTE" TableType="MASTER">
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdditionalAttributes"
+                    ForeignEntity="Shipment_Container"
+                    Name="ShipmentContainer" Type="Bidirectional" XMLName="Container">
+                    <Attribute Name="Parent_Key" ParentName="Shipment_Container_Key"/>
+                    <Attribute Name="Parent_Table" ParentName="YFS_SHIPMENT_CONTAINER"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+		<Entity TableName="YFS_PLANNED_TASK" TableType="TRANSACTION">
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlannedTasks"
+                    ChildName="Planned_Task" ChildXMLName="PlannedTask"
+                    DeleteCascade="true" ForeignEntity="Shipment"
+                    Name="Shipment" Type="Bidirectional" XMLName="Shipment">
+                    <Attribute Name="Entity_Key" ParentName="Shipment_Key"/>
+                    <Attribute Name="Entity_Name" ParentName="YFS_SHIPMENT"/>
+                </RelationShip>                
+            </RelationShips>
+        </Entity>
+		<Entity TableName="YFS_TASK" TableType="TRANSACTION">
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Shipment_Line" Name="Shipment_Line"
+                    Type="Unidirectional" XMLName="Task">
+                    <Attribute Name="Shipment_Line_Key" ParentName="Shipment_Line_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Shipment" Name="Shipment"
+                    Type="Unidirectional" XMLName="Shipment">
+                    <Attribute Name="Shipment_Key" ParentName="Shipment_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+	</Entities>
+</DBSchema>

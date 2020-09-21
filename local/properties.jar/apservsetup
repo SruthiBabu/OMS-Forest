@@ -1,0 +1,30 @@
+# VENDORFILE0 = a path only
+#		added to sh,tcsh and pc variables
+# VENDORFILE1 = a vendor jar that is also distrbuted to the customer
+#		added to sh,tcsh and pc variables
+# VENDORFILE2 = a vendor jar that is also distrbuted to the customer
+#		added to sh and pc variables
+# VENDORFILE3 = a vendor jar that is not distrubuted to the customer
+#		added to sh,tcsh and pc variables
+#
+# also note that the following jars are added to the classpath in the order
+# that they are in this file irregardless of type
+#
+JB_PASSWORD=smiley01
+NOAPP_SRV=1
+NOAPP=1
+
+VENDORFILE3=&ANT_DIR;/ant.jar
+VENDORFILE3=&ANT_DIR;/ant-junit.jar
+VENDORFILE3=&ANT_DIR;/xercesImpl.jar
+VENDORFILE3=&ANT_DIR;/xml-apis.jar
+
+VENDORFILE3=&JAVA_HOME;/lib/tools.jar
+
+
+#:ifdef ORACLE_USE_BLOB
+VENDORFILE3=&INSTALL_DIR;/jetspeed/1_4/village-2.0-dev-oraclepatched-20041022.jar
+#:else
+VENDORFILE3=&INSTALL_DIR;/jetspeed/1_4/village-2.0-dev-20030625.jar
+#:endif
+

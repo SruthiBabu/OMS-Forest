@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+ <MapManager>
+	<MapLayers MinimumZoom="3.3" MaximumZoom="100000">
+		<Layer LayerNumber="0" LayerName="countries" Shapefile="countries"/> 
+		<Layer LayerNumber="1" LayerName="placenames" Shapefile="placenames" MinimumZoom="7.5"/> 
+		<Layer LayerNumber="2" LayerName="polines" Shapefile="polines" MinimumZoom="2.5"/> 
+		<Layer LayerNumber="98" LayerName="Nodes" Shapefile="data" MinimumZoom="7.5"/> 
+		<Layer LayerNumber="99" LayerName="Links" Shapefile="data" MinimumZoom="7.5"/> 
+	</MapLayers>
+	<NodeTypes>
+		<NodeType NodeType='Store' ShapeType='TriangleUp' Color='green' SelectedColor='red' Size='8' MinimumZoom='7' MaximumZoom='240'/>
+		<NodeType NodeType='DC' ShapeType='RoundRectangle' Color='#8A2BE2' SelectedColor='red' Size='14' MinimumZoom='7' MaximumZoom='240'/>
+	</NodeTypes>
+</MapManager>

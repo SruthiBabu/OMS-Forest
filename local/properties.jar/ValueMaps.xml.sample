@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  IBM Sterling Order Management  (5725-D10)
+  IBM Sterling Configure Price Quote (5725-D11)
+
+  (C) Copyright IBM Corp. 2011,2016 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+
+<!-- Maps WC values to SSFS values -->
+<mm:ValueMaps
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mm="http://WCToSSFSMediationModule"
+	xsi:schemaLocation="http://WCToSSFSMediationModule ValueMaps.xsd ">
+	
+	<!-- Maps WC store IDs to SSFS organization codes -->
+	<mm:Map name="storeIdToOrganizationCode">
+		<mm:Entry key="10152">MadisonsBase</mm:Entry>
+	</mm:Map>	
+
+	<!-- Maps WC store IDs to SSFS Inventory organization codes -->	
+	<mm:Map name="storeIdToInventoryOrganizationCode">
+		<mm:Entry key="10152">MadisonsBase</mm:Entry>		
+	</mm:Map>
+
+	<!-- Maps SSFS Locale Codes to WC Locale Codes -->	
+	<mm:Map name="scLocaleToWcLocale">
+		<mm:Entry key="en_US">en_US_EST</mm:Entry>
+		<mm:Entry key="fr_FR">fr_FR</mm:Entry>
+	</mm:Map>
+
+	<!-- Maps SSFS Order Statuses to WC Order Statuses -->
+	<mm:Map name="scStatusToWcStatus">
+		<mm:Entry key="1100">G</mm:Entry>
+		<mm:Entry key="1140">G</mm:Entry>
+		<mm:Entry key="1200">G</mm:Entry>
+		<mm:Entry key="1230">G</mm:Entry>
+		<mm:Entry key="1260">G</mm:Entry>
+		<mm:Entry key="1300">G</mm:Entry>
+		<mm:Entry key="1310">G</mm:Entry>
+		<mm:Entry key="1400">G</mm:Entry>
+		<mm:Entry key="1500">G</mm:Entry>
+		<mm:Entry key="1600">G</mm:Entry>
+		<mm:Entry key="2030">G</mm:Entry>
+		<mm:Entry key="2060">G</mm:Entry>
+		<mm:Entry key="2100">G</mm:Entry>
+		<mm:Entry key="2130">G</mm:Entry>
+		<mm:Entry key="2130.01">G</mm:Entry>
+		<mm:Entry key="2140">G</mm:Entry>
+		<mm:Entry key="2141">G</mm:Entry>
+		<mm:Entry key="2160">G</mm:Entry>
+		<mm:Entry key="2160.01">G</mm:Entry>
+		<mm:Entry key="3200">G</mm:Entry>
+		<mm:Entry key="3200.01">G</mm:Entry>
+		<mm:Entry key="3200.02">G</mm:Entry>
+		<mm:Entry key="3300">G</mm:Entry>
+		<mm:Entry key="3350">G</mm:Entry>
+		<mm:Entry key="3700">S</mm:Entry>
+		<mm:Entry key="3700.01">K</mm:Entry>
+		<mm:Entry key="3700.02">K</mm:Entry>
+		<mm:Entry key="3700.7777">D</mm:Entry>
+		<mm:Entry key="3780">K</mm:Entry>
+		<mm:Entry key="3900">K</mm:Entry>
+		<mm:Entry key="3950">K</mm:Entry>
+		<mm:Entry key="8000">G</mm:Entry>
+		<mm:Entry key="8500">G</mm:Entry>
+		<mm:Entry key="9000">X</mm:Entry>
+		<mm:Entry key="9020">X</mm:Entry>
+		<mm:Entry key="9100">K</mm:Entry>
+	</mm:Map>	
+	
+	<!-- Maps WC UnitOfMeasure to SC UnitOfMeasure -->
+	<mm:Map name="wcUOMToscUOM">
+		<mm:Entry key="C62">EACH</mm:Entry>
+	</mm:Map>
+	
+	
+	<!-- Maps SC CarrierServiceCode to WC ShipModeCode -->
+	<mm:Map name="carrierServiceCodeToShipModeCode">
+		<mm:Entry key="International Regular">US Regular Delivery</mm:Entry>
+	</mm:Map>
+	
+	<!-- Maps WC Promotion Types to SSFS Rule Set Field Name -->
+	<mm:Map name="promotionTypeToRuleSetFiledName">
+		<mm:Entry key="OrderLevelPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelValueDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelFreeGift_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ORDER_TOTAL_TYPE</mm:Entry>
+		
+		<mm:Entry key="ProductLevelSameItemPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPerItemPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPerItemValueDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelValueDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelSameItemPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelValueDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPerItemPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPerItemValueDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelFixedCostDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPerItemFixedCostDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelFixedCostDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPerItemFixedCostDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		
+		<mm:Entry key="CategoryLevelFixedShippingDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelFixedShippingDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelFixedShippingDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelFixedAmountOffShippingDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		
+		<mm:Entry key="ProductLevelBuyXGetYFree_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelBuyXGetYFree_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="MultipleItemsPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelBuyXGetYPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="MultipleItemsGetYPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPWPPercentDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="MultipleItemsGetYFixedAmountOffDiscount_false">PRICING_RULE_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		
+		<!-- for coupon -->
+		<mm:Entry key="OrderLevelPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelValueDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelFreeGift_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ORDER_TOTAL_TYPE</mm:Entry>
+		
+		<mm:Entry key="ProductLevelSameItemPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPerItemPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPerItemValueDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelValueDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelSameItemPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelValueDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPerItemPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPerItemValueDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelFixedCostDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelPerItemFixedCostDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelFixedCostDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPerItemFixedCostDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_ITEM_QUANTITY_TYPE</mm:Entry>
+		
+		<mm:Entry key="CategoryLevelFixedShippingDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelFixedShippingDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelFixedShippingDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		<mm:Entry key="OrderLevelFixedAmountOffShippingDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_SHIP_ORDER_TOTAL_TYPE</mm:Entry>
+		
+		<mm:Entry key="ProductLevelBuyXGetYFree_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelBuyXGetYFree_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="MultipleItemsPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="CategoryLevelBuyXGetYPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="MultipleItemsGetYPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="ProductLevelPWPPercentDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+		<mm:Entry key="MultipleItemsGetYFixedAmountOffDiscount_true">COUPON_DISCOUNT_CHARGE_CATEGORY_FOR_COMBINATION_TYPE</mm:Entry>
+	</mm:Map>
+	<!-- Maps SC currency to WC currency -->
+	<mm:Map name="scCurrencyToWcCurency">
+		<mm:Entry key="USD">USD</mm:Entry>
+	</mm:Map>
+	
+	<!-- Maps WC payment method to SC payment type -->
+	<!-- WCS payment method LineOfCredit  is applicable only to WCS B2B store -->
+	<mm:Map name="wcPaymentMethodToSCPaymentType">
+		<mm:Entry key="VISA">CREDIT_CARD</mm:Entry>
+		<mm:Entry key="Master Card">CREDIT_CARD</mm:Entry>
+		<mm:Entry key="Check">CHECK</mm:Entry>
+		<mm:Entry key="LineOfCredit">CUSTOMER_ACCOUNT</mm:Entry>
+		<mm:Entry key="COD">OTHERS</mm:Entry>
+	</mm:Map>	
+	
+	<!-- Maps SC credit card type to WC credit card type for CREDIT_CARD -->
+	<mm:Map name="scCreditCardTypeTowcCreditCardTypeForCreditCard">
+	    <mm:Entry key="MasterCard">Master Card</mm:Entry>
+	</mm:Map>
+	
+	<!-- Maps SC SCAC to WC Carrier -->
+	<mm:Map name="scacToCarrier">
+		<mm:Entry key="USPS">XYZ Carrier</mm:Entry>
+	</mm:Map>
+
+	<!-- Maps WC promotion code validation reason code to SC coupon status message -->
+	<mm:Map name="wcPromoCodeReasonCodeToSCCouponStatus">
+		<mm:Entry key="ERR_NO_ERROR">YPM_RULE_VALID</mm:Entry>
+		<mm:Entry key="ERR_MAJ_PROMOTION_CODE_INVALID">YPM_RULE_INVALID</mm:Entry>
+		<mm:Entry key="ERR_MAJ_PROMOTION_NOT_AVAILABLE_AT_THIS_TIME">YPM_RULE_NOT_ACTIVE</mm:Entry>
+		<mm:Entry key="ERR_MAJ_PROMOTION_OVERALL_LIMIT_EXCEEDED">YPM_RULE_INVALID</mm:Entry>
+		<mm:Entry key="ERR_MAJ_PROMOTION_PER_SHOPPER_LIMIT_EXCEEDED">YPM_RULE_INVALID</mm:Entry>
+		<mm:Entry key="ERR_MAJ_SYSTEM_ERR">YPM_RULE_INVALID</mm:Entry>
+	</mm:Map>
+	
+	<!-- Maps WC ship node to SC ship node -->
+	<mm:Map name="wcShipNodeToscShipNode">
+		<mm:Entry key="Aurora">Madisons</mm:Entry> 
+	</mm:Map>
+	<mm:Map name="wcPhysicalStoreToscStore">
+		<mm:Entry key="Aurora">Madisons</mm:Entry> 
+	</mm:Map>
+</mm:ValueMaps>

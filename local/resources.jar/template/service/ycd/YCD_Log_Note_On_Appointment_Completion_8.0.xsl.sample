@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0">
+	<xsl:output method="text"/>
+	<xsl:template match="/WorkOrder/WorkOrderProdDeliveries">
+			<xsl:variable name="ProductItems">
+				<xsl:value-of select="concat('Appointment',' successfully completed for ')"/>
+				<xsl:for-each select="WorkOrderProdDelivery">
+					   <xsl:value-of select="concat(@ItemID,', ')"/>
+				</xsl:for-each>				
+			</xsl:variable>
+			
+			<xsl:value-of select="concat(substring($ProductItems,1,string-length($ProductItems)-2),'. Appointment was planned on ', substring(/WorkOrder/@PromisedApptStartDate,1,string-length(/WorkOrder/@PromisedApptStartDate)-15),' between ',substring(/WorkOrder/@PromisedApptStartDate,12,5),' and',substring(/WorkOrder/@PromisedApptEndDate,12,5),'.')"/>
+		
+	</xsl:template>
+</xsl:stylesheet>

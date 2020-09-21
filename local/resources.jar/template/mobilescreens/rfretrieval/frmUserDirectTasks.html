@@ -1,0 +1,89 @@
+<html>
+    <body>
+        <form name="frmUserDirectTasks" target="/console/rfretrieval.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="10" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblOutboundPick"
+                                    type="text" validate="false" value="Mobile_Task_List"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTaskList"
+                                    type="text" validate="false" value="Mobile_List_Of_Tasks"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table binding="/TaskList/@Task"
+                                    col="1" gridcols="6"
+                                    gridrows="5" id="Task"
+                                    mandatory="false"
+                                    name="gridTaskList"
+                                    namespace="TaskList" size="20"
+                                    tag="binding=gridTaskList" validate="false">
+                                    <tr>
+                                    <td>
+                                    <input colno="0" colName=" "
+                                    size="0"
+                                    type="hidden" value="/console/rfretrieval.ppc?action=frmGetInfo"/>
+									<input colno="1" colName="1"
+                                    inputbinding="xml:/Task/@TaskKey"
+                                    outputbinding="xml:/Task/@TaskKey"
+                                    size="0" type="hidden"/>
+									<input colno="2" colName="2"
+                                    inputbinding="xml:/Task/@IsConsolidatedTask"
+                                    outputbinding="xml:/Task/@IsConsolidatedTask"
+                                    size="0" type="hidden"/>
+									<input colno="3" colName="3"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="0" type="hidden"/>
+									<input colno="4" colName="SourceLocation"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    size="14" type="text"/>
+                                    <input colno="5" colName="Item"
+                                    inputbinding="xml:/Task/Inventory/@ItemId"
+                                    size="10" type="text"/>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>                            
+                            <tr/>
+							<tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F8"
+                                    name="Deposit" size="8"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfretrieval.ppc?action=frmSkipTask"
+                                    validate="false" value="Mobile_Deposit"/>
+                                    <input col="10" hotkey="F4"
+                                    name="DONE" size="5"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfmenu.ppc?CurrentInnerPanelID=menu"
+                                    validate="false" value="Mobile_Done"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

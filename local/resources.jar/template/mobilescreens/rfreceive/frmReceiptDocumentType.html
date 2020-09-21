@@ -1,0 +1,87 @@
+<html>
+    <body>
+        <form name="frmReceiptDocumentType" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblNode"
+                                    type="text" validate="false" value="Mobile_Node"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:CurrentUser:/User/@Node"
+                                    mandatory="false" name="txtNode"
+                                    outputbinding="xml:/Node/@Node"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Node/@Node"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/DocumentParamsList/@DocumentParams"
+                                    col="1" gridcols="4"
+                                    gridrows="4" id="DocumentParams"
+                                    mandatory="false"
+                                    name="gridDocType"
+                                    namespace="DocumentParamsList"
+                                    size="20"
+                                    tag="binding=gridDocType" validate="false">
+                                    <tr>
+                                    <td>
+                                    <input colno="0" colName=" "
+                                    size="0"
+                                    type="hidden" value="/console/rfreceive.ppc?action=frmReceivingCriteria"/>
+                                    <input colno="1" colName=" "
+                                    inputbinding="xml:/Task/@TaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="0" type="hidden"/>
+                                    <input colno="2" colName=" "
+                                    inputbinding="xml:/DocumentParams/@DocumentType"
+                                    outputbinding="xml:/Shipment/@DocumentType"
+                                    size="0" type="hidden"/>
+                                    <input colno="3" colName="DocumentType"
+                                    inputbinding="xml:/DocumentParams/@Description"
+                                    size="20" type="text"/>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    name="DONE" size="5"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfmenu.ppc?CurrentInnerPanelID=menu"
+                                    validate="false" value="Mobile_Done"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

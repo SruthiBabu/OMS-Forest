@@ -1,0 +1,118 @@
+<html>
+    <body>
+        <form name="frmTaskInfo" target="/console/rfsortinventory.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                             <tr>
+                                <td>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblTaskInfo"
+                                    type="text" validate="false" value="Task_Info"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblTarget"
+                                    type="text" validate="false" value="Mobile_Target"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtTarLocation"
+									inputbinding="xml:/Task/@TarLoc"
+                                    outputbinding="xml:/Task/@TarLocation"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@TarLocation"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtTarZone" 
+									inputbinding="xml:/Task/@TarZoneId"
+                                    outputbinding="xml:/Task/@TarZone"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@TarZone"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItem"
+                                    type="text" validate="false" value="Mobile_Item_ID_/_Serial"/>
+								 </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtpItem"
+									inputbinding="xml:/Task/@pItemId"
+                                    outputbinding="xml:/Task/@pItem"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@pItem"
+                                    type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="txtItem" defaultoutput="false"
+									inputbinding="xml:/Task/@ItemId"
+                                    outputbinding="xml:/Task/@Item"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Task/@Item"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblQuantity"
+                                    type="text" validate="false" value="Quantity_To_Pick"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtpQuantity"
+									inputbinding="xml:/Task/@pQty"
+                                    outputbinding="xml:/Task/@pQuantity"
+                                    size="10" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@pQuantity"
+                                    type="text" />
+									<input col="11" size="9"
+									name="txtUom"
+									inputbinding="xml:/Task/@Uom"
+                                    outputbinding="xml:/Task/@Uom"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@Uom"
+                                    type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F4" name="Exception"
+									mandatory="true"
+                                    size="10" subtype="Command"
+                                    tag=" " type="button"
+									url="/console/rfsortinventory.ppc?action=frmInProgress"
+                                    validate="false" value="Exception"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

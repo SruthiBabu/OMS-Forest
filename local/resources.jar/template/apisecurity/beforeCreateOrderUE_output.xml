@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Order>
+    <OrderLines>
+        <!-- 1 or more order line. Optional for Draft order
+	  -->
+        <OrderLine>
+            <OrderLineTranQuantity/>
+            <ChainedFrom/>
+            <!--  The ChainedFrom element is required if the orderline is to be created by chaining from an existing orderline. OrderLineKey or OrderHeaderKey, PrimeLineNo, SubLineNo or OrderNo, EnterpriseCode, DocumentType, PrimeLineNo, SubLineNo are required to identify the orderline to chain with.
+	  -->
+            <OrderLineOptions>
+                <OrderLineOption/>
+            </OrderLineOptions>
+            <OrderLineSourcingControls>
+                <OrderLineSourcingCntrl/>
+            </OrderLineSourcingControls>
+            <Item/>
+            <PersonInfoShipTo/>
+            <!-- Optional
+	  -->
+            <PersonInfoMarkFor/>
+            <!-- Optional
+	  -->
+            <Instructions>
+                <Instruction/>
+            </Instructions>
+            <LinePriceInfo/>
+            <LineCharges>
+                <LineCharge/>
+            </LineCharges>
+            <LineTaxes>
+                <LineTax/>
+            </LineTaxes>
+            <!-- Optional
+	  -->
+            <References>
+                <Reference/>
+            </References>
+            <!-- Optional
+	  -->
+            <KitLines>
+                <KitLine>
+                    <KitLineTranQuantity/>
+                </KitLine>
+            </KitLines>
+            <AdditionalAddresses>
+                <AdditionalAddress>
+                    <PersonInfo/>
+                </AdditionalAddress>
+            </AdditionalAddresses>
+            <Schedules>
+                <Schedule>
+                    <ScheduleTranQuantity/>
+                </Schedule>
+            </Schedules>
+            <Dependency/>
+            <OrderDates>
+                <OrderDate/>
+            </OrderDates>
+            <OrderLineInvAttRequest/>
+            <ProductItems>
+                <ProductItem/>
+            </ProductItems>
+            <OrderLineReservations>
+                <OrderLineReservation/>
+            </OrderLineReservations>
+            <Awards>
+                <Award/>
+            </Awards>
+            <Notes>
+                <Note/>
+            </Notes>
+            <BundleParentLine/>
+            <OrderHoldTypes>
+                <OrderHoldType/>
+            </OrderHoldTypes>
+            <AdditionalLinePrices>
+                <AdditionalLinePrice>
+                    <Promotions>
+                        <Promotion/>
+                    </Promotions>
+                    <Awards>
+                        <Award/>
+                    </Awards>
+                </AdditionalLinePrice>
+            </AdditionalLinePrices>
+            <CustomAttributes/>
+        </OrderLine>
+    </OrderLines>
+    <ProductServiceAssocs>
+        <ProductServiceAssoc>
+            <ProductLine/>
+            <ServiceLine/>
+        </ProductServiceAssoc>
+    </ProductServiceAssocs>
+    <OrderLineRelationships>
+        <OrderLineRelationship>
+            <ParentLine/>
+            <ChildLine/>
+        </OrderLineRelationship>
+    </OrderLineRelationships>
+    <Notes>
+        <Note/>
+    </Notes>
+    <Instructions>
+        <Instruction/>
+    </Instructions>
+    <!--Optional-->
+    <PersonInfoShipTo/>
+    <!--Optional for Draft Order else Mandatory at header level-->
+    <PersonInfoBillTo/>
+    <PersonInfoMarkFor/>
+    <PersonInfoContact/>
+    <AdditionalAddresses>
+        <AdditionalAddress>
+            <!--  Additional Address description is in previous instance. Do not place a description here. -->
+            <PersonInfo/>
+        </AdditionalAddress>
+    </AdditionalAddresses>
+    <PriceInfo/>
+    <HeaderCharges>
+        <HeaderCharge/>
+    </HeaderCharges>
+    <HeaderTaxes>
+        <HeaderTax/>
+    </HeaderTaxes>
+    <References>
+        <Reference/>
+    </References>
+    <PaymentMethods>
+        <PaymentMethod>
+            <PaymentDetails/>
+            <PaymentDetailsList>
+                <PaymentDetails/>
+            </PaymentDetailsList>
+            <PersonInfoBillTo/>
+        </PaymentMethod>
+    </PaymentMethods>
+    <OrderDates>
+        <OrderDate/>
+    </OrderDates>
+    <SpecialServices>
+        <SpecialService/>
+    </SpecialServices>
+    <OrderHoldTypes>
+        <OrderHoldType/>
+    </OrderHoldTypes>
+    <AnswerSets>
+        <AnswerSet>
+            <Answers>
+                <Answer/>
+            </Answers>
+        </AnswerSet>
+    </AnswerSets>
+    <Promotions>
+        <Promotion>
+            <PromotionReferences>
+                <PromotionReference/>
+            </PromotionReferences>
+        </Promotion>
+    </Promotions>
+    <Awards>
+        <Award/>
+    </Awards>
+    <OrderTags>
+        <OrderTag/>
+    </OrderTags>
+    <PersonInfoSoldTo/>
+    <CustomAttributes/>
+</Order>

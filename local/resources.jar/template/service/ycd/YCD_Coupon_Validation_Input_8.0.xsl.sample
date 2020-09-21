@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="no"/>
+
+	<xsl:template match="/">
+		<Comergent>
+			<MessageHeader>
+				<MessageType>CouponValidationRequest</MessageType>
+				<MessageVersion>4.0</MessageVersion>
+				<StoreFrontTransient>
+					<xsl:value-of select="Order/@EnterpriseCode"/>
+				</StoreFrontTransient>
+			</MessageHeader>
+			<RemoteUser>
+				<UserLogin/>
+ 				<UserAuthenticator />
+			</RemoteUser>
+			<CouponValidation type="BusinessObject">
+				<CustomerTypeCode><xsl:value-of select="Order/@PricingClassificationCode" /></CustomerTypeCode>
+				<Currency><xsl:value-of select="Order/PriceInfo/@Currency" /></Currency>
+				<BuyerUser><xsl:value-of select="Order/@BuyerUserId" /></BuyerUser>
+				<BuyerOrgCode><xsl:value-of select="Order/@BuyerOrganizationCode" /></BuyerOrgCode>
+				<PricingCouponList>
+					<xsl:for-each select="/Order/Promotions/Promotion">
+						<PricingCoupon>
+							<CouponID><xsl:value-of select="@PromotionId"/></CouponID>
+						</PricingCoupon>
+					</xsl:for-each>
+				</PricingCouponList>
+			</CouponValidation>
+		</Comergent>
+	</xsl:template>
+
+</xsl:stylesheet>

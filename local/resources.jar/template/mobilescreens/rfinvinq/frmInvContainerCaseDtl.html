@@ -1,0 +1,112 @@
+<html>
+    <body>
+        <form name="frmInvContainerDtl" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Inventory_Container"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input colno="1" 
+									inputbinding="xml:CurrentUser:/User/@Node"  
+                                    outputbinding="xml:CurrentUser:/User/@Node"  
+                                    size="0" subtype="Hidden"
+									tag="binding=xml:CurrentUser:/User/@Node"
+                                    type="hidden" validate="false"/>
+									<input col="1" defaultoutput="false"
+                                    inputbinding="xml:/InventoryContainerDtl/@LocationId"
+                                    name="txtLocation" outputbinding="xml:/InventoryContainerDtl/@LocationId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/InventoryContainerDtl/@LocationId"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/InventoryContainerDtl/@ContainerDtl"
+                                    col="1" gridcols="20"
+                                    gridrows="5" id="ContainerDtl"
+                                    mandatory="false"
+                                    name="gridInventoryContainerDtl"
+                                    namespace="InventoryContainerDtl" size="20"
+                                    tag="binding=gridInventoryContainerDtl" validate="false">
+                                    <tr>
+                                    <td>
+									<input colno="0" name="lblProceed" colName=" " size="0"
+                                    type="hidden" value="/console/rfinvinq.ppc?action=frmProceedContainerItemDtl"/>
+                                    <input colno="1" colName="1" inputbinding="xml:CurrentUser:/User/@Node"
+                                    outputbinding="xml:CurrentUser:/User/@Node"
+                                    size="0" type="hidden"/>
+                                    <input colno="2" colName="2" inputbinding="xml:/InventoryContainerDtl/@LocationId"
+                                    outputbinding="xml:/ContainerDtl/@LocationId"
+                                    size="0" type="hidden"/>
+									<input colno="3" colName="3" inputbinding="xml:/ContainerDtl/@CaseId"
+                                    outputbinding="xml:/ContainerDtl/@ContainerNo"
+                                    size="0" type="hidden"/>
+									<input colno="4" colName="4" inputbinding="xml:/ContainerDtl/@ItemID"
+                                    outputbinding="xml:/ContainerDtl/@ItemID"
+                                    size="0" type="hidden"/>
+									<input colno="5" colName="5" inputbinding="xml:/ContainerDtl/@Quantity"
+                                    outputbinding="xml:/ContainerDtl/@Quantity"
+                                    size="0" type="hidden"/>
+									<input colno="6" colName="6" inputbinding="xml:/ContainerDtl/@UnitOfMeasure"
+                                    outputbinding="xml:/ContainerDtl/@UnitOfMeasure"
+                                    size="0" type="hidden"/>
+									<input colno="7" colName="7" inputbinding="xml:/ContainerDtl/@ProductClass"
+                                    outputbinding="xml:/ContainerDtl/@ProductClass"
+                                    size="0" type="hidden"/>
+									<input colno="8" colName="8" inputbinding="xml:/ContainerDtl/@InventoryStatus"
+                                    outputbinding="xml:/ContainerDtl/@InventoryStatus"
+                                    size="0" type="hidden"/>
+									<input colno="9" colName="9" inputbinding="xml:/ContainerDtl/@OrganizationCode"
+                                    outputbinding="xml:/ContainerDtl/@OrganizationCode"
+                                    size="0" type="hidden"/>
+									<input colno="10" colName="10" inputbinding="xml:/ContainerDtl/@PendOutQty"
+                                    outputbinding="xml:/ContainerDtl/@PendOutQty"
+                                    size="0" type="hidden"/>
+									<input colno="11" colName="Container_#"
+                                    inputbinding="xml:/ContainerDtl/@CaseId" size="10" type="text"/>
+									<input colno="12" colName="Mobile_Item_ID"
+                                    inputbinding="xml:/ContainerDtl/@ItemID" size="10" type="text"/>
+								    <input colno="13" colName="Mobile_Short_Quantity"
+                                    inputbinding="xml:/ContainerDtl/@Quantity" size="10" type="text"/>
+                                    <input colno="14" colName="Mobile_UOM"
+                                    inputbinding="xml:/ContainerDtl/@UnitOfMeasure" size="10" type="text"/>
+                                    <input colno="15" colName="Mobile_Short_Product_Class"
+                                    inputbinding="xml:/ContainerDtl/@ProductClass" size="10" type="text"/>
+                                    <input colno="16" colName="Mobile_Short_Inventory_Status"
+                                    inputbinding="xml:/ContainerDtl/@InventoryStatus" size="10" type="text"/>
+									</td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+							<tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+									subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

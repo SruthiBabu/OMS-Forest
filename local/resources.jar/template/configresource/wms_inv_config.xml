@@ -1,0 +1,14 @@
+<InventorySynchronization>
+	<Count Label="Count" Icon="com/yantra/wms/ui/icons/count.gif" BaseProcessType="COUNT_EXECUTION" PermissionId="YSINV025">
+	 <ApiCallRequired Label="Count_Execution" Icon="com/yantra/ycp/ui/icons/hourglass.gif" 
+	     EntityName="ProcessType" Servlet="/yantra/entities/ProcessType/list" BaseProcessType="COUNT_EXECUTION" OutputLabelAttribute="Description" OutputIcon="com/yantra/wms/ui/icons/count.gif">
+	  <AdditionalNodes>
+		<CountProgram Label="Count_Program" PermissionId="YSINV026" FormName="YINCACG001" 
+	          ImportAllAttributes="Y" SectionName="COUNT" EntityName="CountProgram" Icon="com/yantra/wms/ui/icons/count.gif" GroupName="Inventory"/>
+  		<RegionUsages Label="Region_Usage_For_Count" PermissionId="YSINV027" FormName="YIN73061" DisplayMode="Dialog" GroupName="Inventory" SectionName="COUNT" EntityName="RegionUsage" Icon="com/yantra/ycp/ui/icons/regionschema.gif"/>
+		<CountCancellationReason PermissionId="YSINV028" FormName="YINCACG003" Label="Count_Program_Cancellation_Reasons" GroupName="Inventory" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/backorderreason.gif" SectionName="COUNT"/>
+		 <SystemTablePurgeCriteria Label="One_Time_Count_Purge_Criteria" PermissionId="YSINV024" FormName="YCPPM662" GroupName="DocSpecific" EntityName="PurgeCriteria" SectionName="COUNT" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif" ImportAllAttributes="Y"/>
+	</AdditionalNodes>
+	</ApiCallRequired>
+	</Count>
+</InventorySynchronization>

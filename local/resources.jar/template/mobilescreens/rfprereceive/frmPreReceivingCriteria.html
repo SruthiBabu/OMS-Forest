@@ -1,0 +1,150 @@
+<html>
+    <body>
+        <form name="frmPreReceivingCriteria" target="/console/rfprereceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@DocumentType"
+                                    mandatory="false" name="DocType"
+                                    outputbinding="xml:/Shipment/@DocumentType"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@DocumentType"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@Enterprise"
+                                    mandatory="false"
+                                    name="Enterprise"
+                                    outputbinding="xml:/Shipment/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@TransactionId"
+                                    mandatory="false"
+                                    name="TransactionId"
+                                    outputbinding="xml:/Shipment/@TransactionId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@TransactionId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@ReceiptTransactionId"
+                                    mandatory="false"
+                                    name="ReceiptTransactionId"
+                                    outputbinding="xml:/Shipment/@ReceiptTransactionId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Shipment/@ReceiptTransactionId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Receipt/@ShipmentKey"
+                                    mandatory="false"
+                                    name="ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Receipt/@ShipmentKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="5" mandatory="false"
+                                    size="15" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Pre_Receive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblShipRef"
+                                    type="text" validate="false" value="Mobile_Trailer_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@TrailerNo"
+                                    mandatory="false"
+                                    name="txtTrailerNo"
+                                    outputbinding="xml:/Shipment/@TrailerNo"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@TrailerNo"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLoadNo"
+                                    type="text" validate="false" value="Mobile_Load_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@LoadNo"
+                                    mandatory="false"
+                                    name="txtLoadNo"
+                                    outputbinding="xml:/Shipment/@LoadNo"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@LoadNo"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblBolNo"
+                                    type="text" validate="false" value="Mobile_Bol_#"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@BolNo"
+                                    mandatory="false"
+                                    name="txtBolNo"
+                                    outputbinding="xml:/Shipment/@BolNo"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@BolNo"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblCarrier"
+                                    type="text" validate="false" value="Mobile_Carrier"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Shipment/@SCAC"
+                                    mandatory="false" name="txtSCAC"
+                                    outputbinding="xml:/Shipment/@SCAC"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Shipment/@SCAC"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfprereceive.ppc?action=frmPreReceivingCriteriaUpdGo"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

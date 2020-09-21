@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Order DocumentType="" DraftOrderFlag="" EnteredBy="" EnterpriseCode="" OrderDate="" OrderHeaderKey="" OrderNo="" SellerOrganizationCode="" ShipNode="" ShipToID="" ShipToKey="" >
+	<PriceInfo Currency=""/>
+	<PersonInfoBillTo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" ErrorTxt="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" IsCommercialAddress="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" PreferredShipAddress="" State="" Suffix="" TaxGeoCode="" Title="" UseCount="" VerificationStatus="" ZipCode="" />
+	 <OrderLines>
+		<OrderLine Action="" DeliveryMethod="" ShipNode="" ShipToKey="" MinLineStatus="" MaxLineStatus="" OrderLineKey="" ProductAvailDate="" ProductShipDate="" GiftFlag="" OrderedQty="" ReqShipDate="" AlternateItemID="" ItemGroupCode="" CarrierServiceCode="" ItemID="" IsBundleParent="">
+			<LinePriceInfo UnitPrice="" />
+			<Shipnode ShipNode="" Description="">
+				<ShipNodePersonInfo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" ErrorTxt="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" IsCommercialAddress="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" PreferredShipAddress="" State="" Suffix="" TaxGeoCode="" Title="" UseCount="" VerificationStatus="" ZipCode="" />
+			</Shipnode>
+			<PersonInfoShipTo AddressLine1="" AddressLine2="" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="" Company="" Country="" DayFaxNo="" DayPhone="" Department="" EMailID="" ErrorTxt="" EveningFaxNo="" EveningPhone="" FirstName="" HttpUrl="" IsCommercialAddress="" JobTitle="" LastName="" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" PreferredShipAddress="" State="" Suffix="" TaxGeoCode="" Title="" UseCount="" VerificationStatus="" ZipCode="" />	
+			<PersonInfoMarkFor DayPhone="" FirstName="" LastName=""/>
+			<Item ItemID="" UnitOfMeasure="" ProductClass="" />
+			<ItemDetails ItemID="">
+				<PrimaryInformation BundleFulfillmentMode="" DefaultProductClass="" Description="" ExtendedDescription="" ShortDescription="" IsPickupAllowed="" IsShippingAllowed=""/> 
+				<ItemAttributeGroupTypeList>
+					<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsAdditionalAttributeAllowed="" IsSingleGroup=""  ItemAttributeGroupType=""  ItemAttributeGroupTypeKey="">
+						<ItemAttributeGroupList>
+							<ItemAttributeGroup CategoryKey="" IsInherited="" ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" SequenceNo="">
+								<ItemAttributeList>
+									<ItemAttribute IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value="" /> 
+								</ItemAttributeList>
+							</ItemAttributeGroup>
+						</ItemAttributeGroupList>
+					</ItemAttributeGroupType>
+				</ItemAttributeGroupTypeList>  
+			</ItemDetails>
+			<BundleParentLine OrderLineKey=""/>
+			<CarrierServiceList IsModifiable="">
+				<CarrierService CarrierServiceCode="" CarrierServiceDesc="" Currency="" DeliveryEndDate="" DeliveryStartDate="" Price=""/>
+			</CarrierServiceList>
+			<AvailableActions>
+				<AvailableAction Action="" ActionDesc="" />
+			</AvailableActions>
+			<PromiseLine RequiredQty="" OrderLineKey="" UnitOfMeasure="" ProductClass="" ItemID="">
+				<Assignments>
+					<Assignment AvailableFromUnplannedInventory="" ProductAvailDate="" Quantity="" ReservedQty=""  ShipNode="" ShipDate="">
+						<Procurements>
+							<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty=""/>
+						</Procurements>
+					</Assignment>
+				</Assignments>
+            </PromiseLine>
+            <UnavailableLines>
+	            <UnavailableLine AssignedQty="" BundleParentOrderLineKey="" IsBundleParent="" ItemGroupCode="" ItemID="" NewItemID="" OrderLineKey="" PrimeLineNo="" ProductClass="" SubLineNo="" ToReleaseQty="" ToScheduleQty="" UnitOfMeasure="" IncludeXMLFileName="YFS_getPossibleSchedules_output.xml"  IncludeXMLPath="/Promise/SuggestedOption/UnavailableLines/UnavailableLine" IncludeXMLChildNodes="Y">
+	                <Reasons>
+	                    <Reason Text=""/>
+	                </Reasons>
+	                <Messages>
+	                    <Message Text=""/>
+	                </Messages>
+	            </UnavailableLine>
+	        </UnavailableLines>
+			<OrderDates>
+				<OrderDate CommittedDate="" DateTypeId=""/>
+			</OrderDates>
+			<OrderLineSourcingControls>
+				<OrderLineSourcingCntrl InventoryCheckCode="" Node="" />
+			</OrderLineSourcingControls>
+			<OrderLineTranQuantity OrderedQty="" TransactionalUOM=""/>
+			<OrderLineInvAttRequest BatchNo="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotKeyReference="" LotNumber="" ManufacturingDate="" RevisionNo="" TagNumber="">
+				<Extn/>
+			</OrderLineInvAttRequest>
+			<OrderLineReservations> 
+				<OrderLineReservation BatchNo="" DemandType="" ItemID="" LotNumber="" Node="" ProductAvailabilityDate="" ProductClass="" Quantity="" RequestedReservationDate="" RevisionNo="" TagNumber="" UnitOfMeasure="">
+					<Extn/> 
+				</OrderLineReservation> 
+			</OrderLineReservations> 
+			<Modifications>
+				<Modification StatusModificationType="" ModificationAllowed="" />
+			</Modifications>
+		</OrderLine>
+	 </OrderLines>
+	 <Interactions>
+		<Interaction CarrierServiceCode="" DeliveryDate="" DeliveryMethod="" InteractionNo="" IsDelivery="" ItemGroupCode="" LevelOfService="" Node="" OrganizationCode="" ShipDate="">
+			<PersonInfoShipTo/>
+				<Assignments>
+					<Assignment AvailableFromUnplannedInventory=" " DeliveryDate="" InteractionNo="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate="" ShipNode="">
+						<Procurements>
+							<Procurement AwaitingReservationAcceptance="" ProcureFromNode="" ProductAvailDate="" Quantity="" ReservedQty="" ShipDate=""/>
+						</Procurements>
+						<OrderLine OrderLineKey="" NoOfAssignments=""/>
+					</Assignment>
+				</Assignments>
+		</Interaction>
+	 </Interactions>
+</Order>

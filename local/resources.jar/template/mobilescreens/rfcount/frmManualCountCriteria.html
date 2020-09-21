@@ -1,0 +1,102 @@
+<html>
+    <body>
+        <form name="frmManualCountCriteria" target="/console/rfcount.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="7" 
+                                    name="lblTitle"
+                                    size="13" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Manual_Count"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+							    <td>
+							        <input col="1"
+                                    inputbinding="xml:/Enterprise/@EnterpriseCode"
+                                    outputbinding="xml:/Enterprise/@EnterpriseCode"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Enterprise/@EnterpriseCode"
+                                    type="hidden" validate="false"/>
+								</td>
+							</tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblLocationId"
+                                    type="text" validate="false" value="Mobile_Location_Container"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="txtLocationId"
+                                    inputbinding="xml:/CountRequest/@LocationId" outputbinding="xml:/CountRequest/@LocationId"
+                                    size="20" defaultoutput="false"
+                                    subtype="Hidden" tag="binding=xml:/CountRequest/@LocationId"
+                                    type="hidden" validate="false"/>
+									<input col="1" name="txtPalletId"
+                                    inputbinding="xml:/CountRequest/@PalletId" outputbinding="xml:/CountRequest/@PalletId"
+                                    size="20" defaultoutput="false"
+                                    subtype="Hidden" tag="binding=xml:/CountRequest/@PalletId"
+                                    type="hidden" validate="false"/>									
+									<input col="1" name="txtCaseId"
+                                    inputbinding="xml:/CountRequest/@CaseId" outputbinding="xml:/CountRequest/@CaseId"
+                                    size="20" defaultoutput="false"
+                                    subtype="Hidden" tag="binding=xml:/CountRequest/@CaseId"
+                                    type="hidden" validate="false"/>
+									<input col="1" name="txtScannedContext"
+									inputbinding="xml:/CountRequest/@ScannedContext"
+                                    outputbinding="xml:/CountRequest/@ScannedContext"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/CountRequest/@ScannedContext"
+                                    type="text" validate="true"/>
+									<input col="1" name="txtUom"
+									inputbinding="xml:/CountRequest/@UnitOfMeasure"
+                                    outputbinding="xml:/CountRequest/@UnitOfMeasure"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/CountRequest/@UnitOfMeasure"
+                                    type="hidden" validate="true"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" size="15"
+                                    subtype="Label"
+                                    tag="binding=lblItemId"
+                                    type="text" validate="false" value="Mobile_Item_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtItemId"
+                                    inputbinding="xml:/CountRequest/@ItemId"
+									outputbinding="xml:/CountRequest/@ItemId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/CountRequest/@ItemId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="12" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfcount.ppc?action=frmManualCountCriteriaUpdGo"
+                                    validate="false" value="Mobile_Start_Count"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

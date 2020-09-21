@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- getStoreAvailability Input XML-->
+<Promise AllocationRuleID="" CarrierServiceCode="" ConsiderNextDayForTransfer="" DemandType=""
+    IgnoreMinNotificationTime="" IgnorePromised=""
+    IgnoreUnpromised="" MaximumRecords="" OptimizationType=""
+    OrganizationCode="" ReqStartDate="" SCAC=""
+    ScacAndServiceKey=""   Store="">
+    <FulfillmentTypes ExpeditedTransferPickupFulfillmentType=""
+        ShipToHomeFulfillmentType="" SpecialOrderFulfillmentType="" StdTransferPickupFulfillmentType=" "/>
+    <ShipToAddress Country="" ZipCode=""/>
+    <PromiseLines>
+        <PromiseLine CarrierServiceCode=""
+            ConsiderCurrentStoreInventory="" ConsiderSpecialOrderOnly=""
+            FillQuantity="" ItemID="" LineId=""
+            ProductClass="" ReqStartDate="" RequiredQty=""
+            SCAC="" ScacAndServiceKey=""  UnitOfMeasure="" >
+            <Tag BatchNo="" LotAttribute1="" LotAttribute2=""
+                LotAttribute3="" LotKeyReference="" LotNumber=""
+                ManufacturingDate="" RevisionNo=""/>
+            <AlternateNodes>
+                <AlternateNode Node=""/>
+            </AlternateNodes>
+            <ShipToAddress Country="" ZipCode=""/>
+            <CurrentStorePickup BackorderedQty="" LastPickupDate=""
+                Node="" UnavailableQty="" NodeType="">
+                <Pickup Backordered="" Expedited="" PickupDate=""
+                    ProcureFromNode="" Quantity="" SpecialOrder=""/>
+            </CurrentStorePickup>
+            <AlternateNodePickups>
+                <AlternateNodePickup BackorderedQty="" LastPickupDate=""
+                    Node="" UnavailableQty="" NodeType="">
+                    <Pickup Backordered="" Expedited=""
+                        PickupDate="" ProcureFromNode="" Quantity="" SpecialOrder=""/>
+                </AlternateNodePickup>
+            </AlternateNodePickups>
+            <ShipToHome BackorderedQty="" UnavailableQty="">
+                <Assignments>
+                    <Assignment Backordered="" DeliveryDate="" Node=""
+                        Quantity="" ShipDate="" SpecialOrder=""/>
+                </Assignments>
+            </ShipToHome>
+        </PromiseLine>
+    </PromiseLines>
+    <!-- Below elements are template controlled -->
+    <InventorySupplies>
+        <Items>
+            <Item ItemID="" OrganizationCode="" ProductClass="" UnitOfMeasure="">
+			  <Nodes>
+ 	            <Node Node="">
+					<Supplies>
+						 <Supply FirstShipDate="" LastShipDate="" AvailableQuantity="" Track="">
+						  <Tag BatchNo="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotKeyReference="" LotNumber="" ManufacturingDate="" RevisionNo="" TagNumber="" />
+						 </Supply>
+					</Supplies>
+			    </Node>
+              </Nodes>
+            </Item>
+		</Items>
+   </InventorySupplies>
+</Promise>

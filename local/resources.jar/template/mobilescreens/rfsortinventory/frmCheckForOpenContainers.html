@@ -1,0 +1,78 @@
+<html>
+    <body>
+        <form name="frmCheckForOpenContainers" target="/console/rfsortinventory.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="4" size="13"
+                                    subtype="Label"
+                                    tag="binding=lblConfirmation"
+                                    type="text" validate="false" value="Mobile_Confirmation"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtInfo" size="20"
+                                    subtype="Label" type="text"
+                                    validate="false" value="Mobile_Open_Sorted"/>
+                                </td>
+                            </tr>
+                           <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtInfo1" size="20"
+                                    subtype="Label" type="text"
+                                    validate="false" value="Containers_exist_in"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtInfo2" size="20"
+                                    subtype="Label" type="text"
+                                    validate="false" value="the_Station_._Do_you"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtInfo3" size="20"
+                                    subtype="Label" type="text"
+                                    validate="false" value="want_to_Close_all"/>
+                                </td>
+                            </tr>
+							 <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="txtInfo4" size="20"
+                                    subtype="Label" type="text"
+                                    validate="false" value="the_Open_Containers_?"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Yes"
+                                    size="4" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfsortinventory.ppc?action=frmCloseAllContainers"
+                                    validate="false" value="Mobile_YES"/>
+									<input col="7" hotkey="F4" name="No"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfsortinventory.ppc?action=frmInventoryScan"
+                                    validate="false" value="Mobile_NO"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

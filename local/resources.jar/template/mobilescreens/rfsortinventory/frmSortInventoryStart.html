@@ -1,0 +1,54 @@
+<html>
+    <body>
+        <form name="frmSortInventoryStart" target="/console/rfsortinventory.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+						    <tr>
+                                <td>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblSorting"
+                                    type="text" validate="false" value="Mobile_Sorting"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblSortStation"
+                                    type="text" validate="false" value="Mobile_Sort_Station"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="txtSortStationId"
+                                    outputbinding="xml:/OpenContainer/@SortStationId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/OpenContainer/@SortStationId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>	
+							
+							<br></br>	
+							
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+									url="/console/rfcart.ppc?action=frmSortInventoryStartValtxtSortStationId"
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr>    
+							
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

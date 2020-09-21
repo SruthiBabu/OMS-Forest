@@ -1,0 +1,109 @@
+<DBSchema>
+	<Entities>
+		<Entity TableName="YFS_AUTO_USER_CONSTRAINTS">
+			<Attributes>
+				<Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    Description="Identifies the wave for which user is currently performing a task."
+                    Name="Wave_No" Nullable="true" XMLName="WaveNo"/>
+				 <Attribute ColumnName="COUNT_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="Identifies the count request for which user is currently performing a task."
+                    Name="Count_Request_No" Nullable="false" XMLName="CountRequestNo"/>
+				 <Attribute ColumnName="MOVE_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="Identifies the move request for which user is currently performing a task."
+                    Name="Move_Request_No" Nullable="false" XMLName="MoveRequestNo"/>
+			</Attributes>
+			<Indices>
+                <Index Name="YFS_AUTO_USER_I1" Unique="false">
+                    <Column Name="BATCH_NO"/>
+                </Index>
+                <Index Name="YFS_AUTO_USER_I2" Unique="false">
+                    <Column Name="SHIPMENT_NO"/>
+                </Index>
+                <Index Name="YFS_AUTO_USER_I3" Unique="false">
+                    <Column Name="CONTAINER_NO"/>
+                </Index>
+                <Index Name="YFS_AUTO_USER_I4" Unique="false">
+                    <Column Name="WAVE_NO"/>
+                </Index>
+                <Index Name="YFS_AUTO_USER_I5" Unique="false">
+                    <Column Name="COUNT_REQUEST_NO"/>
+                </Index>
+                <Index Name="YFS_AUTO_USER_I6" Unique="false">
+                    <Column Name="MOVE_REQUEST_NO"/>
+                </Index>
+            </Indices>
+		</Entity>
+		<Entity TableName="YFS_BATCH">
+			<Attributes>
+                <Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The wave number associated with this batch."
+                    Name="Wave_No" Nullable="false" XMLName="WaveNo"/>
+                <Attribute ColumnName="COUNT_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The identifier of the count request within the context of a document type and organization code of the node."
+                    Name="Count_Request_No" Nullable="false" XMLName="CountRequestNo"/>
+                <Attribute ColumnName="MOVE_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="This field identifies a move request for a organization code of the node."
+                    Name="Move_Request_No" Nullable="false" XMLName="MoveRequestNo"/>
+				 <Attribute ColumnName="CONTAINERIZATION_COMPLETE"
+                    DataType="EnumContainerizationComplete"
+                    DefaultValue="' '"
+                    Description="This field indicates whether containerization is completed for this batch. If containerization is not sucessful, then this field will not be populated."
+                    Name="Containerization_Complete" Nullable="false" XMLName="ContainerizationComplete"/>
+			</Attributes>
+		</Entity>
+		<Entity TableName="YFS_TASK">
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Tasks" ChildName="Task"
+                    ChildXMLName="Task" ForeignEntity="Batch_Location"
+                    Name="Batch_Location" Type="Bidirectional" XMLName="BatchLocation">
+                    <Attribute Name="Batch_Key" ParentName="Batch_Key"/>
+                    <Attribute Name="Shipment_Key" ParentName="Shipment_Key"/>
+                    <Attribute Name="Shipment_Container_Key" ParentName="Shipment_Container_Key"/>
+                    <Attribute Name="Move_Request_Key" ParentName="Move_Request_Key"/>
+					<Attribute Name="Target_LPN_No" ParentName="Tote_Id"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Tasks" ChildName="Task"
+                    ChildXMLName="Task" ForeignEntity="Move_Request"
+                    Name="Move_Request" Type="Unidirectional" XMLName="MoveRequest">
+                    <Attribute Name="Move_Request_Key" ParentName="Move_Request_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Tasks" ChildName="Task"
+                    ChildXMLName="Task"
+                    ForeignEntity="Move_Request_Line"
+                    Name="Move_Request_Line" Type="Unidirectional" XMLName="MoveRequestLine">
+                    <Attribute Name="Move_Request_Line_Key" ParentName="Move_Request_Line_Key"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Tasks" ChildName="Task"
+                    ChildXMLName="Task" ForeignEntity="Count_Request"
+                    Name="Count_Request" Type="Bidirectional" XMLName="CountRequest">
+                    <Attribute Name="Count_Request_Key" ParentName="Count_Request_Key"/>
+                </RelationShip> 
+			</RelationShips>
+		</Entity>
+		<Entity TableName="YFS_USER_TRAN_CONSTRAINTS">
+			<Attributes>
+				 <Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The wave number on which the user can work."
+                    Name="Wave_No" Nullable="false" XMLName="WaveNo"/>
+				  <Attribute ColumnName="COUNT_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The count request in which the user is eligible to work on."
+                    Name="Count_Request_No" Nullable="false" XMLName="CountRequestNo"/>
+				  <Attribute ColumnName="MOVE_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The move request on which the user is eligible to work."
+                    Name="Move_Request_No" Nullable="false" XMLName="MoveRequestNo"/>
+			</Attributes>
+		</Entity>
+	</Entities>
+</DBSchema>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores master list of diversions."
+            EntityType="CONFIGURATION" ListXMLName="Activities"
+            Module="ysc" Name="Activity" Prefix="YFS_"
+            TableName="YFS_ACTIVITY" TableType="CONFIGURATION" XMLName="Activity">
+            <Attributes>
+                <Attribute ColumnName="ACTIVITY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key of the YFS_ACTIVITY table."
+                    Name="Activity_Key" Nullable="false"/>
+                <Attribute ColumnName="ACTIVITY_CODE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="Identifier of an activity E.g. PUTAWAY, COUNT, MONOGRAM, EMBROIDER, PROGRAM FREQUENCY."
+                    Name="Activity_Code" Nullable="false" XMLName="ActivityCode"/>
+                <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The group to which an activity belongs."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="FreeText-200" DefaultValue="' '"
+                    Description="Description of the activity."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="SYSTEM_DEFINED" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="Indicates if the activity is system defined."
+                    Name="System_Defined" Nullable="false" XMLName="SystemDefined"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="LPNType"
+                    DefaultValue="' '"
+                    Description="System defined values for the type of LPN. Currently supported types are Case and Pallet."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_ACTIVITY_PK">
+                <Attribute ColumnName="ACTIVITY_KEY" Name="Activity_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_ACTIVITY_I1" Unique="true">
+                    <Column Name="ACTIVITY_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="Activities" ChildName="Activity"
+                    ChildXMLName="Activity" DeleteCascade="true"
+                    ForeignEntity="Base_Activity_Group"
+                    Name="BaseActivityGroup" Type="Bidirectional" XMLName="BaseActivityGroup">
+                    <Attribute Name="Activity_Group_Id" ParentName="Activity_Group_Id"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains the set of all Activity Groups.Activity Groups are system defined, at installation level."
+            EntityType="CONFIGURATION"
+            ListXMLName="BaseActivityGroupList" Module="ysc"
+            Name="Base_Activity_Group" Prefix="YFS_"
+            TableName="YFS_BASE_ACTIVITY_GROUP"
+            TableType="CONFIGURATION" XMLName="BaseActivityGroup"
+            LockingEntity="Base_Process_Type">
+            <Attributes>
+                <Attribute ColumnName="BASE_ACTIVITY_GROUP_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="Primary key attribute."
+                    Name="Base_Activity_Group_Key" Nullable="false" XMLName="BaseActivityGroupKey"/>
+                <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="Every task type must belong to a task type group.  Task Type Groups are sytem defined."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="ACTIVITY_GROUP_NAME" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="Descriptive name for the Activity group."
+                    Name="Activity_Group_Name" Nullable="false" XMLName="ActivityGroupName"/>
+                <Attribute ColumnName="BASE_ACTIVITY_GROUP_COLOR"
+                    DataType="Text-10" DefaultValue="' '"
+                    Description="Color to represent the activity group in the user time sheet."
+                    Name="Base_Activity_Group_Color" Nullable="false" XMLName="BaseActivityGroupColor"/>
+                <Attribute ColumnName="BASE_PROCESS_TYPE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The base process type that is associated with this base activity group."
+                    Name="Base_Process_Type" Nullable="false" XMLName="BaseProcessType"/>
+                <Attribute ColumnName="MULTI_LOCATION" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="Y: Indicates both source and Target Location.  N: Indicates only 1 Location."
+                    DescriptionRows="9" Name="Multi_Location"
+                    Nullable="false" XMLName="MultiLocation"/>
+                <Attribute ColumnName="ALLOC_TYPE"
+                    DataType="EnumAllocType" DefaultValue="' '"
+                    Description="Indicates if it is HARD_ALLOCATED or SOFT_ALLOCATED."
+                    Name="Alloc_Type" Nullable="false" XMLName="AllocType"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="BASE_ACT_GROUP_PK" Name="YFS_BASE_ACTIVITY_GROUP_PK">
+                <Attribute ColumnName="BASE_ACTIVITY_GROUP_KEY"
+                    Name="Base_Activity_Group_Key" XmlName="BaseActivityGroupKey"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="BASE_ACT_GROUP_I1"
+                    Name="YFS_BASE_ACTIVITY_GROUP_I1" Unique="true">
+                    <Column Name="ACTIVITY_GROUP_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BaseActivityGroupList"
+                    ChildName="Base_ActivityGroup"
+                    ChildXMLName="BaseActivityGroup"
+                    DeleteCascade="true"
+                    ForeignEntity="Base_Process_Type"
+                    Name="BaseProcessType" Type="Bidirectional" XMLName="BaseProcessType">
+                    <Attribute Name="Base_Process_Type" ParentName="Base_Process_Type_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

@@ -1,0 +1,69 @@
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2001, 2018  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project basedir=".." name="Build agent deployment jar" default="create-agent">
+    <property file="${basedir}/properties/sandbox.cfg" prefix="sandbox"/>
+    <property name="dir.install" value="${sandbox.INSTALL_DIR}"/>
+    <property name="dir.tmp" value="${sandbox.INSTALL_DIR}/tmp"/>
+	<property name="platform.version" value="${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}"/>
+    <condition property="agent.version" value="${sandbox.STERLING_FOUNDATION_PRODUCT_VERSION}" else="${sandbox.LIC_PROD_VERSION}">
+	<isset property="sandbox.STERLING_FOUNDATION_PRODUCT_VERSION"/>
+    </condition>
+	<property name="agent.version" value="${sandbox.STERLING_FOUNDATION_PRODUCT_VERSION}"/>
+	
+    <target name="create-agent">
+
+        <taskdef name="dynclasspath" classname="com.yantra.tools.ant.ClassPathHelper" />
+
+        <delete dir="${dir.tmp}"/>
+        <mkdir dir="${dir.tmp}"/>
+
+        <dynclasspath includesproperty="manifest.classpath.fsincludes" pathproperty="classpath.astext" basedir="${sandbox.INSTALL_DIR}"/>
+        <path id="manifest.classpath" >
+            <path path="${classpath.astext}"/>
+        </path>
+        <pathconvert property="manifest.classpath.forjar" pathsep=" " refid="manifest.classpath" targetos="unix" >
+            <map from="," to=" "/>
+            <map from="${dir.install}/" to="/"/>
+        </pathconvert>
+
+        <unzip dest="${dir.tmp}" src="${dir.install}/jar/install_foundation.jar"  >
+            <patternset>
+                <include name="com/sterlingcommerce/woodstock/ldr/DynamicClassLoader.class" />
+            </patternset>
+        </unzip>
+    	
+
+        <unzip dest="${dir.tmp}" src="${dir.install}/jar/platform_afc/${platform.version}/platform_afc.jar"  >
+            <patternset>
+                <include name="com/yantra/integration/adapter/IntegrationAdapterLauncher*" />
+            </patternset>
+        </unzip>
+    	
+    	
+    	<jar destfile="${dir.tmp}/properties.jar" basedir="${dir.install}/">
+    		<patternset>
+    			<include name="properties/**"/>
+    			<include name="resources/**"/>
+    			<exclude name="**/*.in"/>
+    			<exclude name="**/backups/**"/>
+    		</patternset>
+    	</jar>
+		
+    	
+        <jar destfile="${dir.install}/external_deployments/agent_${agent.version}.jar" >
+            <manifest>
+                <attribute name="Main-Class" value="com.yantra.integration.adapter.IntegrationAdapterLauncher"/>
+                <section name="IntegrationAdapterLauncher" >
+                	<attribute name="Version" value="${agent.version}"/>                	
+                    <attribute name="ClassPath" value="${manifest.classpath.forjar}"/>
+                </section>
+            </manifest>
+            <zipfileset dir="${dir.tmp}"/>
+            <zipfileset dir="${dir.install}/" includes="${manifest.classpath.fsincludes}" />
+        </jar>
+    </target>
+</project>

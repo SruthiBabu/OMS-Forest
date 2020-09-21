@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2014 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--YFSGetExternalAvailabilityUE template-->
+<Promise AggregateSupplyOfNonRequestedTag="Y" AllocationRuleID=""
+    CarrierServiceCode="" CheckCapacity="" CheckInventory="Y"
+    ConsiderCurrentSlot="" ConsiderSupplementalCapacity="Y"
+    CustomerID="" DeliveryDateBased="Y" DemandType=""
+    DependencyShippingRule="" DistanceToConsider=""
+    DistanceUOMToConsider="" DistributionRuleId="" EnterpriseCode=""
+    ExpirationDate="" FillQuantity="" FulfillmentType="" IgnoreMinNotificationTime="Y"
+    IgnorePromised="Y" IgnoreUnpromised="Y" IsScheduleOrReleaseMode=""
+    IsPartialSubstitutionAllowed="Y" IsSubstitutionAllowed=""
+    MaximumRecords="" OrderReference="" OptimizationType="" OrganizationCode="Required"
+    ReceivingNode="" ReqEndDate="" ReqStartDate=""
+    ReturnMultipleSrvcSlots="Y" ReturnSlotsWithUnavailableCapacity=""
+    SCAC="" ScacAndServiceKey="" Segment="" SegmentType="" ShipNode=""
+    ShipTogetherInRatio="" SourcingClassification="" UseUnplannedInventory="" IsIntendToUpdate="" DetermineHighestPriorityNodeForBackOrderedQty="">
+    <ShipNodes>
+        <ShipNode Node=""/>
+    </ShipNodes>
+    <ExcludedShipNodes>
+        <ExcludedShipNode Node="" SupressProcurement="Y" SupressSourcing="Y"/>
+    </ExcludedShipNodes>
+    <ShipToAddress AddressLine1="" AddressLine2="" AddressLine3=""
+        AddressLine4="" AddressLine5="" AddressLine6=""
+        AlternateEmailID="" Beeper="" City="" Company="" Country=""
+        DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo=""
+        EveningPhone="" FirstName="" IsCommercialAddress="" JobTitle=""
+        LastName="" MiddleName="" MobilePhone="" OtherPhone=""
+        PersonID="" State="" Suffix="" TaxGeoCode="" Title="" ZipCode=""/>
+        <SingleNodeConstraints >
+        <SingleNodeConstraint >
+            <PromiseLine  LineId=""/>
+        </SingleNodeConstraint>
+    </SingleNodeConstraints>
+    <LineShipCompleteConstraints >
+        <LineShipCompleteConstraint >
+            <PromiseLine  IsSingleNodeDate=""
+                LineId="" ShipComplete=""/>
+        </LineShipCompleteConstraint>
+    </LineShipCompleteConstraints>
+    <FillPercentConstraints>
+    <FillPercentConstraint LineId="" OrderLineReference="" FillQuantity=""/>
+    </FillPercentConstraints>
+    <PromiseLines>
+        <PromiseLine BundleParentLineId="" CarrierServiceCode="" DeliveryMethod=""
+            DepartmentCode="" DistributionRuleId="" FillQuantity=""
+            FreightTerms="" FulfillmentType="" GroupID=""
+            IsForwardingAllowed="" IsProcurementAllowed="" IsSubstitutionAllowed=""
+            ItemID="Required" KitQty="" LineId="Required"
+            MinShipByDate="" OriginalItemID="" OriginalUOM="" OriginalPC="" ProcureFromNode="" ProductClass=""
+            ReceivingNode="" ReqEndDate="" ReqStartDate=""
+            RequiredQty="Required" SCAC="" ScacAndServiceKey=""
+            Segment="" SegmentType="" ShipNode="" UnitOfMeasure="" ConsolidationGroupKey=""  OrderLineReference="">
+            <ShipNodes>
+                <ShipNode Node=""/>
+            </ShipNodes>
+            <ExcludedShipNodes>
+                <ExcludedShipNode Node="" SupressProcurement="Y" SupressSourcing="Y"/>
+            </ExcludedShipNodes>
+            <ShipToAddress AddressLine1="" AddressLine2=""
+                AddressLine3="" AddressLine4="" AddressLine5=""
+                AddressLine6="" AlternateEmailID="" Beeper="" City=""
+                Company="" Country="" DayFaxNo="" DayPhone=""
+                Department="" EMailID="" EveningFaxNo="" EveningPhone=""
+                FirstName="" IsCommercialAddress="" JobTitle=""
+                LastName="" MiddleName="" MobilePhone="" OtherPhone=""
+                PersonID="" State="" Suffix="" TaxGeoCode="" Title="" ZipCode=""/>
+            <Tag BatchNo="" LotAttribute1="" LotAttribute2=""
+                LotAttribute3="" LotKeyReference="" LotNumber=""
+                ManufacturingDate="" RevisionNo=""/>
+            <Reservations >
+			   <Reservation AcrossAllTag="" AvailableQuantity=""
+                    FirstShipDate="" LastShipDate=""  TagNumber="" Quantity="" DemandType=""
+                    OrganizationCode="" ShipNode="" Track="" ReservationID="" OrderLineReference="" ConsolidationGroupKey="" />
+            </Reservations >
+        </PromiseLine>
+    </PromiseLines>    
+</Promise>

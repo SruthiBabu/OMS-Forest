@@ -1,0 +1,104 @@
+<html>
+    <body>
+        <form name="frmUsrDrvnPutawayCriteria" target="/console/rfdrvnputaway.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="10" size="9"
+                                    subtype="Label"
+                                    tag="binding=lblTask"
+                                    type="text" validate="false" value="Mobile_Criteria"/>									
+                                    <!-- <input col="1"
+                                    name="CurrentInnerPanelID"
+                                    size="15" subtype="Hidden"
+                                    tag="binding=CurrentInnerPanelID"
+                                    type="hidden" validate="false" value="rfdrvnputawayD1"/>
+                                    <input col="1" name="entitybase"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=entitybase"
+                                    type="hidden" validate="false" value="/rf/wms/userdrivenputaway"/> -->
+									<input col="1"
+                                    inputbinding="xml:/Task/@EquipmentId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+									<input col="1"
+                                    inputbinding="xml:/Task/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+                              </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lbllocation"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task1/@SourceLocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+							<tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblItemId"
+                                    type="text" validate="false" value="Mobile_SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task/@ItemId"
+                                    name="txtItemId"
+                                    outputbinding="xml:/Task/@ItemId"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Task/@ItemId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                             <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url=""
+                                    validate="false" value="Mobile_Go"/>
+                                </td>
+                            </tr> 
+							<tr>
+								<td>
+									<input col="1" hotkey="F8" value="Deposit" 
+									size="7"  type="button" left="600" 
+									validate="false"  subtype="Command" 
+									url="/console/rfdrvnputaway.ppc?action=frmPrepareForDeposit" name="Deposit"  />
+								</td>
+							</tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

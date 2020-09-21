@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:lxslt="http://xml.apache.org/xslt" version="1.0">
+   <xsl:output method="text" encoding="utf-8" />
+   <xsl:template match="Order">
+	The order with Order Number: <xsl:value-of select="@OrderNo" /> is awaiting approval from <xsl:value-of select="CustomerContact/@FirstName" /><xsl:text> </xsl:text><xsl:value-of select="CustomerContact/@LastName" /> (<xsl:value-of select="CustomerContact/@UserID" />), but we did not have a valid e-mail address to inform the contact.   
+	<xsl:if test="CustomerContact/@DayPhone">
+	You may call the approver at <xsl:value-of select="CustomerContact/@DayPhone" />.
+	</xsl:if>
+   </xsl:template>
+</xsl:stylesheet>

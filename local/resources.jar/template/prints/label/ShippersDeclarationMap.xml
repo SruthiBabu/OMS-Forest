@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+   	<LabelField Binding="/Manifest/ShipNodePersonInfo/@AddressLine1" LabelFieldName="ShippingAddress1" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNodePersonInfo/@AddressLine2" LabelFieldName="ShippingAddress2" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNodePersonInfo/@AddressLine3" LabelFieldName="ShippingAddress3" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNodePersonInfo/@City" LabelFieldName="ShippingCity" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNodePersonInfo/@State" LabelFieldName="ShippingState" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNodePersonInfo/@ZipCode" LabelFieldName="ShippingZipCode" RepeatingElement=""/>
+	<LabelField Binding="/Manifest/ShipNodePersonInfo/@Country" LabelFieldName="ShippingCountry" RepeatingElement=""/>
+	
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/@ProNo" LabelFieldName="ShipmentProNo" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/@UnitOfMeasure" LabelFieldName="ItemUOM" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/@ProperShippingName" LabelFieldName="ProperShippingName" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/@HazardClass" LabelFieldName="HazardClass" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/@LabelCode" LabelFieldName="LabelCode" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/@UNNumber" LabelFieldName="UNNumber" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/@PackingGroup" LabelFieldName="PackingGroup" RepeatingElement="HazardousLine"/>
+
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/ToAddress/@Company" LabelFieldName="ShipToName" RepeatingElement="Shipment"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/ToAddress/@AddressLine1" LabelFieldName="ShipToAddressLine1" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/ToAddress/@AddressLine2" LabelFieldName="ShipToAddressLine2" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/ToAddress/@City" LabelFieldName="ShipToCity" RepeatingElement="HazardousLine"/>
+	<LabelField Binding="/Manifest/HazardousLines/HazardousLine/ToAddress/@State" LabelFieldName="ShipToState" RepeatingElement="HazardousLine"/>
+	
+
+	<RepeatingFields>
+        <RepeatingField LabelFieldName="ShipmentProNo" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ProperShippingName" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="HazardClass" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="LabelCode" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="UNNumber" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="PackingGroup" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ShipToName" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ShipToAddressLine1" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ShipToAddressLine2" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ShipToCity" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ShipToState" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+		<RepeatingField LabelFieldName="ItemUOM" MaxFirstPage="5"
+            MaxLastPage="5" MaxMidPage="5"/>
+	</RepeatingFields>
+</LabelFieldMap>

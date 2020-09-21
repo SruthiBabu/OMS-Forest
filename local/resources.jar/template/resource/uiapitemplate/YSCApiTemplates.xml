@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2020 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<UIApplication Id="YSC" Description="YSC UI Application" ModuleCode="ysc">   	
+	<!-- 
+		The attributes 'OrganizationCode' and 'TemplateType' are set to 'DEFAULT' and '00' respectively.
+
+		Api templates can also be defined from similar XML(s) in the same module or from another modules.
+		Any number of templates can be defined for an API depending on the usage but the TemplateId has 
+		to be distinct so that it persists in the database separately and can be retrieved uniquely.
+
+		All the Api Templates given in a XML are defined under a ModuleCode (set at the top node).
+		Besides this api templates can be grouped under a View identified by a ViewId. In order to make
+		TemplateId unique, every TemplateId given below is prefixed with <ModuleCode><ViewId>_. 
+		
+		eg: For TemplateId="getOrderList_1" given below the PLT_API_TEMPLATE.Template_Id will be 
+		populated as svcstrmgmt_getOrderList_1 where svc is the ModuleCode and strmgmt is the ViewId.
+
+		The maximum length allowed for TemplateId (including it's prefix) is 40.
+		Some sample templates are given below.
+	-->
+	<!-- <APIList>
+		<API ApiName="">
+			<TemplateList>
+				<Template TemplateId="" Description=""/>
+			</TemplateList>
+		</API>
+	</APIList> -->
+	<Views>
+		<View ViewId="buc_inv" Description="Business User Controls Common Code List">
+			<APIList>
+				<API ApiName="getCommonCodeList">
+					<TemplateList>
+						<Template TemplateKey="ysc_ui_api_buc_tpl_14" TemplateId="getCommonCodeList_2001" 
+						Description="API template for BUC GIV inv pages">
+							<CommonCodeList>
+								<CommonCode CodeLength=" " CodeLongDescription=" " CodeName=" " CodeShortDescription=" " CodeSymbol=" " CodeType=" " CodeValue=" " CommonCodeKey=" " DocumentType=" " MeantForEnterprise=" " MeantForInternal=" " MeantForSupplier=" " OrganizationCode=" " QualifiedTagId=" " SystemDefinedCode=" ">
+									<LocalizedAttributes/>
+									<CommonCodeAttributeList/>
+								</CommonCode>
+							</CommonCodeList>
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+		<View ViewId="buc" Description="Business User Controls Resource Hierarchy">
+			<APIList>
+				<API ApiName="getResourceHierarchy">
+					<TemplateList>
+						<Template TemplateKey="ysc_ui_api_buc_tpl_16" TemplateId="getResourceHierarchy_2001" 
+						Description="API template for BUC framework">
+							<Resource Active="" IsReadOnly="" ResourceId="" ResourceSubType="" ResourceType="" >
+								<SubResource>
+									<Resource Active="" IsReadOnly="" ResourceId="" ResourceSubType="" ResourceType=""/>
+								</SubResource>
+							</Resource>						
+						</Template>
+					</TemplateList>
+				</API>
+			</APIList>
+		</View>
+	</Views>
+</UIApplication>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<OrderLine>
+    <OrderLineTranQuantity/>
+    <DerivedFrom/>
+    <!-- The DerivedFrom element is required if the orderline is to be derived from an existing orderline. OrderLineKey or OrderHeaderKey, PrimeLineNo, SubLineNo or OrderNo, EnterpriseCode, DocumentType, PrimeLineNo, SubLineNo are required to identify the orderline to derive from. The OrderReleaseKey or OrderHeaderKey, ReleaseNo or OrderNo, DocumentType, EnterpriseCode, ReleaseNo are required to identify the orderrelease to derive from-->
+    <Item/>
+    <OrderLineOptions>
+        <OrderLineOption>
+            <CustomAttributes/>
+        </OrderLineOption>
+    </OrderLineOptions>
+    <PersonInfoShipTo/>
+    <!--Optional-->
+    <PersonInfoMarkFor/>
+    <!--Optional-->
+    <Instructions>
+        <Instruction/>
+        <NumberOfInstructions/>
+    </Instructions>
+    <LinePriceInfo/>
+    <Promotions>
+        <Promotion/>
+    </Promotions>
+    <LineCharges>
+        <LineCharge/>
+    </LineCharges>
+    <LineTaxes>
+        <LineTax/>
+    </LineTaxes>
+    <!--Optional-->
+    <References>
+        <Reference/>
+    </References>
+    <!--Optional-->
+    <KitLines>
+        <KitLine>
+            <KitLineTranQuantity/>
+        </KitLine>
+    </KitLines>
+    <AdditionalAddresses>
+        <AdditionalAddress>
+            <PersonInfo/>
+        </AdditionalAddress>
+    </AdditionalAddresses>
+    <Schedules>
+        <Schedule>
+            <ScheduleTranQuantity/>
+        </Schedule>
+    </Schedules>
+    <Dependency/>
+    <OrderDates>
+        <OrderDate/>
+    </OrderDates>
+    <OrderLineInvAttRequest/>
+    <!-- Based on new line type one of these nodes should be included.
+	If new line is a product line only the <Serviceline> should be included.
+	If new line is a service line only the <Productline> should be included.-->
+    <ProductAssociations>
+        <ProductAssociation>
+            <ProductLine/>
+        </ProductAssociation>
+    </ProductAssociations>
+    <DeliveryAssociations>
+        <DeliveryAssociation>
+            <ServiceLine/>
+        </DeliveryAssociation>
+    </DeliveryAssociations>
+    <ProductItems>
+        <ProductItem/>
+    </ProductItems>
+    <ChildOrderLineRelationships>
+        <OrderLineRelationship>
+            <ChildLine/>
+        </OrderLineRelationship>
+    </ChildOrderLineRelationships>
+    <ParentOrderLineRelationships>
+        <OrderLineRelationship>
+            <ParentLine/>
+        </OrderLineRelationship>
+    </ParentOrderLineRelationships>
+    <OrderLineReservations>
+        <OrderLineReservation/>
+    </OrderLineReservations>
+    <Notes>
+        <Note/>
+    </Notes>
+    <OrderLineSourcingControls>
+        <OrderLineSourcingCntrl/>
+    </OrderLineSourcingControls>
+    <OrderHoldTypes>
+        <OrderHoldType/>
+    </OrderHoldTypes>
+    <OrderOverride/>
+    <AdditionalLinePrices>
+        <AdditionalLinePrice>
+            <Promotions>
+                <Promotion/>
+            </Promotions>
+            <Awards>
+                <Award/>
+            </Awards>
+        </AdditionalLinePrice>
+    </AdditionalLinePrices>
+    <CustomAttributes/>
+</OrderLine>

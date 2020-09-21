@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite, IBM Order Management (5737-D18)
+(C) Copyright IBM Corp. 2005, 2017 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<Entities>
+    <Entity EntityTitle="Logistics_Management_Rules" EntityName="LogisticsManagement" PrimaryKeyAttributeName="OrganizationCode">
+        <YCPPM353 Title="LM_Rules" ScreenType="Tree">
+         <TreeInfo RelationshipAttribute="">
+            <FilterNodeList>
+               <FilterNode NodeName="Tables"/>
+            </FilterNodeList>
+            <Get>
+               <API Servlet="com.yantra.ydm.ui.backend.YDMConfigurationRulesAPI" APIName="getConfigRulesXML" Message="Message_Loading_Logistics_Management_Rules">
+                   <StaticAttributes ApplicationCode="ydm"/>
+                </API>    
+            </Get>
+            <DeleteDocumentType>
+                    <API Servlet="/yantra/entities/ModuleDocumentType/delete" APIName="" Message="Message_Deleting_Module_Document_Type"/>
+            </DeleteDocumentType>
+         </TreeInfo>
+      </YCPPM353>
+	</Entity>
+	<Entity EntityTitle="Routing_Guide" EntityName="RoutingGuide" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="RoutingGuideKey">
+		<ConfigurationAttributes TableName="YFS_ROUTING_GUIDE">
+			 <ApplicationSpecificAttributes ApplicationCode="ydm" PermissionId="YSYDM014" IsPrimary="Y"/>
+			 <ApplicationSpecificAttributes ApplicationCode="omd" PermissionId="YSOMD047" />
+		</ConfigurationAttributes>
+		<YDM00100 Title="Routing_Guides" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="RoutingGuide">
+				<List AttributeName="@RoutingGuideName" ColumnTitle="Name" DataType="Text-100"/>
+				<List AttributeName="@RoutingGuideNo" ColumnTitle="Routing_Guide_#" DataType="DocumentNo"/>
+				<List AttributeName="@EffectiveDate" ColumnTitle="Effective_Date" DataType="Date"/>
+				<List AttributeName="/SelectionCriteria/@FreightTermsQueryAndList" ColumnTitle="Freight_Terms" DataType="Text-40"/>
+				<CreateNew DisplayForm="YDM00101">
+					<StaticAttributes>
+						<SelectionCriteria FreightTermsQuery="EQ" DepartmentCodeQuery="EQ" ItemClassificationQuery="EQ"/>
+					</StaticAttributes>
+					<DynamicAttributes OrganizationCode="@OrganizationCode" Type="@Type"/>
+				</CreateNew>
+				<Modify DisplayForm="YDM00101"/>
+                <SaveAs DisplayForm="YDM00101">
+                    <DynamicAttributes SaveAsRoutingGuideKey="@RoutingGuideKey"/>
+                </SaveAs>
+				<Delete>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="deleteRoutingGuide" Message="Message_Deleting_Routing_Guide"/>
+				</Delete>
+			</ListInfo>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="listRoutingGuide" Message=""/>
+		</YDM00100>
+		<YDM00101 Title="Routing_Guide_Details" ScreenType="Detail">
+			<DetailInfo>
+				<Get>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="doNothing" Message="Message_Loading_Routing_Guide"/>
+				</Get>
+				<Modify>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="modifyRoutingGuide" Message="Message_Saving_Routing_Guide"/>
+				</Modify>
+				<CreateNew>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="createRoutingGuide" Message="Message_Creating_Routing_Guide"/>
+				</CreateNew>
+				<Delete>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="deleteRoutingGuide"  Message="Message_Deleting_Routing_Guide"/>
+				</Delete>
+			</DetailInfo>
+		</YDM00101>
+		<YDM00102 Title="Routing_Guide" ScreenType="Detail">
+			<DetailInfo>
+				<Get>
+					<InnerPanels>
+					</InnerPanels>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getRoutingGuide" Message="Message_Loading_Routing_Guide"/>
+				</Get>
+				<CreateNew>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="createRoutingGuide" Message="Message_Creating_Routing_Guide"/>
+				</CreateNew>
+				<Modify>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="modifyRoutingGuide" Message="Message_Saving_Routing_Guide"/>
+				</Modify>
+				<Delete>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="deleteRoutingGuide"  Message="Message_Deleting_Routing_Guide"/>
+				</Delete>
+				<LogicalKeys>
+					<LogicalKey ComponentType="JTextField" ComponentName="txtRoutingGuideNo"/>
+				</LogicalKeys>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="QryTypeMultiSelect" XMLName="QryTypeMultiSelect"/>
+				<Table Name="FreightTerms" XMLName="FreightTerms">
+					<DynamicAttributes CallingOrganizationCode="@FreightTermsCallingOrg"/>
+                </Table>
+				<Table Name="ClassificationPurpose" XMLName="ItemClassification">
+					<DynamicAttributes CallingOrganizationCode="@OrganizationCode"/>
+					<StaticAttributes ClassificationPurposeCode="ROUTING_GUIDE_CLASS"/>
+				</Table>
+			</MasterData>
+		</YDM00102>
+	</Entity>
+	<Entity EntityTitle="Routing_Guide_Detail" EntityName="RoutingGuideDetail" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="RoutingGuideDetailKey">
+		<YDM00103 Title="Routing_Guide_Line_Search" ScreenType="Search">
+			<SearchInfo ListFormName="YDM00104" ListPanel="pnlList"/>
+			<MasterData>
+				<Table Name="RoutingGuide" XMLName="RoutingGuide">
+					<DynamicAttributes RoutingGuideKey="@RoutingGuideKey"/>
+                </Table>
+				<Table Name="CarrierService" XMLName="CarrierService" AllRecords="Y"/>
+ 				<Table Name="ScacAndService" XMLName="ScacAndService"> 
+					<CodeAttributes>
+						<CodeAttribute ScacAndServiceKey="@ScacAndServiceKey"/>
+					</CodeAttributes>
+				</Table> 
+			</MasterData>
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Message_Getting_Routing_Guide_Lines"/>
+		</YDM00103>
+		<YDM00104 Title="Search_Results" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="RoutingGuideDetail" MultiSelection="N" >
+				<List AttributeName="/ShipFrom/@ShipFromNodeQueryAndList" ColumnTitle="Ship_From_Node" DataType="Text-100"/>
+				<List AttributeName="/ShipFrom/@ShipFromStateQueryAndList" ColumnTitle="Ship_From_State" DataType="Text-100"/>
+				<List AttributeName="/ShipFrom/@ShipFromCityQueryAndList" ColumnTitle="Ship_From_City" DataType="Text-100"/>
+				<List AttributeName="/ShipFrom/@ShipFromZipQueryAndList" ColumnTitle="Ship_From_Postal_Code" DataType="Text-100"/>
+				<List AttributeName="/ShipTo/@ShipToNodeQueryAndList" ColumnTitle="Ship_To_Node" DataType="Text-100"/>
+				<List AttributeName="/Region/@RegionName" ColumnTitle="Ship_To_Region" DataType="Text-100"/>
+				<List AttributeName="/ShipTo/@ShipToStateQueryAndList" ColumnTitle="Ship_To_State" DataType="Text-100"/>
+				<List AttributeName="/ShipTo/@ShipToCityQueryAndList" ColumnTitle="Ship_To_City" DataType="Text-100"/>
+				<List AttributeName="/ShipTo/@ShipToZipQueryAndList" ColumnTitle="Ship_To_Postal_Code" DataType="Text-100"/>
+				<List AttributeName="/RoutingGuideDetailCarrierList/RoutingGuideDetailCarrier/@ScacAndServiceCode" ColumnTitle="SCAC" DataType="Text-100"/>
+				<CreateNew DisplayForm="YDM00105">
+					<StaticAttributes CheckFreightTermsOverride="N" CheckShipToOverride="N" RadioRevisedShipTo="NODE">
+						<ShipFrom ShipFromCountryQuery="EQ" ShipFromStateQuery="EQ" ShipFromZipQuery="EQ" ShipFromNodeQuery="EQ" ShipFromCityQuery="EQ"/>
+						<ShipTo ShipToCountryQuery="EQ" ShipToStateQuery="EQ" ShipToZipQuery="EQ" ShipToNodeQuery="EQ" ShipToConsolNodeQuery="EQ" ShipToStoreQuery="EQ" ShipToCityQuery="EQ"/>
+					</StaticAttributes>
+					<DynamicAttributes RoutingGuideKey="@RoutingGuideKey"/>
+				</CreateNew>
+				<Modify DisplayForm="YDM00105"/>
+                <SaveAs DisplayForm="YDM00105"/>
+				<Delete>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="deleteRoutingGuideDetail" Message="Message_Deleting_Routing_Guide_Detail"/>
+				</Delete>
+			</ListInfo>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="listRoutingGuideDetail" Message="Message_Retrieving_Search_Results"/>
+		</YDM00104>
+		<YDM00105 Title="Routing_Guide_Line_Details" ScreenType="Detail">
+			<DetailInfo>
+				<Get>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getRoutingGuideDetail" Message="Message_Getting_Routing_Guide_Lines"/>
+					<InnerPanels>
+						 <ListPanel FormName="YDM00119" ListPanel="pnlShipVia"
+									InsertUnderElement="xml:/RoutingGuideDetail" LoadOnClick="Y">
+							<DynamicAttributes RoutingGuideDetailKey="@RoutingGuideDetailKey" />
+						</ListPanel> 
+					</InnerPanels>
+				</Get>
+				<CreateNew>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="createRoutingGuideDetail"  Message="Message_Creating_Routing_Guide_Line"/>
+				</CreateNew>
+				<Modify>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="modifyRoutingGuideDetail"  Message="Message_Saving_Routing_Guide_Line"/>
+				</Modify>
+				<LogicalKeys>
+				</LogicalKeys>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="QryTypeMultiSelect" XMLName="QryTypeMultiSelect"/>
+				<Table Name="CommonCode" XMLName="Country" AllRecords="Y">
+				   <StaticAttributes CodeType="COUNTRY"/>
+				</Table>
+				<Table Name="ShipNode">
+					<CodeAttributes>
+						<CodeAttribute ShipnodeKey="@ShipnodeKey"/>
+					</CodeAttributes>
+				</Table>
+				<Table Name="FreightTerms" XMLName="FreightTerms">
+					<DynamicAttributes CallingOrganizationCode="@FreightTermsCallingOrg"/>
+                </Table>
+				<Table Name="CarrierService" XMLName="CarrierService" AllRecords="Y"/>
+                 <Table Name="ScacAndService" XMLName="ScacAndService"> 
+					<CodeAttributes>
+						<CodeAttribute ScacAndServiceKey="/ScacAndService@ScacAndServiceKey"/>
+					</CodeAttributes>
+				</Table> 
+				<Table Name="Region" XMLName="Region">
+				   <DynamicAttributes RegionSchemaKey="@RegionSchemaKey" RegionSchemaName="@RegionSchemaName" Country="@Country"/>
+				   <CodeAttributes>
+					  <CodeAttribute RegionKey="@ShipToRegion"/> 
+				   </CodeAttributes>
+				</Table>
+				<Table Name="RegionUsage" XMLName="RegionUsage">
+        			<StaticAttributes Purpose="ROUTING"  ItemGroupCode="PROD"/>
+					<DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode"/>
+					<CodeAttributes>
+						<CodeAttribute RegionUsageKey="@RegionUsageKey"/> 
+					</CodeAttributes>
+				</Table>
+			</MasterData>
+		</YDM00105>
+		<YDM00106 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@Value" ColumnTitle="Freight_Terms" DataType="Text-40" EditableAddRow="Y" Editable="N" EditableComponent="combobox">
+					<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/RoutingGuideAttr/MasterData/FreightTermss@FreightTerms"/>
+					<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="FreightTerms"/>
+					<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="FreightTerms"/>
+	                <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+            <MasterData>
+				<Table Name="FreightTerms" XMLName="FreightTerms">
+					<DynamicAttributes CallingOrganizationCode="@FreightTermsCallingOrg"/>
+                </Table>
+            </MasterData>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getMasterData" Message=""/>
+        </YDM00106>
+		<YDM00107 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@Value" ColumnTitle="Department_Code" DataType="Text-20" Editable="N" EditableAddRow="Y" EditableComponent="textbox">
+	                <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getMasterData" Message=""/>
+        </YDM00107>
+		<YDM00108 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@Value" ColumnTitle="Item_Classification" DataType="Text-40" Editable="N" EditableAddRow="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor">
+					<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/RoutingGuideAttr/MasterData/Categories@Category"/>
+					<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CategoryID"/>
+					<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CategoryID"/>
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YCM00037"/>
+					<ComponentClientProperty Name="YCPLookup.searchFormId" Value="YCM00037"/>
+					<ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="false"/>
+					<ComponentClientProperty Name="YCPLookup.alwaysUseTextField" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.supressValidations" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.suppressInitialDefaulting" Value="Y"/>
+					<ComponentClientProperty Name="YCPLookup.disableCreateNew" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.lookupSearchElement" Value="&lt;SearchElement>&lt;DynamicAttributes CallingOrganizationCode=&quot;@OrganizationCode&quot; AttributeName=&quot;@ItemClassAttrName&quot;/>&lt;/SearchElement>"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="doNothing" Message=""/>
+        </YDM00108>
+
+		<YDM00109 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@Value" ColumnTitle="Country" DataType="Country" Editable="N" EditableAddRow="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor">
+					<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/RoutingGuideAttr/MasterData/Countrys@CommonCode"/>
+					<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="CodeShortDescription"/>
+					<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="CodeValue"/>
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YCPPM061"/>
+					<ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.searchFormId" Value="YCPPM061"/>                
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+            <MasterData>
+                <Table Name="CommonCode" XMLName="Country" AllRecords="Y">
+                    <StaticAttributes CodeType="COUNTRY"/>
+                </Table>
+            </MasterData>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getMasterData" Message=""/>
+        </YDM00109>
+		<YDM00110 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@Value" ColumnTitle="State" DataType="State" Editable="N" EditableAddRow="Y" EditableComponent="textbox">
+	                <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getMasterData" Message=""/>
+        </YDM00110>
+		<YDM00121 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@Value" ColumnTitle="City" DataType="City" Editable="N" EditableAddRow="Y" EditableComponent="textbox">
+	                <ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getMasterData" Message=""/>
+        </YDM00121>
+		<YDM00111 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@StartZip" ColumnTitle="From_Postal_Code" DataType="ZipCode" Editable="N" EditableAddRow="Y" EditableComponent="textbox">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@EndZip" ColumnTitle="To_Postal_Code" DataType="ZipCode" Editable="N" EditableAddRow="Y" EditableComponent="textbox">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getMasterData" Message=""/>
+        </YDM00111>
+		<YDM00112 Title="List_of_Values" ScreenType="List" >
+            <ListInfo NamePrefix="/" ChildTag="Value" ShowFooter="N" ShowOkCancelPanel="Y">
+				<List AttributeName="@Value" ColumnTitle="Node" DataType="ShipNode" Editable="N" EditableAddRow="Y" EditableComponent="com.yantra.ycp.ui.screens.util.YCPLookupCellEditor">
+					<ComponentClientProperty Name="YFCXMLBinding.listName" Value="xml:/RoutingGuideAttr/MasterData/ShipNodes@ShipNode"/>
+					<ComponentClientProperty Name="YFCXMLBinding.descriptionAttribute" Value="ShipnodeKey"/>
+					<ComponentClientProperty Name="YFCXMLBinding.codeAttribute" Value="ShipnodeKey"/>
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.searchActionId" Value="YCPPM088"/>
+					<ComponentClientProperty Name="YCPLookup.useGenericSearch" Value="true"/>
+					<ComponentClientProperty Name="YCPLookup.searchFormId" Value="YCPPM088"/>                
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete/>
+			</ListInfo>
+            <MasterData>
+				<Table Name="ShipNode">
+					<CodeAttributes>
+						<CodeAttribute ShipnodeKey="@ShipnodeKey"/>
+					</CodeAttributes>
+				</Table>
+            </MasterData>
+			<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getMasterData" Message=""/>
+        </YDM00112>
+	</Entity>
+	<Entity EntityTitle="Routing_Guide_Detail_Carrier" EntityName="RoutingGuideDetailCarrier" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="RoutingGuideDetailCarrierKey">
+		<ConfigurationAttributes  TableName="YFS_ROUTING_GUIDE_DTL_CARRIER">
+				<ApplicationSpecificAttributes ApplicationCode="ydm" PermissionId="YSYDM014" IsPrimary="Y"/>
+				<ApplicationSpecificAttributes ApplicationCode="omd" PermissionId="YSOMD047" />
+		</ConfigurationAttributes>
+		<YDM00119 Title="Carrier_Services" ScreenType="List" >
+			   <ListInfo NamePrefix="/" ChildTag="RoutingGuideDetailCarrier" >
+					<List AttributeName="@Priority" ColumnTitle="Priority" DataType="Integer"/>	
+					<List AttributeName="@ScacAndServiceCode" ColumnTitle="Carrier_/_Service" DataType="Text-40"/>
+					<List AttributeName="@BreakBulkNode" ColumnTitle="Break_Bulk_Node" DataType="Text-24"/>
+					<List AttributeName="@ContactSpecified" ColumnTitle="Contact_Specified" DataType="Boolean"/>    
+					<CreateNew DisplayForm="YDM00120" DisplayMode="Dialog">
+						<DynamicAttributes RoutingGuideDetailKey="@RoutingGuideDetailKey" />
+					</CreateNew>
+					<Modify DisplayForm="YDM00120" DisplayMode="Dialog">
+						<DynamicAttributes RoutingGuideDetailKey="@RoutingGuideDetailKey" ScacAndServiceCode="@ScacAndServiceCode" Priority="@Priority"  ContactKey="@ContactKey"/>
+					</Modify>
+					<Delete>
+						<API Servlet="/yantra/entities/RoutingGuideDetailCarrier/delete" APIName=""
+							Message="Deleting_Routing_Guide_Detail_Carrier"/>
+					</Delete>
+			  </ListInfo>
+			  <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+					Message="Retrieving_Routing_Guide_Detail_Carriers">
+					<DynamicAttributes RoutingGuideDetailKey="@RoutingGuideDetailKey"/>
+			  </API>
+		   </YDM00119>
+		<YDM00120 Title="Carrier_Services" ScreenType="Detail">
+			<DetailInfo>
+				  <Get>
+					<API Servlet="com.yantra.ydm.uibackend.YDMRoutingGuideAPI" APIName="getRoutingGuideCarrierDetail"
+					 Message="Loading_Routing_Guide_Detail_Carrier"/>
+					 <InnerPanels>
+						<AddressPanel FormName="YDM00113" ListPanel="pnlContactAddress" AddressElement="PersonInfoContact"/>
+					</InnerPanels>
+					</Get>
+					<CreateNew>
+					   <API Servlet="/yantra/entities/RoutingGuideDetailCarrier/create" APIName="" Message="Saving_Routing_Guide_Detail_Carrier"/>
+						<DynamicAttributes RoutingGuideDetailKey="@RoutingGuideDetailKey" Priority="@Priority" ScacAndServiceCode="@ScacAndServiceCode" ContactKey="@ContactKey"/>
+					</CreateNew>
+					<Modify>
+					   <API Servlet="/yantra/entities/RoutingGuideDetailCarrier/modify" APIName="" Message="Saving_Routing_Guide_Detail_Carrier"/>
+						<DynamicAttributes RoutingGuideDetailKey="@RoutingGuideDetailKey" RoutingGuideDetailCarrierKey="@RoutingGuideDetailCarrierKey" Priority="@Priority" ScacAndServiceCode="@ScacAndServiceCode" ContactKey="@ContactKey"/>
+					</Modify>
+					<LogicalKeys>
+						<LogicalKey ComponentType="JTextField" ComponentName="txtPriority"/>
+					</LogicalKeys>
+					<RefreshMasterData>
+					   <API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="refreshMasterData" Message="Message_Loading"/>
+					</RefreshMasterData>
+			</DetailInfo>
+			  <MasterData>
+                <Table Name="ScacAndService" XMLName="ScacAndService"> 
+					<CodeAttributes>
+						<CodeAttribute ScacAndServiceKey="/ScacAndService@ScacAndServiceKey"/>
+					</CodeAttributes>
+				</Table>
+				<Table Name="ShipNode">
+					<StaticAttributes DcmIntegrationRealTime="N"/>
+					<CodeAttributes>
+						<CodeAttribute ShipnodeKey="@ShipnodeKey"/>
+					</CodeAttributes>
+				</Table>
+			 </MasterData>
+		 </YDM00120>
+	</Entity>
+    <Entity EntityTitle="Person Info" EntityName="PersonInfo" PrimaryKeyAttributeName="PersonInfoKey">
+		<YDM00113 Title="Contact_Address" ScreenType="None"/>
+    </Entity>
+	<Entity EntityTitle="Carrier_Special_Services" EntityName="SpecialServices" PrimaryKeyAttributeName="SpecialServicesKey">
+		<ConfigurationAttributes  TableName="YFS_SPECIAL_SERVICES">
+			  <ApplicationSpecificAttributes ApplicationCode="ydm" PermissionId="YSYDM012" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+		<YDM00114 Title="Carrier_Special_Services" ScreenType="List">
+			  <ListInfo NamePrefix="/" ChildTag="SpecialServices">
+					<List AttributeName="@SpecialServicesCode" ColumnTitle="Carrier_Special_Services_Code" DataType="Text-20" Editable="N" EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+					</List>
+					<List AttributeName="@SpecialServicesDescription" 
+						  ColumnTitle="Description" DataType="Text-40" Editable="Y"
+					      EditableComponent="textbox" EditableAddRow="Y">
+					</List>
+					<CreateNew ActionResourceID = "YDM00114A01"/>
+				   <Modify ActionResourceID = "YDM00114A02"/>
+					<Delete>
+						 <API Servlet="/yantra/entities/SpecialServices/delete" APIName="" Message="Message_Deleting_Special_Services"/>
+					</Delete>
+					<Save>
+						<API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiUpdateAPI" Message="Message_Saving_Special_Services"/>
+					</Save>
+			 </ListInfo>
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+			 	 Message="Message_Retrieving_Special_Services_List">
+				</API>
+		</YDM00114>
+	</Entity>
+	<Entity EntityTitle="Pro_Number_Generation" EntityName="ProNoData" PrimaryKeyAttributeName="ProNoDataKey">
+		<ConfigurationAttributes  TableName="YFS_PRO_NO_DATA">
+			  <ApplicationSpecificAttributes ApplicationCode="ydm" PermissionId="YSYDM012" IsPrimary="Y"/>
+			  <ApplicationSpecificAttributes ApplicationCode="wms" PermissionId="YSWMSS54" />
+		</ConfigurationAttributes>
+		<YDM00115 Title="Pro_Number_Generation_Scheme" ScreenType="Detail">
+			  <DetailInfo>
+				<Get>
+					<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getModelDocument" Message="Loading_Pro_Number_Generation_Data"/>
+				</Get>
+				<Modify>
+					<API Servlet="/yantra/entities/ProNoData/modify" APIName="" Message="Saving_Pro_Number_Generation_Data"/>
+				</Modify>
+				<CreateNew>
+					<API Servlet="/yantra/entities/ProNoData/create" APIName="" Message="Saving_Pro_Number_Generation_Data"/>
+				</CreateNew>
+				<LogicalKeys>
+					<LogicalKey ComponentType="YCPLookupField" ComponentName="lkpScac"/>
+				</LogicalKeys>
+			</DetailInfo>
+			<MasterData>
+				<Table Name="Scac" XMLName="Scac" AllRecords="Y"/>
+				<Table Name="Flow" XMLName="Flow">
+					<DynamicAttributes />
+					<StaticAttributes FlowType="00" IsOutGoing="Y"  ProcessTypeKey="LOAD_DELIVERY" FlowGroupName="Prints" FlowGroupNameQryType="NE"/>					
+				</Table>
+				<Table Name="CommonCode" XMLName="CheckDigitAlgo">
+					<DynamicAttributes/>
+					<StaticAttributes CodeType="CHECK_DIGIT_LOGIC"/>
+				</Table>
+            </MasterData>
+		</YDM00115>
+		<YDM00116 Title="LTL_SCAC_Preferences" ScreenType="List">
+			<ListInfo NamePrefix="/" ChildTag="ProNoData">
+				<List AttributeName="@Scac" ColumnTitle="Organization_Code" DataType="OrgCode"/>
+				<List AttributeName="/SCAC/@ScacDesc" ColumnTitle="Name" DataType="Text-100"/>
+				<List AttributeName="@GenerationScheme" ColumnTitle="Pro_Number_Generation_Scheme" DataType="Text-10"/>				
+				<CreateNew DisplayForm="YDM00115" DisplayMode="Dialog" ActionResourceID = "YDM00116A01">
+					<StaticAttributes GenerationScheme="NOGEN">
+					</StaticAttributes>
+					<DynamicAttributes  Node="@Node" OrganizationCode="@CallingOrganizationCode"/>
+				</CreateNew>
+				<Modify DisplayForm="YDM00115" DisplayMode="Dialog" ActionResourceID = "YDM00116A02">
+					<DynamicAttributes  OrganizationCode="@CallingOrganizationCode"/>
+				</Modify>
+				<Delete>
+					<API Servlet="/yantra/entities/ProNoData/delete" APIName=""
+					Message="Message_Deleting_Pro_No_Data"/>
+				</Delete>
+                <SaveAs DisplayForm="YDM00115" DisplayMode="Dialog">
+					<DynamicAttributes  OrganizationCode="@CallingOrganizationCode"/>
+                </SaveAs>
+			</ListInfo>			
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" 
+				APIName="getListDocument" Message="Message_Retrieving_Pro_No_Data_List">
+			</API>
+		</YDM00116>
+	</Entity>
+	<Entity EntityTitle="Common_Code" EntityName="CommonCode" OrganizationAttribute="OrganizationCode" PrimaryKeyAttributeName="CommonCodeKey">
+		<PermanentRecordAttributes SystemDefinedCode="Y"/>
+		<YDM00117 Title="Check_Digit_Algorithms" ScreenType="List">
+			<ConfigurationAttributes  CodeType="CHECK_DIGIT_LOGIC">
+				<ApplicationSpecificAttributes ApplicationCode="ydm" PermissionId="YSYDM012" IsPrimary="Y"/>
+			</ConfigurationAttributes>
+			 <ListInfo NamePrefix="/" ChildTag="CommonCode">
+				<List AttributeName="@CodeValue" ColumnTitle="Check_Digit_Algorithms" DataType="Text-100"/>
+				<List AttributeName="@CodeShortDescription" ColumnTitle="Short_Description" DataType="Text-40"/>
+				   <Modify DisplayForm="YCPPM048" DisplayMode="Dialog" />
+				   <SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog" >
+						<StaticAttributes CodeType="CHECK_DIGIT_LOGIC" SystemDefinedCode="N"  MeantForEnterprise="N" MeantForSupplier="N" MeantForInternal="Y"/>
+				   </SaveAs>
+				   <Delete>
+						  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" Message="Message_Deleting_Check_Digit_Logic"/>
+				   </Delete>
+				   <CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+						   <StaticAttributes CodeType="CHECK_DIGIT_LOGIC" SystemDefinedCode="N"  MeantForEnterprise="N" MeantForSupplier="N" MeantForInternal="Y" />
+					   <DynamicAttributes OrganizationCode="@Node"/>
+				   </CreateNew>
+			 </ListInfo>
+			 <API Servlet="/yantra/entities/CommonCode/list" APIName="" Message="Message_Retrieving_Search_Results">
+				<StaticAttributes CodeType="CHECK_DIGIT_LOGIC"/>
+			 </API>
+		</YDM00117>
+      <YDM00118 Title="Modification_Reasons" ScreenType="List">
+        <ConfigurationAttributes  CodeType="MODIFICATION_REASON">
+			<ApplicationSpecificAttributes ApplicationCode="ydm" PermissionId="YSYDM001" IsPrimary="Y"/>
+		</ConfigurationAttributes>
+         <ListInfo NamePrefix="/" ChildTag="CommonCode">
+            <List AttributeName="@CodeValue" ColumnTitle="Modification_Reason" 
+                DataType="Text-100"/>
+            <List AttributeName="@CodeShortDescription" 
+                ColumnTitle="Short_Description" DataType="Text-40"/>
+            <Modify DisplayForm="YCPPM048" DisplayMode="Dialog"/>
+            <SaveAs DisplayForm="YCPPM048" DisplayMode="Dialog">
+                <StaticAttributes CodeType="MODIFICATION_REASON" 
+                    SystemDefinedCode="N"/>
+	           <DynamicAttributes OrganizationCode="@OrganizationCode" DocumentType="@DocumentType"/>
+               </SaveAs>
+               <Delete>
+                  <API Servlet="/yantra/entities/CommonCode/delete" APIName="" 
+                      Message="Message_Deleting_Modification_Reason"/>
+               </Delete>
+               <CreateNew DisplayForm="YCPPM048" DisplayMode="Dialog" >
+                <StaticAttributes CodeType="MODIFICATION_REASON" 
+                    SystemDefinedCode="N"/>
+	           <DynamicAttributes OrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+               </CreateNew>
+        </ListInfo>
+        <API Servlet="/yantra/entities/CommonCode/list" APIName="" 
+            Message="Message_Retrieving_Search_Results">
+            <StaticAttributes CodeType="MODIFICATION_REASON"/>
+	           <DynamicAttributes CallingOrganizationCode="@CallingOrganizationCode" DocumentType="@DocumentType"/>
+         </API>
+      </YDM00118>
+	</Entity>
+	<Entity EntityTitle="Activity_List" EntityName="Activity" PrimaryKeyAttributeName="ActivityKey">
+		<ConfigurationAttributes  TableName="YFS_ACTIVITY">
+				<ApplicationSpecificAttributes ApplicationCode="ydm" PermissionId="YSWYDM027" />
+		</ConfigurationAttributes>
+		<PermanentRecordAttributes SystemDefined="Y"/>
+		<YDM00125 Title="Activities" ScreenType="List">
+			  <ListInfo NamePrefix="/" ChildTag="Activity">
+				<List AttributeName="@ActivityCode" ColumnTitle="Activity_Code" DataType="Activity" Editable="N"
+					EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="true"/>
+				</List>
+				<List AttributeName="@Description" ColumnTitle="Description" DataType="Text-200" Editable="Y"
+				EditableComponent="textbox" EditableAddRow="Y">
+					<ComponentClientProperty Name="YFCXMLBinding.isMandatory" Value="false"/>
+				</List>
+				<CreateNew>
+					<StaticAttributes Action="Create" ActivityGroupId="TRANSPORTATION" SystemDefined="N"/>
+				</CreateNew>
+				<Modify>
+					<StaticAttributes Action="Modify"/>
+				</Modify>
+				<Delete>
+					<API Servlet="/yantra/entities/Activity/delete" APIName="" Message="Deleting_Activity"/>
+				</Delete>
+				 <Save>
+					<API Servlet ="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="multiUpdateAPI" Message="Saving_Activity">
+					</API>
+				</Save>
+			 </ListInfo>
+			<API Servlet="com.yantra.ycp.ui.backend.YCPGenericMasterData" APIName="getListDocument"
+							Message="Retrieving_Activity_List">
+				<StaticAttributes ActivityGroupId="TRANSPORTATION"/>
+			</API>
+		</YDM00125>
+	</Entity>
+</Entities>

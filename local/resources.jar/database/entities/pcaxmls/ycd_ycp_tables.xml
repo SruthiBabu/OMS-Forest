@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2008, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<DBSchema>
+    <Entities>
+	    <Entity TableName="YFS_INBOX" Name="Inbox" Prefix="YFS_" XMLName="Inbox" Module="ycp">
+			<Attributes/>
+			 <Indices>
+                <Index DB2Name="YCD_INBOX_IC1" Name="YCD_INBOX_IC1" Unique="false">
+                    <Column Name="QUEUE_KEY"/>
+                    <Column Name="PRIORITY"/>
+                    <Column Name="STATUS"/>
+                </Index>
+            </Indices>
+		</Entity>
+	</Entities>
+</DBSchema>

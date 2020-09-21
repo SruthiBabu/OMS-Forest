@@ -1,0 +1,250 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling and Fulfillment Suite
+(C) Copyright IBM Corp. 2001, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<Tables> 
+	<!-- GROUP: CurrencyConversion -->
+	<Table TableName="YFS_CURRENCY_CONVERSION" EntityName="CurrencyConversion" KeyAttribute="CurrencyConversionKey"/>
+
+	<!-- GROUP: DocSpecific -->
+	<!-- YFS_CHARGE_CATEGORY and YFS_CHARGE_NAME-->
+	<Table TableName="YFS_CHARGE_CATEGORY" EntityName="ChargeCategory" KeyAttribute="ChargeCategoryKey">
+		<Template> 
+			<ChargeCategory>
+				<ChargeNameList> 
+					<ChargeName/>
+				</ChargeNameList>
+			</ChargeCategory>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_CHARGE_NAME" EntityName="ChargeName" KeyAttribute="ChargeNameKey"/>
+		</RelatedTables>
+	</Table>
+	<Table TableName="YFS_ORDER_LINE_TYPE" EntityName="OrderLineType" KeyAttribute="OrderLineTypeKey"/>
+	<Table TableName="YFS_HOLD_TYPE" EntityName="HoldType" KeyAttribute="HoldTypeKey" OrgColumnName="OrganizationCode">
+		<AdditionalAttributes ApplyOnResolveOfHoldTypeKey="" ApplyConditionKey=" "/>
+		<Template> 
+			<HoldType>
+				<HoldTypeTransactionList>
+					<HoldTypeTran/>
+				</HoldTypeTransactionList>
+				<HoldTypeUserGroupList>
+					<HoldTypeUserGroup/>
+				</HoldTypeUserGroupList>
+				<HoldTypeModificationTypes>
+					<HoldTypeModType/>
+				</HoldTypeModificationTypes>
+			</HoldType>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_HOLD_TYPE_TRAN" EntityName="HoldTypeTran" KeyAttribute="HoldTypeTranKey"/>
+			<Table TableName="YFS_HOLD_TYPE_MOD_TYPE" EntityName="HoldTypeModType" KeyAttribute="HoldTypeModTypeKey"/>
+			<Table TableName="YFS_HOLD_TYPE_USER_GROUP" EntityName="HoldTypeUserGroup" KeyAttribute="HoldTypeUserGroupKey"/>
+		</RelatedTables>
+	</Table>
+	<Table TableName="YFS_PURGE_CRITERIA" EntityName="PurgeCriteria" KeyAttribute="PurgeCriteriaKey">
+		<Template> 
+			<PurgeCriteria>
+				<PurgeCriteriaAddnlList>
+					<PurgeCriteriaAddnl/>
+				</PurgeCriteriaAddnlList>
+			</PurgeCriteria>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_PURGE_CRITERIA_ADDNL" EntityName="PurgeCriteriaAddnl" KeyAttribute="PurgeCriteriaAddnlKey"/>
+		</RelatedTables>
+	</Table>
+	<Table TableName="YFS_RETURN_DISPOSITION" EntityName="ReturnDisposition" KeyAttribute="DispositionKey"/>
+	<Table TableName="YFS_STATUS_MODIFICATION" EntityName="StatusModification" KeyAttribute="StatusModificationKey" ListClassName="com.yantra.ycp.pm.server.YCPStatusModifications" ListMethodName="getStatusModificationList"/>
+	<Table TableName="YFS_ORDER_VALIDATION" EntityName="OrderValidation" KeyAttribute="OrderValidationKey"/>
+	<Table TableName="YFS_RECEIVING_PREFERENCE" EntityName="ReceivingPreference" KeyAttribute="ReceivingPreferenceKey" OrgColumnName="EnterpriseOrgCode"/>
+	<Table TableName="YFS_SHIPPING_PREFERENCE" EntityName="ShippingPreference" KeyAttribute="ShippingPreferenceKey" OrgColumnName="EnterpriseOrgCode"/>
+	<Table TableName="YFS_RECEIVING_DISCR_REASON" EntityName="ReceivingDiscrReason" KeyAttribute="ReceivingDiscrReasonKey"/>
+	<Table TableName="YFS_TRANSACTION_DEPENDENCY_GRP" EntityName="TransactionDependencyGroup" KeyAttribute="TransactionDependencyGrpKey" OrgColumnName="EnterpriseKey">
+		<Template>
+			<TransactionDependencyGroup>
+				<TransactionDependencies>
+					<TransactionDependency />
+				</TransactionDependencies>
+			</TransactionDependencyGroup>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_TRANSACTION_DEPENDENCY" EntityName="TransactionDependency" KeyAttribute="TransactionDependencyKey">
+				<AdditionalAttributes ConditionKey=" "/>
+			</Table>
+		</RelatedTables>
+	</Table>
+	<!-- GROUP: Customer -->
+	<Table TableName="YFS_CUSTOMER" EntityName="Customer" KeyAttribute="CustomerKey">
+		<Template> 
+			<Customer>
+				<Consumer/>
+				<CustomerSlotPreferenceList>
+					<CustomerSlotPreference/>
+				</CustomerSlotPreferenceList>
+			</Customer>
+		</Template> 
+		<RelatedTables>
+			<Table TableName="YFS_CONSUMER" EntityName="Consumer" KeyAttribute="ConsumerKey"/>
+			<Table TableName="YFS_CUSTOMER_SLOT_PREFERENCE" EntityName="CustomerSlotPreference" KeyAttribute="CustomerSlotPreferenceKey"/>
+		</RelatedTables>
+	</Table>
+
+	<!-- GROUP: Vendor -->
+	<Table TableName="YFS_VENDOR" EntityName="Vendor" KeyAttribute="VendorKey"/>
+
+	<!-- GROUP: PriceAndPayment -->
+	<Table TableName="YFS_PAYMENT_TYPE" EntityName="PaymentType" KeyAttribute="PaymentTypeKey"/>
+	<Table TableName="YFS_PAYMENT_RULE" EntityName="PaymentRule" KeyAttribute="PaymentRuleKey"/>
+	<!-- YFS_COST_FACTOR_GROUP and YFS_COST_FACTOR_GROUP_DTL -->
+	<Table TableName="YFS_COST_FACTOR_GROUP" EntityName="CostFactorGroup" KeyAttribute="PriceSetKey" OrgColumnName="EnterpriseKey">
+		<Template> 
+			<CostFactorGroup>
+				<CostFactorGroupDetailList>
+					<CostFactorGroupDetail>
+					</CostFactorGroupDetail>
+				</CostFactorGroupDetailList>
+			</CostFactorGroup>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_COST_FACTOR_GROUP_DTL" EntityName="CostFactorGroupDetail" KeyAttribute="CostFactorGroupDtlKey"/>
+		</RelatedTables>
+	</Table>
+	<!-- YFS_PRICE_SET, YFS_ITEM_PRICE_SET and YFS_ITEM_PRICE_SET_DTL -->
+	<Table TableName="YFS_PRICE_SET" EntityName="PriceSet" KeyAttribute="CostFactorGroupKey" OrgColumnName="EnterpriseCode">
+		<Template> 
+			<PriceSet>
+				<ItemPriceSetList>
+					<ItemPriceSet>
+						<PriceSet/>
+						<ItemPriceSetDtlList>
+							<ItemPriceSetDtl/>
+						</ItemPriceSetDtlList>
+					</ItemPriceSet>
+				</ItemPriceSetList>
+			</PriceSet>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_ITEM_PRICE_SET" EntityName="ItemPriceSet" KeyAttribute="ItemPriceSetKey"/>
+			<Table TableName="YFS_ITEM_PRICE_SET_DTL" EntityName="ItemPriceSetDtl" KeyAttribute="ItemPriceSetDtlKey"/>
+		</RelatedTables>
+	</Table>
+<!--	<Table TableName="YFS_ITEM_PRICE_SET" EntityName="ItemPriceSet" KeyAttribute="ItemPriceSetKey"/>
+		<Table TableName="YFS_ITEM_PRICE_SET_DTL" EntityName="ItemPriceSetDtl" KeyAttribute="ItemPriceSetDtlKey"/> -->
+	<!-- YFS_PRICE_PROGRAM and YFS_PRICE_PROGRAM_DEFN -->
+	<Table TableName="YFS_PRICE_PROGRAM" EntityName="PriceProgram" KeyAttribute="PriceProgramKey" OrgColumnName="EnterpriseKey">
+		<Template> 
+			<PriceProgram>
+				<PricePrograms>
+					<PriceProgramDefn/>
+				</PricePrograms>
+			</PriceProgram>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_PRICE_PROGRAM_DEFN" EntityName="PriceProgramDefn" KeyAttribute="PriceProgramDefnKey"/>
+		</RelatedTables>
+	</Table>
+<!--	<Table TableName="YFS_PRICE_PROGRAM_DEFN" EntityName="PriceProgramDefn" KeyAttribute="PriceProgramDefnKey"/> -->
+
+	<!-- GROUP: Sourcing -->
+	<Table TableName="YFS_ALLOCATION_RULE" EntityName="AllocationRule" KeyAttribute="AllocationRuleKey"/>
+	<!-- YFS_SOURCING_RULE_HDR and YFS_SOURCING_RULE_DTL -->
+	<Table TableName="YFS_SOURCING_RULE_HDR" EntityName="SourcingRuleHeader" KeyAttribute="SourcingRuleHeaderKey" OrgColumnName="OrganizationCode">
+		<Template> 
+			<SourcingRuleHeader>
+				<SourcingRuleDetails>
+					<SourcingRuleDetail/>
+				</SourcingRuleDetails>
+			</SourcingRuleHeader>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_SOURCING_RULE_DTL" EntityName="SourcingRuleDetail" KeyAttribute="SourcingRuleDetailKey">
+			</Table>
+		</RelatedTables>
+	</Table>
+	<Table TableName="YFS_SOURCING_CONFIG" EntityName="SourcingConfig" KeyAttribute="SourcingConfigKey" OrgColumnName="OrganizationCode"/>
+	<Table TableName="YFS_ENT_NODE_TYPE" EntityName="EnterpriseNodeType" KeyAttribute="EnterpriseNodeTypeKey" OrgColumnName="EnterpriseCode"/>
+	<!-- YFS_DISTRIBUTION_RULE and YFS_ITEM_SHIP_NODE -->
+	<Table TableName="YFS_DISTRIBUTION_RULE" EntityName="DistributionRule" KeyAttribute="DistributionRuleKey" OrgColumnName="OwnerKey">
+		<Template> 
+			<DistributionRule>
+				<ItemShipNodes>
+					<ItemShipNode/>
+				</ItemShipNodes>
+			</DistributionRule>
+		</Template>
+		<RelatedTables>
+			<Table TableName="YFS_ITEM_SHIP_NODE" EntityName="ItemShipNode" KeyAttribute="ItemshipnodeKey">
+				<AdditionalAttributes ValidateDistributionRule="N"/>
+			</Table>
+		</RelatedTables>
+	</Table>
+<!--	<Table TableName="YFS_ITEM_SHIP_NODE" EntityName="ItemShipNode" KeyAttribute="ItemshipnodeKey"/> -->
+
+<!-- WMS - putaway tables -->
+<Table TableName="YFS_PUTAWAY_CONDITION" EntityName="PutawayCondition" KeyAttribute="PutawayConditionKey" OrgColumnName="EnterpriseCode">
+	<Template> 
+			<PutawayCondition>
+				<PutawayPreferences>
+					<PutawayPreference/>
+				</PutawayPreferences>
+			</PutawayCondition>
+	</Template>
+	<RelatedTables>
+			<Table TableName="YFS_PUTAWAY_PREFERENCE" EntityName="PutawayPreference" KeyAttribute="DiversionTypeKey"/>
+	</RelatedTables>	
+</Table>
+<!-- WMS - inbound tables -->
+ <Table TableName="YFS_NODE_RECEIVING_PREF" EntityName="NodeReceivingPreference" KeyAttribute="NodeReceivingPreferenceKey" OrgColumnName="EnterpriseCode"/> 
+
+ <!-- BarCode Group -->
+ <Table TableName="YFS_BARCODE_TRANSLATION" EntityName="BarCodeTranslation" KeyAttribute="BarCodeTranslationKey" OrgColumnName="OrganizationCode"/> 
+
+<!-- Logistics Group - Do not change the order of following tables, YFS_FREIGHT_TERMS should be deleted 
+     last when the user clicks give back configuration with delete rule. -->
+	<Table TableName="YFS_OUTBOUND_CONSTRAINTS" EntityName="OutboundConstraints" KeyAttribute="OutboundConstraintsKey"/>
+	<Table TableName="YFS_ESP_TERMS" EntityName="EspTerms" KeyAttribute="EspTermsKey"/>
+	<Table TableName="YFS_SHIP_CONSTRAINTS" EntityName="ShipConstraints" KeyAttribute="ShipConstraintsKey"/>
+	<Table TableName="YFS_ROUTING_GUIDE" EntityName="RoutingGuide" KeyAttribute="RoutingGuideKey"
+	CreateClassName="com.yantra.ydm.common.YDMBackendUtils" CreateMethodName="callCustomAPI">
+		<AdditionalAttributes Action="Create"/>
+		<Template> 
+			<RoutingGuide>
+				<SelectionCriteria/>
+				<RoutingGuideAttrs>
+					<RoutingGuideAttr Include="" AttrName="">
+						<Value/>
+					</RoutingGuideAttr>
+				</RoutingGuideAttrs>
+				<RoutingGuideDetails>
+					<RoutingGuideDetail>
+						<ShipFrom/> 
+						<ShipTo/> 
+						<ShippingParameters/>
+						<RoutingGuideAttrs>
+							<RoutingGuideAttr Include="" AttrName="">
+								<Value/>
+							</RoutingGuideAttr>
+						</RoutingGuideAttrs>
+					</RoutingGuideDetail>
+				</RoutingGuideDetails>
+			</RoutingGuide>	
+		</Template>
+		<RelatedTables>
+				<Table TableName="YFS_ROUTING_GUIDE_DETAIL" EntityName="RoutingGuideDetail" KeyAttribute="RoutingGuideDetailKey"/>
+		</RelatedTables>	
+	</Table>
+	<Table TableName="YFS_FREIGHT_TERMS" EntityName="FreightTerms" KeyAttribute="FreightTermsKey"  OrgColumnName="EnterpriseCode"/>
+	<!-- Questionnaire configutation.  The Template MUST be changed if/when any new question types are defined.  Related Tables must also reflect the new change. -->
+	<Table TableName="YFS_QUESTION" EntityName="Question" KeyAttribute="QuestionKey" OrgColumnName="OrganizationCode" ListClassName="com.yantra.ycp.ui.backend.YCPQuestionAPI" ListMethodName="getQuestionListForOrg">
+		<!--<AdditionalAttributes ParentQuestionKeyQryType="EQ" ParentQuestionKey=" "/>-->
+		<!--<FilterAttributes ParentQuestionKeyQryType="VOID"/>-->
+		<RelatedTables>
+			<Table TableName="YFS_QUESTION" EntityName="Question" KeyAttribute="QuestionKey"/>
+			<Table TableName="YFS_ANSWER_OPTION" EntityName="AnswerOption" KeyAttribute="AnswerOptionKey"/>
+			<Table TableName="YFS_ANSWER_CAPACITY_IMPACT" EntityName="AnswerCapacityImpact" KeyAttribute="AnswerCapacityImpactKey"/>
+		</RelatedTables>
+	</Table>
+</Tables>

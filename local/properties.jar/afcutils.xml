@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite
+     (C) Copyright IBM Corp. 2016 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="afcutils">
+	<macrodef name="createfilelist">
+		<attribute name="fileset.location" />
+		<attribute name="listfile.name" />
+		<attribute name="filters" default="**/*" />
+		<sequential>
+			<fileset id= "createfilelist.tmpfs" dir= "@{fileset.location}" excludes="@{listfile.name}">
+				<include name="@{filters}"/>
+			</fileset>
+	        <property name= "createfilelist.tmpprop" refid= "createfilelist.tmpfs"/> 
+			<property name="createfilelist.tmptgt" value="@{fileset.location}${file.separator}@{listfile.name}" />
+	        <concat destfile="${createfilelist.tmptgt}">${createfilelist.tmpprop}</concat>
+	        <replace  file="${createfilelist.tmptgt}" token=";">
+	            <replacevalue><![CDATA[
+]]></replacevalue>
+	        </replace>
+	        <!-- On windows, the entities.txt has "\"(backslash) as the file seperator character
+	            but it is not acceptable on Unix. So it has been replaced with "/"(forward slash) which is
+	            acceptable in both windows and unix-->
+	        <replace  file="${createfilelist.tmptgt}" token="\">
+	            <replacevalue>/</replacevalue>
+	        </replace>
+		</sequential>
+	</macrodef>
+</project>

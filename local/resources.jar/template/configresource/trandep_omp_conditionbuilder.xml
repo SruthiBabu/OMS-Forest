@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<WorkflowConditionBuilderInput>
+   <ORDER_FULFILLMENT AllowDuplicateAttributes="Y" ShowNotButtons="N" >
+	<OrderLine DisplayName="Order_Line">
+      <LineType Type="Leaf" Id="LineType" DisplayName="LineType" DataType="LineType" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="LineType" IsReqd="" OverRidingClass=""/>
+      </LineType>
+      <OrderedQty Type="Leaf" Id="OrderedQty" DisplayName="OrderedQty" 
+            DataType="Quantity" ControlType="Text">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Greater_Than" QryTypeId="&gt;"/>
+				<QryType QryTypeName="Greater_Than_Or_Equal_To" QryTypeId="&gt;="/>
+				<QryType QryTypeName="Less_Than" QryTypeId="&lt;"/>
+				<QryType QryTypeName="Less_Than_Or_Equal_To" QryTypeId="&lt;="/>
+				<QryType QryTypeName="Equal_To" QryTypeId="="/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+			</QryTypes>
+      </OrderedQty>
+      <LineTotal Type="Leaf" Id="LineTotal" DisplayName="LineTotal" 
+            DataType="Quantity" ControlType="Text">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Greater_Than" QryTypeId="&gt;"/>
+				<QryType QryTypeName="Greater_Than_Or_Equal_To" QryTypeId="&gt;="/>
+				<QryType QryTypeName="Less_Than" QryTypeId="&lt;"/>
+				<QryType QryTypeName="Less_Than_Or_Equal_To" QryTypeId="&lt;="/>
+				<QryType QryTypeName="Equal_To" QryTypeId="="/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+			</QryTypes>
+      </LineTotal>
+      <UnitPrice Type="Leaf" Id="UnitPrice" DisplayName="UnitPrice" 
+            DataType="Money" ControlType="Text">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Greater_Than" QryTypeId="&gt;"/>
+				<QryType QryTypeName="Greater_Than_Or_Equal_To" QryTypeId="&gt;="/>
+				<QryType QryTypeName="Less_Than" QryTypeId="&lt;"/>
+				<QryType QryTypeName="Less_Than_Or_Equal_To" QryTypeId="&lt;="/>
+				<QryType QryTypeName="Equal_To" QryTypeId="="/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+			</QryTypes>
+      </UnitPrice>
+	</OrderLine>
+      <BuyerOrganizationCode Type="Leaf" Id="BuyerOrganizationCode" DisplayName="BuyerOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="BuyerOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </BuyerOrganizationCode>
+      <SellerOrganizationCode Type="Leaf" Id="SellerOrganizationCode" DisplayName="SellerOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="SellerOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </SellerOrganizationCode>
+      <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>
+      <OrderType Type="Leaf" Id="OrderType" DisplayName="OrderType" DataType="Text-20" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="OrderType" IsReqd="" OverRidingClass=""/>
+      </OrderType>
+   </ORDER_FULFILLMENT>
+</WorkflowConditionBuilderInput>

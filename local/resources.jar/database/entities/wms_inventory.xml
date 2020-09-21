@@ -1,0 +1,1804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores the reason for inventory adjustment."
+            EntityType="CONFIGURATION"
+            ListXMLName="AdjustmentReasonList" Module="wms"
+            Name="Adjustment_Reason" Prefix="YFS_"
+            TableName="YFS_ADJUSTMENT_REASON" TableType="CONFIGURATION" XMLName="AdjustmentReason">
+            <Attributes>
+                <Attribute ColumnName="ADJUSTMENT_REASON_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_ADJUSTMENT_REASON table."
+                    Name="Adjustment_Reason_Key" Nullable="false" XMLName="AdjustmentReasonKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this adjustment reason."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' '"
+                    Description="The reason for the inventory transaction. This field is typically populated when the user does an inventory adjustment. Inventory bins, which will be used to adjust inventory (for inventory synchronization) on the host systems, will be tied to this reason code. This can be associated to a sequence of loations in YFS_Adjustment_Locn_Seq entity. During inventory adjustments if the location to be adjusted is not known, these associated locations associated are used to deduct inventory."
+                    Name="Reason_Code" Nullable="false" XMLName="ReasonCode"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="FreeText-200" DefaultValue="' '"
+                    Description="The description of the adjustment status."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="ACCOUNTING_BIN_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The identifier of the accounting bin location. This, in conjunction with NODE_KEY, identifies a unique location in the node."
+                    Name="Accounting_Bin_Location_Id" Nullable="false" XMLName="AccountingBinLocationId"/>
+                <Attribute ColumnName="IMPLY_INCREMENT" DataType="Flag"
+                    DefaultValue="'Y'"
+                    Description="This flag implies that the adjustment reason usually results in increment.  Valid Value: Y/N.  Default Value: Y."
+                    Name="Imply_Increment" Nullable="false" XMLName="ImplyIncrement"/>
+                <Attribute ColumnName="IMPLY_DECREMENT" DataType="Flag"
+                    DefaultValue="'Y'"
+                    Description="This flag implies that the adjustment reason usually results in decrement.  Valid Value: Y/N.  Default Value: Y."
+                    Name="Imply_Decrement" Nullable="false" XMLName="ImplyDecrement"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ADJ_REASON_PK" Name="YFS_ADJUSTMENT_REASON_PK">
+                <Attribute ColumnName="ADJUSTMENT_REASON_KEY" Name="Adjustment_Reason_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ADJ_REASON_I1"
+                    Name="YFS_ADJUSTMENT_REASON_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="REASON_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores the reason for inventory adjustment."
+            EntityType="CONFIGURATION"
+            ListXMLName="AdjustmentReasonDetails" Module="wms"
+            Name="Adjustment_Reason_Detail" Prefix="YFS_"
+            TableName="YFS_ADJUSTMENT_REASON_DTL"
+            TableType="CONFIGURATION" XMLName="AdjustmentReasonDetail">
+            <Attributes>
+                <Attribute ColumnName="ADJUSTMENT_REASON_DTL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_ADJUSTMENT_REASON_DTL table."
+                    Name="Adjustment_Reason_Detail_Key" Nullable="false" XMLName="AdjustmentReasonDetailKey"/>
+                <Attribute ColumnName="ADJUSTMENT_REASON_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The adjustment reason key that is associated with this adjustment reason detail."
+                    Name="Adjustment_Reason_Key" Nullable="false" XMLName="AdjustmentReasonKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_SHIP_NODE table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The code of the inventory organization to which the reason code is associated."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="HOST_REASON_CODE"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The reason for the inventory transaction. This field is typically populated when the user does an inventory adjustment. Inventory bins, which will be used to adjust inventory (for inventory synchronization) on the host systems, will be tied to this reason code."
+                    Name="Host_Reason_Code" Nullable="false" XMLName="HostReasonCode"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ADJRSN_DTL_KEY_PK" Name="YFS_ADJUSTMENT_REASON_DTL_PK">
+                <Attribute ColumnName="ADJUSTMENT_REASON_DTL_KEY" Name="Adjustment_Reason_Detail_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ADJRSN_DTL_KEY_I1"
+                    Name="YFS_ADSMENT_REASON_DTL_KEY_I1" Unique="true">
+                    <Column Name="ADJUSTMENT_REASON_KEY"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdjustmentReasonDetails"
+                    ChildName="Adjustment_Reason_Detail"
+                    ChildXMLName="AdjustmentReasonDetail"
+                    DeleteCascade="true"
+                    ForeignEntity="Adjustment_Reason"
+                    Name="Adjustment_Reason" Type="Bidirectional" XMLName="AdjustmentReason">
+                    <Attribute Name="Adjustment_Reason_Key" ParentName="Adjustment_Reason_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="Ship_Node" Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                    <Attribute Name="Enterprise_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Node_Key" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This table stores the zone or location sequence for inventory adjustments. During inventory adjustments, these locations or zones are considered in the order of sequence. If zones are configured in the adjustment sequence, locations within the zone are considered in the order of pick sequence and location id. Inventory is deducted from non-virtual locations till a virtual location is reached, and the rest of the inventory is deducted from that location. The inventory adjustment is such that only the virtual location configured in the adjustment sequence goes negative."
+            EntityType="CONFIGURATION"
+            ListXMLName="AdjustmentLocationSequenceList" Module="wms"
+            Name="Adjustment_Location_Sequence" Prefix="YFS_"
+            TableName="YFS_ADJUSTMENT_LOCN_SEQ"
+            TableType="CONFIGURATION" XMLName="AdjustmentLocationSequence">
+            <Attributes>
+                <Attribute ColumnName="ADJUSTMENT_LOCN_SEQ_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_ADJUSTMENT_LOCN_SEQ table."
+                    Name="Adjustment_Location_Sequence_Key"
+                    Nullable="false" XMLName="AdjustmentLocationSequenceKey"/>
+                <Attribute ColumnName="ADJUSTMENT_REASON_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_ADJUSTMENT_REASON table."
+                    Name="Adjustment_Reason_Key" Nullable="false" XMLName="AdjustmentReasonKey"/>
+                <Attribute ColumnName="ZONE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_ZONE table."
+                    Name="Zone_Key" Nullable="false" XMLName="ZoneKey"/>
+                <Attribute ColumnName="LOCATION_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Primary key attribute of YFS_LOCATION table."
+                    Name="Location_Key" Nullable="false" XMLName="LocationKey"/>
+                <Attribute ColumnName="SEQUENCE" DataType="Count"
+                    DefaultValue="0"
+                    Description="Sequence in which the location or zone has to be considered while adjusting inventory."
+                    Name="Sequence" Nullable="false" XMLName="Sequence"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ADJ_LOC_SEQ_PK" Name="YFS_ADJUSTMENT_LOCN_SEQ_PK">
+                <Attribute ColumnName="ADJUSTMENT_LOCN_SEQ_KEY" Name="Adjustment_Location_Sequence_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ADJ_LOC_SEQ_I1"
+                    Name="YFS_ADJUSTMENT_LOCN_SEQ_I1" Unique="true">
+                    <Column Name="ADJUSTMENT_REASON_KEY"/>
+                    <Column Name="SEQUENCE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdjustmentLocationSequenceList"
+                    ChildName="Adjustment_Location_Sequence"
+                    ChildXMLName="AdjustmentLocationSequence"
+                    DeleteCascade="true"
+                    ForeignEntity="Adjustment_Reason" IsParent="true"
+                    Name="Adjustment_Reason" ReadOnly="true"
+                    Type="Bidirectional" XMLName="AdjustmentReason">
+                    <Attribute Name="Adjustment_Reason_Key" ParentName="Adjustment_Reason_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdjustmentLocationSequenceList"
+                    ChildName="Adjustment_Location_Sequence"
+                    ChildXMLName="AdjustmentLocationSequence"
+                    DeleteCascade="true" ForeignEntity="Location"
+                    Name="Location" ReadOnly="true" Type="Bidirectional" XMLName="Location">
+                    <Attribute Name="Location_Key" ParentName="Location_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdjustmentLocationSequenceList"
+                    ChildName="Adjustment_Location_Sequence"
+                    ChildXMLName="AdjustmentLocationSequence"
+                    DeleteCascade="true" ForeignEntity="Zone"
+                    Name="Zone" ReadOnly="true" Type="Bidirectional" XMLName="Zone">
+                    <Attribute Name="Zone_Key" ParentName="Zone_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Defines the status in which inventory is sub-classified once it is received in the warehouse. For example, product class is a classification of inventory that the product comes with, when it arrives at the warehouse. Typical values are First Quality and Second Quality. Due to additional inventory processes within the warehouse, it is required to further classify inventory. Typical inventory status values are Normal, Awaiting Inventory Check, Inventory Held etc. The way this inventory attribute impacts business process is that inventory availability picture projected to external systems will be based on the inventory status it is in. The inventory picture is projected through the supply type attribute associated with inventory status. For example, the supply available for allocating against orders would be the one with inventory status Normal, and not Awaiting Inventory Check or Inventory Held etc."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Inventory_Status" Prefix="YFS_"
+            TableName="YFS_INVENTORY_STATUS" TableType="CONFIGURATION" XMLName="InventoryStatus">
+            <Attributes>
+                <Attribute ColumnName="INVENTORY_STATUS_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_INVENTORY_STATUS table."
+                    Name="Inventory_Status_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node to which the location belongs."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The status in which inventory is sub-classified once it is received in the warehouse. For example, product class is a classification of inventory that the product comes with when it arrives at the warehouse. Typical values of product class are First Quality and Second Quality. Due to additional inventory processes within the warehouse, it is required to further classify inventory. Typical inventory status values are Normal, Awaiting Inventory Check, Inventory Held, etc."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="The description of the inventory status."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="SUPPLY_TYPE"
+                    DataType="SupplyType" DefaultValue="' '"
+                    Description="This flag indicates whether inventory belonging to an inventory status can be used for a specific operation. The inventory availability picture projected to external systems will be based on the inventory status it is in. The inventory picture is projected through the supply type attribute associated with inventory status. For example, the supply available for allocating against orders would be the one with inventory status Normal, and not Awaiting Inventory Check or Inventory Held etc."
+                    Name="Supply_Type" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="INV_STATUS_PK" Name="YFS_INVENTORY_STATUS_PK">
+                <Attribute ColumnName="INVENTORY_STATUS_KEY" Name="Inventory_Status_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="INV_STATUS_I1"
+                    Name="YFS_INVENTORY_STATUS_I1" Unique="true">
+                    <Column Name="INVENTORY_STATUS"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="InventoryStatusList"
+                    ChildName="InventoryStatus"
+                    ChildXMLName="InventoryStatus" DeleteCascade="true"
+                    ForeignEntity="Inventory_Supply_Type"
+                    Name="SupplyType" Type="Bidirectional" XMLName="SupplyType">
+                    <Attribute Name="Supply_Type" ParentName="Supply_Type"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="To support automatic change of inventory status and therefore the supplies associated with it, zones have an inventory status transition matrix associated with them. What this implies is that as a result of an operation if inventory is moved to a specific zone, inventory status would automatically change and as a result the supply picture would change automatically. For example, let's consider Inventory in status Awaiting QC check in the QC area. Once the inventory check is done and the product moved to a zone where put away of QC okay products are typically stored, then the inventory status changes from Awaiting QC to Normal."
+            EntityType="CONFIGURATION"
+            ListXMLName="InventoryStatusTransitions" Module="wms"
+            Name="Inventory_Status_Tran" Prefix="YFS_"
+            TableName="YFS_INVENTORY_STATUS_TRAN"
+            TableType="CONFIGURATION" XMLName="InventoryStatusTransition">
+            <Attributes>
+                <Attribute ColumnName="INVENTORY_STATUS_TRAN_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_INVENTORY_STATUS_TRAN table."
+                    Name="Inventory_Status_Tran_Key" Nullable="false" XMLName="InventoryStatusTransitionKey" FactName="false"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The identifier of the  zone."
+                    Name="Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated the location."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The inventory status of the product being put away to this zone."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="NEW_INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The new inventory status acquired by a product upon moving to a zone. Inventory will be status Awaiting QC check in the QC area. Once the inventory check is done and the product moved to a zone where put away of QC okay products are typically stored, then the inventory status changes from Awaiting QC to Normal."
+                    Name="New_Inventory_Status" Nullable="false" XMLName="NewInventoryStatus"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="INV_STAT_TRAN_PK" Name="YFS_INVENTORY_STATUS_TRAN_PK">
+                <Attribute ColumnName="INVENTORY_STATUS_TRAN_KEY" Name="Inventory_Status_Tran_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="INV_STAT_TRAN_I1"
+                    Name="YFS_INVENTORY_STATUS_TRAN_I1" Unique="true">
+                    <Column Name="ZONE_ID"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="INVENTORY_STATUS"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="InventoryStatusTransitions"
+                    ChildName="InventoryStatusTransition"
+                    ChildXMLName="InventoryStatusTransition"
+                    DeleteCascade="true" ForeignEntity="Zone"
+                    Name="Zone" Type="Bidirectional" XMLName="Zone">
+                    <Attribute Name="Zone_Id" ParentName="Zone_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="InventoryStatusTransitions"
+                    ChildName="InventoryStatusTransition"
+                    ChildXMLName="InventoryStatusTransition"
+                    DeleteCascade="true"
+                    ForeignEntity="Inventory_Status"
+                    Name="InventoryStatus" Type="Bidirectional" XMLName="InventoryStatus">
+                    <Attribute Name="Inventory_Status" ParentName="Inventory_Status"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true"
+                    ForeignEntity="Inventory_Status"
+                    Name="NewInventoryStatus" Type="Bidirectional" XMLName="NewInventoryStatus">
+                    <Attribute Name="New_Inventory_Status" ParentName="Inventory_Status"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="Details of license-plated inventory are stored here."
+            EntityType="TRANSACTION" ListXMLName="LPNDtls" Module="wms"
+            Name="LPN_Dtl" Prefix="YFS_" TableName="YFS_LPN_DTL"
+            TableType="TRANSACTION" XMLName="LPNDtl">
+            <Attributes>
+                <Attribute ColumnName="LPN_DTL_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LPN_DTL table."
+                    Name="LPN_Dtl_Key" Nullable="false"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The LPN number that is associated with this LPN detail."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="OUTER_MOST_LPN_NO"
+                    DataType="LPNNo" DefaultValue="' '"
+                    Description="The outer most LPN number that is associated with this LPN detail."
+                    Name="Outer_Most_LPN_No" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_ITEM_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The inventory item key that is associated with this LPN detail."
+                    Name="Inventory_Item_Key" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_TAG_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The inventory tag key that is associated with this LPN detail."
+                    Name="Inventory_Tag_Key" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The status in which inventory is sub-classified once it is received in the warehouse. For example, product class is a classification of inventory that the product comes with when it arrives at the warehouse. Typical values of product class are First Quality and Second Quality. Due to additional inventory processes within the warehouse, it is required to further classify inventory. Typical inventory status values are Normal, Awaiting Inventory Check, Inventory Held, etc."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="The segment type of the inventory. This helps to track inventory separately when the inventory is customized for a specific order so that the inventory can be allocated to that order.&#xd;&#xa;&#xd;&#xa;When inventory is customized, it needs to be tracked separately. This field indicates the buyer or buyer category for who the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory belongs. This helps to track inventory separately when the inventory is customized for a specific order so that the inventory can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="FIFO_NO" DataType="Integer"
+                    DefaultValue="0"
+                    Description="A date based inventory attribute that helps understand the order in which stock arrived at the node. This is used to send out items that arrived earlier than the ones that arrived later."
+                    Name="Fifo_No" Nullable="false"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The receipt header key that is associated with this LPN detail. This helps identify all stocks attached to a receipt. This number is of significance until the sample from the receipt has been certified as having passed or failed QC. This number is used to pull out all stocks based on the receipt."
+                    Name="Receipt_Header_Key" Nullable="false"/>
+                <Attribute ColumnName="COUNTRY_OF_ORIGIN"
+                    DataType="Country" DefaultValue="' '"
+                    Description="The country in which the item was manufactured."
+                    Name="Country_Of_Origin" Nullable="false"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date by which the item must be shipped so that it is usable. This is also referred to as the expiration date."
+                    Name="Ship_By_Date" Nullable="false"/>
+                <Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The number of units of the item available at this location."
+                    Name="Quantity" Nullable="false" XMLName="Quantity"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_LPN_DTL_PK">
+                <Attribute ColumnName="LPN_DTL_KEY" Name="LPN_Dtl_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_LPN_DTL_I1" Unique="true">
+                    <Column Name="LPN_NO"/>
+                    <Column Name="INVENTORY_ITEM_KEY"/>
+                    <Column Name="INVENTORY_TAG_KEY"/>
+                    <Column Name="INVENTORY_STATUS"/>
+                    <Column Name="SHIP_BY_DATE"/>
+                    <Column Name="SEGMENT_TYPE"/>
+                    <Column Name="SEGMENT"/>
+                </Index>
+                <Index Name="YFS_LPN_DTL_I2">
+                    <Column Name="OUTER_MOST_LPN_NO"/>
+                </Index>
+                <Index Name="YFS_LPN_DTL_I3">
+                    <Column Name="INVENTORY_ITEM_KEY"/>
+                </Index>
+				<Index Name="YFS_LPN_DTL_I4">
+                    <Column Name="LPN_NO"/>
+                </Index>
+				<Index Name="YFS_LPN_DTL_I5">
+                    <Column Name="RECEIPT_HEADER_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LPNDtls" ChildName="LPNDtl"
+                    ChildXMLName="LPNDtl" ForeignEntity="Inventory_Item"
+                    Name="Inventory_Item" Type="Bidirectional" XMLName="InventoryItem">
+                    <Attribute Name="Inventory_Item_Key" ParentName="Inventory_Item_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LPNDtls" ChildName="LPNDtl"
+                    ChildXMLName="LPNDtl" ForeignEntity="Inventory_Tag"
+                    Name="Inventory_Tag" Type="Bidirectional" XMLName="TagDetail">
+                    <Attribute Name="Inventory_Tag_Key" ParentName="Inventory_Tag_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="InventoryList"
+                    ChildName="Inventory" ChildXMLName="Inventory"
+                    ForeignEntity="LPN_Hdr" Name="LPN_Hdr"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="LPN">
+                    <Attribute Name="LPN_No" ParentName="LPN_No"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Description="Stores the LPN and its hierarchy."
+            EntityType="TRANSACTION" Extensible="Y" ListXMLName="LPNs"
+            Module="wms" Name="LPN_Hdr" Prefix="YFS_"
+            TableName="YFS_LPN_HDR" TableType="TRANSACTION" XMLName="LPN">
+            <Attributes>
+                <Attribute ColumnName="LPN_HDR_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LPN_HDR table."
+                    Name="LPN_Hdr_Key" Nullable="false"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The receipt header key that is associated with this LPN header. &#xd;&#xa;This helps identify all stocks attached to a receipt. This number is of significance until the sample from the receipt has been certified as having passed or failed QC. This number is used to pull out all stocks based on the receipt. This is usually flled in situations where the LPN does not have contents."
+                    Name="Receipt_Header_Key" Nullable="false"/>
+                <Attribute ColumnName="LENGTH" DataType="Dimension"
+                    DefaultValue="0"
+                    Description="The length of the LPN. This will be present only if the user has overridden the dimension at LPN creation, typically during receipts. Otherwise, the dimensions are picked up based on the standard packaging type for the item."
+                    Name="Length" Nullable="false"/>
+                <Attribute ColumnName="WIDTH" DataType="Dimension"
+                    DefaultValue="0"
+                    Description="The width of the LPN. This will be present only if the user has overridden the dimension at LPN creation, typically during receipts.  Otherwise, the dimensions are picked up based on the standard packaging type for the item."
+                    Name="Width" Nullable="false"/>
+                <Attribute ColumnName="HEIGHT" DataType="Dimension"
+                    DefaultValue="0"
+                    Description="The height of the LPN. This will be present only if the user has overridden the dimension at LPN creation, typically during receipts. Otherwise, the dimensions are picked up based on the standard packaging type for the item."
+                    Name="Height" Nullable="false"/>
+                <Attribute ColumnName="DIMENSION_UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The unit of measure in which the length, width, and height of the LPN are measured."
+                    Name="Dimension_Uom" Nullable="false" XMLName="DimensionUOM"/>
+                <Attribute ColumnName="WEIGHT" DataType="Dimension"
+                    DefaultValue="0"
+                    Description="The weight of the LPN. This will be present only if the user has overridden the weight at LPN creation, typically during receipts. Otherwise, the weight is picked up based on the standard packaging type for the item."
+                    Name="Weight" Nullable="false"/>
+                <Attribute ColumnName="WEIGHT_UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The unit of measure in which the weight of the LPN is measured."
+                    Name="Weight_Uom" Nullable="false" XMLName="WeightUOM"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="A Case Id or Pallet Id. This field is a unique key of YFS_LPN_HDR table."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="PARENT_LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The LPN number of the immediate parent of this LPN."
+                    Name="Parent_LPN_No" Nullable="false"/>
+                <Attribute ColumnName="OUTER_MOST_LPN_NO"
+                    DataType="LPNNo" DefaultValue="' '"
+                    Description="The outer most LPN number that is associated with this LPN detail. This is a unique key of YFS_LPN_HDR table."
+                    Name="Outer_Most_LPN_No" Nullable="false"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The code of the organization to which the LPN belongs. This is usually filled in situations where the LPN does not have contents. Usually, if we know the items on the LPN, we know the organization to which it belongs."
+                    Name="Organization_Code" Nullable="false"/>
+                <Attribute ColumnName="CASE_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The case quantity of the LPN. This will be present only if the user has overridden the case quantity at LPN creation, typically during receipts, because the case quantity is non-standard in this particular LPN. Otherwise, the case quantity is picked up based on the standard packaging type for the item. This attribute is of significance only when we are talking about single SKU pallet LPNs."
+                    Name="Case_Quantity" Nullable="false" XMLName="CaseQuantity"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="The type of the License Plate Number. For requests involving a license plate, this field is populated as Case or Pallet."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="IS_ALLOCATED" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the complete LPN has been allocated to an operation."
+                    Name="Is_Allocated" Nullable="false" XMLName="IsAllocated"/>
+                <Attribute ColumnName="IS_SHIPMENT_ASSIGNED"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This field is not currently used."
+                    Name="Is_Shipment_Assigned" Nullable="false" XMLName="IsShipmentAssigned"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="The segment type of the inventory. This field indicates the buyer or buyer category for whom the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory belongs. This helps to track inventory separately when the inventory is customized for a specific order so that the inventory can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="FREEZE_ON_VARIANCE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flah indicates whether the LPN had variance detected during a Count operation. This drives whether the LPN can be allocated during Pick Location Assignment."
+                    Name="Freeze_On_Variance" Nullable="false" XMLName="FreezeOnVariance"/>
+                <Attribute ColumnName="TRAN_REQ_NO" DataType="Text-10"
+                    DefaultValue="' '"
+                    Description="A sequence number used to identify the transaction which is in progress for this LPN record."
+                    Name="Transaction_Request_No" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="IS_OUTBOUND_CONTAINER"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether the LPN is an Outbound Container."
+                    Name="Is_Outbound_Container" Nullable="false" XMLName="IsOutboundContainer"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey Name="YFS_LPN_HDR_PK">
+                <Attribute ColumnName="LPN_HDR_KEY" Name="LPN_Hdr_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_LPN_HDR_I1" Unique="true">
+                    <Column Name="LPN_NO"/>
+                </Index>
+                <Index Name="YFS_LPN_HDR_I2">
+                    <Column Name="OUTER_MOST_LPN_NO"/>
+                </Index>
+                <Index Name="YFS_LPN_HDR_I3">
+                    <Column Name="PARENT_LPN_NO"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LPNHdrs" ChildName="LPN_Hdr"
+                    ChildXMLName="LPNHdr" ForeignEntity="LPN_Location"
+                    Name="LPN_Location" Type="Bidirectional" XMLName="LPNLocation">
+                    <Attribute Name="Outer_Most_LPN_No" ParentName="Outer_Most_LPN_No"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ContainedLPNs"
+                    ChildName="ContainedLPN" ChildXMLName="ContainedLPN"
+                    ForeignEntity="LPN_Hdr" Name="OuterMostLPN"
+                    Type="Bidirectional" XMLName="OuterMostLPN">
+                    <Attribute Name="Outer_Most_LPN_No" ParentName="LPN_No"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChildLPNs" ChildName="ChildLPN"
+                    ChildXMLName="ChildLPN" ForeignEntity="LPN_Hdr"
+                    Name="ParentLPN" Type="Bidirectional" XMLName="ParentLPN">
+                    <Attribute Name="Parent_LPN_No" ParentName="LPN_No"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Receipt_Header" Name="Receipt"
+                    Type="Bidirectional" XMLName="Receipt">
+                    <Attribute Name="Receipt_Header_Key" ParentName="Receipt_Header_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="Stores location of the LPN that directly sits on the location. In other words, it stores only the outermost LPN."
+            EntityType="TRANSACTION" ListXMLName="LPNLocns" Module="wms"
+            Name="LPN_Location" Prefix="YFS_"
+            TableName="YFS_LPN_LOCATION" TableType="TRANSACTION" XMLName="LPNLocation">
+            <Attributes>
+                <Attribute ColumnName="LPN_LOCATION_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LPN_LOCATION table."
+                    Name="LPN_Location_Key" Nullable="false"/>
+                <Attribute ColumnName="OUTER_MOST_LPN_NO"
+                    DataType="LPNNo" DefaultValue="' '"
+                    Description="The outer most LPN number that is associated with this LPN location."
+                    Name="Outer_Most_LPN_No" Nullable="false"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The zone to which the location belongs. This, in conjunction with NODE_KEY, forms the unique key of the YFS_ZONE table."
+                    Name="Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The identifier for the location. This, in conjunction with NODE_KEY, identifies a unique location in the node."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this LPN location."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LPN_LOCATION_PK" Name="YFS_LPN_LOCATION_PK">
+                <Attribute ColumnName="LPN_LOCATION_KEY" Name="LPN_Location_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LPN_LOCATION_I1"
+                    Name="YFS_LPN_LOCATION_I1" Unique="true">
+                    <Column Name="OUTER_MOST_LPN_NO"/>
+                </Index>
+                <Index DB2Name="LPN_LOCATION_I2" Name="YFS_LPN_LOCATION_I2">
+					<Column Name="LOCATION_ID"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+                <Index DB2Name="LPN_LOCATION_I3" Name="YFS_LPN_LOCATION_I3">
+				    <Column Name="ZONE_ID"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+				<Index DB2Name="LPN_LOCATION_I4" Name="YFS_LPN_LOCATION_I4" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="OUTER_MOST_LPN_NO"/>
+                    <Column Name="LOCATION_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LPNLocationList"
+                    ChildName="LPN_Location" ChildXMLName="LPNLocation"
+                    ForeignEntity="Location" Name="Location"
+                    ReadOnly="true" Type="Bidirectional" XMLName="Location">
+                    <Attribute Name="Location_Id" ParentName="Location_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="Stores details about the LPN or part of the LPN that is on the move."
+            EntityType="TRANSACTION" ListXMLName="LPNPendMoves"
+            Module="wms" Name="LPN_Pend_Move" Prefix="YFS_"
+            TableName="YFS_LPN_PEND_MOVE" TableType="TRANSACTION" XMLName="LPNPendMove">
+            <Attributes>
+                <Attribute ColumnName="LPN_PEND_MOVE_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LPN_PEND_MOVE table."
+                    Name="LPN_Pend_Move_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this LPN pending move."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="TARGET_LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The identifier for the target location. This, in conjunction with NODE_KEY, identifies a unique location in the node."
+                    Name="Target_Location_Id" Nullable="false"/>
+                <Attribute ColumnName="LPN_DTL_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The LPN detail key that is associated with this LPN pending move."
+                    Name="LPN_Dtl_Key" Nullable="false"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The LPN number that is associated with this LPN pending move."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="OUTER_MOST_LPN_NO"
+                    DataType="LPNNo" DefaultValue="' '"
+                    Description="The outer most LPN number that is associated with this LPN pending move."
+                    Name="Outer_Most_LPN_No" Nullable="false"/>
+                <Attribute ColumnName="ALLOC_QTY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The number of units of the item allocated from the LPN. This is applicable only if LPN_DTL_KEY is filled. Otherwise, it is assumed that the whole LPN is moving to the target location."
+                    Name="Alloc_Qty" Nullable="false" XMLName="AllocQty"/>
+                <Attribute ColumnName="ALLOC_TYPE"
+                    DataType="EnumAllocType" DefaultValue="' '"
+                    Description="The type of allocation. This indicates whetherthe item is HARD_ALLOCATED or SOFT_ALLOCATED."
+                    Name="Alloc_Type" Nullable="false" XMLName="AllocType"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LPN_PEND_MOVE_PK" Name="YFS_LPN_PEND_MOVE_PK">
+                <Attribute ColumnName="LPN_PEND_MOVE_KEY" Name="LPN_Pend_Move_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LPN_PEND_MOVE_I1"
+                    Name="YFS_LPN_PEND_MOVE_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="TARGET_LOCATION_ID"/>
+                    <Column Name="LPN_DTL_KEY"/>
+                    <Column Name="LPN_NO"/>
+                </Index>
+                <Index DB2Name="LPN_PEND_MOVE_I2" Name="YFS_LPN_PEND_MOVE_I2">
+                    <Column Name="LPN_NO"/>
+                </Index>
+                <Index DB2Name="LPN_PEND_MOVE_I3" Name="YFS_LPN_PEND_MOVE_I3">
+                    <Column Name="OUTER_MOST_LPN_NO"/>
+                </Index>
+                <Index DB2Name="LPN_PEND_MOVE_I4" Name="YFS_LPN_PEND_MOVE_I4">
+                    <Column Name="LPN_DTL_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LPNPendMoves"
+                    ChildName="LPNPendMove"
+                    DeleteValidationError="YDB20001" Enforce="true"
+                    ForeignEntity="Location" Name="Location"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Location">
+                    <Attribute Name="Target_Location_Id" ParentName="Location_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="Non-license plated inventory is tracked using this table."
+            EntityType="TRANSACTION" Module="wms"
+            Name="Location_Inventory" Prefix="YFS_"
+            TableName="YFS_LOCATION_INVENTORY" TableType="TRANSACTION" XMLName="LocationInventory">
+            <Attributes>
+                <Attribute ColumnName="LOCATION_INVENTORY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCATION_INVENTORY table."
+                    Name="Location_Inventory_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this location inventory."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The zone id that is associated with this location. This is the unique key attribute of the YFS_ZONE table in conjunction with NODE_KEY."
+                    Name="Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The identifier for the location. This, in conjunction with NODE_KEY, identifies a unique location in the node."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_ITEM_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The inventory item key that is associated with this location inventory.  This points to a SKU that comprises the Inventory Organization, Item ID, Product Class and Unit of Measure."
+                    Name="Inventory_Item_Key" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_TAG_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The inventory tag key that is associated with this location inventory. This points to lot and related attributes (revision etc) for the item whose inventory is tracked here."
+                    Name="Inventory_Tag_Key" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The inventory status that is associated with this location inventory.  This refers to an inventory sub classification based on the results of the inventory control processes within the warehouse."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="The segment type of the inventory. This field indicates the buyer or buyer category for whom the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory belongs. This helps to track inventory separately when the inventory is customized for a specific order so that the inventory can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="FIFO_NO" DataType="Integer"
+                    DefaultValue="0"
+                    Description="A date based inventory attribute that helps understand the order in which stock arrived at the node. This is used to send out items that arrived earlier than the ones that arrived later."
+                    Name="Fifo_No" Nullable="false"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The receipt header key that is associated with this LPN header. &#xd;&#xa;This helps identify all stocks attached to a receipt. This number is of significance until the sample from the receipt has been certified as having passed or failed QC. This number is used to pull out all stocks based on the receipt. This is usually flled in situations where the LPN does not have contents."
+                    Name="Receipt_Header_Key" Nullable="false"/>
+                <Attribute ColumnName="COUNTRY_OF_ORIGIN"
+                    DataType="Country" DefaultValue="' '"
+                    Description="The country in which the item was manufactured."
+                    Name="Country_Of_Origin" Nullable="false"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date by which the item must be shipped so that it is usable. This is also referred to as the expiration date."
+                    Name="Ship_By_Date" Nullable="false"/>
+                <Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The number of units of the item available at this location."
+                    Name="Quantity" Nullable="false" XMLName="Quantity"/>
+                <Attribute ColumnName="PEND_IN_QTY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The number of units of the item waiting to move into this location."
+                    Name="Pend_In_Qty" Nullable="false" XMLName="PendInQty"/>
+                <Attribute ColumnName="HARD_ALLOC_QTY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The number of units of this item waiting to move out of this location. This is typically done to service an order. This item will move out of this location for the specified purpose."
+                    Name="Hard_Alloc_Qty" Nullable="false" XMLName="HardAllocQty"/>
+                <Attribute ColumnName="SOFT_ALLOC_QTY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The number of units of this item waiting to move out of this location. However, it is not necessary that it may move because soft allocations are typically  suggestions made by the system for space optimization purposes or for operations within the warehouse not related to order shipments."
+                    Name="Soft_Alloc_Qty" Nullable="false" XMLName="SoftAllocQty"/>
+                <Attribute ColumnName="SHIPMENT_ASSIGNED_QTY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This field is not currently used."
+                    Name="Shipment_Assigned_Qty" Nullable="false" XMLName="ShipmentAssignedQty"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOC_INV_PK" Name="YFS_LOCATION_INVENTORY_PK">
+                <Attribute ColumnName="LOCATION_INVENTORY_KEY" Name="Location_Inventory_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_LOCN_INVT_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_ID"/>
+                    <Column Name="INVENTORY_ITEM_KEY"/>
+                    <Column Name="INVENTORY_TAG_KEY"/>
+                    <Column Name="INVENTORY_STATUS"/>
+                    <Column Name="SHIP_BY_DATE"/>
+                    <Column Name="SEGMENT_TYPE"/>
+                    <Column Name="SEGMENT"/>
+                </Index>
+                <Index Name="YFS_LOCN_INVT_I2">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="INVENTORY_ITEM_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationInventoryList"
+                    ChildName="Location_Inventory"
+                    ChildXMLName="LocationInventory"
+                    ForeignEntity="Inventory_Tag" Name="Inventory_Tag"
+                    Type="Bidirectional" XMLName="TagDetail">
+                    <Attribute Name="Inventory_Tag_Key" ParentName="Inventory_Tag_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationInventoryList"
+                    ChildName="Location_Inventory"
+                    ChildXMLName="LocationInventory"
+                    ForeignEntity="Inventory_Item" Name="Inventory_Item"
+                    Type="Bidirectional" XMLName="InventoryItem">
+                    <Attribute Name="Inventory_Item_Key" ParentName="Inventory_Item_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationInventoryList"
+                    ChildName="Location_Inventory"
+                    ChildXMLName="LocationInventory"
+                    ForeignEntity="Location" Name="Location"
+                    ReadOnly="true" Type="Bidirectional" XMLName="Location">
+                    <Attribute Name="Location_Id" ParentName="Location_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="Stores audit information for every single location inventory transaction."
+            EntityType="TRANSACTION"
+            ListXMLName="LocationInventoryAudits" Module="wms"
+            Name="Location_Inventory_Audit" Prefix="YFS_"
+            TableName="YFS_LOCN_INVENTORY_AUDIT" TableType="TRANSACTION" XMLName="LocationInventoryAudit">
+            <Attributes>
+                <Attribute ColumnName="LOCN_INVENTORY_AUDIT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCN_INVENTORY_AUDIT table."
+                    Name="Locn_Inventory_Audit_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this location inventory audit."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The identifier for the location. This, in conjunction with NODE_KEY, identifies a unique location in the node."
+                    Name="LocationId" Nullable="false"/>
+                <Attribute ColumnName="OUTER_MOST_LPN_NO"
+                    DataType="LPNNo" DefaultValue="' '"
+                    Description="The outer most LPN number that is associated with this LPN location."
+                    Name="Outer_Most_LPN_No" Nullable="false"/>
+                <Attribute ColumnName="OUTER_MOST_LPN_TYPE"
+                    DataType="EnumLPNType" DefaultValue="' '"
+                    Description="The type of the outermost License Plate Number. For requests involving a license plate, this field is populated as Case or Pallet."
+                    Name="Outer_Most_LPN_Type" Nullable="false" XMLName="OuterMostLPNType"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The LPN number that is associated with this location inventory audit."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="The type of the License Plate Number. For requests involving a license plate, this field is populated as Case or Pallet."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="INVENTORY_ITEM_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The inventory item key that is associated with this location inventory audit. This points to a SKU that comprises the Inventory Organization, Item ID, Product Class, and Unit of Measure."
+                    Name="Inventory_Item_Key" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_TAG_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The inventory tag key that is associated with this location inventory audit. This points to the lot and related attributes (revision, etc.) for the item whose inventory is tracked here."
+                    Name="Inventory_Tag_Key" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The status in which inventory is sub-classified once it is received in the warehouse. For example, product class is a classification of inventory that the product comes with when it arrives at the warehouse. Typical values of product class are First Quality and Second Quality. Due to additional inventory processes within the warehouse, it is required to further classify inventory. Typical inventory status values are Normal, Awaiting Inventory Check, Inventory Held, etc."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="The segment type of the inventory. This field indicates the buyer or buyer category for whom the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory belongs. This helps to track inventory separately when the inventory is customized for a specific order so that the inventory can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="FIFO_NO" DataType="Integer"
+                    DefaultValue="0"
+                    Description="A date based inventory attribute that helps understand the order in which stock arrived at the node. This is used to send out items that arrived earlier than the ones that arrived later."
+                    Name="Fifo_No" Nullable="false"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The receipt header key that is associated with this location inventory audit. This helps identify all stocks attached to a receipt. This number is of significance until the sample from the receipt has been certified as having passed or failed QC. This number is used to pull out all stocks based on the receipt. This is usually flled in situations where the LPN does not have contents."
+                    Name="Receipt_Header_Key" Nullable="false"/>
+                <Attribute ColumnName="COUNTRY_OF_ORIGIN"
+                    DataType="Country" DefaultValue="' '"
+                    Description="The country in which the item was manufactured."
+                    Name="Country_Of_Origin" Nullable="false"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date by which the item must be shipped so that it is usable. This is also referred to as the expiration date."
+                    Name="Ship_By_Date" Nullable="false"/>
+                <Attribute ColumnName="OPERATION" DataType="Flag"
+                    DefaultValue="0"
+                    Description="This flag indicates whether it was a an addition to or a substraction of inventory."
+                    Name="Operation" Nullable="false" XMLName="AuditOperation"/>
+                <Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The number of units of the item available at this location."
+                    Name="Quantity" Nullable="false" XMLName="Quantity"/>
+                <Attribute ColumnName="ORDER_NO" DataType="VarcharDocumentNo"
+                    Description="The order # against which inventory transaction was made. This is a part of the unique key for the order.The Enterprise code and the order # together uniquely identify an order."
+                    Name="Order_No" Nullable="true" XMLName="OrderNo"/>
+                <Attribute ColumnName="COUNT_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The count request key that is associated with this location inventory audit. This specifies the count request against which the audit is written."
+                    Name="Count_Request_Key" Nullable="false" XMLName="CountRequestKey"/>
+                <Attribute ColumnName="RELEASE_NO" DataType="Count"
+                    DefaultValue="0"
+                    Description="The release number. This is generated as a one up number against that release."
+                    Name="Release_No" Nullable="false" XMLName="ReleaseNo"/>
+                <Attribute ColumnName="PRIME_LINE_NO" DataType="LineNo"
+                    DefaultValue="0"
+                    Description="The order line number. This is part of an order line's unique key."
+                    Name="Prime_Line_No" Nullable="false" XMLName="PrimeLineNo"/>
+                <Attribute ColumnName="BATCH_NO" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="An audit reference indicating that this inventory transaction was for the batch number."
+                    Name="Batch_No" Nullable="false" XMLName="BatchNo"/>
+                <Attribute ColumnName="BOL_NO" DataType="VarcharDocumentNo"
+                    Description="The Bill of Lading number. An audit reference indicating that this inventory transaction was for a BOL is detailed here."
+                    Name="Bol_No" Nullable="true"/>
+                <Attribute ColumnName="SHIPMENT_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The shipment number against which the inventory transaction was performed."
+                    Name="Shipment_No" Nullable="false"/>
+                <Attribute ColumnName="CONTAINER_NO"
+                    DataType="ContainerNo" DefaultValue="' '"
+                    Description="The shipment container number against which the inventory transaction was performed."
+                    Name="Container_No" Nullable="false"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="The document type for the inventory transaction."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The inventory organization code."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="REFERENCE_1" DataType="Text-50"
+                    DefaultValue="' '" Description="Generic references."
+                    Name="Reference_1" Nullable="false"/>
+                <Attribute ColumnName="REFERENCE_2" DataType="Text-50"
+                    DefaultValue="' '" Description="Generic references."
+                    Name="Reference_2" Nullable="false"/>
+                <Attribute ColumnName="REFERENCE_3" DataType="Text-50"
+                    DefaultValue="' '" Description="Generic references."
+                    Name="Reference_3" Nullable="false"/>
+                <Attribute ColumnName="REFERENCE_4" DataType="Text-254"
+                    DefaultValue="' '" Description="Generic references."
+                    Name="Reference_4" Nullable="false"/>
+                <Attribute ColumnName="REFERENCE_5" DataType="Text-254"
+                    DefaultValue="' '" Description="Generic references."
+                    Name="Reference_5" Nullable="false"/>
+                <Attribute ColumnName="REASON_CODE"
+                    DataType="ReasonCode" DefaultValue="' '"
+                    Description="The reason for the inventory transaction. This field is typically populated when the user does an inventory adjustment. Inventory bins, which will be used to adjust inventory (for inventory synchronization) on the host systems, will be tied to this reason code."
+                    Name="Reason_Code" Nullable="false" XMLName="ReasonCode"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' '"
+                    Description="The description of the reason for the inventory adjustment."
+                    Name="Reason_Text" Nullable="false"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' '"
+                    Description="The nature of the work (task type) that caused the inventory picture to be altered. Typical examples are RECEIPT, PUTAWAY, etc."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="SerialNo"
+                    DefaultValue="' '"
+                    Description="The serial of the inventory being modified."
+                    Name="Serial_No" Nullable="false"/>
+                <Attribute ColumnName="SEQUENCE_NO"
+                    DataType="LongSequence" DefaultValue="0"
+                    Description="The sequence number of the program creating the audit."
+                    Name="Sequence_No" Nullable="false"/>
+                <Attribute ColumnName="ADJUSTMENT_TYPE"
+                    DataType="EnumAdjustmentType" DefaultValue="' '"
+                    Description="The type of adjustment done for the inventory processed. Some of the possible values are like RECEIPT, RETURN, SHIPMENT and ADJUSTMENT."
+                    Name="Adjustment_Type" Nullable="false"/>
+                <Attribute ColumnName="WORK_ORDER_KEY" DataType="Key"
+                    Description="The work order key that is associated with this location inventory audit. This specifies the work order against which the audit is written."
+                    Name="Work_Order_Key" Nullable="true" XMLName="WorkOrderKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="WAVE_NO" DataType="SequenceNo"
+                    Description="The wave number against which the inventory transaction was performed."
+                    Name="Wave_No" Nullable="true"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOCN_INV_AUDIT_PK" Name="YFS_LOCN_INVENTORY_AUDIT_PK">
+                <Attribute ColumnName="LOCN_INVENTORY_AUDIT_KEY" Name="Locn_Inventory_Audit_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="YFS_LOCN_AUDIT_I1" Name="YFS_LOCN_INV_AUDIT_I1">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="CREATETS"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationInventoryAudits"
+                    ChildName="Location_Inventory_Audit"
+                    ChildXMLName="LocationInventoryAudit"
+                    ForeignEntity="Inventory_Tag" Name="Inventory_Tag"
+                    Type="Bidirectional" XMLName="TagDetail">
+                    <Attribute Name="Inventory_Tag_Key" ParentName="Inventory_Tag_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationInventoryAudits"
+                    ChildName="Location_Inventory_Audit"
+                    ChildXMLName="LocationInventoryAudit"
+                    ForeignEntity="Inventory_Item" Name="Inventory_Item"
+                    Type="Bidirectional" XMLName="InventoryItem">
+                    <Attribute Name="Inventory_Item_Key" ParentName="Inventory_Item_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Receipt_Header" Name="Receipt"
+                    Type="Bidirectional" XMLName="Receipt">
+                    <Attribute Name="Receipt_Header_Key" ParentName="Receipt_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Count_Request" Name="CountRequest"
+                    Type="Bidirectional" XMLName="CountRequest">
+                    <Attribute Name="Count_Request_Key" ParentName="Count_Request_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Work_Order" Name="WorkOrder"
+                    Type="Unidirectional" XMLName="WorkOrder">
+                    <Attribute Name="Work_Order_Key" ParentName="Work_Order_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity Description="Stores information for each alert raised."
+            EntityType="TRANSACTION"
+            ListXMLName="LocationMonitorAlertList" Module="wms"
+            Name="Locn_Monitor_Alert" Prefix="YFS_"
+            TableName="YFS_LOCN_MONITOR_ALERT" TableType="TRANSACTION" XMLName="LocationMonitorAlert">
+            <Attributes>
+                <Attribute ColumnName="LOCN_MONITOR_ALERT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCN_MONITOR_ALERT table."
+                    Name="Locn_Monitor_Alert_Key" Nullable="false" XMLName="LocnMonitorAlertKey"/>
+                <Attribute ColumnName="LOCN_MONITOR_RULE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The location monitor rule key that is associated with this location monitor alert."
+                    Name="Locn_Monitor_Rule_Key" Nullable="false" XMLName="LocnMonitorRuleKey"/>
+                <Attribute ColumnName="ALERT_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The common code of the event that can be raised."
+                    Name="Alert_Id" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node to which the location belongs, for which the alert is raised."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The identifierfor the location. This, in conjunction with NODE_KEY, identifies a unique location in the node."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="The identifier for the item for which the alert is raised."
+                    Name="Item_Id" Nullable="false" XMLName="ItemId"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The enterprise to which the item belongs."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The unit of measure for which the alert is raised."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="Thr product class for which the alert is raised."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="The inventory status for which the alert is raised."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="NEXT_ALERT_TS"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The next timestamp beyond which the event can be re-checked."
+                    Name="Next_Alert_Ts" Nullable="false" XMLName="NextAlertTs"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOCN_MON_ALERT_PK" Name="YFS_LOCN_MONITOR_ALERT_PK">
+                <Attribute ColumnName="LOCN_MONITOR_ALERT_KEY" Name="Locn_Monitor_Alert_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LOCN_MON_ALERT_I1"
+                    Name="YFS_LOCN_MONITOR_ALERT_I1" Unique="true">
+                    <Column Name="LOCN_MONITOR_RULE_KEY"/>
+                    <Column Name="ALERT_ID"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_ID"/>
+                    <Column Name="ITEM_ID"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="UOM"/>
+                    <Column Name="PRODUCT_CLASS"/>
+                    <Column Name="INVENTORY_STATUS"/>
+                </Index>
+                <Index DB2Name="LOCN_MON_ALERT_I2" Name="YFS_LOCN_MONITOR_ALERT_I2">
+                    <Column Name="LOCN_MONITOR_RULE_KEY"/>
+                    <Column Name="ALERT_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationMonitorAlertList"
+                    ChildName="Locn_Monitor_Alert"
+                    ChildXMLName="LocationMonitorAlert"
+                    ForeignEntity="Locn_Monitor_Rule"
+                    Name="Locn_Monitor_Rule" ReadOnly="true"
+                    Type="Bidirectional" XMLName="LocationMonitorRule">
+                    <Attribute Name="Locn_Monitor_Rule_Key" ParentName="Locn_Monitor_Rule_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="Stores the monitor filters."
+            EntityType="CONFIGURATION"
+            ListXMLName="LocationMonitorFilterList" Module="wms"
+            Name="Locn_Monitor_Filter" Prefix="YFS_"
+            TableName="YFS_LOCN_MONITOR_FILTER"
+            TableType="CONFIGURATION" XMLName="LocationMonitorFilter">
+            <Attributes>
+                <Attribute ColumnName="LOCN_MONITOR_FILTER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCN_MONITOR_FILTER table."
+                    Name="Locn_Monitor_Filter_Key" Nullable="false" XMLName="LocnMonitorFilterKey"/>
+                <Attribute ColumnName="LOCN_MONITOR_RULE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The location monitor rule key that is associated with this location monitor filter."
+                    Name="Locn_Monitor_Rule_Key" Nullable="false" XMLName="LocnMonitorRuleKey"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The zone being monitored. This, in conjunction with NODE_KEY, forms the unique key of the YFS_ZONE table."
+                    Name="Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The size code of the locations to be monitored.This, along with NODE_KEY, forms the unique key attribute of the YFS_LOCATION_SIZE_CODE table."
+                    Name="Location_Size_Code" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOCN_MON_FLRT_PK" Name="YFS_LOCN_MONITOR_FILTER_PK">
+                <Attribute ColumnName="LOCN_MONITOR_FILTER_KEY" Name="Locn_Monitor_Filter_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LOCN_MON_FLRT_I1"
+                    Name="YFS_LOCN_MONITOR_FILTER_I1" Unique="true">
+                    <Column Name="LOCN_MONITOR_RULE_KEY"/>
+                    <Column Name="ZONE_ID"/>
+                    <Column Name="LOCATION_SIZE_CODE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="LocationMonitorFilterList"
+                    ChildName="Locn_Monitor_Filter"
+                    ChildXMLName="LocationMonitorFilter"
+                    DeleteCascade="true"
+                    ForeignEntity="Locn_Monitor_Rule" IsParent="true"
+                    Name="Locn_Monitor_Rule" Type="Bidirectional"
+                    XMLName="LocationMonitorRule">
+                    <Attribute Name="Locn_Monitor_Rule_Key" ParentName="Locn_Monitor_Rule_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Stores the monitor rules."
+            EntityType="CONFIGURATION"
+            ListXMLName="LocationMonitorRuleList" Module="wms"
+            Name="Locn_Monitor_Rule" Prefix="YFS_"
+            TableName="YFS_LOCN_MONITOR_RULE" TableType="CONFIGURATION" XMLName="LocationMonitorRule">
+            <Attributes>
+                <Attribute ColumnName="LOCN_MONITOR_RULE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_LOCN_MONITOR_RULE table."
+                    Name="Locn_Monitor_Rule_Key" Nullable="false" XMLName="LocnMonitorRuleKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this location monitor rule."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="RULE_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The identifier for a rule within the node."
+                    Name="Rule_Id" Nullable="false"/>
+                <Attribute ColumnName="DESCRIPTION" CanTranslate="Y" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="The description of the monitor rule."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The inventory consolidator for whom the rule is configured."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="ALERT_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The common code of the event that can be raised."
+                    Name="Alert_Id" Nullable="false"/>
+                <Attribute ColumnName="FLOW_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The flow to be invoked."
+                    Name="Flow_Key" Nullable="false" XMLName="FlowKey"/>
+                <Attribute ColumnName="REALERT_TIME_INTERVAL"
+                    DataType="Lockid" DefaultValue="0"
+                    Description="The re-alert time."
+                    Name="Realert_Time_Interval" Nullable="false"/>
+                <Attribute ColumnName="REALERT_TIME_UOM"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The r-alert time unit of measure."
+                    Name="Realert_Time_UOM" Nullable="false"/>
+                <Attribute ColumnName="TRIGGER_PERCENT"
+                    DataType="Percentage" DefaultValue="0"
+                    Description="The value used to trigger the inventory monitor if the inventory at the location falls below the percentage of the location capacity defined."
+                    Name="Trigger_Percent" Nullable="false" XMLName="TriggerPercent"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="The product class of inventory to be monitored."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="The custom defined item classification definition. This allows for dynamically selecting a monitoring classification attribute of an item for defining location inventory monitoring constraints."
+                    Name="Item_Classification_1" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="The custom defined item classification definition. This allows for dynamically selecting a monitoring classification attribute of an item for defining location inventory monitoring constraints."
+                    Name="Item_Classification_2" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="The custom defined item classification definition. This allows for dynamically selecting a monitoring classification attribute of an item for defining location inventory monitoring constraints."
+                    Name="Item_Classification_3" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="LOCN_MON_RULE_PK" Name="YFS_LOCN_MONITOR_RULE_PK">
+                <Attribute ColumnName="LOCN_MONITOR_RULE_KEY" Name="Locn_Monitor_Rule_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="LOCN_MON_RULE_I1"
+                    Name="YFS_LOCN_MONITOR_RULE_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="RULE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="The view formed by joining YFS_Lpn_Hdr,YFS_Lpn_dtl, YFS_Location_Inventory, YFS_Inventory_Item and YFS_LPN_LOCATION tables."
+            EntityType="VIEW" Extensible="N"
+            ListXMLName="NodeInventoryDtlList" Module="wms"
+            Name="NodeInventoryDtl_Vw" Prefix="YFS_"
+            TableName="YFS_NODEINVENTORYDTL_VW" TableType="TRANSACTION"
+            View="true" XMLName="NodeInventoryDtl">
+            <Attributes>
+                <Attribute ColumnName="NODEINVENTORYDTL_VW_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_NODEINVENTORYDTL_VW view."
+                    Name="NodeInventoryDtl_Vw_Key" Nullable="false" XMLName="NodeInventoryDtlKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    Description="The inventory organization."
+                    Name="Organization_Code" Nullable="true" XMLName="InventoryOrganizationCode"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    Description="The item." Name="Item_Id"
+                    Nullable="true" XMLGroup="" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    Description="The unit of measure of the item."
+                    Name="Uom" Nullable="true" XMLGroup="" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass"
+                    Description="The product class of the item."
+                    Name="Product_Class" Nullable="true" XMLGroup="" XMLName="ProductClass"/>
+                <Attribute ColumnName="LPN_LOCATION_KEY" DataType="Key"
+                    Description="The primary key for the YFS_LPN_LOCATION table."
+                    Name="LPN_Location_Key" Nullable="true"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The node of the demand associates with the demand details."
+                    Name="Shipnode_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The identifier of the  zone."
+                    Name="Zone_Id" Nullable="false" XMLName="ZoneId"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The identifier for the location. This, in conjunction with NODE_KEY, identifies a unique location in the node."
+                    Name="Location_Id" Nullable="false" XMLName="LocationId"/>
+                <Attribute ColumnName="LPN_HDR_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_LPN_HDR table."
+                    Name="LPN_Hdr_Key" Nullable="false"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The LPN number that is associated with this LPN detail."
+                    Name="LPN_No" Nullable="false" XMLName="LPNNo"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="The type of the License Plate Number. For requests involving a license plate, this field is populated as Case or Pallet."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="PARENT_LPN_NO" DataType="LPNNo"
+                    Description="The LPN number of the immediate parent of this LPN."
+                    Name="Parent_LPN_No" Nullable="true" XMLName="ParentLPNNo"/>
+                <Attribute ColumnName="OUTER_MOST_LPN_NO"
+                    DataType="LPNNo" DefaultValue="' '"
+                    Description="The outer most LPN number that is associated with this LPN detail."
+                    Name="Outer_Most_LPN_No" Nullable="false" XMLName="OuterMostLPNNo"/>
+				<Attribute ColumnName="LPN_DTL_KEY"
+                    DataType="Key"
+                    Description="The lpn dtl key ."
+                    Name="Lpn_Dtl_Key" Nullable="true" XMLName="LpnDtlKey"/>
+                <Attribute ColumnName="INVENTORY_ITEM_KEY"
+                    DataType="Key"
+                    Description="The inventory item associates with the demand details."
+                    Name="Inventory_Item_Key" Nullable="true" XMLName="InventoryItemKey"/>
+                <Attribute ColumnName="INVENTORY_TAG_KEY" DataType="Key"
+                    Description="The inventory tag key that is associated with this LPN detail."
+                    Name="Inventory_Tag_Key" Nullable="true" XMLName="InventoryTagKey"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus"
+                    Description="The status in which inventory is sub-classified once it is received in the warehouse. For example, product class is a classification of inventory that the product comes with when it arrives at the warehouse. Typical values of product class are First Quality and Second Quality. Due to additional inventory processes within the warehouse, it is required to further classify inventory. Typical inventory status values are Normal, Awaiting Inventory Check, Inventory Held, etc."
+                    Name="Inventory_Status" Nullable="true" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="The segment to which the inventory belongs. This helps to track inventory separately when the inventory is customized for a specific order so that the inventory can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="The segment type of the inventory. This helps to track inventory separately when the inventory is customized for a specific order so that the inventory can be allocated to that order.&#xd;&#xa;&#xd;&#xa;When inventory is customized, it needs to be tracked separately. This field indicates the buyer or buyer category for who the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    Description="The date by which the item must be shipped so that it is usable. This is also referred to as the expiration date."
+                    Name="Ship_By_Date" Nullable="true" XMLName="ShipByDate"/>
+                <Attribute ColumnName="QUANTITY" DataType="Quantity"
+                    Description="The  quantity of the demand details."
+                    Name="Quantity" Nullable="false"/>
+                <Attribute ColumnName="COUNTRY_OF_ORIGIN"
+                    DataType="Country"
+                    Description="The country in which the item was manufactured."
+                    Name="Country_Of_Origin" Nullable="true" XMLName="CountryOfOrigin"/>
+                <Attribute ColumnName="FIFO_NO" DataType="Integer"
+                    Description="A date based inventory attribute that helps understand the order in which stock arrived at the node. This is used to send out items that arrived earlier than the ones that arrived later."
+                    Name="Fifo_No" Nullable="true" XMLName="FifoNo"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key"
+                    Description="The receipt header key that is associated with this LPN detail. This helps identify all stocks attached to a receipt. This number is of significance until the sample from the receipt has been certified as having passed or failed QC. This number is used to pull out all stocks based on the receipt."
+                    Name="Receipt_Header_Key" Nullable="true" XMLName="ReceiptHeaderKey"/>
+                <Attribute ColumnName="FREEZE_ON_VARIANCE"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flah indicates whether the LPN had variance detected during a Count operation. This drives whether the LPN can be allocated during Pick Location Assignment."
+                    Name="Freeze_On_Variance" Nullable="false" XMLName="FreezeOnVariance"/>
+                <Attribute ColumnName="RECEIPT_NO" DataType="ReceiptNo"
+                    Description="The unique key or business key, which by itself identifies a receipt along with ReceivingNode."
+                    Name="Receipt_No" Nullable="true" XMLName="ReceiptNo"/>
+                <Attribute ColumnName="RECEIPT_DATE"
+                    DataType="TimeStamp"
+                    Description="The date when the receipt was started."
+                    Name="Receipt_Date" Nullable="true" XMLName="ReceiptDate"/>
+                <Attribute ColumnName="FREEZE_MOVE_IN" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the inventory is moved into the location. This is used for warehouses with certain number of locations. However, the usage of locations is phased out over a period of time."
+                    Name="Freeze_Move_In" Nullable="false" XMLName="FreezeMoveIn"/>
+                <Attribute ColumnName="FREEZE_MOVE_OUT" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether inventory is moved out of the location."
+                    Name="Freeze_Move_Out" Nullable="false" XMLName="FreezeMoveOut"/>
+                <Attribute ColumnName="PEND_IN_QTY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The number of units of the item waiting to move into this location."
+                    Name="Pend_In_Qty" Nullable="false" XMLName="PendInQty"/>
+                <Attribute ColumnName="PEND_OUT_QTY" DataType="Quantity"
+                    DefaultValue="0"
+                    Description="The number of units of the item waiting to move into this location."
+                    Name="Pend_Out_Qty" Nullable="false" XMLName="PendOutQty"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="NODEINVENTORYDTL_VW_KEY" Name="NodeInventoryDtl_Vw_Key"/>
+            </PrimaryKey>
+        </Entity>
+    </Entities>
+</DBSchema>

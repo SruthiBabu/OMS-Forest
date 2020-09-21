@@ -1,0 +1,2476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.  
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores the rules regarding reservations of sorter equipments for lane assignment."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Chute_Dedication" Prefix="YFS_"
+            TableName="YFS_CHUTE_DEDICATION" TableType="CONFIGURATION" XMLName="ChuteDedication">
+            <Attributes>
+                <Attribute ColumnName="CHUTE_DEDICATION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_CHUTE_DEDICATION table."
+                    Name="Chute_Dedication_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="Indicates the node where chute dedication is defined."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="SORT_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Indicates the sort strategy for which this dedication rule is defined."
+                    Name="Sort_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="ATTR_NAME" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="Valid values are 'CarrierSortingRule' for sorting by carrier and 'ShipmentSortingRule' for sorting by shipment."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="LOCATION_ID" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the location ID associated with the location placeholder for the equipment."
+                    Name="Location_Id" Nullable="false"/>
+                <Attribute ColumnName="SCAC" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The Standard Carrier Alpha Code (SCAC) assigned to&#xd;&#xa;identify the carrier."
+                    Name="Scac" Nullable="false" XMLName="SCAC"/>
+                <Attribute ColumnName="EXPORT_FLAG" DataType="Flag"
+                    DefaultValue="' ' " Description="Valid values: Y/N."
+                    Name="Export_Flag" Nullable="false"/>
+                <Attribute ColumnName="SINGLE_CARTON_SHIPMENTS"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="Valid values: Y/N."
+                    Name="Single_Carton_Shipments" Nullable="false"/>
+                <Attribute ColumnName="PACK_AND_HOLD" DataType="Flag"
+                    DefaultValue="' ' " Description="Valid values: Y/N."
+                    Name="Pack_And_Hold" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CHUTE_DED_PK" Name="YFS_CHUTE_DEDICATION_PK">
+                <Attribute ColumnName="CHUTE_DEDICATION_KEY" Name="Chute_Dedication_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CHUTE_DED_I1"
+                    Name="YFS_CHUTE_DEDICATION_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="SORT_STRATEGY_KEY"/>
+                    <Column Name="ATTR_NAME"/>
+                    <Column Name="LOCATION_ID"/>
+                    <Column Name="SCAC"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ChuteDedicationList"
+                    ChildName="ChuteDedication"
+                    DeleteValidationError="YDB100156" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Unidirectional" ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CarrierSortRuleList"
+                    ChildName="CarrierSortRule" DeleteCascade="true"
+                    ForeignEntity="Sort_Strategy" IsParent="true"
+                    Name="Carrier_Sort_Rule" Type="Bidirectional" XMLName="CarrierSortRule">
+                    <Attribute Name="Sort_Strategy_Key" ParentName="Sort_Strategy_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CarrierSortRule"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSortRuleList"
+                    ChildName="ShipmentSortRule" DeleteCascade="true"
+                    ForeignEntity="Sort_Strategy" IsParent="true"
+                    Name="Shipment_Sort_Rule" Type="Bidirectional" XMLName="ShipmentSortRule">
+                    <Attribute Name="Sort_Strategy_Key" ParentName="Sort_Strategy_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="ShipmentSortRule"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="CHUTE_DEDICATION_KEY"/>
+        </Entity>
+        <Entity
+            Description="This table is used to get one up number for entities like wave."
+            EntityType="TRANSACTION" Module="wms" Name="Node_Tran_Attr"
+            Prefix="YFS_" TableName="YFS_NODE_TRAN_ATTR" TableType="TRANSACTION">
+            <Attributes>
+                <Attribute ColumnName="NODE_TRAN_ATTR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_NODE_TRAN_ATTR table."
+                    Name="Node_Tran_Attr_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_NODE_TRAN_ATTR table."
+                    Name="Node_Key" Nullable="false"/>
+                <Attribute ColumnName="ATTRIBUTE_NAME"
+                    DataType="AttributeName" DefaultValue="' '"
+                    Description="The attribute whose last value is to be stored."
+                    Name="Attribute_Name" Nullable="false"/>
+                <Attribute ColumnName="ATTRIBUTE_VALUE"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="This field indicates the last value of the attribute that is specified in the attribute name."
+                    Name="Attribute_Value" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="NODE_TRAN_ATTR_PK" Name="YFS_NODE_TRAN_ATTR_PK">
+                <Attribute ColumnName="NODE_TRAN_ATTR_KEY" Name="Node_Tran_Attr_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="NODE_TRAN_ATTR_I1"
+                    Name="YFS_NODE_TRAN_ATTR_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ATTRIBUTE_NAME"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity along with its child entities define different Pick strategies in the warehouse. Pick strategies depend on different parameters such Item Classification, Demand, Volume of Shipments, Carrier Type and more."
+            EntityType="CONFIGURATION" Module="wms" Name="Pick_Strategy"
+            Prefix="YFS_" TableName="YFS_PICK_STRATEGY"
+            TableType="CONFIGURATION" XMLName="PickStrategy">
+            <Attributes>
+                <Attribute ColumnName="PICK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PICK_STRATEGY table."
+                    Name="Pick_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PICK_STRATEGY table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="Free form description of pick strategy."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="OWNER_SHIPMENT_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PICK_STRATEGY table."
+                    Name="Owner_Shipment_Group_Key" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PICK_STRATEGY_PK" Name="YFS_PICK_STRATEGY_PK">
+                <Attribute ColumnName="PICK_STRATEGY_KEY" Name="Pick_Strategy_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PickStrategyList"
+                    ChildName="PickStrategy" Enforce="true"
+                    ForeignEntity="Shipment_Group" Name="ShipmentGroup"
+                    Type="Bidirectional" XMLName="ShipmentGroup">
+                    <Attribute Name="Owner_Shipment_Group_Key" ParentName="Shipment_Group_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PickStrategyList"
+                    ChildName="PickStrategy"
+                    DeleteValidationError="YDB100131" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNode" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Pick process determination."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pla_Activity_Deter" Prefix="YFS_"
+            TableName="YFS_PLA_ACTIVITY_DETER" TableType="CONFIGURATION" XMLName="PlaActivityDeter">
+            <Attributes>
+                <Attribute ColumnName="PLA_ACTIVITY_DETER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ACTIVITY_DETER table."
+                    Name="Pla_Activity_Deter_Key" Nullable="false"/>
+                <Attribute ColumnName="PICK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ACTIVITY_DETER table."
+                    Name="Pick_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field indicates that the shipments belonging to this enterprise satisfy the Shipment Selector."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ACTIVITY_DETER table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="A brief description of the Pick process determination."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="ACTIVITY_CODE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="In a warehouse, the pick process code defines the overall process for executing order picking. This field can take one of the pre-defined values (ItemPick, OrderPick, BatchPick)."
+                    Name="Activity_Code" Nullable="false"/>
+                <Attribute ColumnName="ORDER_PICK_TASK_TYPE"
+                    DataType="TaskType" DefaultValue="' '"
+                    Description="It indicates the task type to be used from the staging zone to the final destination."
+                    Name="Order_Pick_Task_Type" Nullable="false" XMLName="OrderPickTaskType"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items that are grouped under the item classification or category one."
+                    Name="Item_Classification_1" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under the item classification or category two."
+                    Name="Item_Classification_2" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under the item classification or category three."
+                    Name="Item_Classification_3" Nullable="false"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates if the activity is specified for this alternate unit of measure."
+                    Name="UOM" Nullable="false" XMLName="UOM"/>
+                <Attribute ColumnName="SINGLE_LINE_SHIPMENT"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether this activity applies to only single line shipments."
+                    Name="Single_Line_Shipment" Nullable="false"/>
+                <Attribute ColumnName="SINGLE_UNIT_SHIPMENT"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether this activity applies to only single unit shipments."
+                    Name="Single_Unit_Shipment" Nullable="false"/>
+                <Attribute ColumnName="CONSIDER_DEMAND" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the demand based constraints will be used to evaluate the activity condition."
+                    Name="Consider_Demand" Nullable="false"/>
+                <Attribute ColumnName="EXCLUDE_CASE_FROM_DEMAND"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the cases are considered while computing the total quantity."
+                    Name="Exclude_Case_From_Demand" Nullable="false"/>
+                <Attribute ColumnName="EXCLUDE_PALLET_FROM_DEMAND"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the pallets are considered while computing the total quantity."
+                    Name="Exclude_Pallet_From_Demand" Nullable="false"/>
+                <Attribute ColumnName="MIN_NO_OF_PACKAGES"
+                    DataType="Integer" DefaultValue="0"
+                    Description="Use this activity if the total quantity for an item in the wave exceeds the specified criteria."
+                    Name="Min_No_Of_Packages" Nullable="false"/>
+                <Attribute ColumnName="MIN_NO_OF_PACKAGES_UOM"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="The unit of measure for the minimum number of packages."
+                    Name="Min_No_Of_Packages_UOM" Nullable="false" XMLName="MinNoOfPackagesUOM"/>
+                <Attribute ColumnName="MIN_NO_OF_SINGLE_UNIT_SHIPMENT"
+                    DataType="Integer" DefaultValue="0"
+                    Description="Use this strategy if a single unit shipment for an item in the wave exceeds this quantity."
+                    Name="Min_No_Of_Single_Unit_Shipment"
+                    Nullable="false" XMLName="MinNoOfSingleUnitShipment"/>
+                <Attribute ColumnName="MIN_SHMNTS_SAME_PROFILEID"
+                    DataType="Integer" DefaultValue="0"
+                    Description="Use this strategy if the number of shipments with the same profileID in the wave exceeds this quantity."
+                    Name="Min_Shmnts_Same_ProfileID" Nullable="false" XMLName="MinNoOfSameProfileIDShipments"/>
+                <Attribute ColumnName="MIN_NO_OF_SINGLE_UNIT_CARTON"
+                    DataType="Integer" DefaultValue="0"
+                    Description="Use this strategy if a single unit shipping cartons for an item in the wave exceeds this quantity."
+                    Name="Min_No_Of_Single_Unit_Carton" Nullable="false" XMLName="MinNoOfSingleUnitCarton"/>
+                <Attribute ColumnName="SHIP_MODE" DataType="ShipMode"
+                    DefaultValue="' '"
+                    Description="This field specifies the mode of shipment used for shipping."
+                    Name="Ship_Mode" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLA_ACT_DETER_PK" Name="YFS_PLA_ACTIVITY_DETER_PK">
+                <Attribute ColumnName="PLA_ACTIVITY_DETER_KEY" Name="Pla_Activity_Deter_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityDeterList"
+                    ChildName="PlaActivityDeter" DeleteCascade="true"
+                    ForeignEntity="Pick_Strategy" IsParent="true"
+                    Name="PickStrategy" Type="Bidirectional" XMLName="PickStrategy">
+                    <Attribute Name="Pick_Strategy_Key" ParentName="Pick_Strategy_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityDeterList"
+                    ChildName="PlaActivityDeter"
+                    DeleteValidationError="YDB100132" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityDeterList"
+                    ChildName="PlaActivityDeter"
+                    DeleteValidationError="YDB100133" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityDeterList"
+                    ChildName="PlaActivityDeter"
+                    DeleteValidationError="YDB100134" Enforce="true"
+                    ForeignEntity="Uom" Name="Uom" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="Uom">
+                    <Attribute Name="Uom" ParentName="Uom"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="The entity stores information about various Staging Zones used in the first step of picking process."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pla_Item_Pick_Staging_Zone" Prefix="YFS_"
+            TableName="YFS_PLA_ITEM_PICK_STAGING_ZONE"
+            TableType="CONFIGURATION" XMLName="PlaItemPickStagingZone">
+            <Attributes>
+                <Attribute ColumnName="PLA_ITEM_PICK_STAGING_ZONE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ITEM_PICK_STAGING_ZONE table."
+                    Name="Pla_Item_Pick_Staging_Zone_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="Indicates the node where PLA activity determination condition is defined."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PLA_ACTIVITY_DETER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ACTIVITY_DETER table."
+                    Name="Pla_Activity_Deter_Key" Nullable="false"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="Indicates the staging zone configured. This forms a unique key for the YFS_ZONE table associated with the NODE_KEY."
+                    Name="Zone_Id" Nullable="false" XMLName="ZoneId"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ITM_PCK_STG_ZNE_PK" Name="YFS_PLA_ITM_PCK_STG_ZONE_PK">
+                <Attribute ColumnName="PLA_ITEM_PICK_STAGING_ZONE_KEY" Name="Pla_Item_Pick_Staging_Zone_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaItemPickStagingZoneList"
+                    ChildName="PlaItemPickStagingZone"
+                    DeleteCascade="true"
+                    ForeignEntity="Pla_Activity_Deter" IsParent="true"
+                    Name="PlaActivityDeter" Type="Bidirectional" XMLName="PlaActivityDeter">
+                    <Attribute Name="Pla_Activity_Deter_Key" ParentName="Pla_Activity_Deter_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Task type for a PLA Zone Set."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pla_Activity_Task_Type" Prefix="YFS_"
+            TableName="YFS_PLA_ACTIVITY_TASK_TYPE"
+            TableType="CONFIGURATION" XMLName="PlaActivityTaskType">
+            <Attributes>
+                <Attribute ColumnName="PLA_ACTIVITY_TASK_TYPE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ACTIVITY_TASK_TYPE table."
+                    Name="Pla_Activity_Task_Type_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ACTIVITY_TASK_TYPE table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PLA_ZONE_SET_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ACTIVITY_TASK_TYPE table."
+                    Name="Pla_Zone_Set_Key" Nullable="false"/>
+                <Attribute ColumnName="ACTIVITY" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="In a warehouse, the pick process code defines the overall process for executing the order pick. This field can take one of the pre-defined values (ItemPick, OrderPick, BatchPick)."
+                    Name="Activity" Nullable="false"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' '"
+                    Description="This field identifies the task type for the activity code."
+                    Name="Task_Type" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLAACTTASKTYPE_PK" Name="YFS_PLA_ACTIVITY_TASK_TYPE_PK">
+                <Attribute ColumnName="PLA_ACTIVITY_TASK_TYPE_KEY" Name="Pla_Activity_Task_Type_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityTaskTypes"
+                    ChildName="PlaActivityTaskType" DeleteCascade="true"
+                    ForeignEntity="Pla_Zone_Set" IsParent="true"
+                    Name="PlaZoneSet" Type="Bidirectional" XMLName="PlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityTaskTypeList"
+                    ChildName="PlaActivityTaskType"
+                    DeleteValidationError="YDB100137" Enforce="true"
+                    ForeignEntity="Activity" Name="Activity"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Activity">
+                    <Attribute Name="Activity" ParentName="Activity_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityTaskTypeList"
+                    ChildName="PlaActivityTaskType"
+                    DeleteValidationError="YDB100138" Enforce="true"
+                    ForeignEntity="Task_Type" Name="TaskType"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="TaskType">
+                    <Attribute Name="Node_Key" ParentName="Organization_Code"/>
+                    <Attribute Name="Task_Type" ParentName="Task_Type"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityTaskTypes"
+                    ChildName="PlaActivityTaskType"
+                    ForeignEntity="Item_Pick_Pla_Zone_Set"
+                    Name="ItemPickPlaZoneSet" Type="Bidirectional" XMLName="ItemPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityTaskTypes"
+                    ChildName="PlaActivityTaskType"
+                    ForeignEntity="Batch_Pick_Pla_Zone_Set"
+                    Name="BatchPickPlaZoneSet" Type="Bidirectional" XMLName="BatchPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityTaskTypes"
+                    ChildName="PlaActivityTaskType"
+                    ForeignEntity="Order_Pick_Pla_Zone_Set"
+                    Name="OrderPickPlaZoneSet" Type="Bidirectional" XMLName="OrderPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaActivityTaskTypes"
+                    ChildName="PlaActivityTaskType"
+                    ForeignEntity="Retrieval_Pla_Zone_Set"
+                    Name="RetrievalPlaZoneSet" Type="Bidirectional" XMLName="RetrievalPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table has list of values for attributes like operation uom for a PLA condition."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pla_Condition_Attr" Prefix="YFS_"
+            TableName="YFS_PLA_CONDITION_ATTR" TableType="CONFIGURATION" XMLName="PlaConditionAttr">
+            <Attributes>
+                <Attribute ColumnName="PLA_CONDITION_ATTR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_CONDITION_ATTR table."
+                    Name="Pla_Condition_Attr_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_CONDITION_ATTR table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PLA_UOM_CONDITION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_CONDITION_ATTR table."
+                    Name="Pla_Uom_Condition_Key" Nullable="false"/>
+                <Attribute ColumnName="ATTR_NAME" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="This field indicates the attribute name of the field that has to be included."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="VALUE" DataType="Text-100"
+                    DefaultValue="' '"
+                    Description="The field indicates the attribute value."
+                    Name="Value" Nullable="false" XMLName="Value">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLA_COND_ATTR_PK" Name="YFS_PLA_CONDITION_ATTR_PK">
+                <Attribute ColumnName="PLA_CONDITION_ATTR_KEY" Name="Pla_Condition_Attr_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaConditionAttrList"
+                    ChildName="PlaConditionAttr" DeleteCascade="true"
+                    ForeignEntity="Pla_Uom_Condition" IsParent="true"
+                    Name="PlaUomCondition" Type="Bidirectional" XMLName="PlaUomCondition">
+                    <Attribute Name="Pla_Uom_Condition_Key" ParentName="Pla_Uom_Condition_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaConditionAttrList"
+                    ChildName="PlaConditionAttr"
+                    DeleteValidationError="YDB100136" Enforce="true"
+                    ForeignEntity="Uom" Name="Uom" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="Uom">
+                    <Attribute Name="Attr_Name" ParentName="UnitOfMeasure"/>
+                    <Attribute Name="Value" ParentName="Uom"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaConditionAttrList"
+                    ChildName="PlaConditionAttr"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores item classifications that require special retrieval location selection preferences."
+            EntityType="CONFIGURATION" IsAbstract="Y" Module="wms"
+            Name="Pla_Item_Condition" Prefix="YFS_"
+            TableName="YFS_PLA_ITEM_CONDITION" TableType="CONFIGURATION" XMLName="PlaItemCondition">
+            <Attributes>
+                <Attribute ColumnName="PLA_ITEM_CONDITION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ITEM_CONDITION table."
+                    Name="Pla_Item_Condition_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ITEM_CONDITION table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="A brief description of the item condition."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Only item classifications belonging to this enterprise is considered."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the wave items are grouped under item classification one."
+                    Name="Item_Classification_1" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the wave items are grouped under item classification two."
+                    Name="Item_Classification_2" Nullable="false"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the wave items are grouped under item classification three."
+                    Name="Item_Classification_3" Nullable="false"/>
+                <Attribute ColumnName="SEQ_NO" DataType="Count"
+                    DefaultValue="0"
+                    Description="This field specifies the number used to identify the order for evaluation."
+                    Name="Seq_No" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLA_ITEM_COND_PK" Name="YFS_PLA_ITEM_CONDITION_PK">
+                <Attribute ColumnName="PLA_ITEM_CONDITION_KEY" Name="Pla_Item_Condition_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaItemConditionList"
+                    ChildName="PlaItemCondition"
+                    DeleteValidationError="YDB100135" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaItemConditionList"
+                    ChildName="PlaItemCondition"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="SEQ_NO"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores item classifications that require special retrieval location selection preferences."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Item_Pick_Pla_Item_Condition" Prefix="YFS_"
+            Superclass="Pla_Item_Condition" TableType="CONFIGURATION" XMLName="ItemPickPlaItemCondition">
+            <Attributes>
+                <Attribute ColumnName="PICK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ITEM_CONDITION table."
+                    Name="Pick_Strategy_Key" Nullable="false"/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ItemPickPlaItemConditionList"
+                    ChildName="ItemPickPlaItemCondition"
+                    DeleteCascade="true" ForeignEntity="Pick_Strategy"
+                    IsParent="true" Name="PickStrategy"
+                    Type="Bidirectional" XMLName="PickStrategy">
+                    <Attribute Name="Pick_Strategy_Key" ParentName="Pick_Strategy_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores item classifications that require special retrieval location selection preferences."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Order_Pick_Pla_Item_Condition" Prefix="YFS_"
+            Superclass="Pla_Item_Condition" TableType="CONFIGURATION" XMLName="OrderPickPlaItemCondition">
+            <Attributes>
+                <Attribute ColumnName="PICK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ITEM_CONDITION table."
+                    Name="Pick_Strategy_Key" Nullable="false"/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="OrderPickPlaItemConditionList"
+                    ChildName="OrderPickPlaItemCondition"
+                    DeleteCascade="true" ForeignEntity="Pick_Strategy"
+                    IsParent="true" Name="PickStrategy"
+                    Type="Bidirectional" XMLName="PickStrategy">
+                    <Attribute Name="Pick_Strategy_Key" ParentName="Pick_Strategy_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores item classifications that require special retrieval location selection preferences."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Batch_Pick_Pla_Item_Condition" Prefix="YFS_"
+            Superclass="Pla_Item_Condition" TableType="CONFIGURATION" XMLName="BatchPickPlaItemCondition">
+            <Attributes>
+                <Attribute ColumnName="PICK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ITEM_CONDITION table."
+                    Name="Pick_Strategy_Key" Nullable="false"/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BatchPickPlaItemConditionList"
+                    ChildName="BatchPickPlaItemCondition"
+                    DeleteCascade="true" ForeignEntity="Pick_Strategy"
+                    IsParent="true" Name="PickStrategy"
+                    Type="Bidirectional" XMLName="PickStrategy">
+                    <Attribute Name="Pick_Strategy_Key" ParentName="Pick_Strategy_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table stores item classifications that require special retrieval location selection preferences."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Retrieval_Pla_Item_Condition" Prefix="YFS_"
+            Superclass="Pla_Item_Condition" TableType="CONFIGURATION" XMLName="RetrievalPlaItemCondition">
+            <Attributes>
+                <Attribute ColumnName="RETRIEVAL_STRATEGY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ITEM_CONDITION table."
+                    Name="Retrieval_Strategy_Key" Nullable="false"/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="RetrievalPlaItemConditionList"
+                    ChildName="RetrievalPlaItemCondition"
+                    DeleteCascade="true"
+                    ForeignEntity="Retrieval_Strategy" IsParent="true"
+                    Name="RetrievalStrategy" Type="Bidirectional" XMLName="RetrievalStrategy">
+                    <Attribute Name="Retrieval_Strategy_Key" ParentName="Retrieval_Strategy_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table contains units of measure that require special pick location selection preferences. The units of measure are included through YFS_RETRIEVAL_ATTR table."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pla_Uom_Condition" Prefix="YFS_"
+            TableName="YFS_PLA_UOM_CONDITION" TableType="CONFIGURATION" XMLName="PlaUomCondition">
+            <Attributes>
+                <Attribute ColumnName="PLA_UOM_CONDITION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_UOM_CONDITION table."
+                    Name="Pla_Uom_Condition_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="Node for which this uom condition is defined."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PLA_ITEM_CONDITION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Item condition for which this uom condition is defined."
+                    Name="Pla_Item_Condition_Key" Nullable="false"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="A brief description of the unit of measure condition."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="SEQ_NO" DataType="Count"
+                    DefaultValue="0"
+                    Description="This field specifies the number used to identify the order for evaluation."
+                    Name="Seq_No" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLA_UOM_COND_PK" Name="YFS_PLA_UOM_CONDITION_PK">
+                <Attribute ColumnName="PLA_UOM_CONDITION_KEY" Name="Pla_Uom_Condition_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaUomConditionList"
+                    ChildName="PlaUomCondition" DeleteCascade="true"
+                    ForeignEntity="Pla_Item_Condition" IsParent="true"
+                    Name="PlaItemCondition" Type="Bidirectional" XMLName="PlaItemCondition">
+                    <Attribute Name="Pla_Item_Condition_Key" ParentName="Pla_Item_Condition_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaUomConditionList"
+                    ChildName="PlaUomCondition"
+                    ForeignEntity="Item_Pick_Pla_Item_Condition"
+                    Name="ItemPickPlaItemCondition" Type="Bidirectional" XMLName="ItemPickPlaItemCondition">
+                    <Attribute Name="Pla_Item_Condition_Key" ParentName="Pla_Item_Condition_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaUomConditionList"
+                    ChildName="PlaUomCondition"
+                    ForeignEntity="Batch_Pick_Pla_Item_Condition"
+                    Name="BatchPickPlaItemCondition"
+                    Type="Bidirectional" XMLName="BatchPickPlaItemCondition">
+                    <Attribute Name="Pla_Item_Condition_Key" ParentName="Pla_Item_Condition_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaUomConditionList"
+                    ChildName="PlaUomCondition"
+                    ForeignEntity="Order_Pick_Pla_Item_Condition"
+                    Name="OrderPickPlaItemCondition"
+                    Type="Bidirectional" XMLName="OrderPickPlaItemCondition">
+                    <Attribute Name="Pla_Item_Condition_Key" ParentName="Pla_Item_Condition_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaUomConditionList"
+                    ChildName="PlaUomCondition"
+                    ForeignEntity="Retrieval_Pla_Item_Condition"
+                    Name="RetrievalPlaItemCondition"
+                    Type="Bidirectional" XMLName="RetrievalPlaItemCondition">
+                    <Attribute Name="Pla_Item_Condition_Key" ParentName="Pla_Item_Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Uom to which demand can be upgraded if required."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Pla_Upgrade_Uom" Prefix="YFS_"
+            TableName="YFS_PLA_UPGRADE_UOM" TableType="CONFIGURATION" XMLName="PlaUpgradeUom">
+            <Attributes>
+                <Attribute ColumnName="PLA_UPGRADE_UOM_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_UPGRADE_UOM table."
+                    Name="Pla_Upgrade_Uom_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_UPGRADE_UOM table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PLA_ZONE_SET_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_UPGRADE_UOM table."
+                    Name="Pla_Zone_Set_Key" Nullable="false"/>
+                <Attribute ColumnName="UOM" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="This field indicates the upgrade unit of measure."
+                    Name="UOM" Nullable="false" XMLName="UOM"/>
+                <Attribute ColumnName="" DataType="Quantity"
+                    DefaultValue="0" Name="UomQuantity" Nullable="false" Virtual="true"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLA_UPGRADE_UOM_PK" Name="YFS_PLA_UPGRADE_UOM_PK">
+                <Attribute ColumnName="PLA_UPGRADE_UOM_KEY" Name="Pla_Upgrade_Uom_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaUpgradeUomList"
+                    ChildName="PlaUpgradeUom" DeleteCascade="true"
+                    ForeignEntity="Pla_Zone_Set" Name="PlaZoneSet"
+                    Type="Bidirectional" XMLName="PlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaUpgradeUomList"
+                    ChildName="PlaUpgradeUom" DeleteCascade="true"
+                    ForeignEntity="Retrieval_Pla_Zone_Set"
+                    IsParent="true" Name="RetrievalPlaZoneSet"
+                    Type="Bidirectional" XMLName="RetrievalPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Item_Pick_Pla_Zone_Set"
+                    Name="ItemPickPlaZoneSet" Type="Bidirectional" XMLName="ItemPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Batch_Pick_Pla_Zone_Set"
+                    Name="BatchPickPlaZoneSet" Type="Bidirectional" XMLName="BatchPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Order_Pick_Pla_Zone_Set"
+                    Name="OrderPickPlaZoneSet" Type="Bidirectional" XMLName="OrderPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Zones for a PLA Zone set."
+            EntityType="CONFIGURATION" Module="wms" Name="Pla_Zone_Attr"
+            Prefix="YFS_" TableName="YFS_PLA_ZONE_ATTR"
+            TableType="CONFIGURATION" XMLName="PlaZoneAttr">
+            <Attributes>
+                <Attribute ColumnName="PLA_ZONE_ATTR_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ZONE_ATTR table."
+                    Name="Pla_Zone_Attr_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ZONE_ATTR table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PLA_ZONE_SET_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ZONE_ATTR table."
+                    Name="Pla_Zone_Set_Key" Nullable="false"/>
+                <Attribute ColumnName="ATTR_NAME" DataType="Key"
+                    DefaultValue="' '"
+                    Description="Attribute name.  Can be one of: InventoryStatus, InventoryZone, PickFenceZone, DynamicSlotZone, CrossDockZone, ShipmentStatus."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="VALUE" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="The field indicates the attribute value."
+                    Name="Value" Nullable="false">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLA_ZONE_ATTR_PK" Name="YFS_PLA_ZONE_ATTR_PK">
+                <Attribute ColumnName="Pla_Zone_Attr_Key" Name="Pla_Zone_Attr_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr" DeleteCascade="true"
+                    ForeignEntity="Pla_Zone_Set" IsParent="true"
+                    Name="PlaZoneSet" Type="Bidirectional" XMLName="PlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr" ForeignEntity="Ship_Node"
+                    Name="ShipNode" Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="InventoryZoneAttrList"
+                    ChildName="InventoryZoneAttr"
+                    ForeignEntity="Pla_Zone_Set"
+                    Name="Inventory_Zone_Set" Type="Bidirectional" XMLName="InventoryZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="InventoryZone"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="InventoryStatusAttrList"
+                    ChildName="InventoryStatusAttr"
+                    ForeignEntity="Pla_Zone_Set"
+                    Name="Inventory_Status_Set" Type="Bidirectional" XMLName="InventoryStatusSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="InventoryStatus"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PickFenceZoneAttrList"
+                    ChildName="OrderPickFenceZoneAttr"
+                    ForeignEntity="Order_Pick_Pla_Zone_Set"
+                    Name="Order_Pick_Fence_Zone_Set"
+                    Type="Bidirectional" XMLName="OrderPickFenceZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="PickFenceZone"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PickFenceZoneAttrList"
+                    ChildName="BatchPickFenceZoneAttr"
+                    ForeignEntity="Batch_Pick_Pla_Zone_Set"
+                    Name="Batch_Pick_Fence_Zone_Set"
+                    Type="Bidirectional" XMLName="BatchPickFenceZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="PickFenceZone"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CrossDockZoneAttrList"
+                    ChildName="OrderCrossDockZoneAttr"
+                    ForeignEntity="Order_Pick_Pla_Zone_Set"
+                    Name="Order_Cross_Dock_Zone_Set"
+                    Type="Bidirectional" XMLName="OrderCrossDockZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CrossDockZone"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CrossDockZoneAttrList"
+                    ChildName="BatchCrossDockZoneAttr"
+                    ForeignEntity="Batch_Pick_Pla_Zone_Set"
+                    Name="Batch_Cross_Dock_Zone_Set"
+                    Type="Bidirectional" XMLName="BatchCrossDockZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CrossDockZone"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentStatusAttrList"
+                    ChildName="ShipmentStatusAttr"
+                    ForeignEntity="Pla_Zone_Set"
+                    Name="Shipment_Status_Set" Type="Bidirectional" XMLName="ShipmentStatusSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="ShipmentStatus"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    DeleteValidationError="YDB100139" Enforce="true"
+                    ForeignEntity="Uom" Name="Uom" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="Uom">
+                    <Attribute Name="Attr_Name" ParentName="UnitOfMeasure"/>
+                    <Attribute Name="Value" ParentName="Uom"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    DeleteValidationError="YDB100140" Enforce="true"
+                    ForeignEntity="Zone" Name="Zone"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Zone">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="PickFenceZone"/>
+                    <Attribute Name="Value" ParentName="Zone_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    DeleteValidationError="YDB100140" Enforce="true"
+                    ForeignEntity="Zone" Name="Zone"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Zone">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CrossDockZone"/>
+                    <Attribute Name="Value" ParentName="Zone_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    DeleteValidationError="YDB100140" Enforce="true"
+                    ForeignEntity="Zone" Name="Zone"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Zone">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="InventoryZone"/>
+                    <Attribute Name="Value" ParentName="Zone_Id"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    DeleteValidationError="YDB100141" Enforce="true"
+                    ForeignEntity="Inventory_Status"
+                    Name="InventoryStatus" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="InventoryStatus">
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="InventoryStatus"/>
+                    <Attribute Name="Value" ParentName="Inventory_Status"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    ForeignEntity="Item_Pick_Pla_Zone_Set"
+                    Name="ItemPickPlaZoneSet" Type="Bidirectional" XMLName="ItemPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    ForeignEntity="Batch_Pick_Pla_Zone_Set"
+                    Name="BatchPickPlaZoneSet" Type="Bidirectional" XMLName="BatchPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    ForeignEntity="Order_Pick_Pla_Zone_Set"
+                    Name="OrderPickPlaZoneSet" Type="Bidirectional" XMLName="OrderPickPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlaZoneAttrList"
+                    ChildName="PlaZoneAttr"
+                    ForeignEntity="Retrieval_Pla_Zone_Set"
+                    Name="RetrievalPlaZoneSet" Type="Bidirectional" XMLName="RetrievalPlaZoneSet">
+                    <Attribute Name="Pla_Zone_Set_Key" ParentName="Pla_Zone_Set_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="zone set for PLA Condition."
+            EntityType="CONFIGURATION" IsAbstract="Y" Module="wms"
+            Name="Pla_Zone_Set" Prefix="YFS_"
+            TableName="YFS_PLA_ZONE_SET" TableType="CONFIGURATION" XMLName="PlaZoneSet">
+            <Attributes>
+                <Attribute ColumnName="PLA_ZONE_SET_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ZONE_SET table."
+                    Name="Pla_Zone_Set_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ZONE_SET table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PLA_UOM_CONDITION_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLA_ZONE_SET table."
+                    Name="Pla_Uom_Condition_Key" Nullable="false"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="This field specifies the zone priority for a PLA condition."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="Free form description of PLA zone set."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="PICK_ALGORITHM_CODE"
+                    DataType="EnumPickAlgorithmCode" DefaultValue="' '"
+                    Description="01- Pick to Clean, 02-Least Pick."
+                    Name="Pick_Algorithm_Code" Nullable="false"/>
+                <Attribute ColumnName="USE_DEDICATED_LOCATIONS"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the inventory will be used in dedicated       locations."
+                    Name="Use_Dedicated_Locations" Nullable="false"/>
+				<Attribute ColumnName="REPLENISH_TO_MAX_QTY"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether to Replenish dedicated locations up to maximum quantity configured for the dedicated location."
+                    Name="Replenish_To_Max_Qty" Nullable="false" XMLName="ReplenishToMaxQty"/>
+				<Attribute ColumnName="REPLENISH_BELOW_MIN_QTY"
+                    DataType="Flag" DefaultValue="'N'"
+                    Description="This flag indicates whether to Replenish dedicated locations when quantity goes below the minimum quantity configured for the dedicated location."
+                    Name="Replenish_Below_Min_Qty" Nullable="false" XMLName="ReplenishBelowMinQty"/>
+                <Attribute ColumnName="DO_NO_SPLIT_LPN_TYPE"
+                    DataType="EnumLPNType" DefaultValue="' '"
+                    Description="This field indicates that the inventory available in this particular LPNType can not be broken during allocation. The types that currently supported are Case and Pallet."
+                    Name="Do_Not_Split_LPN_Type" Nullable="false" XMLName="DoNotSplitLPNType"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLA_ZONE_SET_PK" Name="YFS_PLA_ZONE_SET_PK">
+                <Attribute ColumnName="PLA_ZONE_SET_KEY" Name="Pla_Zone_Set_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Pla_Uom_Condition"
+                    Name="PlaUomCondition" Type="Bidirectional" XMLName="PlaUomCondition">
+                    <Attribute Name="Pla_Uom_Condition_Key" ParentName="Pla_Uom_Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="zone set for PLA Condition."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Item_Pick_Pla_Zone_Set" Prefix="YFS_"
+            Superclass="Pla_Zone_Set" TableType="CONFIGURATION" XMLName="ItemPickPlaZoneSet">
+            <Attributes/>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ItemPickPlaZoneSetList"
+                    ChildName="ItemPickPlaZoneSet" DeleteCascade="true"
+                    ForeignEntity="Pla_Uom_Condition" IsParent="true"
+                    Name="PlaUomCondition" Type="Bidirectional" XMLName="PlaUomCondition">
+                    <Attribute Name="Pla_Uom_Condition_Key" ParentName="Pla_Uom_Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="zone set for PLA Condition."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Order_Pick_Pla_Zone_Set" Prefix="YFS_"
+            Superclass="Pla_Zone_Set" TableType="CONFIGURATION" XMLName="OrderPickPlaZoneSet">
+            <Attributes>
+                <Attribute ColumnName="PICK_FENCE_FACTOR"
+                    DataType="PriorityWithDecimal" DefaultValue="0"
+                    Description="Dynamically slot a location when demand satisfied from a dedicated location is location capacity times PickFenceFactor. If this is specified then pick fence zones should also be specified."
+                    Name="Pick_Fence_Factor" Nullable="false"/>
+                <Attribute ColumnName="USE_DYNAMIC_LOCATIONS"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the inventory will be used in dedicated locations."
+                    Name="Use_Dynamic_Locations" Nullable="false"/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="OrderPickPlaZoneSetList"
+                    ChildName="OrderPickPlaZoneSet" DeleteCascade="true"
+                    ForeignEntity="Pla_Uom_Condition" IsParent="true"
+                    Name="PlaUomCondition" Type="Bidirectional" XMLName="PlaUomCondition">
+                    <Attribute Name="Pla_Uom_Condition_Key" ParentName="Pla_Uom_Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="zone set for PLA Condition."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Batch_Pick_Pla_Zone_Set" Prefix="YFS_"
+            Superclass="Pla_Zone_Set" TableType="CONFIGURATION" XMLName="BatchPickPlaZoneSet">
+            <Attributes>
+                <Attribute ColumnName="PICK_FENCE_FACTOR"
+                    DataType="PriorityWithDecimal" DefaultValue="0"
+                    Description="Dynamically slot a location when demand satisfied from a dedicated location is location capacity times PickFenceFactor. If this is specified then pick fence zones should also be specified."
+                    Name="Pick_Fence_Factor" Nullable="false"/>
+                <Attribute ColumnName="USE_DYNAMIC_LOCATIONS"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the inventory will be used in dedicated locations."
+                    Name="Use_Dynamic_Locations" Nullable="false"/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BatchPickPlaZoneSetList"
+                    ChildName="BatchPickPlaZoneSet" DeleteCascade="true"
+                    ForeignEntity="Pla_Uom_Condition" IsParent="true"
+                    Name="PlaUomCondition" Type="Bidirectional" XMLName="PlaUomCondition">
+                    <Attribute Name="Pla_Uom_Condition_Key" ParentName="Pla_Uom_Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="zone set for PLA Condition."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Retrieval_Pla_Zone_Set" Prefix="YFS_"
+            Superclass="Pla_Zone_Set" TableType="CONFIGURATION" XMLName="RetrievalPlaZoneSet">
+            <Attributes>
+                <Attribute ColumnName="USE_DYNAMIC_LOCATIONS"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the inventory will be used in dedicated locations."
+                    Name="Use_Dynamic_Locations" Nullable="false"/>
+            </Attributes>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="RetrievalPlaZoneSetList"
+                    ChildName="RetrievalPlaZoneSet" DeleteCascade="true"
+                    ForeignEntity="Pla_Uom_Condition" IsParent="true"
+                    Name="PlaUomCondition" Type="Bidirectional" XMLName="PlaUomCondition">
+                    <Attribute Name="Pla_Uom_Condition_Key" ParentName="Pla_Uom_Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table has list of values for attributes like target zone and target location for a Retrieval strategy."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Retrieval_Attr" Prefix="YFS_"
+            TableName="YFS_RETRIEVAL_ATTR" TableType="CONFIGURATION" XMLName="RetrievalAttr">
+            <Attributes>
+                <Attribute ColumnName="RETRIEVAL_ATTR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_RETRIEVAL_ATTR table."
+                    Name="Retrieval_Attr_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_RETRIEVAL_ATTR table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="RETRIEVAL_STRATEGY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_RETRIEVAL_ATTR table."
+                    Name="Retrieval_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="ATTR_NAME" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="This field indicates the attribute name of the field that has to be either included or excluded."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="VALUE" DataType="Text-100"
+                    DefaultValue="' '"
+                    Description="This field indicates the attribute value."
+                    Name="Value" Nullable="false" XMLName="Value">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="RETRIEVAL_ATTR_PK" Name="YFS_RETRIEVAL_ATTR_PK">
+                <Attribute ColumnName="RETRIEVAL_ATTR_KEY" Name="Retrieval_Attr_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="RetrievalAttrList"
+                    ChildName="RetrievalAttr" DeleteCascade="true"
+                    ForeignEntity="Retrieval_Strategy" IsParent="true"
+                    Name="RetrievalStrategy" Type="Bidirectional" XMLName="RetrievalStrategy">
+                    <Attribute Name="Retrieval_Strategy_Key" ParentName="Retrieval_Strategy_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="RetrievalAttrList"
+                    ChildName="RetrievalAttr" ForeignEntity="Ship_Node"
+                    Name="ShipNode" Type="Bidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="RetrievalAttrList"
+                    ChildName="RetrievalAttr"
+                    DeleteValidationError="YDB100158" Enforce="true"
+                    ForeignEntity="Zone" Name="Zone"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Zone">
+                    <Attribute Name="Attr_Name" ParentName="TargetZone"/>
+                    <Attribute Name="Value" ParentName="Zone_Id"/>
+                    <Attribute Name="Node_Key" ParentName="Node_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity along with its child entities stores Retrieval and Replenishment Strategies for various Acitivities. These Activities can be VAS, QC, etc."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Retrieval_Strategy" Prefix="YFS_"
+            TableName="YFS_RETRIEVAL_STRATEGY" TableType="CONFIGURATION" XMLName="RetrievalStrategy">
+            <Attributes>
+                <Attribute ColumnName="RETRIEVAL_STRATEGY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_RETRIEVAL_STRATEGY table."
+                    Name="Retrieval_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_RETRIEVAL_STRATEGY table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="Free form description of retrieval strategy."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="ACTIVITY_GROUP"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="This field indicates the activity group."
+                    Name="Activity_Group" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="RET_STRATEGY_PK" Name="YFS_RETRIEVAL_STRATEGY_PK">
+                <Attribute ColumnName="RETRIEVAL_STRATEGY_KEY" Name="Retrieval_Strategy_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="RetrievalStrategyList"
+                    ChildName="RetrievalStrategy" DeleteCascade="true"
+                    DeleteValidationError="YDB100157" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNode" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="A shipment group is a group of shipments that share similar operational characteristics."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Shipment_Group" Prefix="YFS_"
+            TableName="YFS_SHIPMENT_GROUP" TableType="CONFIGURATION" XMLName="ShipmentGroup">
+            <Attributes>
+                <Attribute ColumnName="SHIPMENT_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_GROUP table."
+                    Name="Shipment_Group_Key" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_GROUP_ID"
+                    DataType="ID-10" DefaultValue="' ' "
+                    Description="This field identifies the shipment group."
+                    Name="Shipment_Group_Id" Nullable="false" XMLName="ShipmentGroupId"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="FreeText-100" DefaultValue="' '"
+                    Description="A brief description of the shipment group."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_GROUP table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="SEQ_NO" DataType="Count"
+                    DefaultValue="0"
+                    Description="This field indicates the sequence number for the shipment group."
+                    Name="Seq_No" Nullable="false" XMLName="SeqNo"/>
+                <Attribute ColumnName="PRIORITY" DataType="EnumPriority"
+                    DefaultValue="0"
+                    Description="Valid values are: 1 - Urgent, 2 - High, 3 - Normal (Default), 4 - Low."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute ColumnName="CALENDAR_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="Calendar Key used in wave release schedule."
+                    Name="Calendar_Key" Nullable="false"/>
+                <Attribute ColumnName="PICK_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_GROUP table."
+                    Name="Pick_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="SORT_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_GROUP table."
+                    Name="Sort_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="PIPELINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="This field indicates the pipeline this wave belongs to."
+                    Name="Pipeline_Key" Nullable="false"/>
+                <Attribute ColumnName="ACCEPT_WAVE" DataType="Text-20"
+                    DefaultValue="' '"
+                    Description="Valid values are: Auto, Manual, Conditional. If it is conditional then either Min_Volume or Min_No_Of_Shipments should be specified."
+                    Name="Accept_Wave" Nullable="false"/>
+                <Attribute ColumnName="MIN_NO_OF_SHIPMENTS"
+                    DataType="Integer" DefaultValue="0"
+                    Description="If the number of shipments in a wave exceeds this number, the wave will be accepted automatically depending on the accept_value."
+                    Name="Min_No_Of_Shipments" Nullable="false"/>
+                <Attribute ColumnName="MIN_VOLUME" DataType="Volume"
+                    DefaultValue="0"
+                    Description="If volume of the wave exceeds this number, the wave will be accepted automatically depending on the accept_value."
+                    Name="Min_Volume" Nullable="false"/>
+                <Attribute ColumnName="NO_OF_CONCURRENT_WAVES"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This field specifies the number of waves that were released concurrently."
+                    Name="No_Of_Concurrent_Waves" Nullable="false"/>
+                <Attribute ColumnName="MAX_WAVES_TO_PROCESS"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This field specifies the number of waves that needs to be processed for a shipment group."
+                    Name="Max_Waves_To_Process" Nullable="false"/>
+                <Attribute ColumnName="TO_WAVE_STATUS" DataType="Status"
+                    DefaultValue="' '"
+                    Description="This field indicates the to status of the wave considered for limiting the waves being processed."
+                    Name="To_Wave_Status" Nullable="false"/>
+                <Attribute ColumnName="EFFECTIVE_DATE_FROM"
+                    DataType="TimeStamp" DefaultValue="sysdate "
+                    Description="This field indicates the date on which the shipment group is available."
+                    Name="Effective_Date_From" Nullable="false"/>
+                <Attribute ColumnName="EFFECTIVE_DATE_TO"
+                    DataType="TimeStamp"
+                    Description="This field indicates the date after which this shipment group is not available."
+                    Name="Effective_Date_To" Nullable="true"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="SHIPMENT_GROUP_PK" Name="YFS_SHIPMENT_GROUP_PK">
+                <Attribute ColumnName="SHIPMENT_GROUP_KEY" Name="Shipment_Group_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SHIPMENT_GROUP_I1"
+                    Name="YFS_SHIPMENT_GROUP_I1" Unique="true">
+                    <Column Name="SHIPMENT_GROUP_ID"/>
+                    <Column Name="NODE_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Calendar" Name="Calendar" Type="Unidirectional">
+                    <Attribute Name="Calendar_Key" ParentName="Calendar_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentGroupList"
+                    ChildName="ShipmentGroup"
+                    ForeignEntity="Pick_Strategy" Name="PickStrategy"
+                    Type="Bidirectional" XMLName="PickStrategy">
+                    <Attribute Name="Pick_Strategy_Key" ParentName="Pick_Strategy_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentGroupList"
+                    ChildName="ShipmentGroup"
+                    ForeignEntity="Sort_Strategy" Name="SortStrategy"
+                    Type="Bidirectional" XMLName="SortStrategy">
+                    <Attribute Name="Sort_Strategy_Key" ParentName="Sort_Strategy_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentGroupList"
+                    ChildName="ShipmentGroup"
+                    DeleteValidationError="YDB100121" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNode" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PipelineList" ChildName="Pipeline"
+                    DeleteValidationError="YDB100122" Enforce="true"
+                    ForeignEntity="Pipeline" Name="Pipeline"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Pipeline">
+                    <Attribute Name="Pipeline_Key" ParentName="Pipeline_Key"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="SEQ_NO"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="Exclude/Include list for a Shipment selectors attribute."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Shipment_Select_Attr" Prefix="YFS_"
+            TableName="YFS_SHIPMENT_SELECT_ATTR"
+            TableType="CONFIGURATION" XMLName="ShipmentSelectAttr">
+            <Attributes>
+                <Attribute ColumnName="SHIPMENT_SELECT_ATTR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_SELECT_ATTR table."
+                    Name="Shipment_Select_Attr_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_SELECT_ATTR table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="SHIPMENT_SELECTOR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The shipment selector key that is associated with this shipment select attribute."
+                    Name="Shipment_Selector_Key" Nullable="false"/>
+                <Attribute ColumnName="ATTR_NAME" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="This field indicates the attribute name of the field that has to be either included or excluded."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="VALUE" DataType="Text-100"
+                    DefaultValue="' '"
+                    Description="This field specifies the attribute value."
+                    Name="Value" Nullable="false" XMLName="Value">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="SHIP_SEL_ATTR_PK" Name="YFS_SHIPMENT_SELECT_ATTR_PK">
+                <Attribute ColumnName="SHIPMENT_SELECT_ATTR_KEY" Name="Shipment_Select_Attr_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SHIP_SEL_ATTR_I1"
+                    Name="YFS_SHIPMENT_SELECT_ATTR_I1" Unique="true">
+                    <Column Name="ATTR_NAME"/>
+                    <Column Name="SHIPMENT_SELECTOR_KEY"/>
+                    <Column Name="VALUE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectAttrList"
+                    ChildName="ShipmentSelectAttr" DeleteCascade="true"
+                    ForeignEntity="Shipment_Selector" IsParent="true"
+                    Name="Shipment_Selector" Type="Bidirectional" XMLName="ShipmentSelector">
+                    <Attribute Name="Shipment_Selector_Key" ParentName="Shipment_Selector_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="BuyerOrganizationAttrList"
+                    ChildName="BuyerOrganizationAttr"
+                    DeleteCascade="true"
+                    ForeignEntity="Shipment_Selector"
+                    Name="Buyer_Shipment_Selector" Type="Bidirectional" XMLName="BuyerShipmentSelector">
+                    <Attribute Name="Shipment_Selector_Key" ParentName="Shipment_Selector_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="BuyerOrganizationCode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CarrierServiceCodeAttrList"
+                    ChildName="CarrierServiceCodeAttr"
+                    DeleteCascade="true"
+                    ForeignEntity="Shipment_Selector"
+                    Name="Carrier_Shipment_Selector"
+                    Type="Bidirectional" XMLName="CarrierShipmentSelector">
+                    <Attribute Name="Shipment_Selector_Key" ParentName="Shipment_Selector_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CarrierServiceCode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ReceivingNodeAttrList"
+                    ChildName="ReceivingNodeAttr" DeleteCascade="true"
+                    ForeignEntity="Shipment_Selector"
+                    Name="Receiving_Shipment_Selector"
+                    Type="Bidirectional" XMLName="ReceivingShipmentSelector">
+                    <Attribute Name="Shipment_Selector_Key" ParentName="Shipment_Selector_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="ReceivingNode"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectAttrList"
+                    ChildName="ShipmentSelectAttr"
+                    DeleteValidationError="YDB100114" Enforce="true"
+                    ForeignEntity="Carrier_Service"
+                    Name="CarrierService" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="CarrierService">
+                    <Attribute Name="Attr_Name" ParentName="CarrierServiceCode"/>
+                    <Attribute Name="Value" ParentName="Carrier_Service_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectAttrList"
+                    ChildName="ShipmentSelectAttr"
+                    DeleteValidationError="YDB100125" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Attr_Name" ParentName="BuyerOrganizationCode"/>
+                    <Attribute Name="Value" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectAttrList"
+                    ChildName="ShipmentSelectAttr"
+                    DeleteValidationError="YDB100126" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="ShipNode">
+                    <Attribute Name="Attr_Name" ParentName="ReceivingNode"/>
+                    <Attribute Name="Value" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectAttrList"
+                    ChildName="ShipmentSelectAttr"
+                    DeleteValidationError="YDB100190" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+            <OrderBy Value="ATTR_NAME"/>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Condition attributes that are used during wave creation."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Shipment_Selector" Prefix="YFS_"
+            TableName="YFS_SHIPMENT_SELECTOR" TableType="CONFIGURATION" XMLName="ShipmentSelector">
+            <Attributes>
+                <Attribute ColumnName="SHIPMENT_SELECTOR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_SELECTOR table."
+                    Name="Shipment_Selector_Key" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_SELECTOR table."
+                    Name="Shipment_Group_Key" Nullable="false"/>
+                <Attribute ColumnName="DESCRIPTION" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="A brief description of the shipment selectors."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SHIPMENT_SELECTOR table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PRIORITY_CODE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="This field indicates the priority code of the order. The external logic can be built for prioritizing orders."
+                    Name="Priority_Code" Nullable="false"
+                    XMLGroup="HeaderAttributes" XMLName="PriorityCode"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field indicates the shipments belonging to this enterprise satisfy the shipment selector."
+                    Name="Enterprise_Code" Nullable="false" XMLGroup="HeaderAttributes"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the shipments belonging to this document type satisfy the shipment selector."
+                    Name="Document_Type" Nullable="false"
+                    XMLGroup="HeaderAttributes" XMLName="DocumentType"/>
+                <Attribute ColumnName="SHIPMENT_VALUE" DataType="Money"
+                    DefaultValue="0"
+                    Description="This field indicates that this shipment selector is applicable only if the shipment's value exceeds this value."
+                    Name="Shipment_Value" Nullable="false" XMLGroup="ShipmentValueAttributes"/>
+                <Attribute ColumnName="CURRENCY" DataType="Currency"
+                    DefaultValue="' ' "
+                    Description="This field specifies the currency of the shipment value."
+                    Name="Currency" Nullable="false" XMLGroup="ShipmentValueAttributes"/>
+                <Attribute ColumnName="ORDER_TYPE" DataType="Text-20"
+                    DefaultValue="' ' "
+                    Description="This field indicates the order classification attribute."
+                    Name="Order_Type" Nullable="false" XMLGroup="HeaderAttributes"/>
+                <Attribute ColumnName="DELIVERY_METHOD"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the delivery method for the product line."
+                    Name="Delivery_Method" Nullable="false" XMLGroup="HeaderAttributes"/>
+                <Attribute ColumnName="SHIP_MODE" DataType="ShipMode"
+                    DefaultValue="' '"
+                    Description="This field indicates the mode of shipment."
+                    Name="Ship_Mode" Nullable="false" XMLGroup="HeaderAttributes"/>
+                <Attribute ColumnName="SCAC" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="The Standard Carrier Alpha Code (SCAC) assigned to&#xd;&#xa;identify the carrier."
+                    Name="Scac" Nullable="false"
+                    XMLGroup="HeaderAttributes" XMLName="SCAC"/>
+                <Attribute ColumnName="SHIP_TO_COUNTRY"
+                    DataType="Text-2" DefaultValue="' '"
+                    Description="This field indicates the country code from where the merchandise is being shipped."
+                    Name="Ship_To_Country" Nullable="false"
+                    XMLGroup="HeaderAttributes" XMLName="ShipToCountry"/>
+                <Attribute ColumnName="SHIP_TO_FROM_ZIP"
+                    DataType="ZipCode" DefaultValue="' ' "
+                    Description="This field indicates the starting zip code of the zip code range."
+                    Name="From_Zip" Nullable="false"
+                    XMLGroup="ZipCodeAttributes" XMLName="FromZip"/>
+                <Attribute ColumnName="SHIP_TO_TO_ZIP"
+                    DataType="ZipCode" DefaultValue="' ' "
+                    Description="This field indicates the zip code where the range ends."
+                    Name="To_Zip" Nullable="false" XMLGroup="ZipCodeAttributes"/>
+                <Attribute ColumnName="ZIP_CODE_LENGTH" DataType="Count"
+                    DefaultValue="0"
+                    Description="This field specifies the number of digits or characters in the Start and End Zip codes."
+                    Name="Zip_Code_Length" Nullable="false"
+                    XMLGroup="ZipCodeAttributes" XMLName="ZipCodeLength"/>
+                <Attribute ColumnName="SINGLE_LINE_SHIPMENT"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the shipment selector applies to only single line shipments."
+                    Name="Single_Line_Shipment" Nullable="false" XMLGroup="SpecialProcessingAttributes"/>
+                <Attribute ColumnName="SINGLE_ITEM_SHIPMENT"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the shipment selector applies to only single item shipments."
+                    Name="Single_Item_Shipment" Nullable="false" XMLGroup="SpecialProcessingAttributes"/>
+                <Attribute ColumnName="PACK_AND_HOLD" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether the shipment selector applies only to pack and hold shipments."
+                    Name="Pack_And_Hold" Nullable="false" XMLGroup="HeaderAttributes"/>
+                <Attribute ColumnName="SHIPMENT_WITH_VAS"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the shipment selector applies to only shipments with &quot;Value Added Services&quot;."
+                    Name="Shipment_With_VAS" Nullable="false" XMLGroup="SpecialProcessingAttributes"/>
+                <Attribute ColumnName="SHIP_DATE_PAST_DUE"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the shipment selector applies to only shipments that have past the ship date."
+                    Name="Ship_Date_Past_Due" Nullable="false" XMLGroup="DelinquentShipmentAttributes"/>
+                <Attribute ColumnName="DEL_CANCEL_DATE_PAST_DUE"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the shipment selector applies only to shipments that have past the delivery date or cancel date."
+                    Name="Del_Cancel_Date_Past_Due" Nullable="false" XMLGroup="DelinquentShipmentAttributes"/>
+                <Attribute ColumnName="DEL_CANCEL_DATE_DELQ_SHIPMENT"
+                    DataType="Count" DefaultValue="0"
+                    Description="This shipment selector is applicable to delinquent shipments whose ship date is past due and delivery date and cancel date is within this value in hours."
+                    Name="Del_Cancel_Date_Delq_Shipment"
+                    Nullable="false" XMLGroup="DelinquentShipmentAttributes"/>
+                <Attribute ColumnName="SHIP_DATE_WITHIN"
+                    DataType="Count" DefaultValue="0"
+                    Description="This shipment selector is applicable to Risk/Regular shipments whose ship date is within this value in hours."
+                    Name="Ship_Date_Within" Nullable="false" XMLGroup="ShipmentDateAttributes"/>
+                <Attribute ColumnName="DEL_CANCEL_DATE_RISK_SHIPMENT"
+                    DataType="Count" DefaultValue="0"
+                    Description="This shipment selector is applicable to Risk/Regular shipments whose delivery date and cancel date is within this value in hours."
+                    Name="Del_Cancel_Date_Risk_Shipment"
+                    Nullable="false" XMLGroup="ShipmentDateAttributes"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under the item classification one."
+                    Name="Item_Classification_1" Nullable="false" XMLGroup="LineAttributes"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are grouped under the item classification two."
+                    Name="Item_Classification_2" Nullable="false" XMLGroup="LineAttributes"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="Item classification or category."
+                    Name="Item_Classification_3" Nullable="false" XMLGroup="LineAttributes"/>
+                <Attribute ColumnName="CUSTOM_CONDITION"
+                    DataType="Text-2000"
+                    Description="This is the custom condition provided for selection of shipment in the wave."
+                    Name="Custom_Condition" Nullable="true"
+                    XMLGroup="CustomCondition" XMLName="CustomCondition"/>
+                <Attribute ColumnName="PICK_DATE_PAST_DUE"
+                    DataType="Flag"
+                    Description="Indicates if shipments past pick date are eligible for picking through this shipment selector."
+                    Name="Pick_Date_Past_Due" Nullable="true"
+                    XMLGroup="PlanningAttributes" XMLName="PickDatePastDue"/>
+                <Attribute ColumnName="PICK_DATE_WITHIN"
+                    DataType="Count"
+                    Description="Indicates that shipments whose pick dates are within this period are eligible to picked up."
+                    Name="Pick_Date_Within" Nullable="true"
+                    XMLGroup="PlanningAttributes" XMLName="PickDateWithin"/>
+                <Attribute ColumnName="INCL_ONLY_PLAN_SHIPS"
+                    DataType="Flag"
+                    Description="Indicates if only planned shipments should get included."
+                    Name="Include_Only_Planned_Shipments"
+                    Nullable="true" XMLGroup="PlanningAttributes" XMLName="IncludeOnlyPlannedShipments"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="SHIP_SELECTOR_PK" Name="YFS_SHIPMENT_SELECTOR_PK">
+                <Attribute ColumnName="SHIPMENT_SELECTOR_KEY" Name="Shipment_Selector_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectorList"
+                    ChildName="ShipmentSelector" DeleteCascade="true"
+                    ForeignEntity="Shipment_Group" IsParent="true"
+                    Name="Shipment_Group" Type="Bidirectional" XMLName="ShipmentGroup">
+                    <Attribute Name="Shipment_Group_Key" ParentName="Shipment_Group_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectorList"
+                    ChildName="ShipmentSelector"
+                    DeleteValidationError="YDB100112" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectorList"
+                    ChildName="ShipmentSelector"
+                    DeleteValidationError="YDB100113" Enforce="true"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Bidirectional" ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectorList"
+                    ChildName="ShipmentSelector"
+                    DeleteValidationError="YDB100123" Enforce="true"
+                    ForeignEntity="Document_Params"
+                    Name="DocumentParams" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="DocumentParams">
+                    <Attribute Name="Document_Type" ParentName="Document_Type"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentSelectorList"
+                    ChildName="ShipmentSelector"
+                    DeleteValidationError="YDB100124" Enforce="true"
+                    ForeignEntity="Currency" Name="Currency"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Currency">
+                    <Attribute Name="Currency" ParentName="Currency"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="The entity stores Sort Strategy for a Shipment Group in a node. Sort Strategy is used to assign lanes (also called sorting stations) for shipments which undergo waving process in the node."
+            EntityType="CONFIGURATION" Module="wms" Name="Sort_Strategy"
+            Prefix="YFS_" TableName="YFS_SORT_STRATEGY"
+            TableType="CONFIGURATION" XMLName="SortStrategy">
+            <Attributes>
+                <Attribute ColumnName="SORT_STRATEGY_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SORT_STRATEGY table."
+                    Name="Sort_Strategy_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_SORT_STRATEGY table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION" DataType="Text-200"
+                    DefaultValue="' '"
+                    Description="A brief description of the sort strategy."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="OWNER_SHIPMENT_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SORT_STRATEGY table."
+                    Name="Owner_Shipment_Group_Key" Nullable="false"/>
+                <Attribute ColumnName="SORT_BY_CARRIER" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether sorting by carrier is necessary."
+                    Name="Sort_By_Carrier" Nullable="false"/>
+                <Attribute ColumnName="CARRIER_SORT_EQUIP_TYPE"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SORT_STRATEGY table."
+                    Name="Carrier_Sort_Equip_Type" Nullable="false"/>
+                <Attribute ColumnName="CARRIER_SORT_EQUIP_ID"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SORT_STRATEGY table."
+                    Name="Carrier_Sort_Equip_Id" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_SORT" DataType="Text-20"
+                    DefaultValue="' '"
+                    Description="This field indicates whether the shipments are sorted manually or automatically. If automated, the shipments are sorted by the Equipment ID field. Otherwise, shipments are sorted manually in the zone."
+                    Name="Shipment_Sort" Nullable="false"/>
+                <Attribute ColumnName="SORT_BY_SHIPMENT" DataType="Flag"
+                    DefaultValue="' ' "
+                    Description="This flag indicates whether sorting by shipment is necessary."
+                    Name="Sort_By_Shipment" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_SORT_EQUIP_TYPE"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SORT_STRATEGY table."
+                    Name="Shipment_Sort_Equip_Type" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_SORT_EQUIP_ID"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_SORT_STRATEGY table."
+                    Name="Shipment_Sort_Equip_Id" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_ZONE_ID"
+                    DataType="ZoneId" DefaultValue="' '"
+                    Description="This field indicates the zone in which shipments are manually sorted."
+                    Name="Shipment_Zone_Id" Nullable="false"/>
+                <Attribute ColumnName="USE_STAGING_LOCATIONS"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether to use staging locations of the dock for sorting when dock is assigned."
+                    Name="Use_Staging_Locations" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="SORT_STGY_PK" Name="YFS_SORT_STRATEGY_PK">
+                <Attribute ColumnName="SORT_STRATEGY_KEY" Name="Sort_Strategy_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="SORT_STGY_I1"
+                    Name="YFS_SORT_STRATEGY_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="OWNER_SHIPMENT_GROUP_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="SortStrategyList"
+                    ChildName="SortStrategy"
+                    DeleteValidationError="YDB100155" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNode" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>        
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="Size constraints for wave."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Wave_Size_Constraint" Prefix="YFS_"
+            TableName="YFS_WAVE_SIZE_CONSTRAINT" TableType="CONFIGURATION">
+            <Attributes>
+                <Attribute ColumnName="WAVE_SIZE_CONSTRAINT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute."
+                    Name="Wave_Size_Constraint_Key" Nullable="false"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-200" DefaultValue="' '"
+                    Description="A brief description of the wave size constraint."
+                    Name="Description" Nullable="false"/>
+                <Attribute ColumnName="SHIPMENT_GROUP_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Primary key attribute of YFS_SHIPMENT_GROUP."
+                    Name="Shipment_Group_Key" Nullable="false"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_WAVE_SIZE_CONSTRAINT table."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field indicates that the wave size constrint is applicable to the enterprise."
+                    Name="Enterprise_Code" Nullable="false"/>
+                <Attribute ColumnName="SCAC" DataType="Text-40"
+                    DefaultValue="' ' " Description="The carrier."
+                    Name="Scac" Nullable="false"
+                    XMLGroup="HeaderAttributes" XMLName="SCAC"/>
+                <Attribute ColumnName="CARRIER_SERVICE_CODE"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the service code associated with the carrier."
+                    Name="Carrier_Service_Code" Nullable="false"
+                    XMLGroup="HeaderAttributes" XMLName="CarrierServiceCode"/>
+                <Attribute ColumnName="SHIP_MODE" DataType="ShipMode"
+                    DefaultValue="' '" Description="Mode of shipment."
+                    Name="Ship_Mode" Nullable="false" XMLGroup="HeaderAttributes"/>
+                <Attribute ColumnName="MULTI_LINE_SHIPMENT"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the wave size constraint is applicable for shipments that have more than one line."
+                    Name="Multi_Line_Shipment" Nullable="false" XMLGroup="SpecialProcessingAttributes"/>
+                <Attribute ColumnName="MULTI_CASE_SHIPMENT"
+                    DataType="Flag" DefaultValue="' ' "
+                    Description="This flag indicates whether the wave size constraint is applicable for shipments that have more than one shipping carton."
+                    Name="Multi_Case_Shipment" Nullable="false" XMLGroup="SpecialProcessingAttributes"/>
+                <Attribute ColumnName="DO_NOT_MIX_PROFILE_ID"
+                    DataType="Flag" DefaultValue="N"
+                    Description="This flag indicates whether shipments with different profileID's can be put together in the same wave or not ."
+                    Name="Do_Not_Mix_ProfileID" Nullable="false" XMLName="DoNotMixProfileID"/>
+                <Attribute ColumnName="SHMNT_PROFILE_THRESHOLD"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This indicates the number of same profileID shipments after which profile mixing is not allowed ."
+                    Name="Shmnt_Profile_Threshold" Nullable="false" XMLName="NumberOfSameProfileShipmentsThreshold"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_1"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as first for the wave size constraint."
+                    Name="Item_Classification_1" Nullable="false" XMLGroup="LineAttributes"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_2"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as second for the wave size constraint."
+                    Name="Item_Classification_2" Nullable="false" XMLGroup="LineAttributes"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION_3"
+                    DataType="ID-40" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as third for the wave size constraint."
+                    Name="Item_Classification_3" Nullable="false" XMLGroup="LineAttributes"/>
+                <Attribute ColumnName="MAX_NO_OF_LOADS"
+                    DataType="Integer" DefaultValue="0"
+                    Description="Thid field indicates the maximum number of loads allowed for the pick criteria."
+                    Name="Max_No_Of_Loads" Nullable="false"/>
+                <Attribute ColumnName="MAX_NO_OF_SHIPMENTS"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This field indicates the maximum number of shipments allowed for the pick criteria."
+                    Name="Max_No_Of_Shipments" Nullable="false"/>
+                <Attribute ColumnName="MAX_NO_OF_CASES"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This field indicates the maximum number of cases allowed for the pick criteria."
+                    Name="Max_No_Of_Cases" Nullable="false"/>
+                <Attribute ColumnName="MAX_NO_OF_SHIPMENT_LINES"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This field indicates the maximum number of shipment lines allowed for the pick criteria."
+                    Name="Max_No_Of_Shipment_Lines" Nullable="false"/>
+                <Attribute ColumnName="MAX_NO_OF_SKUS"
+                    DataType="Integer" DefaultValue="0"
+                    Description="This field indicates the maximum number of distinct SKUs (ItemId/UOM/ProductClass combination) allowed for the pick criteria."
+                    Name="Max_No_Of_Skus" Nullable="false"/>
+                <Attribute ColumnName="MAX_VOLUME" DataType="Volume"
+                    DefaultValue="0" Description="Maximum volume."
+                    Name="Max_Volume" Nullable="false"/>
+                <Attribute ColumnName="MAX_EFFORT" DataType="Integer"
+                    Description="Maximum effort allowed for the criteria."
+                    Name="Max_Effort" Nullable="true" XMLName="MaxEffort"/>
+                <Attribute ColumnName="EFFORT_UOM" DataType="Text-40"
+                    Description="Effort UOM associated with the criteria."
+                    Name="Effort_UOM" Nullable="true" XMLName="EffortUOM"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    Description="Resource Pool associated with the effort."
+                    Name="Resource_Pool_Key" Nullable="true" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="WAVE_SZ_CONSTR_PK" Name="YFS_WAVE_SIZE_CONSTRAINT_PK">
+                <Attribute ColumnName="WAVE_SIZE_CONSTRAINT_KEY" Name="Wave_Size_Constraint_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ShipmentGroupSizeConstraintList"
+                    ChildName="ShipmentGroupSizeConstraint"
+                    DeleteCascade="true" ForeignEntity="Shipment_Group"
+                    IsParent="true" Name="ShipmentGroup"
+                    Type="Bidirectional" XMLName="ShipmentGroup">
+                    <Attribute Name="Shipment_Group_Key" ParentName="Shipment_Group_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveSizeConstraintList"
+                    ChildName="WaveSizeConstraint"
+                    DeleteValidationError="YDB100127" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNode" Type="Bidirectional"
+                    ValidateDelete="true" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>                    
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveSizeConstraintList"
+                    ChildName="WaveSizeConstraint"
+                    DeleteValidationError="YDB100128" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveSizeConstraintList"
+                    ChildName="WaveSizeConstraint"
+                    DeleteValidationError="YDB100129" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Unidirectional" ValidateDelete="true"
+                    Virtual="true" XMLName="Organization">
+                    <Attribute Name="Scac" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveSizeConstraintList"
+                    ChildName="WaveSizeConstraint"
+                    DeleteValidationError="YDB100130" Enforce="true"
+                    ForeignEntity="Carrier_Service"
+                    Name="CarrierService" Type="Unidirectional"
+                    ValidateDelete="true" Virtual="true" XMLName="CarrierService">
+                    <Attribute Name="Carrier_Service_Code" ParentName="Carrier_Service_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="WaveSizeConstraintList"
+                    ChildName="WaveSizeConstraint"
+                    DeleteValidationError="YDB100127" Enforce="true"
+                    ForeignEntity="Ship_Node" IsParent="true"
+                    Name="ShipNodeOnly" Type="Unidirectional"
+                    ValidateDelete="true" XMLName="ShipNodeOnly">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

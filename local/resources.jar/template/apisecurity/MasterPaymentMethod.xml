@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2019 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<PaymentRelated>
+    <InputForManage>
+        <PaymentMethodCommon>
+            <PersonInfoBillTo/>
+        </PaymentMethodCommon>
+        <PaymentMethodSearch>
+            <PersonInfoBillTo/>
+        </PaymentMethodSearch>
+        <PaymentMethodRecordExternalCharges>
+            <PersonInfoBillTo/>
+        </PaymentMethodRecordExternalCharges>
+        <PaymentMethodManageOrder>
+            <PersonInfoBillTo/>
+        </PaymentMethodManageOrder>
+        <!--
+			In capturePayment Input <PaymentMethodCaptureIntelligent
+			DisplayPrimaryAccountNo="" IsCorrection="Y|N"
+			Operation="Manage|Delete|Suspend|SuspendRefund|Collect"
+			PrimaryAccountNo="" RequestedAmount="" ResetSuspensionStatus="Y|N"
+			SecondaryAmount="" SecureAuthenticationCode="">
+			</PaymentMethodCaptureIntelligent>
+		-->
+        <PaymentMethodCaptureManageHybrid>
+            <PersonInfoBillTo/>
+        </PaymentMethodCaptureManageHybrid>
+    </InputForManage>
+    <InputForImport>
+        <PaymentMethod>
+            <PersonInfoBillTo/>
+        </PaymentMethod>
+    </InputForImport>
+    <RecordExternalChargesInput>
+        <PaymentDetailsList>
+            <PaymentDetails/>
+        </PaymentDetailsList>
+    </RecordExternalChargesInput>
+    <OutputForList>
+        <PaymentMethods>
+            <PaymentMethod>
+                <PersonInfoBillTo/>
+            </PaymentMethod>
+        </PaymentMethods>
+    </OutputForList>
+    <OutputForChargeTransaction>
+        <PaymentMethod/>
+    </OutputForChargeTransaction>
+    <ExecutePaymentTransactions>
+        <PaymentMethod>
+            <PersonInfoBillTo/>
+            <PersonInfoShipTo/>
+        </PaymentMethod>
+    </ExecutePaymentTransactions>
+</PaymentRelated>

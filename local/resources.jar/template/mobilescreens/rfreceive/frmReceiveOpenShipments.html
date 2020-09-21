@@ -1,0 +1,69 @@
+<html>
+    <body>
+        <form name="frmReceiveOpenShipments" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="10" mandatory="false"
+                                    size="9" subtype="Label"
+                                    tag="binding=lblReceive"
+                                    type="text" validate="false" value="Mobile_Receive"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <table binding="/Receipts/@Receipt"
+                                    col="1" gridcols="6"
+                                    gridrows="7" id="Receipt"
+                                    mandatory="false"
+                                    name="grdShipmentList1"
+                                    namespace="Receipts" size="20"
+                                    tag="binding=grdShipmentList1" validate="false">
+                                    <tr>
+                                    <td>
+                                    <input colno="0" colName=" "
+                                    size="0"
+                                    type="hidden" value="/console/rfreceive.ppc?action=frmReceiveIntoLocation"/>
+                                    <input colno="1" colName=" "
+                                    inputbinding="xml:/Receipt/Shipment/@ShipmentKey"
+                                    outputbinding="xml:/Receipt/@ShipmentKey"
+                                    size="0" type="hidden"/>
+                                    <input colno="2" colName="ShipmentNo"
+                                    inputbinding="xml:/Receipt/Shipment/@ShipmentNo"
+                                    size="10" type="text"/>
+                                    <input colno="3" colName="Seller"
+                                    inputbinding="xml:/Receipt/Shipment/@SellerOrganizationCode"
+                                    size="10" type="text"/>
+                                    <input colno="4" colName="SCAC"
+                                    inputbinding="xml:/Receipt/Shipment/@SCAC"
+                                    size="4" type="text"/>
+                                    <input colno="5" colName="EnterpriseCode"
+                                    inputbinding="xml:/Receipt/Shipment/@EnterpriseCode"
+                                    size="10" type="text"/>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr/>
+                            <tr>
+                                <td/>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite - Foundation
+(C) Copyright IBM Corp 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+-->
+<TableGroup GroupName="User">
+    <Entity EntityName="User" Table="YFS_USER" Key="USER_KEY" XMLName="User">
+    	<ChildEntity EntityName="User_Delegate" Table="YFS_USER_DELEGATE" Key="USER_DELEGATE_KEY" XMLName="UserDelegate">
+    		<QueryAttr ChildColumn="USER_ID" ParentAttrXML="Loginid"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="User_Printer_Preference" Table="YFS_USER_PRINTER_PREFERENCE" Key="USER_PRINTER_PREFERENCE_KEY" XMLName="UserPrinterPreference">
+    		<QueryAttr ChildColumn="USER_ID" ParentAttrXML="Loginid"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="User_Group_List" Table="YFS_USER_GROUP_LIST" Key="USER_GROUP_LIST_KEY" XMLName="UserGroupList">
+    		<QueryAttr ChildColumn="USER_KEY" ParentAttrXML="UserKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Queue_Subscription" Table="YFS_QUEUE_SUBSCRIPTION" Key="QUEUE_SUBSCRIPTION_KEY" XMLName="QueueSubscription">
+    		<QueryAttr ChildColumn="USER_KEY" ParentAttrXML="UserKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Auth_Answer" Table="PLT_AUTH_ANSWER" Key="AUTH_ANSWER_KEY" XMLName="AuthAnswer">
+    		<QueryAttr ChildColumn="USER_KEY" ParentAttrXML="UserKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Pwd_Req" Table="PLT_PWD_REQ" Key="PWD_REQ_KEY" XMLName="PasswordRequest">
+    		<QueryAttr ChildColumn="USER_KEY" ParentAttrXML="UserKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="User_Login_Fail" Table="PLT_USER_LOGIN_FAIL" Key="USER_LOGIN_FAIL_KEY" XMLName="UserLoginFail">
+    		<QueryAttr ChildColumn="USER_KEY" ParentAttrXML="UserKey"/>
+    	</ChildEntity>
+    	<ChildEntity EntityName="Pwd_Hist" Table="PLT_PWD_HIST" Key="PWD_HIST_KEY" XMLName="PasswordHistory">
+    		<QueryAttr ChildColumn="USER_KEY" ParentAttrXML="UserKey"/>
+    	</ChildEntity>
+        <ChildEntity EntityName="Person_Info" Table="YFS_PERSON_INFO" Key="PERSON_INFO_KEY" XMLName="ContactPersonInfo">
+    		<QueryAttr ChildColumn="PERSON_INFO_KEY" ParentAttrXML="ContactaddressKey"/>
+        </ChildEntity>
+        <ChildEntity EntityName="Person_Info" Table="YFS_PERSON_INFO" Key="PERSON_INFO_KEY" XMLName="BillingPersonInfo">
+    		<QueryAttr ChildColumn="PERSON_INFO_KEY" ParentAttrXML="BillingaddressKey"/>
+        </ChildEntity>
+    </Entity>
+</TableGroup>

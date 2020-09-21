@@ -1,0 +1,111 @@
+<html>
+    <body>
+        <form name="frmVerifyReceipt" target="/console/rfreceive.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Verify_Receipt"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input colno="1" 
+									inputbinding="xml:CurrentUser:/User/@Node"  
+                                    outputbinding="xml:CurrentUser:/User/@Node"  
+                                    size="0" subtype="Hidden"
+									tag="binding=xml:CurrentUser:/User/@Node"
+                                    type="hidden" validate="false"/>
+									<input col="1"                                  
+									name="lblReceiptNo"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblReceiptNo" value="Mobile_ReceiptNo"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+							<tr>
+                                <td>
+									<input col="1" defaultoutput="false"
+                                    inputbinding="xml:/VerifyReceipt/@ReceiptNo"
+                                    name="txtReceiptNo" outputbinding="xml:/VerifyReceipt/@ReceiptNo"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/VerifyReceipt/@ReceiptNo"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+							<tr/>
+							<tr>
+                                <td>
+                                    <input col="1"                                  
+									name="lblNoOfPallets"
+                                    size="14" subtype="Label"
+                                    tag="binding=lblNoOfPallets" value="Mobile_No_Of_Pallets"
+                                    type="text" validate="false"/>
+									<input col="16" defaultoutput="false"
+                                    inputbinding="xml:/VerifyReceipt/@NoOfPallets"
+                                    name="txtNoOfPallets" outputbinding="xml:/VerifyReceipt/@NoOfPallets"
+                                    size="6" subtype="ProtectedText"
+                                    tag="binding=xml:/VerifyReceipt/@NoOfPallets"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+							<tr>
+                                <td>
+									<input col="1"                                  
+									name="lblNoOfCases"
+                                    size="14" subtype="Label"
+                                    tag="binding=lblNoOfCases" value="Mobile_No_Of_Cases"
+                                    type="text" validate="false"/>
+									<input col="16" defaultoutput="false"
+                                    inputbinding="xml:/VerifyReceipt/@NoOfCases"
+                                    name="txtNoOfCases" outputbinding="xml:/VerifyReceipt/@NoOfCases"
+                                    size="6" subtype="ProtectedText"
+                                    tag="binding=xml:/VerifyReceipt/@NoOfCases"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+							<tr/>
+	                        <tr>
+								<td>
+									<input col="1" defaultoutput="false"
+                                    inputbinding="xml:/VerifyReceipt/@DiscrepancyMessage1"
+                                    name="lblDiscrepMessage1" 
+									outputbinding="xml:/VerifyReceipt/@DiscrepancyMessage1"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/VerifyReceipt/@DiscrepancyMessage1"
+                                    type="text" validate="false"/>									
+								</td>
+							</tr>
+	                       <tr>
+								<td>
+									<input col="1" defaultoutput="false"
+                                    inputbinding="xml:/VerifyReceipt/@DiscrepancyMessage2"
+                                    name="lblDiscrepMessage2" 
+									outputbinding="xml:/VerifyReceipt/@DiscrepancyMessage2"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/VerifyReceipt/@DiscrepancyMessage2"
+                                    type="text" validate="false"/>									
+								</td>
+							</tr>
+							<tr/>
+							<tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+									subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

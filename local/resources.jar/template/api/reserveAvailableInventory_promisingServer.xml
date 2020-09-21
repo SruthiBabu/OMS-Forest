@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<PromiseHeader AggregateSupplyOfNonRequestedTag="Y" AllocationRuleID=""
+    CarrierServiceCode="" CheckCapacity="" CheckInventory="Y"
+    ConsiderCurrentSlot="" ConsiderSupplementalCapacity="" CustomerID=""
+    DeliveryDateBased="Y" DemandType="" DependencyShippingRule=""
+    DistanceToConsider="" DistanceUOMToConsider="" DistributionRuleId=""
+    EnterpriseCode="" FillQuantity="" FulfillmentType=""
+    IgnoreMinNotificationTime="" IgnorePromised="Y" IgnoreUnpromised="Y"
+    IsPartialSubstitutionAllowed="" IsSubstitutionAllowed=""
+    LevelOfService="" MaximumRecords="" OptimizationType=""
+    OrganizationCode="" ReceivingNode="" ReqEndDate="" ReqStartDate=""
+    ReturnMultipleSrvcSlots="Y" ReturnSlotsWithUnavailableCapacity=""
+    SCAC="" ScacAndServiceKey="" Segment="" SegmentType="" ShipNode=""
+    ShipTogetherInRatio="" SourcingClassification="" UseUnplannedInventory="">
+    <PromiseLines TotalNumberOfRecords="">
+        <PromiseLine AutoReplacedByPreferredSubstitute=""
+            BundleFulfillmentMode="" BundleParentLineId=""
+            CarrierServiceCode="" DeliveryMethod=""
+            DistributionRuleId="" FillQuantity="" FulfillmentType=""
+            IsBundleParent="" IsSubOnOrderAllowed="" ItemGroupCode=""
+            ItemID="Required" KitQty="" LevelOfService="" LineId=""
+            MinShipByDate="" NewItemID="" ProductClass=""
+            ReceivingNode="" ReqEndDate="" ReqStartDate=""
+            RequiredQty="Required" SCAC="" ScacAndServiceKey=""
+            Segment="" SegmentType="" ShipNode="" TagNumber="" UnitOfMeasure="">
+            <Reservations AvailableQty="" QtyToBeReserved="" TotalReservedQty="">
+                <Reservation ExpirationDate="" ExternalNode=""
+                    IsProcured="" IsSubstituted="" ItemID=""
+                    MergeNode="" OrganizationCode="" ProcureToNode=""
+                    ProductAvailabilityDate="" ProductClass=""
+                    QuantityFromUnplannedInventory="" ReservationID=""
+                    ReservedQty="" ShipDate="" ShipNode="" UnitOfMeasure="">                    
+                </Reservation>
+            </Reservations>
+                  </PromiseLine>
+    </PromiseLines>
+    <SuggestedOption>
+        <Option AvailableFromUnplannedInventory="" FirstDate=""
+            HasAnyUnavailableQty="" LastDate="" LeastPriority=""
+            MaxPriority="" NodeQty="" OptionNo="" TotalShipments="">
+            <PromiseLines TotalNumberOfRecords="">
+                <PromiseLine AutoReplacedByPreferredSubstitute=""
+                    BundleFulfillmentMode="" BundleParentLineId=""
+                    CarrierServiceCode="" DeliveryMethod=""
+                    DistributionRuleId="" FillQuantity=""
+                    FulfillmentType="" IsBundleParent=""
+                    IsSubOnOrderAllowed="" ItemID="Required" KitQty=""
+                    LevelOfService="" LineId="" MinShipByDate=""
+                    NewItemID="" ProductClass="" ReceivingNode=""
+                    ReqEndDate="" ReqStartDate="" RequiredQty="Required"
+                    SCAC="" ScacAndServiceKey="" Segment=""
+                    SegmentType="" ShipNode="" TagNumber="" UnitOfMeasure="">
+                    <Assignments TotalNumberOfRecords="">
+                        <Assignment AcceptedPreReservedQty=""
+                            AvailableFromUnplannedInventory=""
+                            DeliveryDate="" Distance=""
+                            EarliestShipDate="" EmptyAssignmentReason=""
+                            ExternalNode="" InteractionNo=""
+                            InvQty="Required"
+                            InventoryAvailabilityDate="" IsIdleAsset=""
+                            MaxDeliveryDate="" MergeNode=""
+                            MinDeliveryDate="" NodePriority=""
+                            ProcuredQty="" ProductAvailDate=""
+                            Quantity="" IsReservationOnly=""
+                            QuantityFromUnplannedInventory=""
+                            ReservedQty="" SCAC="" SegmentChangeQty=""
+                            ShipDate="" ShipNode="" SubstitutedQty="" TransferNo="">
+                            <SubstituteItems>
+                                <SubstituteItem IsIdleAsset="" ItemID=""
+                                    ProcuredQty="" ProductClass=""
+                                    Quantity="" ReservedQty="" UOM="">
+                                    <Procurements>
+                                    <Procurement IsIdleAsset=""
+                                    ProcureFromNode=""
+                                    Quantity="" ShipDate="" TransferNo="">
+                                    <Supplies>
+                                    <Supply
+                                    ConsumedQuantity=""
+                                    FirstShipDate=""
+                                    LastShipDate="" Track="">
+                                    <InventoryItem
+                                    ItemID="" UnitOfMeasure=""/>
+                                    <Tag BatchNo=""
+                                    LotAttribute1=""
+                                    LotAttribute2=""
+                                    LotKeyReference=""
+                                    LotNumber=""
+                                    ManufacturingDate=""
+                                    RevisionNo="" TagNumber=""/>
+                                    </Supply>
+                                    </Supplies>
+                                    </Procurement>
+                                    </Procurements>
+                                    <Supplies>
+                                    <Supply ConsumedQuantity=""
+                                    FirstShipDate=""
+                                    LastShipDate="" Track="">
+                                    <InventoryItem ItemID="" UnitOfMeasure=""/>
+                                    <Tag BatchNo=""
+                                    LotAttribute1=""
+                                    LotAttribute2=""
+                                    LotKeyReference=""
+                                    LotNumber=""
+                                    ManufacturingDate=""
+                                    RevisionNo="" TagNumber=""/>
+                                    </Supply>
+                                    </Supplies>
+                                </SubstituteItem>
+                            </SubstituteItems>
+                            <Procurements>
+                                <Procurement
+                                    AwaitingReservationAcceptance=""
+                                    IsIdleAsset="" ProcureFromNode=""
+                                    ProductAvailDate="" Quantity=""
+                                    ShipDate="" TransferNo="">
+                                    <Supplies>
+                                    <Supply ConsumedQuantity=""
+                                    FirstShipDate=""
+                                    LastShipDate="" Track="">
+                                    <InventoryItem ItemID="" UnitOfMeasure=""/>
+                                    <Tag BatchNo=""
+                                    LotAttribute1=""
+                                    LotAttribute2=""
+                                    LotKeyReference=""
+                                    LotNumber=""
+                                    ManufacturingDate=""
+                                    RevisionNo="" TagNumber=""/>
+                                    </Supply>
+                                    </Supplies>
+                                </Procurement>
+                            </Procurements>
+                            <Supplies>
+                                <Supply ConsumedQuantity=""
+                                    FirstShipDate="" LastShipDate="" Track="">
+                                    <InventoryItem ItemID="" UnitOfMeasure=""/>
+                                    <Tag BatchNo="" LotAttribute1=""
+                                    LotAttribute2=""
+                                    LotKeyReference="" LotNumber=""
+                                    ManufacturingDate=""
+                                    RevisionNo="" TagNumber=""/>
+                                </Supply>
+                            </Supplies>
+                            <ShipNode Description=""
+                                IdentifiedByParentAs="" OwnerKey=""/>
+                        </Assignment>
+                    </Assignments>
+                    <ItemFilter GetUnpublishedItems="N" IgnoreInvalidItems="N">
+                        <PrimaryInformation ColorCode="" ItemType=""
+                            ManufacturerItem="" ManufacturerName=""
+                            ProductLine="" SizeCode=""/>
+                        <ClassificationCodes CommodityCode="" ECCNNo=""
+                            HarmonizedCode="" NAICSCode="" NMFCCode=""
+                            StorageType="" TaxProductCode="" UNSPSC="" VelocityCode=""/>
+                    </ItemFilter>                    
+                </PromiseLine>
+            </PromiseLines>
+            <PromiseServiceLines TotalNumberOfRecords="">
+                <PromiseServiceLine BundleParentLineId=""
+                    ComputeServiceQty="" FulfillmentType=""
+                    IsBundleParent="" ItemGroupCode="" ItemID="Required"
+                    KitQty="" LevelOfService="" LineId=""
+                    ReceivingNode="" ReqEndDate="" ReqStartDate=""
+                    RequiredCapacity="" RequiredQty="Required"
+                    ResourcePoolID="" ResourcePoolKey="" ShipNode="" UnitOfMeasure="">
+                    <AdditionalCapacityLimits>
+                        <AdditionalCapacityLimit Capacity="" CapacityUnitOfMeasure=""/>
+                    </AdditionalCapacityLimits>
+                    <Slots TimeZone="" TotalNumberOfRecords="">
+                        <Slot EndTime="" ServiceSlotDesc="" SlotEnd=""
+                            SlotStart="" StartTime="">
+                            <AvailableDates>
+                                <AvailableDate AvailableCapacity=""
+                                    CapacityAvailable="Y" Confirmed="Y"
+                                    Date="" Preferred="Y" RegionServiced="Y">
+                                    <ResourcePools>
+                                    <ResourcePool
+                                    CapacityAvailable="Y"
+                                    Confirmed=""
+                                    RegionServiced="Y"
+                                    ResourcePoolId=""
+                                    ResourcePoolKey="" ServiceResource="">
+                                    <AdditionalCapacityLimits>
+                                    <AdditionalCapacityLimit
+                                    Capacity="" CapacityUnitOfMeasure=""/>
+                                    </AdditionalCapacityLimits>
+                                    </ResourcePool>
+                                    </ResourcePools>
+                                </AvailableDate>
+                            </AvailableDates>
+                        </Slot>
+                    </Slots>
+                    <Assignments TotalNumberOfRecords="">
+                        <Assignment ApptDate="" ApptEndTimestamp=""
+                            ApptStartTimestamp="" EndTime=""
+                            ExternalNode="" InteractionNo=""
+                            NodePriority="" SCAC="" ShipNode=""
+                            StartTime="" TimeZone="">
+                            <ShipNode Description=""
+                                IdentifiedByParentAs="" OwnerKey=""/>
+                        </Assignment>
+                    </Assignments>                   
+                </PromiseServiceLine>
+            </PromiseServiceLines>
+            <MultiStopTransfers TotalNumberOfRecords="">
+                <MultiStopTransfer DeliveryDate="" DestinationNode=""
+                    OriginNode="" ShipDate="">
+                    <Stops TotalNumberOfRecords="">
+                        <Stop ArrivalDate="" Node="" ShipDate="" StopNo=""/>
+                    </Stops>
+                </MultiStopTransfer>
+            </MultiStopTransfers>
+            <Interactions TotalNumberOfRecords="">
+                <Interaction ApptEndTimestamp="" ApptStartTimestamp=""
+                    Carrier="" CarrierServiceCode="" DeliveryDate=""
+                    DeliveryMethod="" EarliestDate="" InteractionNo=""
+                    IsDelivery="" ItemGroupCode="" LastDate=""
+                    LevelOfService="" Node="" OrganizationCode=""
+                    ShipDate="" TotalHandlingUnits="">
+                    <PersonInfoShipTo AddressLine1="" AddressLine2=""
+                        AddressLine3="" AddressLine4="" AddressLine5=""
+                        AddressLine6="" AlternateEmailID="" Beeper=""
+                        City="" Company="" Country="" DayFaxNo=""
+                        DayPhone="" Department="" EMailID="" ErrorTxt=""
+                        EveningFaxNo="" EveningPhone="" FirstName=""
+                        HttpUrl="" IsAddressVerified=""
+                        IsCommercialAddress="" JobTitle="" LastName=""
+                        Latitude="" Longitude="" MiddleName=""
+                        MobilePhone="" OtherPhone="" PersonID=""
+                        PreferredShipAddress="" State="" Suffix=""
+                        TaxGeoCode="" Title="" UseCount=""
+                        VerificationStatus="" ZipCode="" isHistory=""/>
+                    <NonWorkingDays>
+                        <NonWorkingDay Date=""/>
+                    </NonWorkingDays>                    
+                </Interaction>
+            </Interactions>
+        </Option>
+        <UnavailableLines>
+            <UnavailableLine AssignedQty="" ItemGroupCode="" ItemID=""
+                LineId="" ProductClass="" RequiredQty="" HighestPriorityNode=""
+                UnavailableReason="" UnitOfMeasure="">
+                <Messages>
+                    <Message Text=""/>
+                </Messages>
+            </UnavailableLine>
+        </UnavailableLines>
+    </SuggestedOption>   
+</PromiseHeader>

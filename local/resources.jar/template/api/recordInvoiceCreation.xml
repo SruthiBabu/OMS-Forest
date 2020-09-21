@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- recordInvoiceCreation Output XML. -->
+<OrderInvoice ActualFreightCharge="" AmountCollected=""
+	ChargeTransactionKey="" ChargedActualFreight=""
+	CollectedExternally="" CollectedThroughAR="" DateInvoiced=""
+	DerivedFromOrderHeaderKey="" HeaderTax="" InvoiceNo=""
+	InvoiceType="" LineSubTotal="" MasterInvoiceNo=""
+	OrderHeaderKey="" OrderInvoiceKey="" OtherCharges=""
+	Reference1="" ReturnReleaseKey="" ShipmentKey="" Status=""
+	TotalAmount="" TotalTax="">
+	<TaxBreakupList >
+		<TaxBreakup ChargeCategory="" ChargeName="" HeaderKey=""
+			InvoicedTax="" LineKey="" RecordType="" Reference1=""
+			Reference2="" Reference3="" Tax="" TaxBreakupKey=""
+			TaxName="" TaxPercentage="" TaxableFlag=""/>
+	</TaxBreakupList>
+	<LineDetails >
+		<LineDetail Charges="" ExtendedPrice="" LineTotal=""
+			OrderInvoiceDetailKey="" OrderInvoiceKey=""
+			OrderLineKey="" ShippedQty="" Tax="" UnitPrice="">
+			<LineDetailTranQuantity ShippedQty="" TransactionalUOM=""/>
+			<LineChargeList >
+				<LineCharge ChargeAmount="" ChargeCategory=""
+					ChargeName="" ChargePerLine="" ChargePerUnit=""
+					HeaderKey="" InvoicedChargePerLine=""
+					InvoicedExtendedCharge="" LineChargesKey=""
+					LineKey="" RecordType="" Reference=""/>
+			</LineChargeList>
+            <LineTaxList >
+		        <LineTax ChargeCategory="" ChargeName="" HeaderKey=""
+			InvoicedTax="" LineKey="" RecordType="" Reference1=""
+			Reference2="" Reference3="" Tax="" TaxBreakupKey=""
+			TaxName="" TaxPercentage="" TaxableFlag=""/>
+	        </LineTaxList>
+		</LineDetail>
+	</LineDetails>
+	<HeaderChargeList >
+		<HeaderCharge ChargeAmount="" ChargeCategory=""
+			ChargeName="" HeaderChargesKey="" HeaderKey=""
+			InvoicedChargeAmount="" RecordType="" Reference=""/>
+	</HeaderChargeList>
+</OrderInvoice>

@@ -1,0 +1,125 @@
+<html>
+    <body>
+        <form name="frmContainerEntry" target="/console/rftrailerload.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblTrailerLoading"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTrailerLoading"
+                                    type="text" validate="false" value="Mobile_Trailer_Loading"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Trailer/@LoadNo"
+                                    mandatory="false" name="Load"
+                                    outputbinding="xml:/Trailer/@LoadNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Trailer/@LoadNo"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/Trailer/@LoadKey"
+                                    mandatory="false" name="LoadKey"
+                                    outputbinding="xml:/Trailer/@LoadKey"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Trailer/@LoadKey"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblPalletId"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblPalletId"
+                                    type="text" validate="false" value="Mobile_Container_SCM"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Trailer/@PalletId"
+                                    mandatory="true"
+                                    name="txtPalletId"
+                                    outputbinding="xml:/Trailer/@PalletId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Trailer/@PalletId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" name="lblLocation"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Trailer/@DockLocationId"
+                                    mandatory="false"
+                                    name="txtLocation"
+                                    outputbinding="xml:/Trailer/@DockLocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Trailer/@DockLocationId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblTrailer"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTrailer"
+                                    type="text" validate="false" value="Mobile_Trailer"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Trailer/@Trailer"
+                                    mandatory="false"
+                                    name="txtTrailer"
+                                    outputbinding="xml:/Trailer/@Trailer"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Trailer/@Trailer"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Trailer/@TrailerNo"
+                                    mandatory="true"
+                                    name="txtTrailerNo"
+                                    outputbinding="xml:/Trailer/@TrailerNo"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Trailer/@TrailerNo"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="8" hotkey="F2"
+                                    mandatory="false" name="Back"
+                                    size="5" subtype="Command"
+                                    type="button"
+                                    url="/console/rftrailerload.ppc?action=frmTrailerLoadingMain"
+                                    validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

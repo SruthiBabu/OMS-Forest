@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:lxslt="http://xml.apache.org/xslt" version="1.0">
+   <xsl:template match="/">
+      <xsl:element name="OrderList">
+         <xsl:attribute name="DupOrderHeaderKey">
+            <xsl:value-of select="/OrderList/@DupOrderHeaderKey" />
+         </xsl:attribute>
+
+         <xsl:attribute name="DupOrderNo">
+            <xsl:value-of select="/OrderList/@DupOrderNo" />
+         </xsl:attribute>
+
+         <xsl:variable name="DupOrderHeaderKey" select="/OrderList/@DupOrderHeaderKey" />
+
+         <xsl:for-each select="/OrderList/Order">
+            <xsl:variable name="OrderHeaderKey" select="@OrderHeaderKey" />
+
+            <xsl:variable name="OrderNo" select="@OrderNo" />
+
+            <xsl:choose>
+               <xsl:when test="$DupOrderHeaderKey != $OrderHeaderKey">
+                  <xsl:element name="Order">
+                     <xsl:attribute name="OrderHeaderKey">
+                        <xsl:value-of select="$OrderHeaderKey" />
+                     </xsl:attribute>
+
+                     <xsl:attribute name="OrderNo">
+                        <xsl:value-of select="$OrderNo" />
+                     </xsl:attribute>
+                  </xsl:element>
+               </xsl:when>
+
+               <xsl:otherwise />
+            </xsl:choose>
+         </xsl:for-each>
+      </xsl:element>
+   </xsl:template>
+</xsl:stylesheet>

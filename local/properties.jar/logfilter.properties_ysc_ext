@@ -1,0 +1,57 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management  (5725-D10), IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2007, 2018 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: logfilter.properties_ysc_ext
+## PROPERTY_IN_FILE_NAME: logfilter.properties_ysc_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## Controls filtering of log messages
+## PROPERTY_FILE_DETAIL_END
+
+## DATABASE_SUPPORT: N
+
+## The default filterset to use for a Filter
+#default.filter.filterset=<name>
+
+## The default filterset to use for a Layout (inside an Appender)
+default.layout.filterset=paymentFilter
+
+## Define filters and replacement strings here. Consult product documentation
+## for the full description of these properties. Note the regular expressions
+## may be applied against the full log string, including any extra items added
+## by a Layout.
+
+#Filters out the CVV from the input XML
+filterset.paymentFilter.pattern.1=(SecureAuthenticationCode=)(["'][^"']+["'])
+#Fitlers out the CVV from UE Struct
+filterset.paymentFilter.pattern.2=(&secureAuthenticationCode=)([^&]+[&])
+filterset.paymentFilter.pattern.3=(&secureAuthenticationCode=)([^&]+)$
+
+#Replaces all the CVV with ***
+filterset.paymentFilter.replace.1=$1"***"
+filterset.paymentFilter.replace.2=$1***
+filterset.paymentFilter.replace.3=$1***
+
+#filterset.<name>.includes=<name>,<name>,...
+
+#Following patterns are to mask the PII data appears in the input/output XMLs of API/Services.
+filterset.PIIXMLFilter.pattern.1=(FirstName|LastName|CustomerFirstName|CustomerLastName)=(["'][^"']+["'])
+filterset.PIIXMLFilter.pattern.2=(AddressLine1|AddressLine2|AddressLine3)=(["'][^"']+["'])
+filterset.PIIXMLFilter.pattern.3=(EMailID|EmailID|AlternateEmailID|CustomerEMailID|EmailAddress|EmailId)=(["'][^"']+["'])
+filterset.PIIXMLFilter.pattern.4=(DayPhone|EveningPhone|MobilePhone|OtherPhone|CustomerPhoneNo|DayFaxNo|EveningFaxNo)=(["'][^"']+["'])
+filterset.PIIXMLFilter.pattern.5=(CreditCardExpDate|CreditCardName|CreditCardNo|DebitCardNo)=(["'][^"']+["'])
+filterset.PIIXMLFilter.pattern.6=(CustomerAccountNo|PrimaryAccountNo|SvcNo|PaymentReference1|PaymentReference2|PaymentReference3)=(["'][^"']+["'])
+filterset.PIIXMLFilter.replace.1=$1="--masked--"
+filterset.PIIXMLFilter.replace.2=$1="--masked--"
+filterset.PIIXMLFilter.replace.3=$1="--masked--"
+filterset.PIIXMLFilter.replace.4=$1="--masked--"
+filterset.PIIXMLFilter.replace.5=$1="--masked--"
+filterset.PIIXMLFilter.replace.6=$1="--masked--"
+
+#Following patterns are to mask the SPII data appears in the log of API/Services.
+filterset.SPIIFilter.pattern.1=(Password|CVV|CreditCardNo|DebitCardNo|SvcNo|CustomerAccountNo|PrimaryAccountNo)\\s*=\\s*(["']).*?\\2
+filterset.SPIIFilter.pattern.2=(LOGINID|USER_ID)\\s*=\\s*(['"]).*?\\2
+filterset.SPIIFilter.replace.1=$1=*--masked--*
+filterset.SPIIFilter.replace.2=$1=*--masked--*

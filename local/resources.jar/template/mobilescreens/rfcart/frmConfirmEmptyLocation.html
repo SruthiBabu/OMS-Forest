@@ -1,0 +1,92 @@
+<html>
+    <body>
+        <form name="frmConfirmEmptyLocation" target="/console/rfcart.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+							 <tr>
+                                <td>
+                                    <input col="7" name="lblMessage"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblMessage"
+                                    type="text" validate="false" value="Mobile_Confirmation"/>
+						        </td>
+							</tr>
+							<tr>
+								<td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLoc"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLoc"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+							<tr>
+								<td>
+									<input col="1"
+                                    inputbinding="xml:/Task/@SourceLocationId"
+                                    name="txtSourceLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblMessageLocEmpty"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblMessage"
+                                    type="text" validate="false" value="Mobile_Is_Location_Empty"/>
+						        </td>
+							</tr>
+							<tr>
+								<td>
+                                    <input col="1"
+                                    inputbinding="xml:/Task1/@BatchNo"
+                                    name="txtBatchNo"
+                                    outputbinding="xml:/Task/@BatchNo"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@BatchNo"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/PrevScannedLocation1/@PrevScannedLocation"
+                                    name="txtBatchNo"
+                                    outputbinding="xml:/PrevScannedLocation/@PrevScannedLocation"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/PrevScannedLocation/@PrevScannedLocation"
+                                    type="hidden" validate="false"/>
+								</td>
+						    </tr>
+                            <tr>
+								<td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="4" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfcart.ppc?action=frmConfirmedEmptyLocn"
+                                    validate="false" value="Mobile_YES"/>
+								    <input col="7" hotkey="F2" name="Back"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfcart.ppc?action=frmRaiseEventForNonEmptyLocn"
+                                    validate="false" value="Mobile_NO"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
+

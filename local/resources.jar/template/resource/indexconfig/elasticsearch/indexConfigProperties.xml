@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<IndexConfigurations>
+    <IndexSet>
+        <Index IndexAliasName="order" Name="order">
+            <IndexType Name="details">
+                <details>
+                    <properties>
+                        <OrderHeaderKey include_in_all="true"
+                            index="not_analyzed" store="false" type="string"/>
+                        <CustomerPONo include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <OrderDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <ReqDeliveryDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <SellerOrganizationCode include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <ColonyId include_in_all="false"
+                            index="not_analyzed" store="true" type="string"/>
+                        <CustomerContactID include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <ReqShipDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <BillToID include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <OrderNo include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <EnterpriseCode include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <DraftOrderFlag include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <DocumentType include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <OrderName include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <PaymentMethods dynamic="true">
+                            <properties>
+                                <PaymentMethod dynamic="true">
+                                    <properties>
+                                    <CreditCardType
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <DisplayCreditCardNo
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <DisplayCustomerAccountNo
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <DisplayDebitCardNo
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <DisplayPaymentReference1
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <DisplaySvcNo
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <FirstName
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <LastName include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <PaymentType
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    </properties>
+                                </PaymentMethod>
+                            </properties>
+                        </PaymentMethods>
+                        <OrderLines dynamic="true">
+                            <properties>
+                                <OrderLine dynamic="true">
+                                    <properties>
+                                    <ItemID include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <ShipNode include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    </properties>
+                                </OrderLine>
+                            </properties>
+                        </OrderLines>
+                        <BuyerUserId include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <PersonInfoBillTo dynamic="true">
+                            <properties>
+                                <AddressLine1 include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <City include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <DayFaxNo include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <DayPhone include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <EMailID include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <FirstName include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <LastName include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <MobilePhone include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <State include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <ZipCode include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                            </properties>
+                        </PersonInfoBillTo>
+                        <ReturnOrderHeaderKeyForExchange
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="string"/>
+                    </properties>
+                    <_source>
+                        <enabled>false</enabled>
+                    </_source>
+                </details>
+            </IndexType>
+        </Index>
+        <Index IndexAliasName="shipment" Name="shipment">
+            <IndexType Name="details">
+                <details>
+                    <properties>
+                        <ActualShipmentDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <SCAC include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <ColonyId include_in_all="false"
+                            index="not_analyzed" store="true" type="string"/>
+                        <ExpectedShipmentDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <SellerOrganizationCode include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <ShipmentKey include_in_all="true"
+                            index="not_analyzed" store="false" type="string"/>
+                        <ActualDeliveryDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <ShipNode include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <Status include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <ShipmentNo include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <EnterpriseCode include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <RequestedDeliveryDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <ExpectedDeliveryDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <RequestedShipmentDate format="dateOptionalTime"
+                            include_in_all="false" index="not_analyzed"
+                            store="false" type="date"/>
+                        <DocumentType include_in_all="false"
+                            index="not_analyzed" store="false" type="string"/>
+                        <BillToAddress dynamic="true">
+                            <properties>
+                                <FirstName include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <MobilePhone include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <LastName include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <DayPhone include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                                <ZipCode include_in_all="false"
+                                    index="not_analyzed" store="false" type="string"/>
+                            </properties>
+                        </BillToAddress>
+                        <ShipmentLines dynamic="true">
+                            <properties>
+                                <ShipmentLine dynamic="true">
+                                    <properties>
+                                    <ItemID include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <OrderNo include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <CustomerPoNo
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <OrderLine dynamic="true">
+                                    <properties>
+                                    <DeliveryMethod
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <PersonInfoMarkFor dynamic="true">
+                                    <properties>
+                                    <FirstName
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <MobilePhone
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <LastName
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <DayPhone
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <ZipCode
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    </properties>
+                                    </PersonInfoMarkFor>
+                                    </properties>
+                                    </OrderLine>
+                                    </properties>
+                                </ShipmentLine>
+                            </properties>
+                        </ShipmentLines>
+                        <Containers dynamic="true">
+                            <properties>
+                                <Container dynamic="true">
+                                    <properties>
+                                    <ContainerScm
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    <TrackingNo
+                                    include_in_all="false"
+                                    index="not_analyzed"
+                                    store="false" type="string"/>
+                                    </properties>
+                                </Container>
+                            </properties>
+                        </Containers>
+                    </properties>
+                    <_source>
+                        <enabled>false</enabled>
+                    </_source>
+                </details>
+            </IndexType>
+        </Index>
+    </IndexSet>
+</IndexConfigurations>

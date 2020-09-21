@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults  DefaultRecordDelimiter="#" DefaultFieldDelimiter="," DefaultEscapeCharacter="\" DefaultPadCharacter="*" RecordIdStartPosition="1" SkipCarriageReturn="false">
+      <FileHeader FileHeaderId="000" FileHeaderStartPos="1" FileHeaderLength="3"/>
+      <FileTrailer FileTrailerId="666" FileTrailerStartPos="1" FileTrailerLength="3"/>
+   </ParserDefaults>
+
+   <Root Name="ItemList">
+		<Header Name="Action" RecordName="ACTRID" MinOccurrence="1" MaxOccurrence="1"/>
+		<Terminal Name="Item" RecordName="ITMRID1" MinOccurrence="1" MaxOccurrence="1"/>
+		<Terminal Name="PrimaryInformation" RecordName="ITMRID2" MinOccurrence="1" MaxOccurrence="1"/>
+		<Terminal Name="AlernateUOM" RecordName="ITMRID3" MinOccurrence="1" MaxOccurrence="1"/>
+		<Terminal Name="ItemInstruction" RecordName="ITMRID4" MinOccurrence="1" MaxOccurrence="1"/>
+		<Sequence Name="ItemAttributes" RecordName="ITMRID5" MinOccurrence="0" MaxOccurrence="1000"/>
+		<Sequence Name="ItemAssets" RecordName="ITMRID6" MinOccurrence="0" MaxOccurrence="1000"/>
+		<Sequence Name="Components" RecordName="ITMRID7" MinOccurrence="0" MaxOccurrence="1000"/>
+   </Root>
+   
+   <RecordDefinitions>
+	  <Record RecordId="ACTRID" Name="ACTRID" XMLName="Action">
+         <Field Name="ACTION" FieldPosition="2" XMLName="Action"/>
+      </Record>
+      <Record RecordId="ITMRID1" Name="ITMRID1" XMLName="Item">
+         <Field Name="ITEMID" FieldPosition="2" XMLName="ItemID"/>
+         <Field Name="UOM" FieldPosition="3" XMLName="UnitOfMeasure"/>
+         <Field Name="SUBCATORG" FieldPosition="4" XMLName="SubCatalogOrganizationCode"/>
+      </Record>
+	  <Record RecordId="ITMRID2" Name="ITMRID2" XMLName="PrimaryInformation">
+         <Field Name="DESCRIPTION" FieldPosition="2" XMLName="Description"/>
+		 <Field Name="EFFECTIVESTRTDATE" FieldPosition="3" XMLName="EffectiveStartDate"/>
+		 <Field Name="EFFECTIVEENDDATE" FieldPosition="4" XMLName="EffectiveEndDate"/>
+		 <Field Name="MANUFACTURERITEM" FieldPosition="5" XMLName="ManufactureItem"/>
+		 <Field Name="MANUFACTURERNAME" FieldPosition="6" XMLName="ManufactureName"/>
+		 <Field Name="TAXABLEFLAG" FieldPosition="7" XMLName="TaxableFlag"/>
+		 <Field Name="UNITCOST" FieldPosition="8" XMLName="UnitCost"/>
+		 <Field Name="IMAGEID" FieldPosition="9" XMLName="ImageID"/>
+		 <Field Name="IMAGELABEL" FieldPosition="10" XMLName="ImageLabel"/>
+		 <Field Name="IMAGELOCATION" FieldPosition="11" XMLName="ImageLocation"/>
+		 <Field Name="DEFPC" FieldPosition="12" XMLName="DefaultProductClass"/>
+		 <Field Name="EXTDESC" FieldPosition="13" XMLName="ExtendedDescription"/>
+		 <Field Name="ISMODEL" FieldPosition="14" XMLName="IsModelItem"/>
+		 <Field Name="ISPICKUP" FieldPosition="15" XMLName="IsPickupAllowed"/>
+		 <Field Name="ISSHIP" FieldPosition="16" XMLName="IsShippingAllowed"/>
+		 <Field Name="ISVALID" FieldPosition="17" XMLName="IsValid"/>
+		 <Field Name="KITCODE" FieldPosition="18" XMLName="KitCode"/>
+		 <Field Name="MAXORDQTY" FieldPosition="19" XMLName="MaxOrderQuantity"/>
+		 <Field Name="MINORDQTY" FieldPosition="20" XMLName="MinOrderQuantity"/>
+		 <Field Name="SHORTDESC" FieldPosition="21" XMLName="ShortDescription"/>
+		 <Field Name="BUNDLESTRAT" FieldPosition="22" XMLName="BundlePricingStrategy"/>
+	  </Record>
+      <Record RecordId="ITMRID3" Name="ITMRID3" XMLName="AlernateUOM">
+         <Field Name="QUANTITY" FieldPosition="2" XMLName="Quantity"/>
+         <Field Name="UOM" FieldPosition="3" XMLName="UnitOfMeasure"/>
+      </Record>
+	   <Record RecordId="ITMRID4" Name="ITMRID4" XMLName="ItemInstruction">
+         <Field Name="INSTRUCTIONTYPE" FieldPosition="2" XMLName="InstructionType"/>
+         <Field Name="INSTRUCTIONTEXT" FieldPosition="3" XMLName="InstructionText"/>
+      </Record>
+	   <Record RecordId="ITMRID5" Name="ITMRID5" XMLName="AdditionalAttribute">
+         <Field Name="ATTRIBUTEDOMAINID" FieldPosition="2" XMLName="AttributeDomainID"/>
+         <Field Name="ATTRIBUTEGROUPID" FieldPosition="3" XMLName="AttributeGroupID"/>
+		 <Field Name="NAME" FieldPosition="4" XMLName="Name"/>
+         <Field Name="VALUE" FieldPosition="5" XMLName="Value"/>
+      </Record>
+	   <Record RecordId="ITMRID6" Name="ITMRID6" XMLName="Asset">
+		 <Field Name="ASSETID" FieldPosition="2" XMLName="AssetID"/>
+         <Field Name="ASSETTYPE" FieldPosition="3" XMLName="Type"/>
+         <Field Name="ASSETLABEL" FieldPosition="4" XMLName="Label"/>
+		 <Field Name="DESCRIPTION" FieldPosition="5" XMLName="Description"/>
+         <Field Name="CONTENTID" FieldPosition="6" XMLName="ContentID"/>
+		 <Field Name="CONTENTLOCATION" FieldPosition="7" XMLName="ContentLocation"/>
+      </Record>
+	   <Record RecordId="ITMRID7" Name="ITMRID7" XMLName="Component">
+		 <Field Name="COMPGRPCODE" FieldPosition="2" XMLName="ComponentItemGroupCode"/>
+         <Field Name="COMPITEMID" FieldPosition="3" XMLName="ComponentItemID"/>
+         <Field Name="COMPORGCODE" FieldPosition="4" XMLName="ComponentOrganizationCode"/>
+		 <Field Name="COMPUOM" FieldPosition="5" XMLName="ComponentUnitOfMeasure"/>
+         <Field Name="KITQTY" FieldPosition="6" XMLName="KitQuantity"/>
+      </Record>
+   </RecordDefinitions>
+</FlatfileDelimitedSchema>

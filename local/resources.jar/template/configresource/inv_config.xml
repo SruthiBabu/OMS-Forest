@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2012 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<InventorySynchronization Label="Inventory_Synchronization" Icon="com/yantra/ycp/ui/icons/inventory.gif">
+	<PermissionOnlyNode Label="Inventory_Synchronization_Tree" PermissionId="YCPPM351">
+		<Actions Label="Actions" Icon="com/yantra/ycp/ui/icons/actionlist.gif">
+			<Action PermissionId="YCPPM351A01"/>
+			<Action PermissionId="YCPPM351A02"/>
+			<Action PermissionId="YCPPM351A03"/>
+			<Action PermissionId="YCPPM351A05"/>
+		</Actions>
+	</PermissionOnlyNode>
+	<InventoryRules Label="Inventory_Rules" PermissionId="YSINV000" FormName="YCPPM018" GroupName="Inventory" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/specificrules.gif"/>
+	<InventorySupplyTypesAndConsiderations Label="Inventory_Types_and_Considerations" Icon="com/yantra/ycp/ui/icons/inventoryconsiderationtab.gif">
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>			
+		</Roles>		
+		<PresentInventoryTypesandConsiderations Label="Present_Inventory_Types_and_Considerations" PermissionId="YSINV001" FormName="YCPIM006" GroupName="HubData" EntityName="InventoryConsideration" Icon="com/yantra/ycp/ui/icons/inventoryconsiderations.gif">
+			<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+			</Roles>
+		</PresentInventoryTypesandConsiderations>
+		<InvAvailSafetyFactors Label="Inventory_Availability_Safety_Factor" PermissionId="YSINV023" FormName="YIN7501" GroupName="Inventory" EntityName="InvAvailSafetyFactor" Icon="com/yantra/ycp/ui/icons/inventorysafetyfactor.gif">
+			<Roles>
+				<Role RoleKey="HUB"/>
+				<Role RoleKey="ENTERPRISE"/>
+			</Roles>
+		</InvAvailSafetyFactors>
+	</InventorySupplyTypesAndConsiderations>
+	<CostFactorGroups Label="Cost_Factor_Groups" PermissionId="YSINV020" FormName="YCPPM650" GroupName="Costing" EntityName="CostFactorGroup" Icon="com/yantra/ycp/ui/icons/distributionrule.gif">
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+	</CostFactorGroups> 
+	<DistributionRules Label="Product_Sourcing_Distribution_Groups" PermissionId="YSINV002" FormName="YCPPM500" GroupName="Sourcing" EntityName="DistributionRule" Icon="com/yantra/ycp/ui/icons/distribution.gif">
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+	</DistributionRules>
+	<NodeTypeRules Label="Inventory_Node_Type_Rules" PermissionId="YSINV029" FormName="YIN71010" GroupName="Inventory" EntityName="InventoryNodeType" Icon="com/yantra/ycp/ui/icons/inventorysafetyfactor.gif">
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+	</NodeTypeRules>
+	<ResourceCapacity Label="Resource_Capacity" Icon="com/yantra/ycp/ui/icons/resourcepool.gif">
+		<CapacityRules Label="Capacity_Rules" PermissionId="YSINV021" FormName="YIN71003" GroupName="Capacity" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/capacityrules.gif"/>
+		<RegionUsages Label="Region_Usage_For_Resource_Pools" PermissionId="YSINV006" FormName="YIN060" DisplayMode="Dialog" GroupName="OrganizationModel" SectionName="RESOURCE_POOL" EntityName="RegionUsage" Icon="com/yantra/ycp/ui/icons/regionschema.gif"/>
+		<SlotGroups Label="Slot_Groups" PermissionId="YSINV003" FormName="YIN095" GroupName="Capacity" EntityName="ServiceSlotGroup" Icon="com/yantra/ycp/ui/icons/slot.gif"/>
+		<ResourcePools Label="Resource_Pools" PermissionId="YSINV004" FormName="YIN001" GroupName="OrganizationModel" EntityName="ResourcePool" Icon="com/yantra/ycp/ui/icons/resourcepool.gif"/>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+			<Role RoleKey="BUYER"/>
+			<Role RoleKey="SELLER"/>
+			<Role RoleKey="CARRIER"/>
+		</Roles>
+	</ResourceCapacity>
+	<VAS Label="VAS" Icon="com/yantra/wms/ui/icons/vas.gif" BaseProcessType="VAS" PermissionId="YSINV007">
+		<ActivityList Label="Activities" PermissionId="YSINV008" FormName="YIN061" GroupName="HubData" EntityName="Activity" Icon="com/yantra/ycm/ui/icons/serviceactivity.gif"/>
+		<ApiCallRequired Label="VAS" Icon="com/yantra/ycp/ui/icons/hourglass.gif" 
+			EntityName="ProcessType" Servlet="/yantra/entities/ProcessType/list" OutputLabelAttribute="Description" OutputIcon="com/yantra/wms/ui/icons/tasktypedetermination.gif" BaseProcessType="VAS">
+			<AdditionalNodes>
+				<WorkOrderCancelReason  PermissionId="YSINV009" FormName="YVSC003" Label="Work_Order_Cancel_Reason" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/deleterejectreasons.gif"/>
+				<WorkOrderAllocationRule Label="Allocation_Considerations" PermissionId="YSINV010" FormName="YVSC001"  GroupName="VAS_WorkOrder_Alloc" EntityName="WorkOrderAllocCons" Icon="com/yantra/ycp/ui/icons/allocationrule.gif"/>	
+				<ModificationGroups Label="VAS_Status_Mod_Groups" PermissionId="YSINV031" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" DocumentType="7001" ImportAllAttributes="Y" />
+				<ProcessTypeDetails Label="VAS_Process_Type_Details" PermissionId="YSINV012" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtypes.gif" ImportAllAttributes="Y" />
+				<HoldTypes Label="Hold_Types" PermissionId="YSINV030" FormName="YOMP71005" GroupName="DocSpecific" EntityName="HoldType" Icon="com/yantra/ycp/ui/icons/holdtype.gif" ProcessTypeKey="VAS" BaseProcessTypeKey="VAS" DocumentType="7001"/>
+				<ProcessModeling  Label="VAS_Process_Model" PermissionId="YSINV013" FormName="YCPWF001" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif" ImportAllAttributes="Y" GroupName="ExtendedProcessModel" DisplayMode="Dock">
+					<PermissionOnlyNode Label="Process_Type_Specific_Configuration">
+							<ServiceDefinitions Label="Service_Definitions" PermissionId="YSINV015"/>
+					</PermissionOnlyNode>
+					<Roles>
+						<Role RoleKey="HUB"/>
+						<Role RoleKey="ENTERPRISE"/>
+					</Roles>
+				</ProcessModeling>
+			    <SystemTablePurgeCriteria Label="Purge_Criteria" PermissionId="YSINV014" FormName="YCPPM660" GroupName="DocSpecific" EntityName="PurgeCriteria" SectionName="Document" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif" ImportAllAttributes="Y"  DocumentType="7001"/>
+			</AdditionalNodes>
+		</ApiCallRequired>
+	</VAS>
+</InventorySynchronization>

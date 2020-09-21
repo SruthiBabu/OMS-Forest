@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2010, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:template match="/Opportunity">
+		<Order>
+			<xsl:attribute name="OrderHeaderKey"><xsl:value-of select="@PrimaryQuoteKey" /></xsl:attribute>
+		</Order>
+	</xsl:template>	
+</xsl:stylesheet>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<InvoiceDetail>
+    <!-- InvoiceHeader is a template-driven element but some of its attributes are not. Attributes that are not template driven: TotalCharges, TotalDiscount, TotalHeaderCharges, HeaderCharges, HeaderDiscount, HeaderTax and LineSubTotal.   -->
+    <InvoiceHeader>
+        <Order>
+            <PriceInfo/>
+            <PersonInfoBillTo/>
+            <AdditionalAddresses>
+                <AdditionalAddress>
+                    <PersonInfo/>
+                </AdditionalAddress>
+            </AdditionalAddresses>
+            <References>
+                <Reference/>
+            </References>
+        </Order>
+        <Shipment>
+            <ToAddress/>
+            <ShipNode>
+                <ShipNodePersonInfo/>
+            </ShipNode>
+        </Shipment>
+        <!-- TotalLines is not a template driven attribute. -->
+        <LineDetails>
+            <LineDetail>
+                <LineDetailTranQuantity/>
+                <OrderLine>
+                    <Item>
+                        <LanguageDescriptionList>
+                            <LanguageDescription/>
+                        </LanguageDescriptionList>
+                    </Item>
+                    <LinePriceInfo/>
+                    <References>
+                        <Reference/>
+                    </References>
+                </OrderLine>
+                <!-- LineCharges is not a template driven element.  If a line has line charges, LineCharges will appear in the output alongwith all its child elements.-->
+                <LineCharges>
+                    <LineCharge/>
+                </LineCharges>
+                <!-- LineTaxes is not a template driven element.  If a line has line taxes, LineTaxes will appear in the output alongwith all its child elements.-->
+                <LineTaxes>
+                    <LineTax/>
+                    <TaxSummary>
+                        <TaxSummaryDetail/>
+                    </TaxSummary>
+                </LineTaxes>
+                <References>
+                    <Reference/>
+                </References>
+            </LineDetail>
+        </LineDetails>
+        <TotalSummary>
+            <ChargeSummary>
+                <!-- ChargeSummaryDetail is not a template-driven element. -->
+                <ChargeSummaryDetail/>
+            </ChargeSummary>
+            <TaxSummary>
+                <!-- ChargeSummaryDetail is not a template-driven element. -->
+                <TaxSummaryDetail/>
+            </TaxSummary>
+        </TotalSummary>
+        <HeaderCharges>
+            <!-- HeaderCharge is not a template driven element. If the template contains HeaderCharges element, HeaderCharge will appear in the output, alongwith all its attributes. -->
+            <HeaderCharge/>
+        </HeaderCharges>
+        <!-- HeaderTaxes is not a template driven element. If the template contains HeaderCharges element, HeaderTaxes will appear in the output, alongwith all its child elements -->
+        <HeaderTaxes>
+            <HeaderTax/>
+            <TaxSummary>
+                <TaxSummaryDetail/>
+            </TaxSummary>
+        </HeaderTaxes>
+        <CollectionDetails>
+            <CollectionDetail>
+                <CreditCardTransactions>
+                    <CreditCardTransaction/>
+                </CreditCardTransactions>
+                <PaymentMethod>
+                    <PersonInfoBillTo/>
+                </PaymentMethod>
+            </CollectionDetail>
+        </CollectionDetails>
+    </InvoiceHeader>
+</InvoiceDetail>

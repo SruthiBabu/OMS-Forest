@@ -1,0 +1,1022 @@
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2001, 2018  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="xapi support" default="all" basedir=".">
+
+	<property environment="env" />
+	<property name="dir.tmp" value="tmpdir" />
+	<property name="jar.file" value="xapi.jar" />
+	<property name="dir.install" location="${basedir}/.." />
+	<property name="dir.lib" location="${dir.install}/jar" />
+	<property name="dir.jarTarget" location="${dir.install}/jar/xapi" />
+
+    <property file="${dir.install}/properties/sandbox.cfg" prefix="sandbox"/>
+	<!--
+	 Also needed:
+        dir.install
+        dir.jarTarget
+        dir.lib
+    -->
+
+	<property name="debug" value="on" />
+	<property name="ANT_MEM_ARGS_DEFAULT" value="-Xmx1024m"/>
+
+	<import file="AFCTasks.xml" />
+
+	<condition property="javadoc.locale" value="${LOCALE}">
+		<isset property="LOCALE"/>
+	</condition>
+	<condition property="javadoc.locale" value="${sandbox.INSTALL_LOCALE}" else="en"  >
+		<isset property="sandbox.INSTALL_LOCALE"/>
+	</condition>
+
+
+	 <target name="-init_ant_opts" >
+                   
+			<condition property="is_ant_opts_set" value="true" >
+			<isset property="env.ANT_HEAP_FLAGS"/>
+           </condition>
+
+            <AFCecho message="Is ANT_OPTS set in environmemt : {1}">
+				<arg value="${is_ant_opts_set}"/>
+			</AFCecho>           
+
+           <condition property="ANT_OPT_TO_USE" value="${ANT_MEM_ARGS_DEFAULT}" >
+				  <not><isset property="is_ant_opts_set"/></not>
+		   </condition>
+
+           <condition property="ANT_OPT_TO_USE" value="${env.ANT_HEAP_FLAGS}" >
+				   <isset property="is_ant_opts_set"/>
+		   </condition>			
+
+           <AFCecho message="Using ANT_OPTS : {1}">
+				<arg value="${ANT_OPT_TO_USE}"/>
+			</AFCecho>
+
+   </target>
+
+    <!-- Custom task definition -->
+    <taskdef name="mungefiles" classname="com.sterlingcommerce.woodstock.install.deployer.AntMunger"/>  
+    <typedef name="config" classname="com.sterlingcommerce.woodstock.install.deployer.AntConfigElement"/>
+
+	<condition property="sysproperty.key1" value="os400.security.properties">
+        <and>
+            <isset property="OS400" />
+			<equals arg1="${java.vm.name}" arg2="Classic VM"/>	
+        </and>
+    </condition>
+    <condition property="sysproperty.key1" value="java.security.properties" >
+            <isset property="OS400" />
+    </condition>
+	
+   <condition property="sysproperty.value1"
+              value="${sandbox.JAVA_LIB_SECURITY_DIR}/java.security">
+        <isset property="sandbox.OS400" />
+   </condition>
+   <condition property="sysproperty.key2"
+              value="java.ext.dirs">
+        <isset property="sandbox.OS400" />
+   </condition>
+   <condition property="sysproperty.value2"
+              value="${sandbox.JAVA_LIB_EXT_DIR}">
+        <isset property="sandbox.OS400" />
+   </condition>
+
+   <condition property="sysproperty.key3"
+              value="java.endorsed.dirs">
+        <isset property="sandbox.OS400" />
+   </condition>
+   <condition property="sysproperty.value3"
+              value="${sandbox.JAVA_LIB_ENDORSED_DIR}">
+        <isset property="sandbox.OS400" />
+   </condition>
+   <condition property="sysproperty.key4"
+              value="os400.jit.nocompile.class">
+        <isset property="sandbox.OS400" />
+   </condition>
+   <condition property="sysproperty.value4"
+              value="com/sterlingcommerce/woodstock/services/sapsuite/common/InstanceParameter:com/yantra/yfc/dom/YFCElement:com/yantra/tools/xsdgen/FileLoaderTree">
+        <isset property="sandbox.OS400" />
+   </condition>
+
+   <condition property="sysproperty.key5"
+              value="java.version">
+        <isset property="sandbox.OS400" />
+   </condition>
+        <condition property="sysproperty.value5"   
+               value="${sandbox.JAVA_VERSION}">   
+         <isset property="sandbox.OS400" />   
+    </condition>   
+
+
+   <condition property="javac.fork"
+              value="false">
+        <isset property="sandbox.OS400" />
+   </condition>
+
+   <condition property="javac.fork"
+              value="true">
+        <not>
+        <isset property="sandbox.OS400" />
+        </not>
+   </condition>
+   <condition property="javadoc.header"
+              value="${sandbox.JAVADOC_PRODUCT_LABEL}">
+        <isset property="sandbox.JAVADOC_PRODUCT_LABEL" />
+   </condition>
+   <condition property="javadoc.header"
+              value=" ">
+	<not>
+        <isset property="sandbox.JAVADOC_PRODUCT_LABEL" />
+	</not>
+   </condition>
+
+   <condition property="javadoc.copyright.info"
+              value="${sandbox.JAVADOC_COPYRIGHT_INFO_LABEL}">
+        <isset property="sandbox.JAVADOC_COPYRIGHT_INFO_LABEL" />
+   </condition>
+   <condition property="javadoc.copyright.info"
+              value=" ">
+       <not>
+        <isset property="sandbox.JAVADOC_COPYRIGHT_INFO_LABEL" />
+       </not>
+   </condition>
+   <condition property="USETARGETNS"
+			  value="true">
+	<not>
+		<isset property="sandbox.USETARGETNS" />
+	</not>
+   </condition>
+   <condition property="USETARGETNS"
+			  value="true">
+	<not>
+		<isset property="sandbox.USETARGETNS" />
+	</not>
+   </condition>
+   <condition property="USETARGETNS"
+			  value="true">
+	<not>
+		<isset property="sandbox.USETARGETNS" />
+	</not>
+   </condition>
+
+	<condition property="JITOptions" value="">
+		<isset property="sandbox.ARCH"/>
+	</condition>
+	<condition property="JITOptions" value="-Xjit:exclude={com/yantra/yfc/dom/YFCElement.getChildren*:com/yantra/tools/xsdgen/FileLoaderTree.findDeps*}" else="">
+		<and>
+			<isset property="JAVA_VM_VENDOR"/>
+			<equals arg1="IBM" arg2="${JAVA_VM_VENDOR}" trim="true" casesensitive="false" />
+		</and>
+	</condition>    
+	
+	<condition property="skipxapimerge">
+		<equals arg1="${sandbox.SKIPXAPIMERGE}" arg2="true" />
+	</condition>
+
+	<path id="runtime.classpath">
+		<pathelement location="${dir.tmp}/build"/>
+	    <fileset dir="${dir.lib}">
+	        <include name="**/*.jar" />
+	        <include name="**/*.zip" />
+	    </fileset>
+	    <fileset dir="${dir.install}/dbjar">
+	        <include name="**/*.jar" />
+	        <include name="**/*.zip" />
+	    </fileset>
+	    <fileset dir="${dir.install}/jar/icu4j">
+	        <include name="**/*.jar" />
+	    </fileset>
+		<pathelement location="${dir.install}/properties" />
+	    <pathelement location="${dir.install}/noapp/lib/jbossall-client.jar"/>
+	</path>
+
+        <target name="all_noTemplates" depends="interopjar, -add3dparty">
+                <delete dir="${dir.jarTarget}" failonerror="false"/>
+                <AFCecho message="XAPI deployment complete" />
+        </target>
+
+	<condition property="all-target" value="all-with-api-standalone" else="all-with-alldocs">
+		<and>
+			<isset property="sandbox.DoXapiJavaDoc"/>
+			<equals arg1="${sandbox.DoXapiJavaDoc}" arg2="false" trim="true" casesensitive="false"/>
+		</and>
+	</condition>
+
+	<target name="all">
+		<antcall target="${all-target}"/>
+	</target>
+
+	<target name="copy-to-staging-and-templates" >
+		<ant antfile="${dir.install}/properties/xapiDeployer.xml"  target="copytostaging" />
+		<ant antfile="${dir.install}/properties/xapiDeployer.xml"  target="templates" />
+		
+	</target>
+
+    <target name="all-with-api-standalone" depends="interopjar, -add3dparty, copytostaging, templates, api-standalone">
+		<delete dir="${dir.jarTarget}" failonerror="false"/>
+        <AFCecho message="XAPI deployment complete" />
+	</target>
+
+	<target name="all-with-alldocs" depends="interopjar, -add3dparty, copytostaging, templates, alldocs">
+		<delete dir="${dir.jarTarget}" failonerror="false"/>
+        <AFCecho message="XAPI deployment complete" />
+	</target>
+
+	<target name="all-noalldocs" depends="initxsl, interopjar, -add3dparty, copytostaging, templates, api-standalone">
+		<delete dir="${dir.jarTarget}" failonerror="false"/>
+		<AFCecho message="XAPI deployment complete" />
+	</target>
+	<target name="copytostaging" >
+		<copy todir="${dir.install}/repository">
+			<fileset dir=".">
+				<include name="xapi/documentation/source/**/*" />
+				<include name="xapi/template/source/**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<condition property="maxparallel.chmod" value="250" else="0" >
+		<and>
+			<isset property="sandbox.ARCH" />
+			<equals arg1="${sandbox.ARCH}" arg2="OS400" trim="true" casesensitive="false"/>
+		</and>
+	</condition>
+
+    <!-- Munge all files with a .in extension -->
+    <target name="munge" depends="init">
+        <mungefiles basedir="${dir.install}">
+            <config configFile="${dir.install}/properties/sandbox.cfg"/>
+            <config configFile="${dir.install}/properties/ports"/>
+            <config configFile="${dir.install}/properties/apservsetup"/>
+            <config configFile="${dir.install}/properties/tuning.properties"/>
+            <!-- dirs ending with this pattern, will be skipped -->
+            <config excludeDir="uninstall"/>
+            <config excludeDir="installed_data"/>
+            <config excludeDir="installed_tests"/>
+	    <config excludeDir="documents" />
+	    <config excludeDir="logs" />
+            <config excludeFile="java_wrapper.sh.in"/>
+            <config excludeFile="deployer.sh.in"/>
+            <config excludeFile="InstallService.sh.in"/>
+            <config excludeFile="InstallService.cmd.in"/>
+        </mungefiles>
+        <!-- maxparallel limits # of files pumped into chmod command -->
+        <!-- unlimited is causing chmod errors on iseries -->
+        <chmod dir="${dir.install}/bin/" perm="ugo+rx" includes="**/*.sh"
+         maxparallel="${maxparallel.chmod}" />
+	<available file="${dir.install}/noapp/bin/" type="dir" property="noapp_bin_dir.exists" />
+	<available file="${dir.install}/tp_import/" type="dir" property="tp_import_dir.exists" />
+	<available file="${dir.install}/container/Applications/" type="dir" property="container_applications_dir.exists" />
+    </target>
+
+    <target name="chmod_noapp_bin" depends="munge" if="noapp_bin_dir.exists" >
+        <chmod dir="${dir.install}/noapp/bin/" perm="ugo+rx" includes="**/*.sh"
+         maxparallel="${maxparallel.chmod}" />
+
+    </target>
+	
+    <target name="chmod_tp_import" depends="munge" if="tp_import_dir.exists" >
+        <chmod dir="${dir.install}/tp_import/" perm="ugo+rx" includes="**/*.sh"
+         maxparallel="${maxparallel.chmod}" />     
+                
+    </target>
+    <target name="chmod_container_applications" depends="munge" if="container_applications_dir.exists" >
+        <chmod dir="${dir.install}/container/Applications/" perm="ugo+rx" includes="**/*.sh"
+         maxparallel="${maxparallel.chmod}" />     
+                
+    </target>
+	<target name="init">
+		<mkdir dir="${dir.tmp}/build" />
+		<mkdir dir="${dir.tmp}/src" />
+		<copy file="${dir.install}/repository/xapi/yantra_modules.xml" todir="${dir.tmp}/build" />		
+    </target>
+    <target name="-checkxapi.xsl">
+        <condition property="copyxsl">
+            <available file="./xapi" type="dir"/>
+        </condition>
+        <property name="dir.xsl" location="${dir.install}/repository/xapi/xsl" />
+    </target>
+    <target name="initxsl" depends="init,-checkxapi.xsl" if="copyxsl">
+		<copy todir="${dir.install}/repository/xapi">
+			<fileset dir="./xapi">
+				<include name="xsl/**" />
+			</fileset>
+		</copy>
+	</target>
+	
+		<target name="yifapigen" depends="initxsl">
+		
+        	<java fork="true" failonerror="true"
+              	classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+        		maxmemory="512m">
+		<classpath>
+			<pathelement location="${sandbox.JAR_DIR}/bootstrapper.jar"/>
+			<pathelement location="${sandbox.JAR_DIR}/icu4j/$(sandbox.ICU4J_VERSION}/icu4j-$(sandbox.ICU4J_VERSION}.jar"/>
+              	</classpath>
+            <arg value="-p" />
+            <arg value="${dir.tmp}/build" />
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />            
+            <arg value="-class" />
+            <arg value="com.yantra.interop.tools.InteropYIFApiGenerator" />            
+            <arg value="-invokeargs" />
+			<arg value="-O"/>
+			<arg value="${dir.tmp}/src/yifapilist.xml" />
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+         <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		</java>
+		<mkdir dir="${dir.tmp}/src/com/yantra/interop/japi/" />
+		<xslt in="${dir.tmp}/src/yifapilist.xml" style="${dir.xsl}/yifapi.xsl"
+			  out="${dir.tmp}/src/com/yantra/interop/japi/YIFApi.java"/>
+		<javac debug="${debug}" failonerror="true" srcdir="${dir.tmp}/src" destdir="${dir.tmp}/build" classpathref="runtime.classpath">
+			<include name="com/yantra/interop/japi/YIFApi.java"/>
+		</javac>
+	</target>
+
+	<target name="interopclassgen" depends="yifapigen">
+	    <mkdir dir="${dir.tmp}/src/com/yantra/interop/services/api" />
+	    <mkdir dir="${dir.tmp}/src/com/yantra/interop/client" />
+	    <mkdir dir="${dir.tmp}/src/com/yantra/interop/services/webservices/rpc/ejb" />
+	    <mkdir dir="${dir.tmp}/src/com/yantra/interop/services/ejb/string" />
+        <java fork="true" failonerror="true" classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" maxmemory="512m">
+		<classpath>
+			<pathelement location="${sandbox.JAR_DIR}/bootstrapper.jar" />
+			<fileset dir="${sandbox.JAR_DIR}/icu4j">
+				<include name="**/*.jar"/>
+			</fileset>
+	      	</classpath>
+            <arg value="-p" />
+            <arg value="${dir.tmp}/build" />
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.interop.tools.InteropBuildHelper" />            
+            <arg value="-invokeargs" />
+		
+			<arg value="-dxml"/>
+			<arg value="${dir.tmp}/src/api.xml"/>
+         	<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+			<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+			<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+			<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+			<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+			<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+	        </java>
+	    <xslt in="${dir.tmp}/src/api.xml" style="${dir.xsl}/apidispatcher.xsl"
+	          out="${dir.tmp}/src/com/yantra/interop/services/api/ApiRequestDispatcher.java"/>
+	    <xslt in="${dir.tmp}/src/api.xml" style="${dir.xsl}/defaultApiRepository.xsl"
+	          out="${dir.tmp}/src/com/yantra/interop/services/api/DefaultApiRepository.java"/>
+	    <xslt in="${dir.tmp}/src/api.xml" style="${dir.xsl}/declarativeejbclient.xsl"
+	          out="${dir.tmp}/src/com/yantra/interop/client/DeclarativeEJBClient.java"/>
+	    <xslt in="${dir.tmp}/src/api.xml" style="${dir.xsl}/webserviceadapter.xsl"
+	          out="${dir.tmp}/src/com/yantra/interop/services/webservices/rpc/ejb/YIFWebServiceAdapter.java"/>
+	    <xslt in="${dir.tmp}/src/api.xml" style="${dir.xsl}/webserviceapi.xsl"
+	          out="${dir.tmp}/src/com/yantra/interop/services/webservices/rpc/ejb/YIFWebServiceApi.java"/>
+	    <xslt in="${dir.tmp}/src/api.xml" style="${dir.xsl}/ejb-string-adapter.xsl"
+	          out="${dir.tmp}/src/com/yantra/interop/services/ejb/string/YantraApiAdapter.java"/>
+	    <xslt in="${dir.tmp}/src/api.xml" style="${dir.xsl}/ejb-string-api.xsl"
+	          out="${dir.tmp}/src/com/yantra/interop/services/ejb/string/YantraStringApi.java"/>
+	</target>
+	
+	<target name="interopclasscompile" depends="munge,chmod_noapp_bin,chmod_tp_import,chmod_container_applications,interopclassgen">
+		<javac debug="${debug}" failonerror="true" srcdir="${dir.tmp}/src" destdir="${dir.tmp}/build" classpathref="runtime.classpath" fork="true">
+			<include name="**/*.java"/>
+		</javac>
+	</target>
+	
+	<target name="interopjar" unless="skipxapimerge">
+		<ant antfile="${dir.install}/properties/xapiDeployer.xml" target="interopclasscompile" />
+        <jar destfile="${jar.file}">
+            <fileset dir="${dir.tmp}/build">
+                <include name="**/*.class" />
+            	<include name="yantra_modules.xml" />
+            </fileset>
+        </jar>
+		<mkdir dir="${dir.jarTarget}" />
+		<copy file="${jar.file}" todir="${dir.jarTarget}" />
+	</target>
+	
+	<target name="templates" unless="skipxapimerge">
+		<taskdef name="mergexapitemplates"
+			     classname="com.yantra.yfc.util.rtbuild.ant.TemplateMergeTask"
+				 classpathref="runtime.classpath" />
+		
+		<mkdir dir="${dir.install}/repository/xapi/template/merged" />
+    	<property name="loglevel" value="INFO" />
+		<mergexapitemplates sourcedir="${dir.install}/repository/xapi/template/source"
+			                destdir="${dir.install}/repository/xapi/template/merged"
+			                disablenativecopy="true" loglevel="${loglevel}"/>
+		<AFCecho message="templates merged" />
+	</target>
+
+    <target name="init-afc-version">
+        <condition property="preinstall-versions-exists" value="true" else="false">
+            <available file="${dir.install}/installed_data/platform_afc/preinstallfiles/properties/app.versions"/>
+        </condition>
+    
+        <property file="${dir.install}/installed_data/platform_afc/preinstallfiles/properties/app.versions" prefix="afcversion"/>
+    
+        <condition property="afc-version" value="${afcversion.LIC_PROD_VERSION}" else="${sandbox.PLATFORM_AFC_LIC_PROD_VERSION}">
+            <equals arg1="${preinstall-versions-exists}" arg2="true" casesensitive="false" trim="true"/>
+        </condition>
+      </target>
+
+	
+	<target name="-add3dparty" depends="init-afc-version" unless="skipxapimerge">
+		<property file="${dir.install}/repository/eardata/afc.version"
+              prefix="afcversion"/>
+
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.sterlingcommerce.woodstock.install.utils.Install3rdParty" />            
+            <arg value="-invokeargs" />
+
+			<sysproperty key="vendor" value="shell"/>
+			<sysproperty key="vendorFile" value="${dir.install}/properties/servers.properties"/>
+         	<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+			<arg value="${dir.install}/properties/sandbox.cfg"/>
+			<arg value="platform"/>
+			<arg value="${afc-version}"/>
+			<arg value="-j"/>
+			<arg value="${dir.jarTarget}/${jar.file}"/>
+			<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+			<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+			<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+			<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+			<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+			<sysproperty key="user.dir" value="${sandbox.INSTALL_DIR}"/>	
+		    </java>
+	</target>
+	
+	<!-- Targets specific to creating the merged XAPI documentation -->
+
+	<property name="cssdir" location="${dir.install}/repository/eardata/platform/war/css" />
+	<property name="entities" location="${dir.install}/repository/entity" />
+	<property name="datatypexml" location="${dir.install}/repository/datatypes/datatypes.xml" />
+	<property name="output" location="${dir.install}/xapidocs" />
+	<property name="jdoc" location="${output}/api_javadocs" />
+	<property name="coredoc" location="${output}/core_javadocs" />
+	<property name="propertydocs" location="${output}/propertydocs" />
+	<property name="apisec" location="${dir.install}/repository/xapi/template/merged/apisecurity" />
+	<property name="factout" location="${dir.install}/repository/xapi/template/merged/resource" />
+	<property name="linkout" location="${dir.install}/repository/xapi/template/merged/resource" />
+	<property name="indexdataout" location="${dir.install}/repository/xapi/template/merged/resource" />
+	<property name="indexlookupout" location="${dir.install}/repository/xapi/template/merged/resource" />
+	
+	
+	<!-- Version of docmergemain and xsdgen that only generates non-documentation data.
+	     This is redundant if alldocs is being used.  -->
+	<target name="api-standalone" depends="-init_ant_opts" unless="skipxapimerge">
+		    	<property name="loglevel" value="INFO" />
+		<property name="xmlstruct.tmpdir" location="${dir.tmp}/xmlstruct"/>
+		<!-- Merges only xmlstruct -->
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+	      <jvmarg line="${ANT_OPT_TO_USE}"/>
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.docmerge.DocMergerMain" />            
+            <arg value="-invokeargs" />
+
+		<sysproperty key="DisableNativeCopy" value="Y"/>
+		<arg value="-DOCSOURCES" />
+		<arg value="${dir.install}/repository/xapi/documentation/source" />
+		<arg value="-OUTDIR" />
+		<arg value="${xmlstruct.tmpdir}" />
+		<arg value="-ED" />
+		<arg value="${entities}" />
+		<arg value="-DT" />
+		<arg value="${datatypexml}" />
+		<arg value="-MERGEXMLSTRUCT" />
+		<arg value="Y" />
+		<arg value="-LOGLEVEL" />
+		<arg value="${loglevel}" />
+        <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+        </java>
+
+        <!-- XSDGenerator, but only generating API security and Facts -->
+		<mkdir dir="${xmlstruct.tmpdir}/xmlstruct" />
+		<mkdir dir="${apisec}" />
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.xsdgen.XSDGenerator" />            
+            <arg value="-invokeargs" />
+        
+		     <jvmarg line="${ANT_OPT_TO_USE} ${JITOptions}"/>
+		<arg value="-EN"/>
+		<arg value="${entities}"/>
+		<arg value="-DT"/>
+		<arg value="${datatypexml}"/>
+		<arg value="-IN"/>
+		<arg value="${xmlstruct.tmpdir}/xmlstruct"/>
+		<arg value="-SE"/>
+		<arg value="${apisec}"/>
+		<arg value="-FACTOUT"/>
+		<arg value="${factout}" />
+		<arg value="-LINKOUT"/>
+		<arg value="${linkout}" />
+		<arg value="-INDEXOUT"/>
+		<arg value="${indexdataout}" />
+		<arg value="-INDEXLOOKUPOUT" />
+		<arg value="${indexlookupout}" />
+        <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+        </java>
+        <delete dir="${xmlstruct.tmpdir}" />
+	</target>
+	
+	<target name="alldocs" depends="-init_ant_opts,docmergemain, javadocjdkpropsetup, javadocgen, javadocgen_core, xsdgen, jsdocgen, cufdocgen, restdoc.generate, propertydocsgen" />
+	
+	<target name="xsdgen">
+		<mkdir dir="${jdoc}/XSD/HTML/CSS" />
+        <copy todir="${jdoc}/XSD/HTML/CSS">
+            <fileset dir="${cssdir}" />
+        </copy>
+		
+	<replace dir="${jdoc}/XSD/HTML/CSS" includes="*.css" token="behavior: url(../css/table.htc) ;" value=""/>
+
+		<mkdir dir="${jdoc}/dtd" />
+		<mkdir dir="${jdoc}/XML" />
+		<mkdir dir="${jdoc}/JSON" />
+		<mkdir dir="${jdoc}/XSD" />
+		<mkdir dir="${jdoc}/XSD/HTML" />
+		<mkdir dir="${output}/xmlstruct" />
+		<mkdir dir="${output}/templateXML" />
+		<mkdir dir="${apisec}" />
+        
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.xsdgen.XSDGenerator" />            
+            <arg value="-invokeargs" />
+        
+		     <jvmarg line="${ANT_OPT_TO_USE} ${JITOptions}"/>
+		<arg value="-EN"/>
+		<arg value="${entities}"/>
+		<arg value="-DT"/>
+		<arg value="${datatypexml}"/>
+		<arg value="-IN"/>
+		<arg value="${output}/xmlstruct"/>
+		<arg value="-OU"/>
+		<arg value="${jdoc}/dtd"/>
+		<arg value="-EX"/>
+		<arg value="_dtd.txt"/>
+		<arg value="-SA"/>
+		<arg value="${jdoc}/XML"/>
+    	<arg value="-JSONSAMPLEOUT"/>
+    	<arg value="${jdoc}/JSON"/>
+		<arg value="-SE"/>
+		<arg value="${apisec}"/>
+		<arg value="-FACTOUT"/>
+		<arg value="${factout}" />
+   		<arg value="-LINKOUT"/>
+   		<arg value="${linkout}" />
+   		<arg value="-INDEXOUT"/>
+   		<arg value="${indexdataout}" />
+		<arg value="-INDEXLOOKUPOUT" />
+		<arg value="${indexlookupout}" />
+		<arg value="-TP"/>
+		<arg value="${output}/templateXML"/>
+		<arg value="-XSD"/>
+		<arg value="${jdoc}/XSD"/>
+		<arg value="-HTMLOUTPUTDIR"/>
+		<arg value="${jdoc}/XSD/HTML"/>
+		<arg value="-USETARGETNS" />
+		<arg value="${USETARGETNS}" />
+        <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+        </java>
+	</target>
+	
+	<target name="check-cuf">
+		<AFCfail unless="dir.install" message="The system property -Ddir.install is not set." />
+	    <condition property="cuf-available">
+	        <available file="${dir.install}/jar/platform_cuf_generator" type="dir" />
+	    </condition>
+	</target>
+	
+	<target name="cufdocgen" if="cuf-available" depends="check-cuf, -init_ant_opts">
+	    <AFCecho message="UI Generator found. Generating documention for metadata XMLs."/>
+	    <delete dir="${dir.tmp}/cufdocgen" />
+	    <mkdir dir="${dir.tmp}/cufdocgen" />
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+		    <jvmarg line="${ANT_OPT_TO_USE} ${JITOptions}"/>
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.ibm.sterling.afc.cuf.generator.util.docgen.DocGeneratorMain" />            
+            <arg value="-invokeargs" />
+		    
+	        <arg value="-d" />
+	        <arg value="${dir.install}/repository/eardata" />
+	        <arg value="-o" />
+	        <arg value="${dir.tmp}/cufdocgen" />
+	        
+        	<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+       		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+			<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+			<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+			<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+			<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+	    </java>
+	    <path id="cufdoc.classpath">
+	        <pathelement location="${dir.tmp}/cufdocgen" />
+	    </path>
+	    <mkdir dir="${output}/cufdocs" />
+	    <copy todir="${output}/cufdocs">
+			<fileset dir="${dir.tmp}/cufdocgen"/>
+		</copy>
+	    <delete dir="${dir.tmp}/cufdocgen" />
+		<delete dir="${dir.install}/repository/eardata/platform_uifwk_ide/war/cufdoc" />
+		<mkdir dir="${dir.install}/repository/eardata/platform_uifwk_ide/war/cufdoc" />
+		<copy todir="${dir.install}/repository/eardata/platform_uifwk_ide/war/cufdoc">
+			<fileset dir="${output}/cufdocs"/>
+		</copy>
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+		    <jvmarg line="${ANT_OPT_TO_USE} ${JITOptions}"/>
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.ibm.sterling.afc.cuf.generator.util.docgen.DocGeneratorCleaner" />            
+            <arg value="-invokeargs" />
+		    
+	        <arg value="-d" />
+	        <arg value="${output}/cufdocs" />
+	        
+        	<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+       		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+			<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+			<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+			<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+			<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+	    </java>
+		<delete dir="${dir.install}/repository/eardata/platform_uifwk_ide/war/xapidocs/api_javadocs/XML" />
+		<mkdir dir="${dir.install}/repository/eardata/platform_uifwk_ide/war/xapidocs/api_javadocs/XML" />
+		<copy todir="${dir.install}/repository/eardata/platform_uifwk_ide/war/xapidocs/api_javadocs/XML">
+			<fileset dir="${dir.install}/xapidocs/api_javadocs/XML"/>
+		</copy>
+	</target>
+
+	<target name="jsdocgen" depends="checkjsdoc,genjsdoc">
+	</target>
+	<target name="checkjsdoc">
+		<property name="jsdocdir" location="${dir.install}/jsdoc" />
+		<property name="jsdoc-toolkit.dir" location="${dir.install}/jsdoc/jsdoc-toolkit" />
+		<property name="jsdoc-toolkit.path.lib" value="${dir.install}/jsdoc/jsdoc-toolkit/jsrun.jar"/>
+		<property name="common.jsdoc.output.dir" value="${output}/jsdocs"/>
+		<property name="common.jsdoc.sources.dir" value="${dir.install}/jsdoc/scripts"/>
+		<available file="${jsdoc-toolkit.path.lib}" property="jsdoc-toolkit.path.lib.exists"/>
+		<AFCecho message="Is Jsdoc lib installed: {1}">
+			<arg value="${jsdoc-toolkit.path.lib.exists}"/>
+		</AFCecho>
+	</target>
+	<target name="genjsdoc" if="jsdoc-toolkit.path.lib.exists">
+		<AFCecho message="Inside jsdocgen."/>
+		<!-- For 20 -->
+		<AFCecho message="Jsdoc dir found. Generating javascript docs for 20."/>
+		<delete dir="${common.jsdoc.output.dir}/20"/>
+		<mkdir dir="${common.jsdoc.output.dir}/20"/>
+		<copy file="${jsdoc-toolkit.dir}/index.html" todir="${common.jsdoc.output.dir}/20"/>
+		<copy file="${jsdoc-toolkit.dir}/welcome.html" todir="${common.jsdoc.output.dir}/20"/>
+
+		<java fork="true" failonerror="true" jar="${jsdoc-toolkit.path.lib}" dir="${jsdoc-toolkit.dir}">
+			<arg value="app/main.js"/>
+			<arg value="-d=${common.jsdoc.output.dir}/20"/>
+			<arg value="-t=templates/ext"/>
+			<arg value="-r"/>
+			<arg value="${common.jsdoc.sources.dir}/20"/>
+		</java>
+		<!-- For 30 -->
+		<AFCecho message="Jsdoc dir found. Generating javascript docs for 30."/>
+		<delete dir="${common.jsdoc.output.dir}/30"/>
+		<mkdir dir="${common.jsdoc.output.dir}/30"/>
+		<copy file="${jsdoc-toolkit.dir}/index.html" todir="${common.jsdoc.output.dir}/30"/>
+		<copy file="${jsdoc-toolkit.dir}/welcome.html" todir="${common.jsdoc.output.dir}/30"/>
+
+		<java fork="true" failonerror="true" jar="${jsdoc-toolkit.path.lib}" dir="${jsdoc-toolkit.dir}">
+			<arg value="app/main.js"/>
+			<arg value="-d=${common.jsdoc.output.dir}/30"/>
+			<arg value="-t=templates/ext"/>
+			<arg value="-r"/>
+			<arg value="${common.jsdoc.sources.dir}/30"/>
+		</java>
+	</target>
+
+	<!--Responsible for setting the javadoc doclint disable when running in JDK8-->
+	<target name="javadocjdkpropsetup">
+		<property name="doclintSupportedJavaVersion" value="1.8"/> <!--Java version that started supporting doclint, this is temporary-->
+		<!--If Java Version is 1.8 then set javadoc.doclint to -Xdoclint:none to disable javadoc validation, this variable is used for the additional param in javadoc generation target-->
+		<condition property="javadoc.doclint" value="-Xdoclint:none">
+			<equals arg1="${sandbox.JAVA_VERSION}" arg2="${doclintSupportedJavaVersion}"/>
+		</condition>
+		<condition property="javadoc.doclint" value="">
+			<not>
+				<equals arg1="${sandbox.JAVA_VERSION}" arg2="${doclintSupportedJavaVersion}"/>
+			</not>
+		</condition>
+		<echo message="doclintSupportedJavaVersion=${doclintSupportedJavaVersion}"/>
+		<echo message="sandbox.JAVA_VERSION=${sandbox.JAVA_VERSION}"/>
+		<echo message="javadoc.doclint=${javadoc.doclint}"/>
+	</target>
+
+    <target name="javadocgen" depends="yifapigen">
+    		<taskdef name="copyapidocs"
+    			     classname="com.yantra.yfc.util.rtbuild.ant.JavadocCopyTask"
+    				 classpathref="runtime.classpath" />
+              <available file="${dir.install}/properties/xapi_includes" property="xapi_includes"/>
+              <available file="${dir.install}/properties/xapi_excludes" property="xapi_excludes"/>
+              <delete dir="${jdoc}/com" quiet="true"/>
+              <delete dir="${jdoc}/resources" quiet="true"/>
+              <delete dir="${jdoc}/XML" quiet="true"/>
+              <delete dir="${jdoc}/XSD" quiet="true"/>
+              <delete dir="${jdoc}/dtd" quiet="true"/>
+              <mkdir dir="${dir.tmp}/srcjd/base" />
+              <mkdir dir="${dir.tmp}/srcjd/merge" />
+              <copy todir="${dir.tmp}/srcjd/base">
+                  <fileset dir="${dir.tmp}/src">
+                      <include name="com/yantra/interop/japi/YIFApi.java"/>
+                  </fileset>
+              </copy>
+              <copy todir="${dir.tmp}/srcjd/base">
+                  <fileset dir="${dir.install}/repository/xapi/documentation/source/foundation/api_javadocs">
+                      <include name="com/yantra/interop/japi/package.html"/>
+                  </fileset>
+              </copy>
+        	  <copyapidocs todir="${dir.tmp}/srcjd/merge" >
+        	  	<classpath refid="runtime.classpath" />
+                <fileset dir="${dir.tmp}/srcjd/base">
+                     <include name="**/*.java"
+                              unless="xapi_includes"/>
+                     <includesfile name="${dir.install}/properties/xapi_includes" 
+                                   if="xapi_includes"/>
+                     <excludesfile name="${dir.install}/properties/xapi_excludes"
+                                   if="xapi_excludes"/>
+                </fileset>
+                <fileset dir="${dir.install}/repository/xapi/documentation/source">
+                     <include name="*/api_javadocs/**/*.java"
+                              unless="xapi_includes"/>
+                     <includesfile name="${dir.install}/properties/xapi_includes" 
+                                   if="xapi_includes"/>
+                     <excludesfile name="${dir.install}/properties/xapi_excludes"
+                                   if="xapi_excludes"/>
+                </fileset>
+        	  </copyapidocs>
+			  <echo message="javadoc.doclint=${javadoc.doclint}"/>
+			  <echo message="sandbox.JAVA_VERSION=${sandbox.JAVA_VERSION}"/>
+              <javadoc  
+					locale="${javadoc.locale}"
+                    bottom="&lt;font face=&apos;Verdana&apos; size=&apos;1&apos;&gt;&amp;#169; ${javadoc.copyright.info} &lt;/font&gt;" 
+                    author="false"
+                    classpathref="runtime.classpath" 
+                    destdir="${jdoc}" 
+                    footer="&lt;b&gt;IBM Corp. Confidential&lt;/b&gt;" 
+                    maxmemory="1024m" 
+					additionalparam="${javadoc.doclint}"
+                    packagenames="*"
+                    useexternalfile="yes"
+                    windowtitle="IBM Sterling Dev java docs">
+                    <header>&lt;b&gt;<![CDATA[${javadoc.header}]]>&lt;/b&gt;</header>
+                    <sourcefiles>
+                        <fileset dir="${dir.tmp}/srcjd/merge" />
+                    </sourcefiles>
+              </javadoc>
+    </target>
+
+        <target name="javadocgen_core">
+              <javadoc  
+					locale="${javadoc.locale}"
+                    bottom="&lt;font face=&apos;Verdana&apos; size=&apos;1&apos;&gt;&amp;#169; ${javadoc.copyright.info} &lt;/font&gt;" 
+                    author="false"
+                    classpathref="runtime.classpath" 
+                    destdir="${coredoc}" 
+                    footer="&lt;b&gt;IBM Corp. Confidential&lt;/b&gt;" 
+                    maxmemory="512m" 
+					additionalparam="${javadoc.doclint}"
+                    packagenames="*"
+                    useexternalfile="yes"
+                    windowtitle="IBM Corp. Dev core java docs">
+                    <header>&lt;b&gt;<![CDATA[${javadoc.header}]]>&lt;/b&gt;</header>
+                    <sourcefiles>
+                        <fileset dir="${dir.install}/repository/xapi/documentation/source">
+                             <include name="*/core_javadocs_src/**/*.java" />
+                        </fileset>
+                    </sourcefiles>
+                    <link offline="false" href="../api_javadocs" />
+              </javadoc>
+    </target>
+
+	
+    <target name="docmergemain">
+    	<property name="loglevel" value="INFO" />
+
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+	      <jvmarg line="${ANT_OPT_TO_USE}"/>
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.docmerge.DocMergerMain" />            
+            <arg value="-invokeargs" />
+
+		<sysproperty key="DisableNativeCopy" value="Y"/>
+		<arg value="-DOCSOURCES" />
+		<arg value="${dir.install}/repository/xapi/documentation/source" />
+		<arg value="-OUTDIR" />
+		<arg value="${output}" />
+		<arg value="-ED" />
+		<arg value="${entities}" />
+		<arg value="-DT" />
+		<arg value="${datatypexml}" />
+		<arg value="-MERGEERD" />
+		<arg value="Y" />
+		<arg value="-MERGECODESAMPLES" />
+		<arg value="Y" />
+		<arg value="-MERGEONLINEHELP" />
+		<arg value="Y" />
+		<arg value="-MERGEXMLSTRUCT" />
+		<arg value="Y" />
+		<arg value="-LOGLEVEL" />
+		<arg value="${loglevel}" />
+        <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+		<sysproperty key="db.vendor" value="${sandbox.DB_VENDOR}"/>
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+        </java>
+    </target>
+    
+    <target name="genclientjar">
+        <AFCfail unless="output" />
+        <property name="includeAll" value="N" />
+        
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${sandbox.JAR_DIR}/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${sandbox.PROP_DIR}/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.util.APIExtractor" />            
+            <arg value="-invokeargs" />
+            <arg value="-Out"/><arg value="${output}" />
+            <arg value="-IncludeAll"/><arg value="${includeAll}" />
+        	<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}" />        	
+			<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+			<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+			<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+			<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+			<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+		</java>
+    </target>
+
+	<target name="-check-restdoc">
+		<condition property="restdoc.enabled.flag">
+			<and>
+				<available file="${dir.install}/jar/com.ibm.sterling.afc.restdoc.jspui" type="dir" />
+				<or>
+					<not><isset property="restdoc" /></not>
+					<istrue value="${restdoc}"/>
+				</or>
+			</and>
+		</condition>
+		<property name="restdoc.servletId" value=""/>
+		<property name="restdoc.spec.dir" location="${dir.install}/repository/eardata/restdoc/war/restdoc/${restdoc.servletId}" />
+		<property name="restdoc.html.dir" location="${output}/restdoc/${restdoc.servletId}" />
+		<property name="loglevel" value="INFO" />
+		<property name="restdoc.loglevel" value="${loglevel}" />
+	</target>
+	
+	<target name="restdoc.generate" if="restdoc.enabled.flag" depends="restdoc.generate.spec,restdoc.generate.html" description="Generate REST documentation">
+	</target>
+	<target name="restdoc.generate.spec" depends="-check-restdoc" >
+		<mkdir dir="${restdoc.spec.dir}" />
+		<java classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" newenvironment="yes" failonerror="true" fork="true" classpath="${sandbox.JAR_DIR}/bootstrapper.jar">
+			<env key="VENDORJARS" value="" />
+			<env key="CLASSPATH" value="" />
+			<sysproperty key="vendor" value="shell" />
+			<sysproperty key="vendorFile" value="${dir.install}/properties/servers.properties" />
+			<sysproperty key="templatemanager.stripprefix" value="true" />
+			<arg value="-class" />
+			<arg value="com.ibm.sterling.afc.restdocgen.xapi.XRestDocGenerator" />
+			<arg value="-p" />
+			<arg value="${dir.install}/repository/xapi/template/merged" />
+			<arg value="-f" />
+			<arg value="${dir.install}/properties/dynamicclasspath.cfg" />
+			<arg value="-invokeargs" />
+			<arg value="-o"/>
+			<arg value="${restdoc.spec.dir}"/>
+			<arg value="-s"/>
+			<arg value="${restdoc.servletId}"/>
+			<arg value="-loglevel"/>
+			<arg value="${restdoc.loglevel}" />
+		</java>
+	</target>
+	<target name="restdoc.generate.html" depends="-check-restdoc" >
+		<mkdir dir="${restdoc.html.dir}" />
+		<java classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" newenvironment="yes" failonerror="true" fork="true" classpath="${sandbox.JAR_DIR}/bootstrapper.jar">
+			<env key="VENDORJARS" value="" />
+			<env key="CLASSPATH" value="" />
+			<sysproperty key="vendor" value="shell" />
+			<sysproperty key="vendorFile" value="${dir.install}/properties/servers.properties" />
+			<arg value="-class" />
+			<arg value="com.ibm.sterling.afc.restdoc.jspui.HTMLOutput" />
+			<arg value="-f" />
+			<arg value="${dir.install}/properties/dynamicclasspath.cfg" />
+			<arg value="-invokeargs" />
+			<arg value="-in"/>
+			<arg value="${restdoc.spec.dir}"/>
+			<arg value="-out"/>
+			<arg value="${restdoc.html.dir}"/>
+		</java>
+	</target>
+
+	<target name="-check-propertydocsgen">
+		<echo message="DATABASE_PROPERTY_MANAGEMENT: ${sandbox.DATABASE_PROPERTY_MANAGEMENT}"/>
+		<condition property="gen.propertydocs" value="true">
+			<and>
+				<isset property="sandbox.DATABASE_PROPERTY_MANAGEMENT"/>
+				<equals arg1="${sandbox.DATABASE_PROPERTY_MANAGEMENT}" arg2="true" casesensitive="false" trim="true"/>
+			</and>
+		</condition>
+		<echo message="Generate Property Documentation: ${gen.propertydocs}"/>
+	</target>
+
+	<target name="propertydocsgen" if="gen.propertydocs" depends="-check-propertydocsgen" description="Generate Property Documentation">
+		<mkdir dir="${propertydocs}"/>
+		<copy file="${dir.install}/repository/eardata/platform/doc/properties/index.html" todir="${propertydocs}" />
+		<copy file="${dir.install}/repository/eardata/platform/doc/properties/stylesheet.css" todir="${propertydocs}" />
+		<java classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" newenvironment="yes" failonerror="true" fork="true" classpath="${sandbox.JAR_DIR}/bootstrapper.jar">
+			<sysproperty key="vendor" value="shell" />
+			<sysproperty key="vendorFile" value="${dir.install}/properties/servers.properties" />
+			<arg value="-class" />
+			<arg value="com.yantra.tools.property.converter.PropertyDocumenter" />
+			<arg value="-f" />
+			<arg value="${dir.install}/properties/dynamicclasspath.cfg" />
+			<arg value="-invokeargs" />
+			<arg value="-inputDir"/>
+			<arg value="${dir.install}/properties"/>
+			<arg value="-xslDir"/>
+			<arg value="${dir.install}/repository/eardata/platform/doc/properties/xsl"/>
+			<arg value="-outputDir"/>
+			<arg value="${propertydocs}"/>
+			<arg value="-audit"/>
+			<arg value="N"/>
+			<arg value="-loadCache"/>
+			<arg value="N"/>
+			<arg value="-logging"/>
+			<arg value="Y"/>
+			<arg value="-logLevel"/>
+			<arg value="INFO"/>
+		</java>
+	</target>
+	
+</project>
+

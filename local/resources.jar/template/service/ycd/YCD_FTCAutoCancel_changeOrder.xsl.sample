@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:variable name="maxstatus">3200</xsl:variable>
+	<xsl:variable name="sts_bofn">1400</xsl:variable>
+
+	<xsl:template match="Order">
+		<Order OrderHeaderKey="{@OrderHeaderKey}" ModificationReasonCode="YCD_FTC_AUTOCANCEL" Override="Y">
+			<xsl:apply-templates select="OrderLines" />
+		</Order>
+	</xsl:template>
+	<xsl:template match="OrderLines">
+		<OrderLines>
+			<xsl:apply-templates />
+		</OrderLines>
+	</xsl:template>
+	<xsl:template match="OrderLine">
+		<OrderLine Action="MODIFY" OrderLineKey="{@OrderLineKey}">
+			<xsl:attribute name="OrderedQty">
+				<xsl:value-of select="number(@OrderedQty)-sum(OrderStatuses/OrderStatus[number(substring(@Status,1,4))&lt;$maxstatus][substring(@Status,1,4)!=$sts_bofn]/@StatusQty)" />
+			</xsl:attribute>
+		</OrderLine>
+	</xsl:template>
+</xsl:stylesheet>

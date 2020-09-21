@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table holds set of condition sets each mapping to a set of conditions."
+            EntityType="CONFIGURATION"
+            ListXMLName="PlannedTaskConditionSets" Module="ysc"
+            Name="Planned_Task_Cond_Set" Prefix="YFS_"
+            TableName="YFS_PLANNED_TASK_COND_SET"
+            TableType="CONFIGURATION" XMLName="PlannedTaskConditionSet">
+            <Attributes>
+                <Attribute ColumnName="PLANNED_TASK_COND_SET_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLANNED_TASK_COND_SET table."
+                    Name="Planned_Task_Cond_Set_Key" Nullable="false" XMLName="PlannedTaskConditionSetKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    Description="Identifies the node for which planning is being done."
+                    Name="Node_Key" Nullable="true" XMLName="Node"/>
+                <Attribute ColumnName="CONDITION_SET_NAME"
+                    DataType="Text-200"
+                    Description="Conditions are grouped under this set name."
+                    Name="Condition_Set_Name" Nullable="true" XMLName="ConditionSetName"/>
+                <Attribute ColumnName="SEQUENCE_NO"
+                    DataType="LongSequence"
+                    Description="Condition sets are evaluated in this sequence."
+                    Name="Sequence_No" Nullable="true" XMLName="SequenceNo"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLN_TSK_CND_ST_PK" Name="YFS_PLANNED_TASK_COND_SET_PK">
+                <Attribute ColumnName="PLANNED_TASK_COND_SET_KEY" Name="Planned_Task_Cond_Set_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlannedTaskConditionSets"
+                    ChildName="PlannedTaskConditionSet"
+                    ChildXMLName="PlannedTaskConditionSet"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table holds set of conditions each mapping to a set of task types."
+            EntityType="CONFIGURATION"
+            ListXMLName="PlannedTaskConditions" Module="ysc"
+            Name="Planned_Task_Cond" Prefix="YFS_"
+            TableName="YFS_PLANNED_TASK_COND" TableType="CONFIGURATION" XMLName="PlannedTaskCondition"
+            LockingEntity="Planned_Task_Cond_Set">
+            <Attributes>
+                <Attribute ColumnName="PLANNED_TASK_COND_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLANNED_TASK_COND table."
+                    Name="Planned_Task_Cond_Key" Nullable="false" XMLName="PlannedTaskConditionKey"/>
+                <Attribute ColumnName="PLANNED_TASK_COND_SET_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLANNED_TASK_COND_SET table."
+                    Name="Planned_Task_Cond_Set_Key" Nullable="false" XMLName="PlannedTaskConditionSetKey"/>
+                <Attribute ColumnName="SEQUENCE_NO"
+                    DataType="LongSequence"
+                    Description="Conditions are evaluated in this sequence to determine the tasks being planned for."
+                    Name="Sequence_No" Nullable="false" XMLName="SequenceNo"/>
+                <Attribute ColumnName="CONDITION_KEY" DataType="Key"
+                    Description="Condition to be evaluated."
+                    Name="Condition_Key" Nullable="true" XMLName="ConditionKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLAN_TASK_COND_PK" Name="YFS_PLANNED_TASK_COND_PK">
+                <Attribute ColumnName="PLANNED_TASK_COND_KEY" Name="Planned_Task_Cond_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlannedTaskConditions"
+                    ChildName="Planned_Task_Cond"
+                    ChildXMLName="PlannedTaskCondition"
+                    DeleteCascade="true"
+                    ForeignEntity="Planned_Task_Cond_Set"
+                    IsParent="true" Name="Planned_Task_Cond_Set"
+                    Type="Bidirectional" XMLName="PlannedTaskConditionSet">
+                    <Attribute Name="Planned_Task_Cond_Set_Key" ParentName="Planned_Task_Cond_Set_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlannedTaskConditions"
+                    ChildName="Planned_Task_Cond"
+                    ChildXMLName="PlannedTaskCondition"
+                    ForeignEntity="Condition" Name="Condition"
+                    ReadOnly="true" Type="Unidirectional" XMLName="Condition">
+                    <Attribute Name="Condition_Key" ParentName="Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table holds task types of tasks that would be involved for a particular planned pask Condition."
+            EntityType="CONFIGURATION"
+            ListXMLName="PlannedTaskConditionResults" Module="ysc"
+            Name="Planned_Task_Cond_Rslt" Prefix="YFS_"
+            TableName="YFS_PLANNED_TASK_COND_RSLT"
+            TableType="CONFIGURATION" XMLName="PlannedTaskConditionResult"
+            LockingEntity="Planned_Task_Cond">
+            <Attributes>
+                <Attribute ColumnName="PLANNED_TASK_COND_RSLT_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_PLANNED_TASK_COND_RSLT table."
+                    Name="Planned_Task_Cond_Rslt_Key" Nullable="false" XMLName="PlannedTaskConditionResultKey"/>
+                <Attribute ColumnName="PLANNED_TASK_COND_KEY"
+                    DataType="Key"
+                    Description="The primary key for the YFS_PLANNED_TASK_COND table."
+                    Name="Planned_Task_Cond_Key" Nullable="true" XMLName="PlannedTaskConditionKey"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    Description="Indicates the task type that would need to be performed when a planned task condition is met."
+                    Name="Task_Type" Nullable="true" XMLName="TaskType"/>
+                <Attribute ColumnName="PLANNED_DATE_TYPE"
+                    DataType="ID-40"
+                    Description="Identifies a date type."
+                    Name="Planned_Date_Type" Nullable="true" XMLName="PlannedDateType"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLTSK_CONDRSLT_PK" Name="YFS_PLANNED_TASK_COND_RSLT_PK">
+                <Attribute ColumnName="PLANNED_TASK_COND_RSLT_KEY" Name="Planned_Task_Cond_Rslt_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlannedTaskConditionResults"
+                    ChildName="Planned_Task_Cond_Rslt"
+                    ChildXMLName="PlannedTaskConditionResult"
+                    DeleteCascade="true"
+                    ForeignEntity="Planned_Task_Cond" IsParent="true"
+                    Name="Planned_Task_Cond" Type="Bidirectional" XMLName="PlannedTaskCondition">
+                    <Attribute Name="Planned_Task_Cond_Key" ParentName="Planned_Task_Cond_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table holds data for all planned tasks for an entity whose execution is being planned (e.g. Shipment)."
+            EntityType="TRANSACTION" ListXMLName="PlannedTasks"
+            Module="ysc" Name="Planned_Task" Prefix="YFS_"
+            TableName="YFS_PLANNED_TASK" TableType="TRANSACTION" XMLName="PlannedTask">
+            <Attributes>
+                <Attribute ColumnName="PLANNED_TASK_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_PLANNED_TASK table."
+                    Name="Planned_Task_Key" Nullable="false" XMLName="PlannedTaskKey"/>
+                <Attribute ColumnName="ENTITY_NAME" DataType="ID-40"
+                    Description="Identifies the entity being planned for."
+                    Name="Entity_Name" Nullable="true" XMLName="EntityName"/>
+                <Attribute ColumnName="ENTITY_KEY" DataType="Key"
+                    Description="Identifies a entity key being planned for."
+                    Name="Entity_Key" Nullable="true" XMLName="EntityKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    Description="Identifies the node for which planning is done."
+                    Name="Node_Key" Nullable="true" XMLName="Node"/>
+                <Attribute ColumnName="PLANNED_DATE_TYPE"
+                    DataType="ID-40"
+                    Description="Identifies a date type like Picking, Shipping."
+                    Name="Planned_Date_Type" Nullable="true" XMLName="PlannedDateType"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    Description="Identifies the resource pool from which capacity is being consumed."
+                    Name="Resource_Pool_Key" Nullable="true" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    Description="Identifies the task type."
+                    Name="Task_Type" Nullable="true" XMLName="TaskType"/>
+                <Attribute ColumnName="REQUIRED_CAPACITY"
+                    DataType="Capacity"
+                    Description="Indicates the capacity expected to be consumed by the pools."
+                    Name="Required_Capacity" Nullable="true" XMLName="RequiredCapacity"/>
+                <Attribute ColumnName="PLANNED_DATE" DataType="Date"
+                    Description="The date planned for consumption of the capacity. Defaulted to expected shipment date of the shipment when Entity name is YFS_SHIPMENT."
+                    Name="Planned_Date" Nullable="true" XMLName="PlannedDate"/>
+                <Attribute ColumnName="COMPLETED" DataType="Flag"
+                    Description="Indicates if this planned task is completed."
+                    Name="Completed" Nullable="true" XMLName="Completed"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PLAN_TASK_PK" Name="YFS_PLANNED_TASK_PK">
+                <Attribute ColumnName="PLANNED_TASK_KEY" Name="Planned_Task_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Unidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This entity lists all resource pools needed for completion of task of a particular task type."
+            EntityType="CONFIGURATION"
+            ListXMLName="TaskTypeResourcePools" Module="ysc"
+            Name="Task_Type_Res_Pool" Prefix="YFS_"
+            TableName="YFS_TASK_TYPE_RES_POOL" TableType="MASTER" XMLName="TaskTypeResourcePool">
+            <Attributes>
+                <Attribute ColumnName="TASK_TYPE_RES_POOL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_TASK_TYPE_RES_POOL table."
+                    Name="Task_Type_Res_Pool_Key" Nullable="false" XMLName="TaskTypeResourcePoolKey"/>
+                <Attribute ColumnName="RESOURCE_POOL_KEY" DataType="Key"
+                    Description="Identifies the resource pool responsible to complete tasks of a particular task type."
+                    Name="Resource_Pool_Key" Nullable="true" XMLName="ResourcePoolKey"/>
+                <Attribute ColumnName="TASK_TYPE_KEY" DataType="Key"
+                    Description="Identifies the task type."
+                    Name="Task_Type_Key" Nullable="true" XMLName="TaskTypeKey"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="TSKTYPE_RESPOOL_PK" Name="YFS_TASK_TYPE_RES_POOL_PK">
+                <Attribute ColumnName="TASK_TYPE_RES_POOL_KEY" Name="Task_Type_Res_Pool_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="TSK_TYP_RES_PL_I1"
+                    Name="YFS_TASK_TYPE_RES_POOL_I1" Unique="true">
+                    <Column Name="TASK_TYPE_KEY"/>
+                    <Column Name="RESOURCE_POOL_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="TaskTypeResourcePools"
+                    ChildName="Task_Type_Resource_Pool"
+                    ChildXMLName="TaskTypeResourcePool"
+                    DeleteCascade="true" ForeignEntity="Task_Type"
+                    IsParent="true" Name="Task_Type"
+                    Type="Bidirectional" XMLName="TaskType">
+                    <Attribute Name="Task_Type_Key" ParentName="Task_Type_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This table holds data for all dates for which demand planning is complete."
+            EntityType="TRANSACTION" ListXMLName="ConfirmDemandPlans"
+            Module="ysc" Name="Confirm_Demand_Plan" Prefix="YFS_"
+            TableName="YFS_CONFIRM_DEMAND_PLAN" TableType="TRANSACTION" XMLName="ConfirmDemandPlan">
+            <Attributes>
+                <Attribute ColumnName="CONFIRM_DEMAND_PLAN_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_CONFIRM_DEMAND_PLAN table."
+                    Name="Confirm_Demand_Plan_Key" Nullable="false" XMLName="ConfirmDemandPlanKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="NODE" DataType="OrgCode"
+                    Description="Organization for which this planning is done."
+                    IsOrgColumn="Y" Name="Organization_Code"
+                    Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="PLANNED_FOR_DATE" DataType="Date"
+                    Description="Date for which planning is done."
+                    Name="Planned_For_Date" Nullable="true" XMLName="PlannedForDate"/>
+                <Attribute ColumnName="PLANNED_ON_TIMESTAMP"
+                    DataType="TimeStamp"
+                    Description="Time stamp when planning was marked complete for a date."
+                    Name="Planned_On_Timestamp" Nullable="true" XMLName="PlannedOnTimestamp"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="Createprogid" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="Modifyprogid" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CNF_DMD_PLN_PK" Name="YFS_CONFIRM_DEMAND_PLAN_PK">
+                <Attribute ColumnName="CONFIRM_DEMAND_PLAN_KEY" Name="Confirm_Demand_Plan_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CNF_DMD_PLN_I1"
+                    Name="YFS_CONFIRM_DEMAND_PLAN_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="PLANNED_FOR_DATE"/>
+                </Index>
+            </Indices>
+        </Entity>
+    </Entities>
+</DBSchema>

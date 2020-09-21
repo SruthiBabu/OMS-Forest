@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<SupplyCollaboration Label="Supply_Collaboration" BaseDocumentType="0001" Icon="com/yantra/ycp/ui/icons/purchaseorder.gif">
+	<PermissionOnlyNode Label="Supply_Collaboration_Tree" PermissionId="YCPPM354">
+		<Actions Label="Actions" Icon="com/yantra/ycp/ui/icons/actionlist.gif">
+			<Action PermissionId="YCPPM354A01"/>
+			<Action PermissionId="YCPPM354A02"/>
+			<Action PermissionId="YCPPM354A03"/>
+			<Action PermissionId="YCPPM354A04"/>
+			<Action PermissionId="YCPPM354A06"/>
+		</Actions>
+	</PermissionOnlyNode>
+    <CommonConfiguration Label="Common_Configuration" Icon="com/yantra/ycp/ui/icons/ruleset.gif">
+        <Logistics Label="Logistics" Icon="com/yantra/ycp/ui/icons/logistics.gif">
+            <LogisticsAttributes Label="Logistics_Attributes" PermissionId="YSOMS000" FormName="YCPPM049" GroupName="Logistics" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/logistics.gif"/>
+            <DeliveryCodes Label="Delivery_Codes" PermissionId="YSOMS001" FormName="YCPPM052" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/deliverycode.gif"/>
+            <ShipmentModes Label="Shipment_Modes" PermissionId="YSOMS017" FormName="YCPPM051" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/shipmentmodes.gif"/>
+        </Logistics>
+        <Negotiation Label="Negotiation" Icon="com/yantra/ycp/ui/icons/negotiation.gif">
+            <NegotiationResponseActions Label="Response_Actions" PermissionId="YSOMS002" FormName="YCPPM172" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/responseactions.gif"/>
+            <NegotiationRejectReasons Label="Reject_Reasons" PermissionId="YSOMS003" FormName="YCPPM304" GroupName="Negotiation" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/rejectreasons.gif"/>
+		</Negotiation>
+        <Vendor Label="Vendor" Icon="com/yantra/ycp/ui/icons/vendor.gif">
+			<VendorClass Label="Vendor_Classifications" PermissionId="YSOMS035" FormName="YCPPM256" GroupName="Vendor" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/vendorclass.gif"/>
+			<Vendor Label="Vendor_Definitions" PermissionId="YSOMS030" FormName="YOMP0076" GroupName="Vendor" EntityName="Vendor" Icon="com/yantra/ycp/ui/icons/vendor.gif"/>
+			<ContactType Label="Contact_Types" PermissionId="YSOMD056" FormName="YOMP73005" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/contacttype.gif"/>
+		</Vendor>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+</CommonConfiguration>
+    <DocumentSpecificConfiguration Label="Document_Specific_Configuration" DocumentTypeSpecific="Y" Icon="com/yantra/ycp/ui/icons/documenttype.gif">
+        <Order Label="Order" Icon="com/yantra/ycp/ui/icons/purchaseorder.gif">
+            <OrderAttributes Label="Order_Attributes" PermissionId="YSOMS004" FormName="YCPPM305" GroupName="DocSpecific" EntityName="OrderAttributes" Icon="com/yantra/ycp/ui/icons/additionalattributes.gif"/>
+			<OrderAttributes Label="Order_Validation" PermissionId="YSOMS031" FormName="YCP00094" DisplayMode="Dialog" GroupName="DocSpecific" EntityName="OrderValidation" Icon="com/yantra/ycp/ui/icons/ordervalidation.gif"/>
+			<InstructionTypes Label="Instruction_Types" PermissionId="YSOMS005" FormName="YOMP80002" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/instructiontype.gif"/>
+			<ModificationReasons Label="Modification_Reasons" PermissionId="YSOMS006" FormName="YCPPM117" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/modificationreason.gif"/>
+			<BackorderReasons Label="Backorder_Reasons" PermissionId="YSOMS007" FormName="YCPPM116" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/backorderreason.gif"/>
+			<NotesReasonCode Label="Notes_Reason_Code" PermissionId="YSOMD057" FormName="YOMP73006" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/notesreason.gif" >
+			</NotesReasonCode>
+			<RelationshipType Label="Line_Relationship_Type" PermissionId="YSOMS040" FormName="YOMP0089" GroupName="DocSpecific" EntityName="LineRelationshipType" Icon="com/yantra/ycm/ui/icons/associations.gif"/>
+            <Fulfillment Label="Fulfillment" BaseProcessType="ORDER_FULFILLMENT" Icon="com/yantra/ycp/ui/icons/order.gif">
+				<OrderModification Label="Order_Modification" Icon="com/yantra/ycp/ui/icons/ordermodification.gif">
+					<OrderModificationTypes Label="Order_Modification_Types" PermissionId="YSOMS008" FormName="YCPPM505" GroupName="HubDocDefn" EntityName="StatusModificationType" Icon="com/yantra/ycp/ui/icons/statusmodificationrules.gif"/>
+					<OrderModificationGroups Label="Order_Status_Mod_Groups" PermissionId="YSOMS041" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+					<PricingIntegration Label="Modifications_Impacting_Pricing" PermissionId="YSOMS019" FormName="YCPPM119" GroupName="DocSpecific" EntityName="StatusModificationType" Icon="com/yantra/ycp/ui/icons/priceprogram.gif"/>
+					<AuditedModifications Label="Modifications_Requiring_Auditing" PermissionId="YSOMS020" FormName="YCPPM125" GroupName="HubDocDefn" EntityName="StatusModificationType" Icon="com/yantra/ycp/ui/icons/modifyadditionalattribute.gif"/>
+
+				</OrderModification>
+				<OrderHoldTypes Label="Hold_Types" PermissionId="YSOMS038" FormName="YOMP71002" GroupName="DocSpecific" BaseProcessTypeKey="ORDER_FULFILLMENT" EntityName="HoldType" Icon="com/yantra/ycp/ui/icons/holdtype.gif" />
+				<OrderTags Label="Order_Tags" PermissionId="YSOMD085" FormName="YOMP0400" GroupName="DocSpecific" BaseProcessTypeKey="ORDER_FULFILLMENT" EntityName="OrderTagDetermination" Icon="com/yantra/ycp/ui/icons/ordertypes.gif" />
+				<ProcessTypeDetails Label="Fulfillment_Process_Type_Details" PermissionId="YSOMS010" FormName="YCPWF072" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtype.gif"/>
+                <FulfillmentProcessModel Label="Fulfillment_Process_Model" PermissionId="YSOMS011" FormName="YCPWF001"  DisplayMode="Dock" GroupName="ExtendedProcessModel" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif">
+				</FulfillmentProcessModel>
+                <TransactionSpecificRules Label="Transaction_Specific_Rules" PermissionId="YSOMS012" FormName="YCPPM083" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/transactionrules.gif"/>
+                <StatusInventoryTypes Label="Status_Inventory_Types" PermissionId="YSOMS013" FormName="YCPWF101" GroupName="HubDocDefn" EntityName="StatusInventoryTypes" Icon="com/yantra/ycp/ui/icons/statusinventorytype.gif"/>
+                <OrderMonitoring Label="Order_Monitoring" PermissionId="YSOMS014" FormName="YCPWF100" GroupName="ExtendedDateType" EntityName="DateType" Icon="com/yantra/ycp/ui/icons/monitor.gif"/>
+                <MonitorEvents Label="Alert_Consolidation_Rules" PermissionId="YSOMS018" FormName="YCPWF090" GroupName="DocSpecific" EntityName="MonitorConsolidation" Icon="com/yantra/ycp/ui/icons/alertconsolidationgroup.gif" />
+				<TransactionDependencies Label="Transaction_Dependencies" PermissionId="YSOMS039" FormName="YCPWF116" GroupName="DocSpecific" EntityName="TransactionDependencyGroup" Icon="com/yantra/ycp/ui/icons/transactiondependencygrp.gif"/>
+            </Fulfillment>
+            <Logistics Label="Inbound_Logistics" BaseProcessType="ORDER_DELIVERY" Icon="com/yantra/ycp/ui/icons/logistics.gif">
+                <ShipmentModification Label="Shipment_Modification" Icon="com/yantra/ycp/ui/icons/ordermodification.gif">
+                    <ShipmentModificationTypes Label="Shipment_Modification_Types" PermissionId="YSOMS008" FormName="YCPPM505" GroupName="HubDocDefn" EntityName="StatusModificationType" Icon="com/yantra/ycp/ui/icons/statusmodificationrules.gif"/>
+					<ShipmentModificationGroups Label="Shipment_Status_Mod_Groups" PermissionId="YSOMS041" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+					<AuditedModifications Label="Shipment_Modifications_Requiring_Auditing" PermissionId="YSOMS021" FormName="YCPPM125" GroupName="HubDocDefn" EntityName="StatusModificationType" Icon="com/yantra/ycp/ui/icons/modifyadditionalattribute.gif"/>
+                </ShipmentModification>
+				<OrderHoldTypes Label="Hold_Types" PermissionId="YSOMS038" FormName="YOMP71005" GroupName="DocSpecific" BaseProcessTypeKey="ORDER_DELIVERY" EntityName="HoldType" Icon="com/yantra/ycp/ui/icons/holdtype.gif" />
+				<ProcessTypeDetails Label="Shipment_Process_Type_Details" PermissionId="YSOMS010" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtype.gif"/>
+                <ShipmentProcessModel Label="Shipment_Process_Model" PermissionId="YSOMS011" FormName="YCPWF001" GroupName="ExtendedProcessModel"  DisplayMode="Dock" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif"/>
+                <ShipmentMonitoring Label="Shipment_Monitoring" PermissionId="YSOMS014" FormName="YCPWF100" GroupName="ExtendedDateType" EntityName="DateType" Icon="com/yantra/ycp/ui/icons/monitor.gif"/>
+                <MonitorEvents Label="Alert_Consolidation_Rules" PermissionId="YSOMS018" FormName="YCPWF090" GroupName="DocSpecific" EntityName="MonitorConsolidation" Icon="com/yantra/ycp/ui/icons/alertconsolidationgroup.gif" />
+	            <ShippingPreference Label="Shipping_Preference" PermissionId="YSOMS025" FormName="OMP020" GroupName="DocSpecific" EntityName="ShippingPreference"  Icon="com/yantra/ycp/ui/icons/shipmentmodes.gif"/>
+			</Logistics>
+            <Receipt Label="Receipt" BaseProcessType="RECEIPT" Icon="com/yantra/ycp/ui/icons/receipts.gif">
+				<ReceiptModification Label="Receipt_Modification" Icon="com/yantra/ycp/ui/icons/ordermodification.gif">
+					<ReceiptModificationGroups Label="Receipt_Status_Mod_Groups" PermissionId="YSOMS041" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+				</ReceiptModification>
+				<ProcessTypeDetails Label="Receipt_Process_Type_Details" PermissionId="YSOMS010" FormName="YCPWF070" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtype.gif"/>
+                <ReceiptProcessModel Label="Receipt_Process_Model" PermissionId="YSOMS011" FormName="YCPWF001" GroupName="ExtendedProcessModel"  DisplayMode="Dock" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif"/>
+                <ReceiptSpecificRules Label="Receipt_Specific_Rules" PermissionId="YSOMS029" FormName="YCPPM801" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/returns.gif"/>
+				<ReceivingPreference Label="Receiving_Preference" PermissionId="YSOMS024" FormName="OMP002" GroupName="DocSpecific" EntityName="ReceivingPreference" Icon="com/yantra/ycp/ui/icons/returns.gif"/>
+	            <ReturnDisposition Label="Receiving_Disposition" PermissionId="YSOMS028" FormName="OMP016" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/returndisposition.gif"/>
+	            <ReceivingDiscrReasons Label="Receiving_Discr_Reasons" PermissionId="YSOMS027" FormName="YCPPM250" GroupName="DocSpecific" EntityName="ReceivingDiscrReason" Icon="com/yantra/ycp/ui/icons/returnreason.gif"/>
+            </Receipt>
+            <Negotiation Label="Negotiation" BaseProcessType="ORDER_NEGOTIATION" Icon="com/yantra/ycp/ui/icons/negotiation.gif">
+                <NegotiationModificationGroups Label="Negotiation_Status_Mod_Groups" PermissionId="YSOMS041" FormName="YCPPM696" GroupName="DocSpecific" EntityName="StatusModGroup" Icon="com/yantra/ycp/ui/icons/ordermodificationrules.gif" ImportAllAttributes="Y"/>
+				<ProcessTypeDetails Label="Negotiation_Process_Type_Details" PermissionId="YSOMS010" FormName="YCPWF071" GroupName="HubDocDefn" EntityName="ProcessType" Icon="com/yantra/ycp/ui/icons/processtype.gif"/>
+                <NegotiationProcessModel Label="Negotiation_Process_Model" PermissionId="YSOMS011" FormName="YCPWF001" DisplayMode="Dock" GroupName="ExtendedProcessModel" EntityName="Repository" Icon="com/yantra/ycp/ui/icons/repository.gif"/>
+			</Negotiation>
+
+            <Financials Label="Financials" Icon="com/yantra/ycp/ui/icons/financials.gif">
+				<PaymentTerms Label="Payment_Terms" PermissionId="YSOMS037" FormName="YCPPM302" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/paymentterms.gif"/>
+                <FinancialAttributes Label="Financial_Attributes" PermissionId="YSOMS015" FormName="YCPPM146" GroupName="DocSpecific" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/financialattributes.gif">
+					<Excludes>
+						<Exclude DocumentClassification="TemplateOrder" DocumentType="0004"/>
+					</Excludes>
+				</FinancialAttributes>
+            </Financials>
+            <PurgeCriteria Label="Purge_Criteria" PermissionId="YSOMS016" FormName="YCPPM660" GroupName="DocSpecific" EntityName="PurgeCriteria" SectionName="Document" Icon="com/yantra/ycp/ui/icons/purgecriteria.gif"/>
+			<PermissionOnlyNode Label="Process_Type_Specific_Configuration">
+					<ServiceDefinitions Label="Service_Definitions" PermissionId="YSOMS036"/>
+			</PermissionOnlyNode>
+        </Order>
+		<Roles>
+			<Role RoleKey="HUB"/>
+			<Role RoleKey="ENTERPRISE"/>
+		</Roles>
+    </DocumentSpecificConfiguration>
+</SupplyCollaboration>

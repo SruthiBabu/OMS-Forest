@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!--changeRelease Input XML-->
+<OrderRelease>
+    <Notes>
+        <Note/>
+    </Notes>
+    <!-- Note can only be added. Note cannot be modified or deleted by this API.-->
+    <OrderLines>
+        <!-- If Action = CANCEL or BACKORDER, then OrderLineKey, PrimeLineNo, SubLineNo, StatusQuantity, ChangeInQuantity, FromStatus and ToStatus are the only relevant attributes and Schedules is the only relevant child element.-->
+        <!-- AvailableReference and FirstAvailableDate are relevant attributes of OrderLine only if Action=BACKORDER at OrderLine. -->
+        <!-- If Action = CREATE, then OrderLineKey, StatusQuantity, ChangeInQuantity and FromStatus are irrelevant. OrderedQty is a REQUIRED attribute.-->
+        <!-- OrderLine element : If the attribute StatusQuantity has a nonvoid value in the input XML, we will operate with that value and ignore ChangeInQuantity. However, if StatusQuantity is not present in the input XML or the input XML contains StatusQuantity="" and the attribute ChangeInQuantity is present, we will operate with ChangeInQuantity, regardless of whether it has void or nonvoid value. If ChangeInQuantity is absent in the input xml and StatusQuantity="" in the input xml or StatusQuantity is absent from the xml, we assume StatusQuantity="0" and operate accordingly.  ChangeInQuantity must have positive numerical value if you want to add quantity, and negative numerical value if you want to cancel or backorder quantity. If ChangeInQuantity="0" or ChangeInQuantity="", no action will happen.-->
+        <OrderLine>
+            <OrderLineTranQuantity/>
+            <Schedules>
+                <Schedule>
+                    <ScheduleTranQuantity/>
+                </Schedule>
+            </Schedules>
+            <OrderHoldTypes>
+                <OrderHoldType/>
+            </OrderHoldTypes>
+            <Item/>
+            <!--Optional-->
+            <PersonInfoMarkFor/>
+            <LinePriceInfo/>
+            <LineCharges>
+                <LineCharge/>
+            </LineCharges>
+            <LineTaxes>
+                <LineTax/>
+            </LineTaxes>
+            <!--Optional-->
+            <KitLines>
+                <KitLine>
+                    <KitLineTranQuantity/>
+                </KitLine>
+            </KitLines>
+            <AdditionalAddresses>
+                <AdditionalAddress>
+                    <PersonInfo/>
+                </AdditionalAddress>
+            </AdditionalAddresses>
+            <Dependency/>
+        </OrderLine>
+    </OrderLines>
+    <PersonInfoShipTo/>
+    <PersonInfoMarkFor/>
+    <OrderDates>
+        <OrderDate/>
+    </OrderDates>
+</OrderRelease>

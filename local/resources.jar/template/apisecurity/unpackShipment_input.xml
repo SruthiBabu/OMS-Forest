@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<!-- Either ShipmentKey or ShipmentNo is required -->
+<!-- OverrideModificationRules is used to override the statuses of shipment that can be considered for unpack. This is determined using the modification_type SHIPMENT_UNPACK -->
+<Shipment>
+    <Containers>
+        <!-- Either ContainerNo or ShipmentContainerKey must be passed-->
+        <!-- Only one Container will be processed in one call to this API. All other Container nodes will be ignored. Read Javadocs for additional details. -->
+        <Container/>
+    </Containers>
+</Shipment>

@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2001, 2019  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project default="deployall" name="STERLING Integrator Ant Deployment">
+    
+    <!-- Project wide properties from sandbox.cfg -->
+    <property file="./properties/sandbox.cfg"/>
+
+    <condition property="sysproperty.key1" value="os400.security.properties">
+		<and>
+         	<isset property="OS400" />   
+			<equals arg1="${java.vm.name}" arg2="Classic VM"/>
+		</and>
+    </condition>   
+	<condition property="sysproperty.key1" value="java.security.properties" >
+         <isset property="OS400" />   
+    </condition>   
+    <condition property="sysproperty.value1"   
+               value="${JAVA_LIB_SECURITY_DIR}/java.security">   
+         <isset property="OS400" />   
+    </condition>   
+    <condition property="sysproperty.key2"   
+               value="java.ext.dirs">   
+         <isset property="OS400" />   
+    </condition>   
+    <condition property="sysproperty.value2"   
+               value="${JAVA_LIB_EXT_DIR}">   
+         <isset property="OS400" />   
+    </condition>   
+    
+    <condition property="sysproperty.key3"   
+               value="java.endorsed.dirs">   
+         <isset property="OS400" />   
+    </condition>   
+    <condition property="sysproperty.value3"   
+               value="${JAVA_LIB_ENDORSED_DIR}">   
+         <isset property="OS400" />   
+    </condition>   
+    <condition property="sysproperty.key4"   
+               value="os400.jit.nocompile.class">   
+         <isset property="OS400" />   
+    </condition>   
+    <condition property="sysproperty.value4"   
+               value="com/sterlingcommerce/woodstock/services/sapsuite/common/InstanceParameter">   
+         <isset property="OS400" />   
+    </condition>   
+    
+    <condition property="sysproperty.key5"   
+               value="java.version">   
+         <isset property="OS400" />   
+    </condition>   
+        <condition property="sysproperty.value5"   
+               value="${JAVA_VERSION}">   
+         <isset property="OS400" />   
+    </condition>   
+    
+    <condition property="global.datatypes.exist">
+	<and>
+		<available file="${INSTALL_DIR}/extensions/global/etc/datatypes.xml" type="file"/>
+	</and>
+    </condition>
+    <condition property="deltalog4jconfigdir.exist">
+    	<available file="${INSTALL_DIR}/extensions/global/resources/deltalog4jconfig" type="dir"/>
+    </condition> 
+	<condition property="skipxapimerge">
+		<or>
+			<equals arg1="${SKIPXAPIMERGE}" arg2="true" />
+			<equals arg1="${sandbox.SKIPXAPIMERGE}" arg2="true" />
+		</or>
+	</condition>
+	<condition property="nodb.mode">
+		<or>
+			<equals arg1="${REINIT_DB}" arg2="false" />
+			<equals arg1="${DB_VENDOR}" arg2="NODB" />
+		</or>
+	</condition>
+    <path id="foreach_classpath">
+       <fileset dir="${INSTALL_DIR}/jar">
+          <include name="platform_afc/**/platform_afc.jar"/>
+          <include name="install_foundation.jar"/>
+       </fileset>
+    </path>
+	
+    <available classname="com.yantra.tools.ant.ForEach" classpathref="foreach_classpath" property="foreach.available"/>
+
+	<import file="AFCTasks.xml" />
+	<import file="afcutils.xml" />
+ 
+    <!-- Custom task definition -->
+    <taskdef name="mungefiles" classname="com.sterlingcommerce.woodstock.install.deployer.AntMunger"/>
+    <taskdef name="appxml" classname="com.sterlingcommerce.woodstock.install.deployer.AntMakeAppXML"/>
+    <taskdef name="configwlip" classname="com.sterlingcommerce.woodstock.install.deployer.AntConfigIP"/>
+    <taskdef name="iterate-dir" classname="com.sterlingcommerce.woodstock.install.deployer.AntTargetDirIterator"/>
+    <taskdef name="iterate-file" classname="com.sterlingcommerce.woodstock.install.deployer.AntTargetFileIterator"/>
+    <taskdef name="listFileAndExport" classname="com.sterlingcommerce.woodstock.install.deployer.AntFileNamesExporter"/>
+
+    <typedef name="config" classname="com.sterlingcommerce.woodstock.install.deployer.AntConfigElement"/>
+    
+    <!-- Common Tasks --> 
+    <!-- Remove files created by this build -->
+<!--
+    <target name="checkclean">
+        <condition property="containerdir.exist">
+            <available dir="${PROG_DIR}"/>
+        </condition> 
+    </target>
+-->
+
+    <target name="clean" if="containerdir.exist"> 
+        <delete>
+            <fileset dir="${PROG_DIR}">
+                <patternset>
+                    <include name="woodstock.ear"/>
+                    <include name="application.xml"/>
+                </patternset>
+            </fileset>
+        </delete>
+    </target>
+    <target name="chkcontainer">
+	<available file="${PROG_DIR}" type="dir" property="prog.dir.exists"/>
+	<condition property="noapp.deployment">
+		<and>
+			<istrue value="${prog.dir.exists}"/>
+			<istrue value="${NOAPP}"/>
+		</and>
+	</condition>
+    </target>
+    <target name="createcontainer" if="prog.dir.exists">
+        <mkdir dir="${PROG_DIR}" />
+    </target>
+
+    <target name="init.foreach" if="foreach.available">
+      <taskdef name="foreach" classname="com.yantra.tools.ant.ForEach">
+        <classpath refid="foreach_classpath"/>
+      </taskdef>
+    </target>
+
+    <!-- Add initialization code if required -->    
+
+    <target name="init" depends="chkcontainer,clean, createcontainer">
+    </target>
+
+    <!-- Munge all files with a .in extension -->
+    <target name="munge" depends="init.foreach" unless="WEBSPHEREZOS">
+	<property name="ant.file" location="${INSTALL_DIR}/properties/deployer.xml"/>
+        <mungefiles basedir="${INSTALL_DIR}">
+	    <config configFile="${INSTALL_DIR}/properties/sandbox.cfg"/>
+	    <config configFile="${INSTALL_DIR}/properties/ports"/>
+	    <config configFile="${INSTALL_DIR}/properties/apservsetup"/>
+	    <config configFile="${INSTALL_DIR}/properties/tuning.properties"/>
+        <!-- dirs ending with this pattern, will be skipped -->
+	    <config excludeDir="uninstall"/>
+	    <config excludeDir="installed_data"/>
+	    <config excludeDir="installed_tests"/>
+	    <config excludeFile="java_wrapper.sh.in"/>
+	    <config excludeFile="deployer.sh.in"/>
+	</mungefiles>
+	<antcall target="dochmod" /> 
+    </target>
+
+      <target name="dochmod" >
+        	<!-- maxparallel limits # of files pumped into chmod command -->
+        	<!-- unlimited is causing chmod errors on iseries -->
+                <chmod maxparallel="100" perm="ugo+rx" >
+                        <fileset dir="${INSTALL_DIR}/" casesensitive="yes">
+                                <include name="**/*.sh"/>
+                                <exclude name="uninstall/*"/>
+                                <exclude name="installed_data/*"/>
+                                <exclude name="installed_tests/*"/>
+                                <exclude name="repository/*"/>
+                                <exclude name="xapidocs/*"/>
+				<exclude name="documents/*"/>
+				<exclude name="tmp/*"/>
+				<exclude name="jar/*"/>
+				<exclude name="properties/*"/>
+				<exclude name="**/backup/*"/>
+				<exclude name="**/backups/*"/>
+                        </fileset>
+                </chmod>
+      </target >
+	<target name="skip-entity-config">
+		<property name="skip-entity-config" value="true" />
+	</target>
+
+	<target name="entitydeployer" depends="skip-entity-config,call-resourcejar" >
+		<mkdir dir="${INSTALL_DIR}/repository/entitybuild" />
+		<mkdir dir="${INSTALL_DIR}/repository/entitybuild/etc" />
+		<mkdir dir="${INSTALL_DIR}/repository/entitybuild/entity" />
+		<loadproperties srcFile="${INSTALL_DIR}/properties/jdbc.properties" />
+		
+		<!-- Ant does not support ${jdbc.${DB_POOL}.driver}, so do this workaround -->
+		<loadproperties srcFile="${INSTALL_DIR}/properties/jdbc.properties">
+			<filterchain>
+				<tokenfilter><containsstring contains="${DB_POOL}."/></tokenfilter>
+				<replacestring from="${DB_POOL}." to="DB_POOL." />
+				<prefixlines prefix="jdbc." />
+			</filterchain>
+		</loadproperties>
+
+		<condition property="colonyxml" value="UNDEF_VALUE">
+			<not>
+				<isset property="colonyxml"/>
+			</not>
+		</condition>
+		<condition property="colonyversion" value="UNDEF_VALUE">
+			<not>
+				<isset property="colonyversion"/>
+			</not>
+		</condition>
+		
+		<AFCfail message="Unable to find {1} properties" unless="jdbc.DB_POOL.url">
+			<arg value="${DB_POOL}"/>
+		</AFCfail>		
+        <AFCdebug property="INSTALL_DIR" />      
+		  
+		<condition property="entitydeployer.target" value="applySqlFiles">
+			<istrue value="${applysqlonly}" />
+		</condition>
+		<condition property="entitydeployer.target" value="all" else="all_noApplySQL">
+			<or>
+				<not><isset property="applysql"/></not>
+				<istrue value="${applysql}" />
+			</or>
+		</condition>
+		
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${INSTALL_DIR}/jar/bootstrapper.jar" >
+                <env key="VENDORJARS" value=""/>
+                <env key="CLASSPATH" value=""/>
+
+		<arg value="-f" />
+		<arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+		<arg value="-class" />
+		<arg value="com.sterlingcommerce.woodstock.install.deployer.AntDeployer" />
+        <arg value="-invokeargs" />
+		<arg value="-x"/>
+		<arg value="${INSTALL_DIR}/properties/entityDeployer.xml" />
+		<arg value="-t" />
+		<arg value="${entitydeployer.target}" />
+		<arg value="-b" />
+		<arg value="${INSTALL_DIR}/repository/entitybuild" />
+		<arg value="-f" />
+		<arg value="${LOG_DIR}/entityDeployer.log" />
+		<sysproperty key="java.io.tmpdir" value="${SYSTMP_DIR}"/>
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+		<sysproperty key="dir" value="${SYSTMP_DIR}/entitybuild"/>
+		<sysproperty key="dir.jarTarget" value="${INSTALL_DIR}/jar/entities"/>
+		<sysproperty key="dir.lib" value="${INSTALL_DIR}/jar"/>
+		<sysproperty key="db.vendor" value="${jdbc.DB_POOL.dbvendor}"/>
+		<sysproperty key="db.driver" value="${jdbc.DB_POOL.driver}"/>
+		<sysproperty key="db.url" value="${jdbc.DB_POOL.url}"/>
+		<sysproperty key="db.userid" value="${jdbc.DB_POOL.user}"/>
+		<sysproperty key="db.name" value="${jdbc.DB_POOL.dbname}"/>
+		<sysproperty key="db.password" value="${jdbc.DB_POOL.password}"/>
+		<sysproperty key="db.no_dbverify" value="${SKIP_DBVERIFY}"/>
+		<sysproperty key="db.no_dbclassgen" value="${SKIP_DBCLASSGEN}"/>
+		<sysproperty key="DBVERIFY_INVOKED_FROM_SCRIPT" value="${DBVERIFY_INVOKED_FROM_SCRIPT}"/>
+		<sysproperty key="APPLYDDL" value="${APPLYDDL}"/>
+		<sysproperty key="INSTALL_DIR" value="${INSTALL_DIR}"/>
+		<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+		<sysproperty key="colonyxml" value="${colonyxml}"/>
+		<sysproperty key="colonyversion" value="${colonyversion}"/>
+		<sysproperty key="jar.file" value="entities.jar"/>
+		<sysproperty key="dir.install" value="${INSTALL_DIR}"/>
+		<sysproperty key="dir.properties" value="${INSTALL_DIR}/properties"/>	
+		<sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+		
+        </java>
+		<property name="run-entity-index-config" value="true" />
+		<ant antfile="${INSTALL_DIR}/properties/deployer.xml" target="call-resourcejargen" inheritRefs="true"/>
+		<ant antfile="${INSTALL_DIR}/properties/deployer.xml" target="call-indexconfig-gen" inheritRefs="true"/>
+	</target>
+
+	<target name="-check-resjar-dirs" >
+            <condition property="build-resource-jar">
+                <and>
+                    <available file="${INSTALL_DIR}/resources"/>
+                    <available file="${INSTALL_DIR}/repository" />
+                	<not><isset property="skipxapimerge"/></not>
+                </and>
+            </condition>
+        </target>
+
+	<target name="copy-global-datatypes-file" if="global.datatypes.exist">
+		<copy todir="${INSTALL_DIR}/repository/xapi/template/merged/api/extn" flatten="true">
+			<fileset dir="${INSTALL_DIR}">
+		  		<include name="extensions/**/etc/datatypes.xml"/>
+			</fileset>
+	    </copy>
+		<move file="${INSTALL_DIR}/repository/xapi/template/merged/api/extn/datatypes.xml" tofile="${INSTALL_DIR}/repository/xapi/template/merged/api/extn/YFSDataTypesGlobal.xml"/>
+	</target>
+
+	<!-- Create and install resources.jar -->	
+    <target name="call-resourcejargen" unless="applysqlonly">
+		<property name="ant.file" location="${INSTALL_DIR}/properties/deployer.xml"/>
+		<antcall target="resourcejargen" /> 
+	</target>
+	<target name="call-resourcejar" unless="applysqlonly">
+		<property name="ant.file" location="${INSTALL_DIR}/properties/deployer.xml"/>
+		<antcall target="resourcejar" /> 
+	</target>
+	<target name="resourcejar" depends="resourcejargen,call-indexconfig-gen">
+	</target>
+	<target name="resourcejargen" if="build-resource-jar" depends="-check-resjar-dirs,init-afc-version,copy-global-datatypes-file,gen-cass-schema-filelist,merge-log4jconfig">
+		<mkdir dir="${INSTALL_DIR}/extensions" />
+		<mkdir dir="${SYSTMP_DIR}/resourcetmp/resources" />
+		<mkdir dir="${SYSTMP_DIR}/resourcetmp/entities/upgradeextensions"/>
+		<copy todir="${SYSTMP_DIR}/resourcetmp/entities/upgradeextensions" flatten="true">
+			<fileset dir="${INSTALL_DIR}/">
+		  		<include name="extensions/**/entity/*.xml"/>
+		  		<include name="extensions/**/entities/*.xml"/>
+			</fileset>
+	    </copy>
+		<mkdir dir="${SYSTMP_DIR}/resourcetmp/resources" />
+		<copy todir="${SYSTMP_DIR}/resourcetmp/resources" >
+			<fileset dir="${INSTALL_DIR}">
+		  		<include name="extensions/*/resources/**/*"/>
+		  		<exclude name="extensions/*/resources/deltalog4jconfig/**/*"/>
+			</fileset>
+			<regexpmapper from="^extensions/.*?/resources/(.*)$" to="\1" handledirsep="true" casesensitive="false"/>
+		</copy>
+		
+		<listFileAndExport childTargetName="createlistfile" propName="overrides" >
+			<fileset dir="${INSTALL_DIR}/repository/xapi/template/merged/mobilescreens/overrides" includes="*.xml"/>
+		</listFileAndExport>
+		
+
+		<jar destfile="${SYSTMP_DIR}/resources.jar">
+			<zipfileset dir="${SYSTMP_DIR}/resourcetmp/entities" prefix="database/entities/extensions" erroronmissingdir="false">
+				<include name="*.xml"/>
+			</zipfileset>
+			<zipfileset dir="${SYSTMP_DIR}/resourcetmp/entities/upgradeextensions" prefix="database/entities/upgradeextensions" erroronmissingdir="false">
+				<include name="*.xml"/>
+			</zipfileset>
+			<zipfileset dir="${INSTALL_DIR}/extensions" includes="*/template/**/*" erroronmissingdir="false"/>
+			<zipfileset dir="${INSTALL_DIR}/resources" prefix="resources" erroronmissingdir="false">
+				<exclude name="extn/extnbundle.properties"/>
+				<exclude name="**/*.in"/>
+				<exclude name="**/backups/*"/>
+				<exclude name="**/backups"/>
+			</zipfileset>
+			<zipfileset dir="${SYSTMP_DIR}/resourcetmp/resources" prefix="resources/extn" erroronmissingdir="false">
+				<exclude name="**/*.in"/>
+				<exclude name="**/backups/*"/>
+				<exclude name="**/backups"/>
+			</zipfileset>
+			<zipfileset dir="${INSTALL_DIR}/repository/xapi/template/merged" prefix="template" erroronmissingdir="false"/>
+			<zipfileset dir="${INSTALL_DIR}/repository/entity" prefix="database/entities" erroronmissingdir="false">
+				<exclude name="entities.txt" />
+			</zipfileset>
+			<zipfileset dir="${INSTALL_DIR}/repository/entity" prefix="database" includes="entities.txt" erroronmissingdir="false"/>
+			<zipfileset dir="${INSTALL_DIR}/repository/datatypes" includes="datatypes.xml" fullpath="template/api/YFSDataTypes.xml" erroronmissingdir="false" />
+			<zipfileset dir="${INSTALL_DIR}/repository/datatypes" includes="extn/datatypes.xml" fullpath="template/api/extn/YFSDataTypes.xml" erroronmissingdir="false" />
+			<zipfileset dir="${INSTALL_DIR}/repository/xapi/template/merged/api" includes="extn/YFSDataTypesGlobal.xml"/>
+			<zipfileset dir="${INSTALL_DIR}" includes="database/cdt/**/*" erroronmissingdir="false"/>
+		</jar>
+		<jar destfile="${SYSTMP_DIR}/resources.jar" update="true">
+			<zipfileset dir="${SYSTMP_DIR}/mergedlog4jconfig" includes="*" prefix="resources" erroronmissingdir="false"/>
+		</jar>
+        <property name="ant.file" location="${INSTALL_DIR}/properties/deployer.xml"/>
+		<antcall target="-check-update-extnbundle" />
+			
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${INSTALL_DIR}/jar/bootstrapper.jar" >
+            <env key="VENDORJARS" value=""/>
+            <env key="CLASSPATH" value=""/>
+
+            <arg value="-f" />
+            <arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.sterlingcommerce.woodstock.install.utils.Install3rdParty"/>
+            <arg value="-invokeargs" />
+            <arg value="${INSTALL_DIR}/properties/sandbox.cfg"/>
+            <arg value="platform"/>
+            <arg value="${afc-version}"/>
+            <arg value="-j"/>
+            <arg value="${SYSTMP_DIR}/resources.jar"/>
+            <sysproperty key="vendor" value="shell"/>
+            <sysproperty key="vendorFile" value="${INSTALL_DIR}/properties/servers.properties"/>
+			<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+        </java>
+        <delete dir="${SYSTMP_DIR}/resourcetmp" />
+        <delete file="${SYSTMP_DIR}/resources.jar" />
+	</target>
+    
+    <target name="-check-extnbundle">
+		<condition property="extnbundle-extn-exists">
+            <available file="${SYSTMP_DIR}/resourcetmp/resources/extnbundle.properties"/>
+        </condition>
+	</target>
+    
+    <target name="-check-update-extnbundle" unless="extnbundle-extn-exists" depends="-check-extnbundle">
+		<jar destfile="${SYSTMP_DIR}/resources.jar" update="true">
+			<zipfileset dir="${INSTALL_DIR}/resources" prefix="resources" erroronmissingdir="false">
+				<include name="extn/extnbundle.properties"/>
+			</zipfileset>
+		</jar>
+	</target>
+	
+	<target name="call-indexconfig-gen" depends="init-afc-version,-check-indexconfig-gen,-generate-entity-indexconfig"/>	
+	
+	<target name="-check-indexconfig-gen">	
+		<condition property="indexconfig-gen">
+			<and>
+				<!-- skip if coming from dbverify since we can't know here if
+				DDLs will be applied or not, and hence the table will exist or not -->
+				<not>
+					<istrue value="${DBVERIFY_INVOKED_FROM_SCRIPT}"/>
+				</not>
+				
+				<available file="${INSTALL_DIR}/jar/platform/${afc-version}/entities.jar"/>
+				<isfalse value="${NO_DBVERIFY}" />
+				<or>
+					<and>
+						<isfalse value="${skip-entity-config}" />
+					</and>
+					<and>
+						<istrue value="${skip-entity-config}" />
+						<istrue value="${run-entity-index-config}" />
+					</and>
+				</or>
+				<not><isset property="${nodb.mode}"/></not>
+			</and>
+        </condition>
+	</target>
+	<target name="-generate-entity-indexconfig" if="indexconfig-gen">
+		<ant antfile="${INSTALL_DIR}/properties/deployer.xml" target="generate-entity-indexconfig" />
+	</target>
+	<target name="generate-entity-indexconfig" depends="init-afc-version">
+		<echo message="Generating Search Index Configuration"/>
+		<java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${INSTALL_DIR}/jar/bootstrapper.jar"
+              >
+			<jvmarg line="-XX:MaxPermSize=512m"/>
+			<arg value="-f" />
+            <arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.index.EntityIndexConfigGenerator" />            
+            <arg value="-invokeargs" />
+			<arg value="-ENTITIES_JAR"/>
+			<arg value="${INSTALL_DIR}/jar/platform/${afc-version}/entities.jar"/>
+			<sysproperty key="vendor" value="shell"/>
+            <sysproperty key="vendorFile" value="${INSTALL_DIR}/properties/servers.properties"/>
+			<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+        </java>
+	</target>
+   	<target name="init-afc-version">
+        <condition property="preinstall-versions-exists" value="true" else="false">
+            <available file="${INSTALL_DIR}/repository/scripts/platform_afc/app.versions"/>
+        </condition>
+
+        <property file="${INSTALL_DIR}/repository/scripts/platform_afc/app.versions" prefix="afcversion"/>
+
+        <condition property="afc-version" value="${afcversion.LIC_PROD_VERSION}" else="${PLATFORM_AFC_LIC_PROD_VERSION}">
+            <equals arg1="${preinstall-versions-exists}" arg2="true" casesensitive="false" trim="true"/>
+        </condition>
+      </target>
+	<target name="gen-cass-schema-filelist">
+		<createfilelist fileset.location="${INSTALL_DIR}/resources/datastores/cassandra_schema" listfile.name="schemas.txt" filters="**/*.xml" />
+	</target>
+	<target name="merge-log4jconfig" if="deltalog4jconfigdir.exist">    
+		<echo message="Merging log4jconfig if any.."/>    
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${SYSTMP_DIR}" includes="mergedlog4jconfig/**/*" />
+		</delete>
+		<mkdir dir="${SYSTMP_DIR}/mergedlog4jconfig"/>
+		<java fork="true" failonerror="true" classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" classpath="${INSTALL_DIR}/jar/bootstrapper.jar">
+			<arg value="-f" />
+			<arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+			<arg value="-p"/>
+			<arg value="${INSTALL_DIR}"/>
+			<arg value="-class" />
+			<arg value="com.yantra.yfc.util.rtbuild.Log4jConfigMerge" />            
+			<arg value="-invokeargs" />
+	        <sysproperty key="vendor" value="shell"/>
+	        <sysproperty key="vendorFile" value="${INSTALL_DIR}/properties/servers.properties"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+			<arg value="-RT"/>
+			<arg value="${INSTALL_DIR}"/>
+			<arg value="-OUT"/>
+			<arg value="${SYSTMP_DIR}/mergedlog4jconfig"/>
+		</java>
+	</target>
+
+    <target name="singlefilemunge" >
+	<mungefiles basedir="${INSTALL_DIR}/properties">
+		<config configFile="${INSTALL_DIR}/properties/sandbox.cfg"/>
+		<config configFile="${INSTALL_DIR}/properties/ports"/>
+		<config configFile="${INSTALL_DIR}/properties/apservsetup"/>
+		<config configFile="${INSTALL_DIR}/properties/tuning.properties"/>
+		<fileset dir="${INSTALL_DIR}/properties">
+			<include name="${filetobemunged}"/>
+		</fileset>
+	</mungefiles>
+	</target>
+	
+	<property name="apisec" location="${INSTALL_DIR}/repository/xapi/template/merged/apisecurity" />
+	<property name="cssdir" location="${INSTALL_DIR}/repository/eardata/platform/war/css" />
+	<property name="entities" location="${INSTALL_DIR}/repository/entity" />
+	<property name="datatypexml" location="${INSTALL_DIR}/repository/datatypes/datatypes.xml" />
+	<property name="output" location="${INSTALL_DIR}/xapidocs" />
+	<property name="jdoc" location="${output}/api_javadocs" />
+	<property name="factout" location="${INSTALL_DIR}/repository/xapi/template/merged/resource" />
+	<property name="linkout" location="${dir.install}/repository/xapi/template/merged/resource" />
+	<property name="indexdataout" location="${INSTALL_DIR}/repository/xapi/template/merged/resource" />
+
+	
+	<property name="debug" value="on" />
+	<property name="ANT_MEM_ARGS_DEFAULT" value="-Xmx768m"/>
+
+
+<target name="updateERD" depends="-init_ant_opts,docmergemain,xapideployer " />
+
+ <target name="docmergemain">
+    	<property name="loglevel" value="INFO" />
+
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${INSTALL_DIR}/jar/bootstrapper.jar"
+              >
+	      <jvmarg line="${ANT_OPT_TO_USE}"/>
+            <arg value="-f" />
+            <arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.docmerge.DocMergerMain" />            
+            <arg value="-invokeargs" />
+
+		<sysproperty key="DisableNativeCopy" value="Y"/>
+		<arg value="-DOCSOURCES" />
+		<arg value="${INSTALL_DIR}/repository/xapi/documentation/source" />
+		<arg value="-OUTDIR" />
+		<arg value="${output}" />
+		<arg value="-ED" />
+		<arg value="${entities}" />
+		<arg value="-DT" />
+		<arg value="${datatypexml}" />
+		<arg value="-MERGEERD" />
+		<arg value="Y" />
+		<arg value="-LOGLEVEL" />
+		<arg value="${loglevel}" />
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+		<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+        </java>
+    </target>
+
+	 <target name="-init_ant_opts" >
+                   
+			<condition property="is_ant_opts_set" value="true" >
+			<isset property="env.ANT_HEAP_FLAGS"/>
+           </condition>
+
+            <AFCecho message="Is ANT_OPTS set in environmemt : {1}">
+				<arg value="${is_ant_opts_set}"/>
+			</AFCecho>           
+
+           <condition property="ANT_OPT_TO_USE" value="${ANT_MEM_ARGS_DEFAULT}" >
+				  <not><isset property="is_ant_opts_set"/></not>
+		   </condition>
+
+           <condition property="ANT_OPT_TO_USE" value="${env.ANT_HEAP_FLAGS}" >
+				   <isset property="is_ant_opts_set"/>
+		   </condition>			
+
+           <AFCecho message="Using ANT_OPTS : {1}">
+				<arg value="${ANT_OPT_TO_USE}"/>
+			</AFCecho>
+   </target>
+
+
+	<target name="xapideployer">
+		<mkdir dir="${jdoc}/XSD/HTML/CSS" />
+        <copy todir="${jdoc}/XSD/HTML/CSS">
+            <fileset dir="${cssdir}" />
+        </copy>
+
+		<mkdir dir="${jdoc}/dtd" />
+		<mkdir dir="${jdoc}/XML" />
+		<mkdir dir="${jdoc}/XSD" />
+		<mkdir dir="${jdoc}/XSD/HTML" />
+		<mkdir dir="${output}/xmlstruct" />
+		<mkdir dir="${output}/templateXML" />
+		<mkdir dir="${apisec}" />
+        
+        <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${INSTALL_DIR}/jar/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.xsdgen.XSDGenerator" />            
+            <arg value="-invokeargs" />
+        
+		<arg value="-EN"/>
+		<arg value="${entities}"/>
+		<arg value="-DT"/>
+		<arg value="${datatypexml}"/>
+		<arg value="-IN"/>
+		<arg value="${output}/xmlstruct"/>
+		<arg value="-OU"/>
+		<arg value="${jdoc}/dtd"/>
+		<arg value="-EX"/>
+		<arg value="_dtd.txt"/>
+		<arg value="-SA"/>
+		<arg value="${jdoc}/XML"/>
+		<arg value="-FACTOUT"/>
+		<arg value="${factout}" />
+    	<arg value="-LINKOUT"/>
+    	<arg value="${linkout}" />
+		<arg value="-INDEXOUT"/>
+		<arg value="${indexdataout}" />
+		<arg value="-SE"/>
+		<arg value="${apisec}"/>
+		<arg value="-TP"/>
+		<arg value="${output}/templateXML"/>
+		<arg value="-XSD"/>
+		<arg value="${jdoc}/XSD"/>
+		<arg value="-HTMLOUTPUTDIR"/>
+		<arg value="${jdoc}/XSD/HTML"/>
+		<sysproperty key="${sysproperty.key1}" value="${sysproperty.value1}"/>
+		<sysproperty key="${sysproperty.key2}" value="${sysproperty.value2}"/>
+		<sysproperty key="${sysproperty.key3}" value="${sysproperty.value3}"/>
+		<sysproperty key="${sysproperty.key4}" value="${sysproperty.value4}"/>
+		<sysproperty key="${sysproperty.key5}" value="${sysproperty.value5}"/>
+		<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+        </java>
+	</target>
+
+	<target name="loadProperties" unless="nodb.mode">	
+
+	 <java fork="true" failonerror="true"
+              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+              classpath="${INSTALL_DIR}/jar/bootstrapper.jar"
+              >
+            <arg value="-f" />
+            <arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+            <arg value="-class" />
+            <arg value="com.yantra.tools.property.converter.PropertyConverter" />            
+            <arg value="-invokeargs" />
+	    <sysproperty key="vendor" value="shell"/>
+	    <sysproperty key="vendorFile" value="${INSTALL_DIR}/properties/servers.properties"/>
+	    <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+		<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+        <arg value="-inputDir"/>
+	    <arg value="${INSTALL_DIR}/properties"/>
+	    <arg value="-validateDBPropMgmt"/>
+	    <arg value="N"/>
+		</java>
+    </target>
+	
+  <target name="callExtension">
+      <AFCecho message="Calling deployer extension: {1}">
+		<arg value="${deployerExtFile}"/>
+	  </AFCecho>
+     <ant antfile="${INSTALL_DIR}/properties/${deployerExtFile}" target="deployExt" inheritRefs="true"/>
+  </target>
+
+  <target name="handleExtensions" if="foreach.available" unless="skipxapimerge">
+       <AFCecho message="Processing any deployer extension files."/>
+       <foreach propertyname="deployerExtFile" targetname="callExtension">
+           <fileset dir="${INSTALL_DIR}/properties">
+               <include name="deployer_*_ext"/>
+           </fileset>
+       </foreach>
+  </target>
+
+  <!-- START: hack for deleting entries from *dynamicclasspath.cfg for the jars which need to be deleted in FixPack using deletevendorjars-->
+	<condition property="platform_suffix" value="cmd" else="sh" >
+		<os family="windows"/>
+	</condition>
+
+	<target name="-setup-files" if="uninstalldatapresent">
+		<copy file="${dir.install}/bin/java_wrapper.${platform_suffix}.in" tofile="${dir.install}/bin/java_wrapper.temp.${platform_suffix}.in"/>
+		<path id="munge.path" >
+			<fileset dir="${dir.install}">
+							<include name="**/*.in"/>
+							<exclude name="installed_data/**"/>
+							<exclude name="database/**"/>
+							<exclude name="dbjar/**"/>
+							<exclude name="extensions/**"/>
+							<exclude name="external_deployments/**"/>
+							<exclude name="xapidocs/**"/>
+							<exclude name="tmp/**"/>
+							<exclude name="idx/**"/>
+							<exclude name="middleware/**"/>
+							<exclude name="jdk/**"/>
+							<exclude name="lib/**"/>
+							<exclude name="packages/**"/>	
+							<exclude name="lib/**"/>
+							<exclude name="logs/**"/>
+						</fileset>
+		</path>
+		<pathconvert property="munge.path.converted" pathsep="${line.separator}">
+			<path refid="munge.path"/>
+		</pathconvert>
+
+		<echo file="${dir.install}/bin/inppbatch" message="${munge.path.converted}"/>
+		<replaceregexp file="${dir.install}/bin/inppbatch" match="(.*).in"  replace="\1.in \1" byline="true"/>
+
+		<java classname="driver.inpp" dir="${dir.install}/bin" fork="true" >
+			<classpath>
+				<pathelement location="${dir.install}/jar/install_foundation.jar"/>
+				<pathelement location="${dir.install}/jar/platform_baseutils.jar"/>
+				<pathelement location="${dir.install}/jar/icu4j/${sandbox.ICU4J_VERSION}/icu4j-${sandbox.ICU4J_VERSION}.jar"/>
+			</classpath>
+			<arg line="exclude=java_wrapper.${platform_suffix}.in"/>
+			<arg line="file=${dir.install}/bin/inppconfig"/>
+			<arg line="backup_path=${dir.install}"/>
+			<arg line="backup_dirs=bin,properties"/>
+		</java>
+		<move file="${dir.install}/bin/java_wrapper.temp.${platform_suffix}.in" tofile="${dir.install}/bin/java_wrapper.${platform_suffix}.in" />
+		<!-- TODO:  should we delete the inppbatch file (necessary?)-->
+	</target>
+
+
+  <target name="uninstallvendorjars" depends="init.foreach" if="foreach.available">
+	  <property name="ant.file" location="${INSTALL_DIR}/properties/deployer.xml"/>
+       <condition property="fileavailable" value="true">
+            <available file="${INSTALL_DIR}/properties/uninstallvendorjars_temp" type="file"/>
+       </condition>
+
+        <antcall target="uninstalljars" />
+  </target>
+
+  <target name="uninstalljars" if="fileavailable" >
+       <AFCecho message="trying to uninstall vendor jars in Fix pack.."/>
+       <loadfile property="filestouninstall" srcfile="${INSTALL_DIR}/properties/uninstallvendorjars_temp"/>
+
+        <condition property="uninstalldatapresent" value="true">
+            <and>
+                <isset property="filestouninstall" />
+                <not>
+			        <equals arg1="${filestouninstall}" arg2="" casesensitive="false" trim="true" />
+                </not>
+            </and>
+        </condition>
+
+        <AFCecho message="value of uninstalldatapresent : ${uninstalldatapresent}" />
+
+
+	   
+       <foreach list="${filestouninstall}" delimiter="${line.separator}" propertyname="linecommand" targetname="uninstalljar">
+       </foreach>
+
+       <delete file="${INSTALL_DIR}/properties/uninstallvendorjars_temp"/>
+
+        <antcall target="-setup-files" />
+  </target>
+
+  <target name="uninstalljar" if="uninstalldatapresent">
+		<condition property="uninstallneeded" value="true">
+            <and>
+                <isset property="linecommand" />
+                <not>
+			        <equals arg1="${linecommand}" arg2="" casesensitive="false" trim="true" />
+                </not>
+            </and>
+		</condition>
+        <antcall target="-uninstalljar">
+            <param name="linecommand" value="${linecommand}"/>
+        </antcall>
+  </target>
+
+  <target name="-uninstalljar" if="uninstallneeded">
+       <AFCecho message="uninstall command : ${linecommand}"/>
+      <exec  executable="${INSTALL_DIR}/bin/install3rdParty.${platform_suffix}">
+        <arg line="${linecommand}"/>
+      </exec>
+  </target>
+
+  <!--  END : hack for deleting entries from *dynamicclasspath.cfg for the jars which need to be deleted in FixPack using deletevendorjars-->
+
+
+  
+    <!-- Default target for the project, control by dependency -->
+    <target name="deployall" depends="init,init.foreach,resourcejar,handleExtensions,uninstallvendorjars" description="Default Target to deploy STERLING Integrator for any appserver">
+    </target>
+	
+	  <target name="loadCassandraTables">
+	     <java fork="true" failonerror="true"
+	              classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader"
+	              classpath="${INSTALL_DIR}/jar/bootstrapper.jar"
+	              >
+	            <arg value="-f" />
+	            <arg value="${INSTALL_DIR}/properties/dynamicclasspath.cfg" />
+	            <arg value="-class" />
+	            <arg value="com.yantra.tools.migrator.CassandraTableLoader" />            
+	            <arg value="-invokeargs" />
+	        <sysproperty key="vendor" value="shell"/>
+	        <sysproperty key="vendorFile" value="${INSTALL_DIR}/properties/servers.properties"/>
+	        <sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+	        <sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+	        </java>
+	  </target>
+
+</project>

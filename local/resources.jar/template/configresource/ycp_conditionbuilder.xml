@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<WorkflowConditionBuilderInput>
+   <!-- Condition variables for GENERAL process types -->
+   <GENERAL AllowDuplicateAttributes="Y" ShowNotButtons="N" >
+	  <ActivityGroupId Type="Leaf" Id="ActivityGroupId" DisplayName="ActivityGroupId" 
+            DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ActivityGroupId" IsReqd="" OverRidingClass=""/>
+      </ActivityGroupId>
+	  <AdjustmentType Type="Leaf" Id="AdjustmentType" DisplayName="AdjustmentType" DataType="Text-20" ControlType="Combo">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="AdjustmentType" IsReqd="" OverRidingClass="" IsStatic="true">
+            <AdjustmentType Code="ADJUSTMENT" Desc="ADJUSTMENT"/>
+            <AdjustmentType Code="RECEIPT" Desc="RECEIPT"/>
+            <AdjustmentType Code="SHIPMENT" Desc="SHIPMENT"/>
+            <AdjustmentType Code="RETURN" Desc="RETURN"/>
+         </MasterData>
+      </AdjustmentType>
+	  <AssignedToUserId Type="Leaf" Id="AssignedToUserId" DisplayName="AssignedToUserId" 
+            DataType="LoginId" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="AssignedToUserId" IsReqd="" OverRidingClass=""/>
+      </AssignedToUserId>
+	  <DocumentType Type="Leaf" Id="DocumentType" DisplayName="DocumentType" 
+            DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="DocumentType" IsReqd="" OverRidingClass=""/>
+      </DocumentType>
+	  <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+      </EnterpriseCode>
+	        <ExceptionType Type="Leaf" Id="ExceptionType" DisplayName="ExceptionType" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ExceptionType" IsReqd="" OverRidingClass=""/>
+      </ExceptionType>
+	  <InventoryStatus Type="Leaf" Id="InventoryStatus" DisplayName="InventoryStatus" 
+            DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="InventoryStatus" IsReqd="" OverRidingClass=""/>
+      </InventoryStatus>
+	  <IsHazmat Type="Leaf" Id="IsHazmat" DisplayName="IsHazmat" DataType="Flag" ControlType="Combo">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Is" QryTypeId="="/>
+			</QryTypes>
+			<MasterData MasterDataId="IsHazmat" IsReqd="" OverRidingClass="" IsStatic="true">
+				<IsHazmat Code="Y" Desc="Yes"/>
+				<IsHazmat Code="N" Desc="No"/>
+			</MasterData>
+	  </IsHazmat>
+	  <ItemID Type="Leaf" Id="ItemID" DisplayName="ItemID" DataType="ItemID" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ItemID" IsReqd="" OverRidingClass=""/>
+      </ItemID>
+	  <OrganizationCode Type="Leaf" Id="OrganizationCode" DisplayName="OrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="OrganizationCode" IsReqd="" OverRidingClass=""/>
+      </OrganizationCode>
+      <ProductClass Type="Leaf" Id="ProductClass" DisplayName="ProductClass" DataType="ProductClass" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ProductClass" IsReqd="" OverRidingClass=""/>
+      </ProductClass>
+      <ProviderOrganizationCode Type="Leaf" Id="ProviderOrganizationCode" DisplayName="ProviderOrganizationCode" DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ProviderOrganizationCode" IsReqd="" OverRidingClass=""/>
+      </ProviderOrganizationCode>
+      <Scac Type="Leaf" Id="Scac" DisplayName="Scac" 
+            DataType="OrgCode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="Scac" IsReqd="" OverRidingClass=""/>
+      </Scac>
+	  <ShipNode Type="Leaf" Id="ShipNode" DisplayName="ShipNode" DataType="ShipNode" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="ShipNode" IsReqd="" OverRidingClass=""/>
+      </ShipNode>
+      <SupplyType Type="Leaf" Id="SupplyType" DisplayName="SupplyType" DataType="Text-40" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="SupplyType" IsReqd="" OverRidingClass=""/>
+      </SupplyType>
+	  <TaskStatus Type="Leaf" Id="TaskStatus" DisplayName="TaskStatus" 
+            DataType="Status" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="TaskStatus" IsReqd="" OverRidingClass=""/>
+      </TaskStatus>
+	  <TaskType Type="Leaf" Id="TaskType" DisplayName="TaskType" 
+            DataType="TaskType" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="TaskType" IsReqd="" OverRidingClass=""/>
+      </TaskType>
+	  <UnitOfMeasure Type="Leaf" Id="UnitOfMeasure" DisplayName="UnitOfMeasure" DataType="UnitOfMeasure" ControlType="Text">
+         <QryTypes DefaultQryTypeId="=">
+            <QryType QryTypeName="Is" QryTypeId="="/>
+            <QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+         </QryTypes>
+         <MasterData MasterDataId="UnitOfMeasure" IsReqd="" OverRidingClass=""/>
+      </UnitOfMeasure>
+	   <SCUIClientVersion Type="Leaf" Id="SCUIClientVersion" DisplayName="UI Client Version" 
+		DataType="Text-40" ControlType="Text">
+		 <QryTypes DefaultQryTypeId="=">
+			<QryType QryTypeName="Is" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+		 </QryTypes>
+		 <MasterData MasterDataId="SCUIClientVersion" IsReqd="" OverRidingClass=""/>
+		</SCUIClientVersion>
+		<IndexName Type="Leaf" Id="IndexName" DisplayName="IndexName" DataType="Text-40" ControlType="Text">
+			<QryTypes DefaultQryTypeId="=">
+				<QryType QryTypeName="Is" QryTypeId="="/>
+				<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+			</QryTypes>
+			<MasterData MasterDataId="IndexName" IsReqd="" OverRidingClass=""/>
+		</IndexName>
+		<IsSearchWorking Type="Leaf" Id="IsSearchWorking" DisplayName="Is Search Working" DataType="Flag" ControlType="Combo">
+		 <QryTypes DefaultQryTypeId="=">
+			<QryType QryTypeName="Is" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+		 </QryTypes>
+		 <MasterData MasterDataId="SearchWorking" IsReqd="" OverRidingClass="">
+			<IsSearchWorking Code="Y" Desc="Yes"/>
+			<IsSearchWorking Code="N" Desc="No"/>
+		 </MasterData>
+		</IsSearchWorking>
+		<IsIndexWorking Type="Leaf" Id="IsIndexingWorking" DisplayName="Is Indexing Working" DataType="Flag" ControlType="Combo">
+		 <QryTypes DefaultQryTypeId="=">
+			<QryType QryTypeName="Is" QryTypeId="="/>
+			<QryType QryTypeName="Not_Equal_To" QryTypeId="&lt;&gt;"/>
+		 </QryTypes>
+		 <MasterData MasterDataId="IndexWorking" IsReqd="" OverRidingClass="">
+			<IsIndexWorking Code="Y" Desc="Yes"/>
+			<IsIndexWorking Code="N" Desc="No"/>
+		 </MasterData>
+		</IsIndexWorking>
+	</GENERAL>
+</WorkflowConditionBuilderInput>

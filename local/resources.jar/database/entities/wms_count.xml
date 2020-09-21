@@ -1,0 +1,1719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright(c) 2006-2008, Sterling Commerce, Inc. All rights reserved. -->
+<DBSchema>
+    <Entities>
+        <Entity
+            Description="This transaction table stores the counts done for the task."
+            EntityType="TRANSACTION" ListXMLName="CountList"
+            Module="wms" Name="Count" Prefix="YFS_"
+            TableName="YFS_COUNT" TableType="TRANSACTION" XMLName="Count">
+            <Attributes>
+                <Attribute ColumnName="COUNT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_COUNT table."
+                    Name="Count_Key" Nullable="false" XMLName="CountKey"/>
+                <Attribute ColumnName="COUNT_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The count request key that is associated with this count."
+                    Name="Count_Request_Key" Nullable="false" XMLName="CountRequestKey"/>
+                <Attribute ColumnName="TASK_ID" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The task id that is associated with this count table."
+                    Name="Task_Id" Nullable="false" XMLName="TaskId"/>
+                <Attribute ColumnName="SUMMARY_TASK_ID"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="The summary task identifier."
+                    Name="Summary_Task_Id" Nullable="false" XMLName="SummaryTaskId"/>
+                <Attribute ColumnName="PARENT_TASK_ID"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="The parent task identifier for multi user tasks."
+                    Name="Parent_Task_Id" Nullable="false" XMLName="ParentTaskId"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="A two-digit code that identifies the task type."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this count."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="Indicates the organization to which the inventory belongs."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="A Location in the node where count was performed."
+                    Name="Location_Id" Nullable="false" XMLName="LocationId"/>
+                <Attribute ColumnName="ORIGINAL_LOCATION"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The original location of the inventory being counted."
+                    Name="Original_Location" Nullable="false" XMLName="OriginalLocation"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The case/pallet License Plate Number for which the count results are recorded."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="PARENT_LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The LPN that has includes other LPN inside it."
+                    Name="Parent_LPN_No" Nullable="false" XMLName="ParentLPNNo"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="The system defined values for the LPN type associated with the LPN number for which the count results are recorded. Currently, the system supports only CASE and PALLET LPN types."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="The item's item ID that was counted."
+                    IsOrgColumn="Y" Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The item's unit of measure." Name="Uom"
+                    Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="The inventory classification of the item, classified based on the product's characteristics. Typical examples are FQ - First Quality, SQ - Second Quality, and so on."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="SerialNo"
+                    DefaultValue="' '"
+                    Description="The serial number that was generated during the count process."
+                    Name="Serial_No" Nullable="false" XMLName="SerialNo"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="A unique key for the inventory status table. This key refers to an inventory sub-classification based on the results of the inventory control processes within the warehouse."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="Whenever the inventory is customized, it needs to be tracked separately. This field indicates the buyer or buyer category for whom the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="Whenever the inventory is customized for a specific order, it needs to be tracked separately so that it can be allocated to that order."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date by which the item must be shipped so that it is usable. This is also referred to as the expiration date."
+                    Name="Ship_By_Date" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_TAG_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The inventory tag key that is associated with this count."
+                    Name="Inventory_Tag_Key" Nullable="false" XMLName="InventoryTagKey"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' "
+                    Description="Indicates the tag number associated with the inventory."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="COUNT_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The physically counted quantity for the count criteria."
+                    Name="Count_Quantity" Nullable="false" XMLName="CountQuantity"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="COUNT_PK" Name="YFS_COUNT_PK">
+                <Attribute ColumnName="COUNT_KEY" Name="Count_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COUNT_I1" Name="YFS_COUNT_I1">
+                    <Column Name="TASK_ID"/>
+                </Index>
+                <Index DB2Name="COUNT_I2" Name="YFS_COUNT_I2">
+                    <Column Name="PARENT_TASK_ID"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            ConfigurableByOrgOrNode="Y"
+            Description="This configuration table stores count programs that are used to perform cycle counting in a warehouse."
+            EntityType="CONFIGURATION" Module="wms" Name="Count_Program"
+            Prefix="YFS_" TableName="YFS_COUNT_PROGRAM"
+            TableType="CONFIGURATION" XMLName="CountProgram">
+            <Attributes>
+                <Attribute ColumnName="COUNT_PROGRAM_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_COUNT_PROGRAM table."
+                    Name="Count_Program_Key" Nullable="false" XMLName="CountProgramKey"/>
+                <Attribute CanTranslate="Y"
+                    ColumnName="COUNT_PROGRAM_NAME" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="A name assigned to the count program by either a node or an enterprise."
+                    Name="Count_Program_Name" Nullable="false" XMLName="CountProgramName"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this count program."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="COUNT_CALENDAR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The count calendar key that is associated with this count program."
+                    Name="Count_Calendar_Key" Nullable="false" XMLName="CountCalendarKey"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataType="OrgCode" DataSecurityUsageType="ORG" 
+                    DefaultValue="' '"
+                    Description="The enterprise code associated with the count program."
+                    IsOrgColumn="Y" Name="Enterprise_Code"
+                    Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="OWNER_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The owner key that is associated with this count program."
+                    Name="Owner_Key" Nullable="false" XMLName="OwnerKey"/>
+                <Attribute ColumnName="REGION_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The region key that is associated with this count program."
+                    Name="Region_Key" Nullable="false" XMLName="RegionKey"/>
+                <Attribute ColumnName="COUNT_ENTITY_NAME"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="This field indicates the count program type. The values defined are provided as common code values in FC for the code type 'COUNT_ENTITY_NAME'."
+                    Name="Count_Entity_Name" Nullable="false" XMLName="CountEntityName"/>
+                <Attribute ColumnName="REQUESTING_USER_ID"
+                    DataType="LoginId" DefaultValue="' '"
+                    Description="The user who requested for the count program."
+                    Name="Requesting_User_Id" Nullable="false" XMLName="RequestingUserId"/>
+                <Attribute ColumnName="START_NO_EARLIER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="This field indicates the earliest date and time when a task should start. This timestamp is stamped on each task."
+                    Name="Start_No_Earlier_Than" Nullable="false" XMLName="StartNoEarlierThan"/>
+                <Attribute ColumnName="FINISH_NO_LATER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="This field indicates the finish date and time when a task should finish. This timestamp is stamped on each task."
+                    Name="Finish_No_Later_Than" Nullable="false" XMLName="FinishNoLaterThan"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="The priority of the count requests generated for the count program."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute ColumnName="REQUEST_TYPE"
+                    DataType="RequestType" DefaultValue="' '"
+                    Description="This field indicates the count request type."
+                    Name="Request_Type" Nullable="false" XMLName="RequestType"/>
+                <Attribute ColumnName="STATUS" DataType="ShortStatus"
+                    DefaultValue="' '"
+                    Description="The current status of the count program. The status is applicable only when the count program type is 'OneTime'."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="EFFECTIVE_FROM_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="The date from when the count program is valid."
+                    Name="Effective_From_Date" Nullable="false" XMLName="EffectiveFromDate"/>
+                <Attribute ColumnName="EFFECTIVE_TO_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="The date till when the count program is valid."
+                    Name="Effective_To_Date" Nullable="false" XMLName="EffectiveToDate"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="COUNT_PROGRAM_PK" Name="YFS_COUNT_PROGRAM_PK">
+                <Attribute ColumnName="COUNT_PROGRAM_KEY" Name="Count_Program_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COUNT_PROGRAM_I1"
+                    Name="YFS_COUNT_PROGRAM_I1" Unique="true">
+                    <Column Name="COUNT_PROGRAM_NAME"/>
+                    <Column Name="OWNER_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountPrograms"
+                    ChildName="CountProgram" ChildXMLName="CountProgram"
+                    DeleteCascade="true" ForeignEntity="Region"
+                    Name="Region" Type="Bidirectional" XMLName="Region">
+                    <Attribute Name="Region_Key" ParentName="Region_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountPrograms"
+                    ChildName="CountProgram" ChildXMLName="CountProgram"
+                    DeleteCascade="true" ForeignEntity="Organization"
+                    Name="Organization" Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Enterprise_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountPrograms"
+                    ChildName="CountProgram" ChildXMLName="CountProgram"
+                    DeleteCascade="true" ForeignEntity="Calendar"
+                    Name="Calendar" Type="Bidirectional" XMLName="Calendar">
+                    <Attribute Name="Count_Calendar_Key" ParentName="Calendar_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountPrograms"
+                    ChildName="CountProgram" ChildXMLName="CountProgram"
+                    DeleteCascade="true" ForeignEntity="Ship_Node"
+                    IsParent="true" Name="Ship_Node"
+                    Type="Bidirectional" XMLName="Node">
+                    <Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+                    <Attribute Name="Owner_Key" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" Enforce="true"
+                    ForeignEntity="Enterprise" Name="Enterprise"
+                    Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Code" ParentName="Enterprise_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This configuration table stores count program conditions such as enterprise and item classifications to perform cycle count in a warehouse."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Count_Program_Condition" Prefix="YFS_"
+            TableName="YFS_COUNT_PROGRAM_COND" TableType="CONFIGURATION" XMLName="CountProgramCondition">
+            <Attributes>
+                <Attribute ColumnName="COUNT_PROGRAM_COND_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_COUNT_PROGRAM_COND table."
+                    Name="Count_Program_Condition_Key" Nullable="false" XMLName="CountProgramConditionKey"/>
+                <Attribute ColumnName="COUNT_PROGRAM_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_COUNT_PROGRAM table."
+                    Name="Count_Program_Key" Nullable="false" XMLName="CountProgramKey"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="A brief description of the count program condition."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION1"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as first for the count program."
+                    Name="Item_Classification1" Nullable="false" XMLName="ItemClassification1"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION2"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as second for the count program."
+                    Name="Item_Classification2" Nullable="false" XMLName="ItemClassification2"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION3"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="This field indicates that the items are classified as third for the count program."
+                    Name="Item_Classification3" Nullable="false" XMLName="ItemClassification3"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="This field indicates the item for which the count request should be generated."
+                    IsOrgColumn="Y" Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="PERCENT_TO_COUNT"
+                    DataType="PositivePercentage" DefaultValue="100"
+                    Description="This is the percentage of locations or items that user wants to count."
+                    Name="Percent_To_Count" Nullable="false" XMLName="PercentToCount"/>
+                <Attribute ColumnName="COUNT_LEVEL" DataType="Text-100"
+                    DefaultValue="' ' "
+                    Description="This value will indicate whether the counting is being done at Item level, Item classification level or location level."
+                    Name="Count_Level" Nullable="false" XMLName="CountLevel"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="This field indicates the unit of measure of the item that needs to be counted."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="CNT_AT_ITEM_CLASSIFICATION_LVL"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the count tasks are created at an item level classification."
+                    Name="Count_At_Item_Classification_Level"
+                    Nullable="false" XMLName="CountAtItemClassificationLevel"/>
+                <Attribute ColumnName="NO_OF_TIMES_TO_COUNT"
+                    DataType="Priority" DefaultValue="0"
+                    Description="This field indicates the number of times the inventory should be counted."
+                    Name="No_Of_Times_To_Count" Nullable="false" XMLName="NoOfTimesToCount"/>
+                <Attribute ColumnName="MIN_UNIT_VALUE"
+                    DataType="UnitPrice" DefaultValue="0"
+                    Description="This field indicates the minimum unit cost of an item that can be put on count."
+                    Name="Min_Unit_Value" Nullable="false"
+                    XMLGroup="PrimaryInformation" XMLName="MinUnitValue"/>
+                <Attribute ColumnName="MAX_UNIT_VALUE"
+                    DataType="UnitPrice" DefaultValue="0"
+                    Description="This field indicates the maximum unit cost of an item that can be put on count."
+                    Name="Max_Unit_Value" Nullable="false"
+                    XMLGroup="PrimaryInformation" XMLName="MaxUnitValue"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CNT_PROG_COND_PK" Name="YFS_COUNT_PROGRAM_COND_PK">
+                <Attribute ColumnName="COUNT_PROGRAM_COND_KEY" Name="Count_Program_Condition_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountProgramConditionList"
+                    ChildName="Count_Program_Condition"
+                    ChildXMLName="CountProgramCondition"
+                    DeleteCascade="true" ForeignEntity="Count_Program"
+                    IsParent="true" Name="Count_Program"
+                    Type="Bidirectional" XMLName="CountProgram">
+                    <Attribute Name="Count_Program_Key" ParentName="Count_Program_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This configuration table stores criteria such as zones and product classes to perform cycle count in a warehouse."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Count_Program_Condition_Attr" Prefix="YFS_"
+            TableName="YFS_CNT_PROG_COND_ATTR" TableType="CONFIGURATION" XMLName="CountProgramConditionAttr">
+            <Attributes>
+                <Attribute ColumnName="CNT_PROG_COND_ATTR_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_CNT_PROG_COND_ATTR table."
+                    Name="Count_Program_Condition_Attr_Key"
+                    Nullable="false" XMLName="CountProgramConditionAttrKey"/>
+                <Attribute ColumnName="COUNT_PROGRAM_COND_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_CNT_PROG_COND table."
+                    Name="Count_Program_Condition_Key" Nullable="false" XMLName="CountProgramConditionKey"/>
+                <Attribute ColumnName="ATTRIBUTE_NAME"
+                    DataType="AttributeName" DefaultValue="' '"
+                    Description="The various count program condition attributes such as ZONE and PRODUCT_CLASS."
+                    Name="Attr_Name" Nullable="false" XMLName="AttrName"/>
+                <Attribute ColumnName="VALUE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The attribute value identified by the ATTRIBUTE_NAME."
+                    Name="Value" Nullable="false" XMLName="Value">
+                    <DBType Name="DERBY" ColumnName="VALUE_COLUMN"/>
+                </Attribute>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CNT_PRG_CND_ATR_PK" Name="YFS_CNT_PROG_COND_ATTR_PK">
+                <Attribute ColumnName="CNT_PROG_COND_ATTR_KEY" Name="Count_Program_Condition_Attr_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountProgramConditionAttrList"
+                    ChildName="Count_Program_Condition_Attr"
+                    ChildXMLName="CountProgramConditionAttr"
+                    DeleteCascade="true"
+                    ForeignEntity="Count_Program_Condition"
+                    IsParent="true" Name="Count_Program_Condition"
+                    Type="Bidirectional" XMLName="CountProgramCondition">
+                    <Attribute Name="Count_Program_Condition_Key" ParentName="Count_Program_Condition_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="ProductClassAttrList"
+                    ChildName="ProductClassAttr" DeleteCascade="true"
+                    ForeignEntity="Count_Program_Condition"
+                    Name="Product_Class_Set" Type="Bidirectional" XMLName="ProductClassSet">
+                    <Attribute Name="Count_Program_Condition_Key" ParentName="Count_Program_Condition_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="ProductClass"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountZoneAttrList"
+                    ChildName="CountZoneAttr" DeleteCascade="true"
+                    ForeignEntity="Count_Program_Condition"
+                    Name="Count_Zone_Set" Type="Bidirectional" XMLName="CountZoneSet">
+                    <Attribute Name="Count_Program_Condition_Key" ParentName="Count_Program_Condition_Key"/>
+                    <Attribute Name="Attr_Name" ParentName="CountZone"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table stores count program condition status such as the last enterprise, location, item, etc that are already counted."
+            EntityType="TRANSACTION" Module="wms"
+            Name="Count_Program_Condition_State" Prefix="YFS_"
+            TableName="YFS_CNT_PROG_COND_STATE" TableType="TRANSACTION" XMLName="CountProgramConditionState">
+            <Attributes>
+                <Attribute ColumnName="CNT_PROG_COND_STATE_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_CNT_PROG_COND_STATE table."
+                    Name="Count_Program_Condition_State_Key"
+                    Nullable="false" XMLName="CountProgramConditionStateKey"/>
+                <Attribute ColumnName="COUNT_PROGRAM_COND_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_CNT_PROG_COND table."
+                    Name="Count_Program_Condition_Key" Nullable="false" XMLName="CountProgramConditionKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with the count program condition state."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="LAST_ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="The last item that was counted in the node."
+                    IsOrgColumn="Y" Name="Last_Item_Id" Nullable="false" XMLName="LastItemID"/>
+                <Attribute ColumnName="NO_OF_TIMES_COUNTED"
+                    DataType="Priority" DefaultValue="0"
+                    Description="Indicates the total number of times the items belonging to a particular criteria was counted."
+                    Name="No_Of_Times_Counted" Nullable="false" XMLName="NoOfTimesCounted"/>
+                <Attribute ColumnName="CURRENT_CYCLE_START_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="The date of start of the Cycle to which current date belongs."
+                    Name="Current_Cycle_Start_Date" Nullable="true"/>
+                <Attribute ColumnName="CURRENT_CYCLE_END_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="The date of end of the Cycle to which current date belongs."
+                    Name="Current_Cycle_End_Date" Nullable="true"/>
+                <Attribute ColumnName="CURRENT_CYCLE_START_TS"
+                    DataType="TimeStamp"
+                    Description="The timestamp of start of the Cycle to which current date belongs."
+                    Name="Current_Cycle_Start_Timestamp" Nullable="true"/>
+                <Attribute ColumnName="CURRENT_CYCLE_END_TS"
+                    DataType="TimeStamp"
+                    Description="The timestamp of end of the Cycle to which current date belongs."
+                    Name="Current_Cycle_End_Timestamp" Nullable="true"/>
+                <Attribute ColumnName="NO_OF_LOCNS_CNTD"
+                    DataType="Number" DefaultValue="0"
+                    Description="The number of locations counted till date in the current cycle."
+                    Name="No_Of_Locns_Cntd" Nullable="false" XMLName="NoOfLocnsCntd"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CNT_PRG_CND_STE_PK" Name="YFS_CNT_PROG_COND_STATE_PK">
+                <Attribute ColumnName="CNT_PROG_COND_STATE_KEY" Name="Count_Program_Condition_State_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="CountProgramConditionStateList"
+                    ChildName="Count_Program_Condition_State"
+                    ChildXMLName="CountProgramConditionState"
+                    DeleteCascade="true"
+                    ForeignEntity="Count_Program_Condition"
+                    IsParent="true" Name="Count_Program_Condition"
+                    Type="Bidirectional" XMLName="CountProgramCondition">
+                    <Attribute Name="Count_Program_Condition_Key" ParentName="Count_Program_Condition_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table stores count requests to perform inventory count in a warehouse. The count process in a warehouse begins with the count request."
+            EntityType="TRANSACTION" Extensible="Y"
+            ListXMLName="CountRequestList" Module="wms"
+            Name="Count_Request" Prefix="YFS_"
+            TableName="YFS_COUNT_REQUEST" TableType="TRANSACTION" XMLName="CountRequest">
+            <Attributes>
+                <Attribute ColumnName="COUNT_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_COUNT_REQUEST table."
+                    Name="Count_Request_Key" Nullable="false" XMLName="CountRequestKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this count request list."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The enterprise for which the count request is created."
+                    Name="Enterprise_Code" Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="DOCUMENT_TYPE" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="The document type associated with the count request."
+                    Name="Document_Type" Nullable="false" XMLName="DocumentType"/>
+                <Attribute ColumnName="COUNT_PROGRAM_NAME"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="The count program name for which the count request is created."
+                    Name="Count_Program_Name" Nullable="false" XMLName="CountProgramName"/>
+                <Attribute ColumnName="COUNT_PROGRAM_OWNER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="Indicates the owner who created the program, node or enterprise."
+                    Name="Count_Program_Owner_Key" Nullable="false" XMLName="CountProgramOwnerKey"/>
+                <Attribute ColumnName="REQUEST_TYPE"
+                    DataType="RequestType" DefaultValue="' '"
+                    Description="This field indicates the count request type."
+                    Name="Request_Type" Nullable="false" XMLName="RequestType"/>
+                <Attribute ColumnName="COUNT_REQUEST_NO"
+                    DataType="DocumentNo" DefaultValue="' '"
+                    Description="The count request number associated with the document type and node."
+                    Name="Count_Request_No" Nullable="false" XMLName="CountRequestNo"/>
+                <Attribute ColumnName="FROM_LOCATION"
+                    DataType="Text-100" DefaultValue="' '"
+                    Description="This is starting location of the range of locations that the user wants to count."
+                    Name="From_Location" Nullable="false" XMLName="FromLocation"/>
+                <Attribute ColumnName="TO_LOCATION" DataType="Text-100"
+                    DefaultValue="' '"
+                    Description="This is the end location of the range of locations that the user wants to count."
+                    Name="To_Location" Nullable="false" XMLName="ToLocation"/>
+                <Attribute ColumnName="REQUESTING_USER_ID"
+                    DataType="LoginId" DefaultValue="' '"
+                    Description="The user who requested for the count."
+                    Name="Requesting_User_Id" Nullable="false" XMLName="RequestingUserId"/>
+                <Attribute ColumnName="START_NO_EARLIER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp associated with the task. This timestamp is stamped on each task."
+                    Name="Start_No_Earlier_Than" Nullable="false" XMLName="StartNoEarlierThan"/>
+                <Attribute ColumnName="AISLE_NUMBER" DataType="Integer"
+                    Description="This field indicates the aisle Number of the location to be counted. The locations belong to zones which have travel aisle's between them. A zone could belong to multiple aisles and multiple zones could belong to an aisle. But a location in a zone always belongs to one and only one aisle."
+                    Name="Aisle_Number" Nullable="true" XMLName="AisleNumber"/>
+                <Attribute ColumnName="LEVEL_NUMBER" DataType="Integer"
+                    Description="This field indicates the level number of the location to be counted. The height of the location (y-co-ordinate of the location from the floor) is classified as levels. The level attribute of the location is used in arriving at locations nearest to the dedicated locations algorithm used during the putaway process. Typically, the level attribute is contained within the location ID."
+                    Name="Level_Number" Nullable="true" XMLName="LevelNumber"/>
+                <Attribute ColumnName="BAY_NUMBER" DataType="Integer"
+                    Description="This field indicates the location's bay number that is to be counted. Typically, the aisle, level and bay put together represents the physical location of the location in a node, if they are based on coordinate system. The bay attribute of the location (x-coordinate from the beginning of the aisle) is used in arriving at locations nearest to the dedicated locations algorithm that is used in putaway. Typically, the bay attribute is contained within the location ID."
+                    Name="Bay_Number" Nullable="true" XMLName="BayNumber"/>
+                <Attribute ColumnName="FINISH_NO_LATER_THAN"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The timestamp associated with the task. This timestamp is stamped on each task."
+                    Name="Finish_No_Later_Than" Nullable="false" XMLName="FinishNoLaterThan"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="The zone where the count should be performed."
+                    Name="Zone_Id" Nullable="false" XMLName="ZoneId"/>
+                <Attribute ColumnName="PRIORITY" DataType="Priority"
+                    DefaultValue="0"
+                    Description="The count request priority."
+                    Name="Priority" Nullable="false" XMLName="Priority"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="A Location in the node where the count should be performed. The LOCATION_ID associated with the NODE_KEY field identifies a unique location in the node."
+                    Name="Location_Id" Nullable="false" XMLName="LocationId"/>
+                <Attribute ColumnName="RECEIPT_HEADER_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The logical foreign key to the YFS_RECEIPT_HEADER table."
+                    Name="Receipt_Header_Key" Nullable="false" XMLName="ReceiptHeaderKey"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The case or pallet License Plate Number for which count request will be created."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="The system defined values for the LPN type associated with the LPN number for which count request is placed. Currently, the system supports only CASE and PALLET LPN types."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="The item to be counted."
+                    IsOrgColumn="Y" Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The item's unit of measure." Name="Uom"
+                    Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION1"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The first item classification for the count request."
+                    Name="Item_Classification1" Nullable="false" XMLName="ItemClassification1"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION2"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The second item classification for the count request."
+                    Name="Item_Classification2" Nullable="false" XMLName="ItemClassification2"/>
+                <Attribute ColumnName="ITEM_CLASSIFICATION3"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The third item classification for the count request."
+                    Name="Item_Classification3" Nullable="false" XMLName="ItemClassification3"/>
+                <Attribute ColumnName="MIN_UNIT_VALUE"
+                    DataType="UnitPrice" DefaultValue="0"
+                    Description="The minimum unit cost of an item to be considered."
+                    Name="Min_Unit_Value" Nullable="false" XMLName="MinUnitValue"/>
+                <Attribute ColumnName="MAX_UNIT_VALUE"
+                    DataType="UnitPrice" DefaultValue="0"
+                    Description="The maximum unit cost of an item to be considered."
+                    Name="Max_Unit_Value" Nullable="false" XMLName="MaxUnitValue"/>
+                <Attribute ColumnName="CNT_AT_ITEM_CLASSIFICATION_LVL"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag indicates whether the count request is created at an item classification level."
+                    Name="Count_At_Item_Classification_Level"
+                    Nullable="false" XMLName="CountAtItemClassificationLevel"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="The item's inventory classification, classified based on the product's characteristics. Typical examples are, FQ - First Quality, SQ - Second Quality, and so on."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="STATUS" DataType="ShortStatus"
+                    DefaultValue="' '"
+                    Description="The current status of the count request. Some of the statuses are 1100 - Count Request Created, 1200 - Count Tasks Created, 1300 - Count Tasks Completed, 2000 - Count Request Completed and 9000 - Count Request Cancelled."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="PIPELINE_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="A logical foreign key to the YFS_PIPELINE table."
+                    Name="Pipeline_Key" Nullable="false" XMLName="PipelineKey"/>
+                <Attribute ColumnName="CANCELLATION_REASON_CODE"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The cancellation reason code for canceling the count request."
+                    Name="Cancellation_Reason_Code" Nullable="false" XMLName="CancellationReasonCode"/>
+                <Attribute ColumnName="REASON_TEXT"
+                    DataType="ReasonText" DefaultValue="' '"
+                    Description="Additional information as to why the count request was cancelled."
+                    Name="Reason_Text" Nullable="false"/>
+                <Attribute ColumnName="PHY_CNT_PLAN_NAME"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="Plan Name of the physical count."
+                    Name="Phy_Cnt_Plan_Name" Nullable="false" XMLName="PhysicalCountPlanName"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="COUNT_REQ_PK" Name="YFS_COUNT_REQUEST_PK">
+                <Attribute ColumnName="COUNT_REQUEST_KEY" Name="Count_Request_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COUNT_REQ_I1"
+                    Name="YFS_COUNT_REQUEST_I1" Unique="true">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="DOCUMENT_TYPE"/>
+                    <Column Name="COUNT_REQUEST_NO"/>
+                </Index>
+                <Index DB2Name="COUNT_REQ_I2"
+                    Name="YFS_COUNT_REQUEST_I2" Unique="false">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LOCATION_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Receipt_Header" Name="Receipt"
+                    Type="Bidirectional" XMLName="Receipt">
+                    <Attribute Name="Receipt_Header_Key" ParentName="Receipt_Header_Key"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    ForeignEntity="Ship_Node" Name="ShipNode"
+                    Type="Unidirectional" XMLName="ShipNode">
+                    <Attribute Name="Node_Key" ParentName="Ship_Node"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table stores results of the count requests."
+            EntityType="TRANSACTION" ListXMLName="CountResultList"
+            Module="wms" Name="Count_Result" Prefix="YFS_"
+            TableName="YFS_COUNT_RESULT" TableType="TRANSACTION" XMLName="CountResult">
+            <Attributes>
+                <Attribute ColumnName="COUNT_RESULT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The primary key for the YFS_COUNT_RESULT table."
+                    Name="Count_Result_Key" Nullable="false" XMLName="CountResultKey"/>
+                <Attribute ColumnName="COUNT_REQUEST_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The count request key that is associated with this count result."
+                    Name="Count_Request_Key" Nullable="false" XMLName="CountRequestKey"/>
+                <Attribute ColumnName="TASK_ID" DataType="SequenceNo"
+                    DefaultValue="' '"
+                    Description="The task id that is associated with this count result."
+                    Name="Task_Id" Nullable="false" XMLName="TaskId"/>
+                <Attribute ColumnName="SUMMARY_TASK_ID"
+                    DataType="SequenceNo" DefaultValue="' '"
+                    Description="The summary task identifier associated with the count result."
+                    Name="Summary_Task_Id" Nullable="false" XMLName="SummaryTaskId"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' ' "
+                    Description="This field is a two-digit code that identifies the task type."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this count result."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The organization to which the inventory belongs."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="LOCATION_ID"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="A Location in the node where count was performed."
+                    Name="Location_Id" Nullable="false" XMLName="LocationId"/>
+                <Attribute ColumnName="ORIGINAL_LOCATION"
+                    DataType="LocationId" DefaultValue="' '"
+                    Description="The original location of inventory counted."
+                    Name="Original_Location" Nullable="false" XMLName="OriginalLocation"/>
+                <Attribute ColumnName="LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The case/pallet License Plate Number for which count results are recorded."
+                    Name="LPN_No" Nullable="false"/>
+                <Attribute ColumnName="PARENT_LPN_NO" DataType="LPNNo"
+                    DefaultValue="' '"
+                    Description="The LPN that has includes other LPN inside it."
+                    Name="Parent_LPN_No" Nullable="false" XMLName="ParentLPNNo"/>
+                <Attribute ColumnName="LPN_TYPE" DataType="EnumLPNType"
+                    DefaultValue="' '"
+                    Description="The system defined values for the LPN type associated with the LPN number for which the count results are recorded. Currently, the system supports only CASE and PALLET LPN types."
+                    Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="This field indicates the item that was counted."
+                    IsOrgColumn="Y" Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="This field indicates the item's unit of measure."
+                    Name="Uom" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="PRODUCT_CLASS"
+                    DataType="ProductClass" DefaultValue="' '"
+                    Description="The inventory classification of the item that is classified based on the product characteristics."
+                    Name="Product_Class" Nullable="false" XMLName="ProductClass"/>
+                <Attribute ColumnName="SERIAL_NO" DataType="SerialNo"
+                    DefaultValue="' '"
+                    Description="This field indicates the serial number that was generated during the count process."
+                    Name="Serial_No" Nullable="false" XMLName="SerialNo"/>
+                <Attribute ColumnName="INVENTORY_STATUS"
+                    DataType="InventoryStatus" DefaultValue="' '"
+                    Description="This field is a unique key for the YFS_INVENTORY_STATUS table. This field refers to an inventory sub-classification based on the inventory control process results within the warehouse."
+                    Name="Inventory_Status" Nullable="false" XMLName="InventoryStatus"/>
+                <Attribute ColumnName="SEGMENT_TYPE"
+                    DataType="SegmentType" DefaultValue="' '"
+                    Description="Whenever inventory is customized, it needs to be tracked separately. This field indicates the buyer or buyer category for whom the inventory is customized."
+                    Name="Segment_Type" Nullable="false" XMLName="SegmentType"/>
+                <Attribute ColumnName="SEGMENT" DataType="Segment"
+                    DefaultValue="' '"
+                    Description="Whenever the inventory is customized for a specific order, the inventory needs to be tracked separately. This field indicates the order to which the inventory is allocated."
+                    Name="Segment" Nullable="false" XMLName="Segment"/>
+                <Attribute ColumnName="SHIP_BY_DATE" DataType="Date"
+                    DefaultValue="sysdate"
+                    Description="The date by which the item must be shipped so that it is usable. This is also referred to as the expiration date."
+                    Name="Ship_By_Date" Nullable="false"/>
+                <Attribute ColumnName="INVENTORY_TAG_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The inventory tag key that is associated with this count result."
+                    Name="Inventory_Tag_Key" Nullable="false" XMLName="InventoryTagKey"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' "
+                    Description="This field indicates the tag number associated with the inventory."
+                    Name="Tag_Number" Nullable="false" XMLName="TagNumber"/>
+                <Attribute ColumnName="SYSTEM_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This field indicates the system reported quantity for the count criteria."
+                    Name="System_Quantity" Nullable="false" XMLName="SystemQuantity"/>
+                <Attribute ColumnName="COUNT_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This field indicates the physically counted quantity for the count criteria."
+                    Name="Count_Quantity" Nullable="false" XMLName="CountQuantity"/>
+                <Attribute ColumnName="VARIANCE_QUANTITY"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="This field specifies the difference between the count quantity and system quantity."
+                    Name="Variance_Quantity" Nullable="false" XMLName="VarianceQuantity"/>
+                <Attribute ColumnName="VARIANCE_PERCENTAGE"
+                    DataType="BigPercentage"
+                    Description="This field specifies the variance percentage which is calculated as 100* VARIANCE_QUANTITY divided by SYSTEM_QUANTITY."
+                    Name="Variance_Percentage" Nullable="true" XMLName="VariancePercentage"/>
+                <Attribute ColumnName="VARIANCE_TYPE"
+                    DataType="EnumVarianceType" DefaultValue="0"
+                    Description="This field determines the variance type based on the count results. If the Variance Quantity > 0, the Variance Type for the items will be 'New', 'Missing' if the Variance Quantity &lt; 0, and 'No Variance' if the Variance Quantity = 0. However, for License Plates the Variance Type will not be computed based on the Variance Quantity. Instead, the Variance Type will be set to 'New' if a Case/Pallet is found in the location, but does not exist in the system inventory of the location, 'Missing' if the Case/Pallet is not found in the location, but  exists in the system inventory of the location, 'No Variance' in situations when there is no count discrepancy."
+                    Name="Variance_Type" Nullable="false" XMLName="VarianceType"/>
+                <Attribute ColumnName="VARIANCE_VALUE"
+                    DataType="VarianceValue" DefaultValue="0"
+                    Description="This field is computed as the summation of VARIANCE_QUANTITY * UNIT_COST for all tasks in the count request for the latest completed iteration."
+                    Name="Variance_Value" Nullable="false" XMLName="VarianceValue"/>
+                <Attribute ColumnName="VARIANCE_ACCEPTED"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This field indicates if the variance was accepted for the count result."
+                    Name="Variance_Accepted" Nullable="false" XMLName="VarianceAccepted"/>
+                <Attribute ColumnName="IS_RESOLVABLE" DataType="Flag"
+                    DefaultValue="' '"
+                    Description="This flag indicates whether the variance can be resolved for the count result."
+                    Name="Is_Resolvable" Nullable="false" XMLName="IsResolvable"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="COUNT_RESULT_PK" Name="YFS_COUNT_RESULT_PK">
+                <Attribute ColumnName="COUNT_RESULT_KEY" Name="Count_Result_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COUNT_RESULT_I1"
+                    Name="YFS_COUNT_RESULT_I1" Unique="true">
+                    <Column Name="COUNT_REQUEST_KEY"/>
+                    <Column Name="LOCATION_ID"/>
+                    <Column Name="TASK_ID"/>
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="PARENT_LPN_NO"/>
+                    <Column Name="LPN_NO"/>
+                    <Column Name="SERIAL_NO"/>
+                    <Column Name="ITEM_ID"/>
+                    <Column Name="UOM"/>
+                    <Column Name="PRODUCT_CLASS"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="INVENTORY_STATUS"/>
+                    <Column Name="SHIP_BY_DATE"/>
+                    <Column Name="TAG_NUMBER"/>
+                    <Column Name="SEGMENT_TYPE"/>
+                    <Column Name="SEGMENT"/>
+                </Index>
+                <Index DB2Name="COUNT_RESULT_I2" Name="YFS_COUNT_RESULT_I2">
+                    <Column Name="COUNT_REQUEST_KEY"/>
+                </Index>
+                <Index DB2Name="COUNT_RESULT_I3"
+                    Name="YFS_COUNT_RESULT_I3" Unique="false">
+                    <Column Name="TASK_ID"/>
+                </Index>
+                <Index DB2Name="COUNT_RESULT_I4"
+                    Name="YFS_COUNT_RESULT_I4" Unique="false">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="LPN_NO"/>
+                    <Column Name="SUMMARY_TASK_ID"/>
+                    <Column Name="VARIANCE_ACCEPTED"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountResultList"
+                    ChildName="Count_Result" ChildXMLName="CountResult"
+                    ForeignEntity="Count_Request" Name="Count_Request"
+                    Type="Bidirectional" XMLName="CountRequest">
+                    <Attribute Name="Count_Request_Key" ParentName="Count_Request_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table stores tag information of the inventory that resulted after counting."
+            EntityType="TRANSACTION" Extensible="Y"
+            ListXMLName="CountResultTagList" Module="wms"
+            Name="Count_Result_Tag" Prefix="YFS_"
+            TableName="YFS_COUNT_RESULT_TAG" TableType="TRANSACTION">
+            <Attributes>
+                <Attribute ColumnName="COUNT_RESULT_TAG_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_COUNT_RESULT_TAG table."
+                    Name="Count_Result_Tag_Key" Nullable="false" XMLName="CountResultTagKey"/>
+                <Attribute ColumnName="COUNT_RESULT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The count result key that is associated with this count result tag."
+                    Name="Count_Result_Key" Nullable="false" XMLName="CountResultKey"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' "
+                    Description="This field indicates the tag number associated with the inventory."
+                    Name="Tag_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_NUMBER" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the lot number associated with the inventory."
+                    Name="Lot_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_KEY_REFERENCE"
+                    DataType="Text-4000" DefaultValue="' ' "
+                    Description="This field stores reference information of the lot number."
+                    Name="Lot_Key_Reference" Nullable="false"/>
+                <Attribute ColumnName="LOT_MANUFACTURE_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="The date on which the lot was manufactured."
+                    Name="Lot_Manufacture_Date" Nullable="false" XMLName="ManufacturingDate"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE1"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the lot number attribute."
+                    Name="Lot_Attribute1" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE2"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the lot number attribute."
+                    Name="Lot_Attribute2" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE3"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the lot number attribute."
+                    Name="Lot_Attribute3" Nullable="false"/>
+                <Attribute ColumnName="REVISION_NO" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the revision number associated with the tag."
+                    Name="Revision_No" Nullable="false"/>
+                <Attribute ColumnName="BATCH_NO" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the batch number associated with the tag."
+                    Name="Batch_No" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CNT_RESULT_TAG_PK" Name="YFS_COUNT_RESULT_TAG_PK">
+                <Attribute ColumnName="COUNT_RESULT_TAG_KEY" Name="Count_Result_Tag_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CNT_RESULT_TAG_I1"
+                    Name="YFS_COUNT_RESULT_TAG_KEY_I1" Unique="true">
+                    <Column Name="COUNT_RESULT_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="CountResultTagList"
+                    ChildName="Count_Result_Tag"
+                    ChildXMLName="CountResultTag"
+                    ForeignEntity="Count_Result" Name="Count_Result"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="CountResult">
+                    <Attribute Name="Count_Result_Key" ParentName="Count_Result_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This configuration table stores parameters used to determine the task type for a task associated with the task type group count."
+            EntityType="CONFIGURATION" Module="wms"
+            Name="Count_Strategy" Prefix="YFS_"
+            TableName="YFS_COUNT_STRATEGY" TableType="CONFIGURATION" XMLName="CountStrategy">
+            <Attributes>
+                <Attribute ColumnName="COUNT_STRATEGY_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key for the YFS_COUNT_STRATEGY table."
+                    Name="Count_Strategy_Key" Nullable="false" XMLName="CountStrategyKey"/>
+                <Attribute CanTranslate="Y" ColumnName="DESCRIPTION"
+                    DataType="Text-100" DefaultValue="' ' "
+                    Description="A brief description of the count strategy."
+                    Name="Description" Nullable="false" XMLName="Description"/>
+                <Attribute ColumnName="TASK_TYPE" DataType="TaskType"
+                    DefaultValue="' '"
+                    Description="This field is a short two-digit code that identifies the task type."
+                    Name="Task_Type" Nullable="false" XMLName="TaskType"/>
+                <Attribute ColumnName="CNT_LOC_EVEN_IF_NO_INV"
+                    DataType="Flag" DefaultValue="' '"
+                    Description="This flag is applicable when strategy is defined for a zone. This flag indicates whether the count tasks are generated for all locations without verifying the inventory availability in the zone."
+                    Name="Count_Location_Even_If_No_Inventory"
+                    Nullable="false" XMLName="CountLocationEvenIfNoInventory"/>
+                <Attribute ColumnName="ACTIVITY_GROUP_ID"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The activity group system defined. This field indicates the task type that should be associated to an activity group."
+                    Name="Activity_Group_Id" Nullable="false" XMLName="ActivityGroupId"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="This field indicates the organization code of the node."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="TASK_GRANULARITY"
+                    DataType="EnumTaskGranularity" DefaultValue="' '"
+                    Description="This field specifies the task granularity with which the count tasks will be performed."
+                    Name="Task_Granularity" Nullable="false" XMLName="TaskGranularity"/>
+                <Attribute ColumnName="ENTERPRISE_KEY"
+                    DataType="Key"
+                    DefaultValue="' '"
+                    Description="The enterprise key that is associated with this count strategy."
+                    Name="Enterprise_Key" Nullable="false" XMLName="EnterpriseKey"/>
+                <Attribute ColumnName="ZONE_ID" DataType="ZoneId"
+                    DefaultValue="' '"
+                    Description="This field specifies the zone for which the count request was created."
+                    Name="Zone_Id" Nullable="false" XMLName="ZoneId"/>
+                <Attribute ColumnName="LOCATION_SIZE_CODE"
+                    DataType="LocationSizeCode" DefaultValue="' '"
+                    Description="This field defines the location capacity. This field maps to the primary key of the YFS_LOCATION_SIZE_CODE table."
+                    Name="Location_Size_Code" Nullable="false" XMLName="LocationSizeCode"/>
+                <Attribute ColumnName="TRANSACTION_ID"
+                    DataType="TransactionID" DefaultValue="' ' "
+                    Description="This field specifies the transaction ID of the count request for which the count strategy is determined."
+                    Name="Transaction_Id" Nullable="false" XMLName="TransactionId"/>
+                <Attribute ColumnName="TASK_TYPE_ITEM_CLASSIFICATION1"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="This field indicates the first item classification for determining the count strategy."
+                    Name="Task_Type_Item_Classification1"
+                    Nullable="false" XMLName="TaskTypeItemClassification1"/>
+                <Attribute ColumnName="TASK_TYPE_ITEM_CLASSIFICATION2"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="This field indicates the second item classification for determining the count strategy."
+                    Name="Task_Type_Item_Classification2"
+                    Nullable="false" XMLName="TaskTypeItemClassification2"/>
+                <Attribute ColumnName="TASK_TYPE_ITEM_CLASSIFICATION3"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="This field indicates the third item classification for determining the count strategy."
+                    Name="Task_Type_Item_Classification3"
+                    Nullable="false" XMLName="TaskTypeItemClassification3"/>
+                <Attribute ColumnName="REQUEST_TYPE"
+                    DataType="RequestType" DefaultValue="' '"
+                    Description="This field defines the count strategy differently for different request types."
+                    Name="Request_Type" Nullable="false" XMLName="RequestType"/>
+                <Attribute ColumnName="LOCKID" DataType="Count"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="COUNT_STRATEGY_PK" Name="YFS_COUNT_STRATEGY_PK">
+                <Attribute ColumnName="COUNT_STRATEGY_KEY" Name="Count_Strategy_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="COUNT_STRATEGY_I1"
+                    Name="YFS_COUNT_STRATEGY_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="ENTERPRISE_KEY"/>
+                    <Column Name="ACTIVITY_GROUP_ID"/>
+                    <Column Name="ZONE_ID"/>
+                    <Column Name="LOCATION_SIZE_CODE"/>
+                    <Column Name="TRANSACTION_ID"/>
+                    <Column Name="TASK_GRANULARITY"/>
+                    <Column Name="TASK_TYPE_ITEM_CLASSIFICATION1"/>
+                    <Column Name="TASK_TYPE_ITEM_CLASSIFICATION2"/>
+                    <Column Name="TASK_TYPE_ITEM_CLASSIFICATION3"/>
+                    <Column Name="REQUEST_TYPE"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="CountStrategyList"
+                    ChildName="CountStrategy"
+                    ChildXMLName="CountStrategy"
+                    ForeignEntity="Task_Type" Name="TaskType"
+                    Type="Bidirectional" XMLName="TaskType">
+                    <Attribute Name="Task_Type" ParentName="Task_Type"/>
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Ship_Node" Virtual="true"
+                    Name="Organization" Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Shipnode_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Enterprise"
+                    Name="Enterprise" Type="Bidirectional" XMLName="Enterprise">
+                    <Attribute Name="Enterprise_Key" ParentName="Enterprise_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="true" ForeignEntity="Org_Enterprise"
+                    IsParent="true" Name="OrgEnterpriseRel"
+                    Type="Bidirectional" XMLName="Org_Enterprise_Rel">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Key"/>
+                    <Attribute Name="Enterprise_Key" ParentName="Enterprise_Organization_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table stores tag information of the inventory that resulted after counting."
+            EntityType="TRANSACTION" Extensible="Y"
+            ListXMLName="CountTagList" Module="wms" Name="Count_Tag"
+            Prefix="YFS_" TableName="YFS_COUNT_TAG" TableType="TRANSACTION">
+            <Attributes>
+                <Attribute ColumnName="COUNT_TAG_KEY" DataType="Key"
+                    DefaultValue="' ' "
+                    Description="The primary key for the YFS_COUNT_TAG table."
+                    Name="Count_Tag_Key" Nullable="false" XMLName="CountTagKey"/>
+                <Attribute ColumnName="COUNT_KEY" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The count key that is associated with this count tag."
+                    Name="Count_Key" Nullable="false" XMLName="CountKey"/>
+                <Attribute ColumnName="TAG_NUMBER" DataType="TagNumber"
+                    DefaultValue="' ' "
+                    Description="This field indicates the tag number associated with the inventory."
+                    Name="Tag_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_NUMBER" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the lot number associated with the inventory."
+                    Name="Lot_Number" Nullable="false"/>
+                <Attribute ColumnName="LOT_KEY_REFERENCE"
+                    DataType="Text-4000" DefaultValue="' ' "
+                    Description="This field stores reference information of the lot number."
+                    Name="Lot_Key_Reference" Nullable="false"/>
+                <Attribute ColumnName="LOT_MANUFACTURE_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="This field specifies the date on which the lot was manufactured."
+                    Name="Lot_Manufacture_Date" Nullable="false" XMLName="ManufacturingDate"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE1"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the lot number attribute."
+                    Name="Lot_Attribute1" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE2"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the lot number attribute."
+                    Name="Lot_Attribute2" Nullable="false"/>
+                <Attribute ColumnName="LOT_ATTRIBUTE3"
+                    DataType="Text-40" DefaultValue="' ' "
+                    Description="This field indicates the lot number attribute."
+                    Name="Lot_Attribute3" Nullable="false"/>
+                <Attribute ColumnName="REVISION_NO" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field indicates the revision number associated with the tag."
+                    Name="Revision_No" Nullable="false"/>
+                <Attribute ColumnName="BATCH_NO" DataType="Text-40"
+                    DefaultValue="' ' "
+                    Description="This field specifies the batch number associated with the tag."
+                    Name="Batch_No" Nullable="false"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="CNT_TAG_PK" Name="YFS_COUNT_TAG_PK">
+                <Attribute ColumnName="COUNT_TAG_KEY" Name="Count_Tag_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="CNT_TAG_I1" Name="YFS_COUNT_TAG_KEY_I1" Unique="true">
+                    <Column Name="COUNT_KEY"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+                <RelationShip Cardinality="OneToOne"
+                    ChildListXMLName="CountTagList"
+                    ChildName="Count_Tag" ChildXMLName="CountTag"
+                    ForeignEntity="Count" Name="Count"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="Count">
+                    <Attribute Name="Count_Key" ParentName="Count_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table stores information of the inventory that was counted in a particular cycle count period."
+            EntityType="TRANSACTION" Extensible="Y"
+            ListXMLName="ItemCountStateList" Module="wms"
+            Name="Item_Count_State" Prefix="YFS_"
+            TableName="YFS_ITEM_COUNT_STATE" TableType="TRANSACTION">
+            <Attributes>
+                <Attribute ColumnName="ITEM_COUNT_STATE_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_ITEM_COUNT_STATE table."
+                    Name="Item_Count_State_Key" Nullable="false" XMLName="ItemCountStateKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Key"
+                    DefaultValue="' '"
+                    Description="The node key that is associated with this count program."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The enterprise code associated with the count program."
+                    IsOrgColumn="Y" Name="Enterprise_Code"
+                    Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="The item that has been counted."
+                    IsOrgColumn="Y" Name="Item_Id" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="LAST_COUNTED_DATE"
+                    DataType="Date" DefaultValue="sysdate"
+                    Description="The date at which this item was put on count."
+                    Name="Last_Counted_Date" Nullable="false"/>
+                <Attribute ColumnName="LAST_COUNTED_TS"
+                    DataType="TimeStamp"
+                    Description="The date at which this item was put on count."
+                    Name="Last_Counted_Timestamp" Nullable="true"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="ITM_CNT_STATE_PK" Name="YFS_ITEM_COUNT_STATE_PK">
+                <Attribute ColumnName="ITEM_COUNT_STATE_KEY" Name="Item_Count_State_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index DB2Name="ITM_CNT_STATE_I1" Name="YFS_ITEM_COUNT_STATE_I1">
+                    <Column Name="NODE_KEY"/>
+                    <Column Name="ENTERPRISE_CODE"/>
+                    <Column Name="ITEM_ID"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity
+            Description="This transaction table is to store the values of a planned physical count in a warehouse."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            IsAbstract="N" ListXMLName="PhysicalCountPlanList"
+            Module="wms" Name="Phy_Cnt_Plan" Prefix="YFS_"
+            TableName="YFS_PHY_CNT_PLAN" TableType="TRANSACTION" XMLName="PhysicalCountPlan">
+            <Attributes>
+                <Attribute ColumnName="PHY_CNT_PLAN_KEY" DataType="Key"
+                    DefaultValue="0"
+                    Description="The primary key for the YFS_PHY_CNT_PLAN table."
+                    Name="Phy_Cnt_Plan_Key" Nullable="false" XMLName="PhysicalCountPlanKey"/>
+                <Attribute ColumnName="NODE_KEY"
+                    DataSecurityUsageType="NODE" DataType="Text-24"
+                    DefaultValue="' '"
+                    Description="Node for which physical count plan is setup."
+                    Name="Node_Key" Nullable="false" XMLName="Node"/>
+                <Attribute ColumnName="PHY_CNT_PLAN_NAME"
+                    DataType="Text-24" DefaultValue="' '"
+                    Description="Plan Name of the physical count."
+                    Name="Phy_Cnt_Plan_Name" Nullable="false" XMLName="PlanName"/>
+                <Attribute ColumnName="ENTERPRISE_CODE"
+                    DataSecurityUsageType="ORG" DataType="OrgCode"
+                    DefaultValue="' '"
+                    Description="The enterprise code associated with the physical count plan."
+                    IsOrgColumn="Y" Name="Enterprise_Code"
+                    Nullable="false" XMLName="EnterpriseCode"/>
+                <Attribute ColumnName="PHY_CNT_START_DATE"
+                    DataType="TimeStamp" DefaultValue="sysdate"
+                    Description="The date of start of the physical count plan."
+                    Name="Physical_Count_Start_Date" Nullable="false" XMLName="StartDate"/>
+                <Attribute ColumnName="PHY_CNT_DURATION"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The duration of the physical count plan."
+                    Name="Physical_Count_Duration" Nullable="false" XMLName="Duration"/>
+                <Attribute ColumnName="DURATION_UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="Physical Count's Duration UOM."
+                    Name="Duration_Uom" Nullable="false" XMLName="DurationUOM"/>
+                <Attribute ColumnName="CANCELLATION_REASON_CODE"
+                    DataType="CommonCode" DefaultValue="' '"
+                    Description="The cancellation reason code for canceling the Physical Count request."
+                    Name="Cancellation_Reason_Code" Nullable="false" XMLName="CancellationReasonCode"/>
+                <Attribute ColumnName="STATUS" DataType="ShortStatus"
+                    DefaultValue="3100"
+                    Description="The current status of the Physical Count program."
+                    Name="Status" Nullable="false" XMLName="Status"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PHY_CNT_PLAN_PK" Name="YFS_PHY_CNT_PLAN_PK">
+                <Attribute ColumnName="PHY_CNT_PLAN_KEY"
+                    Name="Phy_Cnt_Plan_Key" XmlName="PhysicalCountPlanKey"/>
+            </PrimaryKey>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+					ForeignEntity="Ship_Node" Name="Ship_Node" Virtual="true"
+					Type="Unidirectional" XMLName="Node">
+					<Attribute Name="Node_Key" ParentName="Shipnode_Key"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					ForeignEntity="Enterprise" Name="Enterprise" Virtual="true"
+					Type="Unidirectional" XMLName="Enterprise">
+					<Attribute Name="Enterprise_Code" ParentName="Enterprisecode"/>
+				</RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table is to store the values of the Categories corresponding to the physical count in a warehouse."
+            EntityType="TRANSACTION" Extensible="N" HasHistory="Y"
+            IsAbstract="N" ListXMLName="PCPlanActGroupList" Module="wms"
+            Name="Phy_Cnt_Plan_Act" Prefix="YFS_"
+            TableName="YFS_PHY_CNT_PLAN_ACT" TableType="TRANSACTION" XMLName="PCPlanActGroup">
+            <Attributes>
+                <Attribute ColumnName="PHY_CNT_PLAN_ACT_KEY"
+                    DataType="Key" DefaultValue="0"
+                    Description="The primary key for the YFS_PHY_CNT_PLAN table."
+                    Name="" Nullable="false" XMLName="PCPlanActGroupKey"/>
+                <Attribute ColumnName="PHY_CNT_PLAN_KEY" DataType="Key"
+                    DefaultValue="0"
+                    Description="The primary key for the YFS_PHY_CNT_PLAN table."
+                    Name="Phy_Cnt_Plan_Key" Nullable="false" XMLName="PhysicalCountPlanKey"/>
+                <Attribute ColumnName="CATEGORY" DataType="Text-40"
+                    DefaultValue="' '"
+                    Description="Activity Group for which physical count plan is setup."
+                    Name="Category" Nullable="false" XMLName="ActivityGroup"/>
+                <Attribute ColumnName="PHY_CNT_CAT_DURATION"
+                    DataType="Quantity" DefaultValue="0"
+                    Description="The duration before which this category needs to be disabled."
+                    Name="Physical_Count_Category_Duration"
+                    Nullable="false" XMLName="Duration"/>
+                <Attribute ColumnName="CAT_DURATION_UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="Category's Duration UOM."
+                    Name="Category_Duration_Uom" Nullable="false" XMLName="DurationUOM"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PHYCNTPLNGRP_PK" Name="YFS_PHYCNTPLANACT_PK">
+                <Attribute ColumnName="PHY_CNT_PLAN_ACT_KEY"
+                    Name="Phy_Cnt_Plan_Act_Key" XmlName="PCPlanActGroupKey"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PhysicalCountPlanActList"
+                    ChildName="Phy_Cnt_Plan_Act"
+                    ChildXMLName="PhysicalCountPlanAct"
+                    DeleteCascade="true" ForeignEntity="Phy_Cnt_Plan"
+                    IsParent="false" Name="Phy_Cnt_Plan"
+                    Type="Bidirectional" UsedForDataSecurity="true" XMLName="PhysicalCountPlan">
+                    <Attribute Name="Phy_Cnt_Plan_Key" ParentName="Phy_Cnt_Plan_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+        <Entity
+            Description="This transaction table is to store the values of a physical count Categories in a warehouse."
+            EntityType="CONFIGURATION" Extensible="N" HasHistory="Y" Cacheable="true"
+            IsAbstract="N" ListXMLName="PhysicalCountCategoryList"
+            Module="wms" Name="Phy_Cnt_Category" Prefix="YFS_"
+            TableName="YFS_PHY_CNT_CATEGORY" TableType="CONFIGURATION" XMLName="PhysicalCountCategory">
+            <Attributes>
+                <Attribute ColumnName="PHY_CNT_CATEGORY_KEY"
+                    DataType="Key" DefaultValue="0"
+                    Description="The primary key for the YFS_PC_CATEGORY table."
+                    Name="Phy_Cnt_Category_Key" Nullable="false" XMLName="PhysicalCountCategoryKey"/>
+                <Attribute ColumnName="PHY_CNT_CATEGORY_NAME"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Category Name of the activities in physical count."
+                    Name="PC_Category_Name" Nullable="false" XMLName="PhysicalCountCategoryName"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PC_CATEGORY_PK" Name="YFS_PC_CATEGORY_PK">
+                <Attribute ColumnName="PC_CATEGORY_KEY"
+                    Name="Phy_Cnt_Category_Key" XmlName="PhysicalCountCategoryKey"/>
+            </PrimaryKey>
+        </Entity>
+        <Entity
+            Description="This transaction table is to store the values Activities that belong to the Categories corresponding to the physical count in a warehouse."
+            EntityType="CONFIGURATION" Extensible="N" HasHistory="Y"
+            IsAbstract="N" Cacheable="true" 
+            ListXMLName="PhysicalCountCategoryActivityGroupList"
+            Module="wms" Name="Phy_Cnt_Cat_Act_Grp" Prefix="YFS_"
+            TableName="YFS_PHY_CNT_CAT_ACT_GRP" TableType="CONFIGURATION" XMLName="PhysicalCountCategoryActivityGroup">
+            <Attributes>
+                <Attribute ColumnName="PHY_CNT_CAT_ACT_GRP_KEY"
+                    DataType="Key" DefaultValue="0"
+                    Description="The primary key for the YFS_PHY_CNT_CAT_ACT_GRP table."
+                    Name="Phy_Cnt_Cat_Act_Grp_Key" Nullable="false" XMLName="PhysicalCountCategoryActivityGroupKey"/>
+                <Attribute ColumnName="PHY_CNT_CATEGORY_KEY"
+                    DataType="Key"
+                    Description="The primary key for the YFS_PHY_CNT_CATEGORY table."
+                    Name="Phy_Cnt_Category_Key" Nullable="false" XMLName="PhysicalCountCategoryKey"/>
+                <Attribute ColumnName="ACTIVITY_GROUP"
+                    DataType="Text-40" DefaultValue="' '"
+                    Description="Activity Group for which physical count plan is setup."
+                    Name="Activity_Group" Nullable="false" XMLName="ActivityGroup"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' '"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="false" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' '"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="false" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="false" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' '"
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="false" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+            <PrimaryKey DB2Name="PCCATACTGRPKEY_PK" Name="YFS_PCCATACTGRPKEY_PK">
+                <Attribute ColumnName="PHY_CNT_CAT_ACT_GRP_KEY"
+                    Name="Phy_Cnt_Cat_Act_Grp_Key" XmlName="PhysicalCountCategoryActivityGroupKey"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PhysicalCountCategoryActivityGroupList"
+                    ChildName="Phy_Cnt_Cat_Act_Grp"
+                    ChildXMLName="PhysicalCountCategoryActivityGroup"
+                    DeleteCascade="true"
+                    ForeignEntity="Phy_Cnt_Category" IsParent="false"
+                    Name="Phy_Cnt_Category" Type="Bidirectional" XMLName="PhysicalCountCategory">
+                    <Attribute Name="Phy_Cnt_Category_Key" ParentName="Phy_Cnt_Category_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity>
+    </Entities>
+</DBSchema>

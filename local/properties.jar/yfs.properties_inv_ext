@@ -1,0 +1,540 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+# (C) Copyright IBM Corp. 2009, 2019 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_inv_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_inv_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## This file contains the yfs properties to configure the inventory related behaviors in the product.
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.useHotSKUFeature
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to "Y" to use the Hot SKU feature.
+## For more information about the Hot SKU feature, please see Product Concept Guide and
+## the Performance Management Guide
+yfs.hotsku.useHotSKUFeature=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.useTimeOutLocking
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to "Y" to use locking timeout while trying to obtain a lock for an inventory item
+## when the Hot SKU feature is enabled.  The timeout period will be based on the
+## yfs.hotsku.secondsToClassifyAsAbnormalTime property (round up to integer).
+yfs.hotsku.useTimeOutLocking=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.registerAvailabilityOnLockTimeout
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to "Y" to register availablity without a lock if availabilty has not yet
+## been registered. Only applicable when yfs.hotsku.useTimeOutLocking is "Y".
+yfs.hotsku.registerAvailabilityOnLockTimeout=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.qtyMultiplier
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Average requested quantity multiplier (This number can represent number of threads or JVMs which will running simultaneously)
+yfs.hotsku.qtyMultiplier=10
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.secondsToClassifyAsAbnormalTime
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Decimal
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Lock threshold limit in second
+yfs.hotsku.secondsToClassifyAsAbnormalTime=0.10
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.windowTimeInMinutes
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Tracking window interval in minute
+yfs.hotsku.windowTimeInMinutes=600
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.numRequestsInTrackingWindowToKeepAsHotSku
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Number of requests in tracking window to keep item hot
+yfs.hotsku.numRequestsInTrackingWindowToKeepAsHotSku=1
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.numberOfAbnormalLocksForSwitchToHotSKU
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Number of times lock exceeds the lock threshold limit to promote item to be hot
+yfs.hotsku.numberOfAbnormalLocksForSwitchToHotSKU=2
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.highRequestQuantityMultiplier
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## High request quantity multiplier
+yfs.hotsku.highRequestQuantityMultiplier=5
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.maxItemMapSizeInMemory
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Max distinct ItemID of hot item map size in memory.
+yfs.hotsku.maxItemMapSizeInMemory=10000
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.showExtraMessagesAsInfo
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Show extra messages as info.
+yfs.hotsku.showExtraMessagesAsInfo=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.itemMapPurgeLeadTime
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Lead time to purge itemMap in minutes.
+yfs.hotsku.itemMapPurgeLeadTime=10
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.lockOnlyOnLowAvailability
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true, false, Y, N
+## PROPERTY_DESCRIPTION
+## Whether to only attempt locking when availability is determined to be low
+## Setting this property to 'Y/true' uses Optimistic Lock Avoidance.
+## By default this is set to 'N/false'.
+yfs.hotsku.lockOnlyOnLowAvailability=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.assumeUnavailableOnLockTimeout
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## If lock times out, then assume not available.
+yfs.hotsku.assumeUnavailableOnLockTimeout=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: <enterprisecode>.UseSrcWindowForOptimization
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## 
+#<enterprisecode>.UseSrcWindowForOptimization=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.balanceShortageAcrossNodes
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## 
+#yfs.balanceShortageAcrossNodes=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.considerUnassignedDemands
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## 
+#yfs.considerUnassignedDemands=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: <enterprisecode>.externalAvailability.suppressScheduleDemandUpdate
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## When 'Do not check external availability during schedule for reserved order'
+## is checked and <enterprise-code>.externalAvailability.suppressScheduleDemandUpdate
+## is Y, do not raise EXTERNAL_DEMAND_CHANGE event even if configured.
+#<enterprisecode>.externalAvailability.suppressScheduleDemandUpdate=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: <enterprisecode>.externalAvailability.suppressReleaseDemandUpdate
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## When 'Do not check external availability during release' is checked and <enterprise-code>.
+## externalAvailability.suppressReleaseDemandUpdate is Y, do not raise event even if configured.
+#<enterprisecode>.externalAvailability.suppressReleaseDemandUpdate=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.<enterprisecode>.yfs.shipnodeinclause.threshold
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## When the value of eligible ship nodes exceeds the value set in this property,
+## # the queries on the supply and demand tables skip the shipnode_key 'inclause' and perform memory filter for availability.
+yfs.<enterprisecode>.yfs.shipnodeinclause.threshold=999
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.<enterprisecode>.expandAllLines
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## expands to the next sequence of sourcing rule until the product item is found, when the scheduling optimization rule type is 03 (Optimize on Cost, Number of Shipments.)
+## and when availability is fetched for multiple lines and one or more lines are not available in current sequence.
+#yfs.<enterprisecode>.expandAllLines=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.consolidateAdditionalInventory.useLastMessage
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to "N" or "false" to allow Consolidate Additional Inventory Agent to NOT consider LastMessage. If this property is set to "N" or "false", then
+## if Additional Supply/Demand records are created for the same item already processed by the Agent, they could get picked up again by getJobs() based on the NumRecordsToBuffer.
+yfs.consolidateAdditionalInventory.useLastMessage=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.lockItemOnInventoryChanges
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true, false, Y, N
+## PROPERTY_DESCRIPTION
+## This property determines whether an inventory item should be locked prior to making supply or demand updates.
+## By default this is set to 'true' to be backward compatible
+yfs.hotsku.lockItemOnInventoryChanges=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.updateInventoryAfterAPIOutput
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Property is only applicable when yfs.hotsku.lockItemOnInventoryChanges is "N". This property is set to "Y" to commit inventory updates to the DB after API output and at the end
+## of the transaction. If this property is set to "N", then inventory updates are only committed to the DB at the end of the transaction. 
+yfs.hotsku.updateInventoryAfterAPIOutput=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.synchLoadedInventory.MultiRec
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to "Y" to allow the syncLoadedInventory API to correctly calculate inventory changes when there are multiple records in YFS_INVENTORY_ITEM for the same item / node combination.
+yfs.synchLoadedInventory.MultiRec=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.useGranularLockingForItem
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to "Y" to enable granular locking for inventory item. OLA needs to be enabled to use this feature. 
+## It is recommended to set yfs.hotsku.assumeUnavailableOnLockTimeout=Y with this feature.
+yfs.hotsku.useGranularLockingForItem=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.NumberOfLockWithNoWaitAttempts
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Integer
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## Set this property to a suitable value (2 or above) for attempts before considering item unavailable  
+yfs.hotsku.NumberOfLockWithNoWaitAttempts=3
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.useAvailabilityAcrossNodes
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP:
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to a Y if you availability to be considered across inquired nodes. Set N for considering availability high or low at each location individually. 
+yfs.hotsku.useAvailabilityAcrossNodes=Y
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.persitCapacityAdjustments
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Set this property to "true" to push capacity updates to end of transaction, thus reducing lock contention on resource pool consumption table.
+yfs.persitCapacityAdjustments=false
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.hotsku.closeStatementsProactively
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true, false, Y, N
+## PROPERTY_DESCRIPTION
+## This property determines whether to close statements proactively when doing inventory updates. 
+## This property is only applicable when yfs.hotsku.lockItemOnInventoryChanges=N. 
+yfs.hotsku.closeStatementsProactively=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.capacityAvailablity.ignoreCacheForUpdateMode
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Set this property to "true" to disable capacity cache only for api which updates capacity consumption i.e scheduleOrder, reserveAvailableInventory.
+#yfs.capacityAvailablity.ignoreCacheForUpdateMode=true
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.nodecapacity.ignoreCacheForLowAvailability
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: true,false
+## PROPERTY_DESCRIPTION
+## Set this property to "true" to igonre capacity cache and read actual capacity availability for nodes with low capacity cache. This is only supported when capacity locking is enabled.
+#yfs.nodecapacity.ignoreCacheForLowAvailability=true
+## PROPERTY_END

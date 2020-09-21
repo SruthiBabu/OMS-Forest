@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+		<Entity TableName="YFS_ADDITIONAL_ATTRIBUTE" TableType="MASTER">
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdditionalAttributes"
+                    ForeignEntity="Negotiation_Hdr"
+                    Name="Negotiation_Hdr" Type="Bidirectional">
+                    <Attribute Name="Parent_Key" ParentName="Negotiation_Hdr_Key"/>
+                    <Attribute Name="Parent_Table" ParentName="YFS_NEGOIATION_HDR"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="AdditionalAttributes"
+                    ForeignEntity="Negotiation_Line"
+                    Name="Negotiation_Line" Type="Bidirectional">
+                    <Attribute Name="Parent_Key" ParentName="Negotiation_Line_Key"/>
+                    <Attribute Name="Parent_Table" ParentName="YFS_NEGOIATION_LINE"/>
+                </RelationShip>
+            </RelationShips>
+		</Entity>
+		<Entity TableName="YFS_PLANNED_TASK" TableType="TRANSACTION">
+            <RelationShips>               
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="PlannedTasks"
+                    ChildName="Planned_Task" ChildXMLName="PlannedTask"
+                    DeleteCascade="true" ForeignEntity="Order_Header"
+                    Name="Order_Header" Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Entity_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Entity_Name" ParentName="YFS_ORDER_HEADER"/>
+                </RelationShip>				
+            </RelationShips>
+        </Entity>
+	</Entities>
+</DBSchema>

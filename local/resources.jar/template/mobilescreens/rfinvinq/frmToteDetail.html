@@ -1,0 +1,82 @@
+<html>
+    <body>
+        <form name="frmToteDetail" target="/console/rfinvinq.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="9"
+                                    name="lblTitle"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Tote_Info"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblToteid"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblToteid" value="Mobile_Tote_ID"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/ToteDetail/Tote/@ToteId"
+									tag="binding=xml:/ToteDetail/Tote/@ToteId"
+                                    name="txtToteId" size="20" subtype="ProtectedText"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+ 							<tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/ToteDetail/Tote/@ReferenceName"
+                                    name="txtReferenceName" size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/ToteDetail/Tote/@ReferenceName"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/ToteDetail/Tote/@ReferenceValue"
+                                    name="txtReferenceValue" size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/ToteDetail/Tote/@ReferenceValue"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+							<tr>
+                                <td>
+                                    <input col="1" name="lblOpenTask"
+                                    size="10" subtype="Label"
+                                    tag="binding=lblOpenTask" value="Mobile_Open_Tasks"
+                                    type="text" validate="false"/>
+                                    <input col="12" defaultoutput="false"
+                                    inputbinding="xml:/ToteDetail/Tote/@OpenTaskExists"
+                                    name="txtOpenTask" size="2" subtype="ProtectedText"
+                                    tag="binding=xml:/ToteDetail/Tote/@OpenTaskExists"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+                                    subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

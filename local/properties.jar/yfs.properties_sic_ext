@@ -1,0 +1,48 @@
+## Licensed Materials - Property of IBM
+## IBM Sterling Selling and Fulfillment Suite
+## (C) Copyright IBM Corp. 2001, 2016 All Rights Reserved.
+## US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_sic_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_sic_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## Description will goes here
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sic.parameter.to.forward.across.pages
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## A comma separated list of request attributes to be passed across JSP pages.
+## These request parameter values are passed across pages.
+## Comma is used as delimiter to specify multiple request attribute names.
+sic.parameter.to.forward.across.pages=logoutOnExit
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sic.priceandentitlement.cache.additional.param.name
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## A comma separated list of request attribute names to be part of the key for pricing and entitlement cache (user and session specific).
+## Any change in the value of these request attribute values in an existing session, causes the cache to be dropped and  new set of pricing and entitlement data is cached.
+## Following attribute values are already part of key of this cache: ConfigurationDate, Currency, OrganizationCode, EnterpriseCode, CustomerId, IgnoreCustomerEntitlements and BuyerUserId
+## Comma is used as delimiter to specify multiple request attribute names.
+sic.priceandentitlement.cache.additional.param.name=
+## PROPERTY_END

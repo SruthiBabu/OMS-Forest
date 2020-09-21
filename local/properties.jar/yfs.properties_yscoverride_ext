@@ -1,0 +1,144 @@
+# Licensed Materials - Property of IBM
+# IBM Sterling Order Management  (5725-D10), IBM Order Management (5737-D18)
+# IBM Sterling Configure Price Quote (5725-D11)
+# (C) Copyright IBM Corp. 2007, 2018 All Rights Reserved.
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+## PROPERTY_FILE_DETAIL_START
+## PROPERTY_FILE_NAME: yfs.properties_yscoverride_ext
+## PROPERTY_IN_FILE_NAME: yfs.properties_yscoverride_ext.in
+## PROPERTY_FILE_DESCRIPTION
+## This file contains the yfs properties to configure the supply chain related overrides in the product.
+## PROPERTY_FILE_DETAIL_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sc.console.mode
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## override provided since platform ships with sc.console.mode=all
+sc.console.mode=NONE
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.app.identifyconnection
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: N
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: Boolean
+## PROPERTY_PERMISSIBLE_VALUES: Y,N
+## PROPERTY_DESCRIPTION
+## Set this property to 'Y' to enable the application to set contextual information
+## (Agent, API name) on the connection. The information stamped on the connection can
+## be viewed on the database connection by the tools provided by the database vendors.
+## This allows mapping of the connection in the database to its origin on the application
+## side. Note that this is available only for oracle and DB2.
+yfs.app.identifyconnection=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: api.security.smc.enabled
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+api.security.smc.enabled=N
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.onlinehelp.path
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## override help related urls
+yfs.onlinehelp.path=/smcfsdocs/yfscommon/online_help/
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.exception.display.uniqueExceptionId
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+yfs.exception.display.uniqueExceptionId=XML
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: sc.access.token.expire.in.seconds
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+sc.access.token.expire.in.seconds=600
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.config.java.plugin.codebase
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: Y
+## PROPERTY_GROUP: 
+yfs.config.java.plugin.codebase=http://java.sun.com/update/1.7.0/jinstall-7u80-windows-i586.cab
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.config.java.plugin.classid
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+yfs.config.java.plugin.classid=clsid:CAFEEFAC-0017-0000-FFFF-ABCDEFFEDCBA
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.config.java.plugin.type
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+yfs.config.java.plugin.type=application/x-java-applet;jpi-version=1.7.0_80
+## PROPERTY_END
+
+## PROPERTY_START
+## PROPERTY_NAME: yfs.config.java.plugin.javaversion
+## DATABASE_SUPPORT: Y
+## EXTENDED_PROPERTY: N
+## MODIFIABLE: Y
+## MODIFIABLE_AT_RUNTIME: Y
+## SERVER_OVERRIDE: N
+## USER_OVERRIDE: N
+## PROPERTY_GROUP: 
+## PROPERTY_TYPE: String
+## PROPERTY_PERMISSIBLE_VALUES: 
+## PROPERTY_DESCRIPTION
+## 
+yfs.config.java.plugin.javaversion=1.7+
+## PROPERTY_END

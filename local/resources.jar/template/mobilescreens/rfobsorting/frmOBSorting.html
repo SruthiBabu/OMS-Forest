@@ -1,0 +1,101 @@
+<html>
+    <body>
+        <form name="frmOBSorting" target="/console/rfobsorting.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblSort" size="5" subtype="Label" value="Mobile_Sort"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblContainerSCM"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblContainerSCM"
+                                    type="text" validate="false" value="Mobile_Container_SCM"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Container/@ScannedContainer"
+                                    name="txtContainer"
+                                    outputbinding="xml:/Container/@ScannedContainer"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Container/@ScannedContainer"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblDock"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblDock"
+                                    type="hidden" validate="false" value="Mobile_Dock"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Container/@Dock"
+                                    name="txtDock"
+                                    outputbinding="xml:/Container/@Dock"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Container/@Dock"
+                                    type="hidden" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLocationId"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocationId"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Container/@SortLocation"
+                                    name="txtSortLocation"
+                                    outputbinding="xml:/Container/@SortLocation"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/Container/@SortLocation"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Container/@ScannedLocation"
+                                    name="txtLocation"
+                                    outputbinding="xml:/Container/@ScannedLocation"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Container/@ScannedLocation"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Sort"
+                                    size="5" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfobsorting.ppc?action=frmOBSortingValtxtLocation"
+                                    validate="false" value="Mobile_Sort"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

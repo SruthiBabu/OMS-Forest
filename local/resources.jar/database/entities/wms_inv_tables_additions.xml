@@ -1,0 +1,23 @@
+<DBSchema>
+	<Entities>
+		<Entity TableName="YFS_GLOBAL_SERIAL_NUM">
+			<Attributes>
+				<Attribute ColumnName="LOCATION_ID" DataType="ID-40" DefaultValue="' '" Description="The unique identifier for Location. This in conjunction with SHIPNODE_KEY identifies a unique location in the ship node. The location ID on the serial number will reflect the location at which it was last scanned." Name="Location_Id" Nullable="false"/>
+				<Attribute ColumnName="LPN_NO" DataType="ID-40" DefaultValue="' '" Description="LPN number in which the serial is contained. Unique key of YFS_LPN_HDR table." Name="LPN_No" Nullable="false"/>
+				<Attribute ColumnName="LPN_TYPE" DataType="LPNType" DefaultValue="' '" Description="System defined values for the type of LPN. Currently supported types are CASE and PALLET." Name="LPN_Type" Nullable="false" XMLName="LPNType"/>
+				<Attribute ColumnName="INVENTORY_STATUS" DataType="InventoryStatus" DefaultValue="' '" Name="Inventory_Status" Description="The inventory status that is associated with this serial. This refers to an inventory sub classification based on the results of the inventory control processes within the warehouse." IsOrgColumn="N" XMLName="InventoryStatus" CanTranslate="N"/>
+			</Attributes>
+			<CustomInterface Name="WMSGlobalSerialNumCustomDBUtil" Impl="com.yantra.wms.customutil.WMSGlobalSerialNumCustomDBUtilImpl" ModuleCode="wms"/>
+			<Indices>
+				<Index Name="YFS_GLOBAL_SERIAL_NUM_I3" DB2Name="GLOBAL_SER_NUM_I3" Unique="false">
+					<Column Name="LPN_NO"/>
+				</Index>
+				<Index Name="YFS_GLOBAL_SERIAL_NUM_I13" DB2Name="SECONDARY_SER_I13" Unique="false">
+				    <Column Name="AT_NODE"/>
+					<Column Name="SHIPNODE_KEY"/>
+					<Column Name="LOCATION_ID"/>
+				</Index>
+			</Indices>
+		</Entity>
+	</Entities>
+</DBSchema>

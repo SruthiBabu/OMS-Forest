@@ -1,0 +1,268 @@
+<html>
+    <body>
+        <form name="frmCaseDepositInstruction" target="/console/rfcart.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@EquipmentId"
+                                    name="txtEquipmentId"
+                                    outputbinding="xml:/Task/@EquipmentId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EquipmentId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@TaskKey"
+                                    name="txtTaskKey"
+                                    outputbinding="xml:/Task/@TaskKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TaskKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@IsConsolidatedTask"
+                                    name="txtIsConsolidatedTask"
+                                    outputbinding="xml:/Task/@IsConsolidatedTask"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@IsConsolidatedTask"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@EnterpriseKey"
+                                    name="txtEnterprise"
+                                    outputbinding="xml:/Task/@EnterpriseKey"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@EnterpriseKey"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/TaskType/@ActivityGroupId"
+                                    name="txtActivityGroup"
+                                    outputbinding="xml:/Task/@ActivityGroupId"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/Task/@ActivityGroupId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/@DepositAll"
+                                    name="txtDepositAll"
+                                    outputbinding="xml:/DepositLocation/@DepositAll"
+                                    size="10" subtype="Hidden"
+                                    tag="binding=xml:/DepositLocation/@DepositAll"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" name="lblDeposit" size="10" subtype="Label" value="Mobile_Deposit-"
+                                    type="text" validate="false"/>
+                                    <input col="11"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@TaskType"
+                                    name="txtTaskType"
+                                    outputbinding="xml:/Task/@TaskType"
+                                    size="9" subtype="Label"
+                                    tag="binding=xml:/Task/@TaskType"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblCaseId"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblCaseId"
+                                    type="text" validate="false" value="Mobile_Case_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/@LabelAll"
+                                    name="txtSuggestedCaseId"
+                                    outputbinding="xml:/TaskList/Task/Inventory/@SourceCaseId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/TaskList/Task/Inventory/@SourceCaseId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task2/Inventory/@SourceCaseId"
+                                    name="txtCaseId"
+                                    outputbinding="xml:/Task/Inventory/@SourceCaseId"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Task/Inventory/@SourceCaseId"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    name="lblDropoffLocation"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblDropoffLocation"
+                                    type="text" validate="false" value="Mobile_Drop_Off"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/@LocationId"
+                                    name="txtDropoffLocation"
+                                    outputbinding="xml:/Task/@DropoffLocation"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Task/@DropoffLocation"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblLocOrCont"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocOrCont"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/DepositLocation/@DepositLocationId"
+                                    name="txtSuggestedLocationId"
+                                    outputbinding="xml:/DepositLocation/TaskList/Task/@TargetLocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/DepositLocation/TaskList/Task/@TargetLocationId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task2/@Target"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/Task/@Target"
+                                    size="20" subtype="Text"
+                                    tag="binding=xml:/Task/@Target"
+                                    type="text" validate="true"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task2/@TargetLocationId"
+                                    name="txtTargetLocationId"
+                                    outputbinding="xml:/Task/@TargetLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TargetLocationId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task2/@SourceLocationId"
+                                    name="txtCurrentLocationId"
+                                    outputbinding="xml:/Task/@SourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@SourceLocationId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task2/@TargetPalletId"
+                                    name="txtTargetPalletId"
+                                    outputbinding="xml:/Task/@TargetPalletId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TargetPalletId"
+                                    type="hidden" validate="false"/>
+                                    <input col="1" defaultoutput="false"
+                                    inputbinding="xml:/Task2/@TargetCaseId"
+                                    name="txtTargetCaseId"
+                                    outputbinding="xml:/Task/@TargetCaseId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Task/@TargetCaseId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F3" name="Go"
+                                    size="3" subtype="Command"
+                                    tag=" " type="button"
+                                    url="/console/rfcart.ppc?action=frmCartPickDepositUpdate"
+                                    validate="false" value="Mobile_Go"/>
+                                    <input col="5" hotkey="F6"
+                                    name="DepositAll" size="11"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfcart.ppc?action=frmCartPickDepositAll"
+                                    validate="false" value="Mobile_Deposit_All"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="9"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Drop_Offs"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblDeposit" size="10" subtype="Label" value="Mobile_Deposit-"
+                                    type="text" validate="false"/>
+                                    <input col="11"
+                                    inputbinding="xml:/DepositLocation/TaskList/Task/@TaskType"
+                                    name="txtTaskType1"
+                                    size="9" subtype="Label"
+                                    tag="binding=txtTaskType1"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/DepositLocation/DropoffList/@Location"
+                                    col="1" gridcols="2"
+                                    gridrows="4" id="Location"
+                                    mandatory="false"
+                                    name="grdDropOffList"
+                                    namespace="DepositLocation"
+                                    size="20"
+                                    tag="binding=grdDropOffList" validate="false">
+                                    <tr>
+                                    <td>
+                                    <input colno="0" colName=" "
+                                    size="0"
+                                    type="hidden" value=""/>
+                                    <input colno="1" colName="Location"
+                                    inputbinding="xml:/Location/@LocationId"
+                                    size="19" type="text"/>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Prev_View"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,193 @@
+<html>
+    <body>
+        <form name="frmItemEnterpriseList" target="/console/rfcount.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300" >
+                            <tr>
+                                <td>
+                                    <input col="1" 
+                                    name="lblTitle"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblTitle" value="Mobile_Enterprises"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+									<input col="1" mandatory="false"
+                                    name="lblSKU" size="20"
+                                    subtype="Label" tag="binding=lblItemId"
+                                    type="text" validate="false" value="Mobile_Item_ID"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+									<input col="1" defaultoutput="false"
+                                    inputbinding="xml:/EnterpriseList/@ItemID"
+                                    name="txtItemID" 
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/EnterpriseList/@ItemID"
+                                    type="text" validate="false"/>
+								</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table
+                                    binding="/EnterpriseList/Enterprises/@Enterprise"
+                                    col="1" gridcols="20"
+                                    gridrows="5" id="Enterprise"
+                                    mandatory="false"
+                                    name="gridEnterpriseList"
+                                    namespace="EnterpriseList" size="20"
+                                    tag="binding=gridEnterpriseList" validate="false">
+                                    <tr>
+                                    <td>
+									<input colno="0" name="lblProceed" 
+									colName=" " size="0" type="hidden" 
+									value="/console/rfcount.ppc?action=frmCountEntryForCaseOrSKUProceedData"/>
+                                    <input colno="1" colName="1"
+                                    inputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    outputbinding="xml:/RecordCountResult/@CountRequestKey"
+                                    size="0" type="hidden"/>
+									<input colno="2" colName="2"
+                                    inputbinding="xml:/RecordCountResult/@BarCodeData"
+                                    outputbinding="xml:/RecordCountResult/@BarCodeData"
+                                    size="0" type="hidden"/>                                    
+									<input colno="3" colName="3"
+                                    inputbinding="xml:/RecordCountResult/@Node"
+                                    outputbinding="xml:/RecordCountResult/@Node"
+                                    size="0" type="hidden"/>
+                                    <input colno="4" colName="4"
+                                    inputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    outputbinding="xml:/RecordCountResult/@EnterpriseCode"
+                                    size="0" type="hidden"/>
+                                    <input colno="5" colName="5"
+                                    inputbinding="xml:/Inventory/@ItemID"
+									outputbinding="xml:/Inventory/@ItemID"
+                                    size="0" type="hidden"/>
+                                    <input colno="6" colName="6"
+                                    inputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    outputbinding="xml:/Inventory/@UnitOfMeasure"
+                                    size="0" type="hidden"/>
+                                    <input colno="7" colName="7"
+                                    inputbinding="xml:/Inventory/@CatalogOrganizationCode"
+                                    outputbinding="xml:/Inventory/@CatalogOrganizationCode"
+                                    size="0" type="hidden"/>
+                                    <input colno="8" colName="8"
+                                    inputbinding="xml:/Location/@LocationId"
+                                    outputbinding="xml:/Location/@LocationId"
+                                    size="0" type="hidden"/>
+									<input colno="9" colName="9"
+                                    inputbinding="xml:/ParentLPN/@PalletId"
+                                    outputbinding="xml:/ParentLPN/@PalletId"
+                                    size="0" type="hidden"/>
+									<input colno="10" colName="10"
+                                    inputbinding="xml:/ParentLPN/@CaseId"
+                                    outputbinding="xml:/ParentLPN/@CaseId"
+                                    size="0" type="hidden"/>
+                                    <input colno="11" colName="11"
+									inputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    outputbinding="xml:/RecentLPN/@LastScannedLPN"
+                                    size="0" type="hidden"/>
+									<input colno="12" colName="12" 
+									inputbinding="xml:/Enterprise/@Enterprise"
+                                    outputbinding="xml:/Enterprise/@EnterpriseCode"
+                                    size="0" type="hidden"/>
+									<input colno="13" colName="13"
+                                    inputbinding="xml:/CountRequest/@RequestType"
+                                    outputbinding="xml:/CountRequest/@RequestType"
+                                    size="0" type="hidden"/>
+									<input colno="14" colName="13"
+                                    inputbinding="xml:/CountRequest/@LocationId"
+                                    outputbinding="xml:/CountRequest/@LocationId"
+                                    size="0" type="hidden"/>
+									<input colno="15" colName="13"
+                                    inputbinding="xml:/CountRequest/@PalletId"
+                                    outputbinding="xml:/CountRequest/@PalletId"
+                                    size="0" type="hidden"/>
+									<input colno="16" colName="13"
+                                    inputbinding="xml:/CountRequest/@CaseId"
+                                    outputbinding="xml:/CountRequest/@CaseId"
+                                    size="0" type="hidden"/>
+									<input colno="17" colName="13"
+                                    inputbinding="xml:/CountRequest/@ScannedContext"
+                                    outputbinding="xml:/CountRequest/@ScannedContext"
+                                    size="0" type="hidden"/>
+									<input colno="18" colName="Enterprise" 
+									inputbinding="xml:/Enterprise/@Enterprise"
+                                    size="20" type="text"/>
+									<input colno="19" colName="13"
+                                    inputbinding="xml:/CountRequest/@UnitOfMeasure"
+                                    outputbinding="xml:/CountRequest/@UnitOfMeasure"
+                                    size="0" type="hidden"/>
+									</td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr>
+                                <td>
+                                    <input col="1" name="Back"
+                                    size="8" mandatory="false"
+									subtype="CommandBack" hotkey="F4"
+                                    type="button" validate="false" value="Mobile_Back"/>
+																		<input col="10" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="4"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Info"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+					<td>
+						<table>
+							<tr/>                                
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblLocationId" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblLocationId"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td>
+                                    <input col="1"
+                                    inputbinding="xml:/CountRequest/@LocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/CountRequest/@LocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/CountRequest/@LocationId"
+                                    type="text" validate="false"/>
+                                </td>                      
+                            </tr>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Prev_View"/>
+                                </td>
+                            </tr>
+						</table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

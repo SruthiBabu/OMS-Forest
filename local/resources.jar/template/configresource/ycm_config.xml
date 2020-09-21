@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2016 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<ProductManagement Label="Product_Management" Icon="com/yantra/ycp/ui/icons/item.gif">	
+	<PermissionOnlyNode Label="Product_Management_Tree" PermissionId="YCPPM352">
+		<Actions Label="Actions" Icon="com/yantra/ycp/ui/icons/actionlist.gif">
+			<Action PermissionId="YCPPM352A01"/>
+			<Action PermissionId="YCPPM352A02"/>
+			<Action PermissionId="YCPPM352A03"/>
+			<Action PermissionId="YCPPM352A05"/>
+		</Actions>
+	</PermissionOnlyNode>
+    <CatalogConfigurations Label="Catalog_Configurations" Icon="com/yantra/ycp/ui/icons/item.gif">
+        <ItemStatuses Label="Item_Statuses" PermissionId="YSYCM000" FormName="YCPPM039" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/status.gif"/>
+        <AdditionalItemAttributes Label="Additional_Item_Attributes" PermissionId="YSYCM001" FormName="YCPPM041" GroupName="ItemMaster" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/additionalattributes.gif"/>
+        <ItemInstructionCode Label="Item_Instruction_Codes" PermissionId="YSYCM021" FormName="YCM00033" GroupName="ItemMaster" EntityName="ItemInstructionCode" Icon="com/yantra/ycm/ui/icons/instructioncode.gif"/>
+        <InstructionTypes Label="Item_Instruction_Types" PermissionId="YSYCM013" FormName="YCPPM260" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycm/ui/icons/instructiontype.gif"/>
+		<VelocityCode Label="Velocity_Codes" PermissionId="YSYCM018" FormName="YCPPM261" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"/> 
+        <ServiceSkill Label="Service_Skills" PermissionId="YSYCM022" FormName="YCM00082" GroupName="ItemMaster" EntityName="ServiceSkill" Icon="com/yantra/ycm/ui/icons/serviceskills.gif"/>
+        <ServiceComplexityLevel Label="Service_Complexity_Levels" PermissionId="YSYCM027" FormName="YCPPM420" GroupName="ItemMaster" EntityName="CommonCode" Icon="com/yantra/ycm/ui/icons/servicecomplexitylevel.gif"/>
+		<AliasTypes Label="Item_Alias_Types" PermissionId="YSYCM010" FormName="YCPPM040" GroupName="ItemMaster" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/alias.gif"/>	
+		<AssociationTypes Label="Association_Types" PermissionId="YSYCM011" FormName="YCPPM042" GroupName="HubData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/associations.gif"/>	
+		<ItemExclusionCodes Label="Item_Exclusion_Codes" PermissionId="YSYCM012" FormName="YCPPM176" GroupName="ItemMaster" EntityName="CommonCode" Icon="com/yantra/ycm/ui/icons/itemexclusioncodes.gif"/>
+		<CatalogRules Label="Catalog_Rules" PermissionId="YSYCM028" FormName="YCM000110" GroupName="ItemMaster" EntityName="Rules" Icon="com/yantra/ycm/ui/icons/otherservices.gif"/>
+		<Asset Label="Asset" Icon="com/yantra/ycm/ui/icons/services.gif">
+			<AssetTypes Label="Asset_Types" PermissionId="YSYCM029" FormName="YCM000111" GroupName="AssetData" EntityName="CommonCode" Icon="com/yantra/ycm/ui/icons/add.gif"/>
+			<ContentLocations Label="Content_Locations" PermissionId="YSYCM030" FormName="YCM000112" GroupName="AssetData" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/location.gif"/>
+		</Asset>
+	</CatalogConfigurations>
+    <Products Label="Products" Icon="com/yantra/ycp/ui/icons/item.gif">
+    	<Items Label="Items" PermissionId="YSYCM002" FormName="YCM00002" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycp/ui/icons/item.gif"/>    	
+    	<ItemShipNodeAttributes Label="Item_Node_Attributes" PermissionId="YSYCM003" FormName="YCM00063" GroupName="ItemMaster" EntityName="ItemNodeDefn" Icon="com/yantra/ycm/ui/icons/itemshipnode.gif"/>    	
+    	<ItemUOM Label="Item_UOM_Master" PermissionId="YSYCM004" FormName="YCM00074" GroupName="ItemMaster" EntityName="ItemUOMMaster" Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"/>
+		<MasterCatalog Label="Master_Catalog" PermissionId="YSYCM005" FormName="YCM00001" GroupName="ItemMaster" EntityName="MasterCatalog" Icon="com/yantra/ycm/ui/icons/mastercatalog.gif"/>   	
+		<Categories Label="Categories" Icon="com/yantra/ycp/ui/icons/category.gif">
+			<!--CategoryHierarchy Label="Category_Hierarchy" PermissionId="YSYCM006" FormName="YCM00003" DisplayMode="Dock" GroupName="ItemMaster" EntityName="Category" Icon="com/yantra/ycm/ui/icons/categoryhierarchy.gif"/-->
+			<AdditionalCategoryAttributes Label="Additional_Category_Attributes" PermissionId="YSYCM007" FormName="YCPPM020" GroupName="ItemMaster" EntityName="CategoryAttributes" Icon="com/yantra/ycp/ui/icons/category.gif"/>
+		</Categories>
+		<Classifications Label="Classifications" Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif">
+			<ClassificationDefinition Label="Classification_Definition" PermissionId="YSYCM008" FormName="YCM00051" GroupName="ItemMaster" EntityName="CategoryDomain" Icon="com/yantra/ycm/ui/icons/classificationdefinition.gif"/>
+			<ClassificationHierarchy Label="Classification_Hierarchy" PermissionId="YSYCM009" FormName="YCM00036" GroupName="ItemMaster" EntityName="Category" Icon="com/yantra/ycm/ui/icons/classifications.gif"/>
+			<PostingClassifications Label="Posting_Classifications" PermissionId="YSYCM023" FormName="YCPPM654" GroupName="ItemMaster" EntityName="CommonCode" Icon="com/yantra/ycp/ui/icons/status.gif"/>	
+		</Classifications>
+	</Products>        
+	<DeliveryServices Label="Delivery_Services" Icon="com/yantra/ycm/ui/icons/deliveryservices.gif">
+		<!--DeliveryItems Label="Delivery_Service_Items" PermissionId="YSYCM014" FormName="YCM00067" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/deliveryservices.gif"/-->
+		<DeliveryOptions Label="Delivery_Service_Options" PermissionId="YSYCM014" FormName="YCM00073" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"/>
+		<DeliveryUOM Label="Delivery_Service_UOM_Master" PermissionId="YSYCM015" FormName="YCM00056" GroupName="ItemMaster" EntityName="ItemUOMMaster" Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"/>
+		<ServiceTypes Label="Service_Type" Icon="com/yantra/ycm/ui/icons/servicetypegroup.gif">
+			<ServiceType Label="Delivery_Service_Types" PermissionId="YSYCM026" FormName="YCM00095" GroupName="ItemMaster" EntityName="ItemUOMMaster" Icon="com/yantra/ycm/ui/icons/servicetypegroup.gif"/>
+			<CapacityByRegionLevel Label="Additional_Capacity" PermissionId="YSYCM024" FormName="YCM00091" GroupName="ItemMaster" SectionName="ADDNL_CAPACITY" EntityName="RegionUsage" Icon="com/yantra/ycp/ui/icons/slot.gif"/>
+		</ServiceTypes>
+	</DeliveryServices>
+	<ProvidedServices Label="Provided_Services" Icon="com/yantra/ycm/ui/icons/providedservices.gif">
+			<!--ProvidedItems Label="Provided_Service_Items" PermissionId="YSYCM014" FormName="YCM00060" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/providedservices.gif"/-->
+			<ProvidedOptions Label="Provided_Service_Options" PermissionId="YSYCM014" FormName="YCM00072" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/provideditemoption.gif"/>
+			<ProvidedUOM Label="Provided_Service_UOM_Master" PermissionId="YSYCM015" FormName="YCM00055" GroupName="ItemMaster" EntityName="ItemUOMMaster" Icon="com/yantra/ycp/ui/icons/dimensionuom.gif"/>
+			<ServiceType Label="Provided_Service_Types" PermissionId="YSYCM026" FormName="YCM00094" GroupName="ItemMaster" EntityName="ItemUOMMaster" Icon="com/yantra/ycm/ui/icons/servicetypegroup.gif"/>
+	</ProvidedServices> 
+	<Services Label="Value_Added_Services" Icon="com/yantra/ycp/ui/icons/sellerservices.gif">
+		<KittingServices Label="Kitting_Services" PermissionId="YSYCM014" FormName="YCM00110" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/kittingservices.gif"/>
+		<DekittingServices Label="Dekitting_Services" PermissionId="YSYCM014" FormName="YCM00111" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/dekittingservices.gif"/>
+		<ComplianceServices Label="Compliance_Services" PermissionId="YSYCM014" FormName="YCM00112" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/complianceservices.gif"/>
+		<InventoryChangeServices Label="Inventory_Change_Services" PermissionId="YSYCM014" FormName="YCM00113" GroupName="ItemMaster" EntityName="Item" Icon="com/yantra/ycm/ui/icons/inventorychangeservices.gif"/>
+		<ServiceActivityMaster Label="Activities" PermissionId="YSYCM017" FormName="YCM00119" GroupName="HubData" EntityName="Activity" Icon="com/yantra/ycm/ui/icons/serviceactivity.gif"/>
+	</Services>
+</ProductManagement>

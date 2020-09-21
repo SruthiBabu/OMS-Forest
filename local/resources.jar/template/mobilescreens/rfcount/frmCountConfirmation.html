@@ -1,0 +1,200 @@
+<html>
+    <body>
+        <form name="frmCountConfirmation" target="/console/rfcount.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                           <tr>
+                                <td>
+                                    <input col="1" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblTitle"
+                                    type="text" validate="false" value="Count_Confirmation"/>
+									<input col="21"
+                                    inputbinding="xml:/CountTask/@TaskId"
+                                    mandatory="false"
+                                    outputbinding="xml:/CountTask/@TaskId"
+                                    size="0" subtype="Hidden"
+                                    tag="binding=xml:/CountTask/@TaskId"
+                                    type="hidden" validate="false"/>
+									<input col="11"
+                                    inputbinding="xml:/TaskList/Task/Inventory/@ItemId"
+                                    mandatory="false"
+                                    outputbinding="xml:/CountTask/@ItemId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/CountTask/@ItemId"
+                                    type="hidden" validate="false"/>
+									<input col="11"
+                                    inputbinding="xml:/TaskList/Task/@SourceLocationId"
+                                    mandatory="false"
+                                    outputbinding="xml:/CountTask/@SourceLocationId"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/CountTask/@ItemId"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblItemId"
+                                    size="8" subtype="Label"
+                                    tag="binding=lblSku"
+                                    type="text" validate="false" value="SKU"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+									inputbinding="xml:/CountRecordSummary/@DisplayItemId"
+                                    mandatory="false"
+                                    name="txtSuggItemId"
+                                    outputbinding="xml:/CountRecordSummary/@DisplayItemId"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/CountRecordSummary/@DisplayItemId"
+                                    type="text" validate="false"/>
+                                    <input col="1"
+                                    inputbinding="xml:/CountRecordSummary/@ItemID"
+                                    mandatory="false"
+                                    name="txtItemId"
+                                    outputbinding="xml:/CountRecordSummary/@ItemID"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/CountRecordSummary/@ItemID"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblUom"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblUom"
+                                    type="text" validate="false" value="UOM"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/CountRecordSummary/@UnitOfMeasure"
+                                    mandatory="false" name="txtUOM"
+                                    outputbinding="xml:/CountRecordSummary/@UnitOfMeasure"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/CountRecordSummary/@UnitOfMeasure"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblCountQty"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblCountQty"
+                                    type="text" validate="false" value="Count_Quantity"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/CountRecordSummary/@CountQuantity"
+                                    mandatory="false"
+                                    name="txtCountQty"
+                                    outputbinding="xml:/CountRecordSummary/@CountQuantity"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/CountRecordSummary/@CountQuantity"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" name="lblSystemQty"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblSysQty"
+                                    type="text" validate="false" value="System_Quantity"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/CountRecordSummary/@SystemQuantity"
+                                    mandatory="false"
+                                    name="txtSystemQty"
+                                    outputbinding="xml:/CountRecordSummary/@SystemQuantity"
+                                    size="20" subtype="ProtectedText"
+                                    tag="binding=xml:/CountRecordSummary/@SystemQuantity"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F3"
+                                    mandatory="false" size="14"
+                                    subtype="Command" tag=" "
+                                    type="button" name="AcceptButton"
+                                    url="/console/rfcount.ppc?action=frmCompleteTask"
+                                    validate="false" value="Mobile_Confirm_Count"/>
+                                    <input col="15" hotkey="F6"
+                                    mandatory="false" size="7"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfcount.ppc?action=frmRescanTask"
+                                    validate="false" value="Mobile_Rescan"/>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>
+                                    <input col="1" hotkey="F9"
+                                    mandatory="false" size="16"
+                                    subtype="Command" tag=" "
+                                    type="button" name="CountAllLocations"	url="/console/rfcount.ppc?action=frmRescanTaskAllLocations"
+                                    validate="false" value="Count_All_Items"/>
+													<input col="17" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="4"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Info"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+					<td>
+						<table>
+							<tr/>                                
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblLocationId" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblLocationId"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td>
+                                    <input col="1"
+                                    inputbinding="xml:/CountRequest/@LocationId"
+                                    name="txtLocationId"
+                                    outputbinding="xml:/CountRequest/@LocationId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/CountRequest/@LocationId"
+                                    type="text" validate="false"/>
+                                </td>                      
+                            </tr>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+							<tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Prev_View"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

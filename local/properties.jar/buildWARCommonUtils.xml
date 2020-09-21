@@ -1,0 +1,1555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed Materials - Property of IBM
+     IBM Sterling Selling and Fulfillment Suite, IBM Order Management (5737-D18)
+     (C) Copyright IBM Corp. 2001, 2019 All Rights Reserved.
+     US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="commonwar">
+	
+	<condition property="nowars2" value="true">
+		<equals arg1="${nowars}" arg2="true" casesensitive="false" trim="true"/>
+	</condition>
+	<condition property="earfile" value="${package}.ear">
+		<and>
+			<isset property="package" />
+			<not>
+				<isset property="earfile" />
+			</not>
+		</and>
+	</condition>
+	<condition property="earfile" value="smcfs.ear">
+		<not>
+			<isset property="earfile" />
+		</not>
+	</condition>
+
+	<property environment="env" />
+
+	<property file="properties/sandbox.cfg" prefix="sandbox" />
+	<property name="installdir" location="${sandbox.INSTALL_DIR}" />
+	<property file="${installdir}/bin/build.properties" />
+	<property name="dir.external" location="${installdir}/external_deployments" />
+	<property name="platformdata" location="${installdir}/repository/eardata/platform" />
+	<property name="configdata" location="${installdir}/repository/eardata/config" />
+	<property name="shrinksafe.dir" location="${sandbox.INSTALL_DIR}/repository/dojo/src/dojo/util/shrinksafe" />
+	<property name="nodejs.home.dir" location="${installdir}/nodejs/bin" />
+	<property name="node_js.home.dir" location="${installdir}/node_js/bin" />
+	<property name="ngstorebuild.dir" location="${installdir}/nodejs_ngstorebuild" />
+	<property name="ngstorebuild.ootb.file" location="${ngstorebuild.dir}/ngstore_build_gulp.js" />
+	<property name="ngstorebuild.extn.file" location="${ngstorebuild.dir}/ngstore_build_extn_gulp.js" />
+	<property name="minificationscripts.extn.dir" location="${ngstorebuild.dir}/minificationscripts_extn" />
+	<property name="minificationscripts.ootb.dir" location="${ngstorebuild.dir}/minificationscripts_ootb" />
+	<property name="angularbuild.dir" location="${installdir}/nodejs_angularbuild" /><!-- this is for Angular5+ minification-->
+	<property name="tmpdir" location="${sandbox.SYSTMP_DIR}/${earfile}" />
+	<property name="uijartmpdir" value="${tmpdir}/uijars" />
+	
+	<!-- DBQueryTool is not enabled by default. To include it pass -Dnodbqueryclient=false on building EAR. -->
+	<!--property name="nodbqueryclient" value="true"/-->
+
+	<!-- this contains module ui jars -->
+
+	<taskdef name="dynclasspath" classname="com.yantra.tools.ant.ClassPathHelper" />
+	<taskdef name="libexclhelper" classname="com.yantra.tools.ant.LibExcludesHelper" />
+	<taskdef name="sciforeach" classname="com.yantra.tools.ant.ForEach" />
+	<taskdef name="listFiles" classname="com.yantra.tools.ant.ListFiles" />
+	<taskdef name="sciregexpproperty" classname="com.yantra.tools.ant.RegExpProperty" />
+	<taskdef name="wlxmlgen" classname="com.yantra.tools.ant.taskdefs.WebLogicXmlGenerator" />	
+	<taskdef name="JBossClassloadingXmlGen" classname="com.yantra.tools.ant.taskdefs.JBossClassloadingXmlGenerator" />
+
+	<import file="precompileWARCommonUtils.xml" />
+	<import file="AFCTasks.xml" />
+	
+	<path id="project.classpath">
+		<pathelement location="${installdir}/jar/woodstock.jar" />
+		<fileset dir="${installdir}/jar">
+			<include name="platform/**/*.jar" />
+			<include name="log4j/**/*.jar" />
+		</fileset>
+		<fileset dir="${installdir}">
+			<include name="*.jar" />
+			<include name="jasper/**/*.jar" />
+		</fileset>
+		<fileset dir="${sandbox.ANT_DIR}" includes="*.jar" />
+		<fileset dir="${installdir}/dbjar">
+			<include name="**/*.jar" />
+			<include name="**/*.zip" />
+		</fileset>
+		<!-- 
+		<fileset dir="${installdir}/noapp/lib">
+			<include name="javax.servlet.jar" />
+		</fileset>
+		-->
+		<fileset dir="${installdir}/jar">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="project.noapploader.classpath">
+		<pathelement location="${installdir}/jar/bootstrapper.jar" />
+	</path>
+
+
+	<!-- =========================================================================== -->
+
+	<target name="create-wars" unless="nowars2" description="This is the main entry-point to the commonwar utility. EAR and WAR scripts invoke this target.">
+	 	<delete dir="${uijartmpdir}" />
+		<mkdir dir="${uijartmpdir}" />
+		<condition property="warfile-target" value="-make-multiple-warfiles" else="-make-single-warfiles">
+			<isset property="warfiles" />
+		</condition>
+		<antcall target="${warfile-target}" />
+
+	</target>
+
+	<!-- =========================================================================== -->
+
+
+	<target name="-make-single-warfiles">
+		<condition property="wardest" value="${warname}" else="${package}">
+			<isset property="warname" />
+		</condition>
+		<antcall target="tstamp">
+			<param name="message" value="@@@@@@@@@@ Starting war build ${wardest} @@@@@@@@@@" />
+		</antcall>
+		<property name="warfile" value="${tmpdir}/${wardest}.war" />
+		<condition property="package.exists" value="true">
+			<available file="${installdir}/repository/eardata/${package}/war" />
+		</condition>
+		<AFCfail unless="package.exists" message="The -Dpackage={1} does not point to a valid ear data repository" >
+			<arg value="${package}"/>
+		</AFCfail>
+
+		<loadproperties srcFile="${installdir}/bin/build.properties">
+			<filterchain>
+				<tokenfilter>
+					<containsstring contains="${wardest}" />
+				</tokenfilter>
+				<replacestring from="${wardest}.war" to="this.package.contents" />
+				<replacestring from="${wardest}.dojo.profile" to="this.dojo.profile" />
+				<replacestring from="${wardest}.dojo.profile.localeList" to="this.dojo.profile.localeList" />
+				<replacestring from="${wardest}_pre_ant_file" to="this.package.pre.ant.file" />
+                <replacestring from="${wardest}_pre_ant_target" to="this.package.pre.ant.target" />
+			</filterchain>
+		</loadproperties>
+		<AFCdebug property="this.package.contents"/>
+
+		<create-war package.attr="${package}" packagecontents.attr="${this.package.contents},platform" warfile.attr="${warfile}" />
+		<antcall target="-explode-war" />
+		<antcall target="-move-war-to-exter" />
+		<antcall target="tstamp">
+			<param name="message" value="@@@@@@@@@@ Finished war build ${wardest} @@@@@@@@@@" />
+		</antcall>
+	</target>
+
+
+	<!-- =========================================================================== -->
+
+	<target name="-make-multiple-warfiles">
+		<sciforeach list="${warfiles}" propertyName="packagename" targetName="-make-war" />
+	</target>
+
+	<target name="-make-war">
+		<condition property="wardest" value="${warname}" else="${packagename}">
+			<isset property="warname" />
+		</condition>
+		<antcall target="tstamp">
+			<param name="message" value="@@@@@@@@@@ Starting war build ${wardest} @@@@@@@@@@" />
+		</antcall>
+
+		<property name="warfile" value="${tmpdir}/${wardest}.war" />
+
+		<!-- go to the build.properties to get the components of this war -->
+		<loadproperties srcFile="${installdir}/bin/build.properties">
+			<filterchain>
+				<tokenfilter>
+					<containsstring contains="${packagename}" />
+				</tokenfilter>
+				<replacestring from="${packagename}.war" to="this.package.contents" />
+				<replacestring from="${packagename}.dojo.profile" to="this.dojo.profile" />
+				<replacestring from="${packagename}.dojo.profile.localeList" to="this.dojo.profile.localeList" />
+				<replacestring from="${packagename}_pre_ant_file" to="this.package.pre.ant.file" />
+                <replacestring from="${packagename}_pre_ant_target" to="this.package.pre.ant.target" />
+			</filterchain>
+		</loadproperties>
+		<AFCdebug property="this.package.contents"/>
+		 <!-- pre build war call -->
+        <condition property="invoke-pre-ant-file" value="true">
+            <isset property="this.package.pre.ant.file"/>
+        </condition>
+        <antcall target="-before-create-war" />
+		<create-war package.attr="${packagename}" packagecontents.attr="${this.package.contents}" warfile.attr="${warfile}" />
+		<antcall target="-explode-war" />
+		<antcall target="-move-war-to-exter" />
+		<antcall target="tstamp">
+			<param name="message" value="@@@@@@@@@@ Finished war build ${wardest} @@@@@@@@@@" />
+		</antcall>
+	</target>
+	
+	<target name="-explode-war" if="explodewar">
+		<move file="${tmpdir}/${wardest}.war" tofile="${tmpdir}/${wardest}.war1" overwrite="true"/>
+		<mkdir dir="${tmpdir}/${wardest}.war"/>
+		<unzip src="${tmpdir}/${wardest}.war1" dest="${tmpdir}/${wardest}.war" />
+	</target>
+	
+	<target name="-move-war-to-exter" if="movewartoexter">
+		<delete file="${dir.external}/${wardest}.war" failonerror="false" />
+		<delete dir="${dir.external}/${wardest}.war" failonerror="false" />
+		<move file="${tmpdir}/${wardest}.war" todir="${dir.external}"/>
+	</target>
+
+	<target name="-before-create-war" if="invoke-pre-ant-file">
+        <property name="pre.ant.file" value="${sandbox.INSTALL_DIR}/${this.package.pre.ant.file}"/>	
+        <AFCecho message="invoking script ${pre.ant.file} for package ${packagename} before building war file" />
+
+        <condition property="invoke-default-target" value="true">
+            <not>
+                <isset property="this.package.pre.ant.target"/>
+            </not>
+        </condition>
+
+        <antcall target="-invoke-pre-ant-file-default-target" />
+        <antcall target="-invoke-pre-ant-file-custom-target" />
+        <AFCecho message="finished invoking script ${pre.ant.file} for package ${packagename}." />
+   </target>
+
+   <target name="-invoke-pre-ant-file-default-target" if="invoke-default-target">
+        <AFCecho message="invoking default target for script ${pre.ant.file}" />
+        <ant antfile="${pre.ant.file}" />
+   </target>
+
+   <target name="-invoke-pre-ant-file-custom-target" unless="invoke-default-target">
+        <AFCecho message="invoking target ${this.package.pre.ant.target} for script ${pre.ant.file}" />
+        <ant antfile="${pre.ant.file}" target="${this.package.pre.ant.target}"/>
+   </target>
+
+	<target name="gen-weblogic-xml" if="gen.weblogic.xml">
+			<wlxmlgen contextroot="${package-attr}" outputfilepath="${wartmpdir}/WEB-INF/weblogic.xml" extensionfilepath="${installdir}/extensions/${package-attr}/weblogic.xml" />
+	</target>
+
+	<target name="prepare-dojo-files" if="requires.dojo" >
+
+		<!-- technically, CUF uses both dojo and idx -->
+		<condition property="dojo.src.available">
+			<and>
+				<available file="${installdir}/repository/dojo/src" type="dir"/>					
+			</and>
+		</condition>
+		<condition property="idx.src.available">
+			<and>
+				<available file="${installdir}/repository/idx/src" type="dir"/>					
+			</and>
+		</condition>
+		
+		<antcall target="prepare-dojo-simplecopy" />
+		<antcall target="prepare-idx-simplecopy" />
+
+		<condition property="dojo-build-target" value="prepare-dojo-build">
+			<and>
+				<isset property="shrinksafe.dir"/>
+				<available file="${shrinksafe.dir}" type="dir"/>
+			</and>
+		</condition>
+		<property name="dojo-build-target" value="skip-dojo-build"/>
+
+		<antcall target="${dojo-build-target}" />
+
+	</target>
+	
+	<target name="angular-ootb-minification" if="wsc.war.angular.minification.required" >
+		<!-- remove old "tmp", "tmp_copy_ngstore" directories and copy new content from "${installdir}/repository/eardata/wsc/war/ngstore". "iscDoc" is getting copied as doc gen takes up to 10min. We have already done it in store. -->
+		<echo message="1. angular ootb minification: preparing and copying directories and files."></echo>
+		<delete dir="${ngstorebuild.dir}/tmp" />
+		<delete dir="${ngstorebuild.dir}/tmp_copy_ngstore" />
+		<mkdir dir="${ngstorebuild.dir}/tmp" />
+		<mkdir dir="${ngstorebuild.dir}/tmp_copy_ngstore" />
+		<copy todir="${ngstorebuild.dir}/tmp_copy_ngstore">
+			<fileset dir="${installdir}/repository/eardata/wsc/war/ngstore">
+				<include name="iscDoc/**/*"/>
+				<include name="jsps/**/*"/>
+				<include name="shared/**/*"/>
+				<include name="store/**/*"/>
+			</fileset>
+		</copy>
+		<!-- to run OOTB minification, copy all content from "minificationscripts.ootb.dir" directory to "${ngstorebuild.dir}". -->
+		<echo message="2. angular ootb minification: copying minification scripts."></echo>
+		<copy todir="${ngstorebuild.dir}">
+			<fileset dir="${minificationscripts.ootb.dir}" includes="**/*">
+			</fileset>
+		</copy>
+		<echo message="3. angular ootb minification: minification start."></echo>
+		<property environment="env"/>
+		<exec executable="${ngstorebuild.dir}/ootbminify.sh" failonerror="false">
+			<env key="HOME" value="${ngstorebuild.dir}/tmp"/>
+			<env key="PATH" value="${env.PATH}:${nodejs.home.dir}"/>
+			<arg line="${ngstorebuild.ootb.file}" />
+		</exec>
+		<echo message="4. angular ootb minification: minification complete."></echo>
+		<delete file="${ngstorebuild.dir}/bower.json" />
+		<delete file="${ngstorebuild.dir}/csslintrc.json" />
+		<delete file="${ngstorebuild.dir}/isc-attachtheme.js" />
+		<delete file="${ngstorebuild.dir}/isc-copyright.js" />
+		<delete file="${ngstorebuild.dir}/isc-file2js.js" />
+		<delete file="${ngstorebuild.dir}/iscPseudoFile.js" />
+		<delete file="${ngstorebuild.dir}/jshintrc.json" />
+		<delete file="${ngstorebuild.dir}/ngstore.build.config.json" />
+		<delete file="${ngstorebuild.dir}/ngstore.gulp.config.json" />
+		<delete file="${ngstorebuild.ootb.file}" />
+		<delete file="${ngstorebuild.dir}/ngstore_flatten_nls.js" />
+		<delete file="${ngstorebuild.dir}/ngstore_unflatten_nls.js" />
+		<delete file="${ngstorebuild.dir}/ngstore-gulp-tasks.js" />
+		<delete file="${ngstorebuild.dir}/package.json" />
+		
+		<condition property="angular.ngstore.ootb.minification.should.copy">
+            <and>
+                <available file="${ngstorebuild.dir}/tmp_copy_ngstore/scripts" type="dir"/>
+            	<available file="${ngstorebuild.dir}/tmp_copy_ngstore/style" type="dir"/>
+            </and>
+        </condition>
+		<antcall target="angular-ootb-minification-copy" />
+		
+		<delete dir="${ngstorebuild.dir}/tmp" />
+		<delete dir="${ngstorebuild.dir}/tmp_copy_ngstore" />
+		<echo message="6. angular ootb minification: Copying all minified files completed and temporary directories deleted."></echo>
+		
+		<condition property="angular.ngstore.extn.src.available">
+            <and>
+                <available file="${wartmpdir}/extn/ngstore" type="dir"/>
+            </and>
+        </condition>
+		<antcall target="angular-extn-minification" />
+	</target>
+	<target name="angular-ootb-minification-copy" if="angular.ngstore.ootb.minification.should.copy">
+		<AFCecho message="5. angular ootb minification: copied minification scripts - cleaned up. Deleting existing content in {1} and then copying all generating minified files to={1}" >
+			<arg value="${wartmpdir}/ngstore" />
+		</AFCecho>
+		<delete dir="${wartmpdir}/ngstore" />
+		<mkdir dir="${wartmpdir}/ngstore" />
+		<copy todir="${wartmpdir}/ngstore">
+			<fileset dir="${ngstorebuild.dir}/tmp_copy_ngstore" includes="**/*">
+			</fileset>
+		</copy>
+	</target>
+	<target name="angular-extn-minification" if="angular.ngstore.extn.src.available">
+		<!-- remove old "tmp", "tmp_copy_ngstore", "tmp_copy_ngstore_extn" directories and copy new content from "${installdir}/repository/eardata/wsc/war/ngstore", "${wartmpdir}/extn/ngstore". -->
+		<echo message="1. angular extn minification: preparing and copying directories and files."></echo>
+		<delete dir="${ngstorebuild.dir}/tmp" />
+		<delete dir="${ngstorebuild.dir}/tmp_copy_ngstore" />
+		<delete dir="${ngstorebuild.dir}/tmp_copy_ngstore_extn" />
+		<mkdir dir="${ngstorebuild.dir}/tmp" />
+		<mkdir dir="${ngstorebuild.dir}/tmp_copy_ngstore" />
+		<copy todir="${ngstorebuild.dir}/tmp_copy_ngstore">
+			<fileset dir="${installdir}/repository/eardata/wsc/war/ngstore">
+				<include name="iscDoc/**/*"/>
+				<include name="jsps/**/*"/>
+				<include name="shared/**/*"/>
+				<include name="store/**/*"/>
+			</fileset>
+		</copy>
+		<mkdir dir="${ngstorebuild.dir}/tmp_copy_ngstore_extn" />
+		<!-- This is different from OOTB where we only copy limited folders. We want to only not copy the generated folders: scripts, style. -->
+		<copy todir="${ngstorebuild.dir}/tmp_copy_ngstore_extn" >
+			<fileset dir="${wartmpdir}/extn/ngstore" includes="**/*">
+				<exclude name="scripts/" />
+				<exclude name="style/" />
+			</fileset>
+		</copy>
+		<!-- to run OOTB minification, copy all content from "minificationscripts.extn.dir" directory to "${ngstorebuild.dir}". -->
+		<echo message="2. angular extn minification: copying minification scripts."></echo>
+		<copy todir="${ngstorebuild.dir}">
+			<fileset dir="${minificationscripts.extn.dir}" includes="**/*">
+			</fileset>
+		</copy>
+		<echo message="3. angular extn minification: minification start."></echo>
+		<property environment="env"/>
+		<exec executable="${ngstorebuild.dir}/extnminify.sh" failonerror="false">
+			<env key="HOME" value="${ngstorebuild.dir}/tmp"/>
+			<env key="PATH" value="${env.PATH}:${nodejs.home.dir}"/>
+			<arg line="${ngstorebuild.extn.file}" />
+		</exec>
+		<echo message="4. angular extn minification: minification complete."></echo>
+		<delete file="${ngstorebuild.dir}/csslintrc.json" />
+		<delete file="${ngstorebuild.dir}/isc-attachtheme.js" />
+		<delete file="${ngstorebuild.dir}/isc-copyright.js" />
+		<delete file="${ngstorebuild.dir}/isc-file2js.js" />
+		<delete file="${ngstorebuild.dir}/jshintrc.json" />
+		<delete file="${ngstorebuild.dir}/ngstore.build.extn.config.json" />
+		<delete file="${ngstorebuild.dir}/ngstore.gulp.config.json" />
+		<delete file="${ngstorebuild.extn.file}" />
+		<delete file="${ngstorebuild.dir}/ngstore-gulp-tasks.js" />
+		<delete file="${ngstorebuild.dir}/package.json" />
+		<!-- NOTE: extn minification generates content in "${ngstorebuild.dir}/tmp_copy_ngstore_extn/ngstore". We need to copy all its contents outside: ${ngstorebuild.dir}/tmp_copy_ngstore_extn and delete "ngstore" folder. -->
+		<!-- failonerror false because if minification fails, then directory does not exist. -->
+		<copy todir="${ngstorebuild.dir}/tmp_copy_ngstore_extn" failonerror="false">
+			<fileset dir="${ngstorebuild.dir}/tmp_copy_ngstore_extn/ngstore" includes="**/*">
+			</fileset>
+		</copy>
+		<!-- failonerror false because if minification fails, then directory does not exist. -->
+		<delete dir="${ngstorebuild.dir}/tmp_copy_ngstore_extn/ngstore" failonerror="false" />
+		
+		<condition property="angular.ngstore.extn.minification.should.copy">
+            <and>
+                <available file="${ngstorebuild.dir}/tmp_copy_ngstore_extn/scripts" type="dir"/>
+            	<available file="${ngstorebuild.dir}/tmp_copy_ngstore_extn/style" type="dir"/>
+            </and>
+        </condition>
+		<antcall target="angular-extn-minification-copy" />
+		
+		<!-- NOTE: As per current design, we do not want to copy the minified content back to the <Runtime>/extensions/wsc/webpages because we will re-minify things and thus dev toolkit does not need this. If that changes, add the logic here before clearing out folders. -->
+		<!-- NOTE: We are deleting the baseExtnMerged directory. It is an extn minification artefact so it is ok to remove without copying. -->
+		<delete dir="${ngstorebuild.dir}/baseExtnMerged" />
+		<delete dir="${ngstorebuild.dir}/tmp" />
+		<delete dir="${ngstorebuild.dir}/tmp_copy_ngstore" />
+		<delete dir="${ngstorebuild.dir}/tmp_copy_ngstore_extn" />
+		<echo message="6. angular extn minification: Copying all minified files completed and temporary directories deleted."></echo>
+	</target>
+	<target name="angular-extn-minification-copy" if="angular.ngstore.extn.minification.should.copy">
+		<AFCecho message="5. angular extn minification: copied minification scripts - cleaned up. Deleting existing content in {1} and then copying all generating minified files to={1}" >
+			<arg value="${wartmpdir}/extn/ngstore" />
+		</AFCecho>
+		<delete dir="${wartmpdir}/extn/ngstore" />
+		<mkdir dir="${wartmpdir}/extn/ngstore" />
+		<copy todir="${wartmpdir}/extn/ngstore">
+			<fileset dir="${ngstorebuild.dir}/tmp_copy_ngstore_extn" includes="**/*">
+			</fileset>
+		</copy>
+	</target>
+	
+	<!-- minification start for isf-->
+	<target name="isf-minification" if="isf.war.minification.required" description="This is required for isf minification.">
+	    <antcall target="isf-oob-minification" />
+	    <condition property="isf.extn.src.available">
+	        <and>
+	            <available file="${wartmpdir}/extn/storesrc" type="dir"/>
+	        </and>
+	    </condition>
+	    <antcall target="isf-extn-minification" />
+	</target>
+	<target name="isf-oob-minification" description="This is required for oob isf minification.">
+	    <echo message="isf-oob-1. angular ootb minification: not required as of now as files are already minified"></echo>
+	</target>
+	<target name="isf-extn-minification" if="isf.extn.src.available" description="This is required for extension isf minification. It will combine both OOB and extn files for minification">
+	    <echo message="isf-extn-1. extension minification: preparing - copying oob and extn directories and files."></echo>
+	    <delete dir="${angularbuild.dir}/tmp_isf" />
+	    <mkdir dir="${angularbuild.dir}/tmp_isf" />
+	    <!-- copy source code -->
+	    <copy todir="${angularbuild.dir}/tmp_isf">
+	        <fileset dir="${installdir}/repository/eardata/isf/war/storesrc" includes="**/*">
+	        </fileset>
+	    </copy>
+	    <!-- copy extension code -->
+	    <copy todir="${angularbuild.dir}/tmp_isf" overwrite="true">
+	        <fileset dir="${wartmpdir}/extn/storesrc">
+	            <include name="store-extensions-src/app/**/*"/>
+	            <include name="store-extensions-src/assets/**/*"/>
+	            <include name="store-extensions-src/styles_extn.scss"/>
+	            <!-- <include name="store-extensions-src/tsconfig.*.json"/> -->
+	        </fileset>
+	    </copy>
+	    <!-- copy node modules to run minification -->
+	    <!-- <symlink link="${angularbuild.dir}/tmp_isf/node_modules" resource="${angularbuild.dir}/node_modules"/> -->
+	    <copy todir="${angularbuild.dir}/tmp_isf">
+	        <fileset dir="${angularbuild.dir}">
+	            <include name="node_modules/**/*"/>
+	        </fileset>
+	    </copy>
+	    
+	    <echo message="isf-extn-2. extn minification: minification start."></echo>
+	    <property environment="env"/>
+	    <exec executable="/bin/bash" failonerror="false" failifexecutionfails="false" dir="${angularbuild.dir}/tmp_isf" resultproperty="MinificationResult">
+	        <!-- <env key="PATH" value="${nodejs.home.dir}:${angularbuild.dir}/yarn/node_modules/yarn/bin:${angularbuild.dir}/node_modules/@angular/cli/bin:${env.PATH}"/> -->
+	        <env key="PATH" value="${node_js.home.dir}:${angularbuild.dir}/node_modules/@angular/cli/bin:${env.PATH}"/>
+	        <arg value="-c"/>
+	        <arg value="yarn ear-build-prod"/>
+	    </exec>
+	    <echo message="isf-extn-3. extn minification: minification complete with Minification Result:=${MinificationResult}"></echo>
+	    <condition property="isf.extn.min.compl.call" value="isf-extn-minification-success" else="isf-extn-minification-error">
+	        <and>
+	            <equals arg1="${MinificationResult}" arg2="0"/>
+	            <available file="${angularbuild.dir}/tmp_isf/dist/index.html" type="file"/>
+	        </and>
+	    </condition>
+	    <antcall target="${isf.extn.min.compl.call}" />
+	    <antcall target="cleanup-isf-minification" />
+	</target>
+	<target name="isf-extn-minification-success">
+		<!-- <antcall target="isf-extn-minification-sm" /> -->
+		<antcall target="isf-extn-minification-copy" />
+	</target>
+	<target name="isf-extn-minification-sm">
+		<property environment="env"/>
+	    <exec executable="/bin/bash" failonerror="false" failifexecutionfails="false" dir="${angularbuild.dir}/tmp_isf" resultproperty="MinificationSMResult">
+	        <!-- <env key="PATH" value="${env.PATH}:${nodejs.home.dir}:${angularbuild.dir}/yarn/node_modules/yarn/bin:${angularbuild.dir}/node_modules/@angular/cli/bin"/> -->
+	        <env key="PATH" value="${node_js.home.dir}:${angularbuild.dir}/node_modules/@angular/cli/bin:${env.PATH}"/>
+	        <arg value="-c"/>
+	        <arg value="yarn build-prod-sm"/>
+	    </exec>
+	</target>
+	<target name="isf-extn-minification-copy">
+	    <AFCecho message="isf-extn-4-success. extn minification: copied minification scripts - cleaned up. Deleting existing content in {1} and then copying all generating minified files to={1}" >
+	        <arg value="${installdir}/repository/eardata/isf/war/store" />
+	    </AFCecho>
+	    <delete dir="${wartmpdir}/extn/store" />
+		<mkdir dir="${wartmpdir}/extn/store" />
+	    <copy todir="${wartmpdir}/extn/store">
+	        <fileset dir="${angularbuild.dir}/tmp_isf/dist" includes="**/*">
+	        </fileset>
+	    </copy>
+	</target>
+	<target name="isf-extn-minification-error">
+	    <echo message="isf-extn-4-failure. extn minification: minification failed, please check if linting and prod-build is working fine."></echo>
+	</target>
+	<target name="cleanup-isf-minification">
+		<!-- <symlink action="delete" link="${angularbuild.dir}/tmp_isf/node_modules"/> -->
+		<delete dir="${angularbuild.dir}/tmp_isf"/>
+	</target>
+	<!-- minification ends for isf-->
+	
+	<target name="prepare-dojo-build" if="this.dojo.profile">
+
+		<AFCecho message="shrinksafe.dir={1}" >
+			<arg value="${shrinksafe.dir}" />
+		</AFCecho>
+		<AFCecho message="profile={1}">
+			<arg value="${this.dojo.profile}"/>
+		</AFCecho>
+		<AFCecho message="output.dir={1}" >
+			<arg value="${wartmpdir}"/>
+		</AFCecho>
+
+		<ant antfile="bin/dojoBuild.xml" dir="${basedir}" inheritAll="false">
+			<property name="shrinksafe.dir" value="${shrinksafe.dir}" />
+			<property name="profile" value="${this.dojo.profile}" />
+			<property name="output.dir" value="${wartmpdir}" />
+			<property name="localeList" value="${this.dojo.profile.localeList}" />
+		</ant>
+
+	</target>
+
+	<target name="skip-dojo-build">
+		<AFCecho message="skipping dojo build" />
+	</target>
+	
+
+	<target name="prepare-dojo-simplecopy-check" if="requires.dojo">
+		<antcall target="prepare-dojo-simplecopy" />
+	</target>	
+
+	<target name="prepare-dojo-simplecopy" if="dojo.src.available">
+		<AFCfail unless="wartmpdir" message="The war tmp variable is not set." />
+		<sciforeach propertyName="dojo.src.dir" targetName="-copyDojoDir">
+			<dirset dir="${installdir}/repository/dojo/src">
+				<include name="*" />
+			</dirset>
+		</sciforeach>
+	</target>
+
+	<target name="prepare-idx-simplecopy" if="idx.src.available">
+		<AFCfail unless="wartmpdir" message="The war tmp variable is not set."/>
+		<sciforeach propertyName="idx.src.dir" targetName="-copyIDXDir">
+			<dirset dir="${installdir}/repository/idx/src">
+				<include name="*" />
+			</dirset>
+		</sciforeach>
+	</target>
+
+	<target name="-copyDojoDir" >
+		<mkdir dir="${wartmpdir}/dojo" />
+		<AFCecho message="Copying {1} into {2}/dojo" >
+			<arg value="${dojo.src.dir}"/>
+			<arg value="${wartmpdir}"/>
+		</AFCecho>
+		<copy todir="${wartmpdir}/dojo">
+			<fileset dir="${installdir}/repository/dojo/src/${dojo.src.dir}" />
+		</copy>
+	</target>	
+
+	<target name="-copyIDXDir" >
+		<mkdir dir="${wartmpdir}/ibmjs" />
+		<AFCecho message="Copying ${idx.src.dir} into ${wartmpdir}/ibmjs" />
+		<copy todir="${wartmpdir}/ibmjs">
+			<fileset dir="${installdir}/repository/idx/src/${idx.src.dir}" />
+		</copy>
+	</target>
+
+	<target name="-copyDOHDir" if="dojo.src.available">
+		<delete dir="${wartmpdir}/dojo/util" />
+		<mkdir dir="${wartmpdir}/dojo/util/doh" />
+		<copy todir="${wartmpdir}/dojo/util/doh">
+			<fileset dir="${installdir}/repository/dojo/src/dojo/util/doh" />
+		</copy>
+	</target>
+	
+
+	<!-- =========================================================================== -->
+	<!-- everything eventually comes here... 									     -->
+	<!-- =========================================================================== -->
+	<macrodef name="create-war">
+
+		<attribute name="warfile.attr" />
+		<attribute name="package.attr" />
+		<attribute name="packagecontents.attr" />
+
+		<sequential>
+			<AFCecho message="Creating warfile {1} for package {2} using contents {3}" >
+				<arg value="@{warfile.attr}"/>	
+				<arg value="@{package.attr}"/>	
+				<arg value="@{packagecontents.attr}"/>	
+			</AFCecho>
+
+			<createwarlayout package="@{package.attr}" 
+				packagecontents="@{packagecontents.attr}" 
+				wartmpdir="${tmpdir}/build@{package.attr}"
+				excludejsp="${@{package.attr}.exclude.jsp}"
+				excludegif="${@{package.attr}.exclude.gif}"
+				requiresdojo="${@{package.attr}.requires.dojo}" />
+			
+			<antcall target="prepare-dojo-files" />
+			
+			<!--This is possibly a low level check which is ok for wsc ngstore. We need to use a better design may be like: "createwarlayout" to detect this and make it generic for all. -->
+			<condition property="wsc.war.angular.minification.required">
+	            <and>
+	                <available file="${wartmpdir}/ngstore" type="dir"/>
+	            	<available file="${nodejs.home.dir}" type="dir"/>
+	            	<isfalse value="${skipangularminification}"/>
+	            </and>
+	        </condition>
+			<antcall target="angular-ootb-minification" />
+			
+			<!-- this is for angular minification for new store(Angular5+)-->
+			<condition property="isf.war.minification.required">
+	            <and>
+	                <available file="${wartmpdir}/store" type="dir"/>
+	            		<!-- <available file="${nodejs.home.dir}" type="dir"/> -->
+	            		<available file="${node_js.home.dir}" type="dir"/>
+	            		<available file="${angularbuild.dir}" type="dir"/>
+	            		<isfalse value="${skipangularminification}"/>
+	            		<os family="unix"/>
+	            </and>
+	        </condition>
+			<antcall target="isf-minification" />
+			<!-- Angular5 minification ends-->
+			
+			<condition property="gen.weblogic.xml" value="true">
+				<equals arg1="${appserver}" arg2="weblogic" />
+			</condition>
+	
+	
+			<property name="package-attr" value="@{package.attr}"/>	
+			<antcall target="gen-weblogic-xml"/>
+
+			<antcall target="precompile-war" />	
+			
+			<antcall target="-copyDOHDir"/>
+
+			<mkdir dir="${wartmpdir}/WEB-INF" />
+			<mkdir dir="${wartmpdir}/WEB-INF/lib" />
+			<listFiles dir="${wartmpdir}/WEB-INF/lib" prop="@{package.attr}.ui.classpath" isWar="true" isEar="false" />
+			<antcall target="move-ui-libs" />
+			
+			<condition property="war.@{package.attr}.ui.classpath" else="${@{package.attr}.ui.classpath}" value=" ">
+				<and>
+					<isset property="support.multi.war"/>
+					<equals arg1="support.multi.war" arg2="true"/>
+				</and>
+			</condition>
+
+			<JBossClassloadingXmlGen namespace="urn:jboss:classloading:1.0" name="@{package.attr}.war" domain="@{package.attr}.war" parentdomain="${earfile}" exportall="NON_EMPTY" importall="false" outputfile="${wartmpdir}/WEB-INF/jboss-classloading.xml" appserver="${appserver}" noejb="${noejb}" parentfirst="true"/>
+			
+			<antcall target="restdoc.generate" />
+
+			<!-- this condition here to remove the manifest class-path entry from jboss-6.  
+			     since the classloader hierarchy breaks when we have it -->
+			<condition property="package-war-target" value="package-war-jboss" else="package-war"  >
+					<equals arg1="${appserver}" arg2="jboss" />
+			</condition>
+			<antcall target="${package-war-target}">
+				<param name="package.attr" value="@{package.attr}" />
+				<param name="warfile.attr" value="@{warfile.attr}" />
+			</antcall>
+	
+		</sequential>
+	</macrodef>
+
+	<target name="package-war-jboss">
+			<taskdef name="jboss-web-xml-cleaner" classname="com.ibm.afc.ant.taskdefs.JBossWebXmlPolisher" />
+			<jboss-web-xml-cleaner webxml="${tmpdir}/build${package.attr}/WEB-INF/web.xml"/> 
+			<war destfile="${warfile.attr}" webxml="${tmpdir}/build${package.attr}/WEB-INF/web.xml">
+				<fileset dir="${tmpdir}/build${package.attr}">
+					<exclude name="WEB-INF/web.xml" />
+				</fileset>
+			</war>
+	</target>
+
+	<macrodef name="propertycopy">
+		<attribute name="name"/>
+		<attribute name="from"/>
+		<sequential>
+			<property name="@{name}" value="${@{from}}"/>
+		</sequential>
+	</macrodef>
+
+	<target name="package-war">
+			<condition property="war.wsbe.classpath" value="${ear.basename}wsbe.jar">
+				<isfalse value="${nowebservice}"/>
+			</condition>
+			<property name="war.wsbe.classpath" value="" />
+			<condition property="war.lib.classpath" value="">
+				<equals arg1="${appserver}" arg2="websphere" />
+			</condition>
+			<propertycopy name="war.lib.classpath" from="war.${package.attr}.ui.classpath"/>
+		
+			<war destfile="${warfile.attr}" webxml="${tmpdir}/build${package.attr}/WEB-INF/web.xml">
+				<manifest>
+					<attribute name="Class-Path" value="${deployment.manifest.classpath} ${war.wsbe.classpath} ${war.lib.classpath}" />
+				</manifest>
+				<fileset dir="${tmpdir}/build${package.attr}">
+					<exclude name="WEB-INF/web.xml" />
+				</fileset>
+			</war>
+
+	</target>
+
+	<!-- ================================= 
+          target: move-ui-libs              
+         ================================= -->
+	<target name="move-ui-libs" unless="require.struts.workaround" if="isear">
+	<move todir="${uijartmpdir}">
+			<fileset dir="${wartmpdir}/WEB-INF/lib" includes="*.jar" />
+		</move>
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<macrodef name="createwarlayout">
+		<attribute name="package" />
+		<attribute name="packagecontents" />
+		<attribute name="wartmpdir" />
+		<attribute name="excludejsp" />
+		<attribute name="excludegif" />
+		<attribute name="requiresdojo" />
+		<sequential>
+			<AFCecho message=" ** package=@{package}, packagecontents='@{packagecontents}' **"/>
+			<property name="wartmpdir" value="@{wartmpdir}" />
+			<property name="package.repos.name" value="@{package}" />
+			<condition property="include.platform" value="true">
+				<contains string="@{packagecontents}" substring="platform" casesensitive="false" />
+			</condition>
+			<condition property="exclude.jsp" value="true">
+				<istrue value="@{excludejsp}" />
+			</condition>
+			<condition property="exclude.gif" value="true">
+				<istrue value="@{excludegif}" />
+			</condition>
+			<condition property="requires.dojo" value="true">
+				<istrue value="@{requiresdojo}" />
+			</condition>
+			
+			<sciregexpproperty propertyName="first.package" inputString="@{packagecontents}" regexp="([a-zA-Z]*),.*" replacementString="$1" />
+
+			<AFCecho message="*** ** @{packagecontents} ******  ***"/>
+			<sciforeach list="@{packagecontents}" propertyName="packagedata.name" targetName="-call-layout-data-target" />
+
+			<antcall target="-manage-tester" />
+			<antcall target="-iconjar"/>
+			<move file="${wartmpdir}/yantraiconsbe.jar" todir="${wartmpdir}/yfscommon" />
+
+			<antcall target="-manage-dbquery-client" />
+
+			<!-- To delete directories from war -->
+			<antcall target="-exclude-dir"/>
+
+		</sequential>
+	</macrodef>
+
+	<!-- =========================================================================== -->
+
+	<target name="-call-layout-data-target">
+		<condition property="layout-target" value="-layout-nothing">
+			<not>
+				<available file="${installdir}/repository/eardata/${packagedata.name}/war" />
+			</not>
+		</condition>
+		<condition property="layout-target" value="-layout-platformdata" else="-layout-packagedata">
+			<equals arg1="${packagedata.name}" arg2="platform" casesensitive="false" trim="true" />
+		</condition>
+
+		<antcall target="${layout-target}" />
+		
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-layout-nothing" />
+
+	<target name="-layout-packagedata">
+
+		<property name="packagedata.dir" value="${installdir}/repository/eardata/${packagedata.name}" />
+		<property name="extndata.dir" value="${packagedata.dir}/extn" />
+
+		<antcall target="-mergewars" />
+
+		<!-- antcall target="-iconjar" / -->
+		<antcall target="-ui-extn" />
+
+		<!-- move file="${wartmpdir}/yantraiconsbe.jar" todir="${wartmpdir}/yfscommon" / -->
+		<move file="${wartmpdir}/yfsextnui.jar" todir="${wartmpdir}/yfscommon" />
+		<copy todir="${wartmpdir}/yfscommon" flatten="true">
+			<fileset dir="${installdir}/resources">
+				<include name="*bundle*.properties" />
+			</fileset>
+		</copy>
+		<mkdir dir="${wartmpdir}/yfscommon/extn" />
+		<copy todir="${wartmpdir}/yfscommon/extn" flatten="true">
+			<fileset dir="${installdir}/resources">
+				<include name="extn/*bundle*.properties" />
+			</fileset>
+		</copy>
+		<mkdir dir="${wartmpdir}/extn" />
+		<copy todir="${wartmpdir}/extn" flatten="true">
+			<fileset dir="${installdir}/resources">
+				<include name="extn/*bundle*.properties" />
+			</fileset>
+		</copy>
+		<jar jarfile="${wartmpdir}/yfscommon/yantrabundles.jar">
+			<zipfileset dir="${wartmpdir}/yfscommon" includes="*jarlist.txt" />
+			<zipfileset dir="${wartmpdir}/yfscommon" includes="*bundle*.properties" />
+			<zipfileset dir="${wartmpdir}/extn" includes="*bundle*.properties" />
+		</jar>
+		<copy todir="${wartmpdir}/yfscommon" flatten="true">
+			<fileset dir="${wartmpdir}">
+				<include name="extn/yfscommon/**.jar" />
+				<include name="extn/yfscommon/jarlist.txt" />
+			</fileset>
+		</copy>
+		
+		<mkdir dir="${wartmpdir}/WEB-INF/lib" />
+		<antcall target="-layout-webinf-libs" />
+		<mkdir dir="${wartmpdir}/WEB-INF/classes" />
+
+		<condition property="generatewebxml" value="true">
+			<equals arg1="${first.package}" arg2="${packagedata.name}" trim="true" />
+		</condition>
+		<antcall target="-cleanupoldmergedwebxml" />
+		<antcall target="-createwebxml" />						
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-copy-extn-weblogicxml" if="extnweblogicxml.exists">
+		<copy file="${installdir}/extensions/${packagedata.name}/weblogic.xml" tofile="${wartmpdir}/WEB-INF/weblogic.xml" overwrite="true" />
+	</target>
+
+	<target name="-layout-platformdata" if="include.platform">
+		<condition property="war.excludes" value="**/*.js, **/*.jsp, **/*.jspf, **/*.gif" >
+			<and>
+			<istrue value="${exclude.jsp}"/>
+			<istrue value="${exclude.gif}"/>
+			</and>
+		</condition>
+		<condition property="war.excludes" value="*.jsp,*.js" >
+			<istrue value="${exclude.jsp}"/>
+		</condition>
+		<condition property="war.excludes" value="*.gif" else="" >
+			<istrue value="${exclude.gif}"/>
+		</condition>
+
+		<copy todir="${wartmpdir}">
+			<fileset dir="${platformdata}/war" excludes="${war.excludes}"  />
+			<fileset dir="${configdata}/war" excludes="${war.excludes}" />
+			<!-- adding it here as platform is always called -->
+		</copy>
+
+		<copy todir="${wartmpdir}/WEB-INF/" failonerror="false">
+			<fileset dir="${platformdata}/descriptors/${appserver}/WAR/WEB-INF/" />
+		</copy>
+
+		<antcall target="-copy-extn-weblogicxml" />
+				
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-mergewars">
+
+		<mkdir dir="${wartmpdir}" />
+		<mkdir dir="${extndata.dir}" />
+
+		<antcall target="-copy-repository-war"/>
+
+		<!-- TD 177865 -->
+		<sciforeach propertyName="extnwebdir" targetName="-mergeextn.web">
+			<dirset dir="${installdir}/extensions">
+				<include name="global/webpages" />
+				<include name="${packagedata.name}/webpages" />
+			</dirset>
+		</sciforeach>
+		<sciforeach propertyName="extnbundle" targetName="-mergeextn.bundles">
+			<fileset dir="${installdir}/extensions" includes="global/resources/**/*bundle*" />
+		</sciforeach>
+		<sciforeach propertyName="extnbundle" targetName="-mergeextn.bundles">
+			<fileset dir="${installdir}/extensions" includes="*/resources/**/*bundle*" excludes="global/**/*" />
+		</sciforeach>
+	</target>
+
+	<!-- this doesn't work.  the variable war.excludes get set,  but is not 
+		set any longer after completing the target -->
+	<target name="-setup-repository-excludes" >
+		<condition property="war.excludes" value="**/*.js, **/*.jsp, **/*.jspf, **/*.gif" >
+			<and>
+			<istrue value="${exclude.jsp}"/>
+			<istrue value="${exclude.gif}"/>
+			</and>
+		</condition>
+		<condition property="war.excludes" value="*.jsp,*.js" >
+			<istrue value="${exclude.jsp}"/>
+		</condition>
+		<condition property="war.excludes" value="*.gif" else="" >
+			<istrue value="${exclude.gif}"/>
+		</condition>
+	</target>
+	
+	<target name="-copy-repository-war" >
+		<condition property="war.excludes" value="**/*.js, **/*.jsp, **/*.jspf, **/*.gif" >
+			<and>
+			<istrue value="${exclude.jsp}"/>
+			<istrue value="${exclude.gif}"/>
+			</and>
+		</condition>
+		<condition property="war.excludes" value="*.jsp,*.js" >
+			<istrue value="${exclude.jsp}"/>
+		</condition>
+		<condition property="war.excludes" value="*.gif" else="" >
+			<istrue value="${exclude.gif}"/>
+		</condition>
+		<copy todir="${wartmpdir}" overwrite="true">
+			<fileset dir="${packagedata.dir}/war" excludes="${war.excludes}"  />
+		</copy>
+
+		<copy todir="${wartmpdir}" overwrite="true">
+			<fileset dir="${extndata.dir}"  excludes="${war.excludes}" />
+		</copy>
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-layout-webinf-libs" if="include.classpathlibs">
+		<copy todir="${wartmpdir}/WEB-INF/lib">
+			<fileset dir="${libtmp}" />
+		</copy>
+	</target>
+
+	<condition property="is.apitester.enabled" value="true">
+		<or>
+			<equals arg1="${apitester}" arg2="true" casesensitive="false" trim="true"/>
+			<equals arg1="${devmode}" arg2="true" casesensitive="false" trim="true"/>
+		</or>
+	</condition>
+	
+	<target name="-add-api-tester-to-war" if="is.apitester.enabled" >
+		<copy todir="${wartmpdir}/" >
+			<fileset dir="${platformdata}/war">
+				<include name="yfshttpapi/*apitester.*"/>
+			</fileset>
+		</copy>
+		<condition property="dojo.src.available">
+            <and>
+                <available file="${installdir}/repository/dojo/src" type="dir"/>					
+            </and>
+        </condition>
+        <antcall target="prepare-dojo-simplecopy" />
+	</target>	
+	
+	<target name="-remove-api-tester-from-war" unless="is.apitester.enabled">
+		<delete>
+		  	<fileset dir="${wartmpdir}" includes="yfshttpapi/*apitester.*"/>
+		</delete>
+	</target>
+
+	<target name="-manage-tester" >		
+		<antcall target="-add-misc-tester-to-war"/>
+		<antcall target="-remove-misc-tester-from-war"/>
+		<antcall target="-add-api-tester-to-war"/>
+		<antcall target="-remove-api-tester-from-war"/>	
+	</target>
+	
+	<target name="-add-misc-tester-to-war" if="devmode" >
+		<copy todir="${wartmpdir}/" >
+			<fileset dir="${platformdata}/war">
+				<include name="yfshttpapi/**/*"/>
+				<exclude name="yfshttpapi/*apitester.*"/>
+				<include name="yfsadmin/**/*"/>
+				<!-- this doesnt belong here.. this is a way to get login page in there when the webpages are suppressed...
+					it belongs with configurator... -->
+				<include name="console/login.jsp"/>
+			</fileset>
+		</copy>
+		<condition property="dojo.src.available">
+            <and>
+                <available file="${installdir}/repository/dojo/src" type="dir"/>					
+            </and>
+        </condition>
+        <antcall target="prepare-dojo-simplecopy" />
+	</target>	
+	
+	<target name="-remove-misc-tester-from-war" unless="devmode">
+		<delete dir="${wartmpdir}/yfsadmin" />
+		<delete>
+		  	<fileset dir="${wartmpdir}" includes="yfshttpapi/**/*" excludes="*apitester.*"/>
+		</delete>
+	</target>
+
+	<target name="-manage-dbquery-client" >
+		<condition property="is.dbquery-client.disabled" value="true">
+			<or>
+				<and>
+					<isset property="sandbox.multischema.enabled"/>
+					<istrue value="${sandbox.multischema.enabled}" />
+				</and>
+				<and>
+					<isset property="nodbqueryclient"/>
+					<equals arg1="${nodbqueryclient}" arg2="true" casesensitive="false" trim="true"/>
+				</and>
+			</or>
+		</condition>
+		<antcall target="-delete-dbquery-client-from-war"/>
+	</target>
+	
+	<target name="-delete-dbquery-client-from-war" if="is.dbquery-client.disabled">
+		<delete dir="${wartmpdir}/yfshttpdbi"/>
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-mergeextn.web">
+		<mkdir dir="${wartmpdir}/extn" />
+		<copy todir="${wartmpdir}/extn" overwrite="true">
+			<fileset dir="${installdir}/extensions/${extnwebdir}" includes="**/*" excludes="extn/**"/>
+		</copy>
+		<condition property="extnDir.present" value="true">
+			<available file="${installdir}/extensions/${extnwebdir}/extn" type="dir"/>
+		</condition>
+		<antcall target="copyExtnDir" />
+	</target>
+
+	<target name="copyExtnDir" if="extnDir.present">
+		<copy todir="${wartmpdir}/extn" overwrite="true">
+			<fileset dir="${installdir}/extensions/${extnwebdir}/extn" includes="**/*"/>
+		</copy>
+	</target>
+
+	<target name="-mergeextn.bundles">
+		<mkdir dir="${wartmpdir}/yfscommon/extn" />
+		<copy todir="${wartmpdir}/yfscommon/extn" file="${installdir}/extensions/${extnbundle}" />
+		<mkdir dir="${wartmpdir}/extn" />
+		<copy todir="${wartmpdir}/extn" file="${installdir}/extensions/${extnbundle}" />
+	</target>
+
+	<target name="-iconjar">
+		<jar destfile="${wartmpdir}/yantraiconsbe.jar">
+			<zipfileset dir="${wartmpdir}">
+				<include name="console/icons/**/" />
+				<include name="yfcicons/**" />
+				<include name="skins/*/console/icons/**/" />
+				<include name="skins/*/yfcicons/**" />
+			</zipfileset>
+		</jar>
+	</target>
+
+	<target name="-ui-extn" description="Creates UI Extensibility jar">
+		<delete dir="${wartmpdir}/uiextnjar" />
+		<mkdir dir="${wartmpdir}/uiextnjar" />
+		<sciforeach propertyName="extnuijar" targetName="-mergeextn.uijar">
+			<fileset dir="${installdir}/extensions">
+				<include name="*/uijars/**/*.jar" />
+				<include name="*/uijars/**/*.zip" />
+			</fileset>
+		</sciforeach>
+		<!-- TD 177865  <sciforeach propertyName="extnuidir" targetName="-mergeextn.web">
+			<dirset dir="${installdir}/extensions" includes="*/webpages" excludes="global/webpages" />
+		</sciforeach> -->
+		<jar jarfile="${wartmpdir}/yfsextnui.jar" basedir="${wartmpdir}/uiextnjar" />
+		<delete dir="${wartmpdir}/uiextnjar" />
+	</target>
+
+	<target name="-mergeextn.uijar">
+		<unzip src="${installdir}/extensions/${extnuijar}" dest="${wartmpdir}/uiextnjar" />
+	</target>
+
+	<!-- =========================================================================== -->
+	<target name="-cleanupoldmergedwebxml">
+		<delete file="${extndata.dir}/web.xml.merged" failonerror="false" />
+	</target>
+	<target name="-createwebxml" if="generatewebxml">
+		<property file="${packagedata.dir}/build.properties" prefix="webprop" />
+		<property name="webprop.module" value="__NONE__" />
+		<java classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" newenvironment="yes" failonerror="true" fork="true" classpathref="project.noapploader.classpath">
+			<env key="VENDORJARS" value="" />
+			<env key="CLASSPATH" value="" />
+			<sysproperty key="vendor" value="shell" />
+			<sysproperty key="vendorFile" value="${installdir}/properties/servers.properties" />
+			<sysproperty key="DISABLE_DB_PROPERTY" value="Y"/>
+			<arg value="-class" />
+			<arg value="com.yantra.tools.mdm.WebXMLMerger" />
+			<arg value="-f" />
+			<arg value="${installdir}/properties/APPDynamicclasspath.cfg" />
+			<arg value="-invokeargs" />
+			<arg value="-WEBPACKAGE" />
+			<arg value="${webprop.module}" />
+			<arg value="-OUT" />
+			<arg value="${extndata.dir}/web.xml.sample" />
+			<arg value="-BC" />
+			<arg value="Y" />
+			<arg value="-EXTN" />
+			<arg value="${extndata.dir}/customweb.xml" />
+			<arg value="-EXTNWEBXML" />
+			<arg value="${extndata.dir}/web.xml" />			
+			<arg value="-STRUTS_PROPERTIES_OUT" />
+			<arg value="${extndata.dir}/struts.properties.sample" />
+			<arg value="-STRUTS_CONFIG_OUT" />
+			<arg value="${extndata.dir}/struts.xml.sample" />
+			<arg value="-DEVMODE"/>
+			<arg value="${devmode}"/>
+			<arg value="-SERVLETSPEC"/>
+			<arg value="${servletspec}"/>
+			<arg value="-IBMID"/>
+			<arg value="${sandbox.ENABLE_IBMID_AUTHENTICATION}"/>
+			<arg value="-NOIBMIDSMCFS"/>
+			<arg value="${sandbox.DISABLE_IBMID_SMCFS}"/>
+			<arg value="-NOIBMIDSMA"/>
+			<arg value="${sandbox.DISABLE_IBMID_SMA}"/>
+			<arg value="-PACKAGENAME"/>
+			<arg value="${packagedata.name}"/>
+			<arg value="-VALIDATORXML"/>
+			<arg value="${installdir}/properties/webxmlvalidator.xml"/> 
+			<arg value="-MERGEDXML"/>
+			<arg value="${extndata.dir}/web.xml.merged"/> 
+			<arg value="-APPLICATIONSERVER"/>
+			<arg value="${appserver}"/>
+			<sysproperty key="INSTALL_LOCALE" value="${sandbox.INSTALL_LOCALE}"/>
+		</java>
+
+		<condition property="extnwebxml.exists">
+			<available file="${extndata.dir}/web.xml" />
+		</condition>
+		<condition property="mergedwebxml.exists">
+			<available file="${extndata.dir}/web.xml.merged" />
+		</condition>
+		<antcall target="-copy-sample-webxml" />
+		<antcall target="-copy-extn-webxml" />
+		<antcall target="-copy-merged-webxml" />
+
+		<!-- now geerating jboss-web.xml instead of using a static copy -->
+	    <!--<taskdef name="gen-jbosswebxml" classname="com.yantra.tools.ant.taskdefs.JBossWebXmlGenerator" />-->
+
+		<!--<condition property="isjboss6" value="true">
+			<istrue value="${jboss.6}" />
+		</condition>-->
+
+		<!--<antcall target="-generate-jboss-web-xml"/>-->
+
+
+		<!-- Adding below lines to create/copy struts.xml and struts.properties -->
+		<condition property="strutsxml.exists">
+			<and>
+				<available file="${extndata.dir}/struts.xml.sample" />
+				<not>
+					<available file="${extndata.dir}/struts.xml" />
+				</not>
+			</and>
+		</condition>
+		
+		<condition property="extnstrutsxml.exists">
+			<available file="${extndata.dir}/struts.xml" />
+		</condition>
+
+		<condition property="strutsproperties.exists">
+			<and>
+				<available file="${extndata.dir}/struts.properties.sample" />
+				<not>
+					<available file="${extndata.dir}/struts.properties" />
+				</not>
+			</and>
+		</condition>
+
+		<condition property="extnstrutsproperties.exists">
+			<available file="${extndata.dir}/struts.properties" />
+		</condition>
+
+		<condition property="extnweblogicxml.exists">
+			<available file="${installdir}/extensions/${packagedata.name}/weblogic.xml" />
+		</condition>
+
+		<antcall target="-copy-sample-strutsxml" />
+		<antcall target="-copy-extn-strutsxml" />
+		<antcall target="-copy-sample-strutsproperties" />
+		<antcall target="-copy-extn-strutsproperties" />
+		<condition property="extnweblogicxml.exists">
+			<available file="${installdir}/extensions/${packagedata.name}/weblogic.xml" />
+		</condition>
+		<antcall target="-copy-extn-weblogicxml" />
+		
+	</target>
+
+	<!--<target name="-generate-jboss-web-xml" unless="isjboss6">
+		<gen-jbosswebxml appserver="${appserver}" outputdir="${wartmpdir}/" noejb="${noejb}"/>
+	</target>-->
+
+	<target name="-copy-extn-webxml" if="extnwebxml.exists">
+		<copy file="${extndata.dir}/web.xml" tofile="${wartmpdir}/WEB-INF/web.xml" overwrite="true" />
+	</target>
+	<target name="-copy-merged-webxml" if="mergedwebxml.exists">
+		<copy file="${extndata.dir}/web.xml.merged" tofile="${wartmpdir}/WEB-INF/web.xml" overwrite="true" />
+	</target>
+	
+	<target name="-copy-sample-webxml" unless="extnwebxml.exists">
+		<copy file="${extndata.dir}/web.xml.sample" tofile="${wartmpdir}/WEB-INF/web.xml" overwrite="true" />
+	</target>
+
+	<target name="-copy-extn-strutsxml" if="extnstrutsxml.exists">
+		<copy file="${extndata.dir}/struts.xml" tofile="${wartmpdir}/WEB-INF/classes/struts.xml" overwrite="true" />
+	</target>
+
+	<target name="-copy-sample-strutsxml" if="strutsxml.exists">
+		<copy file="${extndata.dir}/struts.xml.sample" tofile="${wartmpdir}/WEB-INF/classes/struts.xml" overwrite="true" />
+	</target>
+
+	<target name="-copy-extn-strutsproperties" if="extnstrutsproperties.exists">
+		<copy file="${extndata.dir}/struts.properties" tofile="${wartmpdir}/WEB-INF/classes/struts.properties" overwrite="true" />
+	</target>
+
+	<target name="-copy-sample-strutsproperties" if="strutsproperties.exists">
+		<copy file="${extndata.dir}/struts.properties.sample" tofile="${wartmpdir}/WEB-INF/classes/struts.properties" overwrite="true" />
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<!-- These set of targets are used to invoke a given target on every
+	     layout file present in the eardata directories -->
+	<target name="-checklayoutfiles">
+		<condition property="layout.platform.exists">
+			<available file="${platformdata}/layout.xml" />
+		</condition>
+		<condition property="layout.package.exists">
+			<and>
+				<not>
+					<equals arg1="platform" arg2="${package.repos.name}" />
+				</not>
+				<available file="${packagedata}/layout.xml" />
+			</and>
+		</condition>
+		<condition property="layout.extn.exists">
+			<available file="${extndata.dir}/layout.xml" />
+		</condition>
+	</target>
+	<target name="-invokeonplatform" if="layout.platform.exists">
+		<ant antfile="${platformdata}/layout.xml" target="${target}" inheritall="true" inheritrefs="true">
+			<property name="dir.libs.copyto" value="${dir.libs.copytobase}/platform" />
+		</ant>
+	</target>
+	<target name="-invokeonpackage" if="layout.package.exists">
+		<ant antfile="${packagedata}/layout.xml" target="${target}" inheritall="true" inheritrefs="true">
+			<property name="dir.libs.copyto" value="${dir.libs.copytobase}/${package.repos.name}" />
+		</ant>
+	</target>
+	<target name="-invokeonextn" if="layout.extn.exists">
+		<ant antfile="${extndata.dir}/layout.xml" target="${target}" inheritall="true" inheritrefs="true">
+			<property name="dir.libs.copyto" value="${dir.libs.copytobase}/extn" />
+		</ant>
+	</target>
+	<target name="-invokelayout" depends="-checklayoutfiles,-invokeonplatform,-invokeonpackage,-invokeonextn" />
+
+	<!-- =========================================================================== -->
+
+	<macrodef name="copyalllibs">
+		<attribute name="todir" />
+		<attribute name="path.property" />
+		<element implicit="true" name="filter" optional="true" />
+		<sequential>
+			<mkdir dir="@{todir}" />
+			<!-- why we need this?   maybe here for war ? variable wartmpdir is not working for this purpose
+			<mkdir dir="${wartmpdir}/libs" />
+			<mkdir dir="${wartmpdir}/libs/platform" />
+			<mkdir dir="${wartmpdir}/libs/${package.repos.name}" />
+			<mkdir dir="${wartmpdir}/libs/extn" />
+			-->
+			<AFCecho message="==== Copying all lib files ====" />
+
+			<!-- Assumes all env.CLASSPATH references are in relation to the install dir. -->
+			<dynclasspath includesproperty="@{path.property}.fsincludes" pathproperty="@{path.property}.astext" basedir="${sandbox.INSTALL_DIR}">
+				<filter />
+			</dynclasspath>
+			<path id="@{path.property}">
+				<path path="${@{path.property}.astext}" />
+			</path>
+			<!--
+			<pathconvert property="@{path.property}.fsincludes" pathsep=",">
+				<path path="${env.CLASSPATH}" id="@{path.property}" />
+				<map from="${sandbox.INSTALL_DIR}${file.separator}" to=""/>
+			</pathconvert>
+			-->
+			<mkdir dir="@{todir}" />
+			<copy todir="@{todir}" flatten="true">
+				<fileset dir="${sandbox.INSTALL_DIR}" includes="${@{path.property}.fsincludes}">
+					<type type="file" />
+				</fileset>
+			</copy>
+			<AFCecho message="==== Copied all lib files to {1} ====" >
+				<arg value="@{todir}"/>
+			</AFCecho>
+		</sequential>
+	</macrodef>
+
+	<!-- =========================================================================== -->
+
+	<target name="prep-classpath-libs">
+
+		<mkdir dir="${propstmp}" />
+
+		<createavailableproperties outputfile="${propstmp}/sci_availableproperties.txt" />
+
+		<libexclhelper packageName="${package}" warfiles="${warfiles}" installdir="${sandbox.INSTALL_DIR}"/>
+
+		<AFCdebug property="libexclude.pattern"/>
+
+		<condition property="libexclude.pattern" value=".*jnpserver.jar" else="">
+			<equals arg1="${appserver}" arg2="jboss" />
+		</condition>
+
+		<condition property="libexclude.pattern_override" value=".*/xml-apis.jar" else="">
+			<equals arg1="${appserver}" arg2="websphere" />
+		</condition>
+
+
+		<copyalllibs todir="${libtmp}" path.property="manifest.class.path">
+			<exclude pattern=".*/tools.jar" />
+			<exclude pattern="${libexclude.pattern}" />
+			<exclude pattern="${libexclude.pattern_override}" />
+		</copyalllibs>
+
+		<copy todir="${propstmp}">
+			<fileset dir="properties">
+				<include name="security.properties" />
+			</fileset>
+		</copy>
+
+		<condition property="passphrase-target" value="-add-passphrase" else="-skip-add-passphrase">
+			<and>
+				<isset property="passphrase" />
+			</and>
+		</condition>
+
+		<antcall target="${passphrase-target}" />
+
+		<replace file="${propstmp}/security.properties" token="J2EEAppServer=NOAPP" value="J2EEAppServer=${appserver}" />
+
+		<jar destfile="${libtmp}/properties.jar">
+
+			<fileset dir="${installdir}/properties" excludes="*.in,backups/*,security.properties,*.*.200*" />
+
+			<fileset dir="${propstmp}" includes="*" />
+		</jar>
+
+		<pathconvert property="manifest.classpath" pathsep=" ">
+			<path refid="manifest.class.path" />
+			<mapper type="flatten" />
+		</pathconvert>
+
+		<pathconvert property="webservices.build.classpath" pathsep="${path.separator}">
+			<path refid="manifest.class.path" />
+		</pathconvert>
+
+		<property name="deployment.manifest.classpath" value="properties.jar ${manifest.classpath}" />
+
+	</target>
+
+	<target name="-skip-add-passphrase" />
+
+	<target name="-add-passphrase">
+		<echo file="${propstmp}/security.properties" append="true">${line.separator}passphrase=${passphrase}${line.separator}</echo>
+	</target>
+
+	<!-- =========================================================================== -->
+
+	<!-- Creates sci_availableproperties.txt, listing all non-standard property files -->
+	<macrodef name="createavailableproperties">
+		<attribute name="outputfile" />
+		<attribute name="dir" default="${installdir}/properties" />
+		<sequential>
+			<pathconvert property="availprops.output" pathsep="${line.separator}">
+				<path>
+					<fileset dir="@{dir}">
+						<include name="*ext" />
+					</fileset>
+				</path>
+				<chainedmapper>
+					<mapper type="flatten" />
+				</chainedmapper>
+			</pathconvert>
+			<echo message="${availprops.output}" file="@{outputfile}" />
+		</sequential>
+	</macrodef>
+
+	<!-- =========================================================================== -->
+
+	<macrodef name="finishwar">
+		<sequential>
+			<AFCecho message="==== Begin war.finish ====" />
+			<antcall target="-invokelayout">
+				<param name="target" value="war.finish" />
+			</antcall>
+			<AFCecho message="==== Finished war.finish ====" />
+		</sequential>
+	</macrodef>
+
+	<!-- =========================================================================== -->
+
+	<macrodef name="checkfile">
+		<attribute name="file" />
+		<attribute name="type" />
+		<sequential>
+			<AFCfail message="{1} does not exist: {2}">
+				<arg value="@{type}"/>
+				<arg value="${@{file}}"/>
+				<condition>
+					<not>
+						<available file="${@{file}}" type="@{type}" />
+					</not>
+				</condition>
+			</AFCfail>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="checkproperty" description="fails if given property is not set">
+		<attribute name="property" description="property to test" />
+		<sequential>
+			<AFCecho message="Checking property: {1}" level="verbose" >
+				<arg value="@{property}"/>
+			</AFCecho>
+			<AFCfail message="Missing required property: {1}">
+				<arg value="@{property}"/>
+				<condition>
+					<or>
+						<not>
+							<isset property="@{property}" />
+						</not>
+						<equals arg1="${@{property}}" arg2="" trim="true" />
+					</or>
+				</condition>
+			</AFCfail>
+		</sequential>
+	</macrodef>
+
+	<!-- =========================================================================== -->
+
+	<target name="clean">
+		<!--<delete dir="${dir.external}" failonerror="false" />-->
+		<delete dir="${tmpdir}" failonerror="false" />
+		<mkdir dir="${tmpdir}" />
+    </target>
+
+	<!-- =========================================================================== -->
+
+	<target name="-initialize" depends="clean,-validate-appserver,-validate-warfiles">
+
+		<mkdir dir="${dir.external}" />
+
+		<antcall target="webservice.utils.validate-setup" />
+
+	</target>
+
+	<target name="-validate-warfiles" if="warfiles">
+		<sciforeach list="${warfiles}" propertyName="packagename" targetName="-validate-war" />
+	</target>
+
+	<target name="-validate-war">
+		<AFCecho message="Validating warfile {1}" >
+			<arg value="${packagename}"/>
+		</AFCecho>
+		<property name="tocompare" value="${this.package.contents}" />
+		<loadproperties srcFile="${installdir}/bin/build.properties">
+			<filterchain>
+				<tokenfilter>
+					<containsstring contains="${packagename}" />
+				</tokenfilter>
+				<replacestring from="${packagename}.war" to="this.package.contents" />
+				<replacestring from="${packagename}.dojo.profile" to="this.dojo.profile" />
+			</filterchain>
+		</loadproperties>
+		<condition property="war.validation.failed" value="true">
+			<equals arg1="${tocompare}" arg2="${this.package.contents}" />
+		</condition>
+		<AFCfail if="war.validation.failed" message="Validation of  {1} failed for -Dwarfiles={2}.  Verify {3} is defined in INSTALL/bin/build.properties." >
+			<arg value="${packagename}"/>
+			<arg value="${warfiles}"/>
+			<arg value="${packagename}.war"/>
+		</AFCfail>
+	</target>
+
+	<target name="-validate-appserver" unless="noapp">
+		<condition property="valid.appserver" value="true">
+			<or>
+				<equals arg1="${appserver}" arg2="weblogic" casesensitive="false" trim="true" />
+				<equals arg1="${appserver}" arg2="websphere" casesensitive="false" trim="true" />
+				<equals arg1="${appserver}" arg2="jboss" casesensitive="false" trim="true" />
+			</or>
+		</condition>
+
+		<AFCfail Message="You should pass -Dappserver=&lt;weblogic|websphere|jboss&gt; in order to use this target" unless="valid.appserver" />
+
+	</target>
+
+
+	<!-- Loading usual property task and reading value as ${package.repos.name}.war.exclude did not seem to work. 
+	Hence using the loadproperties task. Note the target does not check whether the property ${package.repos.name}.war.exclude exists in build.properties.
+	-->
+	<target name="-exclude-dir">			
+		<loadproperties srcFile="${installdir}/bin/build.properties">
+			<filterchain>				
+				<replacestring from="${package.repos.name}.war.exclude" to="exclude.dir" />
+			</filterchain>
+		</loadproperties>		
+		<sciforeach list="${exclude.dir}" propertyName="excludedir" targetName="-exclude-dir-from-war" />
+	</target>
+
+	<target name="-exclude-dir-from-war">
+		<delete dir="${wartmpdir}/${excludedir}"/>
+	</target>
+	
+	<target name="-check-restdoc">
+		<condition property="restdoc.disabled.flag">
+			<istrue value="${norestdoc}" />
+		</condition>
+		<property name="restdoc.extraresources.dir" location="${installdir}/repository/eardata/restdoc/war" />
+		<condition property="restdoc.hasresources.flag">
+			<available file="${restdoc.extraresources.dir}" type="dir"/>
+		</condition>
+		<property name="restdoc.extrauiresources.dir" location="${installdir}/repository/eardata/restdocui/war" />
+		<condition property="restdoc.hasuiresources.flag">
+			<available file="${restdoc.extrauiresources.dir}" type="dir"/>
+		</condition>
+	</target>
+	
+	<target name="restdoc.generate" unless="restdoc.disabled.flag" depends="-check-restdoc">
+		<antcall target="restdoc.extracopy" />
+		<antcall target="restdoc.extrauicopy" />
+	</target>
+	
+	<target name="restdoc.extracopy" if="restdoc.hasresources.flag" depends="-check-restdoc">
+		<copy todir="${wartmpdir}">
+			<fileset dir="${restdoc.extraresources.dir}" />
+		</copy>
+	</target>
+	<target name="restdoc.extrauicopy" if="restdoc.hasuiresources.flag" depends="-check-restdoc">
+		<copy todir="${wartmpdir}">
+			<fileset dir="${restdoc.extrauiresources.dir}" />
+		</copy>
+	</target>
+	
+	<target name="tstamp">
+		<tstamp>
+			<format property="prop" pattern="MM/dd/yyyy hh:mm:ss aa z"/>
+		</tstamp>
+		<echo message="${message} - CURRENT TIME - ${prop}" />
+    </target>
+
+</project>

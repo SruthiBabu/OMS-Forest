@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults DefaultRecordDelimiter="Newline" DefaultFieldDelimiter="," DefaultPadCharacter="#" RecordIdStartPosition="1">
+   </ParserDefaults>
+
+    <Root Name="LocationList">
+         <Header Name="SKUDEDIC" RecordName="SKUDEDIC" MinOccurence="1" MaxOccurence="1"/>
+    </Root>
+<RecordDefinitions>
+  <Record RecordId="SKUDEDIC" Name="SKUDEDIC" XMLName="SKUDedication">
+         <Field Name="LocationId" FieldPosition="2" XMLName="LocationId"/>
+         <Field Name="Node" FieldPosition="3" XMLName="Node"/>
+         <Field Name="EnterpriseCode" FieldPosition="4" XMLName="EnterpriseCode"/>
+         <Field Name="ItemId" FieldPosition="5" XMLName="ItemId"/>
+         <Field Name="UnitOfMeasure" FieldPosition="6" XMLName="UnitOfMeasure"/>
+         <Field Name="ProductClass" FieldPosition="7" XMLName="ProductClass"/>
+         <Field Name="SegmentType" FieldPosition="8" XMLName="SegmentType"/>
+         <Field Name="Segment" FieldPosition="9" XMLName="Segment"/>
+ </Record>
+ </RecordDefinitions>
+</FlatfileDelimitedSchema>

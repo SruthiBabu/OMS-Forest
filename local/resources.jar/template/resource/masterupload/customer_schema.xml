@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<FlatfileDelimitedSchema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='delimitedreceiver.xsd'>
+   <ParserDefaults  DefaultRecordDelimiter="#" DefaultFieldDelimiter="," DefaultEscapeCharacter="\" DefaultPadCharacter="*" RecordIdStartPosition="1" SkipCarriageReturn="false">
+      <FileHeader FileHeaderId="000" FileHeaderStartPos="1" FileHeaderLength="3"/>
+      <FileTrailer FileTrailerId="666" FileTrailerStartPos="1" FileTrailerLength="3"/>
+   </ParserDefaults>
+
+   <Root Name="CustomerRoot">
+		<Header Name="Action" RecordName="ACTRID" MinOccurrence="1" MaxOccurrence="1"/>
+		<Terminal Name="Customer" RecordName="CSTRID1" MinOccurrence="1" MaxOccurrence="1"/>
+		<Sequence Name="CustomerContact" RecordName="CSTRID2" MinOccurrence="1" MaxOccurrence="1000"/>
+		<Sequence Name="CustomerAdditionalAddress" RecordName="CSTRID3" MinOccurrence="1" MaxOccurrence="1000"/>
+   </Root>
+   
+   <RecordDefinitions>
+	  <Record RecordId="ACTRID" Name="ACTRID" XMLName="Action">
+         <Field Name="ACTION" FieldPosition="2" XMLName="Action"/>
+      </Record>
+      <Record RecordId="CSTRID1" Name="CSTRID1" XMLName="Customer">
+         <Field Name="CUSTOMERID" FieldPosition="2" XMLName="CustomerID"/>
+		 <Field Name="COMPANY" FieldPosition="3" XMLName="OrganizationName"/>
+         <Field Name="CUSTOMERTYPE" FieldPosition="4" XMLName="CustomerType"/> <!-- Document - BUSINESS, CONSUMER Default Consumer-->
+		 <Field Name="RELATIONSHIPTYPE" FieldPosition="5" XMLName="RelationshipType"/>
+         <Field Name="VERTICAL" FieldPosition="6" XMLName="Vertical"/>
+		 <Field Name="DUNSNUMBER" FieldPosition="7" XMLName="DunsNumber"/>
+		 <Field Name="ISTAXEXEMPT" FieldPosition="8" XMLName="TaxExemptFlag"/>
+      </Record>
+	  <Record RecordId="CSTRID2" Name="CSTRID2" XMLName="CustomerContact">
+         <Field Name="FIRSTNAME" FieldPosition="2" XMLName="FirstName"/>
+		 <Field Name="MIDDLENAME" FieldPosition="3" XMLName="MiddleName"/>
+		 <Field Name="LASTNAME" FieldPosition="4" XMLName="LastName"/>		
+		 <Field Name="JOBTITLE" FieldPosition="5" XMLName="JobTitle"/>
+		 <Field Name="EMAILID" FieldPosition="6" XMLName="EmailID"/>
+		 <Field Name="PHONE" FieldPosition="7" XMLName="DayPhone"/>		
+      </Record>
+	  <Record RecordId="CSTRID3" Name="CSTRID3" XMLName="CustomerAdditionalAddress">
+         <Field Name="FIRSTNAME" FieldPosition="2" XMLName="FirstName"/>
+		 <Field Name="MIDDLENAME" FieldPosition="3" XMLName="MiddleName"/>
+		 <Field Name="LASTNAME" FieldPosition="4" XMLName="LastName"/>		
+		 <Field Name="EMAILID" FieldPosition="5" XMLName="EmailID"/>
+		 <Field Name="PHONE" FieldPosition="6" XMLName="DayPhone"/>
+		 <Field Name="ADDRESSLINE1" FieldPosition="7" XMLName="AddressLine1"/>
+		 <Field Name="ADDRESSLINE2" FieldPosition="8" XMLName="AddressLine2"/>
+		 <Field Name="CITY" FieldPosition="9" XMLName="City"/>
+		 <Field Name="STATE" FieldPosition="10" XMLName="State"/>
+		 <Field Name="COUNTRY" FieldPosition="11" XMLName="Country"/>
+		 <Field Name="ZIPCODE" FieldPosition="12" XMLName="ZipCode"/>
+		 <Field Name="ISCOMMERCIALADDRESS" FieldPosition="13" XMLName="IsCommercialAddress"/>
+		 <Field Name="DEFAULTBILLTO" FieldPosition="14" XMLName="IsDefaultBillTo"/>
+		 <Field Name="DEFAULTSHIPTO" FieldPosition="15" XMLName="IsDefaultShipTo"/>
+		 <Field Name="DEFAULTSOLDTO" FieldPosition="16" XMLName="IsDefaultSoldTo"/>
+		</Record>
+	
+   </RecordDefinitions>
+  </FlatfileDelimitedSchema>

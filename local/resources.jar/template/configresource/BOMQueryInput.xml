@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<AdvancedQuery QueryType="BOM">
+   <BOMHeader DisplayName="BOMHeader" TableName="YIC_BOM_HEADER" IconFile="item.gif" ShowNotButtons="Y">
+	  <SKU Type="Leaf" Id="SKU" DisplayName="SKU" DataType="Text-120" ControlType="Text" ColumnName="SKU_NAME">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="SKU" IsReqd="" OverRidingClass=""/>
+	  </SKU>
+	  <Type Type="Leaf" Id="Type" DisplayName="Type" DataType="Text-120" ControlType="Text" ColumnName="TYPE">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="Type" IsReqd="" OverRidingClass=""/>
+	  </Type>
+	  <Version Type="Leaf" Id="Version" DisplayName="Version" DataType="PositiveInteger" ControlType="Text" ColumnName="VERSION">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+		  <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+		</QryTypes>
+		<MasterData MasterDataId="Version" IsReqd="" OverRidingClass=""/>
+	  </Version>
+	  <Container Type="Leaf" Id="Container" DisplayName="Is_Container" DataType="Flag" ControlType="Combo" ColumnName="CONTAINER_FLAG">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		</QryTypes>
+		<MasterData MasterDataId="Container" IsReqd="" OverRidingClass="" IsStatic="true">
+		  <Container Code="Y" Desc="Yes"/>
+		  <Container Code="N" Desc="No"/>
+		</MasterData>
+	  </Container>
+	  <ModelName Type="Leaf" Id="ModelName" DisplayName="ModelName" DataType="Text-254" ControlType="Text" ColumnName="MODEL_NAME">
+		<QryTypes DefaultQryTypeId="EQ">
+		  <QryType QryTypeName="Is" QryTypeId="EQ"/>
+		  <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+		  <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+		  <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+		</QryTypes>
+		<MasterData MasterDataId="ModelName" IsReqd="" OverRidingClass=""/>
+	  </ModelName>
+	</BOMHeader>
+</AdvancedQuery>

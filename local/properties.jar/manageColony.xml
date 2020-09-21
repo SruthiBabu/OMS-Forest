@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<project name="Manage Colony" basedir="." default="manageColony">
+  <!--
+	   Caller of manageColony must pass properties for
+	   1) INSTALL_DIR - path to install directory
+	   2) ADD_COLONY_XML - shard definition xml
+	   3) CLASSPATH - Java classpath
+	   4) PROP_DIR  - Installation Properties directory
+	-->
+  <target name="manageColony" depends="createDBViews">
+    <echo message="ManageColony Build Completed."/>
+  </target>
+  <target name="createColonyPools">
+    <echo message="BEGIN: ManageColony Phrase I"/>
+    <ant antfile="${PROP_DIR}/colonyDeployer.xml" dir=".">
+      <property name="dir.install" value="${INSTALL_DIR}"/>
+      <property name="multischema.file" value="${ADD_COLONY_XML}"/>
+      <property name="sql.delimiter" value=";"/>
+    </ant>
+  </target>
+  <target name="createDBViews" depends="createColonyPools">
+    <echo message="BEGIN: ManageColony Phrase II"/>
+    <java fork="true" failonerror="true" maxmemory="512m" classname="com.yantra.tools.devtools.AddColonySQLExecutionManager" classpath="${CLASSPATH}">
+      <jvmarg line="-Xms256m -Xmx512m"/>
+      <arg value="${ADD_COLONY_XML}"/>
+      <arg value="${INSTALL_DIR}"/>
+    </java>
+  </target>
+</project>

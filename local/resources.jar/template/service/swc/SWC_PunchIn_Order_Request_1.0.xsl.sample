@@ -1,0 +1,195 @@
+<?xml version='1.0'?>
+<!-- Licensed Materials - Property of IBM
+IBM Sterling Call Center and Store
+(C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  --> 
+<!-- 
+ * Stylesheet for transforming cxml purchase order message to input xml for createOrder API
+ * 
+-->
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:output method="xml" version="1.0" indent="yes" encoding="UTF-8"  />
+
+<xsl:strip-space elements="*" />
+
+<xsl:template match="/">
+        <xsl:apply-templates select="cXML" />
+</xsl:template>
+
+<xsl:template match="cXML">
+	<Order>
+		<xsl:attribute name="OrderDate">
+			<xsl:value-of select="/cXML/Request/OrderRequest/OrderRequestHeader/@orderDate"/>
+		</xsl:attribute>
+		<xsl:attribute name="OrderName">
+			<xsl:value-of select="/cXML/Request/OrderRequest/OrderRequestHeader/@orderID"/>
+		</xsl:attribute>
+		<xsl:variable name="DocumentType" select="'0001'"/>
+		<xsl:variable name="WebClient" select="'Web'"/>
+		<xsl:variable name="DraftFlag" select="'N'"/>
+
+		<xsl:attribute name="DocumentType">
+			<xsl:value-of select="$DocumentType" />
+		</xsl:attribute>
+		
+		<xsl:attribute name="EnterpriseCode">
+			<xsl:value-of select="/cXML/Request/OrderRequest/OrderRequestHeader/@EnterpriseCode"/>
+		</xsl:attribute>
+		<xsl:attribute name="AuthorizedClient">
+			<xsl:value-of select="$WebClient" />
+		</xsl:attribute>
+		<xsl:attribute name="BillToID">
+			<xsl:value-of select="/cXML/Request/OrderRequest/OrderRequestHeader/@BillToID"/>
+		</xsl:attribute>
+		<xsl:attribute name="EntryType">
+			<xsl:value-of select="$WebClient" />
+		</xsl:attribute>
+		<xsl:attribute name="CustomerContactID">
+			<xsl:value-of select="/cXML/Request/OrderRequest/OrderRequestHeader/@CustomerContactID"/>
+		</xsl:attribute>
+		<xsl:attribute name="DraftOrderFlag">
+			<xsl:value-of select="$DraftFlag" />
+		</xsl:attribute>
+		<xsl:apply-templates select="Header" />
+		
+		<OrderLines>
+		     <xsl:apply-templates select="/cXML/Request/OrderRequest/ItemOut" />
+		</OrderLines>		
+	</Order>
+</xsl:template>
+
+
+<xsl:template match="ItemOut">
+	<xsl:variable name="normalizedConfigInfo">			
+		<xsl:value-of select="normalize-space(ItemID/SupplierPartAuxiliaryID)" />
+	</xsl:variable>
+	<xsl:variable name="bundleParentPrimeLineNo">
+	     <xsl:if test="string-length($normalizedConfigInfo) > 0">	     			
+		<xsl:value-of select="normalize-space(substring-before(substring-after($normalizedConfigInfo,'&lt;BundleParentPrimeLineNo&gt;'),'&lt;/BundleParentPrimeLineNo&gt;'))" />	    
+	     </xsl:if>
+	</xsl:variable>
+	<xsl:variable name="itemProductClass">
+	     <xsl:if test="string-length($normalizedConfigInfo) > 0">	     			
+		<xsl:value-of select="normalize-space(substring-before(substring-after($normalizedConfigInfo,'&lt;ProductClass&gt;'),'&lt;/ProductClass&gt;'))" />  
+	     </xsl:if>
+	</xsl:variable>
+	<xsl:if test="not(string-length($bundleParentPrimeLineNo) > 0)">
+	<OrderLine>
+		<xsl:attribute name="OrderedQty">
+			<xsl:value-of select="@quantity"/>
+		</xsl:attribute>
+		
+		<xsl:attribute name="ReqDeliveryDate">
+			<xsl:value-of select="@requestedDeliveryDate"/>
+		</xsl:attribute>		
+		
+		 <xsl:variable name="bomXml">			
+			<xsl:value-of select="@BOMXML" />
+		 </xsl:variable>
+		 <xsl:if test="string-length($bomXml) > 0">
+		      <xsl:attribute name="BOMXML">			
+			     <xsl:value-of select="@BOMXML"/>
+		      </xsl:attribute>
+		 </xsl:if>
+		
+		<xsl:if test="not(string-length($bomXml) > 0)">
+		<Item>
+	            <xsl:attribute name="ItemID">
+			<xsl:value-of select="ItemID/SupplierPartID"/>			
+		    </xsl:attribute>
+		    <xsl:attribute name="UnitOfMeasure">
+			<xsl:value-of select="ItemDetail/UnitOfMeasure"/>
+		    </xsl:attribute>
+		    <xsl:if test="string-length($itemProductClass) > 0">
+			    <xsl:attribute name="ProductClass">
+				<xsl:value-of select="$itemProductClass"/>
+			    </xsl:attribute>
+		    </xsl:if>
+	        </Item>
+		</xsl:if>
+		
+		<xsl:if test="string-length(ShipTo) > 0">
+		   <PersonInfoShipTo>
+			<xsl:call-template name="AddressInfo">
+				<xsl:with-param name="path" select="ShipTo"/>
+			</xsl:call-template>				
+		    </PersonInfoShipTo>
+		</xsl:if>
+	</OrderLine>
+	</xsl:if>
+</xsl:template>
+
+<xsl:template match="Header">	
+	
+	<PriceInfo>
+		<xsl:attribute name="Currency">
+			<xsl:value-of select="/cXML/Request/OrderRequest/OrderRequestHeader/Total/Money/@currency"/>
+		</xsl:attribute>
+	</PriceInfo>
+	<PaymentMethods>
+		<PaymentMethod>
+			<xsl:attribute name="CustomerAccountNo">
+				<xsl:value-of select="/cXML/Request/OrderRequest/OrderRequestHeader/Payment/PCard/@number"/>
+			</xsl:attribute>
+			<xsl:variable name="PaymentType" select="'CUSTOMER_ACCOUNT'"/>
+			<xsl:variable name="UnlimitedCharges" select="'N'"/>
+			<xsl:variable name="ChargeSequence" select="'0'"/>
+			<xsl:attribute name="PaymentType">
+				<xsl:value-of select="$PaymentType"/>
+			</xsl:attribute>
+			<xsl:attribute name="UnlimitedCharges">
+				<xsl:value-of select="$UnlimitedCharges"/>
+			</xsl:attribute>
+			<xsl:attribute name="ChargeSequence">
+				<xsl:value-of select="$ChargeSequence"/>	
+			</xsl:attribute>	
+			
+		</PaymentMethod>
+	</PaymentMethods>
+	
+	<PersonInfoBillTo>
+		<xsl:call-template name="AddressInfo">
+			<xsl:with-param name="path" select="/cXML/Request/OrderRequest/OrderRequestHeader/BillTo"/>
+		</xsl:call-template>		
+	</PersonInfoBillTo>
+	
+	<PersonInfoShipTo>
+		<xsl:call-template name="AddressInfo">
+			<xsl:with-param name="path" select="/cXML/Request/OrderRequest/OrderRequestHeader/ShipTo"/>
+		</xsl:call-template>		
+	</PersonInfoShipTo>
+	
+	
+</xsl:template>
+<xsl:template name="AddressInfo">
+		<xsl:param name="path"/>
+		
+		<xsl:attribute name="Company">
+			<xsl:value-of select="$path/Address/Name"/>
+		</xsl:attribute>
+		<xsl:attribute name="LastName">
+			<xsl:value-of select="($path)/Address/PostalAddress/DeliverTo[1]"/>
+		</xsl:attribute>
+		<xsl:attribute name="AddressLine1">
+			<xsl:value-of select="($path)/Address/PostalAddress/DeliverTo[2]"/>
+		</xsl:attribute>
+		<xsl:attribute name="AddressLine2">
+			<xsl:value-of select="($path)/Address/PostalAddress/Street"/>
+		</xsl:attribute>
+		<xsl:attribute name="City">
+			<xsl:value-of select="($path)/Address/PostalAddress/City"/>
+		</xsl:attribute>
+		<xsl:attribute name="ZipCode">
+			<xsl:value-of select="($path)/Address/PostalAddress/PostalCode"/>
+		</xsl:attribute>
+		<xsl:attribute name="State">
+			<xsl:value-of select="($path)/Address/PostalAddress/State"/>
+		</xsl:attribute>
+		<xsl:attribute name="Country">
+			<xsl:value-of select="($path)/Address/PostalAddress/Country/@isoCountryCode" />
+		</xsl:attribute>
+	</xsl:template>
+
+</xsl:stylesheet>

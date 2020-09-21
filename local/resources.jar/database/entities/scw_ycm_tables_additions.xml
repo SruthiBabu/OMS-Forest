@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+   <Entities>
+	<Entity AuditRequired="Y" Cacheable="true"
+		ConfigurableByOrgOrNode="Y"
+		Description="Stores WMS specific product information."
+		EntityType="CATALOG_MASTER" Extensible="Y" Module="scw"
+		Name="WMS_Item_Attributes" Prefix="YFS_" SupportHangOffEntity="Y"
+		TableName="YFS_WMS_ITEM_ATTRIBUTES" TableType="MASTER" XMLName="WMSItemAttributes">
+		<Attributes>
+			<Attribute ColumnName="ITEM_KEY" DataType="Key"
+				DefaultValue="' ' " Description="Item for which WMS attributes are defined."
+				Name="Item_Key" Nullable="false" XMLName="ItemKey" />
+			<Attribute ColumnName="WMS_ITEM_ATTR_KEY" DataType="Key"
+				DefaultValue="' ' " Description="Primary key attribute of YFS_WMS_ITEM_ATTRIBUTES ."
+				Name="WMS_Item_Attr_Key" Nullable="false" XMLName="WMSItemAttrKey" />
+			<Attribute ColumnName="DEFORMABLE" DataType="Flag"
+				Description="Indicates whether this item can be folded/stuffed/squeezed."
+				Name="Deformable" Nullable="true" XMLName="Deformable" />
+			<Attribute ColumnName="PACKED_HEIGHT" DataType="Quantity"
+				Description="Height of the item when packed inside a container. The unit of measure for this is same as that of dimension UOM for unit height."
+				Name="Packed_Height" Nullable="true" XMLName="PackedHeight" />
+			<Attribute ColumnName="PACKED_LENGTH" DataType="Quantity"
+				Description="Length of the item when packed inside a container. The unit of measure for this is same as that of dimension UOM for unit length."
+				Name="Packed_Length" Nullable="true" XMLName="PackedLength" />
+            <Attribute ColumnName="PACKED_WIDTH" DataType="Quantity"
+				Description="Width of the item when packed inside a container. The unit of measure for this is same as that of dimension UOM for unit width."
+				Name="Packed_Width" Nullable="true" XMLName="PackedWidth" />
+            <Attribute ColumnName="STACKED_HEIGHT_INC" DataType="Quantity"
+				Description="Increase in height of the item when stacked. The unit of measure for this is same as that of dimension UOM for unit height."
+				Name="Stacked_Height_Inc" Nullable="true" XMLName="StackHeightIncrease" />
+            <Attribute ColumnName="CONSTRAINED_BY_HEIGHT" DataType="Flag"
+				Description="Indicates whether the item orientation when packed inside the container is constrained by height, for ex: up-right or non-tippable items like paints, oil cans etc."
+				Name="Constrained_By_Height" Nullable="true" XMLName="ConstrainedByHeight" />
+			<Attribute ColumnName="PACK_BY_VOLUME" DataType="Flag"
+				Description="Indicates whether the item dimensions should be tracked after this item is placed inside the container. If true, only the volume and weight are tracked after performing a dimension check against the container to be packed."
+				Name="Pack_By_Volume" Nullable="true" XMLName="PackByVolume" />
+			<Attribute ColumnName="LOCKID" DataType="Lockid"
+				DefaultValue="0 "
+				Description="An integer used to track and prevent concurrent modifications."
+				Name="Lockid" Nullable="false" />
+			<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+				DefaultValue="sysdate " Description="Timestamp when the record was created."
+				Name="Createts" Nullable="false" />
+			<Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+				DefaultValue="sysdate " Description="Timestamp when the record was last modified."
+				Name="Modifyts" Nullable="false" />
+			<Attribute ColumnName="CREATEUSERID" DataType="UserId"
+				DefaultValue="' ' " Description="User who created the record." Name="Createuserid"
+				Nullable="false" />
+			<Attribute ColumnName="MODIFYUSERID" DataType="UserId"
+				DefaultValue="' ' " Description="User who modified the record."
+				Name="Modifyuserid" Nullable="false" />
+			<Attribute ColumnName="CREATEPROGID" DataType="ProgramID"
+				DefaultValue="' ' " Description="Program that created the record."
+				Name="Createprogid" Nullable="false" />
+			<Attribute ColumnName="MODIFYPROGID" DataType="ProgramID"
+				DefaultValue="' ' " Description="Program that modified the record."
+				Name="Modifyprogid" Nullable="false" />
+		</Attributes>
+		<PrimaryKey>
+			<Attribute Name="WMS_Item_Attr_Key" />
+		</PrimaryKey>
+		<Indices>
+			<Index Name="YFS_WMS_ITEM_ATTRIBUTES_I1" Unique="true" Version="9.4">
+				<Column Name="ITEM_KEY" />
+			</Index>
+		</Indices>
+		<RelationShips>
+			<RelationShip Cardinality="OneToOne" DeleteCascade="true"
+				ForeignEntity="Item" Name="Item" Type="Bidirectional">
+				<Attribute Name="Item_Key" ParentName="Item_Key" />
+			</RelationShip>
+		</RelationShips>
+	</Entity>
+</Entities>
+</DBSchema>

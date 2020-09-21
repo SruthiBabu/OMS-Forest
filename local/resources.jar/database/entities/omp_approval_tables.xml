@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+       	<Entity Description="This table stores order approval records that are created while evaluating whether a
+		quote needs approvals. These records are created based on order approval rules and approval plan applicable
+		to the quote. The UserGroupID and TeamCode determine the user who can approval an order approval record." HasHistory="Y"
+            EntityType="TRANSACTION" Module="omp"
+            Name="Order_Approval" Prefix="YFS_"
+            TableName="YFS_ORDER_APPROVAL" TableType="TRANSACTION" XMLName="OrderApproval">
+            <Attributes>
+                <Attribute ColumnName="ORDER_APPROVAL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_ORDER_APPROVAL table."
+                    Name="Order_Approval_Key" Nullable="false" XMLName="OrderApprovalKey"/>
+				<Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"                    
+                    Description="The primary key for the YFS_ORDER_HEADER table."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey" />
+                <Attribute ColumnName="SEQUENCE" DataType="LongSequence"
+                    Description="Indicates the sequence of the approval."
+                    Name="Sequence" Nullable="true" XMLName="Sequence"/>
+				<Attribute ColumnName="TEAM_CODE"
+                    DataType="DataSecurityGroupId" 
+                    Description="Team which has to approve the document." 
+                    Name="Team_Code" Nullable="true" XMLName="TeamCode"/>
+				<Attribute ColumnName="USER_GROUP_ID"
+                    DataType="UserGroup"
+                    Description="User group which has to approve the document." 
+                    Name="User_Group_ID" Nullable="true" XMLName="UserGroupID"/>
+				<Attribute ColumnName="USER_ID"
+                    DataType="LoginId-50"
+                    Description="Indicates user who needs to approve the order." 
+                    Name="User_ID" Nullable="true" XMLName="UserID"/>
+				<Attribute ColumnName="DELEGATE_USER_ID"
+                    DataType="LoginId-50"
+                    Description="Indicates the delegate who has been assigned to approve the order on behalf of the UserID." 
+                    Name="Delegate_User_ID" Nullable="true" XMLName="DelegateUserID"/>
+				<Attribute ColumnName="APPROVER_USER_ID"
+                    DataType="LoginId-50"
+                    Description="Indicates user who has approved or rejected the Order Approval." Name="Approver_User_ID" Nullable="true" XMLName="ApproverUserID"/>
+                <Attribute ColumnName="APPROVAL_GROUP_KEY"
+                    DataType="Key"
+                    Description="Indicates the approval group used for this order approval."
+                    Name="Approval_Group_Key" Nullable="true" XMLName="ApprovalGroupKey"/>
+				<Attribute ColumnName="STATUS"
+                    DataType="OrderApprovalStatus" 
+                    Description="Indicates approval status." Name="Status" Nullable="true" XMLName="Status"/>
+				<Attribute ColumnName="PREDECESSOR_ORDER_APPR_SEQ"
+                    DataType="OrderApprovalPredecessorOrderApprSeq" 
+                    Description="Indicates the sequence or comma separated sequences of order approvals
+                    which needs to be approved before this record can be approve."
+                    Name="Predecessor_Order_Appr_Seq" Nullable="true" XMLName="PredecessorOrderApprSeq"/>
+				<Attribute ColumnName="IS_MANDATORY"
+                    DataType="Flag"
+                    Description="Indicates if the approval is mandatory and is required regardless of the hierarchy." 
+                    Name="Is_Mandatory" Nullable="true" XMLName="IsMandatory"/>
+				<Attribute ColumnName="APPROVAL_CYCLE"
+                    DataType="OrderApprovalCycle" 
+                    Description="This attribute keeps track of how many times the approval process has been initiated and what is the current iteration for the approvals." 
+                    Name="Approval_Cycle" Nullable="true" XMLName="ApprovalCycle"/>  
+				<Attribute ColumnName="APPROVER_COMMENTS"
+                    DataType="OrderApprovalApproverComments" 
+                    Description="This attribute keeps track of how many times the approval process has been initiated and what is the current iteration for the approvals." 
+                    Name="Approver_Comments" Nullable="true" XMLName="ApproverComments"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="ORDER_APPR_I1"
+                    Name="YFS_ORDER_APPROVAL_I1" Unique="true">
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="SEQUENCE"/>
+                    <Column Name="APPROVAL_CYCLE"/>
+					<Column Name="APPROVAL_GROUP_KEY"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="ORDER_APPR_PK" Name="YFS_ORDER_APPROVAL_PK">
+                <Attribute ColumnName="ORDER_APPROVAL_KEY" Name="Order_Approval_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany" UsedForDataSecurity="true"
+                    ChildListXMLName="CurrentOrderApprovals" ChildName="CurrentOrderApproval"
+                    ChildXMLName="OrderApproval"
+                    ForeignEntity="Order_Header" Name="CurrentOrder"
+                    Type="Bidirectional" XMLName="CurrentOrder">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                    <Attribute Name="Approval_Cycle" ParentName="Approval_Cycle"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" UsedForDataSecurity="true"
+                    ChildListXMLName="OrderApprovals" ChildName="OrderApproval"
+                    ChildXMLName="OrderApproval"
+                    ForeignEntity="Order_Header" Name="Order"
+                    Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>              
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Approval_Group" Name="ApprovalGroup"
+                    Type="Bidirectional">
+                    <Attribute Name="Approval_Group_Key" ParentName="Approval_Group_Key"/>
+                </RelationShip>
+            </RelationShips>
+    	</Entity>
+		<Entity Description="This tables stores order approval details which get created either when an quote is created/changed
+		or when a quote is sent for approval. These records are created based on approval plan and order approval rules. An order approval
+		detail without an order approval record indicates that the quote has not been sent for approval yet. An order approval detail
+		associated to an order approval indicates what a user would be approving while approving the associated order approval." 
+			HasHistory="Y" EntityType="TRANSACTION" Module="omp" Name="Order_Approval_Detail" Prefix="YFS_" TableName="YFS_ORDER_APPROVAL_DTL" 
+			TableType="TRANSACTION" XMLName="OrderApprovalDetail">
+            <Attributes>
+                <Attribute ColumnName="ORDER_APPROVAL_DTL_KEY"
+                    DataType="Key" DefaultValue="' '"
+                    Description="The primary key of the YFS_ORDER_APPROVAL_DTL table."
+                    Name="Order_Approval_Detail_Key" Nullable="false" XMLName="OrderApprovalDetailKey"/>
+				<Attribute ColumnName="ORDER_APPROVAL_KEY"
+                    DataType="Key" Description="The primary key of the order approval that this order approval detail is associated with."
+                    Name="Order_Approval_Key" Nullable="true" XMLName="OrderApprovalKey"/>
+				<Attribute ColumnName="ORDER_HEADER_KEY" DataType="Key"                    
+                    Description="The primary key of the order that this order approval detail is associated with."
+                    Name="Order_Header_Key" Nullable="true" XMLName="OrderHeaderKey" />               
+				<Attribute ColumnName="ORDER_LINE_KEY" DataType="Key"
+                    Description="The primary key of the order line that this order approval detail is associated with."
+                    Name="Order_Line_Key" Nullable="true" XMLName="OrderLineKey"/>
+				<Attribute ColumnName="APPROVAL_RULE_ID"
+                    DataType="OrderApprovalRuleRuleID" 
+                    Description="Indicates which rule triggered the approvals." 
+                    Name="Approval_Rule_ID" Nullable="true" XMLName="ApprovalRuleID"/>
+				<Attribute ColumnName="MESSAGE" CanTranslate="Y"
+                    DataType="OrderApprovalRuleMessage" 
+                    Description="Message to be displayed when approval rule is violated." 
+                    Name="Message" Nullable="true" XMLName="Message"/>
+				<Attribute ColumnName="MESSAGE_CODE"
+                    DataType="OrderApprovalRuleMessageCode" 
+                    Description="Message code to be displayed when approval rule is violated." 
+                    Name="Message_Code" Nullable="true" XMLName="MessageCode"/>
+				<Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <AuditReferences/>
+			<Indices>
+                <Index DB2Name="ORD_APPR_DTL_I1"
+                    Name="YFS_ORDER_APPROVAL_DTL_I1" Unique="true">
+                    <Column Name="ORDER_HEADER_KEY"/>
+                    <Column Name="ORDER_APPROVAL_KEY"/>
+					<Column Name="ORDER_LINE_KEY"/>
+					<Column Name="APPROVAL_RULE_ID"/>
+                </Index>
+			</Indices>
+            <PrimaryKey DB2Name="ORD_APPR_DTL_PK" Name="YFS_ORDER_APPROVAL_DTL_PK">
+                <Attribute ColumnName="ORDER_APPROVAL_DTL_KEY" Name="Order_Approval_Detail_Key"/>
+            </PrimaryKey>
+            <RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="OrderApprovalDetails" ChildName="OrderApprovalDetail"
+                    ChildXMLName="OrderApprovalDetail"
+                    ForeignEntity="Order_Approval" Name="Order_Approval"
+                    Type="Bidirectional" XMLName="Order_Approval">
+                    <Attribute Name="Order_Approval_Key" ParentName="Order_Approval_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany" UsedForDataSecurity="true"
+                    ChildListXMLName="OrderApprovalDetails" ChildName="OrderApprovalDetail"
+                    ChildXMLName="OrderApprovalDetail"
+                    ForeignEntity="Order_Header" Name="Order"
+                    Type="Bidirectional" XMLName="Order">
+                    <Attribute Name="Order_Header_Key" ParentName="Order_Header_Key"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                    ChildListXMLName="OrderApprovalDetails" ChildName="OrderApprovalDetail"
+                    ChildXMLName="OrderApprovalDetail"
+                    ForeignEntity="Order_Line" Name="Order_Line"
+                    Type="Bidirectional" XMLName="OrderLine">
+                    <Attribute Name="Order_Line_Key" ParentName="Order_Line_Key"/>
+                </RelationShip>
+            </RelationShips>
+    	</Entity>
+	</Entities>
+</DBSchema>

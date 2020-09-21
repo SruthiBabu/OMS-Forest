@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity
+            Description="The view formed by joining the YPM_PRICELIST_HDR and YPM_PRICELIST_LINE tables.   This view will be used by the getItemList API to exclude items in the price list specified in the excludeItemsInPriceList attribute."
+            EntityType="VIEW" TableType="MASTER" Extensible="N"
+            ListXMLName="Pricelists" Module="ycm"
+            Name="Pricelist_VW" Prefix="YFS_"
+            TableName="YFS_PRICELIST_VW" View="true" XMLName="Pricelist">
+            <Attributes>
+                <Attribute ColumnName="PRICELIST_VW_KEY"
+                    DataType="Key" DefaultValue="' ' "
+                    Description="The primary key for the YFS_PRICELIST_VW view."
+                    Name="Pricelist_Vw_Key" Nullable="false" XMLName="PricelistVwKey"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                    DataType="OrgCode" DefaultValue="' '  "
+                    Description="The organization code whose product information is being stored."
+                    Name="Organization_Code" Nullable="false" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="PRICELIST_NAME"
+                    DataType="PricelistName"
+                    Description="Name of the price list."
+                    Name="Pricelist_Name" Nullable="false" XMLName="PricelistName"/>
+                <Attribute ColumnName="MARKED_FOR_LIST_PRICE"
+                    DataType="Flag"
+                    Description="Indicates this price list is marked for listing prices. Applicable only for master price list."
+                    Name="Marked_For_List_Price" Nullable="true" XMLName="MarkedForListPrice"/>
+                <Attribute ColumnName="ITEM_ID" DataType="ItemID"
+                    DefaultValue="' '"
+                    Description="Item for which the price is defined in this price list line."
+                    Name="Item_ID" Nullable="false" XMLName="ItemID"/>
+                <Attribute ColumnName="UOM" DataType="UOM"
+                    DefaultValue="' '"
+                    Description="The unit of measure of the item."
+                    Name="Unit_Of_Measure" Nullable="false" XMLName="UnitOfMeasure"/>
+                <Attribute ColumnName="LIST_PRICE" DataType="UnitPrice"
+                    Description="List Price of an item."
+                    Name="List_Price" Nullable="true" XMLName="ListPrice"/>
+                <Attribute ColumnName="MAX_MODIFYTS"
+                    DataType="TimeStamp"
+                    Description="This field indicates the maximum modify timestamp pricing data for this item."
+                    Name="Max_ModifyTS" Nullable="true" XMLName="MaxModifyTS"/>                    
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was created."
+                    Name="Createts" Nullable="false"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="Timestamp when the record was last modified."
+                    Name="Modifyts" Nullable="false"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid" DefaultValue="' ' "
+                    Description="User who created the record."
+                    Name="Createuserid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid" DefaultValue="' ' "
+                    Description="User who modified the record."
+                    Name="Modifyuserid" Nullable="false"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that created the record."
+                    Name="Createprogid" Nullable="false"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" DefaultValue="' ' "
+                    Description="Program that modified the record."
+                    Name="Modifyprogid" Nullable="false"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0 "
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false"/>
+            </Attributes>
+            <PrimaryKey>
+                <Attribute ColumnName="PRICELIST_VW_KEY" Name="Pricelist_Vw_Key"/>
+            </PrimaryKey>
+        </Entity>
+    </Entities>
+</DBSchema>

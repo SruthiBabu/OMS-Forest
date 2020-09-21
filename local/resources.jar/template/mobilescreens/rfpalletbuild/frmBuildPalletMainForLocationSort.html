@@ -1,0 +1,155 @@
+<!--
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2011 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<html>
+    <body>
+        <form name="frmBuildPalletMainForLocationSort" target="/console/rfpalletbuild.ppc">
+            <table border="1">
+                <tr>
+                    <td>
+                        <table border="0" width="300">
+                            <tr>
+                                <td>
+                                    <input col="4" mandatory="false"
+                                    size="16" subtype="Label"
+                                    tag="binding=lblPalletBuild"
+                                    type="text" validate="false" value="Mobile_Deposit"/>
+                                </td>
+                            </tr>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblPallet"
+                                    type="text" validate="false" value="Mobile_Container_SCM"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Container/@PalletId"
+                                    mandatory="false"
+                                    name="txtSuggPalletId"
+                                    outputbinding="xml:/Container/@PalletId"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Container/@PalletId"
+                                    type="text" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Container/@Pallet"
+                                    mandatory="false"
+                                    name="txtPallet"
+                                    outputbinding="xml:/Container/@Pallet"
+                                    size="20"
+                                    subtype="Text"
+                                    tag="binding=xml:/Container/@Pallet"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    size="20" subtype="Label"
+                                    tag="binding=lblLocation"
+                                    type="text" validate="false" value="Mobile_Location"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Container/@LocationId"
+                                    mandatory="false"
+                                    name="txtSuggLocation"
+                                    outputbinding="xml:/Container/@LocationId"
+                                    size="10"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Container/@LocationId"
+                                    type="text" validate="false"/>
+
+									<input col="1"
+                                    inputbinding="xml:/Container/@IsDummyContainer"
+                                    name="txtPallet"
+                                    outputbinding="xml:/Container/@IsDummyContainer"
+                                    size="20" subtype="Hidden"
+                                    tag="binding=xml:/Container/@IsDummyContainer"
+                                    type="hidden" validate="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1"
+                                    inputbinding="xml:/Container/@Segment"
+                                    
+                                    name="txtLocation"
+                                    outputbinding="xml:/Container/@Segment"
+                                    size="10" subtype="Text"
+                                    tag="binding=xml:/Container/@Segment"
+                                    type="text" validate="true"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="10" hotkey="F3"
+                                    name="Go" size="3"
+                                    subtype="Command" tag=" "
+                                    type="button"
+                                    url="/console/rfpalletbuild.ppc?action=frmBuildPalletMainForLocationSortValtxtLocation"
+                                    validate="false" value="Mobile_Go"/>
+									<input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Mobile_Info"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+					<td>
+						<table>
+							<tr/>
+							<tr>
+                                <td>
+                                    <input col="1" mandatory="false"
+                                    name="lblShipment" size="20"
+                                    subtype="Label"
+                                    tag="binding=lblShipment"
+                                    type="text" validate="false" value="Mobile_Shipment_#"/>
+                                </td>
+                            </tr> 
+							<tr>
+								<td>
+                                    <input col="1"
+                                    inputbinding="xml:/Container/@ShipmentNo"
+                                    name="txtShipment"
+                                    outputbinding="xml:/Container/@ShipmentNo"
+                                    size="20"
+                                    subtype="ProtectedText"
+                                    tag="binding=xml:/Container/@ShipmentNo"
+                                    type="text" validate="false"/>
+                                </td>                      
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input col="1" hotkey="F7"
+                                    mandatory="false" name="action2"
+                                    size="10"
+                                    subtype="CommandNextView"
+                                    type="button" validate="false" value="Prev_View"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
+

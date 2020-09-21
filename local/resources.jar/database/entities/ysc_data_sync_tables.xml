@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<DBSchema>
+    <Entities>
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table holds information about SyncProfiles.  One of SyncProfileKey or both SyncProfileID and OrganizationCode must be passed to uniquely identify this SyncProfile."
+            Extensible="N" Name="Sync_Profile" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_SYNC_PROFILE" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="SyncProfile">
+            <Attributes>
+                <Attribute ColumnName="SYNC_PROFILE_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_SYNC_PROFILE table."
+                    Name="Sync_Profile_Key" Nullable="false" XMLName="SyncProfileKey"/>
+                <Attribute ColumnName="SYNC_PROFILE_ID"
+                	DataType="SyncTableID-40" Description="The ID for this SyncProfile."
+                    Name="Sync_Profile_ID" Nullable="true" XMLName="SyncProfileID"/>
+                <Attribute ColumnName="TABLEGROUP"
+                	DataType="SyncTableID-40" Description="This defines what entity is associated with this profile."
+                    Name="TableGroup" Nullable="true" XMLName="TableGroup"/>
+				<Attribute ColumnName="ORGANIZATION_CODE"
+                	DataType="OrgCode" IsOrgColumn="Y"
+                	Description="The organization associated with this SyncProfile."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SHORT_DESCRIPTION"
+                    DataType="FreeDescription-100" 
+                    Description="The short description of the profile."
+                    Name="Short_Description" Nullable="true" XMLName="ShortDescription"
+                    Localized="true"/>
+                <Attribute ColumnName="LONG_DESCRIPTION"
+                    DataType="FreeDescription-1500" 
+                    Description="The long description of the profile."
+                    Name="Long_Description" Nullable="true" XMLName="LongDescription"
+                    Localized="true"/>                    
+                <Attribute ColumnName="SYNC_QUERY_KEY"
+                    DataType="Key" 
+                    Description="The query used to filter elements into this profile."
+                    Name="Sync_Query_Key" Nullable="true" XMLName="SyncQueryKey"/>
+				<Attribute ColumnName="SYNC_TYPE"
+                	DataType="ID-15" Description="The data synchronization type for which this SyncProfile is defined. Possible values are FULL, DELTA or null. If null, the SyncProfile would be used for both FULL and DELTA data synchronization types."
+                    Name="Sync_Type" Nullable="true" XMLName="SyncType"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YFS_SPROFILE_PK" Name="YFS_SYNC_PROFILE_PK">
+    	         <Attribute ColumnName="SYNC_PROFILE_KEY" Name="Sync_Profile_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_SYNC_PROFILE_I1" DB2Name="YFS_SYNCPFILE_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="SYNC_PROFILE_ID"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+						DeleteCascade="false" Enforce="true"
+						ForeignEntity="Query" Name="Query"
+						Type="Bidirectional" XMLName="Query">
+						<Attribute Name="Sync_Query_Key" ParentName="Query_Key"/>
+				</RelationShip>
+				<RelationShip Cardinality="OneToMany"
+                    DeleteCascade="false" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>               
+            </RelationShips>
+        </Entity> 
+        <Entity AuditRequired="Y" Cacheable="true"
+        	Description="This table holds an association between a subscription and a profile."
+        	Extensible="N" Name="Sync_Profile_Subscription" Prefix="YFS_" Module="ysc"
+        	TableName="YFS_SYNC_PROFILE_SUBSCRIPTION" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+        	XMLName="SyncProfileSubscription" ConfigurableByOrgOrNode="Y">
+        	<Attributes>
+        		<Attribute ColumnName="SYNC_PROF_SUB_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_SYNC_PROFILE_SUBSCRIPTION table."
+                    Name="Sync_Prof_Sub_Key" Nullable="false" XMLName="SyncProfSubKey"/>
+                <Attribute ColumnName="SYNC_SUBSCRIPTION_KEY"
+                    DataType="Key" Description="The primary key of the YFS_SUBSCRIPTION table."
+                    Name="Sync_Subscription_Key" Nullable="true" XMLName="SyncSubscriptionKey"/>
+                 <Attribute ColumnName="SYNC_PROFILE_KEY"
+                    DataType="Key" Description="The primary key of the YFS_SYNC_PROFILE table."
+                    Name="Sync_Profile_Key" Nullable="true" XMLName="SyncProfileKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+			</Attributes>
+            <PrimaryKey DB2Name="YFS_SYNCPRSUB_PK" Name="YFS_SYNC_PROF_SUB_PK">
+    	         <Attribute ColumnName="SYNC_PROF_SUB_KEY" Name="Sync_Prof_Sub_Key"/>
+            </PrimaryKey>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                	ChildListXMLName="SyncProfileSubscriptionList" ChildName="SyncProfileSubscription"	
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Sync_Subscription" Name="Sync_Subscription"
+                    Type="Bidirectional" XMLName="SyncSubscription">
+                    <Attribute Name="Sync_Subscription_Key" ParentName="Sync_Subscription_Key"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="SyncProfileSubscriptionList" ChildName="SyncProfileSubscription"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Sync_Profile" Name="Sync_Profile"
+                    Type="Bidirectional" XMLName="SyncProfile">
+                    <Attribute Name="Sync_Profile_Key" ParentName="Sync_Profile_Key"/>
+                </RelationShip>                        
+            </RelationShips>
+            <Indices>
+                <Index Name="YFS_SYNCPROFSUB_I1" DB2Name="YFS_SYNCPROFSUB_I1" Unique="true">
+                    <Column Name="SYNC_PROFILE_KEY"/>
+                    <Column Name="SYNC_SUBSCRIPTION_KEY"/>
+                </Index>              
+            </Indices>
+        </Entity> 
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table holds information about SyncSubscriptions.  One of SyncSubscriptionKey or both SyncSubscriptionID and OrganizationCode must be passed to uniquely identify this SyncSubscription."
+            Extensible="N" Name="Sync_Subscription" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_SYNC_SUBSCRIPTION" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="SyncSubscription" ConfigurableByOrgOrNode="Y">
+            <Attributes>
+                <Attribute ColumnName="SYNC_SUBSCRIPTION_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_SUBSCRIPTION table."
+                    Name="Sync_Subscription_Key" Nullable="false" XMLName="SyncSubscriptionKey"/>
+                <Attribute ColumnName="SYNC_SUBSCRIPTION_ID"
+                	DataType="SyncTableID-40" Description="The ID for this Subscription."
+                    Name="Sync_Subscription_ID" Nullable="true" XMLName="SyncSubscriptionID"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                	DataType="OrgCode" IsOrgColumn="Y" 
+                	Description="The organization associated with this SyncSubscription."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SHORT_DESCRIPTION"
+                    DataType="FreeDescription-100" 
+                    Description="The short description of the subscription."
+                    Name="Short_Description" Nullable="true" XMLName="ShortDescription"
+                    Localized="true"/>
+                <Attribute ColumnName="LONG_DESCRIPTION"
+                    DataType="FreeDescription-1500" 
+                    Description="The long description of the subscription."
+                    Name="Long_Description" Nullable="true" XMLName="LongDescription"
+                    Localized="true"/>                    
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YFS_SYNCSBSCR_PK" Name="YFS_SYNC_SUBSCRIPTION_PK">
+    	         <Attribute ColumnName="SYNC_SUBSCRIPTION_KEY" Name="Sync_Subscription_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_SYNCSUB_I1" DB2Name="YFS_SYNC_SUBSCR_I1" Unique="true">
+                    <Column Name="SYNC_SUBSCRIPTION_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>              
+            </Indices>
+			<RelationShips>
+                <RelationShip Cardinality="OneToMany"
+                    DeleteCascade="false" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity> 
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table holds information about SyncTargets.  One of SyncTargetKey or both SyncTargetID and OrganizationCode must be passed to uniquely identify this SyncTarget."
+            Extensible="N" Name="Sync_Target" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_SYNC_TARGET" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="SyncTarget" ConfigurableByOrgOrNode="Y">
+            <Attributes>
+                <Attribute ColumnName="SYNC_TARGET_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_SYNC_TARGET table."
+                    Name="Sync_Target_Key" Nullable="false" XMLName="SyncTargetKey"/>
+                <Attribute ColumnName="SYNC_TARGET_ID"
+                	DataType="SyncTableID-40" Description="The ID for this Target."
+                    Name="Sync_Target_ID" Nullable="true" XMLName="SyncTargetID"/>
+                <Attribute ColumnName="ORGANIZATION_CODE"
+                	DataType="OrgCode" IsOrgColumn="Y"
+                	Description="The primary Enterprise that owns this SyncTarget."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SHORT_DESCRIPTION"
+                    DataType="FreeDescription-100" 
+                    Description="The short description of the target."
+                    Name="Short_Description" Nullable="true" XMLName="ShortDescription"
+                    Localized="true"/>
+                <Attribute ColumnName="LONG_DESCRIPTION"
+                    DataType="FreeDescription-1500" 
+                    Description="The long description of the target."
+                    Name="Long_Description" Nullable="true" XMLName="LongDescription"
+                    Localized="true"/>
+				<Attribute ColumnName="SYNC_SUBSCRIPTION_KEY"
+                    DataType="Key" 
+                    Description="The SyncSubscription to which this SyncTarget belongs."
+                    Name="Sync_Subscription_Key" Nullable="true" XMLName="SyncSubscriptionKey"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YFS_SYNCTGT_PK" Name="YFS_SYNC_TARGET_PK">
+    	         <Attribute ColumnName="SYNC_TARGET_KEY" Name="Sync_Target_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_SYNCTGT_I1" DB2Name="YFS_SYNCTGT_I1" Unique="true">
+                    <Column Name="SYNC_TARGET_ID"/>
+                    <Column Name="ORGANIZATION_CODE"/>
+                </Index>
+            </Indices>
+			<RelationShips>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="SyncTargetList" ChildName="SyncTarget"
+                    DeleteCascade="false" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+				<RelationShip Cardinality="OneToMany"
+					ChildListXMLName="SyncTargetList" ChildName="SyncTarget"
+                    DeleteCascade="false" Enforce="true"
+                    ForeignEntity="Sync_Subscription" Name="Sync_Subscription"
+                    Type="Bidirectional" XMLName="SyncSubscription">
+                    <Attribute Name="Sync_Subscription_Key" ParentName="Sync_Subscription_Key"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity> 
+        <Entity AuditRequired="Y" Cacheable="true"
+            Description="This table holds information about database import synchronization times and types (FULL or DELTA)."
+            Extensible="N" Name="Sync_DB_Import" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_SYNC_DB_IMPORT" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="SyncDBImport" ConfigurableByOrgOrNode="Y">
+            <Attributes>
+                <Attribute ColumnName="SYNC_DB_IMPORT_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_SYNC_DB_IMPORT table."
+                    Name="Sync_DB_Import_Key" Nullable="false" XMLName="SyncDBImportKey"/>
+                <Attribute ColumnName="SYNC_TYPE"
+                	DataType="ID-15" Description="The type of synchronization (FULL or DELTA)."
+                    Name="Sync_Type" Nullable="true" XMLName="SyncType"/>
+                <Attribute ColumnName="SEQUENCE_NO"
+                	DataType="Counter" Description="Sequence number used to identify which sync file was imported."
+                    Name="Sequence_No" Nullable="true" XMLName="SequenceNo"/>
+                <Attribute ColumnName="DB_IMPORT_TIME"
+                	DataType="HourMinuteTimeStamp" Description="The time of last import."
+                    Name="DB_Import_Time" Nullable="true" XMLName="DBImportTime"/>
+                <Attribute ColumnName="SYNC_TARGET_ID"
+                	DataType="SyncTableID-40" Description="The ID for the SyncTarget that was imported."
+                    Name="Sync_Target_ID" Nullable="true" XMLName="SyncTargetID"/>
+				<Attribute ColumnName="ORGANIZATION_CODE"
+                	DataType="OrgCode" IsOrgColumn="Y"
+                	Description="The organization that performed the import."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="SYNC_PROFILE_ID"
+                	DataType="SyncTableID-40" Description="The ID for the SyncProfile that was imported."
+                    Name="Sync_Profile_ID" Nullable="true" XMLName="SyncProfileID"/>
+				<Attribute ColumnName="PROFILE_ORGANIZATION_CODE"
+                	DataType="OrgCode"
+                	Description="The organization that owns the profile."
+                    Name="Profile_Organization_Code" Nullable="true" XMLName="ProfileOrganizationCode"/>
+                 <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YFS_SYNC_DB_I_PK" Name="YFS_SYNC_DB_IMPORT_PK">
+    	         <Attribute ColumnName="SYNC_DB_IMPORT_KEY" Name="Sync_DB_Import_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_SYNC_DB_I_I1" DB2Name="YFS_SYNCDB_I_I1" Unique="true">
+                    <Column Name="ORGANIZATION_CODE"/>
+                    <Column Name="SYNC_TARGET_ID"/>
+					<Column Name="PROFILE_ORGANIZATION_CODE"/>                    
+                    <Column Name="SYNC_PROFILE_ID"/>
+					<Column Name="SYNC_TYPE"/>
+                </Index>
+           </Indices>
+            <RelationShips>
+                 <RelationShip Cardinality="OneToMany"
+                	ChildListXMLName="SyncDBImportList" ChildXMLName="SyncDBImport"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                	ChildListXMLName="SyncDBImportList" ChildXMLName="SyncDBImport"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Sync_Profile" Name="SyncDBImport"
+                    Type="Unidirectional" XMLName="SyncProfile">
+                    <Attribute Name="Sync_Profile_ID" ParentName="Sync_Profile_ID"/>
+					<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity> 
+        <Entity AuditRequired="Y"
+            Description="This table holds information about database export synchronization times and types (FULL or DELTA)."
+            Extensible="N" Name="Sync_DB_Export" Prefix="YFS_" Module="ysc" 
+            TableName="YFS_SYNC_DB_EXPORT" EntityType="CONFIGURATION" TableType="CONFIGURATION"
+            XMLName="SyncDBExport" ConfigurableByOrgOrNode="Y">
+            <Attributes>
+                <Attribute ColumnName="SYNC_DB_EXPORT_KEY"
+                    DataType="Key" DefaultValue="' '  "
+                    Description="The primary key of the YFS_SYNC_DB_EXPORT table."
+                    Name="Sync_DB_Export_Key" Nullable="false" XMLName="SyncDBExportKey"/>
+                <Attribute ColumnName="SYNC_TYPE"
+                	DataType="ID-15" Description="The type of synchronization (FULL or DELTA)."
+                    Name="Sync_Type" Nullable="true" XMLName="SyncType"/>
+                <Attribute ColumnName="SEQUENCE_NO"
+                	DataType="Counter" Description="Sequence number assigned to exported sync file."
+                    Name="Sequence_No" Nullable="true" XMLName="SequenceNo"/>
+                <Attribute ColumnName="DB_EXPORT_TIME"
+                	DataType="HourMinuteTimeStamp" Description="The time that the export took place"
+                    Name="DB_Export_Time" Nullable="true" XMLName="DBExportTime"/>
+                <Attribute ColumnName="SYNC_PROFILE_ID"
+                	DataType="SyncTableID-40" Description="The ID of the SyncProfile that was exported."
+                    Name="Sync_Profile_ID" Nullable="true" XMLName="SyncProfileID"/>
+				<Attribute ColumnName="TABLEGROUP"
+                	DataType="SyncTableID-40" Description="The TableGroup associated with the profile exported."
+                    Name="TableGroup" Nullable="true" XMLName="TableGroup"/>
+				<Attribute ColumnName="ORGANIZATION_CODE"
+                	DataType="OrgCode" IsOrgColumn="Y"
+                	Description="The organization that performed the export."
+                    Name="Organization_Code" Nullable="true" XMLName="OrganizationCode"/>
+                <Attribute ColumnName="CREATETS" DataType="TimeStamp"
+                    DefaultValue="sysdate"
+                    Description="The timestamp for the creation of this record."
+                    Name="Createts" Nullable="false" XMLName="Createts"/>
+                <Attribute ColumnName="MODIFYTS" DataType="TimeStamp"
+                    DefaultValue="sysdate "
+                    Description="The timestamp for the last modification of this record."
+                    Name="Modifyts" Nullable="false" XMLName="Modifyts"/>
+                <Attribute ColumnName="CREATEUSERID"
+                    DataType="Createuserid"
+                    Description="The user who created this record."
+                    Name="Createuserid" Nullable="true" XMLName="Createuserid"/>
+                <Attribute ColumnName="MODIFYUSERID"
+                    DataType="Modifyuserid"
+                    Description="The user who last modified this record."
+                    Name="Modifyuserid" Nullable="true" XMLName="Modifyuserid"/>
+                <Attribute ColumnName="CREATEPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that created this record."
+                    Name="Createprogid" Nullable="true" XMLName="Createprogid"/>
+                <Attribute ColumnName="MODIFYPROGID"
+                    DataType="ProgramID" 
+                    Description="The program that modified this record."
+                    Name="Modifyprogid" Nullable="true" XMLName="Modifyprogid"/>
+                <Attribute ColumnName="LOCKID" DataType="Lockid"
+                    DefaultValue="0"
+                    Description="An integer used to track and prevent concurrent modifications."
+                    Name="Lockid" Nullable="false" XMLName="Lockid"/>
+            </Attributes>
+            <PrimaryKey DB2Name="YFS_SYNCDB_E_PK" Name="YFS_SYNCDB_EXPORT_PK">
+    	         <Attribute ColumnName="SYNC_DB_EXPORT_KEY" Name="Sync_DB_Export_Key"/>
+            </PrimaryKey>
+            <Indices>
+                <Index Name="YFS_SYNCDB_E_I1" DB2Name="YFS_SYNCDB_E_I1" Unique="true">               
+                    <Column Name="SYNC_TYPE"/>
+                    <Column Name="SYNC_PROFILE_ID"/>
+					<Column Name="ORGANIZATION_CODE"/>
+					<Column Name="SEQUENCE_NO"/>
+                </Index>
+            </Indices>
+            <RelationShips>
+				<RelationShip Cardinality="OneToMany"
+                	ChildListXMLName="SyncDBExportList" ChildXMLName="SyncDBExport"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Organization" Name="Organization"
+                    Type="Bidirectional" XMLName="Organization">
+                    <Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+                <RelationShip Cardinality="OneToMany"
+                	ChildListXMLName="SyncDBExportList" ChildXMLName="SyncDBExport"
+                    DeleteCascade="true" Enforce="true"
+                    ForeignEntity="Sync_Profile" Name="SyncDBExport"
+                    Type="Unidirectional" XMLName="SyncProfile">
+                    <Attribute Name="Sync_Profile_ID" ParentName="Sync_Profile_ID"/>
+					<Attribute Name="Organization_Code" ParentName="Organization_Code"/>
+                </RelationShip>
+            </RelationShips>
+        </Entity> 
+	</Entities>
+</DBSchema>

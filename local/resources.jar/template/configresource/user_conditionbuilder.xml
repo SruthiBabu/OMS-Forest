@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<SYNCUSER>
+  <Activateflag Type="Leaf" Id="Activateflag" DisplayName="Activateflag" DataType="Flag" ControlType="Combo" ColumnName="ACTIVATEFLAG">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+    </QryTypes>
+    <MasterData MasterDataId="Activateflag" IsReqd="" OverRidingClass="" IsStatic="true">
+      <Activateflag Code="Y" Desc="Yes"/>
+      <Activateflag Code="N" Desc="No"/>
+    </MasterData>
+  </Activateflag>
+  <ChangePassNext Type="Leaf" Id="ChangePassNext" DisplayName="ChangePassNext" DataType="Flag" ControlType="Combo" ColumnName="CHANGE_PASS_NEXT">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+    </QryTypes>
+    <MasterData MasterDataId="ChangePassNext" IsReqd="" OverRidingClass="" IsStatic="true">
+      <ChangePassNext Code="Y" Desc="Yes"/>
+      <ChangePassNext Code="N" Desc="No"/>
+    </MasterData>
+  </ChangePassNext>
+  <IsCustomer Type="Leaf" Id="IsCustomer" DisplayName="IsCustomer" DataType="Flag" ControlType="Combo" ColumnName="IS_CUSTOMER">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+    </QryTypes>
+    <MasterData MasterDataId="IsCustomer" IsReqd="" OverRidingClass="" IsStatic="true">
+      <IsCustomer Code="Y" Desc="Yes"/>
+      <IsCustomer Code="N" Desc="No"/>
+    </MasterData>
+  </IsCustomer>
+  <IsSupervisor Type="Leaf" Id="IsSupervisor" DisplayName="IsSupervisor" DataType="Flag" ControlType="Combo" ColumnName="IS_SUPERVISOR">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+    </QryTypes>
+    <MasterData MasterDataId="IsSupervisor" IsReqd="" OverRidingClass="" IsStatic="true">
+      <IsSupervisor Code="Y" Desc="Yes"/>
+      <IsSupervisor Code="N" Desc="No"/>
+    </MasterData>
+  </IsSupervisor>
+  <BillingaddressKey Type="Leaf" Id="BillingaddressKey" DisplayName="BillingaddressKey" DataType="Text-40" ControlType="Text" ColumnName="BILLINGADDRESS_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="BillingaddressKey" IsReqd="" OverRidingClass=""/>
+  </BillingaddressKey>
+  <BusinessKey Type="Leaf" Id="BusinessKey" DisplayName="BusinessKey" DataType="Text-40" ControlType="Text" ColumnName="BUSINESS_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="BusinessKey" IsReqd="" OverRidingClass=""/>
+  </BusinessKey>
+  <ContactaddressKey Type="Leaf" Id="ContactaddressKey" DisplayName="ContactaddressKey" DataType="Text-40" ControlType="Text" ColumnName="CONTACTADDRESS_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="ContactaddressKey" IsReqd="" OverRidingClass=""/>
+  </ContactaddressKey>
+  <CreatorOrganizationKey Type="Leaf" Id="CreatorOrganizationKey" DisplayName="CreatorOrganizationKey" DataType="Text-40" ControlType="Text" ColumnName="CREATOR_ORGANIZATION_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="CreatorOrganizationKey" IsReqd="" OverRidingClass=""/>
+  </CreatorOrganizationKey>
+  <DataSecurityGroupId Type="Leaf" Id="DataSecurityGroupId" DisplayName="DataSecurityGroupId" DataType="Text-40" ControlType="Text" ColumnName="DATA_SECURITY_GROUP_ID">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="DataSecurityGroupId" IsReqd="" OverRidingClass=""/>
+  </DataSecurityGroupId>
+  <DepartmentKey Type="Leaf" Id="DepartmentKey" DisplayName="DepartmentKey" DataType="Text-40" ControlType="Text" ColumnName="DEPARTMENT_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="DepartmentKey" IsReqd="" OverRidingClass=""/>
+  </DepartmentKey>
+  <DisplayUserID Type="Leaf" Id="DisplayUserID" DisplayName="DisplayUserID" DataType="Text-40" ControlType="Text" ColumnName="DISPLAY_USER_ID">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="DisplayUserID" IsReqd="" OverRidingClass=""/>
+  </DisplayUserID>
+  <EnterpriseCode Type="Leaf" Id="EnterpriseCode" DisplayName="EnterpriseCode" DataType="Text-40" ControlType="Text" ColumnName="ENTERPRISE_CODE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="EnterpriseCode" IsReqd="" OverRidingClass=""/>
+  </EnterpriseCode>
+  <Imagefile Type="Leaf" Id="Imagefile" DisplayName="Imagefile" DataType="Text-40" ControlType="Text" ColumnName="IMAGEFILE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Imagefile" IsReqd="" OverRidingClass=""/>
+  </Imagefile>
+  <Localecode Type="Leaf" Id="Localecode" DisplayName="Localecode" DataType="Text-40" ControlType="Text" ColumnName="LOCALECODE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Localecode" IsReqd="" OverRidingClass=""/>
+  </Localecode>
+  <Loginid Type="Leaf" Id="Loginid" DisplayName="Loginid" DataType="Text-40" ControlType="Text" ColumnName="LOGINID">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Loginid" IsReqd="" OverRidingClass=""/>
+  </Loginid>
+  <Longdesc Type="Leaf" Id="Longdesc" DisplayName="Longdesc" DataType="Text-40" ControlType="Text" ColumnName="LONGDESC">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Longdesc" IsReqd="" OverRidingClass=""/>
+  </Longdesc>
+  <MenuId Type="Leaf" Id="MenuId" DisplayName="MenuId" DataType="Text-40" ControlType="Text" ColumnName="MENU_ID">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="MenuId" IsReqd="" OverRidingClass=""/>
+  </MenuId>
+  <NoteKey Type="Leaf" Id="NoteKey" DisplayName="NoteKey" DataType="Text-40" ControlType="Text" ColumnName="NOTE_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="NoteKey" IsReqd="" OverRidingClass=""/>
+  </NoteKey>
+  <OrganizationKey Type="Leaf" Id="OrganizationKey" DisplayName="OrganizationKey" DataType="Text-40" ControlType="Text" ColumnName="ORGANIZATION_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="OrganizationKey" IsReqd="" OverRidingClass=""/>
+  </OrganizationKey>
+  <ParentUserKey Type="Leaf" Id="ParentUserKey" DisplayName="ParentUserKey" DataType="Text-40" ControlType="Text" ColumnName="PARENT_USER_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="ParentUserKey" IsReqd="" OverRidingClass=""/>
+  </ParentUserKey>
+  <Password Type="Leaf" Id="Password" DisplayName="Password" DataType="Text-40" ControlType="Text" ColumnName="PASSWORD">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Password" IsReqd="" OverRidingClass=""/>
+  </Password>
+  <PasswordPolicyId Type="Leaf" Id="PasswordPolicyId" DisplayName="PasswordPolicyId" DataType="Text-40" ControlType="Text" ColumnName="PASSWORD_POLICY_ID">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="PasswordPolicyId" IsReqd="" OverRidingClass=""/>
+  </PasswordPolicyId>
+  <PreferenceKey Type="Leaf" Id="PreferenceKey" DisplayName="PreferenceKey" DataType="Text-40" ControlType="Text" ColumnName="PREFERENCE_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="PreferenceKey" IsReqd="" OverRidingClass=""/>
+  </PreferenceKey>
+  <SuperUser Type="Leaf" Id="SuperUser" DisplayName="SuperUser" DataType="Text-40" ControlType="Text" ColumnName="SUPER_USER">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="SuperUser" IsReqd="" OverRidingClass=""/>
+  </SuperUser>
+  <Theme Type="Leaf" Id="Theme" DisplayName="Theme" DataType="Text-40" ControlType="Text" ColumnName="THEME">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Theme" IsReqd="" OverRidingClass=""/>
+  </Theme>
+  <Username Type="Leaf" Id="Username" DisplayName="Username" DataType="Text-40" ControlType="Text" ColumnName="USERNAME">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Username" IsReqd="" OverRidingClass=""/>
+  </Username>
+  <Usertype Type="Leaf" Id="Usertype" DisplayName="Usertype" DataType="Text-40" ControlType="Text" ColumnName="USERTYPE">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Usertype" IsReqd="" OverRidingClass=""/>
+  </Usertype>
+  <UserKey Type="Leaf" Id="UserKey" DisplayName="UserKey" DataType="Text-40" ControlType="Text" ColumnName="USER_KEY">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Starts_With" QryTypeId="FLIKE"/>
+      <QryType QryTypeName="Ends_With" QryTypeId="ELIKE"/>
+      <QryType QryTypeName="Contains" QryTypeId="LIKE"/>
+    </QryTypes>
+    <MasterData MasterDataId="UserKey" IsReqd="" OverRidingClass=""/>
+  </UserKey>
+  <MaxCustomerAssignments Type="Leaf" Id="MaxCustomerAssignments" DisplayName="MaxCustomerAssignments" DataType="Number" ControlType="Text" ColumnName="MAX_CUST_ASSIGN">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="MaxCustomerAssignments" IsReqd="" OverRidingClass=""/>
+  </MaxCustomerAssignments>
+  <Pwdlastchangedon Type="Leaf" Id="Pwdlastchangedon" DisplayName="Pwdlastchangedon" DataType="Number" ControlType="Text" ColumnName="PWDLASTCHANGEDON">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="Pwdlastchangedon" IsReqd="" OverRidingClass=""/>
+  </Pwdlastchangedon>
+  <SessionTimeout Type="Leaf" Id="SessionTimeout" DisplayName="SessionTimeout" DataType="Number" ControlType="Text" ColumnName="SESSION_TIMEOUT">
+    <QryTypes DefaultQryTypeId="EQ">
+      <QryType QryTypeName="Is" QryTypeId="EQ"/>
+      <QryType QryTypeName="Greater_than_or_Equal" QryTypeId="GE"/>
+      <QryType QryTypeName="Less_than_or_Equal" QryTypeId="LE"/>
+    </QryTypes>
+    <MasterData MasterDataId="SessionTimeout" IsReqd="" OverRidingClass=""/>
+  </SessionTimeout>
+</SYNCUSER>

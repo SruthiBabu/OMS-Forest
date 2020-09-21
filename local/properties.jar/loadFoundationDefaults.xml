@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<!--
+  Licensed Materials - Property of IBM
+  IBM Sterling Order Management (5725-D10), IBM Order Management (5737-D18)
+  (C) Copyright IBM Corp. 2009, 2018  All Rights Reserved.
+  US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<project name="FC Installer" basedir="." default="install">
+    <description>
+        FC Installation
+    </description>
+	<import file="AFCTasks.xml" />
+
+    <property environment="env" />
+    <property name="runtime" value="/opt/SSFS_9.5/runtime"/>
+    <!-- Project wide properties from sandbox.cfg -->
+    <property file="${runtime}/properties/sandbox.cfg" prefix="sandbox"/>
+    
+	<condition property="upgrademode" value="true">
+		<equals arg1="${install.mode}" arg2="upgrade" />
+	</condition>
+
+    <path id="custom.class.path">
+        <pathelement location="${runtime}/jar/smcfs/9.5"/>
+        <fileset dir="${runtime}/jar">
+            <include name="**/yscpbe.jar"/>
+        </fileset>
+    </path>
+
+    <target name="check.properties">
+	<AFCfail unless="runtime" Message="{1} variable is not set" >
+		<arg value="INSTALL_DIR"/>
+	</AFCfail>
+    </target>
+    
+    <target name="check.upgrade" if="upgrademode">
+		<property file="${runtime}/properties/fcmigrator.properties" />
+    </target>
+
+    <target name="install" depends="check.properties,check.upgrade">
+        <condition property="auditrequired" value="${sandbox.AUDIT_LOAD_DEFAULTS}" else="false">
+          <isset property="sandbox.AUDIT_LOAD_DEFAULTS" />
+        </condition>
+
+        <taskdef resource="smcfs.tasks" classpathref="custom.class.path" />
+        <AFCecho message="Factory setup data install"/>
+
+		<antcall target="-installFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/platform_afc/installer.xml"/>
+		</antcall>
+		<antcall target="-installFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/platform_afc_ui_impl/installer.xml"/>
+		</antcall>
+		<antcall target="-installFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/base_factorysetup/installer.xml"/>
+		</antcall>
+		<antcall target="-installsceCoreFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/scecore_installation/installer.xml"/>
+		</antcall>
+		<antcall target="-installFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/base_addin_factorysetup/installer.xml"/>
+		</antcall>
+		<antcall target="-installFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/base_sbc_factorysetup/installer.xml"/>
+		</antcall>
+		<antcall target="-installCCFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/isccs/installer.xml"/>
+		</antcall>
+		<antcall target="-installStoreFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/wsc/installer.xml"/>
+		</antcall>
+		<antcall target="-installSFSFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/sfs/installer.xml"/>
+		</antcall>
+		<antcall target="-installISFFC">
+			<param name="fcfile" value="${runtime}/repository/factorysetup/isf/installer.xml"/>
+		</antcall>
+	</target>
+
+	<target name="-installFC">
+		<dirname property="migratorXmlsDir" file="${fcfile}"/>
+		<java failonerror="true" fork="true" maxmemory="512m" classname="com.sterlingcommerce.woodstock.noapp.NoAppLoader" classpath="${runtime}/jar/bootstrapper.jar">
+		    <jvmarg line="-Xms128m -Xmx2048m"/>
+		    <sysproperty key="vendor" value="shell"/> 
+		    <sysproperty key="vendorFile" value="${runtime}/properties/servers.properties"/> 
+		    <sysproperty key="audit.required" value="${auditrequired}"/>
+		<sysproperty key="yfs.validatePKPrefix" value="N" />
+		    <sysproperty key="DISABLE_DS_EXTENSIONS" value="Y"/> 
+		    <sysproperty key="DISABLE_EXTENSIONS" value="Y"/>
+	        <sysproperty key="yfs.migrator.xml.directory" value="${migratorXmlsDir}${file.separator}XMLS"/>
+			<syspropertyset>
+				<propertyref prefix="yfs.migrator.protect."/>
+				<propertyref prefix="yfs.migrator.ignore."/>
+			</syspropertyset>
+		    <arg value="-class"/>
+		    <arg value="com.yantra.tools.migrator.MigratorMain"/>
+		    <arg value="-f"/>
+		    <arg value="${runtime}/properties/dynamicclasspath.cfg"/>
+		    <arg value="-invokeargs"/>
+		    <arg value="-xml"/>
+		    <arg value="${fcfile}"/>
+		</java>
+	</target>
+
+	<target name="-installsceCoreFC" depends="check-scecore-installer" if="scecore-installer-present">
+		<antcall target="-installFC">
+			<param name="fcfile" value="${fcfile}"/>
+		</antcall>
+	</target>
+
+	<target name="check-scecore-installer">
+		<available file="${fcfile}" property="scecore-installer-present"/>
+	</target>
+
+	<target name="-installCCFC" depends="check-cc-installer" if="cc-installer-present">
+		<antcall target="-installFC">
+			<param name="fcfile" value="${fcfile}"/>
+		</antcall>
+	</target>
+
+	<target name="check-cc-installer">
+		<available file="${fcfile}" property="cc-installer-present"/>
+	</target>
+
+	<target name="-installStoreFC" depends="check-store-installer" if="store-installer-present">
+		<antcall target="-installFC">
+			<param name="fcfile" value="${fcfile}"/>
+		</antcall>
+	</target>
+
+	<target name="check-store-installer">
+		<available file="${fcfile}" property="store-installer-present"/>
+	</target>
+
+	<target name="-installSFSFC" depends="check-sfs-installer" if="sfs-installer-present">
+		<antcall target="-installFC">
+			<param name="fcfile" value="${fcfile}"/>
+		</antcall>
+	</target>
+
+	<target name="check-sfs-installer">
+		<available file="${fcfile}" property="sfs-installer-present"/>
+	</target>
+
+	<target name="-installISFFC" depends="check-isf-installer" if="isf-installer-present">
+		<antcall target="-installFC">
+			<param name="fcfile" value="${fcfile}"/>
+		</antcall>
+	</target>
+
+	<target name="check-isf-installer">
+		<available file="${fcfile}" property="isf-installer-present"/>
+	</target>
+</project>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Licensed Materials - Property of IBM
+IBM Sterling Selling And Fulfillment Suite
+(C) Copyright IBM Corp. 2005, 2013 All Rights Reserved.
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ -->
+<LabelFieldMap>
+    <LabelField Binding="/Shipment/ShipNode/ShipNodePersonInfo/@AddressLine1" LabelFieldName="FromAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipNode/ShipNodePersonInfo/@AddressLine2" LabelFieldName="FromAddressLine2" RepeatingElement=""/>
+    <LabelField Binding="concat(/Shipment/ShipNode/ShipNodePersonInfo/@FirstName,' ',/Shipment/ShipNode/ShipNodePersonInfo/@LastName)" LabelFieldName="FromName" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipNode/ShipNodePersonInfo/@City" LabelFieldName="FromCity" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipNode/ShipNodePersonInfo/@State" LabelFieldName="FromState" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipNode/ShipNodePersonInfo/@Country" LabelFieldName="FromCountry" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipNode/ShipNodePersonInfo/@ZipCode" LabelFieldName="FromZip" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/@ShipmentNo" LabelFieldName="ShipmentNo" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/@ShipmentNo" LabelFieldName="ShipmentNoBarCode" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/@ActualShipmentDate" LabelFieldName="ShipmentDate" RepeatingElement="" DataType="Date"/>
+    <LabelField Binding="concat(/Shipment/ToAddress/@FirstName,' ',/Shipment/ToAddress/@LastName)" LabelFieldName="ToName" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ToAddress/@AddressLine1" LabelFieldName="ToAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ToAddress/@AddressLine2" LabelFieldName="ToAddressLine2" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ToAddress/@City" LabelFieldName="ToCity" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ToAddress/@State" LabelFieldName="ToState" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ToAddress/@ZipCode" LabelFieldName="ToZip" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ToAddress/@Country" LabelFieldName="ToCountry" RepeatingElement=""/>
+    <LabelField Binding="concat(/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@FirstName,' ',/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@LastName)" LabelFieldName="BillToName" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@AddressLine1" LabelFieldName="BillToAddressLine1" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@AddressLine2" LabelFieldName="BillToAddressLine2" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@City" LabelFieldName="BillToCity" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@State" LabelFieldName="BillToState" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@ZipCode" LabelFieldName="BillToZip" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/Order/PersonInfoBillTo/@Country" LabelFieldName="BillToCountry" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/Carrier/@ScacDesc" LabelFieldName="SCAC" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/BillingInformation/@ShipmentChargeType" LabelFieldName="FreightTerms" RepeatingElement=""/>
+    <LabelField Binding="concat(/Shipment/MarkForAddress/@FirstName,' ',/Shipment/MarkForAddress/@LastName)" LabelFieldName="MarkFor" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/Instructions/Instruction[@InstructionType='SHIP']/@InstructionText" LabelFieldName="SpecialInstruction" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/@CustomerPoNo" LabelFieldName="CustomerPONo" RepeatingElement="ShipmentLine"/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/@ItemID" LabelFieldName="ItemId" RepeatingElement=""/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/OrderLine/Item/@CustomerItem" LabelFieldName="CustItemId" RepeatingElement="ShipmentLine"/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/@ItemDesc" LabelFieldName="ItemDesc" RepeatingElement="ShipmentLine"/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/@UnitOfMeasure" LabelFieldName="UOM" RepeatingElement="ShipmentLine"/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/OrderLine/@OrderedQty" LabelFieldName="OrdQty" RepeatingElement="ShipmentLine"/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/@ActualQuantity" LabelFieldName="Quantity" RepeatingElement="ShipmentLine"/>
+    <LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/@BackOrderedQty" LabelFieldName="BOQty" RepeatingElement="ShipmentLine"/>
+	<LabelField Binding="/Shipment/BatchLocations/BatchLocation/@CartLocationId" LabelFieldName="CartLocationId" RepeatingElement=""/>
+	<LabelField Binding="/Shipment/BatchLocations/BatchLocation/Batch/@BatchNo" LabelFieldName="BatchNo" RepeatingElement=""/>
+	<!--<LabelField Binding="/Shipment/ShipmentLines/ShipmentLine/OrderLine/OrderStatuses/OrderStatus[substring(@Status,1,4)='1300']/@StatusQty" LabelFieldName="BOQty" RepeatingElement="ShipmentLine"/>-->
+    <LabelField Binding="" LabelFieldName="Line" RepeatingElement="" Sequence="Y"/>
+    <RepeatingFields>
+        <RepeatingField LabelFieldName="CustomerPONo" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="ItemId" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="CustItemId" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="ItemDesc" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="UOM" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="OrdQty" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="Quantity" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="BOQty" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+        <RepeatingField LabelFieldName="Line" MaxFirstPage="10"
+            MaxLastPage="12" MaxMidPage="12"/>
+    </RepeatingFields>
+</LabelFieldMap>
