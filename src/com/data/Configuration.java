@@ -7,7 +7,7 @@ public class Configuration {
 		Properties props = new Properties();
 
 		// HTTP_Signature = http_signature and JWT = jwt
-		props.setProperty("authenticationType", "http_Signature");
+		props.setProperty("authenticationType", "jwt");
 		props.setProperty("merchantID", "fahm_tech_us");
 		props.setProperty("runEnvironment", "CyberSource.Environment.SANDBOX");
 		props.setProperty("requestJsonPath", "src/resources/request.json");
@@ -40,7 +40,7 @@ public class Configuration {
 		Properties props = new Properties();
 
 		// HTTP_Signature = http_signature and JWT = jwt
-		props.setProperty("authenticationType", "http_Signature");
+		props.setProperty("authenticationType", "jwt");
 		props.setProperty("merchantID", "fahm_tech_us");
 		props.setProperty("runEnvironment", "CyberSource.Environment.SANDBOX");
 		props.setProperty("requestJsonPath", "src/resources/request.json");
