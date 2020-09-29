@@ -46,7 +46,7 @@ import com.yantra.yfs.japi.YFSExtnPaymentCollectionOutputStruct;
 import com.yantra.yfs.japi.YFSUserExitException;
 import com.yantra.yfs.japi.ue.YFSCollectionCreditCardUE;
 
-class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE{
+public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE{
 	
 	private static String merchantId = "fahm_tech_us";
     private static String requestHost = "apitest.cybersource.com";
