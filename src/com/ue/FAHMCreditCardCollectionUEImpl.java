@@ -1,6 +1,7 @@
 package com.ue;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -63,7 +64,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		
 		//System.out.println(merchantId);
 			
-		/*arg1.orderNo = "TC50171_3";
+		arg1.orderNo = "TC50171_3";
 		arg1.billToFirstName="John";
 		arg1.billToLastName="Doe";
 		arg1.billToAddressLine1="1 Market St";
@@ -77,7 +78,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		arg1.creditCardExpirationDate="12/2031";
 		arg1.currency = "USD";
 		arg1.secureAuthenticationCode = "123";
-		arg1.requestAmount = 10.20;*/
+		arg1.requestAmount = 10.20;
 		
 		String[] dmy =  arg1.creditCardExpirationDate.split("/");
 		String sMonth = "";
@@ -147,10 +148,11 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		output.tranAmount = arg1.requestAmount;
 		output.authorizationAmount = arg1.requestAmount;
 		output.authorizationId = jsonOutput.getString("id");
+		//output.authorizationExpirationDate = 
 		
-		/*JSONObject processor = new JSONObject();
-		processor = jsonOutput.get(avs);
-		output.authAVS = processor.*/
+		System.out.println("Id" +jsonOutput.getString("id"));
+		
+		//String code = jsonOutput.getString("clientReferenceInformation");
 		
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -240,7 +242,11 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	            }
 	            
 	            in.close();
+	           /* Base64.Decoder decoder = Base64.getDecoder();
+	            byte[] decoded = decoder.decode(response.toString());
+	            ByteArrayInputStream is = new ByteArrayInputStream(decoded);
 	            
+	            System.out.println("Decoded:" + is);*/
 	         
 	            jsonout = new JSONObject(response.toString());
 	            
@@ -266,7 +272,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	
 		//Replace below testrest.p12 file with your <MERCHANT>.p12 file.
                 //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
-  	 	FileInputStream keyFile = new FileInputStream("src/resources/fahm_tech_us.p12");
+  	 	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
         	
 			merchantKeyStore.load(keyFile, merchantId.toCharArray());
 			
