@@ -2,7 +2,6 @@ package com.ue;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -23,16 +22,12 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.StringTokenizer;
 
 import org.apache.commons.json.JSONException;
 import org.apache.commons.json.JSONObject;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.jose4j.json.internal.json_simple.parser.ParseException;
 
-import com.fahm.forest.utils.OmsUtils;
-import com.ibm.disthub2.impl.formats.OldEnvelop.payload.normal.body.jms.properties;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JOSEObject;
 import com.nimbusds.jose.JWSAlgorithm;
@@ -55,7 +50,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		FAHMCreditCardCollectionUEImpl temp = new FAHMCreditCardCollectionUEImpl();
 		
 		try {
-			temp.collectionCreditCard(null, new YFSExtnPaymentCollectionInputStruct());
+			System.out.println(temp.collectionCreditCard(null, new YFSExtnPaymentCollectionInputStruct()));
 		} catch (YFSUserExitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,9 +61,9 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	public YFSExtnPaymentCollectionOutputStruct collectionCreditCard(YFSEnvironment arg0,
 			YFSExtnPaymentCollectionInputStruct arg1) throws YFSUserExitException {
 		
-		System.out.println(merchantId);
+		//System.out.println(merchantId);
 			
-		/*arg1.orderNo = "TC50171_3";
+		arg1.orderNo = "TC50171_3";
 		arg1.billToFirstName="John";
 		arg1.billToLastName="Doe";
 		arg1.billToAddressLine1="1 Market St";
@@ -82,7 +77,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		arg1.creditCardExpirationDate="12/2031";
 		arg1.currency = "USD";
 		arg1.secureAuthenticationCode = "123";
-		arg1.requestAmount = 10.20;*/
+		arg1.requestAmount = 10.20;
 		
 		String[] dmy =  arg1.creditCardExpirationDate.split("/");
 		String sMonth = "";
@@ -96,6 +91,14 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		}
 				
 		YFSExtnPaymentCollectionOutputStruct output = new YFSExtnPaymentCollectionOutputStruct();
+		
+		if(isValid(arg1)){
+			if(isSystemDown(arg1)){
+				YFSUserExitException ue = new YFSUserExitException();
+				ue.setErrorCode("YFS023");
+				ue.setErrorDescription("Payment_System_Down");
+				throw ue;
+			}
 
 			String request = "{\n" +
                     "  \"clientReferenceInformation\": {\n" +
@@ -130,30 +133,66 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
                     "    }\n" +
                     "  }\n" +
                     "}";
-		
-		try {
+			
+			
+			JSONObject jsonOutput = new JSONObject();
 			System.out.println(request);
-			int postStatusCode = postRequest(request);
-			if (postStatusCode != 0) {
+			jsonOutput = postRequest(request);
+			/*if (postStatusCode != 0) {
             	System.out.println("STATUS : ERROR (HTTP Status = " + postStatusCode + ")");
             } else {
             	System.out.println("STATUS : SUCCESS (HTTP Status = " + postStatusCode + ")");
-            }
-		} catch (Exception e) {
-			System.out.println("ERROR : " + e.getMessage());
-			e.printStackTrace();
-		}
+            }*/
+				
+		try {
 		output.tranAmount = arg1.requestAmount;
 		output.authorizationAmount = arg1.requestAmount;
+		output.authorizationId = jsonOutput.getString("id");
 		
+		/*JSONObject processor = new JSONObject();
+		processor = jsonOutput.get(avs);
+		output.authAVS = processor.*/
+		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		} 
 		return output;
 		
 	}
-	private static int postRequest(String request) {
+	
+	private boolean isSystemDown(YFSExtnPaymentCollectionInputStruct input){
+		if(!isEncrypted(input)){
+			if(input.creditCardNo.startsWith("12")){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isValid(YFSExtnPaymentCollectionInputStruct input){
+		if(isEncrypted(input)){
+			return true;
+		} else {
+			return true;
+		}
+	}
+	
+	private boolean isEncrypted(YFSExtnPaymentCollectionInputStruct input){
+		if(input.creditCardNo.startsWith("IDES")){
+			return true;
+		} else if(input.creditCardNo.startsWith("E")){
+			return true;
+		}
+		return false;
+	}
+
+	private static JSONObject postRequest(String request) {
 		int responseStatus = 0;
 		
 		String resource = "/pts/v2/payments";
-		
+		JSONObject jsonout = new JSONObject();
 		/* HTTP connection */
         URL url;
 		try {
@@ -203,7 +242,12 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	            
 	            in.close();
 	            
-	            System.out.println("\tResponse Payload :\n" + response.toString());
+	         
+	            jsonout = new JSONObject(response.toString());
+	            
+	            System.out.println("\tResponse Payload :\n" + jsonout.toString(4));
+	            
+	            
 	        } else {
 	        	responseStatus = -1;
 	        }
@@ -211,7 +255,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 			System.out.println(e.getStackTrace());
 		}
 		
-		return responseStatus;
+		return jsonout;
 	}
 	
 	private static String generateJWT(String request, String method) {
