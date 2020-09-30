@@ -63,7 +63,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		
 		//System.out.println(merchantId);
 			
-		arg1.orderNo = "TC50171_3";
+		/*arg1.orderNo = "TC50171_3";
 		arg1.billToFirstName="John";
 		arg1.billToLastName="Doe";
 		arg1.billToAddressLine1="1 Market St";
@@ -77,7 +77,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		arg1.creditCardExpirationDate="12/2031";
 		arg1.currency = "USD";
 		arg1.secureAuthenticationCode = "123";
-		arg1.requestAmount = 10.20;
+		arg1.requestAmount = 10.20;*/
 		
 		String[] dmy =  arg1.creditCardExpirationDate.split("/");
 		String sMonth = "";
@@ -133,7 +133,6 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
                     "    }\n" +
                     "  }\n" +
                     "}";
-			
 			
 			JSONObject jsonOutput = new JSONObject();
 			System.out.println(request);
