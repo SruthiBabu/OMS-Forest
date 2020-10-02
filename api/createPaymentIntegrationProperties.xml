@@ -29,8 +29,15 @@
 	</API>
 	<API Name="manageProperty">
 		<Input>
-			<Property BasePropertyName="cybersource.url" Category="fahm" PropertyOverride="BASE" PropertyValue="https://ebctest.cybersource.com/ebc2/">
-				<PropertyMetadata BasePropertyName="url" Category="fahm" Description="Stores the CyberSource URL" Modifiable="Y" ModifiableAtRuntime="Y" />
+			<Property BasePropertyName="cybersource.requesthost" Category="fahm" PropertyOverride="BASE" PropertyValue="apitest.cybersource.com">
+				<PropertyMetadata BasePropertyName="requesthost" Category="fahm" Description="Stores the CyberSource hostl url" Modifiable="Y" ModifiableAtRuntime="Y" />
+			</Property>
+		</Input>
+	</API>
+	<API Name="manageProperty">
+		<Input>
+			<Property BasePropertyName="cybersource.resourceurl" Category="fahm" PropertyOverride="BASE" PropertyValue="/pts/v2/payments">
+				<PropertyMetadata BasePropertyName="resourceurl" Category="fahm" Description="Stores the CyberSource resource URL" Modifiable="Y" ModifiableAtRuntime="Y" />
 			</Property>
 		</Input>
 	</API>

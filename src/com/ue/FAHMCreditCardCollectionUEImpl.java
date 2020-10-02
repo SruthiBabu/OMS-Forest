@@ -1,41 +1,14 @@
 package com.ue;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.KeyStore;
-import java.security.MessageDigest;
-import java.security.PrivateKey;
-import java.security.KeyStore.PasswordProtection;
-import java.security.KeyStore.PrivateKeyEntry;
-import java.security.cert.CertificateEncodingException;
-import java.security.cert.X509Certificate;
-import java.security.interfaces.RSAPrivateKey;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.text.SimpleDateFormat;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.apache.commons.json.JSONException;
 import org.apache.commons.json.JSONObject;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JOSEObject;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.JWSObject;
-import com.nimbusds.jose.Payload;
-import com.nimbusds.jose.crypto.RSASSASigner;
+import com.fahm.forest.utils.CyberSourceUtils;
 import com.yantra.yfs.japi.YFSEnvironment;
 import com.yantra.yfs.japi.YFSExtnPaymentCollectionInputStruct;
 import com.yantra.yfs.japi.YFSExtnPaymentCollectionOutputStruct;
@@ -43,9 +16,6 @@ import com.yantra.yfs.japi.YFSUserExitException;
 import com.yantra.yfs.japi.ue.YFSCollectionCreditCardUE;
 
 public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE{
-	
-	private static String merchantId = "fahm_tech_us";
-    private static String requestHost = "apitest.cybersource.com";
   
     public static void main(String[] args) {
 		FAHMCreditCardCollectionUEImpl temp = new FAHMCreditCardCollectionUEImpl();
@@ -53,7 +23,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		try {
 			System.out.println(temp.collectionCreditCard(null, new YFSExtnPaymentCollectionInputStruct()));
 		} catch (YFSUserExitException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -61,10 +31,8 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	@Override
 	public YFSExtnPaymentCollectionOutputStruct collectionCreditCard(YFSEnvironment arg0,
 			YFSExtnPaymentCollectionInputStruct arg1) throws YFSUserExitException {
-		
-		//System.out.println(merchantId);
 			
-		arg1.orderNo = "TC50171_3";
+		/*arg1.orderNo = "TC50171_3";
 		arg1.billToFirstName="John";
 		arg1.billToLastName="Doe";
 		arg1.billToAddressLine1="1 Market St";
@@ -79,6 +47,9 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		arg1.currency = "USD";
 		arg1.secureAuthenticationCode = "123";
 		arg1.requestAmount = 10.20;
+		arg1.chargeType = "CAPTURE";
+		arg1.authorizationId = "6016137121056270204002";*/
+		
 		
 		String[] dmy =  arg1.creditCardExpirationDate.split("/");
 		String sMonth = "";
@@ -137,27 +108,30 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 			
 			JSONObject jsonOutput = new JSONObject();
 			System.out.println(request);
-			jsonOutput = postRequest(request);
-			/*if (postStatusCode != 0) {
-            	System.out.println("STATUS : ERROR (HTTP Status = " + postStatusCode + ")");
-            } else {
-            	System.out.println("STATUS : SUCCESS (HTTP Status = " + postStatusCode + ")");
-            }*/
+			
+			if(arg1.chargeType.equals("AUTHORIZATION")) {
+				jsonOutput = CyberSourceUtils.callAuth(arg0,request);
+			}else if (arg1.chargeType.equals("CHARGE")) {
+				jsonOutput = CyberSourceUtils.callCapture(arg0,request,arg1.authorizationId);
+			} /*else if (arg1.chargeType.equals("REVERSAL")) {
+				jsonOutput = CyberSourceUtils.callReversal(arg0,request, arg1.authorizationId);
+			}*/
+
+				try {
+				output.tranAmount = arg1.requestAmount;
+				output.authorizationAmount = arg1.requestAmount;
+				output.authorizationId = jsonOutput.getString("id");
 				
-		try {
-		output.tranAmount = arg1.requestAmount;
-		output.authorizationAmount = arg1.requestAmount;
-		output.authorizationId = jsonOutput.getString("id");
-		//output.authorizationExpirationDate = 
-		
-		System.out.println("Id" +jsonOutput.getString("id"));
-		
-		//String code = jsonOutput.getString("clientReferenceInformation");
-		
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+				GregorianCalendar now = new GregorianCalendar();
+				now.setTime(new Date());
+				now.add(Calendar.DAY_OF_MONTH, 5);
+				output.authorizationExpirationDate = dateFormat.format(now.getTime());
+				
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		} 
 		return output;
 		
@@ -189,12 +163,12 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		return false;
 	}
 
-	private static JSONObject postRequest(String request) {
+	/*private static JSONObject postRequest(String request, String resource) {
 		int responseStatus = 0;
 		
-		String resource = "/pts/v2/payments";
+		//String resource = "/pts/v2/payments";
+	
 		JSONObject jsonout = new JSONObject();
-		/* HTTP connection */
         URL url;
 		try {
 			url = new URL("https://" + requestHost + resource);
@@ -220,6 +194,8 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	        con.setRequestProperty("Content-Type", "application/json;charset=utf-8");
 	        con.setRequestProperty("Host", requestHost);
 	        
+	        System.out.println("Connection ok");
+	        
 	        try(OutputStream outputStream = con.getOutputStream()) {
 	        	byte[] input = request.getBytes("utf-8");
 	        	outputStream.write(input, 0, input.length);
@@ -242,11 +218,6 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	            }
 	            
 	            in.close();
-	           /* Base64.Decoder decoder = Base64.getDecoder();
-	            byte[] decoded = decoder.decode(response.toString());
-	            ByteArrayInputStream is = new ByteArrayInputStream(decoded);
-	            
-	            System.out.println("Decoded:" + is);*/
 	         
 	            jsonout = new JSONObject(response.toString());
 	            
@@ -261,9 +232,42 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		}
 		
 		return jsonout;
+	}*/
+	
+	/*private static JSONObject callAuth(String arg1) {
+		JSONObject jsonauth = new JSONObject();
+		
+		String resource = "/pts/v2/payments";
+		
+		jsonauth = postRequest(arg1,resource);
+
+		return jsonauth;
+
 	}
 	
-	private static String generateJWT(String request, String method) {
+	private static JSONObject callCapture(String arg1, String arg2) {
+		JSONObject jsonauth = new JSONObject();
+
+		String resource = "/pts/v2/payments/" + arg2 + "/captures";
+		
+		jsonauth = postRequest(arg1,resource);
+
+		return jsonauth;
+
+	}
+	
+	private static JSONObject callReversal(String arg1, String arg2) {
+		JSONObject jsonauth = new JSONObject();
+
+		String resource = "/pts/v2/payments/" + arg2 + "/reversals";
+		
+		jsonauth = postRequest(arg1,resource);
+
+		return jsonauth;
+
+	}*/
+	
+	/*private static String generateJWT(String request, String method) {
         String token = "TOKEN_PLACEHOLDER";
         System.out.println("\tMethod : " + method);
 
@@ -272,7 +276,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	
 		//Replace below testrest.p12 file with your <MERCHANT>.p12 file.
                 //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
-  	 	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
+  	 	FileInputStream keyFile = new FileInputStream("src/resources/fahm_tech_us.p12");
         	
 			merchantKeyStore.load(keyFile, merchantId.toCharArray());
 			
@@ -325,7 +329,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 			}
 			
 			/* Preparing the Signature Header. */
-			HashMap<String, Object> customHeaders = new HashMap<String, Object>();
+			/*HashMap<String, Object> customHeaders = new HashMap<String, Object>();
 			if (merchantId != null) {
 				customHeaders.put(JWTCryptoProcessor.MERCHANT_ID, merchantId);
 			}
@@ -346,7 +350,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
         }
 
         return "Bearer " + token;
-    }
+    }*/
     
     /**
 	 * @param array
@@ -355,7 +359,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	 *            -Id of merchant.
 	 * @return merchantKeyalias for merchant.
 	 */
-	private static String keyAliasValidator(ArrayList<String> array, String merchantID) {
+	/*private static String keyAliasValidator(ArrayList<String> array, String merchantID) {
 		int size = array.size();
 		String tempKeyAlias, merchantKeyAlias, result;
 		StringTokenizer str;
@@ -377,62 +381,6 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		}
 		
 		return null;
-	}
+	}*/
 	
-}
-
-class JWTCryptoProcessor {
-	public static String MERCHANT_ID = "v-c-merchant-id";
-	
-	public String sign(String content, PrivateKey privateKey, X509Certificate x509Certificate,
-			Map<String, Object> customHeaders) {
-		return serializeToken(signPayload(content, privateKey, x509Certificate, customHeaders));
-	}
-	
-	private String serializeToken(JOSEObject joseObject) {
-		return joseObject.serialize();
-	}
-	
-	private JOSEObject signPayload(String content, PrivateKey privateKey, X509Certificate x509Certificate,
-			Map<String, Object> customHeaders) {
-		if ((content == null) || (content.trim().length() == 0) || (x509Certificate == null) || (privateKey == null)) {
-			return null;
-		}
-		String serialNumber = null;
-		String serialNumberPrefix = "SERIALNUMBER=";
-		String principal = x509Certificate.getSubjectDN().getName().toUpperCase();
-		int beg = principal.indexOf(serialNumberPrefix);
-		if (beg >= 0) {
-			int end = principal.indexOf(",", beg);
-			if (end == -1) {
-				end = principal.length();
-			}
-			serialNumber = principal.substring(beg + serialNumberPrefix.length(), end);
-		} else {
-			serialNumber = x509Certificate.getSerialNumber().toString();
-		}
-		List<com.nimbusds.jose.util.Base64> x5cBase64List = new ArrayList<>();
-		try {
-			x5cBase64List.add(com.nimbusds.jose.util.Base64.encode(x509Certificate.getEncoded()));
-		} catch (CertificateEncodingException e) {
-			return null;
-		}
-		RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) privateKey;
-		Payload payload = new Payload(content);
-
-		JWSHeader jwsHeader = new JWSHeader.Builder(JWSAlgorithm.RS256)
-										   .customParams(customHeaders).keyID(serialNumber)
-										   .x509CertChain(x5cBase64List).build();
-		JWSObject jwsObject = new JWSObject(jwsHeader, payload);
-		try {
-			RSASSASigner signer = new RSASSASigner(rsaPrivateKey);
-			jwsObject.sign(signer);
-			if (!jwsObject.getState().equals(JWSObject.State.SIGNED)) {
-				return null;
-			}
-		} catch (JOSEException joseException) {
-			return null;
-		}
-		return jwsObject;
-	}
 }
