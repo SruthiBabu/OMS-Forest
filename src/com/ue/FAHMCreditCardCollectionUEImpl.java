@@ -48,9 +48,9 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		
 		arg1.requestAmount = 10.20;
 		arg1.chargeType = "CAPTURE";
-		arg1.authorizationId = "6016137121056270204002";*/
+		arg1.authorizationId = "6016137121056270204002";
 		
-		arg1.secureAuthenticationCode = "123";
+		arg1.secureAuthenticationCode = "123";*/
 		String[] dmy =  arg1.creditCardExpirationDate.split("/");
 		String sMonth = "";
 		String sYear = "";
