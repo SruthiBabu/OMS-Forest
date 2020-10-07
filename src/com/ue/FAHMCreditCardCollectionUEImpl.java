@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 import org.apache.commons.json.JSONException;
 import org.apache.commons.json.JSONObject;
 import com.fahm.forest.utils.CyberSourceUtils;
+import com.yantra.pca.ycd.ue.utils.YCDPaymentUEXMLManager;
+import com.yantra.yfc.dom.YFCDocument;
 import com.yantra.yfs.japi.YFSEnvironment;
 import com.yantra.yfs.japi.YFSExtnPaymentCollectionInputStruct;
 import com.yantra.yfs.japi.YFSExtnPaymentCollectionOutputStruct;
@@ -32,7 +34,7 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 	public YFSExtnPaymentCollectionOutputStruct collectionCreditCard(YFSEnvironment arg0,
 			YFSExtnPaymentCollectionInputStruct arg1) throws YFSUserExitException {
 			
-		/*arg1.orderNo = "TC50171_3";
+		arg1.orderNo = "TC50171_3";
 		arg1.billToFirstName="John";
 		arg1.billToLastName="Doe";
 		arg1.billToAddressLine1="1 Market St";
@@ -47,10 +49,11 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		arg1.currency = "USD";
 		
 		arg1.requestAmount = 10.20;
-		arg1.chargeType = "CAPTURE";
-		arg1.authorizationId = "6016137121056270204002";
+		arg1.chargeType = "AUTHORIZATION";
+		//arg1.authorizationId = "6016137121056270204002";
 		
-		arg1.secureAuthenticationCode = "123";*/
+		//arg1.secureAuthenticationCode = "123";
+		
 		String[] dmy =  arg1.creditCardExpirationDate.split("/");
 		String sMonth = "";
 		String sYear = "";
@@ -128,6 +131,8 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 				now.add(Calendar.DAY_OF_MONTH, 5);
 				output.authorizationExpirationDate = dateFormat.format(now.getTime());
 				
+				output.authReturnMessage = jsonOutput.getString("status");
+				
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -163,224 +168,4 @@ public class FAHMCreditCardCollectionUEImpl implements YFSCollectionCreditCardUE
 		return false;
 	}
 
-	/*private static JSONObject postRequest(String request, String resource) {
-		int responseStatus = 0;
-		
-		//String resource = "/pts/v2/payments";
-	
-		JSONObject jsonout = new JSONObject();
-        URL url;
-		try {
-			url = new URL("https://" + requestHost + resource);
-
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			
-			System.out.println("\n -- RequestURL -- ");
-	        System.out.println("\tURL : " + url);
-	        System.out.println("\n -- HTTP Headers -- ");
-	        System.out.println("\tContent-Type : " + "application/json");
-	        System.out.println("\tv-c-merchant-id : " + merchantId);
-	        System.out.println("\tHost : " + requestHost);
-			
-			String token = generateJWT(request, "POST");
-			
-	        System.out.println("\n -- TOKEN -- ");
-	        System.out.println(token);
-	        
-	        con.setRequestMethod("POST");
-	        con.setDoOutput(true);
-	        con.setRequestProperty("Authorization", token);
-	        con.setRequestProperty("Accept", "application/hal+json;charset=utf-8");
-	        con.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-	        con.setRequestProperty("Host", requestHost);
-	        
-	        System.out.println("Connection ok");
-	        
-	        try(OutputStream outputStream = con.getOutputStream()) {
-	        	byte[] input = request.getBytes("utf-8");
-	        	outputStream.write(input, 0, input.length);
-	        }
-	        
-	        int responseCode = con.getResponseCode();
-	        String responseHeader = con.getHeaderField("v-c-correlation-id");
-
-	        System.out.println("\n -- Response Message -- " );
-	        System.out.println("\tResponse Code :" + responseCode);
-	        System.out.println("\tv-c-correlation-id :" + responseHeader);
-	        
-	        if (responseCode == 200 || responseCode == 201) {
-	        	BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	            String inputLine;
-	            StringBuffer response = new StringBuffer();
-
-	            while ((inputLine = in.readLine()) != null) {
-	                response.append(inputLine);
-	            }
-	            
-	            in.close();
-	         
-	            jsonout = new JSONObject(response.toString());
-	            
-	            System.out.println("\tResponse Payload :\n" + jsonout.toString(4));
-	            
-	            
-	        } else {
-	        	responseStatus = -1;
-	        }
-		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
-		}
-		
-		return jsonout;
-	}*/
-	
-	/*private static JSONObject callAuth(String arg1) {
-		JSONObject jsonauth = new JSONObject();
-		
-		String resource = "/pts/v2/payments";
-		
-		jsonauth = postRequest(arg1,resource);
-
-		return jsonauth;
-
-	}
-	
-	private static JSONObject callCapture(String arg1, String arg2) {
-		JSONObject jsonauth = new JSONObject();
-
-		String resource = "/pts/v2/payments/" + arg2 + "/captures";
-		
-		jsonauth = postRequest(arg1,resource);
-
-		return jsonauth;
-
-	}
-	
-	private static JSONObject callReversal(String arg1, String arg2) {
-		JSONObject jsonauth = new JSONObject();
-
-		String resource = "/pts/v2/payments/" + arg2 + "/reversals";
-		
-		jsonauth = postRequest(arg1,resource);
-
-		return jsonauth;
-
-	}*/
-	
-	/*private static String generateJWT(String request, String method) {
-        String token = "TOKEN_PLACEHOLDER";
-        System.out.println("\tMethod : " + method);
-
-        try {
-        	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12", new BouncyCastleProvider());
-	
-		//Replace below testrest.p12 file with your <MERCHANT>.p12 file.
-                //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
-  	 	FileInputStream keyFile = new FileInputStream("src/resources/fahm_tech_us.p12");
-        	
-			merchantKeyStore.load(keyFile, merchantId.toCharArray());
-			
-			String merchantKeyAlias = null;
-			Enumeration<String> enumKeyStore = merchantKeyStore.aliases();
-			ArrayList<String> array = new ArrayList<String>();
-			
-			while (enumKeyStore.hasMoreElements()) {
-				merchantKeyAlias = (String) enumKeyStore.nextElement();
-				array.add(merchantKeyAlias);
-				if (merchantKeyAlias.contains(merchantId)) {
-					break;
-				}
-			}
-			
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// Initialize private key from certificate        	
-			PrivateKeyEntry e = (PrivateKeyEntry) merchantKeyStore.getEntry(merchantKeyAlias,
-					new PasswordProtection(merchantId.toCharArray()));
-			
-			RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) e.getPrivateKey();
-			
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// Initialize certificate
-			merchantKeyAlias = keyAliasValidator(array, merchantId);
-			
-			e = (PrivateKeyEntry) merchantKeyStore.getEntry(merchantKeyAlias,
-					new PasswordProtection(merchantId.toCharArray()));
-			
-			X509Certificate certificate = (X509Certificate) e.getCertificate();
-			
-			String encryptedSigMessage = "";
-
-			if (request != null && !request.isEmpty()) {
-				MessageDigest jwtBody = MessageDigest.getInstance("SHA-256");
-				byte[] jwtClaimSetBody = jwtBody.digest(request.getBytes());
-				encryptedSigMessage = Base64.getEncoder().encodeToString(jwtClaimSetBody);
-			}
-			
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// Get JWT
-			String claimSet = null;
-			if (method.equalsIgnoreCase("GET")) {
-				claimSet = "{\n            \"iat\":\"" + ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT)
-						+ "\"\n} \n\n";
-			} else if (method.equalsIgnoreCase("POST")) {
-				claimSet = "{\n            \"digest\":\"" + encryptedSigMessage
-						+ "\",\n            \"digestAlgorithm\":\"SHA-256\",\n            \"iat\":\""
-						+ ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT) + "\"\n} \n\n";
-			}
-			
-			/* Preparing the Signature Header. */
-			/*HashMap<String, Object> customHeaders = new HashMap<String, Object>();
-			if (merchantId != null) {
-				customHeaders.put(JWTCryptoProcessor.MERCHANT_ID, merchantId);
-			}
-
-			if (merchantId != null) {
-				customHeaders.put("v-c-partner-id", merchantId);
-			}
-
-			JWTCryptoProcessor jwtCryptoProcessor = new JWTCryptoProcessor();
-
-	        System.out.println("\t JWT Body : " + claimSet);
-			
-			token = jwtCryptoProcessor.sign(claimSet, rsaPrivateKey, certificate, customHeaders);
-        }
-        catch (Exception ex)
-        {
-            System.out.println("ERROR : " + ex.toString());
-        }
-
-        return "Bearer " + token;
-    }*/
-    
-    /**
-	 * @param array
-	 *            -list of keyAlias.
-	 * @param merchantID
-	 *            -Id of merchant.
-	 * @return merchantKeyalias for merchant.
-	 */
-	/*private static String keyAliasValidator(ArrayList<String> array, String merchantID) {
-		int size = array.size();
-		String tempKeyAlias, merchantKeyAlias, result;
-		StringTokenizer str;
-		for (int i = 0; i < size; i++) {
-			merchantKeyAlias = array.get(i).toString();
-			str = new StringTokenizer(merchantKeyAlias, ",");
-			while (str.hasMoreTokens()) {
-				tempKeyAlias = str.nextToken();
-				if (tempKeyAlias.contains("CN")) {
-					str = new StringTokenizer(tempKeyAlias, "=");
-					while (str.hasMoreElements()) {
-						result = str.nextToken();
-						if (result.equalsIgnoreCase(merchantID)) {
-							return merchantKeyAlias;
-						}
-					}
-				}
-			}
-		}
-		
-		return null;
-	}*/
-	
 }

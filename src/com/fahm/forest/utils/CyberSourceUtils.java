@@ -27,11 +27,15 @@ import com.ue.JWTCryptoProcessor;
 import com.yantra.yfs.japi.YFSEnvironment;
 
 public class CyberSourceUtils {
+	
+	//private static String merchantId = "fahm_tech_us";
+    //private static String requestHost = "apitest.cybersource.com";
 
 	public static JSONObject callAuth(YFSEnvironment arg0,String arg1) {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
+		//String res = "/pts/v2/payments";
 		String resource = res;
 		
 		jsonauth = postRequest(arg0,arg1,resource);
@@ -44,6 +48,7 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
+		//String res = "/pts/v2/payments";
 		String resource = res + arg2 + "/captures";
 		
 		jsonauth = postRequest(arg0,arg1,resource);
@@ -56,6 +61,7 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
+		//String res = "/pts/v2/payments";
 		String resource = res + arg2 + "/reversals";
 		
 		jsonauth = postRequest(arg0,arg1,resource);
