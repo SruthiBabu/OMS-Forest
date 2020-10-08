@@ -82,7 +82,6 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "}";
 			
 			JSONObject jsonOutput = new JSONObject();
-			System.out.println(request);
 			
 			if(root.getAttribute("ChargeType").equals("AUTHORIZATION")) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,request);

@@ -27,15 +27,11 @@ import com.ue.JWTCryptoProcessor;
 import com.yantra.yfs.japi.YFSEnvironment;
 
 public class CyberSourceUtils {
-	
-	//private static String merchantId = "fahm_tech_us";
-    //private static String requestHost = "apitest.cybersource.com";
 
 	public static JSONObject callAuth(YFSEnvironment arg0,String arg1) {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
-		//String res = "/pts/v2/payments";
 		String resource = res;
 		
 		jsonauth = postRequest(arg0,arg1,resource);
@@ -48,7 +44,6 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
-		//String res = "/pts/v2/payments";
 		String resource = res + arg2 + "/captures";
 		
 		jsonauth = postRequest(arg0,arg1,resource);
@@ -61,7 +56,6 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
-		//String res = "/pts/v2/payments";
 		String resource = res + arg2 + "/reversals";
 		
 		jsonauth = postRequest(arg0,arg1,resource);
@@ -83,26 +77,14 @@ public class CyberSourceUtils {
 
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			
-			System.out.println("\n -- RequestURL -- ");
-	        System.out.println("\tURL : " + url);
-	        System.out.println("\n -- HTTP Headers -- ");
-	        System.out.println("\tContent-Type : " + "application/json");
-	        System.out.println("\tv-c-merchant-id : " + merchantId);
-	        System.out.println("\tHost : " + requestHost);
-			
 			String token = generateJWT(arg0,request, "POST");
 			
-	        System.out.println("\n -- TOKEN -- ");
-	        System.out.println(token);
-	        
 	        con.setRequestMethod("POST");
 	        con.setDoOutput(true);
 	        con.setRequestProperty("Authorization", token);
 	        con.setRequestProperty("Accept", "application/hal+json;charset=utf-8");
 	        con.setRequestProperty("Content-Type", "application/json;charset=utf-8");
 	        con.setRequestProperty("Host", requestHost);
-	        
-	        System.out.println("Connection ok");
 	        
 	        try(OutputStream outputStream = con.getOutputStream()) {
 	        	byte[] input = request.getBytes("utf-8");
@@ -112,10 +94,6 @@ public class CyberSourceUtils {
 	        int responseCode = con.getResponseCode();
 	        String responseHeader = con.getHeaderField("v-c-correlation-id");
 
-	        System.out.println("\n -- Response Message -- " );
-	        System.out.println("\tResponse Code :" + responseCode);
-	        System.out.println("\tv-c-correlation-id :" + responseHeader);
-	        
 	        if (responseCode == 200 || responseCode == 201) {
 	        	BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	            String inputLine;
@@ -129,9 +107,6 @@ public class CyberSourceUtils {
 	         
 	            jsonout = new JSONObject(response.toString());
 	            
-	            System.out.println("\tResponse Payload :\n" + jsonout.toString(4));
-	            
-	            
 	        } else {
 	        	responseStatus = -1;
 	        }
@@ -144,8 +119,6 @@ public class CyberSourceUtils {
 	
 	private static String generateJWT(YFSEnvironment arg0,String request, String method) {
         String token = "TOKEN_PLACEHOLDER";
-        System.out.println("\tMethod : " + method);
-        
         String merchantId = OmsUtils.getPropertyValue(arg0, "cybersource.merchant_id", "fahm");
         try {
         	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12", new BouncyCastleProvider());
@@ -216,8 +189,6 @@ public class CyberSourceUtils {
 
 			JWTCryptoProcessor jwtCryptoProcessor = new JWTCryptoProcessor();
 
-	        System.out.println("\t JWT Body : " + claimSet);
-			
 			token = jwtCryptoProcessor.sign(claimSet, rsaPrivateKey, certificate, customHeaders);
         }
         catch (Exception ex)

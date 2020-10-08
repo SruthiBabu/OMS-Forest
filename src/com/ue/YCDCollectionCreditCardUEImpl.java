@@ -38,26 +38,7 @@ public class YCDCollectionCreditCardUEImpl
 
   public YFSExtnPaymentCollectionOutputStruct collectionCreditCard(YFSEnvironment oEnv, YFSExtnPaymentCollectionInputStruct paymentInputStruct) throws YFSUserExitException {
     cat.beginTimer("YCDCollectionCreditCardUEImpl");
-    
-    
-    paymentInputStruct.orderNo = "TC50171_3";
-    paymentInputStruct.billToFirstName="John";
-    paymentInputStruct.billToLastName="Doe";
-    paymentInputStruct.billToAddressLine1="1 Market St";
-    paymentInputStruct.billToCity="san francisco";
-    paymentInputStruct.billToState="CA";
-    paymentInputStruct.billToZipCode="94105";
-    paymentInputStruct.billToCountry="US";
-    paymentInputStruct.billToEmailId="test@cybs.com";
-    paymentInputStruct.billToDayPhone="4158880000";
-    paymentInputStruct.creditCardNo="5555555555554444";
-    paymentInputStruct.creditCardExpirationDate="12/2031";
-    paymentInputStruct.currency = "USD";
 
-    paymentInputStruct.requestAmount = 10.20;
-    paymentInputStruct.chargeType = "AUTHORIZATION";
-    
-    
     YFSContext oCtx = (YFSContext)oEnv;
     
     YFSExtnPaymentCollectionOutputStruct paymentOutputStruct = new YFSExtnPaymentCollectionOutputStruct();
