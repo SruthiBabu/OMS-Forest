@@ -115,9 +115,9 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 				JSONObject processorInformation = new JSONObject(obj.getString("processorInformation"));
 		    	JSONObject avs = new JSONObject(processorInformation.getString("avs"));
 		    	String avsCode = avs.getString("code");
-		    	String authcode = avs.getString("codeRaw");
+		    	String authcode = processorInformation.getString("approvalCode");
 		    	paymentRoot.setAttribute("AuthAVS", avsCode);   //code within avs from CyberSource response payload
-		    	paymentRoot.setAttribute("AuthCode", authcode);  //codeRaw within avs from CyberSource response payload		    	
+		    	paymentRoot.setAttribute("AuthCode", authcode);  //capprovalCode from CyberSource response payload		    	
 		    	JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
 		    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
 		    	String authorizedAmount = amountDetails.getString("authorizedAmount");

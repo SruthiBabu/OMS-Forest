@@ -1,11 +1,13 @@
 package com.fahm.forest.utils;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Key;
 import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.KeyStore.PasswordProtection;
@@ -122,12 +124,17 @@ public class CyberSourceUtils {
         String merchantId = OmsUtils.getPropertyValue(arg0, "cybersource.merchant_id", "fahm");
         try {
         	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12", new BouncyCastleProvider());
-	
+        	
+        	Console console = System.console();
+        	String password = console.readPassword("%s ", "Keystore Password:").toString();
+        	
+        	String alias = "fahm_tech_us";
 		//Use <MERCHANT>.p12 file here.
                 //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
-  	 	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
+  	 	//FileInputStream keyFile = new FileInputStream("fahm_tech_us.p12");
         	
-			merchantKeyStore.load(keyFile, merchantId.toCharArray());
+			//merchantKeyStore.load(keyFile, password.toCharArray());
+			Key key = merchantKeyStore.getKey(alias, password.toCharArray());
 			
 			String merchantKeyAlias = null;
 			Enumeration<String> enumKeyStore = merchantKeyStore.aliases();
@@ -144,7 +151,7 @@ public class CyberSourceUtils {
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// Initialize private key from certificate        	
 			PrivateKeyEntry e = (PrivateKeyEntry) merchantKeyStore.getEntry(merchantKeyAlias,
-					new PasswordProtection(merchantId.toCharArray()));
+					new PasswordProtection(password.toCharArray()));
 			
 			RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) e.getPrivateKey();
 			
@@ -153,7 +160,7 @@ public class CyberSourceUtils {
 			merchantKeyAlias = keyAliasValidator(array, merchantId);
 			
 			e = (PrivateKeyEntry) merchantKeyStore.getEntry(merchantKeyAlias,
-					new PasswordProtection(merchantId.toCharArray()));
+					new PasswordProtection(password.toCharArray()));
 			
 			X509Certificate certificate = (X509Certificate) e.getCertificate();
 			
