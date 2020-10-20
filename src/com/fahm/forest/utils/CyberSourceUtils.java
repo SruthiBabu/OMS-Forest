@@ -124,7 +124,7 @@ public class CyberSourceUtils {
         String token = "TOKEN_PLACEHOLDER";
         String merchantId = OmsUtils.getPropertyValue(arg0, "cybersource.merchant_id", "fahm");
         try {
-        	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12");
+        	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12", new BouncyCastleProvider());
         	
         	String keyStore = System.getProperty("javax.net.ssl.keyStore");
             String pass = System.getProperty("javax.net.ssl.keyStorePassword");
