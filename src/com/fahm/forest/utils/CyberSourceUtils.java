@@ -125,10 +125,10 @@ public class CyberSourceUtils {
         try {
         	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12", new BouncyCastleProvider());
         	
-        	Console console = System.console();
-        	String password = console.readPassword("%s ", "Keystore Password:").toString();
+        	String password = "secret4ever";
         	
         	String alias = "fahm_tech_us";
+        	
 		//Use <MERCHANT>.p12 file here.
                 //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
   	 	//FileInputStream keyFile = new FileInputStream("fahm_tech_us.p12");
