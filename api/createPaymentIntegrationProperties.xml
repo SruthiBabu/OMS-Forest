@@ -36,8 +36,15 @@
 	</API>
 	<API Name="manageProperty">
 		<Input>
-			<Property BasePropertyName="cybersource.resourceurl" Category="fahm" PropertyOverride="BASE" PropertyValue="/pts/v2/payments">
-				<PropertyMetadata BasePropertyName="resourceurl" Category="fahm" Description="Stores the CyberSource resource URL" Modifiable="Y" ModifiableAtRuntime="Y" />
+			<Property BasePropertyName="cybersource.paymentsurl" Category="fahm" PropertyOverride="BASE" PropertyValue="/pts/v2/payments">
+				<PropertyMetadata BasePropertyName="paymentsurl" Category="fahm" Description="Stores the CyberSource payment resource URL" Modifiable="Y" ModifiableAtRuntime="Y" />
+			</Property>
+		</Input>
+	</API>
+	<API Name="manageProperty">
+		<Input>
+			<Property BasePropertyName="cybersource.capturesurl" Category="fahm" PropertyOverride="BASE" PropertyValue="/pts/v2/captures">
+				<PropertyMetadata BasePropertyName="capturesurl" Category="fahm" Description="Stores the CyberSource captures resource URL" Modifiable="Y" ModifiableAtRuntime="Y" />
 			</Property>
 		</Input>
 	</API>

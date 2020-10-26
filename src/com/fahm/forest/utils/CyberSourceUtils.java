@@ -34,7 +34,7 @@ public class CyberSourceUtils {
 	public static JSONObject callAuth(YFSEnvironment arg0,String arg1) {
 		JSONObject jsonauth = new JSONObject();
 		
-		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
+		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res;
 		
 		jsonauth = postRequest(arg0,arg1,resource);
@@ -46,7 +46,7 @@ public class CyberSourceUtils {
 	public static JSONObject callCapture(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
 		
-		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
+		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res + arg2 + "/captures";
 		
 		jsonauth = postRequest(arg0,arg1,resource);
@@ -58,13 +58,35 @@ public class CyberSourceUtils {
 	public static JSONObject callReversal(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
 		
-		String res = OmsUtils.getPropertyValue(arg0, "cybersource.resourceurl", "fahm");
+		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res + arg2 + "/reversals";
 		
 		jsonauth = postRequest(arg0,arg1,resource);
 
 		return jsonauth;
 
+	}
+	
+	public static JSONObject callAuthRefund(YFSEnvironment arg0, String arg1, String arg2) {
+		JSONObject jsonauth = new JSONObject();
+		
+		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
+		String resource = res + arg2 + "/refunds";
+		
+		jsonauth = postRequest(arg0, arg1, resource);
+		
+		return jsonauth;
+	}
+	
+	public static JSONObject callCaptureRefund(YFSEnvironment arg0, String arg1, String arg2) {
+		JSONObject jsonauth = new JSONObject();
+		
+		String res = OmsUtils.getPropertyValue(arg0, "cybersource.capturesurl", "fahm");
+		String resource = res + arg2 + "/refunds";
+		
+		jsonauth = postRequest(arg0, arg1, resource);
+		
+		return jsonauth;
 	}
 	
 	private static JSONObject postRequest(YFSEnvironment arg0,String request, String resource) {
@@ -126,16 +148,17 @@ public class CyberSourceUtils {
         try {
         	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12", new BouncyCastleProvider());
         	
-        	String keyStore = System.getProperty("javax.net.ssl.keyStore");
+        	/*String keyStore = System.getProperty("javax.net.ssl.keyStore");
             String pass = System.getProperty("javax.net.ssl.keyStorePassword");
-        	String alias = "fahm_tech_us";
+        	String alias = "fahm_tech_us";*/
         	
 		//Use <MERCHANT>.p12 file here.
                 //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
-  	 	FileInputStream keyFile = new FileInputStream(keyStore);
+  	 	//FileInputStream keyFile = new FileInputStream(keyStore);
+  	 	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
         	//KeyStorePrivateKeyLoader.getPrivateKey(alias);
-			merchantKeyStore.load(keyFile, pass.toCharArray());
-			Key key = merchantKeyStore.getKey(alias, pass.toCharArray());
+			merchantKeyStore.load(keyFile, merchantId.toCharArray());
+			//Key key = merchantKeyStore.getKey(alias, pass.toCharArray());
 			//Key key = KeyStorePrivateKeyLoader.getPrivateKey(alias); 
         	
 			String merchantKeyAlias = null;
@@ -153,7 +176,7 @@ public class CyberSourceUtils {
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// Initialize private key from certificate        	
 			PrivateKeyEntry e = (PrivateKeyEntry) merchantKeyStore.getEntry(merchantKeyAlias,
-					new PasswordProtection(pass.toCharArray()));
+					new PasswordProtection(merchantId.toCharArray()));
 			
 			RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) e.getPrivateKey();
 			
@@ -162,7 +185,7 @@ public class CyberSourceUtils {
 			merchantKeyAlias = keyAliasValidator(array, merchantId);
 			
 			e = (PrivateKeyEntry) merchantKeyStore.getEntry(merchantKeyAlias,
-					new PasswordProtection(pass.toCharArray()));
+					new PasswordProtection(merchantId.toCharArray()));
 			
 			X509Certificate certificate = (X509Certificate) e.getCertificate();
 			

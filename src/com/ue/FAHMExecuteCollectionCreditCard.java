@@ -83,11 +83,17 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			
 			JSONObject jsonOutput = new JSONObject();
 			
-			if(root.getAttribute("ChargeType").equals("AUTHORIZATION")) {
+			double reqAmnt = Double.parseDouble(root.getAttribute("RequestAmount"));
+			
+			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt > 0) ) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,request);
-			}else if (root.getAttribute("ChargeType").equals("CHARGE")) {
+			}else if ((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt < 0) ) {
+				jsonOutput = CyberSourceUtils.callReversal(oEnv, request, root.getAttribute("AuthorizationId"));
+			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt > 0) ) {
 				jsonOutput = CyberSourceUtils.callCapture(oEnv,request,root.getAttribute("AuthorizationId"));
-			} 
+			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt < 0) ) {
+				jsonOutput = CyberSourceUtils.callCaptureRefund(oEnv, request, root.getAttribute("AuthorizationId"));
+			}
 			
 				YFCDocument outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
 			    
