@@ -1,13 +1,11 @@
 package com.fahm.forest.utils;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.Key;
 import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.KeyStore.PasswordProtection;
@@ -25,7 +23,6 @@ import java.util.StringTokenizer;
 import org.apache.commons.json.JSONObject;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import com.ibm.sterling.afc.jwt.auth.verify.key.KeyStorePrivateKeyLoader;
 import com.ue.JWTCryptoProcessor;
 import com.yantra.yfs.japi.YFSEnvironment;
 
@@ -147,21 +144,13 @@ public class CyberSourceUtils {
         String merchantId = OmsUtils.getPropertyValue(arg0, "cybersource.merchant_id", "fahm");
         try {
         	KeyStore merchantKeyStore = KeyStore.getInstance("PKCS12", new BouncyCastleProvider());
-        	
-        	/*String keyStore = System.getProperty("javax.net.ssl.keyStore");
-            String pass = System.getProperty("javax.net.ssl.keyStorePassword");
-        	String alias = "fahm_tech_us";
-        	FileInputStream keyFile = new FileInputStream(keyStore);
-        	KeyStorePrivateKeyLoader.getPrivateKey(alias);
-        	Key key = merchantKeyStore.getKey(alias, pass.toCharArray());
-			//Key key = KeyStorePrivateKeyLoader.getPrivateKey(alias); 
-        	*/
-        	
-        	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
+	
+		//Use <MERCHANT>.p12 file here.
+                //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
+  	 	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
         	
 			merchantKeyStore.load(keyFile, merchantId.toCharArray());
-			 
-        	
+			
 			String merchantKeyAlias = null;
 			Enumeration<String> enumKeyStore = merchantKeyStore.aliases();
 			ArrayList<String> array = new ArrayList<String>();
