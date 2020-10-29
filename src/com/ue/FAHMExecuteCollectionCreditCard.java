@@ -96,6 +96,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			}
 			
 				YFCDocument outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
+				
+				System.out.println("jsonOutput:"  + jsonOutput);
 			    
 	    	    return outDoc.getDocument();
 	}
@@ -108,7 +110,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    YFCElement paymentRoot = outDoc.createElement("Payment");
 	    
 	    try {
-	    	
+	    	System.out.println("status:" + obj.getString("status"));
 	    	String resposeCode = "";
 	    	
 	    	if(obj.getString("status").equals("AUTHORIZED")) {  //status from CyberSource response payload
