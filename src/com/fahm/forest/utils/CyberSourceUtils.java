@@ -157,7 +157,7 @@ public class CyberSourceUtils {
 			//Key key = KeyStorePrivateKeyLoader.getPrivateKey(alias); 
         	*/
         	
-        	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us_new.p12");
+        	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
         	
 			merchantKeyStore.load(keyFile, merchantId.toCharArray());
 			 
