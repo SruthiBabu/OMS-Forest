@@ -150,16 +150,17 @@ public class CyberSourceUtils {
         	
         	/*String keyStore = System.getProperty("javax.net.ssl.keyStore");
             String pass = System.getProperty("javax.net.ssl.keyStorePassword");
-        	String alias = "fahm_tech_us";*/
-        	
-		//Use <MERCHANT>.p12 file here.
-                //Steps to generate your P12 - https://developer.cybersource.com/api/developer-guides/dita-gettingstarted/authentication/createCert.html
-  	 	//FileInputStream keyFile = new FileInputStream(keyStore);
-  	 	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us.p12");
-        	//KeyStorePrivateKeyLoader.getPrivateKey(alias);
-			merchantKeyStore.load(keyFile, merchantId.toCharArray());
-			//Key key = merchantKeyStore.getKey(alias, pass.toCharArray());
+        	String alias = "fahm_tech_us";
+        	FileInputStream keyFile = new FileInputStream(keyStore);
+        	KeyStorePrivateKeyLoader.getPrivateKey(alias);
+        	Key key = merchantKeyStore.getKey(alias, pass.toCharArray());
 			//Key key = KeyStorePrivateKeyLoader.getPrivateKey(alias); 
+        	*/
+        	
+        	FileInputStream keyFile = new FileInputStream("/var/oms/certs/fahm_tech_us_new.p12");
+        	
+			merchantKeyStore.load(keyFile, merchantId.toCharArray());
+			 
         	
 			String merchantKeyAlias = null;
 			Enumeration<String> enumKeyStore = merchantKeyStore.aliases();
