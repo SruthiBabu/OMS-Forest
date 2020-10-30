@@ -35,6 +35,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		
 		YFCDocument inDoc = YFCDocument.getDocumentFor(inputDoc);
 	    YFCElement root = inDoc.getDocumentElement();
+	    
+	    System.out.println("indoc" + inDoc);
 			
 			String[] dmy =  root.getAttribute("CreditCardExpirationDate").split("/");
 			String sMonth = "";
@@ -87,7 +89,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			
 			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,request);
-			}else if ((root.getAttribute("ChargeType").equals("CANCEL")) && (reqAmnt < 0) ) {
+			}else if ((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt < 0) ) {
 				System.out.println("calling callReversal");
 				jsonOutput = CyberSourceUtils.callReversal(oEnv, request, root.getAttribute("AuthorizationId"));
 				System.out.println("reversal jsonOutput:" + jsonOutput);
