@@ -54,7 +54,8 @@ public class CyberSourceUtils {
 	
 	public static JSONObject callReversal(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
-		
+		System.out.println("request" + arg1);
+		System.out.println("authid:" + arg2);
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res + arg2 + "/reversals";
 		
@@ -77,7 +78,8 @@ public class CyberSourceUtils {
 	
 	public static JSONObject callCaptureRefund(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
-		
+		System.out.println("request" + arg1);
+		System.out.println("authid:" + arg2);
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.capturesurl", "fahm");
 		String resource = res + arg2 + "/refunds";
 		
