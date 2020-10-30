@@ -91,6 +91,8 @@ public class CyberSourceUtils {
 	private static JSONObject postRequest(YFSEnvironment arg0,String request, String resource) {
 		int responseStatus = 0;
 		
+		System.out.println("inside postRequest");
+		
 		String merchantId = OmsUtils.getPropertyValue(arg0, "cybersource.merchant_id", "fahm");
 		String requestHost = OmsUtils.getPropertyValue(arg0, "cybersource.requesthost", "fahm");
 		
@@ -102,6 +104,8 @@ public class CyberSourceUtils {
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			
 			String token = generateJWT(arg0,request, "POST");
+			
+			System.out.println("token" + token);
 			
 	        con.setRequestMethod("POST");
 	        con.setDoOutput(true);
@@ -117,7 +121,8 @@ public class CyberSourceUtils {
 	        
 	        int responseCode = con.getResponseCode();
 	        String responseHeader = con.getHeaderField("v-c-correlation-id");
-
+	        System.out.println("responsecode" + responseCode);
+	        
 	        if (responseCode == 200 || responseCode == 201) {
 	        	BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	            String inputLine;
