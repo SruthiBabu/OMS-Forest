@@ -45,9 +45,9 @@ public class CyberSourceUtils {
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res + arg2 + "/captures";
-		
+		System.out.println("Inside callCapture");
 		jsonauth = postRequest(arg0,arg1,resource);
-
+		System.out.println("jsonauth from callcapture" + jsonauth);
 		return jsonauth;
 
 	}
@@ -126,7 +126,7 @@ public class CyberSourceUtils {
 	            }
 	            
 	            in.close();
-	         
+	            System.out.println("respose from postreq:" + response);
 	            jsonout = new JSONObject(response.toString());
 	            
 	        } else {
