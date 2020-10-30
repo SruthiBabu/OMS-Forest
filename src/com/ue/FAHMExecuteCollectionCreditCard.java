@@ -85,19 +85,21 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			
 			double reqAmnt = Double.parseDouble(root.getAttribute("RequestAmount"));
 			
-			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt > 0) ) {
+			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,request);
 			}else if ((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt < 0) ) {
 				jsonOutput = CyberSourceUtils.callReversal(oEnv, request, root.getAttribute("AuthorizationId"));
-			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt > 0) ) {
+			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt >= 0) ) {
+				System.out.println("calling callCapture");
 				jsonOutput = CyberSourceUtils.callCapture(oEnv,request,root.getAttribute("AuthorizationId"));
+				System.out.println("capture jsonOutput:" + jsonOutput);
 			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt < 0) ) {
 				jsonOutput = CyberSourceUtils.callCaptureRefund(oEnv, request, root.getAttribute("AuthorizationId"));
 			}
 			
 				YFCDocument outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
 				
-				System.out.println("jsonOutput:"  + jsonOutput);
+				//System.out.println("jsonOutput:"  + jsonOutput);
 			    
 	    	    return outDoc.getDocument();
 	}
