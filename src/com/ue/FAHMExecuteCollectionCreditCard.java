@@ -92,7 +92,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "      \"totalAmount\": \"" + root.getAttribute("RequestAmount") + "\",\n" +
                     "      \"currency\": \"" + root.getAttribute("Currency") + "\"\n" +
                     "    }\n" +
-                    "  },\n" +
+                    "  }\n" +
                     "}";
 			
 			JSONObject jsonOutput = new JSONObject();
