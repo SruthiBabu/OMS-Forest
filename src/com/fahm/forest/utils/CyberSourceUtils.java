@@ -45,17 +45,16 @@ public class CyberSourceUtils {
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res + arg2 + "/captures";
-		System.out.println("Inside callCapture");
+		
 		jsonauth = postRequest(arg0,arg1,resource);
-		System.out.println("jsonauth from callcapture" + jsonauth);
+		
 		return jsonauth;
 
 	}
 	
 	public static JSONObject callReversal(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
-		System.out.println("request" + arg1);
-		System.out.println("authid:" + arg2);
+		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res + arg2 + "/reversals";
 		
@@ -78,8 +77,7 @@ public class CyberSourceUtils {
 	
 	public static JSONObject callCaptureRefund(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
-		System.out.println("request" + arg1);
-		System.out.println("authid:" + arg2);
+		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.capturesurl", "fahm");
 		String resource = res + arg2 + "/refunds";
 		
@@ -114,8 +112,12 @@ public class CyberSourceUtils {
 	        con.setRequestProperty("Content-Type", "application/json;charset=utf-8");
 	        con.setRequestProperty("Host", requestHost);
 	        
+	        System.out.println("request:" + request);
+	        
 	        try(OutputStream outputStream = con.getOutputStream()) {
 	        	byte[] input = request.getBytes("utf-8");
+	        	
+	        	System.out.println("input:" + input);
 	        	outputStream.write(input, 0, input.length);
 	        }
 	        
