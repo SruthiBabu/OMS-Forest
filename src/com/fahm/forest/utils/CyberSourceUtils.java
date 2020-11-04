@@ -44,7 +44,7 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
-		String resource = res + arg2 + "/captures";
+		String resource = res + "/" + arg2 + "/captures";
 		
 		System.out.println("resource:" + resource);
 		
@@ -58,7 +58,7 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
-		String resource = res + arg2 + "/reversals";
+		String resource = res + "/" + arg2 + "/reversals";
 		
 		jsonauth = postRequest(arg0,arg1,resource);
 
@@ -70,7 +70,7 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
-		String resource = res + arg2 + "/refunds";
+		String resource = res + "/" + arg2 + "/refunds";
 		
 		jsonauth = postRequest(arg0, arg1, resource);
 		
@@ -81,7 +81,7 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.capturesurl", "fahm");
-		String resource = res + arg2 + "/refunds";
+		String resource = res + "/" + arg2 + "/refunds";
 		
 		jsonauth = postRequest(arg0, arg1, resource);
 		
