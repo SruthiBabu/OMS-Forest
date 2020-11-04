@@ -46,6 +46,8 @@ public class CyberSourceUtils {
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
 		String resource = res + arg2 + "/captures";
 		
+		System.out.println("resource:" + resource);
+		
 		jsonauth = postRequest(arg0,arg1,resource);
 		
 		return jsonauth;
@@ -117,7 +119,6 @@ public class CyberSourceUtils {
 	        try(OutputStream outputStream = con.getOutputStream()) {
 	        	byte[] input = request.getBytes("utf-8");
 	        	
-	        	System.out.println("input:" + input);
 	        	outputStream.write(input, 0, input.length);
 	        }
 	        
