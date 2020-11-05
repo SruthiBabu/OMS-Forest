@@ -95,6 +95,17 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "  }\n" +
                     "}";
 			
+			String revrequest = "{\n" +
+                    "  \"clientReferenceInformation\": {\n" +
+                    "    \"code\": \"" + root.getAttribute("OrderNo") + "\"\n" +
+                    "  },\n" +
+                    "  \"reversalInformation\": {\n" +
+                    "    \"amountDetails\": {\n" +
+                    "      \"totalAmount\": \"" + root.getAttribute("RequestAmount") + "\",\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}";
+			
 			JSONObject jsonOutput = new JSONObject();
 			
 			double reqAmnt = Double.parseDouble(root.getAttribute("RequestAmount"));
@@ -102,13 +113,13 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,payrequest);
 			}else if ((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt < 0) ) {
-				jsonOutput = CyberSourceUtils.callReversal(oEnv, payrequest, root.getAttribute("AuthorizationId"));
+				jsonOutput = CyberSourceUtils.callReversal(oEnv, revrequest, root.getAttribute("AuthorizationId"));
 				System.out.println("reversal jsonOutput:" + jsonOutput);
 			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callCapture(oEnv,caprequest,root.getAttribute("AuthorizationId"));
 				System.out.println("capture jsonOutput:" + jsonOutput);
 			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt < 0) ) {
-				jsonOutput = CyberSourceUtils.callCaptureRefund(oEnv, payrequest, root.getAttribute("AuthorizationId"));
+				jsonOutput = CyberSourceUtils.callCaptureRefund(oEnv, caprequest, root.getAttribute("AuthorizationId"));
 			}
 			
 				YFCDocument outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
