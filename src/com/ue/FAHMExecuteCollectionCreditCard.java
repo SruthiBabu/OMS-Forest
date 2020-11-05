@@ -127,15 +127,15 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    
 	    try {
 	    	System.out.println("status:" + obj.getString("status"));
-	    	String resposeCode = "";
+	    	String responseCode = "";
 	    	
 	    	if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("AUTHORIZED"))) {  //status from CyberSource response payload
-	    		resposeCode = "APPROVED";
+	    		responseCode = "APPROVED";
 		    	paymentRoot.setAttribute("AuthReturnFlag", "T");
 		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
 		        paymentRoot.setAttribute("HoldReason", "");
 		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
-		    	paymentRoot.setAttribute("ResponseCode", resposeCode); 
+		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
 				JSONObject processorInformation = new JSONObject(obj.getString("processorInformation"));
 		    	JSONObject avs = new JSONObject(processorInformation.getString("avs"));
 		    	String avsCode = avs.getString("code");
@@ -161,9 +161,9 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	    	
 	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("DECLINED"))) {
-	    		resposeCode = "HARD_DECLINED";
+	    		responseCode = "HARD_DECLINED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
-	    		paymentRoot.setAttribute("ResponseCode", resposeCode); 
+	    		paymentRoot.setAttribute("ResponseCode", responseCode); 
 	    		paymentRoot.setAttribute("AsynchRequestProcess", "false");
 	    		paymentRoot.setAttribute("AuthReturnMessage", obj.getString("reason"));
 	    		paymentRoot.setDoubleAttribute("AuthorizationAmount", 0.0D);
@@ -173,9 +173,9 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	  	        
 	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("INVALID_REQUEST"))) {
-	    		resposeCode = "SOFT_DECLINED";
+	    		responseCode = "SOFT_DECLINED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
-	    		paymentRoot.setAttribute("ResponseCode", resposeCode); 
+	    		paymentRoot.setAttribute("ResponseCode", responseCode); 
 	    		paymentRoot.setAttribute("AsynchRequestProcess", "false");
 	    		paymentRoot.setAttribute("AuthReturnMessage", obj.getString("reason"));
 	    		paymentRoot.setDoubleAttribute("AuthorizationAmount", 0.0D);
@@ -185,9 +185,9 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	  	        
 	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("SERVER_ERROR"))) {
-	    		resposeCode = "SERVICE_UNAVAILABLE";
+	    		responseCode = "SERVICE_UNAVAILABLE";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
-	    		paymentRoot.setAttribute("ResponseCode", resposeCode); 
+	    		paymentRoot.setAttribute("ResponseCode", responseCode); 
 	    		paymentRoot.setAttribute("AsynchRequestProcess", "false");
 	    		paymentRoot.setAttribute("AuthReturnMessage", obj.getString("reason"));
 	    		paymentRoot.setDoubleAttribute("AuthorizationAmount", 0.0D);
@@ -197,19 +197,20 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	  	        
 	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("REVERSED"))) {
-	    		resposeCode = "APPROVED";
+	    		responseCode = "APPROVED";
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("INVALID_REQUEST"))) {
-	    		resposeCode = "SOFT_DECLINED";
+	    		responseCode = "SOFT_DECLINED";
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
-	    		resposeCode = "APPROVED";
+	    		responseCode = "APPROVED";
 	    		
+	    	}else {
+	    		responseCode = "SERVICE_UNAVAILABLE";
 	    	}
 	    	
 	    } catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	    	System.out.println(e.getStackTrace());
 		}
 	    outDoc.appendChild(paymentRoot);
 	    return outDoc;
