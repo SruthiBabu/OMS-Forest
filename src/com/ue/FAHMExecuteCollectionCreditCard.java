@@ -129,7 +129,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    	System.out.println("status:" + obj.getString("status"));
 	    	String resposeCode = "";
 	    	
-	    	if(obj.getString("status").equals("AUTHORIZED")) {  //status from CyberSource response payload
+	    	if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("AUTHORIZED"))) {  //status from CyberSource response payload
 	    		resposeCode = "APPROVED";
 		    	paymentRoot.setAttribute("AuthReturnFlag", "T");
 		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
@@ -160,7 +160,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		        paymentRoot.setAttribute("TranAmount", root.getDoubleAttribute("RequestAmount"));
 		        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	    	
-	    	}else if(obj.getString("status").equals("DECLINED")) {
+	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("DECLINED"))) {
 	    		resposeCode = "HARD_DECLINED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
 	    		paymentRoot.setAttribute("ResponseCode", resposeCode); 
@@ -172,7 +172,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        paymentRoot.setDoubleAttribute("TranAmount", 0.0D);
 	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	  	        
-	    	}else if(obj.getString("status").equals("INVALID_REQUEST")) {
+	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("INVALID_REQUEST"))) {
 	    		resposeCode = "SOFT_DECLINED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
 	    		paymentRoot.setAttribute("ResponseCode", resposeCode); 
@@ -184,7 +184,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        paymentRoot.setDoubleAttribute("TranAmount", 0.0D);
 	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	  	        
-	    	}else if(obj.getString("status").equals("SERVER_ERROR")) {
+	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("SERVER_ERROR"))) {
 	    		resposeCode = "SERVICE_UNAVAILABLE";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
 	    		paymentRoot.setAttribute("ResponseCode", resposeCode); 
@@ -195,8 +195,18 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        paymentRoot.setAttribute("HoldReason", " ");
 	  	        paymentRoot.setDoubleAttribute("TranAmount", 0.0D);
 	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
+	  	        
+	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("REVERSED"))) {
+	    		resposeCode = "APPROVED";
+	    		
+	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("INVALID_REQUEST"))) {
+	    		resposeCode = "SOFT_DECLINED";
+	    		
+	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
+	    		resposeCode = "APPROVED";
+	    		
 	    	}
-	        
+	    	
 	    } catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
