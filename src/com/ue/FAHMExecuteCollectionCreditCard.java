@@ -37,6 +37,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    YFCElement root = inDoc.getDocumentElement();
 	    
 	    System.out.println("indoc" + inDoc);
+	    
+	    	String reason = "testing";
 			
 			String[] dmy =  root.getAttribute("CreditCardExpirationDate").split("/");
 			String sMonth = "";
@@ -101,7 +103,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "  },\n" +
                     "  \"reversalInformation\": {\n" +
                     "    \"amountDetails\": {\n" +
-                    "      \"totalAmount\": \"" + root.getAttribute("RequestAmount") + "\",\n" +
+                    "      \"totalAmount\": \"" + root.getAttribute("RequestAmount") + "\"\n" +
                     "    }\n" +
                     "  }\n" +
                     "}";
