@@ -104,6 +104,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "  \"reversalInformation\": {\n" +
                     "    \"amountDetails\": {\n" +
                     "      \"totalAmount\": \"" + root.getAttribute("RequestAmount") + "\"\n" +
+                    "  },\n" +
+                    "    \"reason\": \"" + reason + "\"\n" +
                     "    }\n" +
                     "  }\n" +
                     "}";
