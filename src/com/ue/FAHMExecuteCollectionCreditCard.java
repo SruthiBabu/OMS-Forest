@@ -97,22 +97,23 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "  }\n" +
                     "}";
 			
+			double reqAmnt = Double.parseDouble(root.getAttribute("RequestAmount"));
+			double reqAmount = Math.abs(reqAmnt);
+			
 			String revrequest = "{\n" +
                     "  \"clientReferenceInformation\": {\n" +
                     "    \"code\": \"" + root.getAttribute("OrderNo") + "\"\n" +
                     "  },\n" +
                     "  \"reversalInformation\": {\n" +
                     "    \"amountDetails\": {\n" +
-                    "      \"totalAmount\": \"" + root.getAttribute("RequestAmount") + "\"\n" +
-                    "  },\n" +
-                    "    \"reason\": \"" + reason + "\"\n" +
+                    "      \"totalAmount\": \"" + reqAmount + "\"\n" +
                     "    }\n" +
                     "  }\n" +
                     "}";
 			
 			JSONObject jsonOutput = new JSONObject();
 			
-			double reqAmnt = Double.parseDouble(root.getAttribute("RequestAmount"));
+			
 			
 			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,payrequest);
