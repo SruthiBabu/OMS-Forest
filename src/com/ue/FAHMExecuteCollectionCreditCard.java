@@ -16,6 +16,7 @@ import com.yantra.yfc.date.YTimestamp;
 import com.yantra.yfc.dom.YFCDocument;
 import com.yantra.yfc.dom.YFCElement;
 import com.yantra.yfc.log.YFCLogCategory;
+import com.yantra.yfc.util.YFCException;
 import com.yantra.yfs.japi.YFSEnvironment;
 
 public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
@@ -29,7 +30,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	}
 	private static YFCLogCategory cat = YFCLogCategory.instance(FAHMExecuteCollectionCreditCard.class.getName());
 	
-	public Document executeCollectionCreditCard(YFSEnvironment oEnv, Document inputDoc) {
+	public Document executeCollectionCreditCard(YFSEnvironment oEnv, Document inputDoc) throws JSONException {
 		
 		String sResponseCode = "";
 		
@@ -113,8 +114,6 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			
 			JSONObject jsonOutput = new JSONObject();
 			
-			
-			
 			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,payrequest);
 			}else if ((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt < 0) ) {
@@ -134,7 +133,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    	    return outDoc.getDocument();
 	}
 	
-	public YFCDocument constructOutputDoc(JSONObject obj, YFCDocument inDoc, String sResponseCode) {
+	public YFCDocument constructOutputDoc(JSONObject obj, YFCDocument inDoc, String sResponseCode) throws JSONException{
 	    YFCDocument outDoc = YFCDocument.createDocument();
 	    
 	    YFCElement root = inDoc.getDocumentElement();
@@ -227,6 +226,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    	
 	    } catch (JSONException e) {
 	    	System.out.println(e.getStackTrace());
+	    	System.out.println("ERROR ERROR ERROR!!!!!!!!");
+	    	throw e;
 		}
 	    outDoc.appendChild(paymentRoot);
 	    return outDoc;
