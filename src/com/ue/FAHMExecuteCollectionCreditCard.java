@@ -213,20 +213,48 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        
 	    	}else if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (obj.getString("status").equals("REVERSED"))) {
 	    		responseCode = "APPROVED";
+	    		paymentRoot.setAttribute("AuthReturnFlag", "T");
+		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
+		        paymentRoot.setAttribute("HoldReason", "");
+		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
+		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("INVALID_REQUEST"))) {
 	    		responseCode = "SOFT_DECLINED";
+	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
+	    		paymentRoot.setAttribute("ResponseCode", responseCode); 
+	    		paymentRoot.setAttribute("AsynchRequestProcess", "false");
+	    		paymentRoot.setAttribute("AuthReturnMessage", obj.getString("reason"));
+	    		paymentRoot.setDoubleAttribute("AuthorizationAmount", 0.0D);
+	    		paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
+	  	        paymentRoot.setAttribute("HoldReason", " ");
+	  	        paymentRoot.setDoubleAttribute("TranAmount", 0.0D);
+	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
+
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
 	    		responseCode = "APPROVED";
+	    		paymentRoot.setAttribute("AuthReturnFlag", "T");
+		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
+		        paymentRoot.setAttribute("HoldReason", "");
+		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
+		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
 	    		
 	    	}else {
 	    		responseCode = "SERVICE_UNAVAILABLE";
+	    		paymentRoot.setAttribute("AuthReturnFlag", "F");
+	    		paymentRoot.setAttribute("ResponseCode", responseCode); 
+	    		paymentRoot.setAttribute("AsynchRequestProcess", "false");
+	    		paymentRoot.setAttribute("AuthReturnMessage", obj.getString("reason"));
+	    		paymentRoot.setDoubleAttribute("AuthorizationAmount", 0.0D);
+	    		paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
+	  	        paymentRoot.setAttribute("HoldReason", " ");
+	  	        paymentRoot.setDoubleAttribute("TranAmount", 0.0D);
+	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 	    	}
 	    	
 	    } catch (JSONException e) {
 	    	System.out.println(e.getStackTrace());
-	    	System.out.println("ERROR ERROR ERROR!!!!!!!!");
 	    	throw e;
 		}
 	    outDoc.appendChild(paymentRoot);
