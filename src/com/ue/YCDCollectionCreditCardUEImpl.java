@@ -78,6 +78,9 @@ public class YCDCollectionCreditCardUEImpl
         
         paymentOutputStruct = constructBasicCollectionCreditCardOutput(collectionOutputDoc);
         
+        System.out.println("paymentOutputStruct:" + paymentOutputStruct);
+        System.out.println("responsecode:" + sResponseCode);
+        
         if (YFCObject.equals(sResponseCode, "HARD_DECLINED"))
         {
           boolean bAuthStrikeLimitReached = processAuthStrikes(oCtx, collectionOutputDoc, oOrder);
@@ -162,6 +165,8 @@ public class YCDCollectionCreditCardUEImpl
           paymentOutputStruct.tranAmount = Double.parseDouble(collectionOutputDoc.getDocumentElement().getAttribute("TranAmount"));
           paymentOutputStruct.sCVVAuthCode = collectionOutputDoc.getDocumentElement().getAttribute("SCVVAuthCode");
         }
+        
+        System.out.println("outputstruct:" + paymentOutputStruct);
       
       }
     
