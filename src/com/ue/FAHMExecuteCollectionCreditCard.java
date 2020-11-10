@@ -218,6 +218,16 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		        paymentRoot.setAttribute("HoldReason", "");
 		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
 		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
+		    	JSONObject reversalAmountDetails = new JSONObject(obj.getString("reversalAmountDetails"));
+		    	String authorizationAmount = reversalAmountDetails.getString("reversedAmount");
+		    	paymentRoot.setAttribute("AuthorizationAmount", authorizationAmount );
+		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+				GregorianCalendar now = new GregorianCalendar();
+				now.setTime(new Date());
+				now.add(Calendar.DAY_OF_MONTH, 5);
+		    	paymentRoot.setAttribute("AuthorizationExpirationDate", dateFormat.format(now.getTime()));
+		    	paymentRoot.setAttribute("AuthTime", YTimestamp.newMutableTimestamp().getString("yyyyMMdd'T'HH:mm:ss"));
+		    	paymentRoot.setAttribute("TranAmount", root.getDoubleAttribute("RequestAmount"));
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("INVALID_REQUEST"))) {
 	    		responseCode = "SOFT_DECLINED";
@@ -239,6 +249,17 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		        paymentRoot.setAttribute("HoldReason", "");
 		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
 		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
+		    	JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
+		    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
+		    	String totalAmount = amountDetails.getString("totalAmount");
+		    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );	
+		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+				GregorianCalendar now = new GregorianCalendar();
+				now.setTime(new Date());
+				now.add(Calendar.DAY_OF_MONTH, 5);
+		    	paymentRoot.setAttribute("AuthorizationExpirationDate", dateFormat.format(now.getTime()));
+		    	paymentRoot.setAttribute("AuthTime", YTimestamp.newMutableTimestamp().getString("yyyyMMdd'T'HH:mm:ss"));
+		    	paymentRoot.setAttribute("TranAmount", root.getDoubleAttribute("RequestAmount"));
 	    		
 	    	}else {
 	    		responseCode = "SERVICE_UNAVAILABLE";
