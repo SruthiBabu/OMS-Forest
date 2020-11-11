@@ -248,10 +248,18 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
 		        paymentRoot.setAttribute("HoldReason", "");
 		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
-		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
+		    	paymentRoot.setAttribute("ResponseCode", responseCode);
+		    	JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
+		    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
+		    	if (amountDetails.containsKey("totalAmount")) {
+		    	String totalAmount = amountDetails.getString("totalAmount");
+		    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );	
+		    	}else	
+		    	{
 		    	JSONObject refundAmountDetails = new JSONObject(obj.getString("refundAmountDetails"));
 		    	String refundAmount = refundAmountDetails.getString("refundAmount");
 		    	paymentRoot.setAttribute("AuthorizationAmount", refundAmount );	
+		    	}
 		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 				GregorianCalendar now = new GregorianCalendar();
 				now.setTime(new Date());
