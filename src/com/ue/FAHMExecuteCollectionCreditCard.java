@@ -242,7 +242,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
 
 	    		
-	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING")) && (!obj.containsKey("refundAmountDetails"))) {
+	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
 	    		responseCode = "APPROVED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "T");
 		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
