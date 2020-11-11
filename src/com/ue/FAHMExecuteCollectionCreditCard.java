@@ -252,25 +252,12 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		    	JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
 		    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
 		    	String totalAmount = amountDetails.getString("authorizedAmount");
-		    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );		
-		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-				GregorianCalendar now = new GregorianCalendar();
-				now.setTime(new Date());
-				now.add(Calendar.DAY_OF_MONTH, 5);
-		    	paymentRoot.setAttribute("AuthorizationExpirationDate", dateFormat.format(now.getTime()));
-		    	paymentRoot.setAttribute("AuthTime", YTimestamp.newMutableTimestamp().getString("yyyyMMdd'T'HH:mm:ss"));
-		    	paymentRoot.setAttribute("TranAmount", root.getDoubleAttribute("RequestAmount"));
-	    		
-	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING")) && (obj.containsKey("refundAmountDetails"))) {
-	    		responseCode = "APPROVED";
-	    		paymentRoot.setAttribute("AuthReturnFlag", "T");
-		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
-		        paymentRoot.setAttribute("HoldReason", "");
-		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
-		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
+		    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );	
+		    	if (obj.containsKey("refundAmountDetails")) {
 		    	JSONObject refundAmountDetails = new JSONObject(obj.getString("refundAmountDetails"));
 		    	String refundAmount = refundAmountDetails.getString("refundAmount");
-		    	paymentRoot.setAttribute("AuthorizationAmount", refundAmount );	
+		    	paymentRoot.setAttribute("AuthorizationAmount", refundAmount );
+		    	}
 		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 				GregorianCalendar now = new GregorianCalendar();
 				now.setTime(new Date());
