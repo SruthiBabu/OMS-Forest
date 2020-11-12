@@ -249,10 +249,15 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
+	    		System.out.println("**chargetype**" + root.getAttribute("ChargeType"));
+    			System.out.println("**status**" + obj.getString("status"));
 	    		if(obj.has("refundAmountDetails")) {
 	    			System.out.println("*******refund*******");
 	    		}
 	    		if(isRefund) {
+	    			System.out.println("chargetype" + root.getAttribute("ChargeType"));
+	    			System.out.println("status" + obj.getString("status"));
+	    			System.out.println("***********isRefund**************");
 	    			JSONObject refundAmountDetails = new JSONObject(obj.getString("refundAmountDetails"));
 			    	String refundAmount = refundAmountDetails.getString("refundAmount");
 			    	paymentRoot.setAttribute("AuthorizationAmount", refundAmount);	
