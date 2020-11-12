@@ -86,20 +86,20 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "  }\n" +
                     "}";
 			
+			double reqAmnt = Double.parseDouble(root.getAttribute("RequestAmount"));
+			double reqAmount = Math.abs(reqAmnt);
+			
 			String caprequest = "{\n" +
                     "  \"clientReferenceInformation\": {\n" +
                     "    \"code\": \"" + root.getAttribute("OrderNo") + "\"\n" +
                     "  },\n" +
                     "  \"orderInformation\": {\n" +
                     "    \"amountDetails\": {\n" +
-                    "      \"totalAmount\": \"" + root.getAttribute("RequestAmount") + "\",\n" +
+                    "      \"totalAmount\": \"" + reqAmount + "\"\n" +
                     "      \"currency\": \"" + root.getAttribute("Currency") + "\"\n" +
                     "    }\n" +
                     "  }\n" +
                     "}";
-			
-			double reqAmnt = Double.parseDouble(root.getAttribute("RequestAmount"));
-			double reqAmount = Math.abs(reqAmnt);
 			
 			String revrequest = "{\n" +
                     "  \"clientReferenceInformation\": {\n" +
