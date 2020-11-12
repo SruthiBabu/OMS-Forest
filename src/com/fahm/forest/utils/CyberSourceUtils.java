@@ -72,6 +72,7 @@ public class CyberSourceUtils {
 		JSONObject jsonauth = new JSONObject();
 		
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
+		System.out.println("authid" + arg2);
 		String resource = res + "/" + arg2 + "/refunds";
 		
 		jsonauth = postRequest(arg0, arg1, resource);
