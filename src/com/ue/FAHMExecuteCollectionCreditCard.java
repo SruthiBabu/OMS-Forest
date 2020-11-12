@@ -243,22 +243,26 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
+	    		if(obj.has("refundAmountDetails")) {
+	    			JSONObject refundAmountDetails = new JSONObject(obj.getString("refundAmountDetails"));
+			    	String refundAmount = refundAmountDetails.getString("refundAmount");
+			    	paymentRoot.setAttribute("AuthorizationAmount", refundAmount );	
+			    	JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
+			    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
+			    	String currency = amountDetails.getString("currency");
+			    	paymentRoot.setAttribute("Currency", currency );
+	    		}else {
+	    			JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
+			    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
+			    	String totalAmount = amountDetails.getString("totalAmount");
+			    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );
+	    		}
 	    		responseCode = "APPROVED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "T");
 		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
 		        paymentRoot.setAttribute("HoldReason", "");
 		        paymentRoot.setAttribute("AsynchRequestProcess", "false");	    	
 		    	paymentRoot.setAttribute("ResponseCode", responseCode); 
-		    	JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
-		    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
-		    	String totalAmount = amountDetails.getString("totalAmount");
-		    	if (totalAmount != null) {
-		    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );
-		    	}else {
-		    	JSONObject refundAmountDetails = new JSONObject(obj.getString("refundAmountDetails"));
-		    	String refundAmount = amountDetails.getString("refundAmount");
-		    	paymentRoot.setAttribute("AuthorizationAmount", refundAmount );
-		    	}
 		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 				GregorianCalendar now = new GregorianCalendar();
 				now.setTime(new Date());
