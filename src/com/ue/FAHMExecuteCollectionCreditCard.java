@@ -243,7 +243,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
-	    		if(obj.has("refundAmountDetails")) {
+	    		if(obj.getString("refundAmountDetails") != null ) {
+	    			System.out.println("*******refund*******");
 	    			JSONObject refundAmountDetails = new JSONObject(obj.getString("refundAmountDetails"));
 			    	String refundAmount = refundAmountDetails.getString("refundAmount");
 			    	paymentRoot.setAttribute("AuthorizationAmount", refundAmount );	
@@ -252,6 +253,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			    	String currency = amountDetails.getString("currency");
 			    	paymentRoot.setAttribute("Currency", currency );
 	    		}else {
+	    			System.out.println("*******charge*******");
 	    			JSONObject orderInformation = new JSONObject(obj.getString("orderInformation"));
 			    	JSONObject amountDetails = new JSONObject(orderInformation.getString("amountDetails"));
 			    	String totalAmount = amountDetails.getString("totalAmount");
