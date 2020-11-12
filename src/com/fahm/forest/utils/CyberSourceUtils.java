@@ -85,6 +85,8 @@ public class CyberSourceUtils {
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.capturesurl", "fahm");
 		String resource = res + "/" + arg2 + "/refunds";
 		
+		System.out.println("Refund resource" + resource);
+		
 		jsonauth = postRequest(arg0, arg1, resource);
 		
 		return jsonauth;
