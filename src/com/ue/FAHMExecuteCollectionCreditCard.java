@@ -95,7 +95,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
                     "  },\n" +
                     "  \"orderInformation\": {\n" +
                     "    \"amountDetails\": {\n" +
-                    "      \"totalAmount\": \"" + reqAmount + "\"\n" +
+                    "      \"totalAmount\": \"" + reqAmount + "\",\n" +
                     "      \"currency\": \"" + root.getAttribute("Currency") + "\"\n" +
                     "    }\n" +
                     "  }\n" +
