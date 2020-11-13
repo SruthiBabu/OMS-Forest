@@ -68,18 +68,6 @@ public class CyberSourceUtils {
 
 	}
 	
-	public static JSONObject callAuthRefund(YFSEnvironment arg0, String arg1, String arg2) {
-		JSONObject jsonauth = new JSONObject();
-		
-		String res = OmsUtils.getPropertyValue(arg0, "cybersource.paymentsurl", "fahm");
-		
-		String resource = res + "/" + arg2 + "/refunds";
-		
-		jsonauth = postRequest(arg0, arg1, resource);
-		
-		return jsonauth;
-	}
-	
 	public static JSONObject callCaptureRefund(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
 		

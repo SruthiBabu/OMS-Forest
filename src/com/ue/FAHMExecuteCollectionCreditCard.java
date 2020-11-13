@@ -127,6 +127,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 				System.out.println("capture jsonOutput:" + jsonOutput);
 				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode, false);
 			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt < 0) ) {
+				System.out.println("root.getAttribute(\"AuthorizationId\")" + root.getAttribute("AuthorizationId"));
 				jsonOutput = CyberSourceUtils.callCaptureRefund(oEnv, caprequest, root.getAttribute("AuthorizationId"));
 				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode, true);
 				
