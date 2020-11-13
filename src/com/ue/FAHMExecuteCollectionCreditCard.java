@@ -235,6 +235,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 		    	paymentRoot.setAttribute("AuthorizationExpirationDate", dateFormat.format(now.getTime()));
 		    	paymentRoot.setAttribute("AuthTime", YTimestamp.newMutableTimestamp().getString("yyyyMMdd'T'HH:mm:ss"));
 		    	paymentRoot.setAttribute("TranAmount", root.getDoubleAttribute("RequestAmount"));
+		    	String authID = obj.getString("id");
+		    	paymentRoot.setAttribute("AuthorizationId", authID);
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("INVALID_REQUEST"))) {
 	    		responseCode = "SOFT_DECLINED";
@@ -273,6 +275,8 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			    	String totalAmount = amountDetails.getString("totalAmount");
 			    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );
 	    		}
+	    		String authID = obj.getString("id");
+		    	paymentRoot.setAttribute("AuthorizationId", authID);
 	    		responseCode = "APPROVED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "T");
 		        paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
