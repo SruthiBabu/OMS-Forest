@@ -266,6 +266,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			    	paymentRoot.setAttribute("AuthorizationAmount", totalAmount );
 	    		}
 	    		String authID = obj.getString("id");
+	    		System.out.println("charge/refund authid: " + authID);
 		    	paymentRoot.setAttribute("AuthorizationId", authID);
 	    		responseCode = "APPROVED";
 	    		paymentRoot.setAttribute("AuthReturnFlag", "T");

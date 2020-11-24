@@ -71,7 +71,7 @@ public class CyberSourceUtils {
 	public static JSONObject callCaptureRefund(YFSEnvironment arg0, String arg1, String arg2) {
 		JSONObject jsonauth = new JSONObject();
 		
-		System.out.println("authid" + arg2);
+		System.out.println("authid inside callcapture" + arg2);
 		String res = OmsUtils.getPropertyValue(arg0, "cybersource.capturesurl", "fahm");
 		String resource = res + "/" + arg2 + "/refunds";
 		
