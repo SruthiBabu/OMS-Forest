@@ -38,9 +38,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    YFCElement root = inDoc.getDocumentElement();
 	    
 	    System.out.println("indoc" + inDoc);
-	    
-	    	String reason = "testing";
-			
+
 			String[] dmy =  root.getAttribute("CreditCardExpirationDate").split("/");
 			String sMonth = "";
 			String sYear = "";
@@ -117,30 +115,27 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 			
 			if((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callAuth(oEnv,payrequest);
-				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode, false);
+				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
 			}else if ((root.getAttribute("ChargeType").equals("AUTHORIZATION")) && (reqAmnt < 0) ) {
 				jsonOutput = CyberSourceUtils.callReversal(oEnv, revrequest, root.getAttribute("AuthorizationId"));
 				System.out.println("reversal jsonOutput:" + jsonOutput);
-				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode, false);
+				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
 			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt >= 0) ) {
 				jsonOutput = CyberSourceUtils.callCapture(oEnv,caprequest,root.getAttribute("AuthorizationId"));
 				System.out.println("capture jsonOutput:" + jsonOutput);
-				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode, false);
+				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
 			}else if ((root.getAttribute("ChargeType").equals("CHARGE")) && (reqAmnt < 0) ) {
-				System.out.println("root.getAttribute(\"AuthorizationId\")" + root.getAttribute("AuthorizationId"));
 				jsonOutput = CyberSourceUtils.callCaptureRefund(oEnv, caprequest, root.getAttribute("AuthorizationId"));
-				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode, true);
+				outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode);
 				
 			}
-			
-				//YFCDocument outDoc = constructOutputDoc(jsonOutput, inDoc, sResponseCode, true);
 				
 				System.out.println("jsonOutput:"  + jsonOutput);
 			    
 	    	    return outDoc.getDocument();
 	}
 	
-	public YFCDocument constructOutputDoc(JSONObject obj, YFCDocument inDoc, String sResponseCode, Boolean isRefund) throws JSONException{
+	public YFCDocument constructOutputDoc(JSONObject obj, YFCDocument inDoc, String sResponseCode) throws JSONException{
 	    YFCDocument outDoc = YFCDocument.createDocument();
 	    
 	    YFCElement root = inDoc.getDocumentElement();
@@ -252,12 +247,7 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 
 	    		
 	    	}else if((root.getAttribute("ChargeType").equals("CHARGE")) && (obj.getString("status").equals("PENDING"))) {
-	    		System.out.println("**chargetype**" + root.getAttribute("ChargeType"));
-    			System.out.println("**status**" + obj.getString("status"));
 	    		if(obj.has("refundAmountDetails")) {
-	    			System.out.println("*******refund*******");
-	    		}
-	    		if(isRefund) {
 	    			System.out.println("chargetype" + root.getAttribute("ChargeType"));
 	    			System.out.println("status" + obj.getString("status"));
 	    			System.out.println("***********isRefund**************");
@@ -305,8 +295,17 @@ public class FAHMExecuteCollectionCreditCard implements YIFCustomApi{
 	    	}
 	    	
 	    } catch (JSONException e) {
-	    	System.out.println(e.getStackTrace());
-	    	throw e;
+	    	//responseCode = "SERVICE_UNAVAILABLE";
+    		paymentRoot.setAttribute("AuthReturnFlag", "F");
+    		paymentRoot.setAttribute("ResponseCode", "SERVICE_UNAVAILABLE"); 
+    		paymentRoot.setAttribute("AsynchRequestProcess", "false");
+    		paymentRoot.setAttribute("AuthReturnMessage", obj.getString("reason"));
+    		paymentRoot.setDoubleAttribute("AuthorizationAmount", 0.0D);
+    		paymentRoot.setAttribute("HoldOrderAndRaiseEvent", "N");
+  	        paymentRoot.setAttribute("HoldReason", " ");
+  	        paymentRoot.setDoubleAttribute("TranAmount", 0.0D);
+  	        paymentRoot.setAttribute("TranType", root.getAttribute("ChargeType"));
+	    	
 		}
 	    outDoc.appendChild(paymentRoot);
 	    return outDoc;
